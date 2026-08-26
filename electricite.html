@@ -537,22 +537,23 @@
 
 <h3>1.5 — La pile : un petit moteur chimique</h3>
 <p>Une pile n'est pas un réservoir d'électricité. C'est un <strong>moteur</strong> — un moteur chimique sans aucune pièce mobile, dont le seul travail est de faire remonter des électrons d'une borne à l'autre <em>à l'intérieur</em> d'elle-même, contre leur gré.</p>
-<p>Le principe tient en deux réactions qui se font face, séparées par l'électrolyte :</p>
+<p>Pour le voir en entier, prenons la pile la plus lisible qui soit : la <strong>pile Daniell</strong>, deux métaux plongés chacun dans une solution de son propre sel — une lame de <strong>zinc</strong> dans du sulfate de zinc, une lame de <strong>cuivre</strong> dans du sulfate de cuivre (le liquide bleu), les deux compartiments séparés par une paroi poreuse. Deux réactions se font alors face :</p>
 <ul>
-<li>Sur l'électrode <strong>négative</strong> (le zinc, dans une pile saline), le métal <strong>se dissout</strong> : chaque atome de zinc part dans l'électrolyte sous forme d'ion Zn²⁺ en <strong>abandonnant deux électrons</strong>, qui restent prisonniers de l'électrode. Celle-ci se charge donc négativement.</li>
-<li>Sur l'électrode <strong>positive</strong>, une seconde réaction fait exactement l'inverse : elle <strong>consomme</strong> des électrons.</li>
+<li>Côté <strong>zinc</strong>, borne <strong>négative</strong> : le métal <strong>se dissout</strong>. Chaque atome part dans la solution sous forme d'ion Zn²⁺ en <strong>abandonnant deux électrons</strong>, qui restent prisonniers de la lame. Celle-ci se charge donc négativement — et elle <strong>maigrit à vue d'œil</strong>.</li>
+<li>Côté <strong>cuivre</strong>, borne <strong>positive</strong> : l'inverse exact. Les ions Cu²⁺ déjà présents dans la solution bleue viennent <strong>récupérer deux électrons</strong> et se déposer sur la lame à l'état de métal. La lame de cuivre <strong>grossit</strong>, et la solution <strong>perd sa couleur bleue</strong> à mesure qu'elle se vide de ses ions cuivre.</li>
 </ul>
-<p>Entre les deux, l'électrolyte laisse passer les <strong>ions</strong> mais refuse absolument les électrons. Ces derniers n'ont donc qu'un seul chemin pour rejoindre la borne + : <strong>le circuit extérieur</strong> — votre fil, votre lampe, votre moteur. C'est en empruntant ce détour obligatoire qu'ils font le travail que vous leur demandez.</p>
+<p>Le bilan est spectaculaire de simplicité : <span class="cle">du métal disparaît d'un côté, du métal apparaît de l'autre.</span> La pile est littéralement en train de se manger elle-même — et le jour où il ne reste plus de zinc, plus rien ne pousse les électrons : la pile est usée. Définitivement, car rien ne remontera le zinc à sa place.</p>
+<p>Entre les deux, la solution laisse passer les <strong>ions</strong> mais refuse absolument les électrons. Ces derniers n'ont donc qu'un seul chemin pour rejoindre la borne + : <strong>le circuit extérieur</strong> — votre fil, votre lampe, votre moteur. C'est en empruntant ce détour obligatoire qu'ils font le travail que vous leur demandez.</p>
 
 <figure class="anim">
-  <canvas id="a-pile" width="900" height="360" aria-label="Animation : la pile, moteur chimique qui pompe les électrons d'une borne à l'autre"></canvas>
+  <canvas id="a-pile" width="900" height="360" aria-label="Animation : pile Daniell, le zinc se dissout et le cuivre se dépose"></canvas>
   <div class="ctrls">
     <div class="c"><label class="switch"><input type="checkbox" id="a-pile-k"><span>Fermer l'interrupteur</span></label></div>
     <div class="c"><label>Consommation de la lampe <span id="a-pile-r-l">moyenne</span></label><input type="range" id="a-pile-r" min="1" max="10" value="5"></div>
     <div class="c"><button class="btn" id="a-pile-neuve">Pile neuve</button></div>
     <div class="c readout" id="a-pile-out"></div>
   </div>
-  <figcaption>À gauche, l'intérieur de la pile : le zinc se dissout et lâche ses électrons ; les ions traversent l'électrolyte. À droite, le circuit extérieur, seul chemin possible pour les électrons. <b>Laissez l'interrupteur ouvert</b> et regardez la pompe <b>caler toute seule</b> au bout d'une seconde : tension présente, courant nul, réserve intacte. <b>Fermez-le</b> : les électrons s'échappent, le déséquilibre retombe, la réaction repart. <b>Montez la consommation</b> : la réserve se vide plus vite et la tension aux bornes s'affaisse — c'est la résistance interne de la pile.</figcaption>
+  <figcaption>À gauche, l'intérieur de la pile ; à droite, le circuit extérieur, seul chemin possible pour les électrons. <b>Laissez l'interrupteur ouvert</b> et regardez la pompe <b>caler toute seule</b> en une seconde : tension présente, courant nul, zinc intact. <b>Fermez-le</b> et laissez tourner : la lame de zinc <b>est rongée et disparaît</b> pendant que le cuivre <b>s'épaissit</b> en face et que le bleu de la solution <b>s'efface</b>. <b>Montez la consommation</b> : tout va plus vite et la tension aux bornes s'affaisse — c'est la résistance interne. <b>Quand il ne reste plus de zinc, la pile est morte</b> : le moteur chimique n'a plus de carburant. <em>Le temps est accéléré : une pile réelle met des heures à faire ce que vous voyez en vingt secondes.</em></figcaption>
 </figure>
 <script>
 (function(){
@@ -567,7 +568,7 @@
   document.getElementById('a-pile-neuve').addEventListener('click', function(){ reserve=1; q=0; ions=[]; });
 
   // Le circuit extérieur, du pôle − au pôle +
-  var PATH=[[104,64],[104,34],[836,34],[836,326],[262,326],[262,296]];
+  var PATH=[[92,64],[92,34],[836,34],[836,326],[262,326],[262,296]];
   var LONG=[], TOT=0;
   for(var s=1;s<PATH.length;s++){
     var L=Math.hypot(PATH[s][0]-PATH[s-1][0], PATH[s][1]-PATH[s-1][1]);
@@ -589,8 +590,10 @@
     var vide = reserve<=0;
     var I = (K.val && !vide) ? q/R : 0;               // courant (unité arbitraire)
     var pompe = vide ? 0 : 3*(1-Math.pow(q,8));       // débit de la pompe chimique
-    q += (pompe - I)*dt; q=Math.max(0,Math.min(1,q));
-    reserve = Math.max(0, reserve - I*dt*0.018);
+    q += (pompe - I)*dt;
+    if(vide) q -= dt*0.7;                             // plus de zinc = plus de f.e.m. : le déséquilibre s’effondre
+    q=Math.max(0,Math.min(1,q));
+    reserve = Math.max(0, reserve - I*dt*0.030);
     var U = 1.5*q;
 
     MSPC.fond(ctx,W,H);
@@ -599,47 +602,83 @@
     var bx=62, by=64, bw=232, bh=232;
     ctx.fillStyle='rgba(255,255,255,.03)'; ctx.fillRect(bx,by,bw,bh);
     ctx.strokeStyle='#8d968b'; ctx.lineWidth=1.6; ctx.strokeRect(bx+.5,by+.5,bw,bh);
-    MSPC.mono(ctx,'INTÉRIEUR DE LA PILE', 132, 54, 10.5, '#8d968b');
-    // électrolyte
-    ctx.fillStyle='rgba(91,134,189,.10)'; ctx.fillRect(bx+46, by+18, bw-92, bh-36);
-    MSPC.mono(ctx,'électrolyte', bx+bw/2, by+bh-10, 10, '#5b86bd', 'center');
+    MSPC.mono(ctx,'INTÉRIEUR DE LA PILE (pile Daniell)', 132, 54, 10.5, '#8d968b');
 
-    var ax=bx+22, cx2=bx+bw-40;                        // anode (−) / cathode (+)
-    // anode zinc, rongée au fur et à mesure
-    var usure=(1-reserve)*16;
-    ctx.fillStyle='#9aa3a0'; ctx.fillRect(ax, by+18+usure*0.5, 24, bh-36-usure);
-    ctx.strokeStyle='#c9d2c8'; ctx.lineWidth=1.2; ctx.strokeRect(ax+.5, by+18+usure*0.5, 24, bh-36-usure);
-    MSPC.mono(ctx,'ZINC (−)', ax+12, by+12, 9.5, '#c9d2c8','center');
-    // cathode
-    ctx.fillStyle='#7a5a33'; ctx.fillRect(cx2, by+18, 24, bh-36);
-    ctx.strokeStyle='#c9a06a'; ctx.strokeRect(cx2+.5, by+18, 24, bh-36);
-    MSPC.mono(ctx,'CARBONE (+)', cx2+12, by+12, 9.5, '#c9a06a','center');
+    var hEl=bh-36, yEl=by+18;
+    var xZnL=bx+22, xCuR=bx+bw-22, xMid=(xZnL+xCuR)/2;   // faces extérieures des deux lames
+    var eZn=24*reserve;                                  // le zinc maigrit…
+    var eCu=24+22*(1-reserve);                           // …et le cuivre grossit d'autant
+    var xZn=xZnL+eZn, xCu=xCuR-eCu;                      // les deux faces qui se font face
 
-    // charges accumulées : c'est le déséquilibre
-    var nq=Math.round(q*9);
+    // les deux solutions ; le bleu du sulfate de cuivre s'efface en se vidant de ses ions
+    ctx.fillStyle='rgba(200,210,200,.07)'; ctx.fillRect(xZnL, yEl, xMid-xZnL, hEl);
+    ctx.fillStyle='rgba(46,110,196,'+(0.07+0.28*reserve)+')'; ctx.fillRect(xMid, yEl, xCuR-xMid, hEl);
+    ctx.strokeStyle='rgba(255,255,255,.22)'; ctx.lineWidth=1.4; ctx.setLineDash([3,4]);
+    ctx.beginPath(); ctx.moveTo(xMid, yEl); ctx.lineTo(xMid, yEl+hEl); ctx.stroke();
+    ctx.setLineDash([]);
+    MSPC.mono(ctx,'paroi poreuse', xMid, by+bh-10, 9.5, '#7f8a7e','center');
+
+    /* --- lame de ZINC : rongée, elle finit par disparaître complètement --- */
+    if(eZn>0.8){
+      ctx.fillStyle='#9aa3a0';
+      ctx.beginPath();
+      ctx.moveTo(xZnL, yEl); ctx.lineTo(xZn, yEl);
+      var creux=(1-reserve)*7;                           // bord d'autant plus rongé que le zinc a fondu
+      for(var z=0;z<=10;z++){
+        var d=Math.abs(Math.sin(z*2.3+7)*creux + Math.sin(z*5.1)*creux*0.5);
+        ctx.lineTo(Math.max(xZnL, xZn-d), yEl+hEl*z/10);
+      }
+      ctx.lineTo(xZnL, yEl+hEl); ctx.closePath();
+      ctx.fill();
+      ctx.strokeStyle='#c9d2c8'; ctx.lineWidth=1.1; ctx.stroke();
+    }
+    MSPC.mono(ctx,'ZINC (−)', xZnL+12, by+12, 9.5, vide?'#ff6a5e':'#c9d2c8','center');
+    if(vide) MSPC.mono(ctx,'zinc disparu', xZnL+40, yEl+hEl/2, 10.5, '#ff6a5e','center');
+
+    /* --- lame de CUIVRE : elle s'épaissit du métal qui vient s'y déposer --- */
+    ctx.fillStyle='#8a5a2c'; ctx.fillRect(xCu, yEl, eCu, hEl);
+    if(reserve<0.98){
+      ctx.fillStyle='#c9752e';                           // le dépôt frais, plus clair, côté solution
+      ctx.fillRect(xCu, yEl, 22*(1-reserve), hEl);
+    }
+    ctx.strokeStyle='#e0a06a'; ctx.lineWidth=1.2; ctx.strokeRect(xCu+.5, yEl+.5, eCu, hEl);
+    MSPC.mono(ctx,'CUIVRE (+)', xCuR-12, by+12, 9.5, '#e0a06a','center');
+
+    // charges accumulées sur les lames : c'est le déséquilibre
+    var nq=Math.round(q*8);
     ctx.font='13px "IBM Plex Mono",monospace'; ctx.textAlign='center';
     for(var i=0;i<nq;i++){
-      ctx.fillStyle='#c8d834'; ctx.fillText('−', ax+34, by+34+i*20);
-      ctx.fillStyle='#e08b6a'; ctx.fillText('+', cx2-12, by+34+i*20);
+      ctx.fillStyle='#c8d834'; ctx.fillText('−', xZn+11, yEl+22+i*22);
+      ctx.fillStyle='#e08b6a'; ctx.fillText('+', xCu-11, yEl+22+i*22);
     }
 
-    /* ---------- dissolution du zinc : les ions Zn2+ partent ---------- */
+    /* ---------- les ions : le zinc part à gauche, le cuivre se dépose à droite ---------- */
     if(!a.reduce){
-      spawn += pompe*dt*3.2;
-      while(spawn>=1){ spawn-=1; if(ions.length<26) ions.push({u:0, y:Math.random()}); }
+      spawn += pompe*dt*2.6;
+      while(spawn>=1){
+        spawn-=1;
+        if(ions.length<30){
+          ions.push({t:'zn', u:0.03, y:Math.random()});
+          ions.push({t:'cu', u:0.55+Math.random()*0.30, y:Math.random()});
+        }
+      }
       for(var n=ions.length-1;n>=0;n--){
-        ions[n].u += dt*(I*0.42+0.015);
-        if(ions[n].u>1) ions.splice(n,1);
+        var it=ions[n];
+        it.u += dt*(I*0.30+0.012);
+        if(it.t==='zn' ? it.u>0.47 : it.u>1) ions.splice(n,1);
       }
     }
     for(var n2=0;n2<ions.length;n2++){
       var io=ions[n2];
-      var ix=ax+26+io.u*(cx2-ax-26), iy=by+30+io.y*(bh-60);
-      ctx.fillStyle='rgba(224,139,106,.85)';
+      var ix=xZn+io.u*(xCu-xZn), iy=yEl+9+io.y*(hEl-18);
+      ctx.fillStyle = io.t==='zn' ? 'rgba(206,214,206,.92)' : 'rgba(224,139,66,.94)';
       ctx.beginPath(); ctx.arc(ix,iy,5,0,6.2832); ctx.fill();
-      MSPC.mono(ctx,'+', ix, iy+3.5, 9, '#2a1a10','center');
+      MSPC.mono(ctx,'+', ix, iy+3.5, 9, '#1a1408','center');
     }
-    if(ions.length) MSPC.mono(ctx,'ions Zn²⁺ →', bx+bw/2, by+bh-28, 9.5, '#e08b6a','center');
+    if(ions.length && !vide){
+      MSPC.mono(ctx,'Zn²⁺ →', xZnL+48, yEl+hEl-9, 9.5, '#c9d2c8','center');
+      MSPC.mono(ctx,'Cu²⁺ →', xMid+26, yEl+hEl-9, 9.5, '#e0a06a','center');
+    }
 
     /* ---------- circuit extérieur ---------- */
     ctx.strokeStyle='#8d968b'; ctx.lineWidth=2.4;
@@ -648,8 +687,8 @@
     for(var p=1;p<PATH.length;p++) ctx.lineTo(PATH[p][0],PATH[p][1]);
     ctx.stroke();
     // bornes
-    ctx.fillStyle='#c8d834'; ctx.fillRect(ax+4,by-8,16,10);
-    ctx.fillStyle='#e08b6a'; ctx.fillRect(cx2+2,by+bh-2,16,10);
+    ctx.fillStyle='#c8d834'; ctx.fillRect(xZnL,by-8,16,10);
+    ctx.fillStyle='#e08b6a'; ctx.fillRect(xCuR-16,by+bh-2,16,10);
 
     // interrupteur
     var kx=470, ky=34;
@@ -693,14 +732,14 @@
     MSPC.titre(ctx, (I*0.42).toFixed(2)+' A', dx2, dy2+62, 30, I>0.02?'#c8d834':'#6f786e');
     MSPC.mono(ctx,'COURANT', dx2, dy2+78, 9.5, '#8d968b');
     // réserve chimique
-    MSPC.mono(ctx,'RÉSERVE CHIMIQUE', dx2, dy2+112, 9.5, '#8d968b');
+    MSPC.mono(ctx,'ZINC RESTANT', dx2, dy2+112, 9.5, '#8d968b');
     ctx.fillStyle='rgba(255,255,255,.10)'; ctx.fillRect(dx2, dy2+120, 120, 14);
     ctx.fillStyle= reserve>0.4?'#93a415':(reserve>0.15?'#f0a844':'#b32017');
     ctx.fillRect(dx2, dy2+120, 120*reserve, 14);
 
     // état de la pompe
     var etat, col;
-    if(vide){ etat='PILE ÉPUISÉE'; col='#b32017'; }
+    if(vide){ etat='PILE USÉE'; col='#b32017'; }
     else if(pompe<0.25 && !K.val){ etat='POMPE CALÉE'; col='#f0a844'; }
     else { etat='POMPE EN MARCHE'; col='#c8d834'; }
     MSPC.titre(ctx, etat, dx2, dy2+176, 19, col);
@@ -708,7 +747,7 @@
     ctx.fillStyle='rgba(255,255,255,.10)'; ctx.fillRect(dx2, dy2+186, 120, 8);
     ctx.fillStyle=col; ctx.fillRect(dx2, dy2+186, 120*Math.min(1,pompe/3), 8);
 
-    out.innerHTML = vide ? '<b style="color:#ff6a5e">Zinc entièrement consommé.</b> Le moteur chimique n’a plus de carburant.'
+    out.innerHTML = vide ? '<b style="color:#ff6a5e">Le zinc a entièrement disparu.</b><br>Il est passé, atome par atome, sur la lame de cuivre. Plus de carburant : c’est fini.'
       : (K.val ? 'La pompe tourne en continu : les électrons s’échappent par le fil,<br>le déséquilibre retombe et la réaction <b>repart</b>.'
                : 'Le déséquilibre repousse les électrons suivants.<br>Poussée chimique = répulsion électrique → <b>tout s’arrête</b>, réserve intacte.');
   }, {fixed:true});
@@ -724,7 +763,13 @@
 <div class="plaque"><span class="tag">Anecdote — la pile est née d'une grenouille et d'une dispute</span>
 <p>En 1780 à Bologne, <strong>Luigi Galvani</strong> dissèque des grenouilles. Il remarque que les cuisses se contractent violemment quand elles touchent en même temps deux métaux différents. Il en conclut à une « électricité animale », une force vitale propre au vivant.</p>
 <p>À Pavie, <strong>Alessandro Volta</strong> n'y croit pas une seconde. Il refait les essais et comprend que la grenouille ne produit rien du tout : elle ne fait que <em>détecter</em>. Ce qui produit l'électricité, ce sont les <strong>deux métaux différents séparés par un liquide</strong>. Pour le prouver, il empile en 1800 des disques de zinc et de cuivre séparés par des rondelles de carton imbibées de saumure : la <strong>pile</strong> — le mot vient de là, c'est littéralement un empilement.</p>
-<p>Volta avait raison sur la pile, Galvani n'avait pas tort sur le vivant (les nerfs sont bien électriques). Mais retenez surtout ceci : <span class="cle">pour faire une pile, il faut deux métaux différents et un électrolyte.</span> C'est aussi pourquoi, en maintenance, une vis inox dans une pièce en aluminium mouillée constitue une pile miniature qui ronge l'aluminium — la corrosion galvanique. Vous fabriquez des piles sans le vouloir.</p></div>
+<p>Volta avait raison sur la pile, Galvani n'avait pas tort sur le vivant (les nerfs sont bien électriques). Mais retenez surtout ceci : <span class="cle">pour faire une pile, il faut deux métaux différents et un électrolyte.</span> C'est aussi pourquoi, en maintenance, une vis inox dans une pièce en aluminium mouillée constitue une pile miniature qui ronge l'aluminium — la corrosion galvanique. Vous fabriquez des piles sans le vouloir.</p>
+<p>La pile de Volta avait un défaut rédhibitoire : sa tension s'effondrait en quelques minutes. C'est <strong>John Frederic Daniell</strong> qui règle le problème en <strong>1836</strong>, en séparant les deux métaux dans deux solutions distinctes — celle que vous venez de faire fonctionner. Enfin stable et durable, elle devient la source d'énergie du <strong>télégraphe électrique</strong> : pendant un demi-siècle, avant l'arrivée des alternateurs, une bonne partie des communications du monde a circulé grâce à des lames de zinc qu'il fallait périodiquement remplacer parce qu'elles avaient été <em>mangées</em>.</p></div>
+
+<div class="plaque"><span class="tag">Et la pile de votre télécommande ?</span>
+<p>La pile bâton du commerce n'est pas une Daniell : c'est une <strong>pile saline</strong> ou <strong>alcaline</strong>. Son pôle positif n'est pas du cuivre mais du <strong>dioxyde de manganèse</strong>, et le bâtonnet de carbone que vous trouvez au centre en la démontant n'est qu'un <em>collecteur de courant</em> : il ne se dépose rien dessus, il ne fait que conduire les électrons.</p>
+<p>En revanche — et c'est tout l'intérêt de ce que vous venez de voir — <span class="cle">le côté négatif fonctionne exactement pareil : c'est du zinc, et il est bel et bien mangé.</span> Dans une pile saline, ce zinc <strong>est l'enveloppe même de la pile</strong>. Quand elle est complètement déchargée, l'enveloppe a été rongée de l'intérieur… et finit par se percer. C'est très précisément pour cela qu'une pile oubliée dans un appareil <strong>coule</strong> et fait des dégâts.</p>
+<p>Réflexe d'atelier : on retire les piles des appareils de mesure et des outils qu'on ne va pas utiliser pendant plusieurs mois. Un multimètre détruit par une pile qui a coulé, ce n'est pas de la malchance — c'est de la chimie parfaitement prévisible.</p></div>
 
 <h3>1.6 — La résistance, sans une seule formule</h3>
 <p>Les électrons qui dérivent ne traversent pas le fil tranquillement. Ils <strong>percutent les ions du réseau</strong>. À chaque choc, l'électron perd de la vitesse et cède son énergie à l'ion, qui se met à vibrer un peu plus fort. Un ion qui vibre plus fort, dans notre langage, ça s'appelle <strong>de la chaleur</strong>.</p>
