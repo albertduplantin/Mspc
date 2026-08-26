@@ -1260,21 +1260,232 @@
 <p>Une spire, c'est un petit champ. Deux spires côte à côte, leurs champs s'ajoutent. Cent spires, cent fois plus. La bobine ainsi formée s'appelle un <strong>solénoïde</strong>, et son champ ressemble comme deux gouttes d'eau à celui d'un aimant droit : un pôle nord d'un côté, un pôle sud de l'autre.</p>
 
 <h3>6.2 — Deuxième geste : le noyau de fer</h3>
-<p>Glissez un clou en fer doux à l'intérieur : le champ est multiplié par <strong>1 000 à 5 000</strong>. Le fer contient des micro-aimants naturels (les domaines de Weiss) orientés en désordre. Le champ de la bobine les aligne tous dans le même sens, et ils ajoutent leur propre champ à celui de la bobine.</p>
+<p>Glissez un clou en fer doux à l'intérieur de la bobine : le champ est multiplié par <strong>1 000 à 5 000</strong>. Le fer ne consomme rien, ne reçoit aucun fil — et pourtant il transforme un jouet en outil. Ce qui se passe à l'intérieur mérite qu'on s'y arrête, parce que c'est franchement surprenant.</p>
+
+<h4>Le fer est déjà aimanté — mais en désordre</h4>
+<p>Voici le fait que personne n'attend : un morceau de fer parfaitement ordinaire, qui n'attire rien du tout, est <strong>déjà aimanté à l'intérieur</strong>. Il est découpé en une multitude de petites régions, les <strong>domaines de Weiss</strong>, à l'intérieur desquelles tous les atomes pointent <em>spontanément</em> dans la même direction. Chaque domaine est donc un véritable petit aimant, avec son nord et son sud.</p>
+<p>Seulement voilà : ces domaines pointent dans <strong>toutes les directions</strong>. Un domaine vers la droite, son voisin vers le haut, le suivant vers la gauche… Additionnez-les tous, et le bilan est nul. <span class="cle">Le fer n'est pas « non aimanté » : il est aimanté partout, mais dans tous les sens à la fois.</span> C'est exactement la situation du chapitre 1 avec les électrons libres qui s'agitent sans produire de courant.</p>
+<p>Entre deux domaines voisins, il existe une frontière où l'orientation bascule progressivement : c'est une <strong>paroi</strong>. Et cette paroi peut se déplacer.</p>
+
+<h4>Ce que fait le champ de la bobine</h4>
+<p>Quand la bobine crée son champ, le fer ne « s'aimante » pas d'un coup. Il se réorganise, en deux temps :</p>
+<ol>
+<li><strong>Les parois se déplacent.</strong> Les domaines qui pointaient déjà à peu près dans le bon sens <em>grandissent</em>, en mangeant leurs voisins mal orientés. Ce n'est pas progressif et régulier : les parois s'accrochent sur les défauts du métal puis se libèrent d'un coup, par petits sauts brusques. On appelle cela l'<strong>effet Barkhausen</strong> — et on peut réellement l'entendre, en branchant une bobine sur un amplificateur : le fer qui s'aimante <em>crépite</em>.</li>
+<li><strong>Les derniers domaines tournent.</strong> Quand il ne reste plus de domaine à avaler, ceux qui sont encore de travers se mettent à pivoter vers la direction du champ. Cela demande beaucoup plus d'effort.</li>
+</ol>
+<p>Une fois tous les domaines alignés, le fer a donné tout ce qu'il avait : c'est la <strong>saturation</strong>. Au-delà, augmenter le courant n'ajoute pratiquement plus rien au champ — <span class="cle">mais continue d'échauffer la bobine, qui, elle, ne sature jamais</span>. Un point à retenir : c'est la raison pour laquelle on ne « rattrape » pas un électroaimant sous-dimensionné en montant le courant.</p>
+<p>Et l'aluminium ? Ses atomes sont bien de minuscules aimants eux aussi. Mais rien ne les fait coopérer : chacun s'oriente dans son coin, l'agitation thermique brouille tout, et il ne se forme jamais le moindre domaine. Sa perméabilité relative vaut <span class="mono">1,000022</span> — autant dire de l'air. <strong>Ce qui distingue le fer, ce n'est pas d'avoir des atomes magnétiques : c'est qu'ils s'entendent entre eux.</strong></p>
 
 <div class="formule">Champ ∝ N × I<small>« ampères-tours » — N = nombre de spires, I = courant en ampères</small></div>
 <p>Traduction pratique : <strong>200 spires parcourues par 1 A font le même champ que 100 spires parcourues par 2 A.</strong> Le concepteur choisit selon ce qu'il a : de la place (spires) ou du courant disponible.</p>
 
 <figure class="anim">
-  <canvas id="a-elm" width="900" height="360" aria-label="Animation : électroaimant attirant des trombones"></canvas>
+  <canvas id="a-elm" width="900" height="400" aria-label="Animation : électroaimant, domaines de Weiss dans le noyau de fer et lignes de champ"></canvas>
   <div class="ctrls">
     <div class="c"><label>Nombre de spires <span id="a-elm-n">80</span></label><input type="range" id="a-elm-nr" min="5" max="200" value="80"></div>
     <div class="c"><label>Courant <span id="a-elm-i">1,0 A</span></label><input type="range" id="a-elm-ir" min="0" max="30" value="10"></div>
     <div class="c"><label>Noyau <span id="a-elm-c">Fer doux</span></label><input type="range" id="a-elm-cr" min="0" max="2" value="2"></div>
     <div class="c readout" id="a-elm-out"></div>
   </div>
-  <figcaption>Mettez le noyau sur « Aucun (air) » à 200 spires et 3 A : presque rien. Repassez sur « Fer doux » : les trombones sautent. <b>Le fer ne consomme rien ; il multiplie.</b></figcaption>
+  <figcaption>À gauche l'électroaimant et ses <b>lignes de champ</b> ; à droite, un zoom à l'intérieur du noyau. <b>Mettez le noyau sur « aucun »</b> à 200 spires et 3 A : une ou deux lignes pâles, les trombones ne bougent pas. <b>Repassez sur « fer doux »</b> sans rien toucher d'autre : les petits aimants basculent l'un après l'autre, les <b>parois entre domaines s'effacent</b>, et les lignes de champ se multiplient — le champ est plusieurs <b>milliers</b> de fois plus intense. <b>Montez encore le courant</b> jusqu'à ce que tous les domaines soient alignés : c'est la <b>saturation</b>, et à partir de là vous pouvez doubler le courant sans presque rien gagner. <b>Essayez enfin l'aluminium</b> : ses atomes sont bien de minuscules aimants, mais isolés et désordonnés — ils ne s'organisent jamais, et il ne se passe rien.</figcaption>
 </figure>
+<script>
+(function(){
+  "use strict";
+  var CORE=[
+    {n:'Aucun (air)', mur:1.0000004, type:'rien', col:'rgba(255,255,255,.04)'},
+    {n:'Aluminium',   mur:1.000022,  type:'para', col:'#9aa2a8'},
+    {n:'Fer doux',    mur:0,         type:'ferro',col:'#6f7780'}
+  ];
+  var MU0=1.2566e-6, LC=0.10;           // perméabilité du vide · longueur du noyau (m)
+  var N=MSPC.ctrl('a-elm-nr', function(v){ return String(v); }, 'a-elm-n');
+  var I=MSPC.ctrl('a-elm-ir', function(v){ return (v/10).toFixed(1).replace('.',',')+' A'; }, 'a-elm-i');
+  var C=MSPC.ctrl('a-elm-cr', function(v){ return CORE[v].n; }, 'a-elm-c');
+  var out=document.getElementById('a-elm-out');
+
+  var COLS=8, ROWS=3, EASY=[0, Math.PI/2, Math.PI, -Math.PI/2];
+  var dom=[], para=[], sig=null, force=0;
+
+  function bati(type){
+    dom=[];
+    for(var r=0;r<ROWS;r++) for(var c=0;c<COLS;c++){
+      var ea=EASY[(Math.random()*4)|0];
+      dom.push({ea:ea, ang:ea, s:0.04+Math.random()*0.92});
+    }
+    para=[];
+    for(var k=0;k<70;k++) para.push({x:Math.random(), y:Math.random(), a:Math.random()*6.2832, v:(Math.random()-0.5)*3});
+  }
+
+  function petitAimant(ctx,x,y,L,E,ang,alpha){
+    ctx.save(); ctx.translate(x,y); ctx.rotate(ang);
+    ctx.globalAlpha=alpha;
+    ctx.fillStyle='#4f7fb8'; ctx.fillRect(-L/2,-E/2,L/2,E);
+    ctx.fillStyle='#b32017'; ctx.fillRect(0,-E/2,L/2,E);
+    ctx.strokeStyle='rgba(255,255,255,.30)'; ctx.lineWidth=1; ctx.strokeRect(-L/2,-E/2,L,E);
+    ctx.globalAlpha=1;
+    ctx.restore();
+  }
+
+  MSPC.anim('a-elm', function(a){
+    var ctx=a.ctx, W=a.W, H=a.H, dt=a.dt;
+    var noy=CORE[C.val], Nv=N.val, Iv=I.val/10;
+    if(sig!==C.val){ sig=C.val; bati(noy.type); }
+
+    /* ---------- physique ---------- */
+    var Hc=Nv*Iv/LC;                                   // excitation, A/m
+    var al=0, B;
+    if(noy.type==='ferro'){
+      al=1-Math.exp(-Hc/420);                          // taux d'alignement des domaines
+      B=MU0*(Hc+1.6e6*al);
+    } else {
+      B=MU0*noy.mur*Hc;
+    }
+    var mur=Hc>0.1 ? B/(MU0*Hc) : 1;
+    var Bn=Math.min(1, Math.log(1+B*1000)/Math.log(2001));   // échelle lisible
+    var cible=Math.min(1.3, B/1.6);
+    force += (cible-force)*Math.min(1, dt*3);
+
+    MSPC.fond(ctx,W,H);
+
+    /* ================= GAUCHE : l'électroaimant ================= */
+    var cx=245, cy=140;
+    var nbL=1+Math.round(Bn*11);
+    for(var f=0;f<nbL;f++){
+      var rx=128+f*8, ry=36+f*8;
+      ctx.strokeStyle='rgba(200,216,52,'+(0.14+0.55*Bn)*(1-f/(nbL+2))+')';
+      ctx.lineWidth=1.2+1.6*Bn;
+      ctx.beginPath(); ctx.ellipse(cx,cy,rx,ry,0,0,6.2832); ctx.stroke();
+      // le sens du champ, matérialisé sur la ligne
+      if(Bn>0.15){
+        var tp=(a.t*0.5+f*0.13)%1, an=tp*6.2832;
+        var px=cx+Math.cos(an)*rx, py=cy+Math.sin(an)*ry;
+        var tx=-Math.sin(an)*rx, ty=Math.cos(an)*ry, m=Math.hypot(tx,ty)||1;
+        ctx.fillStyle='rgba(200,216,52,'+(0.35+0.5*Bn)+')';
+        ctx.beginPath();
+        ctx.moveTo(px+tx/m*5, py+ty/m*5);
+        ctx.lineTo(px-tx/m*3-ty/m*3, py-ty/m*3+tx/m*3);
+        ctx.lineTo(px-tx/m*3+ty/m*3, py-ty/m*3-tx/m*3);
+        ctx.closePath(); ctx.fill();
+      }
+    }
+    // le noyau
+    ctx.fillStyle=noy.col; ctx.fillRect(125,cy-23,240,46);
+    ctx.strokeStyle='rgba(255,255,255,.22)'; ctx.lineWidth=1.4; ctx.strokeRect(125.5,cy-23.5,240,46);
+    // le flux canalisé dans le noyau
+    if(Bn>0.05){
+      ctx.strokeStyle='rgba(200,216,52,'+(0.25+0.6*Bn)+')'; ctx.lineWidth=1+2*Bn;
+      for(var g=0;g<4;g++){
+        var yy=cy-15+g*10;
+        ctx.beginPath(); ctx.moveTo(127,yy); ctx.lineTo(363,yy); ctx.stroke();
+      }
+    }
+    // la bobine
+    var turns=Math.max(4,Math.min(18,Math.round(Nv/11)));
+    for(var t2=0;t2<turns;t2++){
+      var xt=cx-100+t2*(200/turns);
+      ctx.strokeStyle='#b06a2c'; ctx.lineWidth=Math.max(1.6,11/Math.sqrt(turns));
+      ctx.beginPath(); ctx.ellipse(xt,cy,6,32,0,0,6.2832); ctx.stroke();
+    }
+    if(Bn>0.12){
+      MSPC.titre(ctx,'S',108,cy+7,20,'#4f7fb8','center');
+      MSPC.titre(ctx,'N',382,cy+7,20,'#b32017','center');
+    }
+    MSPC.mono(ctx,'NOYAU : '+noy.n.toUpperCase(),30,cy-58,10.5,'#8d968b');
+
+    // les trombones
+    var nb=Math.min(21, Math.round(force*21));
+    for(var k2=0;k2<nb;k2++){
+      var co=k2%3, ro=Math.floor(k2/3);
+      var tx2=372+co*17, ty2=cy-32+ro*11+Math.sin(a.t*6+k2)*0.8;
+      ctx.strokeStyle='#cfd6cd'; ctx.lineWidth=2; ctx.lineCap='round';
+      ctx.beginPath(); ctx.moveTo(tx2,ty2); ctx.lineTo(tx2+11,ty2);
+      ctx.moveTo(tx2+11,ty2); ctx.lineTo(tx2+11,ty2+5); ctx.lineTo(tx2+2,ty2+5); ctx.stroke();
+    }
+    MSPC.mono(ctx,nb+' trombones',372,cy+66,10.5,'#8d968b');
+
+    /* ================= DROITE : dans le noyau ================= */
+    var netAl=0;
+    var zx=496, zy=52, zw=384, zh=196;
+    ctx.fillStyle='rgba(255,255,255,.03)'; ctx.fillRect(zx,zy,zw,zh);
+    ctx.strokeStyle='rgba(255,255,255,.22)'; ctx.lineWidth=1.4; ctx.strokeRect(zx+.5,zy+.5,zw,zh);
+    MSPC.mono(ctx,'ZOOM À L’INTÉRIEUR DU NOYAU',zx,zy-12,10.5,'#8d968b');
+
+    if(noy.type==='ferro'){
+      var cw=zw/COLS, ch=zh/ROWS;
+      // orientation de chaque domaine
+      for(var d=0;d<dom.length;d++){
+        var D=dom[d], but;
+        if(al>D.s) but=0;                                    // paroi déplacée : le domaine a basculé
+        else but=D.ea*(1-Math.max(0,(al-0.75)/0.25)*0.8);    // aux forts champs, il tourne peu à peu
+        var df=but-D.ang;
+        while(df>Math.PI) df-=6.2832;
+        while(df<-Math.PI) df+=6.2832;
+        if(dt>0) D.ang+=df*Math.min(1, dt*(al>D.s?13:4));
+      }
+      // parois entre domaines d'orientations différentes
+      ctx.strokeStyle='rgba(255,255,255,.30)'; ctx.lineWidth=1.6;
+      for(var r2=0;r2<ROWS;r2++) for(var c2=0;c2<COLS;c2++){
+        var id=r2*COLS+c2;
+        if(c2<COLS-1 && Math.abs(dom[id].ang-dom[id+1].ang)>0.35){
+          ctx.beginPath(); ctx.moveTo(zx+(c2+1)*cw, zy+r2*ch+3); ctx.lineTo(zx+(c2+1)*cw, zy+(r2+1)*ch-3); ctx.stroke();
+        }
+        if(r2<ROWS-1 && Math.abs(dom[id].ang-dom[id+COLS].ang)>0.35){
+          ctx.beginPath(); ctx.moveTo(zx+c2*cw+3, zy+(r2+1)*ch); ctx.lineTo(zx+(c2+1)*cw-3, zy+(r2+1)*ch); ctx.stroke();
+        }
+      }
+      // les domaines eux-mêmes
+      var som=0;
+      for(var d2=0;d2<dom.length;d2++){
+        var rr=Math.floor(d2/COLS), cc=d2%COLS;
+        som+=Math.cos(dom[d2].ang);            // seule compte la projection sur le champ
+        petitAimant(ctx, zx+cc*cw+cw/2, zy+rr*ch+ch/2, cw*0.72, ch*0.30, dom[d2].ang, 0.95);
+      }
+      netAl=Math.max(0,som/dom.length);
+      var pc=Math.round(netAl*100);
+      MSPC.mono(ctx,'DOMAINES DE WEISS — aimantation résultante '+pc+' %', zx, zy+zh+18, 10.5, pc>92?'#c8d834':'#8d968b');
+      if(al>0.985) MSPC.titre(ctx,'SATURATION', zx+zw, zy+zh+22, 20, '#f0a844','right');
+    } else if(noy.type==='para'){
+      for(var p=0;p<para.length;p++){
+        var P=para[p];
+        if(dt>0) P.a+=P.v*dt*2.2;
+        petitAimant(ctx, zx+12+P.x*(zw-24), zy+12+P.y*(zh-24), 15, 5, P.a, 0.75);
+      }
+      MSPC.mono(ctx,'moments atomiques isolés — aucun domaine',zx,zy+zh+18,10.5,'#8d968b');
+      MSPC.mono(ctx,'µr = 1,000022',zx+zw,zy+zh+18,10.5,'#7f8a7e','right');
+    } else {
+      MSPC.mono(ctx,'du vide : rien à aligner',zx+zw/2,zy+zh/2,12,'#6f786e','center');
+    }
+
+    /* ================= BAS : les chiffres ================= */
+    var by=300;
+    function bloc(x,val,lab,col){
+      MSPC.titre(ctx,val,x,by,26,col);
+      MSPC.mono(ctx,lab,x,by+16,9.5,'#8d968b');
+    }
+    bloc(30, Math.round(Nv*Iv)+' At', 'AMPÈRES-TOURS  N × I', '#e6ebe4');
+    bloc(230, (mur>=100?Math.round(mur):mur.toFixed(mur<10?3:0)), 'PERMÉABILITÉ RELATIVE  µr', mur>100?'#c8d834':'#8d968b');
+    bloc(430, (B>=0.01? B.toFixed(2)+' T' : (B*1000).toFixed(2)+' mT'), 'CHAMP DANS LE NOYAU  B', B>0.5?'#c8d834':'#f0a844');
+    bloc(650, noy.type==='ferro' ? Math.round(netAl*100)+' %' : '—', 'AIMANTATION DU FER  M / Msat', netAl>0.9?'#c8d834':'#8d968b');
+
+    ctx.fillStyle='rgba(255,255,255,.10)'; ctx.fillRect(30,by+30,840,12);
+    ctx.fillStyle=Bn>0.75?'#c8d834':(Bn>0.3?'#f0a844':'#6f786e');
+    ctx.fillRect(30,by+30,840*Bn,12);
+    MSPC.mono(ctx,'B — échelle logarithmique, de 1 mT à 2 T',870,by+56,9.5,'#6f786e','right');
+
+    var msg,mc;
+    if(noy.type!=='ferro'){ msg='Sans fer, il ne reste que le champ de la bobine seule — des milliers de fois plus faible.'; mc='#f0a844'; }
+    else if(al>0.985){ msg='SATURATION : tous les domaines sont alignés. Doubler le courant n’ajoutera presque plus rien — mais chauffera deux fois plus.'; mc='#ff6a5e'; }
+    else if(al>0.5){ msg='Les domaines basculent l’un après l’autre, par petits sauts brusques : c’est l’effet Barkhausen.'; mc='#c8d834'; }
+    else { msg='Champ faible : seuls les domaines déjà bien orientés commencent à gagner du terrain.'; mc='#8d968b'; }
+    MSPC.mono(ctx,msg,30,by+62,11,mc);
+
+    out.innerHTML='B = <b>'+(B>=0.01?B.toFixed(2)+' T':(B*1000).toFixed(2)+' mT')+'</b> · µr ≈ <b>'+(mur>=100?Math.round(mur):mur.toFixed(3))+'</b><br>'
+      +(noy.type==='ferro'
+        ? 'Le fer multiplie le champ de la bobine par <b>'+Math.round(mur)+'</b>'
+        : 'Ce noyau n’apporte <b>rien</b> : µr ≈ 1');
+  }, {fixed:true});
+})();
+</script>
 
 <h3>6.3 — Fer doux ou acier : la différence qui compte</h3>
 <table>
@@ -2758,69 +2969,6 @@ function crystal(st, opts){
         (Math.abs(I)>12 ? "Le champ du fil <b>domine</b> : les boussoles s'alignent sur les cercles." : "Les deux champs se <b>composent</b>.");
   }
   sr.addEventListener('input', upd); upd();
-})();
-
-/* ============ 5. ÉLECTROAIMANT ============ */
-(function(){
-  var sn = el('a-elm-nr'), si2 = el('a-elm-ir'), sc = el('a-elm-cr'); if(!sn) return;
-  var CORE = [{n:"Aucun (air)", m:0.02, c:"rgba(255,255,255,.06)"},
-              {n:"Aluminium",   m:0.03, c:"#9aa2a8"},
-              {n:"Fer doux",    m:1.00, c:"#6f7780"}];
-  var N=80, I=1, ci=2, force=0, shown=0;
-  var st = mk('a-elm', function(ctx, s, dt){
-    var W=s.W, H=s.H, cx=W*0.36, cy=H/2;
-    shown += (force-shown)*Math.min(1, dt*3);
-    /* noyau */
-    ctx.fillStyle = CORE[ci].c; ctx.fillRect(cx-150, cy-16, 300, 32);
-    ctx.strokeStyle="rgba(255,255,255,.18)"; ctx.strokeRect(cx-150, cy-16, 300, 32);
-    label(ctx, cx-150, cy-30, "NOYAU : " + CORE[ci].n.toUpperCase(), COL.vert, 10);
-    /* bobine */
-    var turns = Math.max(4, Math.round(N/6));
-    for(var i=0;i<turns;i++){
-      var x = cx-110 + i*(220/turns);
-      ctx.strokeStyle = COL.cuivre; ctx.lineWidth = Math.max(1.8, 12/Math.sqrt(turns));
-      ctx.beginPath(); ctx.ellipse(x, cy, 6, 30, 0, 0, 6.284); ctx.stroke();
-    }
-    /* champ */
-    if(shown>0.02){
-      for(var f=0;f<5;f++){
-        var rx = 150+f*26, ry = 44+f*20;
-        ctx.beginPath(); ctx.ellipse(cx, cy, rx, ry, 0, 0, 6.284);
-        ctx.strokeStyle="rgba(200,216,52," + Math.min(.5, shown*0.5/(1+f*0.5)) + ")";
-        ctx.lineWidth=1.3; ctx.stroke();
-      }
-      label(ctx, cx-172, cy+6, "S", COL.bleu, 20, "center");
-      label(ctx, cx+172, cy+6, "N", COL.rouge, 20, "center");
-    }
-    /* trombones */
-    var nb = Math.min(22, Math.round(shown*22));
-    for(var k=0;k<nb;k++){
-      var col2 = k%3, row = Math.floor(k/3);
-      var tx = cx+156+col2*16, ty = cy-24+row*13 + Math.sin(s.t*6+k)*0.8;
-      ctx.strokeStyle = "#cfd6cd"; ctx.lineWidth=2; ctx.lineCap="round";
-      ctx.beginPath(); ctx.moveTo(tx,ty); ctx.lineTo(tx+11,ty);
-      ctx.moveTo(tx+11,ty); ctx.lineTo(tx+11,ty+5); ctx.lineTo(tx+2,ty+5); ctx.stroke();
-    }
-    /* jauge */
-    var gx=W-118, gy=48, gh=H-110;
-    ctx.strokeStyle="rgba(255,255,255,.25)"; ctx.strokeRect(gx,gy,26,gh);
-    ctx.fillStyle=COL.vert; ctx.fillRect(gx+2, gy+gh-2-(gh-4)*Math.min(1,shown), 22, (gh-4)*Math.min(1,shown));
-    label(ctx, gx+13, gy-10, "FORCE", COL.vert, 10, "center");
-    label(ctx, gx+13, gy+gh+18, nb + " trombones", COL.blanc, 12, "center");
-    label(ctx, 14, H-16, "AMPÈRES-TOURS  N × I = " + N + " × " + I.toFixed(1).replace('.',',') + " = " + Math.round(N*I) + " At", COL.blanc, 14);
-  });
-  function upd(){
-    N = +sn.value; I = (+si2.value)/10; ci = +sc.value;
-    force = Math.min(1.35, (N*I*CORE[ci].m)/460);
-    el('a-elm-n').textContent = N;
-    el('a-elm-i').textContent = I.toFixed(1).replace('.',',') + " A";
-    el('a-elm-c').textContent = CORE[ci].n;
-    el('a-elm-out').innerHTML =
-      "Ampères-tours : <b>" + Math.round(N*I) + " At</b><br>" +
-      "Multiplication par le noyau : <b>×" + (CORE[ci].m>0.5?"≈800":"≈1") + "</b><br>" +
-      (I>2.4 ? "<b style='color:#ffd34d'>Attention : la bobine chauffe (P = RI²)</b>" : "Échauffement bobine : modéré");
-  }
-  sn.addEventListener('input', upd); si2.addEventListener('input', upd); sc.addEventListener('input', upd); upd();
 })();
 
 /* ============ 6. INDUCTION (aimant déplaçable) ============ */
