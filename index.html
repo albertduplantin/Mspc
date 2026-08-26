@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Atelier MSPC — Cours, exercices et TP pour le Bac Pro Maintenance</title>
+<meta name="description" content="Ressources complètes de Bac Pro MSPC : électricité, maintenance préventive, mécanique, pneumatique, hydraulique. Cours, animations pilotables, exercices corrigés et fiches TP d'atelier.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Saira+Condensed:wght@500;600;700&family=Public+Sans:ital,wght@0,400;0,600;0,800;1,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/site.css">
+<style>
+:root{--accent:#93a415; --accent-clair:#c8d834}
+.hero-canvas-wrap{height:min(70vh,560px); min-height:420px}
+.pitch{display:grid; grid-template-columns:repeat(auto-fit,minmax(230px,1fr)); gap:0; margin-bottom:56px;
+  border:1px solid #bcc1b7; background:var(--papier); box-shadow:var(--ombre)}
+.pitch>div{padding:20px 22px 22px; border-right:1px solid #d5d9d0}
+.pitch>div:last-child{border-right:none}
+.pitch .n{font-family:"IBM Plex Mono",monospace; font-size:10.5px; letter-spacing:.2em; text-transform:uppercase; color:var(--repere)}
+.pitch h3{margin:4px 0 7px; font-size:1.18rem; text-transform:uppercase}
+.pitch p{margin:0; font-size:.93rem; color:var(--encre-doux)}
+.legende-hero{display:flex; flex-wrap:wrap; gap:5px 16px; margin-top:10px}
+.legende-hero span{font-family:"IBM Plex Mono",monospace; font-size:10px; letter-spacing:.1em; text-transform:uppercase; color:#cfd6cf; display:flex; align-items:center; gap:6px}
+.legende-hero i{width:9px; height:9px; display:block}
+.switch{display:flex; align-items:center; gap:9px; cursor:pointer; margin:0 0 12px}
+.switch input{width:auto; margin:0}
+.switch span{font-family:"IBM Plex Mono",monospace; font-size:10.5px; letter-spacing:.11em; text-transform:uppercase; color:#fff}
+@media (max-width:760px){.pitch>div{border-right:none; border-bottom:1px solid #d5d9d0}}
+</style>
+</head>
+<body>
+
+<nav class="sitenav" aria-label="Navigation entre les cours">
+  <a class="marque" href="index.html"><span class="sig">Atelier <b>MSPC</b></span></a>
+  <div class="liens">
+    <a href="index.html" aria-current="page">Accueil</a>
+    <a class="m-elec" href="electricite.html"><i class="pastille"></i>Électricité</a>
+    <a class="m-maint" href="maintenance-preventive.html"><i class="pastille"></i>Maintenance préventive</a>
+    <a class="m-meca" href="mecanique.html"><i class="pastille"></i>Mécanique</a>
+    <a class="m-pneu" href="pneumatique.html"><i class="pastille"></i>Pneumatique</a>
+    <a class="m-hydro" href="hydraulique.html"><i class="pastille"></i>Hydraulique</a>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="hero-canvas-wrap">
+    <canvas id="ligne" aria-label="Animation : ligne de production pluritechnologique avec ou sans maintenance préventive"></canvas>
+    <div class="hero-ctrl">
+      <label>Cadence de production <span id="hc">60 %</span></label>
+      <input type="range" id="hcad" min="10" max="100" value="60" aria-label="Cadence de production">
+      <label class="switch"><input type="checkbox" id="hprev" checked><span>Plan préventif actif</span></label>
+      <div class="verdict" id="hverdict">Machine en marche. Regardez l'usure monter en bas de l'écran.</div>
+    </div>
+    <div class="hero-text">
+      <span class="eyebrow">Bac Pro MSPC · Maintenance des Systèmes de Production Connectés</span>
+      <h1>Une machine, <em>cinq</em> technologies</h1>
+      <p>Un moteur qui tourne, des engrenages qui transmettent, de l'air qui pousse, de l'huile qui presse — et quelqu'un dont le métier est que tout cela ne s'arrête jamais. Coupez le plan préventif ci-contre et regardez ce qui arrive.</p>
+      <div class="legende-hero">
+        <span><i style="background:#c8d834"></i>Électricité</span>
+        <span><i style="background:#79a6c4"></i>Mécanique</span>
+        <span><i style="background:#5cc4e0"></i>Pneumatique</span>
+        <span><i style="background:#e07a4e"></i>Hydraulique</span>
+        <span><i style="background:#f0a844"></i>Maintenance</span>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="meta-bar">
+  <div><b>5</b> matières</div>
+  <div><b>70</b> chapitres</div>
+  <div><b>60+</b> animations pilotables</div>
+  <div><b>75</b> fiches TP d'atelier</div>
+  <div><b>200+</b> exercices corrigés</div>
+  <div>Conforme au référentiel <b>Bac Pro MSPC</b></div>
+</div>
+
+<div class="wrap">
+
+<h2 class="section-titre">Les cours</h2>
+<p class="section-intro">Cinq dossiers complets, construits sur le même principe : on part de ce qui se passe réellement dans la matière, on remonte jusqu'au composant industriel, puis on va le manipuler à l'atelier. Chaque dossier se lit d'un bout à l'autre, mais chaque chapitre se tient tout seul.</p>
+
+<div class="cours-grid">
+
+  <a class="carte m-elec" href="electricite.html">
+    <div class="vignette">
+      <svg viewBox="0 0 320 132" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+        <g fill="none" stroke="#c8d834" stroke-width="2">
+          <path d="M40 96h60M140 96h50M230 96h50M280 96V56M280 36h-40M100 96V56M100 36h40"/>
+          <rect x="140" y="26" width="40" height="20"/>
+          <circle cx="210" cy="96" r="20"/><path d="M196 82l28 28M224 82l-28 28"/>
+          <path d="M100 96 l0 0"/>
+          <path d="M40 96V70M40 70h0" stroke-width="0"/>
+        </g>
+        <g stroke="#c8d834" stroke-width="2"><path d="M120 88v16M110 84v24M96 88v16M86 84v24"/></g>
+        <path d="M20 40q20-24 40 0t40 0" fill="none" stroke="#93a415" stroke-width="1.6" opacity=".55"/>
+        <g fill="#c8d834"><circle cx="60" cy="96" r="3"><animate attributeName="cx" values="45;275" dur="3.2s" repeatCount="indefinite"/></circle>
+        <circle cx="60" cy="96" r="3" opacity=".6"><animate attributeName="cx" values="45;275" dur="3.2s" begin="-1.1s" repeatCount="indefinite"/></circle>
+        <circle cx="60" cy="96" r="3" opacity=".4"><animate attributeName="cx" values="45;275" dur="3.2s" begin="-2.2s" repeatCount="indefinite"/></circle></g>
+      </svg>
+    </div>
+    <div class="corps">
+      <span class="num">Dossier 01 · Électrotechnique</span>
+      <h3>Du cristal de cuivre au disjoncteur</h3>
+      <p>L'électron libre, l'ampère, l'effet Joule, l'électroaimant, l'induction, le triphasé, le transformateur, le court-circuit. Sans formule tant que la formule n'est pas devenue évidente.</p>
+      <div class="chiffres"><span>14 chapitres</span><span>13 animations</span><span>15 TP</span><span>40+ exercices</span></div>
+      <div class="cta">Ouvrir le dossier <em>→</em></div>
+    </div>
+  </a>
+
+  <a class="carte m-maint" href="maintenance-preventive.html">
+    <div class="vignette">
+      <svg viewBox="0 0 320 132" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+        <path d="M20 34h280M20 108h280" stroke="#5a4a2e" stroke-width="1" opacity=".6"/>
+        <path d="M24 44 C60 104, 92 96, 130 96 L210 96 C255 96, 280 60, 296 36"
+              fill="none" stroke="#f0a844" stroke-width="2.5"/>
+        <g stroke="#c9791a" stroke-width="1.2" opacity=".7" stroke-dasharray="4 4">
+          <path d="M130 30v78M210 30v78"/></g>
+        <g fill="#f0a844" font-family="monospace" font-size="9" opacity=".85">
+          <text x="42" y="26">JEUNESSE</text><text x="140" y="26">VIE UTILE</text><text x="224" y="26">USURE</text></g>
+        <circle cx="170" cy="96" r="5" fill="#f0a844"><animate attributeName="cx" values="30;296" dur="6s" repeatCount="indefinite"/><animate attributeName="cy" values="44;96;96;36" keyTimes="0;0.35;0.7;1" dur="6s" repeatCount="indefinite"/></circle>
+      </svg>
+    </div>
+    <div class="corps">
+      <span class="num">Dossier 02 · Méthodes</span>
+      <h3>La panne qui n'a pas eu lieu</h3>
+      <p>Défaillance, dégradation, courbe en baignoire, MTBF, taux de disponibilité, graissage, AMDEC, analyse vibratoire, thermographie, GMAO et plan de maintenance.</p>
+      <div class="chiffres"><span>14 chapitres</span><span>13 animations</span><span>15 TP</span><span>45+ exercices</span></div>
+      <div class="cta">Ouvrir le dossier <em>→</em></div>
+    </div>
+  </a>
+
+  <div class="carte m-meca bientot">
+    <div class="vignette">
+      <svg viewBox="0 0 320 132" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+        <g fill="none" stroke="#79a6c4" stroke-width="2">
+          <circle cx="110" cy="66" r="38"/><circle cx="110" cy="66" r="10"/>
+          <circle cx="205" cy="66" r="24"/><circle cx="205" cy="66" r="7"/>
+        </g>
+        <g stroke="#79a6c4" stroke-width="2"><path d="M110 22v-9M110 110v9M66 66h-9M154 66h9M79 35l-7-7M141 97l7 7M141 35l7-7M79 97l-7 7"/></g>
+        <g stroke="#79a6c4" stroke-width="2"><path d="M205 38v-8M205 94v8M181 66h-8M229 66h8"/></g>
+      </svg>
+    </div>
+    <div class="corps">
+      <span class="num">Dossier 03 · Mécanique</span>
+      <h3>Transmettre, guider, tenir</h3>
+      <p>Liaisons, guidages, roulements, engrenages, poulies-courroies, accouplements, lubrification, ajustements, serrage au couple, alignement laser.</p>
+      <div class="chiffres"><span>En préparation</span></div>
+      <div class="cta">Bientôt disponible <em>·</em></div>
+    </div>
+  </div>
+
+  <div class="carte m-pneu bientot">
+    <div class="vignette">
+      <svg viewBox="0 0 320 132" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+        <g fill="none" stroke="#5cc4e0" stroke-width="2">
+          <rect x="60" y="46" width="130" height="40"/>
+          <path d="M190 66h44M60 56h-26M60 76h-26"/>
+          <rect x="234" y="52" width="46" height="28"/><path d="M257 52v28"/>
+        </g>
+        <rect x="70" y="50" width="26" height="32" fill="#5cc4e0" opacity=".85">
+          <animate attributeName="x" values="70;150;150;70" keyTimes="0;0.35;0.6;1" dur="4s" repeatCount="indefinite"/></rect>
+        <rect x="96" y="63" width="100" height="6" fill="#5cc4e0" opacity=".55">
+          <animate attributeName="x" values="96;176;176;96" keyTimes="0;0.35;0.6;1" dur="4s" repeatCount="indefinite"/></rect>
+      </svg>
+    </div>
+    <div class="corps">
+      <span class="num">Dossier 04 · Pneumatique</span>
+      <h3>Ce que l'air comprimé sait faire</h3>
+      <p>Production et traitement de l'air, vérins, distributeurs, séquences, réglage de vitesse, ventouses, GRAFCET, chasse aux fuites et coût du bar perdu.</p>
+      <div class="chiffres"><span>En préparation</span></div>
+      <div class="cta">Bientôt disponible <em>·</em></div>
+    </div>
+  </div>
+
+  <div class="carte m-hydro bientot">
+    <div class="vignette">
+      <svg viewBox="0 0 320 132" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+        <g fill="none" stroke="#e07a4e" stroke-width="2">
+          <circle cx="72" cy="66" r="24"/><path d="M62 54l22 12-22 12z" fill="#e07a4e" opacity=".8" stroke="none"/>
+          <path d="M96 66h48M144 40v52M144 66h40"/>
+          <rect x="184" y="42" width="86" height="48"/><path d="M270 66h22"/>
+        </g>
+        <rect x="188" y="46" width="20" height="40" fill="#e07a4e" opacity=".85">
+          <animate attributeName="x" values="188;242;242;188" keyTimes="0;0.4;0.62;1" dur="4.6s" repeatCount="indefinite"/></rect>
+        <g fill="#e07a4e"><circle cx="110" cy="66" r="3.2" opacity=".9"><animate attributeName="cx" values="98;142" dur="1.4s" repeatCount="indefinite"/></circle>
+        <circle cx="120" cy="66" r="3.2" opacity=".6"><animate attributeName="cx" values="98;142" dur="1.4s" begin="-.7s" repeatCount="indefinite"/></circle></g>
+      </svg>
+    </div>
+    <div class="corps">
+      <span class="num">Dossier 05 · Hydraulique</span>
+      <h3>La force que l'huile transmet</h3>
+      <p>Pascal, pression et débit, pompes, vérins et moteurs, distributeurs, limiteurs, accumulateurs, pollution du fluide, lecture de schéma ISO 1219.</p>
+      <div class="chiffres"><span>En préparation</span></div>
+      <div class="cta">Bientôt disponible <em>·</em></div>
+    </div>
+  </div>
+
+</div>
+
+<h2 class="section-titre">Comment c'est fabriqué</h2>
+<p class="section-intro">Chaque dossier suit la même mécanique pédagogique, du premier chapitre à la dernière fiche TP.</p>
+
+<div class="pitch">
+  <div><span class="n">01</span><h3>On explique d'abord</h3><p>Le phénomène physique, avec une image mentale avant toute formule. La formule n'arrive qu'une fois qu'elle est devenue évidente.</p></div>
+  <div><span class="n">02</span><h3>On fait bouger</h3><p>Des animations pilotables : vous poussez un curseur, vous voyez la conséquence. Un élève qui joue avec la surcharge la comprend mieux qu'un élève qui la lit.</p></div>
+  <div><span class="n">03</span><h3>On s'entraîne</h3><p>Des exercices courts, corrigés, ancrés sur des situations d'atelier réelles — pas sur des exercices « de livre ».</p></div>
+  <div><span class="n">04</span><h3>On va au banc</h3><p>Des fiches TP prêtes à imprimer : objectif, matériel, protocole, exploitation, et le piège pédagogique à tendre au bon moment.</p></div>
+</div>
+
+<div class="bloc">
+  <h2>Pour l'élève</h2>
+  <p>Lisez dans l'ordre. Chaque dossier est construit comme une chaîne : le chapitre 13 ne veut rien dire si le chapitre 1 n'est pas passé. Quand une animation apparaît, <strong>arrêtez de lire et jouez avec</strong> : poussez les curseurs jusqu'aux extrêmes, cherchez à casser la machine virtuelle. C'est là que la compréhension se fait, pas dans le paragraphe qui précède.</p>
+  <p>Les exercices ont leur correction repliée juste en dessous. Cherchez sincèrement avant d'ouvrir : une réponse lue n'apprend rien, une réponse cherchée puis vérifiée reste.</p>
+
+  <h3>Pour le professeur</h3>
+  <p>Les pages s'impriment proprement (les commandes d'animation disparaissent, les fiches TP ne se coupent pas entre deux pages) : <span class="mono">Ctrl+P</span> sur la section des TP donne un dossier d'atelier directement distribuable. Chaque fiche TP indique la durée, le régime électrique, l'organisation (binôme ou groupe) et le chapitre auquel elle se rattache.</p>
+  <p>Les anecdotes historiques ne sont pas du remplissage : elles servent de points d'ancrage mémoriels et donnent aux notions une épaisseur humaine. Un élève qui retient que Joule était brasseur retient aussi ce qu'est l'effet Joule.</p>
+
+  <h3>Sécurité</h3>
+  <p>Toutes les manipulations élèves proposées se font en régime protégé — <strong>TBTS ≤ 25 V</strong> en électricité, pressions réduites en pneumatique, bancs à énergie consignée en hydraulique et en mécanique — sauf les fiches explicitement marquées <span class="mono">HABILITATION</span> ou <span class="mono">DÉMO PROF</span>. Le cadre de sécurité complet est rappelé en tête de chaque série de TP.</p>
+</div>
+
+<footer class="fin">
+  <p><strong>Atelier MSPC</strong> — ressources de formation pour le Baccalauréat Professionnel Maintenance des Systèmes de Production Connectés. Cours, animations, exercices corrigés et travaux pratiques.</p>
+  <p>Contenu pédagogique librement utilisable en classe. Les valeurs numériques et les ordres de grandeur sont donnés à titre indicatif : sur une intervention réelle, la documentation constructeur et les normes en vigueur font toujours foi.</p>
+</footer>
+
+</div>
+
+<script>
+(function(){
+  "use strict";
+  var cv=document.getElementById('ligne'), ctx=cv.getContext('2d');
+  var cad=document.getElementById('hcad'), prev=document.getElementById('hprev');
+  var lblC=document.getElementById('hc'), verdict=document.getElementById('hverdict');
+  var W=0,H=0,dpr=1;
+  var reduce=window.matchMedia&&window.matchMedia('(prefers-reduced-motion:reduce)').matches;
+
+  function resize(){
+    dpr=Math.min(window.devicePixelRatio||1,2);
+    var r=cv.getBoundingClientRect();
+    W=r.width; H=r.height;
+    cv.width=Math.round(W*dpr); cv.height=Math.round(H*dpr);
+    ctx.setTransform(dpr,0,0,dpr,0,0);
+  }
+  window.addEventListener('resize',resize);
+
+  // --- état de la machine ---
+  var t=0, ang=0, beltX=0, verinP=0, verinDir=1, presseP=0;
+  var usure=0, heures=0, arrets=0, hArret=0, enPanne=0, enPreventif=0, prochainPrev=250;
+  var boites=[];
+  for(var i=0;i<5;i++) boites.push({x:-i*120, ok:true});
+
+  function reset(){ usure=0; heures=0; arrets=0; hArret=0; enPanne=0; enPreventif=0; prochainPrev=250; }
+  prev.addEventListener('change',function(){ if(prev.checked) prochainPrev=heures+250; });
+
+  function machine(k){
+    // k : coefficient de marche (0 = arrêtée)
+    var cx=W*0.5, base=H*0.60, s=Math.min(W/900,H/560*1.35); s=Math.max(s,0.42);
+    ctx.save(); ctx.translate(cx,base); ctx.scale(s,s);
+
+    // --- bâti ---
+    ctx.fillStyle='#1a2019'; ctx.fillRect(-420,60,840,26);
+    ctx.fillStyle='#232b24'; ctx.fillRect(-420,86,840,10);
+
+    // --- 1. MOTEUR ÉLECTRIQUE (vert) ---
+    ctx.save(); ctx.translate(-320,0);
+    ctx.strokeStyle='#93a415'; ctx.lineWidth=2.4; ctx.fillStyle='rgba(147,164,21,.10)';
+    ctx.beginPath(); ctx.arc(0,0,52,0,6.2832); ctx.fill(); ctx.stroke();
+    ctx.fillStyle='#11160f'; ctx.fillRect(-30,52,60,10);
+    // rotor
+    ctx.save(); ctx.rotate(ang);
+    ctx.strokeStyle='#c8d834'; ctx.lineWidth=3.4;
+    for(var a=0;a<3;a++){ ctx.rotate(2.0944); ctx.beginPath(); ctx.moveTo(0,0); ctx.lineTo(0,-38); ctx.stroke(); }
+    ctx.restore();
+    ctx.fillStyle='#c8d834'; ctx.beginPath(); ctx.arc(0,0,7,0,6.2832); ctx.fill();
+    // arc électrique animé sur l'alim
+    ctx.strokeStyle='rgba(200,216,52,'+(0.35+0.3*Math.sin(t*6))+')'; ctx.lineWidth=2;
+    ctx.beginPath(); ctx.moveTo(-52,-30); ctx.lineTo(-96,-30); ctx.lineTo(-96,-88); ctx.stroke();
+    ctx.fillStyle='#c8d834'; ctx.font='11px "IBM Plex Mono",monospace'; ctx.textAlign='center';
+    ctx.fillText('M 3~',0,84);
+    ctx.restore();
+
+    // --- 2. ENGRENAGES (bleu acier) ---
+    function roue(x,y,r,n,rot,col){
+      ctx.save(); ctx.translate(x,y); ctx.rotate(rot);
+      ctx.strokeStyle=col; ctx.lineWidth=2.2;
+      ctx.beginPath(); ctx.arc(0,0,r,0,6.2832); ctx.stroke();
+      ctx.beginPath();
+      for(var i=0;i<n;i++){ var A=i*6.2832/n; ctx.moveTo(Math.cos(A)*r,Math.sin(A)*r); ctx.lineTo(Math.cos(A)*(r+9),Math.sin(A)*(r+9)); }
+      ctx.stroke();
+      ctx.beginPath(); ctx.arc(0,0,r*0.22,0,6.2832); ctx.stroke();
+      ctx.restore();
+    }
+    roue(-224,0,44,12,ang*0.6,'#79a6c4');
+    roue(-136,0,32,9,-ang*0.83,'#79a6c4');
+    ctx.strokeStyle='rgba(121,166,196,.45)'; ctx.lineWidth=1.4;
+    ctx.beginPath(); ctx.moveTo(-320,0); ctx.lineTo(-224,0); ctx.stroke();
+
+    // --- 3. CONVOYEUR (bande) ---
+    ctx.strokeStyle='#6d7469'; ctx.lineWidth=3;
+    ctx.beginPath(); ctx.moveTo(-136,44); ctx.lineTo(300,44); ctx.stroke();
+    ctx.strokeStyle='#464d43'; ctx.lineWidth=1.6;
+    for(var b=0;b<26;b++){ var bx=-136+((b*20+beltX)%440); ctx.beginPath(); ctx.moveTo(bx,44); ctx.lineTo(bx-6,54); ctx.stroke(); }
+    // boîtes transportées
+    for(var i2=0;i2<boites.length;i2++){
+      var bo=boites[i2];
+      if(bo.x<-140||bo.x>300) continue;
+      ctx.fillStyle=bo.ok?'rgba(214,220,208,.92)':'rgba(179,32,23,.85)';
+      ctx.fillRect(bo.x-15,10,30,32);
+      ctx.strokeStyle='#0f1512'; ctx.lineWidth=1.4; ctx.strokeRect(bo.x-15,10,30,32);
+    }
+
+    // --- 4. VÉRIN PNEUMATIQUE (cyan) : pousseur au-dessus du convoyeur ---
+    ctx.save(); ctx.translate(-40,-96);
+    ctx.strokeStyle='#5cc4e0'; ctx.lineWidth=2.2;
+    ctx.strokeRect(-46,-16,74,32);
+    ctx.fillStyle='rgba(92,196,224,.55)'; ctx.fillRect(-44,-14,20+verinP*40,28);
+    ctx.beginPath(); ctx.moveTo(28,0); ctx.lineTo(40+verinP*46,0); ctx.stroke();
+    ctx.strokeRect(40+verinP*46,-13,9,26);
+    // arrivée d'air
+    ctx.strokeStyle='rgba(92,196,224,.5)'; ctx.lineWidth=1.5;
+    ctx.beginPath(); ctx.moveTo(-46,-8); ctx.lineTo(-84,-8); ctx.lineTo(-84,-54); ctx.stroke();
+    ctx.restore();
+
+    // --- 5. PRESSE HYDRAULIQUE (orange) ---
+    ctx.save(); ctx.translate(190,-118);
+    ctx.strokeStyle='#e07a4e'; ctx.lineWidth=2.4;
+    ctx.strokeRect(-34,-30,68,44);
+    ctx.fillStyle='rgba(224,122,78,.5)'; ctx.fillRect(-32,-28,64,10+presseP*30);
+    ctx.beginPath(); ctx.moveTo(0,14); ctx.lineTo(0,52+presseP*54); ctx.stroke();
+    ctx.fillStyle='#e07a4e'; ctx.fillRect(-30,52+presseP*54,60,14);
+    // enclume
+    ctx.fillStyle='#3a423a'; ctx.fillRect(-40,140,80,12);
+    ctx.strokeStyle='rgba(224,122,78,.45)'; ctx.lineWidth=1.5;
+    ctx.beginPath(); ctx.moveTo(-34,-16); ctx.lineTo(-78,-16); ctx.lineTo(-78,-60); ctx.stroke();
+    ctx.restore();
+
+    ctx.restore();
+  }
+
+  function jauge(){
+    var pad=Math.min(W*0.06,46), y=H-58, w=W-pad*2;
+    ctx.font='11px "IBM Plex Mono",monospace'; ctx.textAlign='left';
+    ctx.fillStyle='#8d968b'; ctx.fillText('USURE CUMULÉE DES ORGANES',pad,y-9);
+    // barre
+    ctx.fillStyle='rgba(255,255,255,.10)'; ctx.fillRect(pad,y,w,10);
+    var u=Math.min(usure,100)/100;
+    var col = u<0.55 ? '#93a415' : (u<0.82 ? '#f0a844' : '#b32017');
+    ctx.fillStyle=col; ctx.fillRect(pad,y,w*u,10);
+    // seuil de défaillance
+    ctx.strokeStyle='rgba(179,32,23,.85)'; ctx.lineWidth=2;
+    ctx.beginPath(); ctx.moveTo(pad+w*0.92,y-5); ctx.lineTo(pad+w*0.92,y+15); ctx.stroke();
+    ctx.fillStyle='rgba(179,32,23,.9)'; ctx.font='9px "IBM Plex Mono",monospace';
+    ctx.fillText('SEUIL DE DÉFAILLANCE',pad+w*0.92-96,y+26);
+    // compteurs
+    ctx.textAlign='right'; ctx.font='11px "IBM Plex Mono",monospace'; ctx.fillStyle='#cfd6cf';
+    var dispo = heures>0 ? (100*(heures-hArret)/heures) : 100;
+    ctx.fillText(Math.round(heures)+' h  ·  '+arrets+' panne'+(arrets>1?'s':'')+'  ·  dispo '+dispo.toFixed(1)+' %',pad+w,y-9);
+  }
+
+  function bandeau(){
+    if(enPanne>0){
+      ctx.fillStyle='rgba(179,32,23,'+(0.14+0.09*Math.sin(t*9))+')'; ctx.fillRect(0,0,W,H);
+      ctx.fillStyle='#ff6a5e'; ctx.font='700 '+Math.min(W*0.045,34)+'px "Saira Condensed",sans-serif';
+      ctx.textAlign='center'; ctx.fillText('ARRÊT FORTUIT — DÉFAILLANCE',W/2,H*0.30);
+      ctx.fillStyle='#ffb0a8'; ctx.font='12px "IBM Plex Mono",monospace';
+      ctx.fillText('Réparation en cours · production perdue',W/2,H*0.30+22);
+    } else if(enPreventif>0){
+      ctx.fillStyle='#f0a844'; ctx.font='700 '+Math.min(W*0.034,26)+'px "Saira Condensed",sans-serif';
+      ctx.textAlign='center'; ctx.fillText('ARRÊT PROGRAMMÉ — INTERVENTION PRÉVENTIVE',W/2,H*0.30);
+      ctx.fillStyle='#e0c49a'; ctx.font='12px "IBM Plex Mono",monospace';
+      ctx.fillText('Graissage · contrôle · remplacement des pièces d\'usure',W/2,H*0.30+22);
+    }
+  }
+
+  var dernierTexte='';
+  function texte(){
+    var msg;
+    if(enPanne>0) msg='Panne. Personne n\'avait rien vu venir : la machine s\'arrête au pire moment, et l\'arrêt dure longtemps.';
+    else if(enPreventif>0) msg='Arrêt court, choisi, planifié. On remet l\'usure à zéro avant qu\'elle ne devienne une panne.';
+    else if(usure>82) msg='Usure critique : vibrations, jeu, échauffement. La défaillance est imminente.';
+    else if(usure>55) msg='L\'usure s\'installe. C\'est ici qu\'un contrôle conditionnel la détecterait.';
+    else if(+cad.value>85) msg='Cadence élevée : la machine produit plus, mais s\'use nettement plus vite.';
+    else msg='Machine en marche. Regardez l\'usure monter en bas de l\'écran.';
+    if(msg!==dernierTexte){ verdict.textContent=msg; dernierTexte=msg; }
+  }
+
+  var last=0;
+  function boucle(ts){
+    if(!W) resize();
+    var dt=Math.min((ts-last)/1000,0.05); last=ts; t+=dt;
+    var c=+cad.value/100;
+    lblC.textContent=Math.round(c*100)+' %';
+
+    var marche = (enPanne<=0 && enPreventif<=0) ? 1 : 0;
+
+    if(marche){
+      heures += dt*22;
+      // l'usure croît plus que proportionnellement à la cadence
+      usure += dt*3.4*Math.pow(c,1.7);
+      if(prev.checked && heures>=prochainPrev){ enPreventif=2.0; }
+      if(usure>=92){ enPanne=6.0; arrets++; }
+    } else {
+      heures += dt*22; hArret += dt*22;
+      if(enPreventif>0){ enPreventif-=dt; if(enPreventif<=0){ usure=Math.max(0,usure*0.12); prochainPrev=heures+250; } }
+      if(enPanne>0){ enPanne-=dt; if(enPanne<=0){ usure=0; if(prev.checked) prochainPrev=heures+250; } }
+    }
+
+    // cinématique
+    var k = marche ? c : 0;
+    if(!reduce){
+      ang += dt*9*k;
+      beltX += dt*150*k;
+      verinP += verinDir*dt*1.5*k; if(verinP>1){verinP=1;verinDir=-1;} if(verinP<0){verinP=0;verinDir=1;}
+      presseP = marche ? (0.5+0.5*Math.sin(t*2.2*c-1.57)) : presseP;
+      for(var i=0;i<boites.length;i++){
+        boites[i].x += dt*150*k*0.85;
+        if(boites[i].x>320){ boites[i].x=-150; boites[i].ok = usure<80 || Math.random()>0.4; }
+      }
+    }
+
+    // rendu
+    ctx.clearRect(0,0,W,H);
+    var g=ctx.createLinearGradient(0,0,0,H);
+    g.addColorStop(0,'#0d120f'); g.addColorStop(1,'#161d18');
+    ctx.fillStyle=g; ctx.fillRect(0,0,W,H);
+    ctx.globalAlpha=0.5;
+    ctx.strokeStyle='rgba(255,255,255,.05)'; ctx.lineWidth=1;
+    for(var gx=0;gx<W;gx+=40){ ctx.beginPath(); ctx.moveTo(gx,0); ctx.lineTo(gx,H); ctx.stroke(); }
+    for(var gy=0;gy<H;gy+=40){ ctx.beginPath(); ctx.moveTo(0,gy); ctx.lineTo(W,gy); ctx.stroke(); }
+    ctx.globalAlpha=1;
+
+    machine(k);
+    jauge();
+    bandeau();
+    texte();
+    requestAnimationFrame(boucle);
+  }
+
+  resize();
+  requestAnimationFrame(boucle);
+})();
+</script>
+
+</body>
+</html>
