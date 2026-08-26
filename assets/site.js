@@ -18,16 +18,31 @@
     var ctx = cv.getContext('2d');
     var W = 0, H = 0, dpr = 1, t = 0, last = 0, visible = true, running = false;
     var ratio = opts.ratio || (cv.height && cv.width ? cv.height / cv.width : 0.34);
+    // Dimensions déclarées par les attributs width/height du <canvas>, mémorisées
+    // avant toute modification : c'est l'espace de dessin du mode « fixed ».
+    var FW = cv.width || 900, FH = cv.height || 300;
 
+    /* Trois modes de dimensionnement :
+       • par défaut  : espace de dessin = taille CSS réelle, hauteur = largeur × ratio
+       • fill        : le canvas remplit son conteneur (héros pleine hauteur)
+       • fixed       : l'espace de dessin reste celui des attributs width/height.
+                       Les coordonnées écrites dans le dessin ne bougent jamais ;
+                       seule la finesse du rendu suit l'écran. */
     function resize(){
       dpr = Math.min(global.devicePixelRatio || 1, 2);
-      var r = cv.getBoundingClientRect();
-      W = r.width || cv.clientWidth || 900;
-      H = opts.fill ? (r.height || 400) : W * ratio;
-      if(!opts.fill) cv.style.height = H + 'px';
+      if(opts.fixed){
+        W = FW; H = FH;
+        cv.style.width = '100%';
+      } else {
+        var r = cv.getBoundingClientRect();
+        W = r.width || cv.clientWidth || 900;
+        H = opts.fill ? (r.height || 400) : W * ratio;
+        if(!opts.fill) cv.style.height = H + 'px';
+      }
       cv.width = Math.round(W * dpr);
       cv.height = Math.round(H * dpr);
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      if(opts.onResize) opts.onResize(api);
     }
 
     var api = {
@@ -58,8 +73,11 @@
           if(visible) start(); else stop();
         });
       }, {rootMargin: '120px'}).observe(cv);
-      // premier rendu même hors écran, pour que la figure ne soit jamais vide
-      api.dt = 0; dessin(api);
+      // Premier rendu différé d'une frame, pour que la figure ne soit jamais
+      // vide — mais après que le code appelant a fini son initialisation.
+      global.requestAnimationFrame(function(){
+        if(!running){ api.dt = 0; dessin(api); }
+      });
     } else {
       start();
     }

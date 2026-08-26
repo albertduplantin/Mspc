@@ -9,6 +9,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Saira+Condensed:wght@500;600;700&family=Public+Sans:ital,wght@0,400;0,600;0,800;1,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/site.css">
+<script src="assets/site.js"></script>
 <style>
 :root{--accent:#93a415; --accent-clair:#c8d834}
 .hero-canvas-wrap{height:min(70vh,560px); min-height:420px}
@@ -234,17 +235,9 @@
   var cv=document.getElementById('ligne'), ctx=cv.getContext('2d');
   var cad=document.getElementById('hcad'), prev=document.getElementById('hprev');
   var lblC=document.getElementById('hc'), verdict=document.getElementById('hverdict');
-  var W=0,H=0,dpr=1;
-  var reduce=window.matchMedia&&window.matchMedia('(prefers-reduced-motion:reduce)').matches;
-
-  function resize(){
-    dpr=Math.min(window.devicePixelRatio||1,2);
-    var r=cv.getBoundingClientRect();
-    W=r.width; H=r.height;
-    cv.width=Math.round(W*dpr); cv.height=Math.round(H*dpr);
-    ctx.setTransform(dpr,0,0,dpr,0,0);
-  }
-  window.addEventListener('resize',resize);
+  // Dimensionnement et boucle de rendu confiés au moteur commun (assets/site.js)
+  var W=0,H=0;
+  var reduce=MSPC.reduce;
 
   // --- état de la machine ---
   var t=0, ang=0, beltX=0, verinP=0, verinDir=1, presseP=0;
@@ -387,10 +380,9 @@
     if(msg!==dernierTexte){ verdict.textContent=msg; dernierTexte=msg; }
   }
 
-  var last=0;
-  function boucle(ts){
-    if(!W) resize();
-    var dt=Math.min((ts-last)/1000,0.05); last=ts; t+=dt;
+  MSPC.anim('ligne', function(a){
+    W=a.W; H=a.H; t=a.t;
+    var dt=a.dt;
     var c=+cad.value/100;
     lblC.textContent=Math.round(c*100)+' %';
 
@@ -436,11 +428,7 @@
     jauge();
     bandeau();
     texte();
-    requestAnimationFrame(boucle);
-  }
-
-  resize();
-  requestAnimationFrame(boucle);
+  }, {fill:true});
 })();
 </script>
 

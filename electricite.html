@@ -103,7 +103,7 @@
     <div class="c"><label>Agitation thermique <span id="a-et-t-l">ambiante</span></label><input type="range" id="a-et-t" min="0" max="100" value="45"></div>
     <div class="c readout" id="a-et-out"></div>
   </div>
-  <figcaption>Six vues, dans l'ordre. <b>L'atome</b> d'abord : un noyau, des couches, et tout au bord un électron mal tenu. Puis les états de la matière — <b>solide</b>, <b>liquide</b>, <b>gaz</b>, <b>plasma</b> — où l'agitation thermique décide de tout : plus il fait chaud, moins les atomes se tiennent. Et enfin le <b>solide métallique</b>, qui est un cas à part et le seul qui nous intéresse vraiment : <span style="color:var(--accent-clair)">les atomes y restent rangés comme dans un solide, mais leurs électrons extérieurs circulent librement comme dans un gaz</span>. Un cristal immobile traversé par une mer d'électrons — voilà ce qu'est un fil de cuivre. <b>Chauffez la vue « métal »</b> : les ions vibrent plus fort, les électrons se cognent davantage. Vous regardez la résistance électrique en train de naître (§ 1.5).</figcaption>
+  <figcaption>Six vues, dans l'ordre. <b>L'atome</b> d'abord : un noyau, des couches, et tout au bord un électron mal tenu. Puis les états de la matière — <b>solide</b>, <b>liquide</b>, <b>gaz</b>, <b>plasma</b> — où l'agitation thermique décide de tout : plus il fait chaud, moins les atomes se tiennent. Notez au passage qu'en dehors des métaux, la matière est le plus souvent faite de <b>molécules</b> et non d'atomes isolés : la vue « liquide » montre de vraies molécules d'eau, qui restent <b>constamment au contact</b> les unes des autres — c'est ce qui conserve le volume — tout en <b>glissant</b> sans cesse et en changeant de voisines, ce qui explique qu'un liquide n'ait pas de forme propre. Et enfin le <b>solide métallique</b>, qui est un cas à part et le seul qui nous intéresse vraiment : <span style="color:var(--accent-clair)">les atomes y restent rangés comme dans un solide, mais leurs électrons extérieurs circulent librement comme dans un gaz</span>. Un cristal immobile traversé par une mer d'électrons — voilà ce qu'est un fil de cuivre. <b>Chauffez la vue « métal »</b> : les ions vibrent plus fort, les électrons se cognent davantage. Vous regardez la résistance électrique en train de naître (§ 1.5).</figcaption>
 </figure>
 <script>
 (function(){
@@ -119,14 +119,14 @@
   var TITRE={atome:'L’ATOME', solide:'SOLIDE ISOLANT', liquide:'LIQUIDE', gaz:'GAZ', plasma:'PLASMA', metal:'SOLIDE MÉTALLIQUE'};
   var SOUS ={atome:'un noyau, des couches d’électrons',
              solide:'atomes rangés · électrons prisonniers',
-             liquide:'atomes au contact, libres de glisser',
+             liquide:'molécules au contact, libres de glisser',
              gaz:'atomes très éloignés, très rapides',
              plasma:'les électrons ont été arrachés aux noyaux',
              metal:'ions rangés + mer d’électrons libres'};
   var PIED={
     atome:'Autant de protons que d’électrons : l’atome est neutre. Schéma simplifié — le cuivre en a 29 sur 4 couches, dont 1 seul à l’extérieur.',
     solide:'Chauffez : les atomes vibrent plus fort mais ne quittent pas leur place. Aucun électron ne circule — c’est un isolant.',
-    liquide:'Les liaisons cèdent : les atomes glissent les uns sur les autres. Le volume est conservé, la forme ne l’est plus.',
+    liquide:'Les molécules ne se quittent jamais — le volume est conservé — mais elles changent de voisines sans arrêt : la forme, elle, ne l’est pas.',
     gaz:'Plus aucune liaison : les atomes ne se rencontrent que par chocs. C’est pourquoi l’air sec est un excellent isolant.',
     plasma:'Le 4e état : arc de soudure, foudre, tube néon, Soleil. Les électrons arrachés le rendent conducteur — d’où l’arc électrique.',
     metal:'Les ions ne quittent jamais leur place ; les électrons, eux, vont partout. Plus il fait chaud, plus ils se cognent : c’est la résistance.'
@@ -142,6 +142,84 @@
   var NUC=[];
   for(var q=0;q<14;q++){ var Aq=q*2.3999, rq=Math.sqrt(q/14)*13; NUC.push({dx:Math.cos(Aq)*rq, dy:Math.sin(Aq)*rq, p:(q%2===0)}); }
 
+  /* ---- Sous-modèle « liquide » : des molécules qui restent au contact ----
+     Chaque molécule subit trois forces : une répulsion à très courte distance
+     (elles ne s'interpénètrent jamais), une cohésion à moyenne distance (elles
+     ne se séparent pas non plus — c'est ce qui conserve le volume) et la
+     pesanteur. Il en sort tout seul un liquide qui coule, qui a une surface
+     libre, et dont les molécules glissent sans cesse les unes sur les autres
+     en changeant de voisines. */
+  var LIQ={p:[], liens:[], w:0, h:0, acc:0};
+  var NMOL=46, FRAC=0.90;                       // nb de molécules · part du récipient occupée
+  function rayonEq(w,h){ return Math.sqrt(w*h*FRAC/NMOL); }   // distance d'équilibre entre centres
+
+  function initLiq(w,h){
+    LIQ.p=[]; LIQ.liens=[]; LIQ.acc=0; LIQ.w=w; LIQ.h=h;
+    var n=NMOL, r0=rayonEq(w,h);
+    var cols=Math.max(3, Math.floor((w-r0*0.6)/r0));
+    for(var i=0;i<n;i++){
+      var c=i%cols, r=Math.floor(i/cols);
+      LIQ.p.push({
+        x:r0*0.6+c*r0+(Math.random()-0.5)*4,
+        y:h-r0*0.6-r*r0*0.9+(Math.random()-0.5)*4,
+        vx:0, vy:0, fx:0, fy:0,
+        a:Math.random()*6.2832, va:(Math.random()-0.5)*2.4
+      });
+    }
+  }
+
+  function pasLiq(dt,T,w,h){
+    var P=LIQ.p, n=P.length, i, j;
+    var r0=rayonEq(w,h), cut=r0*1.75;
+    var kRep=r0*190, kAtt=r0*17*(1-T*0.5), g=r0*7.5;
+    for(i=0;i<n;i++){ P[i].fx=0; P[i].fy=g; }
+    LIQ.liens.length=0;
+    for(i=0;i<n;i++){
+      for(j=i+1;j<n;j++){
+        var dx=P[j].x-P[i].x, dy=P[j].y-P[i].y, d2=dx*dx+dy*dy;
+        if(d2>cut*cut || d2<0.01) continue;
+        var d=Math.sqrt(d2), nx=dx/d, ny=dy/d, f;
+        // Deux molécules assez proches sont liées — y compris quand elles sont
+        // tassées l'une contre l'autre (d < r0), ce qui est le cas le plus courant.
+        if(d<r0*1.35) LIQ.liens.push(i,j);
+        if(d<r0){ f=-kRep*(r0-d)/r0; }                       // répulsion : on se repousse
+        else { f=kAtt*(1-(d-r0)/(cut-r0)); }                 // cohésion : on se retient
+        P[i].fx+=f*nx; P[i].fy+=f*ny;
+        P[j].fx-=f*nx; P[j].fy-=f*ny;
+      }
+    }
+    var kick=r0*(2+T*34), amort=Math.exp(-(3.4-T*1.5)*dt), vmax=r0*10, marge=r0*0.46;
+    for(i=0;i<n;i++){
+      var p=P[i];
+      p.vx=(p.vx+p.fx*dt+(Math.random()-0.5)*kick*dt)*amort;
+      p.vy=(p.vy+p.fy*dt+(Math.random()-0.5)*kick*dt)*amort;
+      var sp=Math.sqrt(p.vx*p.vx+p.vy*p.vy);
+      if(sp>vmax){ p.vx=p.vx/sp*vmax; p.vy=p.vy/sp*vmax; }
+      p.x+=p.vx*dt; p.y+=p.vy*dt;
+      p.a+=p.va*dt*(0.35+T*3.2);
+      if(p.x<marge){ p.x=marge; p.vx=Math.abs(p.vx)*0.5; }
+      if(p.x>w-marge){ p.x=w-marge; p.vx=-Math.abs(p.vx)*0.5; }
+      if(p.y>h-marge){ p.y=h-marge; p.vy=-Math.abs(p.vy)*0.3; p.vx*=0.92; }
+      if(p.y<marge){ p.y=marge; p.vy=Math.abs(p.vy)*0.5; }
+    }
+  }
+
+  /* Une molécule d'eau : un oxygène, deux hydrogènes écartés de 104,5° */
+  function molecule(ctx,x,y,ang,R){
+    var b=R*0.92, a1=ang-0.912, a2=ang+0.912;
+    var h1x=x+Math.cos(a1)*b, h1y=y+Math.sin(a1)*b;
+    var h2x=x+Math.cos(a2)*b, h2y=y+Math.sin(a2)*b;
+    ctx.strokeStyle='rgba(190,205,215,.55)'; ctx.lineWidth=Math.max(1.6,R*0.26);
+    ctx.beginPath(); ctx.moveTo(h1x,h1y); ctx.lineTo(x,y); ctx.lineTo(h2x,h2y); ctx.stroke();
+    ctx.fillStyle='#c9d6dd';
+    ctx.beginPath(); ctx.arc(h1x,h1y,R*0.40,0,6.2832); ctx.fill();
+    ctx.beginPath(); ctx.arc(h2x,h2y,R*0.40,0,6.2832); ctx.fill();
+    var gO=ctx.createRadialGradient(x-R*0.28,y-R*0.28,R*0.08,x,y,R);
+    gO.addColorStop(0,'#6ba6d8'); gO.addColorStop(1,'#17548f');
+    ctx.fillStyle=gO;
+    ctx.beginPath(); ctx.arc(x,y,R,0,6.2832); ctx.fill();
+  }
+
   function init(k){
     ions=[]; elec=[]; tauxChoc=0; var i,r,c;
     if(k==='solide'||k==='metal'){
@@ -152,8 +230,7 @@
         elec.push({x:ex0, y:ey0, a:Math.random()*6.2832, px:ex0, py:ey0});
       }
     } else if(k==='liquide'){
-      for(i=0;i<54;i++)
-        ions.push({x:0.03+Math.random()*0.94, y:0.36+Math.random()*0.60, vx:(Math.random()-0.5)*0.1, vy:(Math.random()-0.5)*0.1});
+      LIQ.p=[]; LIQ.liens=[]; LIQ.w=0; LIQ.h=0; LIQ.acc=0;  // bâti au 1er rendu, quand la taille est connue
     } else if(k==='gaz'){
       for(i=0;i<16;i++)
         ions.push({x:Math.random(), y:Math.random(), vx:(Math.random()-0.5), vy:(Math.random()-0.5)});
@@ -265,32 +342,45 @@
 
     /* ---------------- 3. LIQUIDE ---------------- */
     else if(k==='liquide'){
-      ctx.strokeStyle='rgba(255,255,255,.20)'; ctx.lineWidth=1.6;
-      ctx.beginPath(); ctx.moveTo(box.x,box.y); ctx.lineTo(box.x,box.y+box.h);
-      ctx.lineTo(box.x+box.w,box.y+box.h); ctx.lineTo(box.x+box.w,box.y); ctx.stroke();
-      var top=0.30-T*0.05, rL=Math.min(box.w/COLS, box.h/ROWS)*0.28, cible=0.05+T*0.16;
-      ctx.fillStyle='rgba(91,134,189,.10)';
-      ctx.fillRect(box.x, PY(top), box.w, box.y+box.h-PY(top));
-      for(var i5=0;i5<ions.length;i5++){
-        var p5=ions[i5];
-        if(!a.reduce){
-          p5.vx += (Math.random()-0.5)*dt*2.2; p5.vy += (Math.random()-0.5)*dt*2.2;
-          var m5=Math.sqrt(p5.vx*p5.vx+p5.vy*p5.vy)||1e-6;
-          p5.vx=p5.vx/m5*cible; p5.vy=p5.vy/m5*cible;
-          p5.x+=p5.vx*dt; p5.y+=p5.vy*dt;
-          if(p5.x<0.02){p5.x=0.02;p5.vx=Math.abs(p5.vx);}
-          if(p5.x>0.98){p5.x=0.98;p5.vx=-Math.abs(p5.vx);}
-          if(p5.y<top){p5.y=top;p5.vy=Math.abs(p5.vy);}
-          if(p5.y>0.98){p5.y=0.98;p5.vy=-Math.abs(p5.vy);}
-        }
-        var X5=PX(p5.x), Y5=PY(p5.y);
-        ctx.fillStyle='rgba(120,132,120,.35)'; ctx.strokeStyle='#8d968b'; ctx.lineWidth=1.1;
-        ctx.beginPath(); ctx.arc(X5,Y5,rL,0,6.2832); ctx.fill(); ctx.stroke();
-        ctx.fillStyle='#b32017'; ctx.beginPath(); ctx.arc(X5,Y5,rL*0.26,0,6.2832); ctx.fill();
+      // Récipient un peu moins haut que la zone de dessin : le liquide en occupe
+      // l'essentiel et la surface libre reste bien visible.
+      var lb={x:box.x, y:box.y+box.h*0.28, w:box.w, h:box.h*0.72};
+      var bw=lb.w, bh=lb.h;
+      if(!LIQ.p.length){ initLiq(bw,bh); }
+      else if(Math.abs(LIQ.w-bw)>1 || Math.abs(LIQ.h-bh)>1){
+        var sx=bw/LIQ.w, sy=bh/LIQ.h;                        // le récipient a changé de taille
+        for(var q3=0;q3<LIQ.p.length;q3++){ LIQ.p[q3].x*=sx; LIQ.p[q3].y*=sy; }
+        LIQ.w=bw; LIQ.h=bh;
       }
-      ctx.strokeStyle='rgba(91,134,189,.55)'; ctx.lineWidth=1.6;
-      ctx.beginPath(); ctx.moveTo(box.x,PY(top)); ctx.lineTo(box.x+box.w,PY(top)); ctx.stroke();
-      MSPC.mono(ctx,'surface libre', box.x+box.w-4, PY(top)-7, 10, '#5b86bd', 'right');
+      // Physique à pas fixe : stable quelle que soit la cadence d'affichage
+      if(!a.reduce){
+        LIQ.acc += Math.min(dt,0.05);
+        var PAS=1/180, it=0;
+        while(LIQ.acc>=PAS && it<10){ pasLiq(PAS,T,bw,bh); LIQ.acc-=PAS; it++; }
+      }
+
+      // récipient
+      ctx.strokeStyle='rgba(255,255,255,.22)'; ctx.lineWidth=1.8;
+      ctx.beginPath(); ctx.moveTo(lb.x,lb.y); ctx.lineTo(lb.x,lb.y+lb.h);
+      ctx.lineTo(lb.x+lb.w,lb.y+lb.h); ctx.lineTo(lb.x+lb.w,lb.y); ctx.stroke();
+
+      var RM=rayonEq(bw,bh)*0.36;
+      // liaisons intermoléculaires : elles se font et se défont en permanence
+      ctx.strokeStyle='rgba(200,216,52,.60)'; ctx.lineWidth=1.7; ctx.setLineDash([3,3]);
+      ctx.beginPath();
+      for(var L3=0;L3<LIQ.liens.length;L3+=2){
+        var A3=LIQ.p[LIQ.liens[L3]], B3=LIQ.p[LIQ.liens[L3+1]];
+        ctx.moveTo(lb.x+A3.x, lb.y+A3.y); ctx.lineTo(lb.x+B3.x, lb.y+B3.y);
+      }
+      ctx.stroke(); ctx.setLineDash([]);
+      // molécules
+      for(var m3=0;m3<LIQ.p.length;m3++){
+        var pm=LIQ.p[m3];
+        molecule(ctx, lb.x+pm.x, lb.y+pm.y, pm.a, RM);
+      }
+      MSPC.mono(ctx,'molécule d’eau H₂O : ● oxygène  ● hydrogène  ┈ liaisons intermoléculaires', box.x, box.y+6, 10.5, '#8d968b');
+      MSPC.mono(ctx, (LIQ.liens.length/2)+' liaisons à cet instant — elles se rompent et se refont sans cesse',
+                box.x+box.w, box.y+6, 10.5, '#c8d834', 'right');
     }
 
     /* ---------------- 4. GAZ / 5. PLASMA ---------------- */
@@ -394,7 +484,7 @@
     var msg={
       atome:'Le noyau tient fermement les couches internes.<br>Sur la couche extérieure : <b>1 seul électron, mal accroché</b>.',
       solide:'Atomes rangés, liaisons fortes.<br><b>Aucun électron libre → aucun courant possible</b>.',
-      liquide:'Les liaisons ont cédé sous la chaleur.<br>Les atomes glissent, mais restent au contact.',
+      liquide:'Molécules <b>toujours au contact</b>, jamais imbriquées.<br>Elles <b>glissent</b> l’une sur l’autre : liaisons rompues et refaites en permanence.',
       gaz:'Atomes isolés, très rapides, très espacés.<br>Rien ne relie les atomes entre eux.',
       plasma:'Les électrons ont été <b>arrachés</b> aux atomes.<br>Ions + électrons libres → <b>c’est conducteur</b>.',
       metal:'Ions immobiles + <b>'+elec.length+' électrons libres</b><br>Chocs ≈ <b>'+Math.round(tauxChoc)+'/s</b> → c’est la <b>résistance</b>.'
@@ -1645,53 +1735,39 @@ function sci(n){
 }
 function el(id){ return document.getElementById(id); }
 
-/* Prépare un canvas à dimensions fixes (attributs width/height) en haute définition */
+/* Les deux fabriques ci-dessous délèguent la boucle de rendu au moteur commun
+   (assets/site.js) : chaque figure se met en pause dès qu'elle sort de l'écran
+   et reprend quand elle revient. L'espace de dessin, lui, ne change pas — les
+   coordonnées écrites dans chaque animation restent exactement les mêmes. */
+
+/* Canvas à dimensions fixes (attributs width/height), rendu en haute définition */
 function mk(id, draw){
   var cv = el(id); if(!cv) return null;
-  var W = cv.width, H = cv.height;
-  var dpr = Math.min(window.devicePixelRatio || 1, 2);
-  cv.width = W * dpr; cv.height = H * dpr;
-  cv.style.width = "100%";
-  var ctx = cv.getContext('2d');
-  ctx.scale(dpr, dpr);
-  var st = {W:W, H:H, ctx:ctx, cv:cv, t:0, last:performance.now()};
-  function loop(now){
-    var dt = Math.min((now - st.last)/1000, 0.05);
-    st.last = now; st.t += dt;
-    ctx.save();
-    ctx.fillStyle = COL.bg; ctx.fillRect(0,0,W,H);
-    draw(ctx, st, dt);
-    ctx.restore();
-    requestAnimationFrame(loop);
-  }
-  requestAnimationFrame(loop);
+  var st = {W:cv.width, H:cv.height, ctx:cv.getContext('2d'), cv:cv, t:0, last:0};
+  MSPC.anim(id, function(a){
+    st.t = a.t; st.last = a.t; st.W = a.W; st.H = a.H;
+    a.ctx.save();
+    a.ctx.fillStyle = COL.bg; a.ctx.fillRect(0, 0, a.W, a.H);
+    draw(a.ctx, st, a.dt);
+    a.ctx.restore();
+  }, {fixed:true});
   return st;
 }
 
 /* Canvas qui remplit son conteneur (le hero) */
 function mkFill(id, draw){
   var cv = el(id); if(!cv) return null;
-  var ctx = cv.getContext('2d');
-  var st = {W:0, H:0, ctx:ctx, cv:cv, t:0, last:performance.now()};
-  function resize(){
-    var dpr = Math.min(window.devicePixelRatio || 1, 2);
-    st.W = cv.clientWidth; st.H = cv.clientHeight;
-    cv.width = st.W * dpr; cv.height = st.H * dpr;
-    ctx.setTransform(dpr,0,0,dpr,0,0);
-    if(st.onResize) st.onResize(st);
-  }
-  window.addEventListener('resize', resize);
-  resize();
-  function loop(now){
-    var dt = Math.min((now - st.last)/1000, 0.05);
-    st.last = now; st.t += dt;
-    ctx.save();
-    ctx.fillStyle = COL.bg; ctx.fillRect(0,0,st.W,st.H);
-    draw(ctx, st, dt);
-    ctx.restore();
-    requestAnimationFrame(loop);
-  }
-  requestAnimationFrame(loop);
+  var st = {W:0, H:0, ctx:cv.getContext('2d'), cv:cv, t:0, last:0};
+  MSPC.anim(id, function(a){
+    st.t = a.t; st.last = a.t; st.W = a.W; st.H = a.H;
+    a.ctx.save();
+    a.ctx.fillStyle = COL.bg; a.ctx.fillRect(0, 0, a.W, a.H);
+    draw(a.ctx, st, a.dt);
+    a.ctx.restore();
+  }, {fill:true, onResize:function(a){
+    st.W = a.W; st.H = a.H;
+    if(st.onResize) st.onResize(st);   // hook posé après coup par crystal()
+  }});
   return st;
 }
 
