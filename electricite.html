@@ -1208,62 +1208,110 @@
 </tbody></table>
 
 <figure class="anim">
-  <canvas id="a-deux" width="900" height="400" aria-label="Animation : comparaison de la pompe chimique et de l'induction magnétique"></canvas>
+  <canvas id="a-deux" width="900" height="400" aria-label="Animation : à gauche une pile alimentant une lampe, à droite un aimant tournant devant une bobine qui alimente la même lampe"></canvas>
   <div class="ctrls">
     <div class="c"><label>Vitesse de l'aimant <span id="a-dx-v-l">moyenne</span></label><input type="range" id="a-dx-v" min="1" max="10" value="5"></div>
     <div class="c"><button class="btn" id="a-dx-pause">Pause</button></div>
     <div class="c readout" id="a-dx-out"></div>
   </div>
-  <figcaption>Les deux mécanismes, côte à côte, au même instant. <b>À gauche</b>, la pompe chimique : la flèche rouge — la force — n'apparaît qu'<b>à un seul endroit</b>, dans la pile. Les électrons y passent l'un après l'autre et tournent toujours dans le même sens : la courbe du bas est plate, c'est du <b>continu</b>. <b>À droite</b>, l'aimant qui va et vient : <span style="color:var(--accent-clair)">toutes les flèches apparaissent en même temps, sur toute la longueur du fil</span>, et <b>toutes basculent ensemble</b> quand l'aimant repart en arrière. Les électrons ne font alors que des allers-retours sur place — la courbe du bas est une sinusoïde, c'est de l'<b>alternatif</b>. <b>Mettez en pause</b> au moment où l'aimant s'arrête en bout de course : plus de mouvement, plus de flèches, plus de courant. Ce n'est pas l'aimant qui produit le courant, c'est <b>son déplacement</b>.</figcaption>
+  <figcaption><b>Deux circuits, la même lampe.</b> À gauche, la pompe chimique : la flèche rouge — la force — n'apparaît qu'<b>à un seul endroit</b>, dans la pile. Les électrons y passent l'un après l'autre et tournent toujours dans le même sens ; la courbe du bas est plate et <b>la lampe ne cille jamais</b> : c'est du <b>continu</b>. À droite, un <b>aimant tourne devant une bobine</b> qui alimente la même lampe. Aucun contact, aucune chimie — et pourtant <span style="color:var(--accent-clair)">toutes les flèches apparaissent au même instant sur toute la longueur du fil, et toutes basculent ensemble</span> à chaque demi-tour. Les électrons ne font que des allers-retours sur place ; la courbe est une sinusoïde : c'est l'<b>alternatif</b>.<br><b>Regardez la lampe de droite</b> : elle <b>s'éteint deux fois par tour</b>, chaque fois que la sinusoïde traverse le zéro — à cet instant l'aimant présente sa longueur à la bobine, le flux est maximal donc il ne <em>varie</em> plus, et sans variation il n'y a pas de courant. Puis elle se rallume <b>aussi fort dans un sens que dans l'autre</b> : son éclat suit i², qui est positif quel que soit le sens. <span class="cle">C'est exactement pour cela qu'une lampe à filament brille pareil en continu et en alternatif.</span> <b>Ralentissez l'aimant</b> pour voir le clignotement ; en 50 Hz réel il a lieu 100 fois par seconde, bien trop vite pour l'œil.</figcaption>
 </figure>
 <script>
 (function(){
   "use strict";
   var V = MSPC.ctrl('a-dx-v', function(v){ return v<4?'lente':(v<8?'moyenne':'rapide'); }, 'a-dx-v-l');
   var out = document.getElementById('a-dx-out');
-  var pause=false, ph=0, defil=0;
+  var pause=false, ang=0, defil=0;
   var btn=document.getElementById('a-dx-pause');
   btn.addEventListener('click', function(){ pause=!pause; btn.textContent=pause?'Reprendre':'Pause'; });
 
   var traceDC=[], traceAC=[];
 
+  /* Une lampe dont l'éclat suit br (0 à 1) */
+  function lampe(ctx,x,y,r,br){
+    if(br>0.02){
+      var g=ctx.createRadialGradient(x,y,2,x,y,r*3.6);
+      g.addColorStop(0,'rgba(255,233,160,'+(0.60*br)+')');
+      g.addColorStop(1,'rgba(255,233,160,0)');
+      ctx.fillStyle=g; ctx.beginPath(); ctx.arc(x,y,r*3.6,0,6.2832); ctx.fill();
+    }
+    ctx.fillStyle= br>0.05 ? 'rgba(90,74,26,'+(0.3+0.7*br)+')' : '#0d120f';
+    ctx.beginPath(); ctx.arc(x,y,r,0,6.2832); ctx.fill();
+    ctx.strokeStyle= br>0.05 ? 'rgba(255,233,160,'+(0.35+0.65*br)+')' : '#6f786e';
+    ctx.lineWidth=2;
+    ctx.beginPath(); ctx.arc(x,y,r,0,6.2832); ctx.stroke();
+    ctx.beginPath();
+    ctx.moveTo(x-r*0.64,y-r*0.64); ctx.lineTo(x+r*0.64,y+r*0.64);
+    ctx.moveTo(x+r*0.64,y-r*0.64); ctx.lineTo(x-r*0.64,y+r*0.64);
+    ctx.stroke();
+  }
+
+  function scope(ctx,x,y,w,h,val,serie,couleur,titre,dt){
+    ctx.strokeStyle='rgba(255,255,255,.20)'; ctx.lineWidth=1;
+    ctx.strokeRect(x+.5,y+.5,w,h);
+    ctx.strokeStyle='rgba(255,255,255,.12)';
+    ctx.beginPath(); ctx.moveTo(x,y+h/2); ctx.lineTo(x+w,y+h/2); ctx.stroke();
+    if(dt>0){ serie.push(val); if(serie.length>w) serie.shift(); }
+    ctx.strokeStyle=couleur; ctx.lineWidth=2; ctx.beginPath();
+    for(var s=0;s<serie.length;s++){
+      var X=x+w-serie.length+s, Y=y+h/2-serie[s]*(h/2-6);
+      if(s===0) ctx.moveTo(X,Y); else ctx.lineTo(X,Y);
+    }
+    ctx.stroke();
+    MSPC.mono(ctx,titre,x,y-6,10.5,couleur);
+  }
+
+  /* Le circuit alimenté par la bobine, de la 1re borne à la 2de */
+  var AC=[[640,152],[640,96],[856,96],[856,134],[856,170],[856,208],[744,208],[744,152]];
+  var ACL=[], ACT=0;
+  for(var s0=1;s0<AC.length;s0++){
+    var Ls=Math.hypot(AC[s0][0]-AC[s0-1][0], AC[s0][1]-AC[s0-1][1]);
+    ACL.push(Ls); ACT+=Ls;
+  }
+  function posAC(u){
+    u=Math.max(0,Math.min(0.999,u));
+    var d=u*ACT, k=0;
+    while(k<ACL.length && d>ACL[k]){ d-=ACL[k]; k++; }
+    if(k>=ACL.length){ k=ACL.length-1; d=ACL[k]; }
+    var r=d/ACL[k], A=AC[k], B=AC[k+1];
+    return [A[0]+(B[0]-A[0])*r, A[1]+(B[1]-A[1])*r];
+  }
+
   MSPC.anim('a-deux', function(a){
     var ctx=a.ctx, W=a.W, H=a.H, dt=pause?0:a.dt;
-    var w=1.1+V.val*0.30;
-    ph += dt*w; defil += dt*0.9;
-    var vAimant=Math.cos(ph);                 // vitesse de l'aimant : c'est elle qui compte
-    MSPC.fond(ctx,W,H);
+    var vit=1.0+V.val*0.26;
+    ang += dt*vit; defil += dt*0.9;
+    var i=Math.sin(ang);          // courant induit : maximal quand l'aimant balaie la bobine
+    var br=i*i;                   // éclat de la lampe : c'est la puissance, donc i²
+    var nul=Math.abs(i)<0.08;
 
+    MSPC.fond(ctx,W,H);
     ctx.strokeStyle='rgba(255,255,255,.14)'; ctx.lineWidth=1;
     ctx.beginPath(); ctx.moveTo(450,20); ctx.lineTo(450,H-20); ctx.stroke();
 
     /* ================= GAUCHE : POMPE CHIMIQUE ================= */
-    MSPC.titre(ctx,'POMPE CHIMIQUE', 34, 34, 20, '#c8d834');
-    MSPC.mono(ctx,'la force n’agit qu’en UN point', 34, 50, 10.5, '#8d968b');
+    MSPC.titre(ctx,'POMPE CHIMIQUE',34,34,20,'#c8d834');
+    MSPC.mono(ctx,'la force n’agit qu’en UN point',34,50,10.5,'#8d968b');
 
-    var L={x:70, y:96, w:300, h:150};
-    ctx.strokeStyle='#8d968b'; ctx.lineWidth=2.4;
-    ctx.strokeRect(L.x, L.y, L.w, L.h);
-    // pile sur le brin du bas
+    var L={x:74,y:100,w:280,h:132};
+    ctx.strokeStyle='#8d968b'; ctx.lineWidth=2.4; ctx.strokeRect(L.x,L.y,L.w,L.h);
     var px=L.x+L.w/2, py=L.y+L.h;
     ctx.fillStyle='#0d120f'; ctx.fillRect(px-26,py-16,52,32);
     ctx.strokeStyle='#c8d834'; ctx.lineWidth=3;
     ctx.beginPath(); ctx.moveTo(px-8,py-15); ctx.lineTo(px-8,py+15); ctx.stroke();
     ctx.lineWidth=2;
     ctx.beginPath(); ctx.moveTo(px+8,py-8); ctx.lineTo(px+8,py+8); ctx.stroke();
-    MSPC.mono(ctx,'PILE', px, py+30, 10, '#c8d834','center');
-    // la force, en un seul point
+    MSPC.mono(ctx,'PILE',px,py+28,10,'#c8d834','center');
     ctx.strokeStyle='#ff6a5e'; ctx.lineWidth=2.6;
     ctx.beginPath(); ctx.moveTo(px+42,py-32); ctx.lineTo(px+11,py-9); ctx.stroke();
     ctx.beginPath(); ctx.moveTo(px+11,py-9); ctx.lineTo(px+23,py-10); ctx.lineTo(px+19,py-19); ctx.closePath();
     ctx.fillStyle='#ff6a5e'; ctx.fill();
-    MSPC.mono(ctx,'FORCE ICI —', px+48, py-34, 10.5, '#ff6a5e');
-    MSPC.mono(ctx,'et nulle part ailleurs', px+48, py-20, 10.5, '#ff6a5e');
+    MSPC.mono(ctx,'FORCE ICI —',px+48,py-34,10.5,'#ff6a5e');
+    MSPC.mono(ctx,'et nulle part ailleurs',px+48,py-20,10.5,'#ff6a5e');
 
-    // électrons qui tournent
     var per=2*(L.w+L.h);
-    for(var i=0;i<34;i++){
-      var u=((i/34)+defil*0.35)%1, d=u*per, X,Y;
+    for(var k=0;k<34;k++){
+      var u=((k/34)+defil*0.35)%1, d=u*per, X,Y;
       if(d<L.w){ X=L.x+L.w-d; Y=L.y+L.h; }
       else if(d<L.w+L.h){ X=L.x; Y=L.y+L.h-(d-L.w); }
       else if(d<2*L.w+L.h){ X=L.x+(d-L.w-L.h); Y=L.y; }
@@ -1271,77 +1319,89 @@
       ctx.fillStyle='#c8d834';
       ctx.beginPath(); ctx.arc(X,Y,3.6,0,6.2832); ctx.fill();
     }
-    MSPC.mono(ctx,'tous dans le même sens, sans arrêt', L.x, L.y-12, 10.5, '#9aa494');
+    lampe(ctx,L.x+L.w,L.y+L.h/2,15,1);
+    MSPC.mono(ctx,'les électrons tournent, toujours dans le même sens',L.x,L.y-12,10.5,'#9aa494');
+    MSPC.mono(ctx,'LAMPE ALLUMÉE EN PERMANENCE',L.x+L.w,282,10.5,'#93a415','right');
 
     /* ================= DROITE : INDUCTION ================= */
-    MSPC.titre(ctx,'INDUCTION', 486, 34, 20, '#c8d834');
-    MSPC.mono(ctx,'la force agit PARTOUT à la fois', 486, 50, 10.5, '#8d968b');
+    MSPC.titre(ctx,'INDUCTION',486,34,20,'#c8d834');
+    MSPC.mono(ctx,'la force agit PARTOUT à la fois',486,50,10.5,'#8d968b');
 
-    var fx1=500, fx2=866, fy=214;
-    // aimant, qui va et vient au-dessus du fil
-    var mx=(fx1+fx2)/2 + Math.sin(ph)*112, my=132;
-    var gA=ctx.createRadialGradient(mx,my,4,mx,my,120);
-    gA.addColorStop(0,'rgba(200,216,52,.16)'); gA.addColorStop(1,'rgba(200,216,52,0)');
-    ctx.fillStyle=gA; ctx.beginPath(); ctx.arc(mx,my,120,0,6.2832); ctx.fill();
-    ctx.fillStyle='#b32017'; ctx.fillRect(mx-40,my-17,40,34);
-    ctx.fillStyle='#4f7fb8'; ctx.fillRect(mx,my-17,40,34);
-    ctx.strokeStyle='#e6ebe4'; ctx.lineWidth=1.4; ctx.strokeRect(mx-40,my-17,80,34);
-    MSPC.mono(ctx,'N', mx-20, my+4, 13, '#fff','center');
-    MSPC.mono(ctx,'S', mx+20, my+4, 13, '#fff','center');
-    // sens de déplacement de l'aimant
-    if(Math.abs(vAimant)>0.08){
-      var sgn=vAimant>0?1:-1;
-      ctx.strokeStyle='#e6ebe4'; ctx.lineWidth=2;
-      ctx.beginPath(); ctx.moveTo(mx+sgn*52,my); ctx.lineTo(mx+sgn*86,my); ctx.stroke();
-      ctx.beginPath(); ctx.moveTo(mx+sgn*86,my); ctx.lineTo(mx+sgn*74,my-6); ctx.lineTo(mx+sgn*74,my+6); ctx.closePath();
-      ctx.fillStyle='#e6ebe4'; ctx.fill();
-    } else {
-      MSPC.mono(ctx,'l’aimant s’arrête → plus de courant', mx, my-30, 10.5, '#ff6a5e','center');
+    // --- l'aimant tournant ---
+    var mx=556, my=152, mR=42;
+    var gh=ctx.createRadialGradient(mx,my,6,mx,my,92);
+    gh.addColorStop(0,'rgba(200,216,52,'+(0.05+0.16*Math.abs(i))+')');
+    gh.addColorStop(1,'rgba(200,216,52,0)');
+    ctx.fillStyle=gh; ctx.beginPath(); ctx.arc(mx,my,92,0,6.2832); ctx.fill();
+    ctx.strokeStyle='rgba(230,235,228,.30)'; ctx.lineWidth=1.4;
+    ctx.beginPath(); ctx.arc(mx,my,58,-1.35,-0.15); ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(mx+56,my-11); ctx.lineTo(mx+50,my-22); ctx.lineTo(mx+62,my-20); ctx.closePath();
+    ctx.fillStyle='rgba(230,235,228,.45)'; ctx.fill();
+    ctx.save(); ctx.translate(mx,my); ctx.rotate(ang);
+    ctx.fillStyle='#b32017'; ctx.fillRect(-mR,-13,mR,26);
+    ctx.fillStyle='#4f7fb8'; ctx.fillRect(0,-13,mR,26);
+    ctx.strokeStyle='#e6ebe4'; ctx.lineWidth=1.4; ctx.strokeRect(-mR,-13,mR*2,26);
+    ctx.fillStyle='#fff'; ctx.font='700 14px "Saira Condensed",sans-serif'; ctx.textAlign='center';
+    ctx.fillText('N',-mR/2,5); ctx.fillText('S',mR/2,5);
+    ctx.restore();
+    ctx.fillStyle='#8d968b'; ctx.beginPath(); ctx.arc(mx,my,5,0,6.2832); ctx.fill();
+    MSPC.mono(ctx,'aimant en rotation',mx,my+78,10.5,'#8d968b','center');
+
+    // --- la bobine ---
+    var bA=640, bB=744, bcy=152, bry=26, NT=7;
+    ctx.strokeStyle='#c9a06a'; ctx.lineWidth=2.6; ctx.beginPath();
+    for(var t=0;t<=1.0001;t+=0.008){
+      var Xb=bA+t*(bB-bA), Yb=bcy+Math.sin(t*Math.PI*2*NT)*bry;
+      if(t===0) ctx.moveTo(Xb,Yb); else ctx.lineTo(Xb,Yb);
     }
+    ctx.stroke();
+    MSPC.mono(ctx,'bobine',(bA+bB)/2,bcy+74,10.5,'#c9a06a','center');
 
-    // le conducteur
-    ctx.strokeStyle='#8d968b'; ctx.lineWidth=7;
-    ctx.beginPath(); ctx.moveTo(fx1,fy); ctx.lineTo(fx2,fy); ctx.stroke();
-    ctx.strokeStyle='#5a6158'; ctx.lineWidth=5;
-    ctx.beginPath(); ctx.moveTo(fx1,fy); ctx.lineTo(fx2,fy); ctx.stroke();
+    // --- le circuit et la lampe ---
+    ctx.strokeStyle='#8d968b'; ctx.lineWidth=2.4;
+    ctx.beginPath(); ctx.moveTo(AC[0][0],AC[0][1]);
+    for(var p2=1;p2<AC.length;p2++) ctx.lineTo(AC[p2][0],AC[p2][1]);
+    ctx.stroke();
 
-    // TOUS les électrons reçoivent la même force au même instant
-    var NE2=15, amp=13;
-    for(var k=0;k<NE2;k++){
-      var ex=fx1+16+(k*(fx2-fx1-32)/(NE2-1)) + Math.sin(ph)*amp*0.7;
+    // les électrons : ils oscillent tous ensemble, ils ne font pas le tour
+    var osc=-Math.cos(ang)*0.030;
+    for(var e2=0;e2<26;e2++){
+      var ub=0.02+e2/26*0.96+osc;
+      var P=posAC(ub);
+      if(P[1]>132 && P[1]<172 && P[0]>840) continue;   // masqué par la lampe
       ctx.fillStyle='#c8d834';
-      ctx.beginPath(); ctx.arc(ex,fy,4,0,6.2832); ctx.fill();
-      if(Math.abs(vAimant)>0.08){
-        var s2=vAimant>0?1:-1, La=16*Math.abs(vAimant)+8;
-        ctx.strokeStyle='#ff6a5e'; ctx.lineWidth=2;
-        ctx.beginPath(); ctx.moveTo(ex,fy-13); ctx.lineTo(ex+s2*La,fy-13); ctx.stroke();
-        ctx.beginPath(); ctx.moveTo(ex+s2*La,fy-13); ctx.lineTo(ex+s2*(La-6),fy-17); ctx.lineTo(ex+s2*(La-6),fy-9); ctx.closePath();
-        ctx.fillStyle='#ff6a5e'; ctx.fill();
+      ctx.beginPath(); ctx.arc(P[0],P[1],3.6,0,6.2832); ctx.fill();
+    }
+    // toutes les flèches de force, au même instant, sur le brin du haut
+    if(!nul){
+      var sg=i>0?1:-1, Lf=10+16*Math.abs(i);
+      ctx.strokeStyle='#ff6a5e'; ctx.lineWidth=2;
+      ctx.fillStyle='#ff6a5e';
+      for(var fx=664;fx<=832;fx+=26){
+        ctx.beginPath(); ctx.moveTo(fx-sg*Lf/2,84); ctx.lineTo(fx+sg*Lf/2,84); ctx.stroke();
+        ctx.beginPath();
+        ctx.moveTo(fx+sg*Lf/2,84); ctx.lineTo(fx+sg*(Lf/2-6),80); ctx.lineTo(fx+sg*(Lf/2-6),88); ctx.closePath();
+        ctx.fill();
       }
     }
-    MSPC.mono(ctx,'toutes les flèches apparaissent et basculent ENSEMBLE', (fx1+fx2)/2, fy+34, 10.5, '#ff6a5e','center');
+    lampe(ctx,856,152,17,br);
+
+    if(nul){
+      MSPC.mono(ctx,'COURANT NUL → LAMPE ÉTEINTE',700,264,10.5,'#ff6a5e','center');
+      MSPC.mono(ctx,'l’aimant ne fait plus varier le flux',700,278,9.5,'#7f8a7e','center');
+    } else {
+      MSPC.mono(ctx,'LA LAMPE S’ALLUME 2 FOIS PAR TOUR',700,264,10.5,'#f0a844','center');
+      MSPC.mono(ctx,'son éclat suit i² — le SENS lui est indifférent',700,278,9.5,'#7f8a7e','center');
+    }
 
     /* ================= OSCILLOSCOPES ================= */
-    function scope(x,y,w2,h2,val,serie,couleur,titre){
-      ctx.strokeStyle='rgba(255,255,255,.20)'; ctx.lineWidth=1;
-      ctx.strokeRect(x+.5,y+.5,w2,h2);
-      ctx.strokeStyle='rgba(255,255,255,.12)';
-      ctx.beginPath(); ctx.moveTo(x,y+h2/2); ctx.lineTo(x+w2,y+h2/2); ctx.stroke();
-      if(dt>0){ serie.push(val); if(serie.length>w2) serie.shift(); }
-      ctx.strokeStyle=couleur; ctx.lineWidth=2; ctx.beginPath();
-      for(var s=0;s<serie.length;s++){
-        var X2=x+w2-serie.length+s, Y2=y+h2/2-serie[s]*(h2/2-6);
-        if(s===0) ctx.moveTo(X2,Y2); else ctx.lineTo(X2,Y2);
-      }
-      ctx.stroke();
-      MSPC.mono(ctx,titre,x,y-6,10.5,couleur);
-    }
-    scope(70,300,300,72,0.62,traceDC,'#93a415','COURANT CONTINU — toujours du même signe');
-    scope(500,300,366,72,vAimant,traceAC,'#f0a844','COURANT ALTERNATIF — il change de signe');
+    scope(ctx,74,300,280,72,0.62,traceDC,'#93a415','COURANT CONTINU — toujours du même signe',dt);
+    scope(ctx,486,300,380,72,i,traceAC,'#f0a844','COURANT ALTERNATIF — il change de signe',dt);
 
-    out.innerHTML = Math.abs(vAimant)<0.08
-      ? '<b style="color:#ff6a5e">Aimant à l’arrêt : tension induite nulle.</b><br>La pile, elle, continue de débiter.'
-      : 'Pile : force sur <b>1</b> point du circuit<br>Induction : force sur <b>'+NE2+'</b> électrons au même instant';
+    out.innerHTML = nul
+      ? '<b style="color:#ff6a5e">i = 0 : la lampe est éteinte.</b><br>À gauche, la pile, elle, n’a pas bronché.'
+      : 'Courant induit <b>'+(i>0?'+':'')+i.toFixed(2)+'</b> · éclat <b>'+Math.round(br*100)+' %</b><br>'
+        +'Force appliquée sur <b>tous</b> les électrons au même instant';
   }, {fixed:true});
 })();
 </script>
