@@ -49,7 +49,7 @@
 
 <div class="meta-bar">
   <div><b>14</b> chapitres</div>
-  <div><b>16</b> animations pilotables</div>
+  <div><b>17</b> animations pilotables</div>
   <div><b>15</b> fiches TP d'atelier</div>
   <div><b>40+</b> exercices corrigés</div>
   <div>Manips en <b>TBTS ≤ 24 V</b> sauf mention</div>
@@ -772,7 +772,7 @@
 <p>Réflexe d'atelier : on retire les piles des appareils de mesure et des outils qu'on ne va pas utiliser pendant plusieurs mois. Un multimètre détruit par une pile qui a coulé, ce n'est pas de la malchance — c'est de la chimie parfaitement prévisible.</p></div>
 
 <h3>1.6 — La résistance, sans une seule formule</h3>
-<p>Les électrons qui dérivent ne traversent pas le fil tranquillement. Ils <strong>percutent les ions du réseau</strong>. À chaque choc, l'électron perd de la vitesse et cède son énergie à l'ion, qui se met à vibrer un peu plus fort. Un ion qui vibre plus fort, dans notre langage, ça s'appelle <strong>de la chaleur</strong>.</p>
+<p>Les électrons qui dérivent ne traversent pas le fil tranquillement : ils sont <strong>déviés</strong>, encore et encore. À chaque choc, l'électron perd de la vitesse et cède son énergie au réseau, dont les ions se mettent à vibrer un peu plus fort. Un ion qui vibre plus fort, dans notre langage, ça s'appelle <strong>de la chaleur</strong>.</p>
 <p>La <strong>résistance</strong>, c'est exactement ça : le nombre et la violence des chocs subis par les électrons sur leur trajet. Elle se mesure en <strong>ohms (Ω)</strong>.</p>
 
 <div class="image-mentale"><span class="tag">Image mentale</span>
@@ -785,6 +785,212 @@
 <li><strong>La section</strong> — un fil deux fois plus gros offre deux fois plus de couloirs : deux fois moins de résistance. C'est pour cette raison qu'on parle de 1,5 mm², 2,5 mm², 6 mm²... et pas de la couleur de la gaine.</li>
 <li><strong>La température</strong> — dans un métal, plus c'est chaud, plus les ions vibrent, plus la résistance monte. <span class="cle">Retenez-le : ça reviendra au chapitre 12 avec la lampe et au chapitre 14 avec le bilame.</span></li>
 </ul>
+
+<h4>Déviés par quoi, exactement ?</h4>
+<p>Ici se trouve la seule subtilité du chapitre, et elle vaut d'être comprise car elle explique tout le reste. On imagine spontanément l'électron rebondissant contre des atomes comme une bille dans un flipper — <strong>et plus il y aurait d'atomes serrés, plus ce serait dur de passer</strong>. C'est faux, et c'est même le contraire.</p>
+<p>Dans un cristal <strong>parfaitement rangé</strong>, les ions sont alignés en rangées régulières. L'électron ne les percute pas : il se faufile entre eux comme dans un couloir bien droit. Un cristal parfait, à très basse température, laisserait passer les électrons presque sans les gêner.</p>
+<p><span class="cle">Ce qui arrête un électron, ce n'est pas la présence des ions : c'est ce qui rompt leur alignement.</span> Et il n'y a que deux façons de rompre l'alignement d'un cristal :</p>
+<ul>
+<li><strong>Un atome étranger</strong>, qui n'a rien à faire là et casse la régularité de la rangée. C'est le principe même d'un <em>alliage</em> : le nichrome est du nickel volontairement pollué de chrome, et cette pagaille organisée le rend <strong>65 fois</strong> plus résistant que le cuivre.</li>
+<li><strong>Un ion qui vibre</strong> et sort de son rang. Plus le métal est chaud, plus les ions s'écartent de leur position, plus le couloir devient sinueux. C'est toute l'explication de l'effet de la température.</li>
+</ul>
+<p>Ces deux causes s'additionnent, et l'animation ci-dessous les compte séparément. Comparez le cuivre et le nichrome à température égale : dans le cuivre, presque tous les chocs viennent des ions qui vibrent ; dans le nichrome, ce sont les atomes étrangers qui dominent de très loin. <span class="cle">D'où une conséquence que tout électricien connaît : la résistance du cuivre augmente nettement quand il chauffe, celle du nichrome ne bouge quasiment pas.</span> C'est précisément pour cela qu'on fabrique les résistances chauffantes et les résistances de précision en nichrome : elles gardent leur valeur, brûlantes ou froides.</p>
+
+<figure class="anim">
+  <canvas id="a-resist" width="900" height="380" aria-label="Animation : résistance d'un conducteur selon le matériau, la température, la longueur et la section"></canvas>
+  <div class="ctrls">
+    <div class="c"><label>Matériau <span id="a-rs-m-l">cuivre</span></label><input type="range" id="a-rs-m" min="0" max="4" value="1"></div>
+    <div class="c"><label>Température <span id="a-rs-t-l">20 °C</span></label><input type="range" id="a-rs-t" min="0" max="300" step="10" value="20"></div>
+    <div class="c"><label>Longueur <span id="a-rs-l-l">10 m</span></label><input type="range" id="a-rs-l" min="0" max="4" value="2"></div>
+    <div class="c"><label>Section <span id="a-rs-s-l">2,5 mm²</span></label><input type="range" id="a-rs-s" min="0" max="4" value="1"></div>
+    <div class="c readout" id="a-rs-out"></div>
+  </div>
+  <figcaption>Les quatre leviers du paragraphe précédent, tous les quatre pilotables. Les <b style="color:#c8d834">points verts</b> sont les électrons, les <b>gris</b> les ions rangés, les <b style="color:#e08b6a">orange</b> les irrégularités du réseau. Un éclair rouge marque chaque déviation.<br><b>Partez du cuivre à 0 °C</b> : les rangées sont bien tenues et les électrons circulent assez librement. <b>Montez la température</b> : les ions sortent du rang, le compteur de chocs thermiques s'emballe et la résistance grimpe. <b>Passez au nichrome</b> : le réseau est saturé d'atomes étrangers, les électrons n'avancent plus qu'en zigzag — et cette fois, refroidir n'y change presque rien. <b>Allongez le fil</b> (plus de chocs à subir) puis <b>grossissez la section</b> (plus de couloirs en parallèle) et regardez la résistance suivre. <em>Pour un alliage, les points orange sont bien de vrais atomes étrangers ; entre métaux purs, ils représentent plus largement tout ce qui rend un réseau moins favorable au passage des électrons.</em></figcaption>
+</figure>
+<script>
+(function(){
+  "use strict";
+  // rho en nΩ·m à 20 °C · alpha en /°C · des = irrégularités du réseau
+  var MAT=[
+    {n:'argent',    rho:15.9,  al:0.0038, des:0.02, col:'#d8dde0'},
+    {n:'cuivre',    rho:16.8,  al:0.0039, des:0.03, col:'#c9752e'},
+    {n:'aluminium', rho:26.5,  al:0.0040, des:0.09, col:'#b9c2c8'},
+    {n:'fer',       rho:96.1,  al:0.0050, des:0.28, col:'#8a8f96'},
+    {n:'nichrome',  rho:1100,  al:0.0004, des:0.70, col:'#7d8a86'}
+  ];
+  var LON=[1,5,10,25,50], SEC=[1.5,2.5,4,6,10];
+
+  var M=MSPC.ctrl('a-rs-m', function(v){ return MAT[v].n; }, 'a-rs-m-l');
+  var T=MSPC.ctrl('a-rs-t', function(v){ return v+' °C'; }, 'a-rs-t-l');
+  var LI=MSPC.ctrl('a-rs-l', function(v){ return LON[v]+' m'; }, 'a-rs-l-l');
+  var SI=MSPC.ctrl('a-rs-s', function(v){ return String(SEC[v]).replace('.',',')+' mm²'; }, 'a-rs-s-l');
+  var out=document.getElementById('a-rs-out');
+
+  var ions=[], elec=[], flash=[], sig=null;
+  var lpm=40, chocT=0, chocI=0, rT=0, rI=0;
+
+  function bati(x0,cy,Lpx,Hpx,des){
+    ions=[];
+    var pas=22, nx=Math.max(2,Math.floor(Lpx/pas)), ny=Math.max(2,Math.round(Hpx/pas));
+    var mx=(Lpx-(nx-1)*pas)/2, my=(Hpx-(ny-1)*pas)/2;
+    for(var r=0;r<ny;r++) for(var c=0;c<nx;c++){
+      ions.push({
+        x:x0+mx+c*pas, y:cy-Hpx/2+my+r*pas,
+        f:(Math.random()<des), ph:Math.random()*6.2832
+      });
+    }
+    var ne=Math.max(14, Math.round(Hpx*Lpx/700));
+    elec=[];
+    for(var e=0;e<Math.min(ne,46);e++){
+      elec.push({x:x0+Math.random()*Lpx, y:cy-Hpx/2+6+Math.random()*(Hpx-12),
+                 vx:(Math.random()-0.5)*90, vy:(Math.random()-0.5)*90, d:0, cd:0});
+    }
+  }
+
+  MSPC.anim('a-resist', function(a){
+    var ctx=a.ctx, W=a.W, H=a.H, dt=a.dt;
+    var mat=MAT[M.val], Lm=LON[LI.val], Sm=SEC[SI.val], Tc=T.val;
+    var rho=mat.rho*(1+mat.al*(Tc-20));
+    var R=rho*Lm/Sm/1000;                      // ohms
+    var x0=56, cy=148;
+    var Lpx=240+300*(LI.val/4), Hpx=40+130*(SI.val/4);
+    var clef=M.val+'|'+LI.val+'|'+SI.val;
+    if(clef!==sig){ sig=clef; bati(x0,cy,Lpx,Hpx,mat.des); chocT=0; chocI=0; }
+
+    var amp=1+(Tc/300)*8;                      // amplitude de vibration des ions
+    var vDeriv=52/(1+rho/26);                  // les électrons rampent dans le nichrome
+    var haut=cy-Hpx/2, bas=cy+Hpx/2;
+
+    MSPC.fond(ctx,W,H);
+
+    /* --- le conducteur --- */
+    ctx.fillStyle='rgba(255,255,255,.035)'; ctx.fillRect(x0,haut,Lpx,Hpx);
+    if(Tc>140){                                 // il rougit quand il chauffe
+      ctx.fillStyle='rgba(179,32,23,'+((Tc-140)/160*0.20)+')'; ctx.fillRect(x0,haut,Lpx,Hpx);
+    }
+    ctx.strokeStyle=mat.col; ctx.lineWidth=2; ctx.strokeRect(x0+.5,haut+.5,Lpx,Hpx);
+    MSPC.mono(ctx,mat.n.toUpperCase()+'  ·  '+Lm+' m  ·  '+String(Sm).replace('.',',')+' mm²', x0, haut-14, 11, mat.col);
+
+    /* --- les ions, qui vibrent d'autant plus qu'il fait chaud --- */
+    var vib=[];
+    for(var i=0;i<ions.length;i++){
+      var io=ions[i];
+      var dx=Math.sin(a.t*6+io.ph)*amp, dy=Math.cos(a.t*5.3+io.ph*1.7)*amp;
+      var ix=io.x+dx, iy=io.y+dy;
+      vib.push(ix,iy);
+      if(io.f){
+        ctx.fillStyle='rgba(224,139,106,.95)';
+        ctx.beginPath(); ctx.arc(ix,iy,6,0,6.2832); ctx.fill();
+      } else {
+        ctx.fillStyle='rgba(150,160,150,'+(0.45+0.3*(amp/9))+')';
+        ctx.beginPath(); ctx.arc(ix,iy,5,0,6.2832); ctx.fill();
+      }
+    }
+
+    /* --- les électrons --- */
+    var cT=0, cI=0;
+    for(var e=0;e<elec.length;e++){
+      var p=elec[e];
+      if(dt>0 && !a.reduce){
+        if(p.cd>0) p.cd-=dt;
+        var px=p.x, py=p.y;
+        p.x+=(p.vx+vDeriv)*dt; p.y+=p.vy*dt;
+        p.d+=Math.hypot(p.x-px,p.y-py);
+        if(p.y<haut+4){ p.y=haut+4; p.vy=Math.abs(p.vy); }
+        if(p.y>bas-4){ p.y=bas-4; p.vy=-Math.abs(p.vy); }
+        if(p.x>x0+Lpx){ p.x=x0; p.y=haut+6+Math.random()*(Hpx-12); p.d=0; }
+        if(p.x<x0) p.x=x0;
+        // déviation par une irrégularité ou par un ion sorti de son rang
+        if(p.cd<=0){
+          for(var k=0;k<ions.length;k++){
+            var ix2=vib[k*2], iy2=vib[k*2+1];
+            if(Math.abs(p.x-ix2)>11 || Math.abs(p.y-iy2)>11) continue;
+            var pr = ions[k].f ? 0.92 : 0.04+0.62*Math.pow(Tc/300,1.3);
+            if(Math.random()<pr){
+              lpm = lpm*0.92 + p.d*0.08;
+              if(ions[k].f) cI++; else cT++;
+              p.d=0; p.cd=0.05;
+              var ang=Math.random()*6.2832, sp=80+Math.random()*50;
+              p.vx=Math.cos(ang)*sp; p.vy=Math.sin(ang)*sp;
+              if(flash.length<40) flash.push({x:ix2,y:iy2,t:0.30,f:ions[k].f});
+              break;
+            }
+          }
+        }
+      }
+      ctx.fillStyle='#c8d834';
+      ctx.beginPath(); ctx.arc(p.x,p.y,3.2,0,6.2832); ctx.fill();
+    }
+    if(dt>0){ rT=rT*0.90+(cT/Math.max(dt,0.001))*0.10; rI=rI*0.90+(cI/Math.max(dt,0.001))*0.10; }
+
+    for(var f=flash.length-1;f>=0;f--){
+      var fl=flash[f]; fl.t-=dt;
+      if(fl.t<=0){ flash.splice(f,1); continue; }
+      ctx.strokeStyle=(fl.f?'rgba(224,139,106,':'rgba(255,106,94,')+(fl.t/0.30*0.9)+')';
+      ctx.lineWidth=2;
+      ctx.beginPath(); ctx.arc(fl.x,fl.y,4+(0.30-fl.t)*40,0,6.2832); ctx.stroke();
+    }
+
+    /* --- colonne de droite --- */
+    var rx=612;
+    MSPC.mono(ctx,'RÉSISTIVITÉ',rx,60,10,'#8d968b');
+    MSPC.titre(ctx,rho.toFixed(1)+' nΩ·m',rx,84,25,mat.col);
+    MSPC.mono(ctx,'RÉSISTANCE DU FIL',rx,124,10,'#8d968b');
+    var txtR = R<1 ? (R*1000).toFixed(1)+' mΩ' : R.toFixed(2)+' Ω';
+    MSPC.titre(ctx,txtR,rx,152,32, R<0.2?'#93a415':(R<3?'#f0a844':'#b32017'));
+    // barre logarithmique de résistance
+    ctx.fillStyle='rgba(255,255,255,.10)'; ctx.fillRect(rx,166,240,12);
+    var fr=Math.max(0.02,Math.min(1,(Math.log(R*1000+1)/Math.LN10)/2.6));
+    ctx.fillStyle=R<0.2?'#93a415':(R<3?'#f0a844':'#b32017'); ctx.fillRect(rx,166,240*fr,12);
+
+    MSPC.mono(ctx,'LIBRE PARCOURS MOYEN',rx,206,10,'#8d968b');
+    MSPC.mono(ctx,'distance parcourue sans être dévié',rx,220,9.5,'#6f786e');
+    ctx.fillStyle='rgba(255,255,255,.10)'; ctx.fillRect(rx,228,240,12);
+    var fl2=Math.max(0.015,Math.min(1,lpm/95));
+    ctx.fillStyle=fl2>0.55?'#93a415':(fl2>0.22?'#f0a844':'#b32017'); ctx.fillRect(rx,228,240*fl2,12);
+
+    /* --- les deux causes de déviation --- */
+    var by=282;
+    MSPC.mono(ctx,'D’OÙ VIENNENT LES DÉVIATIONS ?',x0,by-10,10.5,'#8d968b');
+    function cause(y,lab,val,maxi,col){
+      MSPC.mono(ctx,lab,x0,y,10.5,col);
+      ctx.fillStyle='rgba(255,255,255,.10)'; ctx.fillRect(x0+230,y-9,200,11);
+      ctx.fillStyle=col; ctx.fillRect(x0+230,y-9,200*Math.min(1,val/maxi),11);
+      MSPC.mono(ctx,Math.round(val)+' /s',x0+444,y,10.5,col);
+    }
+    cause(by+10,'ions qui vibrent — température',rT,500,'#ff6a5e');
+    cause(by+32,'atomes étrangers — matériau',rI,500,'#e08b6a');
+    var msg, mcol='#6f786e';
+    if(mat.des>0.5){ msg='Ici les atomes étrangers dominent : chauffer ne change presque rien à la résistance.'; mcol='#e08b6a'; }
+    else if(Tc>=200){ msg='À chaud, les ions qui sortent du rang dominent très largement.'; mcol='#ff6a5e'; }
+    else { msg='Les deux causes s’additionnent — c’est la résistance totale.'; }
+    MSPC.mono(ctx, msg, x0, by+58, 10.5, mcol);
+
+    // légende
+    var lg=[['#c8d834','électron'],['rgba(150,160,150,.75)','ion rangé'],['rgba(224,139,106,.95)','irrégularité du réseau']], lgx=x0;
+    for(var g2=0;g2<lg.length;g2++){
+      ctx.fillStyle=lg[g2][0]; ctx.beginPath(); ctx.arc(lgx+4,356,4.5,0,6.2832); ctx.fill();
+      MSPC.mono(ctx,lg[g2][1],lgx+14,360,10,'#8d968b');
+      lgx+=14+ctx.measureText(lg[g2][1]).width+26;
+    }
+
+    out.innerHTML='ρ = <b>'+rho.toFixed(1)+' nΩ·m</b> à '+Tc+' °C<br>R = <b>'+txtR+'</b> pour '+Lm+' m de '+String(Sm).replace('.',',')+' mm²';
+  }, {fixed:true});
+})();
+</script>
+
+<div class="encadre"><span class="tag">Non, un métal dense n'est pas un métal résistant</span>
+<p>L'intuition est tenace : puisque les électrons se cognent, un métal aux atomes bien serrés devrait être plus difficile à traverser. <strong>Les chiffres disent le contraire</strong> :</p>
+<table>
+<thead><tr><th>Métal</th><th class="mono">Masse volumique</th><th class="mono">Résistivité à 20 °C</th></tr></thead>
+<tbody>
+<tr><td><strong>Cuivre</strong></td><td class="mono">8,96 g/cm³</td><td class="mono">16,8 nΩ·m</td></tr>
+<tr><td><strong>Aluminium</strong></td><td class="mono">2,70 g/cm³</td><td class="mono">26,5 nΩ·m</td></tr>
+</tbody></table>
+<p>L'aluminium est <strong>3,3 fois plus léger</strong> que le cuivre — ses atomes sont bien moins tassés — et il est pourtant <strong>58 % plus résistant</strong>. Le cuivre gagne sur les deux tableaux à la fois.</p>
+<p>La raison est simple une fois qu'on a lu le paragraphe précédent : beaucoup d'atomes, cela veut dire beaucoup <strong>d'électrons libres</strong> — donc beaucoup de porteurs pour transporter le courant. La densité <em>aide</em>, elle ne gêne pas. Ce qui freine, c'est le <strong>désordre</strong>, pas l'encombrement.</p>
+<p><strong>Alors pourquoi les lignes à haute tension sont-elles en aluminium ?</strong> Justement parce qu'il est léger. À conductance égale, il faut un câble alu plus gros — mais il pèse environ <strong>deux fois moins</strong> qu'un câble cuivre équivalent, et il coûte bien moins cher. Sur des portées de plusieurs centaines de mètres entre deux pylônes, c'est le <em>poids</em> qui commande, pas la résistivité. En revanche, dans une armoire ou une gaine, où le poids n'a aucune importance, on met du cuivre.</p>
+</div>
 
 <div class="plaque"><span class="tag">Anecdote — le métier</span>
 <p>En maintenance, on ne cherche pas les résistances : on cherche celles qui <strong>ne devraient pas être là</strong>. Une borne mal serrée dans une armoire, c'est un contact imparfait, donc une résistance parasite de quelques milliohms. Sur 30 A, ça fait un point chaud à 120 °C dans un coffret fermé. C'est la première cause d'incendie d'origine électrique en industrie, et c'est pour ça qu'on passe les armoires à la <strong>caméra thermique</strong> et qu'on serre les bornes <strong>au couple</strong>, pas « à la sensation ».</p></div>
