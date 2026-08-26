@@ -49,7 +49,7 @@
 
 <div class="meta-bar">
   <div><b>14</b> chapitres</div>
-  <div><b>14</b> animations pilotables</div>
+  <div><b>16</b> animations pilotables</div>
   <div><b>15</b> fiches TP d'atelier</div>
   <div><b>40+</b> exercices corrigés</div>
   <div>Manips en <b>TBTS ≤ 24 V</b> sauf mention</div>
@@ -103,7 +103,7 @@
     <div class="c"><label>Agitation thermique <span id="a-et-t-l">ambiante</span></label><input type="range" id="a-et-t" min="0" max="100" value="45"></div>
     <div class="c readout" id="a-et-out"></div>
   </div>
-  <figcaption>Six vues, dans l'ordre. <b>L'atome</b> d'abord : un noyau, des couches, et tout au bord un électron mal tenu. Puis les états de la matière — <b>solide</b>, <b>liquide</b>, <b>gaz</b>, <b>plasma</b> — où l'agitation thermique décide de tout : plus il fait chaud, moins les atomes se tiennent. Notez au passage qu'en dehors des métaux, la matière est le plus souvent faite de <b>molécules</b> et non d'atomes isolés : la vue « liquide » montre de vraies molécules d'eau, qui restent <b>constamment au contact</b> les unes des autres — c'est ce qui conserve le volume — tout en <b>glissant</b> sans cesse et en changeant de voisines, ce qui explique qu'un liquide n'ait pas de forme propre. Et enfin le <b>solide métallique</b>, qui est un cas à part et le seul qui nous intéresse vraiment : <span style="color:var(--accent-clair)">les atomes y restent rangés comme dans un solide, mais leurs électrons extérieurs circulent librement comme dans un gaz</span>. Un cristal immobile traversé par une mer d'électrons — voilà ce qu'est un fil de cuivre. <b>Chauffez la vue « métal »</b> : les ions vibrent plus fort, les électrons se cognent davantage. Vous regardez la résistance électrique en train de naître (§ 1.5).</figcaption>
+  <figcaption>Six vues, dans l'ordre. <b>L'atome</b> d'abord : un noyau, des couches, et tout au bord un électron mal tenu. Puis les états de la matière — <b>solide</b>, <b>liquide</b>, <b>gaz</b>, <b>plasma</b> — où l'agitation thermique décide de tout : plus il fait chaud, moins les atomes se tiennent. Notez au passage qu'en dehors des métaux, la matière est le plus souvent faite de <b>molécules</b> et non d'atomes isolés : la vue « liquide » montre de vraies molécules d'eau, qui restent <b>constamment au contact</b> les unes des autres — c'est ce qui conserve le volume — tout en <b>glissant</b> sans cesse et en changeant de voisines, ce qui explique qu'un liquide n'ait pas de forme propre. Et enfin le <b>solide métallique</b>, qui est un cas à part et le seul qui nous intéresse vraiment : <span style="color:var(--accent-clair)">les atomes y restent rangés comme dans un solide, mais leurs électrons extérieurs circulent librement comme dans un gaz</span>. Un cristal immobile traversé par une mer d'électrons — voilà ce qu'est un fil de cuivre. <b>Chauffez la vue « métal »</b> : les ions vibrent plus fort, les électrons se cognent davantage. Vous regardez la résistance électrique en train de naître (§ 1.6).</figcaption>
 </figure>
 <script>
 (function(){
@@ -514,7 +514,7 @@
 <p><em>C'est exactement ce que montre la dernière vue de l'animation du <a href="#c1">§ 1.1</a> : remettez-la sur <strong>« solide métallique »</strong> et regardez-la maintenant avec ce vocabulaire — les billes cuivre sont les ions, les points verts sont la mer de Fermi.</em></p>
 
 <h3>1.4 — Ce qui se passe quand on branche</h3>
-<p>Le générateur (pile, alternateur, alimentation) ne fabrique pas d'électrons. Il fait une seule chose : il crée un <strong>déséquilibre</strong>, un manque d'électrons d'un côté et un excès de l'autre. Ce déséquilibre, c'est la <strong>tension</strong>, en volts.</p>
+<p>Le générateur — pile, alternateur, alimentation — <strong>ne fabrique aucun électron</strong>. Ils sont tous déjà là, dans le fil, depuis le jour de sa fabrication. Le générateur fait une seule chose, et c'est déjà énorme : il <strong>applique une force</strong> aux électrons qui s'y trouvent. Cette force, rapportée à la charge qu'elle déplace, c'est la <strong>tension</strong>, en volts.</p>
 <p>Résultat dans le fil : les électrons continuent leur agitation folle dans tous les sens, mais <strong>en plus</strong>, ils sont tous très légèrement poussés dans le même sens. Ce lent glissement d'ensemble s'appelle la <strong>vitesse de dérive</strong>. Et c'est <em>ça</em>, le courant électrique.</p>
 
 <figure class="anim">
@@ -527,7 +527,206 @@
   <figcaption><b>Sans tension</b> : chaos, zéro courant. <b>Avec tension</b> : le chaos continue, mais tout glisse vers la droite. <b>En chauffant</b> : les ions vibrent plus fort, les électrons se cognent davantage, la dérive ralentit — vous venez de voir la résistance.</figcaption>
 </figure>
 
-<h3>1.5 — La résistance, sans une seule formule</h3>
+<h4>Mais d'où vient cette force ?</h4>
+<p>C'est la question que presque personne ne pose, et c'est pourtant là que se joue toute la différence entre les deux électricités que vous croiserez en atelier. Il n'existe que <strong>deux moyens</strong> de pousser les électrons d'un fil, et ils n'ont rien à voir l'un avec l'autre :</p>
+<ul>
+<li><strong>La chimie.</strong> Une réaction arrache des électrons à un métal et les entasse sur une borne. C'est une <em>pompe</em> : elle travaille <strong>en un seul endroit</strong> du circuit, et elle pousse toujours dans le même sens. C'est le <strong>courant continu</strong> — l'objet du paragraphe suivant.</li>
+<li><strong>Le magnétisme.</strong> Un aimant que l'on déplace près d'un conducteur. Ni contact, ni chimie, ni borne : le champ agit <em>à distance</em> et pousse <strong>tous les électrons du conducteur au même instant</strong>. Et comme l'aimant va et vient, la poussée s'inverse : c'est le <strong>courant alternatif</strong>. Ce mécanisme demande les chapitres 5 à 7 ; on le mettra face à la pile, animation contre animation, au <a href="#c8">chapitre 8</a>.</li>
+</ul>
+<p><span class="cle">Retenez la différence dès maintenant : la pile pousse en un point, l'aimant pousse partout à la fois.</span></p>
+
+<h3>1.5 — La pile : un petit moteur chimique</h3>
+<p>Une pile n'est pas un réservoir d'électricité. C'est un <strong>moteur</strong> — un moteur chimique sans aucune pièce mobile, dont le seul travail est de faire remonter des électrons d'une borne à l'autre <em>à l'intérieur</em> d'elle-même, contre leur gré.</p>
+<p>Le principe tient en deux réactions qui se font face, séparées par l'électrolyte :</p>
+<ul>
+<li>Sur l'électrode <strong>négative</strong> (le zinc, dans une pile saline), le métal <strong>se dissout</strong> : chaque atome de zinc part dans l'électrolyte sous forme d'ion Zn²⁺ en <strong>abandonnant deux électrons</strong>, qui restent prisonniers de l'électrode. Celle-ci se charge donc négativement.</li>
+<li>Sur l'électrode <strong>positive</strong>, une seconde réaction fait exactement l'inverse : elle <strong>consomme</strong> des électrons.</li>
+</ul>
+<p>Entre les deux, l'électrolyte laisse passer les <strong>ions</strong> mais refuse absolument les électrons. Ces derniers n'ont donc qu'un seul chemin pour rejoindre la borne + : <strong>le circuit extérieur</strong> — votre fil, votre lampe, votre moteur. C'est en empruntant ce détour obligatoire qu'ils font le travail que vous leur demandez.</p>
+
+<figure class="anim">
+  <canvas id="a-pile" width="900" height="360" aria-label="Animation : la pile, moteur chimique qui pompe les électrons d'une borne à l'autre"></canvas>
+  <div class="ctrls">
+    <div class="c"><label class="switch"><input type="checkbox" id="a-pile-k"><span>Fermer l'interrupteur</span></label></div>
+    <div class="c"><label>Consommation de la lampe <span id="a-pile-r-l">moyenne</span></label><input type="range" id="a-pile-r" min="1" max="10" value="5"></div>
+    <div class="c"><button class="btn" id="a-pile-neuve">Pile neuve</button></div>
+    <div class="c readout" id="a-pile-out"></div>
+  </div>
+  <figcaption>À gauche, l'intérieur de la pile : le zinc se dissout et lâche ses électrons ; les ions traversent l'électrolyte. À droite, le circuit extérieur, seul chemin possible pour les électrons. <b>Laissez l'interrupteur ouvert</b> et regardez la pompe <b>caler toute seule</b> au bout d'une seconde : tension présente, courant nul, réserve intacte. <b>Fermez-le</b> : les électrons s'échappent, le déséquilibre retombe, la réaction repart. <b>Montez la consommation</b> : la réserve se vide plus vite et la tension aux bornes s'affaisse — c'est la résistance interne de la pile.</figcaption>
+</figure>
+<script>
+(function(){
+  "use strict";
+  var K   = MSPC.ctrl('a-pile-k');
+  var CH  = MSPC.ctrl('a-pile-r', function(v){ return v<3?'faible':(v<7?'moyenne':'forte'); }, 'a-pile-r-l');
+  var out = document.getElementById('a-pile-out');
+
+  var q=0.0;        // séparation de charge : 0 = neutre, 1 = pompe calée
+  var reserve=1;    // réserve chimique
+  var spawn=0, ions=[], parcours=0;
+  document.getElementById('a-pile-neuve').addEventListener('click', function(){ reserve=1; q=0; ions=[]; });
+
+  // Le circuit extérieur, du pôle − au pôle +
+  var PATH=[[104,64],[104,34],[836,34],[836,326],[262,326],[262,296]];
+  var LONG=[], TOT=0;
+  for(var s=1;s<PATH.length;s++){
+    var L=Math.hypot(PATH[s][0]-PATH[s-1][0], PATH[s][1]-PATH[s-1][1]);
+    LONG.push(L); TOT+=L;
+  }
+  function pos(u){                      // u dans [0,1] le long du parcours
+    var d=u*TOT, s=0;
+    while(s<LONG.length && d>LONG[s]){ d-=LONG[s]; s++; }
+    if(s>=LONG.length) s=LONG.length-1, d=LONG[s];
+    var r=d/LONG[s], A=PATH[s], B=PATH[s+1];
+    return [A[0]+(B[0]-A[0])*r, A[1]+(B[1]-A[1])*r];
+  }
+  var NE=30, elecs=[];
+  for(var e=0;e<NE;e++) elecs.push(e/NE);
+
+  MSPC.anim('a-pile', function(a){
+    var ctx=a.ctx, W=a.W, H=a.H, dt=a.dt;
+    var R = 3.4/CH.val;                               // charge : plus on consomme, plus R est faible
+    var vide = reserve<=0;
+    var I = (K.val && !vide) ? q/R : 0;               // courant (unité arbitraire)
+    var pompe = vide ? 0 : 3*(1-Math.pow(q,8));       // débit de la pompe chimique
+    q += (pompe - I)*dt; q=Math.max(0,Math.min(1,q));
+    reserve = Math.max(0, reserve - I*dt*0.018);
+    var U = 1.5*q;
+
+    MSPC.fond(ctx,W,H);
+
+    /* ---------- corps de la pile ---------- */
+    var bx=62, by=64, bw=232, bh=232;
+    ctx.fillStyle='rgba(255,255,255,.03)'; ctx.fillRect(bx,by,bw,bh);
+    ctx.strokeStyle='#8d968b'; ctx.lineWidth=1.6; ctx.strokeRect(bx+.5,by+.5,bw,bh);
+    MSPC.mono(ctx,'INTÉRIEUR DE LA PILE', 132, 54, 10.5, '#8d968b');
+    // électrolyte
+    ctx.fillStyle='rgba(91,134,189,.10)'; ctx.fillRect(bx+46, by+18, bw-92, bh-36);
+    MSPC.mono(ctx,'électrolyte', bx+bw/2, by+bh-10, 10, '#5b86bd', 'center');
+
+    var ax=bx+22, cx2=bx+bw-40;                        // anode (−) / cathode (+)
+    // anode zinc, rongée au fur et à mesure
+    var usure=(1-reserve)*16;
+    ctx.fillStyle='#9aa3a0'; ctx.fillRect(ax, by+18+usure*0.5, 24, bh-36-usure);
+    ctx.strokeStyle='#c9d2c8'; ctx.lineWidth=1.2; ctx.strokeRect(ax+.5, by+18+usure*0.5, 24, bh-36-usure);
+    MSPC.mono(ctx,'ZINC (−)', ax+12, by+12, 9.5, '#c9d2c8','center');
+    // cathode
+    ctx.fillStyle='#7a5a33'; ctx.fillRect(cx2, by+18, 24, bh-36);
+    ctx.strokeStyle='#c9a06a'; ctx.strokeRect(cx2+.5, by+18, 24, bh-36);
+    MSPC.mono(ctx,'CARBONE (+)', cx2+12, by+12, 9.5, '#c9a06a','center');
+
+    // charges accumulées : c'est le déséquilibre
+    var nq=Math.round(q*9);
+    ctx.font='13px "IBM Plex Mono",monospace'; ctx.textAlign='center';
+    for(var i=0;i<nq;i++){
+      ctx.fillStyle='#c8d834'; ctx.fillText('−', ax+34, by+34+i*20);
+      ctx.fillStyle='#e08b6a'; ctx.fillText('+', cx2-12, by+34+i*20);
+    }
+
+    /* ---------- dissolution du zinc : les ions Zn2+ partent ---------- */
+    if(!a.reduce){
+      spawn += pompe*dt*3.2;
+      while(spawn>=1){ spawn-=1; if(ions.length<26) ions.push({u:0, y:Math.random()}); }
+      for(var n=ions.length-1;n>=0;n--){
+        ions[n].u += dt*(I*0.42+0.015);
+        if(ions[n].u>1) ions.splice(n,1);
+      }
+    }
+    for(var n2=0;n2<ions.length;n2++){
+      var io=ions[n2];
+      var ix=ax+26+io.u*(cx2-ax-26), iy=by+30+io.y*(bh-60);
+      ctx.fillStyle='rgba(224,139,106,.85)';
+      ctx.beginPath(); ctx.arc(ix,iy,5,0,6.2832); ctx.fill();
+      MSPC.mono(ctx,'+', ix, iy+3.5, 9, '#2a1a10','center');
+    }
+    if(ions.length) MSPC.mono(ctx,'ions Zn²⁺ →', bx+bw/2, by+bh-28, 9.5, '#e08b6a','center');
+
+    /* ---------- circuit extérieur ---------- */
+    ctx.strokeStyle='#8d968b'; ctx.lineWidth=2.4;
+    ctx.beginPath();
+    ctx.moveTo(PATH[0][0],PATH[0][1]);
+    for(var p=1;p<PATH.length;p++) ctx.lineTo(PATH[p][0],PATH[p][1]);
+    ctx.stroke();
+    // bornes
+    ctx.fillStyle='#c8d834'; ctx.fillRect(ax+4,by-8,16,10);
+    ctx.fillStyle='#e08b6a'; ctx.fillRect(cx2+2,by+bh-2,16,10);
+
+    // interrupteur
+    var kx=470, ky=34;
+    ctx.fillStyle='#0d120f'; ctx.fillRect(kx-30,ky-14,60,28);
+    ctx.strokeStyle=K.val?'#c8d834':'#b32017'; ctx.lineWidth=2.6;
+    ctx.beginPath(); ctx.moveTo(kx-22,ky);
+    if(K.val) ctx.lineTo(kx+22,ky); else ctx.lineTo(kx+16,ky-20);
+    ctx.stroke();
+    ctx.fillStyle=K.val?'#c8d834':'#b32017';
+    ctx.beginPath(); ctx.arc(kx-22,ky,3.4,0,6.2832); ctx.fill();
+    ctx.beginPath(); ctx.arc(kx+22,ky,3.4,0,6.2832); ctx.fill();
+    MSPC.mono(ctx, K.val?'FERMÉ':'OUVERT', kx, ky-22, 10, K.val?'#c8d834':'#ff6a5e','center');
+
+    // lampe
+    var lx=836, ly=180, br=Math.min(1,I/1.1);
+    if(br>0.02){
+      var gl=ctx.createRadialGradient(lx,ly,2,lx,ly,46);
+      gl.addColorStop(0,'rgba(255,240,170,'+(0.55*br)+')'); gl.addColorStop(1,'rgba(255,240,170,0)');
+      ctx.fillStyle=gl; ctx.beginPath(); ctx.arc(lx,ly,46,0,6.2832); ctx.fill();
+    }
+    ctx.fillStyle='#0d120f'; ctx.beginPath(); ctx.arc(lx,ly,18,0,6.2832); ctx.fill();
+    ctx.strokeStyle=br>0.02?'#ffe9a0':'#8d968b'; ctx.lineWidth=2;
+    ctx.beginPath(); ctx.arc(lx,ly,18,0,6.2832); ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(lx-12,ly-12); ctx.lineTo(lx+12,ly+12);
+    ctx.moveTo(lx+12,ly-12); ctx.lineTo(lx-12,ly+12); ctx.stroke();
+
+    // électrons dans le fil
+    if(!a.reduce){ parcours += I*dt*0.16; }
+    for(var m=0;m<NE;m++){
+      var u=(elecs[m]+parcours)%1;
+      var P=pos(u);
+      ctx.fillStyle= I>0.02 ? '#c8d834' : 'rgba(200,216,52,.35)';
+      ctx.beginPath(); ctx.arc(P[0],P[1],3.4,0,6.2832); ctx.fill();
+    }
+    MSPC.mono(ctx,'les électrons ne traversent JAMAIS la pile : ils font le tour par l’extérieur', 470, 356, 10.5, '#6f786e','center');
+
+    /* ---------- afficheurs ---------- */
+    var dx2=330, dy2=96;
+    MSPC.titre(ctx, U.toFixed(2)+' V', dx2, dy2, 30, U>1.2?'#c8d834':'#f0a844');
+    MSPC.mono(ctx,'TENSION AUX BORNES', dx2, dy2+16, 9.5, '#8d968b');
+    MSPC.titre(ctx, (I*0.42).toFixed(2)+' A', dx2, dy2+62, 30, I>0.02?'#c8d834':'#6f786e');
+    MSPC.mono(ctx,'COURANT', dx2, dy2+78, 9.5, '#8d968b');
+    // réserve chimique
+    MSPC.mono(ctx,'RÉSERVE CHIMIQUE', dx2, dy2+112, 9.5, '#8d968b');
+    ctx.fillStyle='rgba(255,255,255,.10)'; ctx.fillRect(dx2, dy2+120, 120, 14);
+    ctx.fillStyle= reserve>0.4?'#93a415':(reserve>0.15?'#f0a844':'#b32017');
+    ctx.fillRect(dx2, dy2+120, 120*reserve, 14);
+
+    // état de la pompe
+    var etat, col;
+    if(vide){ etat='PILE ÉPUISÉE'; col='#b32017'; }
+    else if(pompe<0.25 && !K.val){ etat='POMPE CALÉE'; col='#f0a844'; }
+    else { etat='POMPE EN MARCHE'; col='#c8d834'; }
+    MSPC.titre(ctx, etat, dx2, dy2+176, 19, col);
+    // jauge de débit de la pompe
+    ctx.fillStyle='rgba(255,255,255,.10)'; ctx.fillRect(dx2, dy2+186, 120, 8);
+    ctx.fillStyle=col; ctx.fillRect(dx2, dy2+186, 120*Math.min(1,pompe/3), 8);
+
+    out.innerHTML = vide ? '<b style="color:#ff6a5e">Zinc entièrement consommé.</b> Le moteur chimique n’a plus de carburant.'
+      : (K.val ? 'La pompe tourne en continu : les électrons s’échappent par le fil,<br>le déséquilibre retombe et la réaction <b>repart</b>.'
+               : 'Le déséquilibre repousse les électrons suivants.<br>Poussée chimique = répulsion électrique → <b>tout s’arrête</b>, réserve intacte.');
+  }, {fixed:true});
+})();
+</script>
+
+<div class="encadre"><span class="tag">Pourquoi une pile neuve ne se vide pas dans le tiroir</span>
+<p>Faites l'expérience ci-dessus : <strong>laissez l'interrupteur ouvert</strong>. La pompe chimique démarre, entasse quelques électrons sur la borne −… puis <strong>elle cale toute seule</strong>.</p>
+<p>La raison est très belle : chaque électron déjà entassé <em>repousse</em> le suivant. Plus le déséquilibre grandit, plus la réaction chimique peine à en ajouter un de plus. En une fraction de seconde, la répulsion électrique équilibre exactement la poussée chimique et <strong>tout s'arrête</strong>. Il reste une <strong>tension</strong> aux bornes, un <strong>courant nul</strong> et une réserve <strong>intacte</strong>.</p>
+<p>Fermez le circuit : les électrons entassés s'échappent par le fil, le déséquilibre retombe, la réaction repart — et elle ne s'arrêtera que lorsque le zinc sera mangé. <span class="cle">Une pile ne se vide que si on lui donne un chemin.</span></p>
+</div>
+
+<div class="plaque"><span class="tag">Anecdote — la pile est née d'une grenouille et d'une dispute</span>
+<p>En 1780 à Bologne, <strong>Luigi Galvani</strong> dissèque des grenouilles. Il remarque que les cuisses se contractent violemment quand elles touchent en même temps deux métaux différents. Il en conclut à une « électricité animale », une force vitale propre au vivant.</p>
+<p>À Pavie, <strong>Alessandro Volta</strong> n'y croit pas une seconde. Il refait les essais et comprend que la grenouille ne produit rien du tout : elle ne fait que <em>détecter</em>. Ce qui produit l'électricité, ce sont les <strong>deux métaux différents séparés par un liquide</strong>. Pour le prouver, il empile en 1800 des disques de zinc et de cuivre séparés par des rondelles de carton imbibées de saumure : la <strong>pile</strong> — le mot vient de là, c'est littéralement un empilement.</p>
+<p>Volta avait raison sur la pile, Galvani n'avait pas tort sur le vivant (les nerfs sont bien électriques). Mais retenez surtout ceci : <span class="cle">pour faire une pile, il faut deux métaux différents et un électrolyte.</span> C'est aussi pourquoi, en maintenance, une vis inox dans une pièce en aluminium mouillée constitue une pile miniature qui ronge l'aluminium — la corrosion galvanique. Vous fabriquez des piles sans le vouloir.</p></div>
+
+<h3>1.6 — La résistance, sans une seule formule</h3>
 <p>Les électrons qui dérivent ne traversent pas le fil tranquillement. Ils <strong>percutent les ions du réseau</strong>. À chaque choc, l'électron perd de la vitesse et cède son énergie à l'ion, qui se met à vibrer un peu plus fort. Un ion qui vibre plus fort, dans notre langage, ça s'appelle <strong>de la chaleur</strong>.</p>
 <p>La <strong>résistance</strong>, c'est exactement ça : le nombre et la violence des chocs subis par les électrons sur leur trajet. Elle se mesure en <strong>ohms (Ω)</strong>.</p>
 
@@ -947,9 +1146,166 @@
     <span class="kicker">Le courant qui change d'avis 100 fois par seconde</span><h2>L'alternatif et l'alternateur</h2></div></div>
   <div class="ch-body">
 
-<p class="lede">L'induction a une conséquence embêtante : le courant qu'elle produit change de sens dès que le mouvement change de sens. Plutôt que de lutter, l'industrie en a fait un standard mondial.</p>
+<p class="lede">L'induction a une conséquence embêtante : le courant qu'elle produit change de sens dès que le mouvement change de sens. Plutôt que de lutter, l'industrie en a fait un standard mondial. Mais avant d'en arriver là, il faut voir en face les <strong>deux moteurs à électrons</strong> que vous connaissez maintenant tous les deux — et comprendre qu'ils ne se ressemblent en rien.</p>
 
-<h3>8.1 — Pourquoi une sinusoïde ?</h3>
+<h3>8.1 — Deux moteurs à électrons</h3>
+<p>Au <a href="#c1">chapitre 1</a>, on a laissé une question en suspens : d'où vient la force qui pousse les électrons ? Vous avez maintenant les deux réponses, et le moment est venu de les mettre côte à côte.</p>
+
+<table>
+<thead><tr><th></th><th>La pile — pompe chimique</th><th>L'alternateur — induction</th></tr></thead>
+<tbody>
+<tr><td><strong>D'où vient la force ?</strong></td><td>D'une réaction chimique qui arrache des électrons à un métal</td><td>D'un champ magnétique <em>qui varie</em> (loi de Faraday, chapitre 7)</td></tr>
+<tr><td><strong>Où s'applique-t-elle ?</strong></td><td><span class="cle">En un seul point du circuit</span> — entre les deux électrodes. Partout ailleurs, les électrons ne font que suivre.</td><td><span class="cle">Sur toute la longueur du conducteur à la fois</span> — chaque électron à portée du champ est poussé au même instant.</td></tr>
+<tr><td><strong>Faut-il un contact ?</strong></td><td>Oui : les électrodes trempent dans l'électrolyte</td><td><strong>Non.</strong> L'aimant ne touche rien. Il agit à distance, à travers l'air, le vide, le carter.</td></tr>
+<tr><td><strong>Sens du courant</strong></td><td>Toujours le même : la chimie ne change pas d'avis → <strong>continu</strong></td><td>S'inverse dès que l'aimant repart en sens inverse → <strong>alternatif</strong></td></tr>
+<tr><td><strong>Ce qui l'épuise</strong></td><td>La consommation des réactifs. Une pile s'use en débitant.</td><td>Rien. Tant qu'on entraîne le rotor, ça dure. <em>Ce qui s'use, c'est le carburant de la turbine.</em></td></tr>
+<tr><td><strong>Puissance courante</strong></td><td>Du milliwatt à quelques centaines de watts</td><td>Jusqu'à <strong>1 500 MW</strong> pour un alternateur de centrale</td></tr>
+</tbody></table>
+
+<figure class="anim">
+  <canvas id="a-deux" width="900" height="400" aria-label="Animation : comparaison de la pompe chimique et de l'induction magnétique"></canvas>
+  <div class="ctrls">
+    <div class="c"><label>Vitesse de l'aimant <span id="a-dx-v-l">moyenne</span></label><input type="range" id="a-dx-v" min="1" max="10" value="5"></div>
+    <div class="c"><button class="btn" id="a-dx-pause">Pause</button></div>
+    <div class="c readout" id="a-dx-out"></div>
+  </div>
+  <figcaption>Les deux mécanismes, côte à côte, au même instant. <b>À gauche</b>, la pompe chimique : la flèche rouge — la force — n'apparaît qu'<b>à un seul endroit</b>, dans la pile. Les électrons y passent l'un après l'autre et tournent toujours dans le même sens : la courbe du bas est plate, c'est du <b>continu</b>. <b>À droite</b>, l'aimant qui va et vient : <span style="color:var(--accent-clair)">toutes les flèches apparaissent en même temps, sur toute la longueur du fil</span>, et <b>toutes basculent ensemble</b> quand l'aimant repart en arrière. Les électrons ne font alors que des allers-retours sur place — la courbe du bas est une sinusoïde, c'est de l'<b>alternatif</b>. <b>Mettez en pause</b> au moment où l'aimant s'arrête en bout de course : plus de mouvement, plus de flèches, plus de courant. Ce n'est pas l'aimant qui produit le courant, c'est <b>son déplacement</b>.</figcaption>
+</figure>
+<script>
+(function(){
+  "use strict";
+  var V = MSPC.ctrl('a-dx-v', function(v){ return v<4?'lente':(v<8?'moyenne':'rapide'); }, 'a-dx-v-l');
+  var out = document.getElementById('a-dx-out');
+  var pause=false, ph=0, defil=0;
+  var btn=document.getElementById('a-dx-pause');
+  btn.addEventListener('click', function(){ pause=!pause; btn.textContent=pause?'Reprendre':'Pause'; });
+
+  var traceDC=[], traceAC=[];
+
+  MSPC.anim('a-deux', function(a){
+    var ctx=a.ctx, W=a.W, H=a.H, dt=pause?0:a.dt;
+    var w=1.1+V.val*0.30;
+    ph += dt*w; defil += dt*0.9;
+    var vAimant=Math.cos(ph);                 // vitesse de l'aimant : c'est elle qui compte
+    MSPC.fond(ctx,W,H);
+
+    ctx.strokeStyle='rgba(255,255,255,.14)'; ctx.lineWidth=1;
+    ctx.beginPath(); ctx.moveTo(450,20); ctx.lineTo(450,H-20); ctx.stroke();
+
+    /* ================= GAUCHE : POMPE CHIMIQUE ================= */
+    MSPC.titre(ctx,'POMPE CHIMIQUE', 34, 34, 20, '#c8d834');
+    MSPC.mono(ctx,'la force n’agit qu’en UN point', 34, 50, 10.5, '#8d968b');
+
+    var L={x:70, y:96, w:300, h:150};
+    ctx.strokeStyle='#8d968b'; ctx.lineWidth=2.4;
+    ctx.strokeRect(L.x, L.y, L.w, L.h);
+    // pile sur le brin du bas
+    var px=L.x+L.w/2, py=L.y+L.h;
+    ctx.fillStyle='#0d120f'; ctx.fillRect(px-26,py-16,52,32);
+    ctx.strokeStyle='#c8d834'; ctx.lineWidth=3;
+    ctx.beginPath(); ctx.moveTo(px-8,py-15); ctx.lineTo(px-8,py+15); ctx.stroke();
+    ctx.lineWidth=2;
+    ctx.beginPath(); ctx.moveTo(px+8,py-8); ctx.lineTo(px+8,py+8); ctx.stroke();
+    MSPC.mono(ctx,'PILE', px, py+30, 10, '#c8d834','center');
+    // la force, en un seul point
+    ctx.strokeStyle='#ff6a5e'; ctx.lineWidth=2.6;
+    ctx.beginPath(); ctx.moveTo(px+42,py-32); ctx.lineTo(px+11,py-9); ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(px+11,py-9); ctx.lineTo(px+23,py-10); ctx.lineTo(px+19,py-19); ctx.closePath();
+    ctx.fillStyle='#ff6a5e'; ctx.fill();
+    MSPC.mono(ctx,'FORCE ICI —', px+48, py-34, 10.5, '#ff6a5e');
+    MSPC.mono(ctx,'et nulle part ailleurs', px+48, py-20, 10.5, '#ff6a5e');
+
+    // électrons qui tournent
+    var per=2*(L.w+L.h);
+    for(var i=0;i<34;i++){
+      var u=((i/34)+defil*0.35)%1, d=u*per, X,Y;
+      if(d<L.w){ X=L.x+L.w-d; Y=L.y+L.h; }
+      else if(d<L.w+L.h){ X=L.x; Y=L.y+L.h-(d-L.w); }
+      else if(d<2*L.w+L.h){ X=L.x+(d-L.w-L.h); Y=L.y; }
+      else { X=L.x+L.w; Y=L.y+(d-2*L.w-L.h); }
+      ctx.fillStyle='#c8d834';
+      ctx.beginPath(); ctx.arc(X,Y,3.6,0,6.2832); ctx.fill();
+    }
+    MSPC.mono(ctx,'tous dans le même sens, sans arrêt', L.x, L.y-12, 10.5, '#9aa494');
+
+    /* ================= DROITE : INDUCTION ================= */
+    MSPC.titre(ctx,'INDUCTION', 486, 34, 20, '#c8d834');
+    MSPC.mono(ctx,'la force agit PARTOUT à la fois', 486, 50, 10.5, '#8d968b');
+
+    var fx1=500, fx2=866, fy=214;
+    // aimant, qui va et vient au-dessus du fil
+    var mx=(fx1+fx2)/2 + Math.sin(ph)*112, my=132;
+    var gA=ctx.createRadialGradient(mx,my,4,mx,my,120);
+    gA.addColorStop(0,'rgba(200,216,52,.16)'); gA.addColorStop(1,'rgba(200,216,52,0)');
+    ctx.fillStyle=gA; ctx.beginPath(); ctx.arc(mx,my,120,0,6.2832); ctx.fill();
+    ctx.fillStyle='#b32017'; ctx.fillRect(mx-40,my-17,40,34);
+    ctx.fillStyle='#4f7fb8'; ctx.fillRect(mx,my-17,40,34);
+    ctx.strokeStyle='#e6ebe4'; ctx.lineWidth=1.4; ctx.strokeRect(mx-40,my-17,80,34);
+    MSPC.mono(ctx,'N', mx-20, my+4, 13, '#fff','center');
+    MSPC.mono(ctx,'S', mx+20, my+4, 13, '#fff','center');
+    // sens de déplacement de l'aimant
+    if(Math.abs(vAimant)>0.08){
+      var sgn=vAimant>0?1:-1;
+      ctx.strokeStyle='#e6ebe4'; ctx.lineWidth=2;
+      ctx.beginPath(); ctx.moveTo(mx+sgn*52,my); ctx.lineTo(mx+sgn*86,my); ctx.stroke();
+      ctx.beginPath(); ctx.moveTo(mx+sgn*86,my); ctx.lineTo(mx+sgn*74,my-6); ctx.lineTo(mx+sgn*74,my+6); ctx.closePath();
+      ctx.fillStyle='#e6ebe4'; ctx.fill();
+    } else {
+      MSPC.mono(ctx,'l’aimant s’arrête → plus de courant', mx, my-30, 10.5, '#ff6a5e','center');
+    }
+
+    // le conducteur
+    ctx.strokeStyle='#8d968b'; ctx.lineWidth=7;
+    ctx.beginPath(); ctx.moveTo(fx1,fy); ctx.lineTo(fx2,fy); ctx.stroke();
+    ctx.strokeStyle='#5a6158'; ctx.lineWidth=5;
+    ctx.beginPath(); ctx.moveTo(fx1,fy); ctx.lineTo(fx2,fy); ctx.stroke();
+
+    // TOUS les électrons reçoivent la même force au même instant
+    var NE2=15, amp=13;
+    for(var k=0;k<NE2;k++){
+      var ex=fx1+16+(k*(fx2-fx1-32)/(NE2-1)) + Math.sin(ph)*amp*0.7;
+      ctx.fillStyle='#c8d834';
+      ctx.beginPath(); ctx.arc(ex,fy,4,0,6.2832); ctx.fill();
+      if(Math.abs(vAimant)>0.08){
+        var s2=vAimant>0?1:-1, La=16*Math.abs(vAimant)+8;
+        ctx.strokeStyle='#ff6a5e'; ctx.lineWidth=2;
+        ctx.beginPath(); ctx.moveTo(ex,fy-13); ctx.lineTo(ex+s2*La,fy-13); ctx.stroke();
+        ctx.beginPath(); ctx.moveTo(ex+s2*La,fy-13); ctx.lineTo(ex+s2*(La-6),fy-17); ctx.lineTo(ex+s2*(La-6),fy-9); ctx.closePath();
+        ctx.fillStyle='#ff6a5e'; ctx.fill();
+      }
+    }
+    MSPC.mono(ctx,'toutes les flèches apparaissent et basculent ENSEMBLE', (fx1+fx2)/2, fy+34, 10.5, '#ff6a5e','center');
+
+    /* ================= OSCILLOSCOPES ================= */
+    function scope(x,y,w2,h2,val,serie,couleur,titre){
+      ctx.strokeStyle='rgba(255,255,255,.20)'; ctx.lineWidth=1;
+      ctx.strokeRect(x+.5,y+.5,w2,h2);
+      ctx.strokeStyle='rgba(255,255,255,.12)';
+      ctx.beginPath(); ctx.moveTo(x,y+h2/2); ctx.lineTo(x+w2,y+h2/2); ctx.stroke();
+      if(dt>0){ serie.push(val); if(serie.length>w2) serie.shift(); }
+      ctx.strokeStyle=couleur; ctx.lineWidth=2; ctx.beginPath();
+      for(var s=0;s<serie.length;s++){
+        var X2=x+w2-serie.length+s, Y2=y+h2/2-serie[s]*(h2/2-6);
+        if(s===0) ctx.moveTo(X2,Y2); else ctx.lineTo(X2,Y2);
+      }
+      ctx.stroke();
+      MSPC.mono(ctx,titre,x,y-6,10.5,couleur);
+    }
+    scope(70,300,300,72,0.62,traceDC,'#93a415','COURANT CONTINU — toujours du même signe');
+    scope(500,300,366,72,vAimant,traceAC,'#f0a844','COURANT ALTERNATIF — il change de signe');
+
+    out.innerHTML = Math.abs(vAimant)<0.08
+      ? '<b style="color:#ff6a5e">Aimant à l’arrêt : tension induite nulle.</b><br>La pile, elle, continue de débiter.'
+      : 'Pile : force sur <b>1</b> point du circuit<br>Induction : force sur <b>'+NE2+'</b> électrons au même instant';
+  }, {fixed:true});
+})();
+</script>
+
+<div class="image-mentale"><span class="tag">Image mentale — la pompe et la vague</span>
+<p>La <strong>pile</strong>, c'est une <em>écluse</em> sur un canal en boucle : toute l'énergie est fournie en un seul point, et l'eau fait le tour. Bouchez le canal ailleurs et tout s'arrête, mais l'écluse, elle, ne pousse toujours qu'à un seul endroit.</p>
+<p>L'<strong>induction</strong>, c'est une <em>vague qui passe sous une rangée de bateaux</em>. Aucun contact, aucun moteur sur les bateaux : la vague les soulève tous <strong>en même temps</strong>. Et quand elle repart en sens inverse, ils redescendent tous ensemble. Les bateaux ne voyagent pas — ils montent et descendent sur place. <span class="cle">C'est exactement ce que font les électrons d'un fil en 50 Hz : des allers-retours sur place, jamais un voyage.</span></p></div>
+
+<h3>8.2 — Pourquoi une sinusoïde ?</h3>
 <p>Faites tourner une spire dans le champ d'un aimant, à vitesse constante. Selon sa position, elle « coupe » plus ou moins de lignes de champ :</p>
 <ul>
 <li>Spire à plat dans le champ → elle traverse les lignes à pleine vitesse → <strong>tension maximale</strong></li>
@@ -968,7 +1324,7 @@
   <figcaption>La spire tourne à gauche, la courbe se trace à droite <b>en temps réel</b>. Ralentissez : la période s'allonge, la fréquence baisse. <b>Un alternateur ne peut pas produire n'importe quelle fréquence : elle est imposée par la vitesse de rotation.</b></figcaption>
 </figure>
 
-<h3>8.2 — Le vocabulaire de l'alternatif</h3>
+<h3>8.3 — Le vocabulaire de l'alternatif</h3>
 <table>
 <thead><tr><th>Grandeur</th><th>Définition</th><th class="mono">Valeur en France</th></tr></thead>
 <tbody>
@@ -979,7 +1335,7 @@
 </tbody></table>
 <p><strong>Attention à la valeur efficace</strong>, c'est le piège classique : le « 230 V » de votre prise n'est jamais atteint deux fois par période — la tension y culmine en réalité à <strong>325 V</strong>. Un condensateur de filtrage doit donc être choisi pour 400 V minimum, pas pour 250 V. C'est la définition officielle : la valeur efficace est celle qui produit le <em>même effet Joule</em> qu'un courant continu de même valeur. Le chapitre 4 sert à définir le chapitre 8.</p>
 
-<h3>8.3 — La vraie raison de l'alternatif</h3>
+<h3>8.4 — La vraie raison de l'alternatif</h3>
 <p>L'alternatif est moins commode que le continu (les moteurs à courant continu se pilotent plus simplement, les batteries sont en continu). Il a gagné pour <strong>une seule raison</strong> : il permet de changer facilement de tension grâce au transformateur (chapitre 10), qui ne fonctionne qu'avec un champ variable. Et changer de tension, c'est ce qui rend le transport possible (chapitre 11).</p>
 
 <div class="plaque"><span class="tag">Anecdote — la guerre des courants</span>
