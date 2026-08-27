@@ -2926,186 +2926,182 @@
 
 <div class="formule">La valeur efficace d'une tension alternative,<br>c'est la tension continue qui chaufferait exactement autant<small>même résistance, même échauffement, même puissance</small></div>
 
-<p>Autrement dit : on prend deux résistances identiques. On branche la première sur l'alternatif à mesurer, la seconde sur une alimentation continue réglable. On tourne le bouton du continu jusqu'à ce que les deux chauffent pareil. <span class="cle">La valeur affichée par l'alimentation continue à cet instant, c'est la valeur efficace de l'alternatif.</span> Il n'y a rien de plus dans cette notion — et c'est exactement ce que fait l'animation ci-dessous.</p>
+<p>Autrement dit : on prend deux lampes identiques. On branche la première sur du continu, la seconde sur de l'alternatif, et l'on compare l'éclat. <span class="cle">La tension continue qui donne le même éclat, c'est la valeur efficace de l'alternatif.</span> Il n'y a rien de plus dans cette notion.</p>
+<p>L'animation ci-dessous fait exactement cette expérience — et elle commence par une surprise. Mettez la même tension des deux côtés, 230 V de continu contre 230 V de crête en alternatif : <strong>la lampe alternative brille deux fois moins</strong>. Pour rattraper le continu, il faut monter sa crête à 325 V. Ce n'est pas un défaut de l'alternatif : c'est que sa tension ne reste au sommet qu'un instant, et repasse par zéro cent fois par seconde.</p>
+
+<h4>Comment on calcule cette valeur : carré, moyenne, racine</h4>
+<p>Le raisonnement se fait en trois gestes, et l'animation les montre l'un après l'autre :</p>
+<ol>
+<li><strong>On élève la tension au carré.</strong> Pourquoi le carré ? Parce que c'est la puissance qui chauffe, et qu'elle vaut u²/R. Effet secondaire décisif : <em>un carré est toujours positif</em>. Les alternances négatives chauffent donc autant que les positives — c'est bien pour cela qu'une tension qui change de sens cent fois par seconde parvient malgré tout à faire rougir un filament.</li>
+<li><strong>On prend la moyenne de ce carré.</strong> C'est elle qui détermine la chaleur réellement produite sur une période entière.</li>
+<li><strong>On en prend la racine</strong> pour revenir à des volts.</li>
+</ol>
+<p>Carré, moyenne, racine : cette opération porte un nom, c'est la <strong>moyenne quadratique</strong>. Et c'est très exactement ce que dit son abréviation anglaise, celle qui est gravée sur vos multimètres — <strong>RMS</strong>, pour <em>Root Mean Square</em> : racine de la moyenne des carrés, dans cet ordre, à l'envers.</p>
+<p><em>Attention à ne pas la confondre avec la moyenne ordinaire : la moyenne d'une sinusoïde est nulle, puisque le positif compense exactement le négatif. Et ce n'est pas non plus la moyenne géométrique, qui est tout autre chose. C'est bien la moyenne <strong>des carrés</strong>.</em></p>
 
 <figure class="anim">
-  <canvas id="a-eff" width="900" height="480" aria-label="Animation : la valeur efficace définie par l'égalité d'échauffement entre alternatif et continu"></canvas>
+  <canvas id="a-eff" width="900" height="520" aria-label="Animation : deux circuits identiques, l'un en continu, l'autre en alternatif, et la construction de la valeur efficace"></canvas>
   <div class="ctrls">
-    <div class="c"><label>Tension crête de l'alternatif <span id="a-eff-c-l">325 V</span></label><input type="range" id="a-eff-c" min="100" max="400" step="5" value="325"></div>
-    <div class="c"><label>Forme du signal <span id="a-eff-f-l">sinusoïde</span></label><input type="range" id="a-eff-f" min="0" max="2" value="0"></div>
-    <div class="c"><label>Tension continue à régler <span id="a-eff-d-l">150 V</span></label><input type="range" id="a-eff-d" min="0" max="400" step="5" value="150"></div>
+    <div class="c"><label>Tension continue <span id="a-eff-d-l">230 V</span></label><input type="range" id="a-eff-d" min="0" max="400" step="5" value="230"></div>
+    <div class="c"><label>Tension crête de l'alternatif <span id="a-eff-c-l">230 V</span></label><input type="range" id="a-eff-c" min="0" max="500" step="5" value="230"></div>
     <div class="c readout" id="a-eff-out"></div>
   </div>
-  <figcaption>Les deux résistances sont identiques. Celle de gauche est alimentée en alternatif, celle de droite en continu. <b>Réglez le continu jusqu'à ce que les deux thermomètres s'alignent</b> : vous venez de mesurer la valeur efficace, au sens strict de sa définition. Avec 325 V de crête, l'égalité tombe sur <b>230 V</b>.<br>La courbe du bas explique pourquoi une tension qui passe son temps à changer de signe parvient malgré tout à chauffer : la puissance vaut u²/R, et <b>le carré efface le signe</b>. Elle est donc toujours positive, même pendant les alternances négatives. La valeur efficace n'est rien d'autre que la tension continue qui donnerait cette même puissance moyenne.<br><b>Changez la forme du signal</b> : le rapport crête/efficace n'est plus √2 du tout. Et regardez alors ce que lit un voltmètre bas de gamme — l'erreur devient considérable.</figcaption>
+  <figcaption>Deux circuits rigoureusement identiques, deux lampes identiques. <b>À gauche du continu, à droite de l'alternatif</b> — et au départ, la même tension de 230 V de part et d'autre.<br>Regardez les lampes : celle de gauche brille sans jamais ciller ; celle de droite <b>scintille</b>, parce que sa tension repasse par zéro deux fois par période. Et surtout, <b>elle brille nettement moins</b> — sa puissance moyenne n'est que la moitié. À tension crête égale, l'alternatif chauffe deux fois moins.<br><b>Montez alors la crête de l'alternatif</b> jusqu'à retrouver le même éclat : il faut aller à <b>325 V</b>. Voilà d'où sort le √2, non pas décrété mais constaté.<br>Les deux courbes du bas montrent pourquoi. On élève la tension au <b>carré</b> — ce qui efface le signe, et explique qu'une tension qui change de sens chauffe quand même —, on en prend la <b>moyenne</b>, puis la <b>racine</b>. Le résultat, en bas, est identique des deux côtés : 230 V. C'est la définition exacte de la valeur efficace, et c'est aussi ce que veut dire son nom anglais, <em>RMS</em> : <em>Root Mean Square</em>, racine de la moyenne des carrés.</figcaption>
 </figure>
 <script>
 (function(){
   "use strict";
-  var FORME=[
-    {n:'sinusoïde',   kEff:1/Math.SQRT2, kMoy:2/Math.PI},
-    {n:'carrée',      kEff:1,            kMoy:1},
-    {n:'triangulaire',kEff:1/Math.sqrt(3), kMoy:0.5}
-  ];
-  var CR=MSPC.ctrl('a-eff-c', function(v){ return v+' V'; }, 'a-eff-c-l');
-  var FO=MSPC.ctrl('a-eff-f', function(v){ return FORME[v].n; }, 'a-eff-f-l');
+  var R=100, PER=2;                                  // 2 périodes affichées
   var DC=MSPC.ctrl('a-eff-d', function(v){ return v+' V'; }, 'a-eff-d-l');
+  var CR=MSPC.ctrl('a-eff-c', function(v){ return v+' V'; }, 'a-eff-c-l');
   var out=document.getElementById('a-eff-out');
 
-  var Ta=20, Tb=20, R=100;
-
-  function onde(ph,f){
-    if(f===0) return Math.sin(ph);
-    if(f===1) return Math.sin(ph)>=0?1:-1;
-    var x=((ph/(2*Math.PI))%1+1)%1;               // triangle
-    return x<0.25? x*4 : (x<0.75? 2-x*4 : x*4-4);
+  function lampe(ctx,x,y,r,br){
+    if(br>0.02){
+      var g=ctx.createRadialGradient(x,y,2,x,y,r*4.2);
+      g.addColorStop(0,'rgba(255,236,170,'+(0.72*br)+')');
+      g.addColorStop(1,'rgba(255,236,170,0)');
+      ctx.fillStyle=g; ctx.beginPath(); ctx.arc(x,y,r*4.2,0,6.2832); ctx.fill();
+    }
+    ctx.fillStyle='rgb('+Math.round(16+225*br)+','+Math.round(20+200*br)+','+Math.round(18+120*br)+')';
+    ctx.beginPath(); ctx.arc(x,y,r,0,6.2832); ctx.fill();
+    ctx.strokeStyle=br>0.05?'rgba(255,236,170,'+(0.4+0.6*br)+')':'#6f786e';
+    ctx.lineWidth=2.2; ctx.beginPath(); ctx.arc(x,y,r,0,6.2832); ctx.stroke();
+    ctx.beginPath();
+    ctx.moveTo(x-r*0.64,y-r*0.64); ctx.lineTo(x+r*0.64,y+r*0.64);
+    ctx.moveTo(x+r*0.64,y-r*0.64); ctx.lineTo(x-r*0.64,y+r*0.64);
+    ctx.stroke();
   }
 
   MSPC.anim('a-eff', function(a){
-    var ctx=a.ctx, W=a.W, H=a.H, dt=a.dt;
-    var Umax=CR.val, f=FO.val, Udc=DC.val;
-    var Ueff=Umax*FORME[f].kEff;
-    var Umoy=Umax*FORME[f].kMoy;
-    var lectureTRMS=Ueff;
-    var lectureBasGamme=Umoy*1.111;               // redressée puis calibrée pour du sinus
+    var ctx=a.ctx, W=a.W, H=a.H;
+    var Udc=DC.val, Ucr=CR.val;
+    var Ueff=Ucr/Math.SQRT2;
+    var Pdc=Udc*Udc/R, Pac=Ueff*Ueff/R;
+    var UMAX=420;
 
-    var Pac=Ueff*Ueff/R, Pdc=Udc*Udc/R;
-    var Teq=function(P){ return 20+P*0.18; };
-    if(dt>0){
-      Ta+=(Teq(Pac)-Ta)*Math.min(1,dt*1.6);
-      Tb+=(Teq(Pdc)-Tb)*Math.min(1,dt*1.6);
-    }
-    var ecart=Math.abs(Ta-Tb), egal=Math.abs(Udc-Ueff)<4;
+    // le curseur balaie les deux périodes, au ralenti
+    var t=(a.t*0.30)%1;
+    var ph=t*PER*2*Math.PI;
+    var uac=Ucr*Math.sin(ph);
+    var pac=uac*uac/R;
 
     MSPC.fond(ctx,W,H,0);
 
-    /* ================= les deux résistances ================= */
-    MSPC.mono(ctx,'DEUX RÉSISTANCES RIGOUREUSEMENT IDENTIQUES',34,44,10.5,'#8d968b');
-    MSPC.mono(ctx,'on règle le continu jusqu’à ce qu’elles chauffent pareil',34,60,9.5,'#6f786e');
+    var COL=[{x:30,w:400,titre:'COURANT CONTINU',c:'#5cc4e0'},
+             {x:470,w:400,titre:'COURANT ALTERNATIF',c:'#f0a844'}];
 
-    function chauffe(x,T,titre,sous,col,inst){
-      var y0=92, hh=150;
-      // thermomètre
-      var tx=x+96, tw=22;
-      for(var s=0;s<hh;s++){
-        var u=1-s/hh;
-        ctx.fillStyle='rgb('+Math.round(60+195*u)+','+Math.round(46+120*u*u)+','+Math.round(34+30*u)+')';
-        ctx.fillRect(tx,y0+s,tw,1.4);
+    for(var k=0;k<2;k++){
+      var C=COL[k], alt=(k===1);
+      var U=alt?Ucr:Udc, uInst=alt?uac:Udc, pInst=alt?pac:Pdc, Pmoy=alt?Pac:Pdc;
+
+      MSPC.titre(ctx,C.titre,C.x,44,20,C.c);
+
+      /* ----- le circuit ----- */
+      var lx=C.x+40, rx=C.x+300, ty=76, by=192;
+      ctx.strokeStyle='#8d968b'; ctx.lineWidth=2.4;
+      ctx.beginPath();
+      ctx.moveTo(lx,ty); ctx.lineTo(rx,ty); ctx.lineTo(rx,by); ctx.lineTo(lx,by); ctx.lineTo(lx,ty);
+      ctx.stroke();
+      var cy=(ty+by)/2;
+      // la source
+      ctx.fillStyle='#0d120f'; ctx.fillRect(lx-22,cy-32,44,64);
+      ctx.strokeStyle=C.c; ctx.lineWidth=1.6; ctx.strokeRect(lx-22,cy-32,44,64);
+      if(alt){
+        ctx.strokeStyle=C.c; ctx.lineWidth=2.2; ctx.beginPath();
+        for(var s=-14;s<=14;s++) ctx.lineTo(lx+s, cy-Math.sin(s/14*Math.PI*2)*9);
+        ctx.stroke();
+      } else {
+        ctx.strokeStyle=C.c; ctx.lineWidth=3;
+        ctx.beginPath(); ctx.moveTo(lx-6,cy-15); ctx.lineTo(lx-6,cy+15); ctx.stroke();
+        ctx.lineWidth=2;
+        ctx.beginPath(); ctx.moveTo(lx+7,cy-8); ctx.lineTo(lx+7,cy+8); ctx.stroke();
       }
-      ctx.strokeStyle='rgba(255,255,255,.28)'; ctx.lineWidth=1; ctx.strokeRect(tx+.5,y0+.5,tw,hh);
-      var yT=y0+hh-hh*Math.min(1,(T-20)/120);
-      ctx.strokeStyle='#fff'; ctx.lineWidth=2.4;
-      ctx.beginPath(); ctx.moveTo(tx-8,yT); ctx.lineTo(tx+tw+8,yT); ctx.stroke();
-      MSPC.titre(ctx,Math.round(T)+' °C',tx+tw+14,yT+6,19,'#fff');
-      // la résistance
-      var glow=Math.min(1,(T-20)/110);
-      if(glow>0.03){
-        var g=ctx.createRadialGradient(x+34,y0+hh/2,4,x+34,y0+hh/2,58);
-        g.addColorStop(0,'rgba(255,120,40,'+(0.5*glow)+')'); g.addColorStop(1,'rgba(255,120,40,0)');
-        ctx.fillStyle=g; ctx.beginPath(); ctx.arc(x+34,y0+hh/2,58,0,6.2832); ctx.fill();
+      MSPC.mono(ctx, alt? Ucr+' V crête' : Udc+' V continus', lx, by+24, 11.5, C.c, 'center');
+      if(alt) MSPC.mono(ctx, '= '+Ueff.toFixed(0)+' V eff.', lx+96, by+24, 10.5, '#c8d834');
+
+      // la lampe, dont l'éclat suit la puissance instantanée
+      lampe(ctx, rx, cy, 22, Math.min(1, pInst/900));
+      MSPC.mono(ctx, alt?'elle scintille':'elle ne cille jamais', rx, by+24, 10.5, alt?'#f0a844':'#5cc4e0','center');
+
+      /* ----- u(t) ----- */
+      var g1={x:C.x, y:238, w:C.w, h:78};
+      ctx.strokeStyle='rgba(255,255,255,.18)'; ctx.lineWidth=1; ctx.strokeRect(g1.x+.5,g1.y+.5,g1.w,g1.h);
+      var mid=g1.y+g1.h/2, sc=(g1.h/2-6)/UMAX;
+      ctx.strokeStyle='rgba(255,255,255,.14)';
+      ctx.beginPath(); ctx.moveTo(g1.x,mid); ctx.lineTo(g1.x+g1.w,mid); ctx.stroke();
+      ctx.strokeStyle=C.c; ctx.lineWidth=2.2; ctx.beginPath();
+      for(var i=0;i<=g1.w;i++){
+        var u2=alt? Ucr*Math.sin(i/g1.w*PER*2*Math.PI) : Udc;
+        var yy=Math.max(g1.y+3,Math.min(g1.y+g1.h-3,mid-u2*sc));
+        if(i===0) ctx.moveTo(g1.x+i,yy); else ctx.lineTo(g1.x+i,yy);
       }
-      ctx.fillStyle='rgb('+Math.round(46+190*glow)+','+Math.round(52+70*glow)+','+Math.round(48+10*glow)+')';
-      ctx.fillRect(x+12,y0+34,44,82);
-      ctx.strokeStyle='#e08b6a'; ctx.lineWidth=2; ctx.strokeRect(x+12,y0+34,44,82);
-      ctx.strokeStyle='#8d968b'; ctx.lineWidth=2;
-      ctx.beginPath(); ctx.moveTo(x+34,y0+10); ctx.lineTo(x+34,y0+34);
-      ctx.moveTo(x+34,y0+116); ctx.lineTo(x+34,y0+140); ctx.stroke();
-      MSPC.mono(ctx,titre,x+34,y0-14,10.5,col,'center');
-      MSPC.mono(ctx,sous,x+34,y0+158,10.5,col,'center');
-      if(inst!==null) MSPC.mono(ctx,inst,x+34,y0+174,9.5,'#6f786e','center');
-    }
+      ctx.stroke();
+      MSPC.mono(ctx,'tension u(t)',g1.x,g1.y-8,10,'#8d968b');
+      if(alt){
+        ctx.strokeStyle='#c8d834'; ctx.setLineDash([4,3]); ctx.lineWidth=1.3;
+        [1,-1].forEach(function(sg){
+          ctx.beginPath(); ctx.moveTo(g1.x,mid-sg*Ueff*sc); ctx.lineTo(g1.x+g1.w,mid-sg*Ueff*sc); ctx.stroke();
+        });
+        ctx.setLineDash([]);
+        MSPC.mono(ctx,'efficace '+Ueff.toFixed(0)+' V',g1.x+g1.w-4,mid-Ueff*sc-5,9.5,'#c8d834','right');
+      }
 
-    var val=Umax*onde(a.t*4.2,f);
-    chauffe(34,  Ta, 'ALTERNATIF', Ueff.toFixed(0)+' V efficaces', '#f0a844',
-            'à cet instant : '+val.toFixed(0)+' V');
-    chauffe(226, Tb, 'CONTINU',    Udc+' V',                        '#5cc4e0', 'stable, toujours');
+      /* ----- u²(t) ----- */
+      var g2={x:C.x, y:346, w:C.w, h:78};
+      ctx.strokeStyle='rgba(255,255,255,.18)'; ctx.lineWidth=1; ctx.strokeRect(g2.x+.5,g2.y+.5,g2.w,g2.h);
+      var base=g2.y+g2.h, sc2=(g2.h-8)/(UMAX*UMAX);
+      ctx.strokeStyle='#ff6a5e'; ctx.lineWidth=2.2; ctx.beginPath();
+      for(var j=0;j<=g2.w;j++){
+        var v=alt? Ucr*Math.sin(j/g2.w*PER*2*Math.PI) : Udc;
+        var yy2=Math.max(g2.y+3,base-v*v*sc2);
+        if(j===0) ctx.moveTo(g2.x+j,yy2); else ctx.lineTo(g2.x+j,yy2);
+      }
+      ctx.stroke();
+      var moyC=alt? Ucr*Ucr/2 : Udc*Udc;
+      var ym=base-moyC*sc2;
+      ctx.strokeStyle='#c8d834'; ctx.setLineDash([5,4]); ctx.lineWidth=1.8;
+      ctx.beginPath(); ctx.moveTo(g2.x,ym); ctx.lineTo(g2.x+g2.w,ym); ctx.stroke(); ctx.setLineDash([]);
+      MSPC.mono(ctx,'u² — le carré efface le signe',g2.x,g2.y-8,10,'#8d968b');
+      MSPC.mono(ctx,'moyenne de u² = '+Math.round(moyC).toLocaleString('fr-FR')+' V²',g2.x+g2.w-4,ym-6,9.5,'#c8d834','right');
 
-    // verdict
-    var vy=300;
-    if(egal){
-      ctx.fillStyle='rgba(147,164,21,.16)'; ctx.fillRect(28,vy-22,404,50);
-      ctx.strokeStyle='#93a415'; ctx.lineWidth=1.4; ctx.strokeRect(28.5,vy-21.5,404,50);
-      MSPC.titre(ctx,'MÊME ÉCHAUFFEMENT',34,vy,19,'#c8d834');
-      MSPC.mono(ctx,'ce continu-là EST la valeur efficace de l’alternatif',34,vy+18,10.5,'#93a415');
-    } else {
-      MSPC.mono(ctx, Udc<Ueff ? 'Le continu chauffe moins : montez-le.' : 'Le continu chauffe plus : baissez-le.',
-        34, vy, 11.5, '#f0a844');
-      MSPC.mono(ctx,'écart de température : '+ecart.toFixed(1)+' °C',34,vy+18,10,'#6f786e');
-    }
-
-    /* ================= les courbes ================= */
-    var bx=470, bw=W-bx-40;
-    // u(t)
-    var b1={x:bx,y:70,w:bw,h:112};
-    ctx.strokeStyle='rgba(255,255,255,.20)'; ctx.lineWidth=1; ctx.strokeRect(b1.x+.5,b1.y+.5,b1.w,b1.h);
-    var mid=b1.y+b1.h/2, sc=(b1.h/2-8)/400;
-    ctx.strokeStyle='rgba(255,255,255,.15)';
-    ctx.beginPath(); ctx.moveTo(b1.x,mid); ctx.lineTo(b1.x+b1.w,mid); ctx.stroke();
-    // repères crête et efficace
-    [[Umax,'#ff6a5e','crête '+Umax+' V'],[Ueff,'#c8d834','efficace '+Ueff.toFixed(0)+' V']].forEach(function(r,i){
-      [1,-1].forEach(function(sg){
-        var y=mid-sg*r[0]*sc;
-        ctx.strokeStyle=r[1]; ctx.setLineDash([4,3]); ctx.lineWidth=1.2;
-        ctx.beginPath(); ctx.moveTo(b1.x,y); ctx.lineTo(b1.x+b1.w,y); ctx.stroke(); ctx.setLineDash([]);
+      /* ----- le curseur ----- */
+      [g1,g2].forEach(function(g){
+        var cxp=g.x+t*g.w;
+        ctx.strokeStyle='rgba(255,255,255,.5)'; ctx.lineWidth=1.3;
+        ctx.beginPath(); ctx.moveTo(cxp,g.y); ctx.lineTo(cxp,g.y+g.h); ctx.stroke();
       });
-      if(i===0) MSPC.mono(ctx,r[2],b1.x+b1.w-4,mid-r[0]*sc-5,9.5,r[1],'right');
-      else       MSPC.mono(ctx,r[2],b1.x+5,mid-r[0]*sc-5,9.5,r[1]);
-    });
-    ctx.strokeStyle='#f0a844'; ctx.lineWidth=2.2; ctx.beginPath();
-    for(var i2=0;i2<=b1.w;i2++){
-      var ph=(i2/b1.w)*4*Math.PI + a.t*4.2;
-      var y=mid-Umax*onde(ph,f)*sc;
-      if(i2===0) ctx.moveTo(b1.x+i2,y); else ctx.lineTo(b1.x+i2,y);
+      ctx.fillStyle='#fff';
+      ctx.beginPath(); ctx.arc(g1.x+t*g1.w, mid-uInst*sc, 4, 0, 6.2832); ctx.fill();
+      ctx.beginPath(); ctx.arc(g2.x+t*g2.w, base-pInst*R*sc2, 4, 0, 6.2832); ctx.fill();
+
+      /* ----- la racine : on remonte à la tension équivalente ----- */
+      var ry=444;
+      MSPC.mono(ctx,'√ ( moyenne de u² )',C.x,ry,10.5,'#8d968b');
+      MSPC.titre(ctx,Math.sqrt(moyC).toFixed(0)+' V',C.x+140,ry+4,24,'#c8d834');
+      MSPC.mono(ctx,'puissance moyenne',C.x,ry+22,10.5,'#8d968b');
+      MSPC.titre(ctx,Math.round(Pmoy)+' W',C.x+140,ry+26,24, '#e6ebe4');
     }
-    ctx.stroke();
-    MSPC.mono(ctx,'TENSION u(t) — elle passe son temps à changer',b1.x,b1.y-10,10.5,'#8d968b');
 
-    // p(t)
-    var b2={x:bx,y:216,w:bw,h:112};
-    ctx.strokeStyle='rgba(255,255,255,.20)'; ctx.lineWidth=1; ctx.strokeRect(b2.x+.5,b2.y+.5,b2.w,b2.h);
-    var base=b2.y+b2.h, sc2=(b2.h-10)/(400*400/R);
-    ctx.strokeStyle='#ff6a5e'; ctx.lineWidth=2.2; ctx.beginPath();
-    for(var i3=0;i3<=b2.w;i3++){
-      var ph2=(i3/b2.w)*4*Math.PI + a.t*4.2;
-      var v=Umax*onde(ph2,f), pp=v*v/R;
-      var y2=base-pp*sc2;
-      if(i3===0) ctx.moveTo(b2.x+i3,y2); else ctx.lineTo(b2.x+i3,y2);
+    /* ================= verdict ================= */
+    var ecart=Pac/Math.max(Pdc,0.001);
+    var vy=496, msg, mc;
+    if(Math.abs(Ueff-Udc)<4){
+      msg='ÉGALITÉ — même éclat, même puissance. Il a fallu monter la crête à '+Ucr+' V, soit √2 fois la tension continue.';
+      mc='#c8d834';
+    } else if(Ueff<Udc){
+      msg='L’alternatif chauffe '+(1/Math.max(ecart,0.001)).toFixed(1).replace('.',',')+' fois moins. Montez sa tension crête jusqu’à '+(Udc*Math.SQRT2).toFixed(0)+' V pour égaliser.';
+      mc='#f0a844';
+    } else {
+      msg='L’alternatif chauffe '+ecart.toFixed(1).replace('.',',')+' fois plus. Sa crête dépasse '+(Udc*Math.SQRT2).toFixed(0)+' V.';
+      mc='#ff6a5e';
     }
-    ctx.stroke();
-    // la moyenne de p, qui est justement Ueff²/R
-    var ym=base-Pac*sc2;
-    ctx.strokeStyle='#c8d834'; ctx.setLineDash([5,4]); ctx.lineWidth=1.6;
-    ctx.beginPath(); ctx.moveTo(b2.x,ym); ctx.lineTo(b2.x+b2.w,ym); ctx.stroke(); ctx.setLineDash([]);
-    MSPC.mono(ctx,'puissance moyenne = '+Pac.toFixed(0)+' W',b2.x+b2.w-4,ym-6,9.5,'#c8d834','right');
-    MSPC.mono(ctx,'PUISSANCE p(t) = u²/R — toujours positive, même quand u est négative',b2.x,b2.y-10,10.5,'#8d968b');
-    MSPC.mono(ctx,'le carré efface le signe : voilà pourquoi l’alternatif chauffe',b2.x,b2.y+b2.h+16,9.5,'#6f786e');
+    MSPC.mono(ctx,msg,30,vy,11.5,mc);
+    MSPC.mono(ctx,'ralenti — en 50 Hz réel ce scintillement a lieu 100 fois par seconde, et l’inertie du filament l’efface presque entièrement',30,vy+18,9.5,'#6f786e');
 
-    /* ================= le voltmètre ================= */
-    var vx=34, vyy=356;
-    ctx.fillStyle='#0d120f'; ctx.fillRect(vx,vyy,190,60);
-    ctx.strokeStyle='#5cc4e0'; ctx.lineWidth=1.6; ctx.strokeRect(vx+.5,vyy+.5,190,60);
-    MSPC.mono(ctx,'VOLTMÈTRE  ~',vx+10,vyy+18,9.5,'#5cc4e0');
-    MSPC.titre(ctx,lectureTRMS.toFixed(1)+' V',vx+10,vyy+49,26,'#5cc4e0');
-    MSPC.mono(ctx,'TRMS',vx+180,vyy+49,10,'#5cc4e0','right');
-    var err=100*(lectureBasGamme-Ueff)/Ueff, juste=Math.abs(err)<0.5;
-    MSPC.mono(ctx,'il n’affiche jamais les '+Umax+' V de crête',vx+202,vyy+16,10,'#8d968b');
-    MSPC.mono(ctx,'un modèle bas de gamme lirait '+lectureBasGamme.toFixed(0)+' V',vx+202,vyy+34,10, juste?'#93a415':'#ff6a5e');
-    MSPC.mono(ctx, juste ? 'soit juste — mais parce que c’est un sinus'
-                         : 'soit '+(err>0?'+':'')+err.toFixed(1)+' % d’erreur sur cette forme',
-      vx+202,vyy+52,10, juste?'#93a415':'#ff6a5e');
-
-    /* ================= chiffres ================= */
-    function bloc(x,val,lab,col){ MSPC.titre(ctx,val,x,452,22,col); MSPC.mono(ctx,lab,x,467,9.5,'#8d968b'); }
-    bloc(34,  Umax+' V',            'VALEUR CRÊTE','#ff6a5e');
-    bloc(190, Ueff.toFixed(0)+' V', 'VALEUR EFFICACE','#c8d834');
-    bloc(360, (Umax/Ueff).toFixed(3).replace('.',','), 'CRÊTE / EFFICACE','#e6ebe4');
-    MSPC.mono(ctx, f===0 ? 'ce rapport vaut √2 = 1,414 — mais uniquement pour une sinusoïde'
-                         : 'ce rapport n’est PAS √2 : il change avec la forme du signal',
-      500, 452, 11, f===0?'#93a415':'#ff6a5e');
-    MSPC.mono(ctx,'sur le terrain, tout est en valeurs efficaces : 230 V, 16 A…',500,470,10,'#6f786e');
-
-    out.innerHTML = egal
-      ? '<b style="color:#c8d834">Égalité atteinte.</b> '+Udc+' V continus chauffent autant que cet alternatif :<br>c’est la définition de la valeur efficace.'
-      : 'Alternatif : <b>'+Pac.toFixed(0)+' W</b> · continu : <b>'+Pdc.toFixed(0)+' W</b><br>Réglez le continu sur <b>'+Ueff.toFixed(0)+' V</b> pour égaliser.';
+    out.innerHTML = Math.abs(Ueff-Udc)<4
+      ? '<b style="color:#c8d834">'+Ucr+' V crête = '+Ueff.toFixed(0)+' V efficaces</b><br>soit exactement les '+Udc+' V du continu, pour le même éclat.'
+      : 'Continu <b>'+Math.round(Pdc)+' W</b> · alternatif <b>'+Math.round(Pac)+' W</b><br>Crête à viser : <b>'+(Udc*Math.SQRT2).toFixed(0)+' V</b>';
   }, {fixed:true});
 })();
 </script>
@@ -3129,7 +3125,7 @@
 <h4>Le √2, et le piège de le croire universel</h4>
 <p>Pour une sinusoïde — et <strong>seulement</strong> pour une sinusoïde — le calcul donne un rapport constant entre le sommet et la valeur efficace :</p>
 <div class="formule">U<sub>crête</sub> = U<sub>efficace</sub> × √2<small>√2 = 1,414 · d'où 230 × 1,414 ≈ 325 V, et 400 × 1,414 ≈ 566 V</small></div>
-<p>Ce facteur n'a rien d'universel : il sort de la géométrie de la sinusoïde, rien de plus. Faites tourner le sélecteur de forme dans l'animation :</p>
+<p>Ce facteur n'a rien d'universel : il sort de la géométrie de la sinusoïde, et de rien d'autre. Refaites mentalement les trois gestes — carré, moyenne, racine — sur d'autres formes d'onde, et le rapport change complètement :</p>
 <div class="table-scroll">
 <table>
 <thead><tr><th>Forme du signal</th><th class="mono">U<sub>eff</sub> pour 325 V crête</th><th class="mono">Rapport crête/efficace</th></tr></thead>
