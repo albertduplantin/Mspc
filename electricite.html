@@ -1823,7 +1823,7 @@
     <div class="c"><label>Pose du câble <span id="a-joule-p-l">à l'air libre</span></label><input type="range" id="a-joule-p" min="0" max="2" value="0"></div>
     <div class="c readout" id="a-joule-out"></div>
   </div>
-  <figcaption>Vous voyez le mécanisme lui-même : les électrons bleus dérivent, percutent les ions, et <b>chaque choc libère un grain de chaleur orange</b> qui s'échappe du métal. Montez le courant : les chocs se multiplient et le flot de grains devient un torrent.<br>Les deux barres du milieu sont le cœur du sujet. La rouge est la chaleur <b>produite</b> à chaque seconde, la bleue celle qui est <b>évacuée</b>. Tant que la rouge dépasse la bleue, la température grimpe ; quand elles s'égalisent, elle se fige — <b>c'est cet équilibre qui fixe la température d'un câble</b>, pas le courant tout seul. <b>Passez la pose sur « enroulé sur touret »</b> à courant inchangé : rien ne change côté production, mais les grains de chaleur restent piégés, l'évacuation s'effondre et le câble grimpe vers le rouge. Voilà pourquoi un enrouleur porte deux calibres.<br>À droite, la courbe P = R·I² : ce n'est pas une droite, c'est une parabole. <b>Doublez le courant, la chaleur est multipliée par quatre.</b></figcaption>
+  <figcaption>Vous voyez le mécanisme lui-même : les électrons bleus dérivent, percutent les ions, et <b>chaque choc libère un grain de chaleur orange</b> qui s’échappe du métal.<br><b>Changez la section</b> : le fil grossit et maigrit sous vos yeux. Un gros fil offre beaucoup de couloirs — les électrons y avancent lentement et se cognent mollement. <b>Un fil fin, à courant égal, oblige les mêmes coulombs à passer par moins de place</b> : les électrons filent plus vite, les chocs deviennent violents, les grains de chaleur grossissent. C’est toute la raison pour laquelle une section trop faible chauffe.<br>Les deux barres du milieu sont le cœur du sujet : la rouge est la chaleur <b>produite</b> chaque seconde, la bleue celle qui est <b>évacuée</b>. Tant que la rouge dépasse, la température grimpe ; quand elles s’égalisent, elle se fige — <b>c’est cet équilibre qui fixe la température d’un câble</b>, pas le courant tout seul. <b>Passez la pose sur « enroulé sur touret »</b> sans rien changer d’autre : la production ne bouge pas d’un milliwatt, mais les grains restent piégés, l’évacuation s’effondre et le câble part vers le rouge. Voilà pourquoi un enrouleur porte deux calibres.</figcaption>
 </figure>
 <script>
 (function(){
@@ -1853,13 +1853,15 @@
   }
   function chaud(T){ return 0.08+((T-TAMB)/200)*0.85; }
 
-  function bati(x0,y0,w,h){
+  // Un fil plus gros, c'est plus de rangées d'ions ET plus d'électrons de front.
+  function bati(x0,y0,w,h,sect){
     ions=[]; elec=[];
-    var pas=26;
+    var pas=20;
     for(var y=pas/2;y<h;y+=pas) for(var x=pas/2;x<w;x+=pas)
       ions.push({x:x0+x, y:y0+y, ph:Math.random()*6.2832});
-    for(var e=0;e<32;e++)
-      elec.push({x:x0+Math.random()*w, y:y0+8+Math.random()*(h-16), cd:0});
+    var n=Math.round(8+sect*6.5);
+    for(var e=0;e<n;e++)
+      elec.push({x:x0+Math.random()*w, y:y0+6+Math.random()*Math.max(2,h-12), cd:0});
   }
 
   MSPC.anim('a-joule', function(a){
@@ -1878,15 +1880,26 @@
     MSPC.fond(ctx,W,H,0);
 
     /* ---------- le conducteur, vu de très près ---------- */
-    var cx0=44, cy0=104, cw=596, ch=104;
+    // l'épaisseur dessinée suit le diamètre réel du fil, qui varie comme la racine de la section
+    var CENTRE=160, cx0=64, cw=576;
+    var ch=Math.round(30*Math.sqrt(Sv/0.75));
+    var cy0=Math.round(CENTRE-ch/2);
     var clef=S.val+'|'+cw;
-    if(clef!==sig){ sig=clef; bati(cx0,cy0,cw,ch); }
+    if(clef!==sig){ sig=clef; bati(cx0,cy0,cw,ch,Sv); }
 
-    MSPC.mono(ctx,'UN MÈTRE DE CUIVRE, VU DE TRÈS PRÈS',cx0,cy0-52,10.5,'#8d968b');
-    MSPC.mono(ctx,'chaque choc d’un électron sur un ion libère un grain de chaleur',cx0,cy0-36,9.5,'#6f786e');
+    MSPC.mono(ctx,'UN MÈTRE DE CUIVRE, VU DE TRÈS PRÈS',cx0,52,10.5,'#8d968b');
+    MSPC.mono(ctx,'chaque choc d’un électron sur un ion libère un grain de chaleur',cx0,68,9.5,'#6f786e');
 
     ctx.fillStyle=thermo(chaud(T)); ctx.fillRect(cx0,cy0,cw,ch);
     ctx.strokeStyle='rgba(255,255,255,.22)'; ctx.lineWidth=1.4; ctx.strokeRect(cx0+.5,cy0+.5,cw,ch);
+    // la cote : on voit le fil grossir et maigrir
+    ctx.strokeStyle='#e08b6a'; ctx.lineWidth=1.4;
+    ctx.beginPath();
+    ctx.moveTo(cx0-16,cy0); ctx.lineTo(cx0-16,cy0+ch);
+    ctx.moveTo(cx0-21,cy0+1); ctx.lineTo(cx0-11,cy0+1);
+    ctx.moveTo(cx0-21,cy0+ch-1); ctx.lineTo(cx0-11,cy0+ch-1);
+    ctx.stroke();
+    MSPC.mono(ctx,String(Sv).replace('.',',')+' mm²',cx0+4,cy0-13,11,'#e08b6a');
 
     if(pose.conf){
       ctx.strokeStyle='rgba(255,106,94,.45)'; ctx.lineWidth=1.6; ctx.setLineDash([5,4]);
@@ -1903,7 +1916,10 @@
       ctx.beginPath(); ctx.arc(io._x,io._y,4.5,0,6.2832); ctx.fill();
     }
 
-    var vit=14+Iv*11;
+    // À courant égal, un fil plus fin offre moins de couloirs : les électrons
+    // doivent aller plus vite, et chaque choc est d'autant plus violent.
+    var vit=10+9*Iv/Sv;
+    var viol=Math.min(1.6,(Iv/Sv)/10);
     for(var e2=0;e2<elec.length;e2++){
       var p=elec[e2];
       if(dt>0){
@@ -1916,8 +1932,8 @@
             p.cd=0.06;
             p.y+=(Math.random()-0.5)*16;
             p.y=Math.max(cy0+6,Math.min(cy0+ch-6,p.y));
-            flash.push({x:ions[q]._x,y:ions[q]._y,t:0.22});
-            quanta.push({x:ions[q]._x,y:ions[q]._y,vx:(Math.random()-0.5)*26,vy:-26-Math.random()*38,t:1.0});
+            flash.push({x:ions[q]._x,y:ions[q]._y,t:0.22,f:0.5+viol});
+            quanta.push({x:ions[q]._x,y:ions[q]._y,vx:(Math.random()-0.5)*26,vy:-26-Math.random()*38,t:1.0,r:1.8+viol*2.2});
             break;
           }
         }
@@ -1929,10 +1945,16 @@
     for(var f=flash.length-1;f>=0;f--){
       var fl=flash[f]; fl.t-=dt;
       if(fl.t<=0){ flash.splice(f,1); continue; }
-      ctx.strokeStyle='rgba(255,226,140,'+(fl.t/0.22)+')'; ctx.lineWidth=2;
-      ctx.beginPath(); ctx.arc(fl.x,fl.y,3+(0.22-fl.t)*46,0,6.2832); ctx.stroke();
+      ctx.strokeStyle='rgba(255,226,140,'+(fl.t/0.22)+')'; ctx.lineWidth=1.4+fl.f;
+      ctx.beginPath(); ctx.arc(fl.x,fl.y,3+(0.22-fl.t)*46*fl.f,0,6.2832); ctx.stroke();
     }
 
+    if(Iv>0 && Sv<6){
+      MSPC.mono(ctx,'moins de couloirs : les électrons y filent '+(6/Sv).toFixed(1).replace('.',',')+'× plus vite, et cognent d’autant plus fort',
+        cx0, cy0+ch+22, 10, Sv<2?'#ff6a5e':'#7f8a7e');
+    } else if(Iv>0){
+      MSPC.mono(ctx,'beaucoup de couloirs : des électrons lents, des chocs rares et mous', cx0, cy0+ch+22, 10, '#93a415');
+    }
     var plafond=cy0-24;
     for(var g=quanta.length-1;g>=0;g--){
       var Q=quanta[g]; Q.t-=dt*(pose.conf?0.45:1);
@@ -1940,7 +1962,7 @@
       Q.x+=Q.vx*dt; Q.y+=Q.vy*dt;
       if(pose.conf && Q.y<plafond){ Q.y=plafond; Q.vy=Math.abs(Q.vy)*0.35; }
       ctx.fillStyle='rgba(255,150,40,'+(Q.t*0.8)+')';
-      ctx.beginPath(); ctx.arc(Q.x,Q.y,2.7,0,6.2832); ctx.fill();
+      ctx.beginPath(); ctx.arc(Q.x,Q.y,Q.r,0,6.2832); ctx.fill();
     }
 
     /* ---------- thermomètre ---------- */
@@ -1964,7 +1986,7 @@
     ctx.fillStyle='#f0a844'; ctx.fillRect(lx,ty+104,9,3);
     MSPC.mono(ctx,'70 °C — limite du PVC',lx+15,ty+108,9.5,'#f0a844');
     ctx.fillStyle='#ff6a5e'; ctx.fillRect(lx,ty+124,9,3);
-    MSPC.mono(ctx,'110 °C — l’isolant se dégrade',lx+15,ty+128,9.5,'#ff6a5e');
+    MSPC.mono(ctx,'110 °C — isolant dégradé',lx+15,ty+128,9.5,'#ff6a5e');
 
     /* ---------- production contre évacuation ---------- */
     var by=272, bw=470;
@@ -1996,8 +2018,7 @@
     ctx.beginPath(); ctx.moveTo(ax.X(Izv),ax.y0); ctx.lineTo(ax.X(Izv),ax.y1); ctx.stroke(); ctx.setLineDash([]);
     MSPC.mono(ctx,'Iz '+Izv+' A',ax.X(Izv)+4,ax.y1+11,9.5,'#c8d834');
     ctx.fillStyle='#fff'; ctx.beginPath(); ctx.arc(ax.X(Iv),ax.Y(Math.min(P,Pmax)),5,0,6.2832); ctx.fill();
-    MSPC.mono(ctx,'P = R × I² : une parabole, pas une droite',box.x,box.y-26,10,'#ff6a5e');
-    MSPC.mono(ctx,'doubler le courant, c’est ×4 la chaleur',box.x,box.y+box.h+30,10,'#8d968b');
+    MSPC.mono(ctx,'une parabole : doubler I, c’est ×4 la chaleur',box.x,box.y+box.h+30,10,'#ff6a5e');
 
     /* ---------- chiffres et verdict ---------- */
     function bloc(x,val,lab,col){ MSPC.titre(ctx,val,x,414,23,col); MSPC.mono(ctx,lab,x,429,9.5,'#8d968b'); }
