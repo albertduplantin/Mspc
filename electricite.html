@@ -2323,7 +2323,8 @@
 <li><strong>Les derniers domaines tournent.</strong> Quand il ne reste plus de domaine à avaler, ceux qui sont encore de travers se mettent à pivoter vers la direction du champ. Cela demande beaucoup plus d'effort.</li>
 </ol>
 <p>Une fois tous les domaines alignés, le fer a donné tout ce qu'il avait : c'est la <strong>saturation</strong>. Au-delà, augmenter le courant n'ajoute pratiquement plus rien au champ — <span class="cle">mais continue d'échauffer la bobine, qui, elle, ne sature jamais</span>. Un point à retenir : c'est la raison pour laquelle on ne « rattrape » pas un électroaimant sous-dimensionné en montant le courant.</p>
-<p>Et l'aluminium ? Ses atomes sont bien de minuscules aimants eux aussi. Mais rien ne les fait coopérer : chacun s'oriente dans son coin, l'agitation thermique brouille tout, et il ne se forme jamais le moindre domaine. Sa perméabilité relative vaut <span class="mono">1,000022</span> — autant dire de l'air. <strong>Ce qui distingue le fer, ce n'est pas d'avoir des atomes magnétiques : c'est qu'ils s'entendent entre eux.</strong></p>
+<p>Et l'aluminium ? Attention au raccourci : <strong>ses atomes sont bien de minuscules aimants, eux aussi, et ils ne disparaissent pas</strong>. Ce qui manque, c'est ce qui fait la force du fer — la <strong>coopération entre voisins</strong>. Dans le fer, un atome qui s'oriente entraîne ses voisins avec lui : c'est ce couplage qui fabrique les domaines. Dans l'aluminium, il n'existe pas. Chaque moment est seul face à l'agitation thermique, qui le réoriente au hasard des millions de fois par seconde.</p>
+<p>Le résultat n'est pas « rien », c'est <em>presque</em> rien — et le chiffre vaut la peine d'être vu. Au plus fort courant de l'animation ci-dessous, le champ parvient à aligner environ <strong>un atome d'aluminium sur quatre millions</strong>. Sa perméabilité relative vaut <span class="mono">1,000022</span> : à la troisième décimale près, c'est de l'air. <span class="cle">Ce qui distingue le fer, ce n'est pas d'avoir des atomes magnétiques — c'est qu'ils s'entendent entre eux.</span></p>
 
 <div class="formule">Champ ∝ N × I<small>« ampères-tours » — N = nombre de spires, I = courant en ampères</small></div>
 <p>Traduction pratique : <strong>200 spires parcourues par 1 A font le même champ que 100 spires parcourues par 2 A.</strong> Le concepteur choisit selon ce qu'il a : de la place (spires) ou du courant disponible.</p>
@@ -2336,7 +2337,7 @@
     <div class="c"><label>Noyau <span id="a-elm-c">Fer doux</span></label><input type="range" id="a-elm-cr" min="0" max="2" value="2"></div>
     <div class="c readout" id="a-elm-out"></div>
   </div>
-  <figcaption>À gauche l'électroaimant et ses <b>lignes de champ</b> ; à droite, un zoom à l'intérieur du noyau. <b>Mettez le noyau sur « aucun »</b> à 200 spires et 3 A : une ou deux lignes pâles, les trombones ne bougent pas. <b>Repassez sur « fer doux »</b> sans rien toucher d'autre : les petits aimants basculent l'un après l'autre, les <b>parois entre domaines s'effacent</b>, et les lignes de champ se multiplient — le champ est plusieurs <b>milliers</b> de fois plus intense. <b>Montez encore le courant</b> jusqu'à ce que tous les domaines soient alignés : c'est la <b>saturation</b>, et à partir de là vous pouvez doubler le courant sans presque rien gagner. <b>Essayez enfin l'aluminium</b> : ses atomes sont bien de minuscules aimants, mais isolés et désordonnés — ils ne s'organisent jamais, et il ne se passe rien.</figcaption>
+  <figcaption>À gauche l'électroaimant et ses <b>lignes de champ</b> ; à droite, un zoom à l'intérieur du noyau. <b>Mettez le noyau sur « aucun »</b> à 200 spires et 3 A : une ou deux lignes pâles, les trombones ne bougent pas. <b>Repassez sur « fer doux »</b> sans rien toucher d'autre : les petits aimants basculent l'un après l'autre, les <b>parois entre domaines s'effacent</b>, et les lignes de champ se multiplient — le champ est plusieurs <b>milliers</b> de fois plus intense. <b>Montez encore le courant</b> jusqu'à ce que tous les domaines soient alignés : c'est la <b>saturation</b>, et à partir de là vous pouvez doubler le courant sans presque rien gagner. <b>Essayez enfin l'aluminium</b> : ses atomes sont bien de minuscules aimants, et ils sont toujours là — mais chacun est seul, l'agitation thermique les rebrouille sans cesse, et <b>aucun ne se met en rang</b>. Le compteur en bas de la vignette dit pourquoi : même à plein courant, le champ n'en aligne qu'environ <b>un sur quatre millions</b>. Ce n'est pas que l'aluminium résiste au champ — c'est qu'il n'a personne pour coopérer.</figcaption>
 </figure>
 <script>
 (function(){
@@ -2453,7 +2454,7 @@
     MSPC.mono(ctx,nb+' trombones',372,cy+66,10.5,'#8d968b');
 
     /* ================= DROITE : dans le noyau ================= */
-    var netAl=0;
+    var netAl=0, alPara=0;
     var zx=496, zy=52, zw=384, zh=196;
     ctx.fillStyle='rgba(255,255,255,.03)'; ctx.fillRect(zx,zy,zw,zh);
     ctx.strokeStyle='rgba(255,255,255,.22)'; ctx.lineWidth=1.4; ctx.strokeRect(zx+.5,zy+.5,zw,zh);
@@ -2491,15 +2492,32 @@
       }
       netAl=Math.max(0,som/dom.length);
       var pc=Math.round(netAl*100);
-      MSPC.mono(ctx,'DOMAINES DE WEISS — aimantation résultante '+pc+' %', zx, zy+zh+18, 10.5, pc>92?'#c8d834':'#8d968b');
+      MSPC.mono(ctx,'DOMAINES DE WEISS — aimantation '+pc+' %', zx, zy+zh+18, 10.5, pc>92?'#c8d834':'#8d968b');
       if(al>0.985) MSPC.titre(ctx,'SATURATION', zx+zw, zy+zh+22, 20, '#f0a844','right');
     } else if(noy.type==='para'){
+      /* Paramagnétisme. Les moments existent, mais rien ne les couple entre eux :
+         l'agitation thermique les réoriente sans arrêt, au hasard. Ils ne tournent
+         donc pas d'un mouvement régulier — ils sont brouillés en permanence.
+         Le champ n'impose qu'un biais d'alignement M/Msat = khi·H/Msat, soit
+         2,2e-5 × H / 5,6e5 : quelques 1e-7 aux courants de cette animation.
+         Autrement dit : invisible, et c'est exactement ce qu'il faut montrer. */
       for(var p=0;p<para.length;p++){
         var P=para[p];
-        if(dt>0) P.a+=P.v*dt*2.2;
-        petitAimant(ctx, zx+12+P.x*(zw-24), zy+12+P.y*(zh-24), 15, 5, P.a, 0.75);
+        if(dt>0){
+          P.a += (Math.random()-0.5)*7.5*dt;                          // agitation thermique
+          if(Math.random() < dt*1.7) P.a = Math.random()*6.2832;      // réorientation brutale
+        }
+        petitAimant(ctx, zx+12+P.x*(zw-24), zy+12+P.y*(zh-24), 15, 5, P.a, 0.72);
       }
-      MSPC.mono(ctx,'moments atomiques isolés — aucun domaine',zx,zy+zh+18,10.5,'#8d968b');
+      alPara = 2.2e-5*Hc/5.6e5;                                       // fraction réellement alignée
+      ctx.fillStyle='rgba(13,18,15,.88)'; ctx.fillRect(zx+1, zy+zh-37, zw-2, 36);
+      MSPC.mono(ctx, alPara>0
+          ? 'alignés par le champ : '+(alPara*100).toFixed(7).replace('.',',')+' %'
+          : 'aucun champ appliqué',
+        zx+zw/2, zy+zh-22, 10, '#ff6a5e', 'center');
+      MSPC.mono(ctx, alPara>0 ? 'soit 1 atome sur '+Math.round(1/alPara).toLocaleString('fr-FR') : '',
+        zx+zw/2, zy+zh-8, 10, '#ff6a5e', 'center');
+      MSPC.mono(ctx,'MOMENTS ISOLÉS — aucun domaine',zx,zy+zh+18,10.5,'#8d968b');
       MSPC.mono(ctx,'µr = 1,000022',zx+zw,zy+zh+18,10.5,'#7f8a7e','right');
     } else {
       MSPC.mono(ctx,'du vide : rien à aligner',zx+zw/2,zy+zh/2,12,'#6f786e','center');
@@ -2514,19 +2532,23 @@
     bloc(30, Math.round(Nv*Iv)+' At', 'AMPÈRES-TOURS  N × I', '#e6ebe4');
     bloc(230, (mur>=100?Math.round(mur):mur.toFixed(mur<10?3:0)), 'PERMÉABILITÉ RELATIVE  µr', mur>100?'#c8d834':'#8d968b');
     bloc(430, (B>=0.01? B.toFixed(2)+' T' : (B*1000).toFixed(2)+' mT'), 'CHAMP DANS LE NOYAU  B', B>0.5?'#c8d834':'#f0a844');
-    bloc(650, noy.type==='ferro' ? Math.round(netAl*100)+' %' : '—', 'AIMANTATION DU FER  M / Msat', netAl>0.9?'#c8d834':'#8d968b');
+    bloc(650, noy.type==='ferro' ? Math.round(netAl*100)+' %'
+            : (noy.type==='para' ? (alPara>0? (alPara*100).toFixed(6).replace('.',',')+' %' : '0 %') : '—'),
+         noy.type==='para' ? 'ALIGNEMENT DES MOMENTS  M / Msat' : 'AIMANTATION DU FER  M / Msat',
+         netAl>0.9?'#c8d834':(noy.type==='para'?'#ff6a5e':'#8d968b'));
 
     ctx.fillStyle='rgba(255,255,255,.10)'; ctx.fillRect(30,by+30,840,12);
     ctx.fillStyle=Bn>0.75?'#c8d834':(Bn>0.3?'#f0a844':'#6f786e');
     ctx.fillRect(30,by+30,840*Bn,12);
-    MSPC.mono(ctx,'B — échelle logarithmique, de 1 mT à 2 T',870,by+56,9.5,'#6f786e','right');
+    MSPC.mono(ctx,'B — échelle logarithmique, de 1 mT à 2 T',30,by+56,9.5,'#6f786e');
 
     var msg,mc;
-    if(noy.type!=='ferro'){ msg='Sans fer, il ne reste que le champ de la bobine seule — des milliers de fois plus faible.'; mc='#f0a844'; }
+    if(noy.type==='para'){ msg='Les moments sont là — mais chacun est seul. Le champ n’en aligne qu’un sur des millions : rien ne s’organise.'; mc='#f0a844'; }
+    else if(noy.type!=='ferro'){ msg='Sans noyau, il ne reste que le champ de la bobine seule — des milliers de fois plus faible.'; mc='#f0a844'; }
     else if(al>0.985){ msg='SATURATION : tous les domaines sont alignés. Doubler le courant n’ajoutera presque plus rien — mais chauffera deux fois plus.'; mc='#ff6a5e'; }
     else if(al>0.5){ msg='Les domaines basculent l’un après l’autre, par petits sauts brusques : c’est l’effet Barkhausen.'; mc='#c8d834'; }
     else { msg='Champ faible : seuls les domaines déjà bien orientés commencent à gagner du terrain.'; mc='#8d968b'; }
-    MSPC.mono(ctx,msg,30,by+62,11,mc);
+    MSPC.mono(ctx,msg,30,by+78,11,mc);
 
     out.innerHTML='B = <b>'+(B>=0.01?B.toFixed(2)+' T':(B*1000).toFixed(2)+' mT')+'</b> · µr ≈ <b>'+(mur>=100?Math.round(mur):mur.toFixed(3))+'</b><br>'
       +(noy.type==='ferro'
