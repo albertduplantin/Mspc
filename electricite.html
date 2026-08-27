@@ -2898,7 +2898,7 @@
 
     if(nul){
       MSPC.mono(ctx,'COURANT NUL → LAMPE ÉTEINTE',700,264,10.5,'#ff6a5e','center');
-      MSPC.mono(ctx,'l’aimant ne fait plus varier le flux',700,278,9.5,'#7f8a7e','center');
+      MSPC.mono(ctx,'l’aimant pointe vers la bobine : flux maximal, donc constant',700,278,9.5,'#7f8a7e','center');
     } else {
       MSPC.mono(ctx,'LA LAMPE S’ALLUME 2 FOIS PAR TOUR',700,264,10.5,'#f0a844','center');
       MSPC.mono(ctx,'son éclat suit i² — le SENS lui est indifférent',700,278,9.5,'#7f8a7e','center');
@@ -3175,6 +3175,14 @@
 <li><strong>Aimant de travers</strong> → le flux passe par zéro, mais il le traverse à toute vitesse → <strong>tension maximale</strong></li>
 <li><strong>Un demi-tour plus loin</strong> → l'aimant présente son autre pôle, tout s'inverse → <strong>tension maximale négative</strong></li>
 </ul>
+<div class="encadre"><span class="tag">Un mot à bannir : « parallèle »</span>
+<p>Dire « l'aimant est parallèle à la bobine » ne veut rien dire, et cette phrase est à l'origine de la moitié des erreurs sur ce chapitre. Parallèle à quoi, exactement ?</p>
+<ul>
+<li>Parallèle à l'<strong>axe</strong> de la bobine — c'est-à-dire pointant vers elle : le flux est <strong>maximal</strong>, la tension est <strong>nulle</strong>.</li>
+<li>Parallèle au <strong>plan de ses spires</strong> — c'est-à-dire de flanc : le flux est <strong>nul</strong>, la tension est <strong>maximale</strong>.</li>
+</ul>
+<p>Ce sont deux situations exactement opposées. Prenez l'habitude de décrire la position autrement : <span class="cle">l'aimant pointe-t-il vers la bobine, ou lui présente-t-il son flanc ?</span> Avec cette formulation, aucune confusion n'est possible.</p>
+<p>Et gardez la règle qui tranche tous les cas : <strong>la tension ne suit jamais le flux, elle suit sa pente.</strong> Là où le flux est extrême, sa pente est nulle. Là où il passe par zéro, sa pente est maximale.</p></div>
 <p>Une rotation régulière produit donc une variation régulière et douce : c'est la <strong>sinusoïde</strong>. Elle n'a pas été choisie, elle est la conséquence géométrique de la rotation.</p>
 
 <figure class="anim">
@@ -3184,7 +3192,7 @@
     <div class="c"><button class="btn" id="a-alt-pause">Pause</button></div>
     <div class="c readout" id="a-alt-out"></div>
   </div>
-  <figcaption>Un aimant tourne devant une bobine qui alimente une lampe, et la courbe <b>se dessine sous vos yeux</b>, tour après tour.<br><b>Restez au ralenti</b> et suivez le trait pointillé : il relie la <b>pointe nord de l’aimant</b> au point que la plume est en train de tracer. Ce n’est pas une coïncidence — <span style="color:var(--accent-clair)">la hauteur de cette pointe au-dessus de l’axe <em>est</em> la tension induite</span>. La sinusoïde n’est rien d’autre que la trace laissée par un point qui tourne en rond : voilà pourquoi elle a cette forme, et non une autre.<br>Deux positions valent qu’on s’y arrête, avec le bouton Pause. <b>Aimant aligné sur la bobine</b> : sa pointe est à hauteur de l’axe, la tension est <b>nulle</b> — alors même que le flux est à son maximum. C’est le point qui déroute tout le monde : un flux au sommet ne varie plus, et sans variation il n’y a pas de tension. <b>Aimant perpendiculaire</b> : sa pointe est tout en haut, le flux passe par zéro à pleine vitesse, la tension est <b>maximale</b>.<br>Regardez enfin la lampe : elle s’allume <b>deux fois par tour</b>, une fois par alternance, puisque son éclat ne dépend pas du sens du courant. <b>Montez la vitesse</b> jusqu’à 3 000 tr/min et le clignotement disparaît : vous retrouvez le 50 Hz du réseau.</figcaption>
+  <figcaption>Un aimant tourne devant une bobine qui alimente une lampe, et la courbe <b>se dessine sous vos yeux</b>, tour après tour.<br><b>Restez au ralenti</b> et suivez le trait pointillé : il relie la <b>pointe nord de l’aimant</b> au point que la plume est en train de tracer. Ce n’est pas une coïncidence — <span style="color:var(--accent-clair)">la hauteur de cette pointe au-dessus de l’axe <em>est</em> la tension induite</span>. La sinusoïde n’est rien d’autre que la trace laissée par un point qui tourne en rond : voilà pourquoi elle a cette forme, et non une autre.<br>Deux positions valent qu’on s’y arrête, avec le bouton Pause. <b>Aimant pointant droit vers la bobine</b> : sa pointe est à hauteur de l’axe, la tension est <b>nulle</b> — alors même que le flux la traverse au maximum. C’est le point qui déroute tout le monde : un flux au sommet ne varie plus, et sans variation il n’y a pas de tension. <b>Aimant de flanc</b> : sa pointe est tout en haut, le flux est nul mais il file à travers ce zéro, et la tension est <b>maximale</b>.<br>Regardez enfin la lampe : elle s’allume <b>deux fois par tour</b>, une fois par alternance, puisque son éclat ne dépend pas du sens du courant. <b>Montez la vitesse</b> jusqu’à 3 000 tr/min et le clignotement disparaît : vous retrouvez le 50 Hz du réseau.</figcaption>
 </figure>
 <script>
 (function(){
@@ -3254,6 +3262,8 @@
     }
     ctx.stroke();
     MSPC.mono(ctx,'bobine',(bA+bB)/2,cy-38,10,'#c9a06a','center');
+    MSPC.mono(ctx,'flux : '+Math.round(Math.abs(flux)*100)+' %',(bA+bB)/2,cy+48,10,
+      Math.abs(flux)>0.87?'#c8d834':(Math.abs(flux)<0.13?'#ff6a5e':'#8d968b'),'center');
     // le flux qui la traverse
     var fl=flux*26;
     ctx.strokeStyle='rgba(200,216,52,'+(0.2+0.6*Math.abs(flux))+')'; ctx.lineWidth=2.4;
@@ -3331,11 +3341,11 @@
     /* ================= ce qui se passe à cet instant ================= */
     var m1,m2,mc;
     if(Math.abs(uu)<0.13){
-      m1='L’aimant est aligné avec la bobine.';
-      m2='Le flux est à son maximum, donc il ne varie plus → tension NULLE.'; mc='#ff6a5e';
+      m1='L’aimant POINTE DROIT VERS la bobine.';
+      m2='Le flux la traverse au maximum — et un maximum ne varie plus → tension NULLE.'; mc='#ff6a5e';
     } else if(Math.abs(flux)<0.13){
-      m1='L’aimant est perpendiculaire à la bobine.';
-      m2='Le flux traverse le zéro à pleine vitesse → tension MAXIMALE.'; mc='#c8d834';
+      m1='L’aimant lui PRÉSENTE SON FLANC.';
+      m2='Le flux est nul, mais il file à travers ce zéro → tension MAXIMALE.'; mc='#c8d834';
     } else {
       m1='Le flux est en train de changer.';
       m2='Une tension apparaît, d’autant plus forte qu’il change vite.'; mc='#8d968b';
