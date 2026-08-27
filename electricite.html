@@ -3145,23 +3145,174 @@
 
 
 <h3>12.3 — D'où vient la forme sinusoïdale, et pourquoi 50 Hz</h3>
-<p>Faites tourner une spire dans le champ d'un aimant, à vitesse constante. Selon sa position, elle « coupe » plus ou moins de lignes de champ :</p>
+<p>Faites tourner un aimant devant une bobine, à vitesse constante. Le flux magnétique qui traverse la bobine change en permanence, et c'est ce changement — lui seul — qui produit la tension :</p>
 <ul>
-<li>Spire à plat dans le champ → elle traverse les lignes à pleine vitesse → <strong>tension maximale</strong></li>
-<li>Spire dans le plan du champ → elle glisse le long des lignes → <strong>tension nulle</strong></li>
-<li>Un demi-tour plus loin, tout est inversé → <strong>tension maximale négative</strong></li>
+<li><strong>Aimant face à la bobine</strong> → le flux est à son maximum, donc il ne varie plus → <strong>tension nulle</strong></li>
+<li><strong>Aimant de travers</strong> → le flux passe par zéro, mais il le traverse à toute vitesse → <strong>tension maximale</strong></li>
+<li><strong>Un demi-tour plus loin</strong> → l'aimant présente son autre pôle, tout s'inverse → <strong>tension maximale négative</strong></li>
 </ul>
 <p>Une rotation régulière produit donc une variation régulière et douce : c'est la <strong>sinusoïde</strong>. Elle n'a pas été choisie, elle est la conséquence géométrique de la rotation.</p>
 
 <figure class="anim">
-  <canvas id="a-alt" width="900" height="340" aria-label="Animation : alternateur, spire tournante et sinusoïde produite"></canvas>
+  <canvas id="a-alt" width="900" height="430" aria-label="Animation : un aimant tournant devant une bobine, le flux et la sinusoïde induite"></canvas>
   <div class="ctrls">
-    <div class="c"><label>Vitesse de rotation <span id="a-alt-n">1500 tr/min</span></label><input type="range" id="a-alt-nr" min="150" max="3000" value="1500" step="150"></div>
+    <div class="c"><label>Vitesse de rotation <span id="a-alt-n">1 500 tr/min</span></label><input type="range" id="a-alt-nr" min="150" max="3000" value="1500" step="150"></div>
+    <div class="c"><label>Pôles de l'aimant <span id="a-alt-p">2 paires</span></label><input type="range" id="a-alt-pr" min="1" max="4" value="2"></div>
     <div class="c"><button class="btn" id="a-alt-pause">Pause</button></div>
     <div class="c readout" id="a-alt-out"></div>
   </div>
-  <figcaption>La spire tourne à gauche, la courbe se trace à droite <b>en temps réel</b>. Ralentissez : la période s'allonge, la fréquence baisse. <b>Un alternateur ne peut pas produire n'importe quelle fréquence : elle est imposée par la vitesse de rotation.</b></figcaption>
+  <figcaption>Un aimant tourne devant une bobine, et la sinusoïde se trace en direct. <b>Mettez en pause</b> à deux moments précis pour tout comprendre.<br><b>Quand l'aimant fait face à la bobine</b>, le flux qui la traverse est <em>maximal</em> — et pourtant la tension est <b>nulle</b>. C'est le point qui surprend tout le monde : ce n'est jamais le flux qui produit la tension, c'est sa <b>variation</b>, et à cet instant il est à son sommet, donc il ne varie plus.<br><b>Quand l'aimant est de travers</b>, le flux vaut zéro — mais il le traverse à toute allure, et la tension est <b>maximale</b>. Les deux courbes de droite sont donc décalées d'un quart de tour : <span style="color:var(--accent-clair)">la tension est la pente du flux</span>. Une rotation régulière donne une variation régulière : voilà d'où vient la forme sinusoïdale, elle n'a jamais été choisie.<br><b>Changez le nombre de paires de pôles</b> à vitesse constante : la fréquence est multipliée d'autant. C'est toute la formule f = p × n / 60, et la raison pour laquelle un alternateur ne peut pas tourner à n'importe quelle vitesse.</figcaption>
 </figure>
+<script>
+(function(){
+  "use strict";
+  var FEN=0.08;                                   // fenêtre affichée : 80 ms
+  var N =MSPC.ctrl('a-alt-nr', function(v){ return (+v).toLocaleString('fr-FR')+' tr/min'; }, 'a-alt-n');
+  var P =MSPC.ctrl('a-alt-pr', function(v){ return v+(v>1?' paires':' paire'); }, 'a-alt-p');
+  var out=document.getElementById('a-alt-out');
+  var pause=false, th=0;
+  var btn=document.getElementById('a-alt-pause');
+  btn.addEventListener('click', function(){ pause=!pause; btn.textContent=pause?'Reprendre':'Pause'; });
+
+  MSPC.anim('a-alt', function(a){
+    var ctx=a.ctx, W=a.W, H=a.H, dt=pause?0:a.dt;
+    var rpm=N.val, p=P.val;
+    var wmec=6.2832*rpm/60;                       // rad/s mécaniques
+    th += dt*wmec;                                 // angle de l'aimant
+    var f=p*rpm/60, T=1/f;
+    var the=p*th;                                  // angle électrique
+    var flux=Math.cos(the);                        // flux à travers la bobine
+    var uu=Math.sin(the);                          // tension induite = -dФ/dt
+    var amp=Math.min(0.95,0.8*f/50);               // la tension induite grandit avec la fréquence
+
+    MSPC.fond(ctx,W,H,0);
+
+    /* ================= la machine ================= */
+    var mx=168, my=152, mR=52;
+    MSPC.mono(ctx,'UN AIMANT QUI TOURNE DEVANT UNE BOBINE',30,44,10.5,'#8d968b');
+
+    // le champ qui atteint la bobine, d'autant plus fort que l'aimant lui fait face
+    var vers=Math.abs(flux);
+    var gg=ctx.createRadialGradient(mx,my,8,mx,my,150);
+    gg.addColorStop(0,'rgba(200,216,52,'+(0.05+0.13*vers)+')');
+    gg.addColorStop(1,'rgba(200,216,52,0)');
+    ctx.fillStyle=gg; ctx.beginPath(); ctx.arc(mx,my,150,0,6.2832); ctx.fill();
+
+    // cercle de rotation et repères des quatre positions clés
+    ctx.strokeStyle='rgba(255,255,255,.12)'; ctx.lineWidth=1; ctx.setLineDash([3,4]);
+    ctx.beginPath(); ctx.arc(mx,my,mR+16,0,6.2832); ctx.stroke(); ctx.setLineDash([]);
+
+    // l'aimant
+    ctx.save(); ctx.translate(mx,my); ctx.rotate(th);
+    ctx.fillStyle='#b32017'; ctx.fillRect(-mR,-15,mR,30);
+    ctx.fillStyle='#4f7fb8'; ctx.fillRect(0,-15,mR,30);
+    ctx.strokeStyle='#e6ebe4'; ctx.lineWidth=1.5; ctx.strokeRect(-mR,-15,mR*2,30);
+    ctx.fillStyle='#fff'; ctx.font='700 15px "Saira Condensed",sans-serif'; ctx.textAlign='center';
+    ctx.fillText('N',-mR/2,6); ctx.fillText('S',mR/2,6);
+    ctx.restore();
+    ctx.fillStyle='#8d968b'; ctx.beginPath(); ctx.arc(mx,my,6,0,6.2832); ctx.fill();
+    MSPC.mono(ctx,rpm.toLocaleString('fr-FR')+' tr/min',mx,my+96,10.5,'#8d968b','center');
+    // sens de rotation
+    ctx.strokeStyle='rgba(230,235,228,.35)'; ctx.lineWidth=1.8;
+    ctx.beginPath(); ctx.arc(mx,my,mR+30,-1.3,-0.2); ctx.stroke();
+    ctx.fillStyle='rgba(230,235,228,.5)';
+    ctx.beginPath(); ctx.moveTo(mx+mR+29,my-16); ctx.lineTo(mx+mR+22,my-28); ctx.lineTo(mx+mR+35,my-25); ctx.closePath(); ctx.fill();
+
+    // la bobine
+    var bA=272, bB=396, bcy=my, bry=27;
+    ctx.strokeStyle='#c9a06a'; ctx.lineWidth=2.6; ctx.beginPath();
+    for(var t2=0;t2<=1.0001;t2+=0.008){
+      var X=bA+t2*(bB-bA), Y=bcy+Math.sin(t2*Math.PI*2*7)*bry;
+      if(t2===0) ctx.moveTo(X,Y); else ctx.lineTo(X,Y);
+    }
+    ctx.stroke();
+    MSPC.mono(ctx,'bobine',(bA+bB)/2,bcy+72,10.5,'#c9a06a','center');
+    // les deux bornes
+    ctx.strokeStyle='#8d968b'; ctx.lineWidth=2.2;
+    ctx.beginPath(); ctx.moveTo(bB,bcy); ctx.lineTo(bB+22,bcy); ctx.stroke();
+    MSPC.mono(ctx,'u',bB+30,bcy+4,13,'#c8d834');
+
+    // le flux qui la traverse, matérialisé par une flèche
+    var fl=flux*30;
+    ctx.strokeStyle='rgba(200,216,52,'+(0.25+0.6*vers)+')'; ctx.lineWidth=2.4;
+    ctx.beginPath(); ctx.moveTo((bA+bB)/2-fl,bcy); ctx.lineTo((bA+bB)/2+fl,bcy); ctx.stroke();
+    if(Math.abs(fl)>5){
+      var sg=fl>0?1:-1;
+      ctx.fillStyle='rgba(200,216,52,'+(0.3+0.6*vers)+')';
+      ctx.beginPath();
+      ctx.moveTo((bA+bB)/2+fl,bcy);
+      ctx.lineTo((bA+bB)/2+fl-sg*9,bcy-5);
+      ctx.lineTo((bA+bB)/2+fl-sg*9,bcy+5);
+      ctx.closePath(); ctx.fill();
+    }
+    MSPC.mono(ctx,'flux Φ',(bA+bB)/2,bcy-42,10,'#c8d834','center');
+
+    /* ---- ce qui se passe à cet instant précis ---- */
+    var m1,m2,mc;
+    if(Math.abs(uu)<0.14){
+      m1='L’aimant fait face à la bobine.';
+      m2='Flux maximal, donc il ne varie plus → tension NULLE.'; mc='#ff6a5e';
+    } else if(Math.abs(flux)<0.14){
+      m1='L’aimant est de travers.';
+      m2='Le flux traverse le zéro à toute allure → tension MAXIMALE.'; mc='#c8d834';
+    } else {
+      m1='Le flux est en train de changer.';
+      m2='Une tension apparaît, d’autant plus forte qu’il change vite.'; mc='#8d968b';
+    }
+    MSPC.mono(ctx,m1,30,264,11,mc);
+    MSPC.mono(ctx,m2,30,281,10.5,mc);
+    MSPC.mono(ctx,'ce n’est jamais le flux qui crée la tension, c’est sa VARIATION',30,301,10,'#6f786e');
+
+    /* ================= les deux courbes ================= */
+    var gx=460, gw=W-gx-34;
+    function trace(y,h,fn,col,titre,sous){
+      ctx.strokeStyle='rgba(255,255,255,.18)'; ctx.lineWidth=1; ctx.strokeRect(gx+.5,y+.5,gw,h);
+      var mid=y+h/2;
+      ctx.strokeStyle='rgba(255,255,255,.13)';
+      ctx.beginPath(); ctx.moveTo(gx,mid); ctx.lineTo(gx+gw,mid); ctx.stroke();
+      for(var ms=20;ms<80;ms+=20){
+        var xg=gx+gw*ms/80;
+        ctx.strokeStyle='rgba(255,255,255,.08)';
+        ctx.beginPath(); ctx.moveTo(xg,y); ctx.lineTo(xg,y+h); ctx.stroke();
+      }
+      ctx.strokeStyle=col; ctx.lineWidth=2.2; ctx.beginPath();
+      for(var px=0;px<=gw;px++){
+        var tt=px/gw*FEN;
+        var v=fn(the + 6.2832*f*tt);
+        var yy=mid-v*(h/2-6);
+        if(px===0) ctx.moveTo(gx+px,yy); else ctx.lineTo(gx+px,yy);
+      }
+      ctx.stroke();
+      // le point « maintenant », à gauche
+      ctx.fillStyle='#fff';
+      ctx.beginPath(); ctx.arc(gx, mid-fn(the)*(h/2-6), 4.5, 0, 6.2832); ctx.fill();
+      MSPC.mono(ctx,titre,gx,y-8,10.5,col);
+      if(sous) MSPC.mono(ctx,sous,gx+gw-4,y-8,9.5,'#6f786e','right');
+    }
+    trace(70,102, function(x){ return Math.cos(x); }, '#c8d834',
+          'FLUX Φ dans la bobine', 'maximal quand l’aimant lui fait face');
+    trace(214,102, function(x){ return Math.sin(x)*amp/0.8*0.8; }, '#f0a844',
+          'TENSION INDUITE u(t)', 'maximale quand le flux passe par zéro');
+    MSPC.mono(ctx,'80 ms',gx+gw-4,214+102+14,9,'#5e675e','right');
+    MSPC.mono(ctx,'décalées d’un quart de tour : u est la PENTE de Φ',gx,214+102+30,10,'#8d968b');
+
+    /* ================= chiffres ================= */
+    function bloc(x,val,lab,col){ MSPC.titre(ctx,val,x,368,24,col); MSPC.mono(ctx,lab,x,384,9.5,'#8d968b'); }
+    bloc(30,  rpm.toLocaleString('fr-FR'),'TOURS PAR MINUTE','#e6ebe4');
+    bloc(190, String(p),                   'PAIRES DE PÔLES','#e6ebe4');
+    bloc(330, f.toFixed(1).replace('.',',')+' Hz','FRÉQUENCE PRODUITE', Math.abs(f-50)<0.6?'#c8d834':'#f0a844');
+    bloc(520, (T*1000).toFixed(1).replace('.',',')+' ms','PÉRIODE','#e6ebe4');
+    bloc(680, (60*50/p).toLocaleString('fr-FR')+' tr/min','VITESSE POUR FAIRE DU 50 Hz','#5cc4e0');
+
+    MSPC.mono(ctx,'f = p × n / 60   —   la fréquence n’est pas réglable : elle est imposée par la vitesse',30,412,11,
+      Math.abs(f-50)<0.6?'#c8d834':'#8d968b');
+
+    out.innerHTML='f = '+p+' × '+rpm+' / 60 = <b>'+f.toFixed(1).replace('.',',')+' Hz</b><br>'
+      +(Math.abs(f-50)<0.6?'<b style="color:#c8d834">c’est exactement la fréquence du réseau</b>'
+                          :'pour du 50 Hz il faudrait <b>'+(60*50/p).toLocaleString('fr-FR')+' tr/min</b>');
+  }, {fixed:true});
+})();
+</script>
 
 <h4>Période et fréquence</h4>
 <p>Deux mots reviennent en permanence dès qu'on parle d'alternatif, et ils disent la même chose de deux façons :</p>
@@ -4353,72 +4504,6 @@ function crystal(st, opts){
       "Loi de Lenz : le courant induit <b>s'oppose</b> au mouvement";
   }
   sv.addEventListener('input', upd); sN.addEventListener('input', upd); upd();
-})();
-
-/* ============ 7. ALTERNATEUR ============ */
-(function(){
-  var sn = el('a-alt-nr'); if(!sn) return;
-  var rpm = 1500, paused = false, ang = 0, trace = [];
-  el('a-alt-pause').addEventListener('click', function(){
-    paused = !paused; this.textContent = paused ? "Reprendre" : "Pause";
-  });
-  var st = mk('a-alt', function(ctx, s, dt){
-    var W=s.W, H=s.H, cx=150, cy=H/2, R=92;
-    var f = rpm/60;
-    if(!paused) ang += 2*Math.PI*f*dt*0.22;   /* ralenti pour l'œil */
-
-    /* pôles */
-    ctx.fillStyle="rgba(232,65,44,.20)"; ctx.fillRect(cx-R-42, cy-70, 34, 140);
-    ctx.fillStyle="rgba(74,157,224,.20)"; ctx.fillRect(cx+R+8, cy-70, 34, 140);
-    label(ctx, cx-R-25, cy+6, "N", COL.rouge, 22, "center");
-    label(ctx, cx+R+25, cy+6, "S", COL.bleu, 22, "center");
-    for(var l=-2;l<=2;l++){
-      ctx.strokeStyle="rgba(200,216,52,.16)"; ctx.lineWidth=1.2;
-      ctx.beginPath(); ctx.moveTo(cx-R-8, cy+l*26); ctx.lineTo(cx+R+8, cy+l*26); ctx.stroke();
-    }
-    /* spire */
-    ctx.beginPath(); ctx.arc(cx,cy,R,0,6.284);
-    ctx.strokeStyle="rgba(255,255,255,.12)"; ctx.lineWidth=1; ctx.stroke();
-    var w = Math.abs(Math.cos(ang))*R;
-    ctx.save(); ctx.translate(cx,cy);
-    ctx.strokeStyle=COL.cuivre; ctx.lineWidth=5; ctx.lineJoin="round";
-    ctx.beginPath(); ctx.ellipse(0,0, Math.max(3,w), R*0.78, 0, 0, 6.284); ctx.stroke();
-    ctx.restore();
-    var ax = cx+Math.cos(ang)*R, ay = cy+Math.sin(ang)*R*0.78;
-    ctx.beginPath(); ctx.arc(ax,ay,7,0,6.284); ctx.fillStyle=COL.vert; ctx.fill();
-    label(ctx, cx, cy+R+34, fr(rpm) + " tr/min", COL.blanc, 13, "center");
-
-    /* tracé */
-    var gx=300, gw=W-330, gy=cy, gh=100;
-    ctx.strokeStyle="rgba(255,255,255,.22)"; ctx.lineWidth=1;
-    ctx.beginPath(); ctx.moveTo(gx,gy); ctx.lineTo(gx+gw,gy); ctx.stroke();
-    ctx.beginPath(); ctx.moveTo(gx,gy-gh); ctx.lineTo(gx,gy+gh); ctx.stroke();
-    if(!paused){ trace.push(Math.sin(ang)); if(trace.length>gw) trace.shift(); }
-    ctx.strokeStyle=COL.vert; ctx.lineWidth=2.4; ctx.beginPath();
-    for(var i=0;i<trace.length;i++){
-      var X = gx+gw-trace.length+i, Y = gy-trace[i]*gh*0.92;
-      i?ctx.lineTo(X,Y):ctx.moveTo(X,Y);
-    }
-    ctx.stroke();
-    if(trace.length){
-      var lx = gx+gw-1, ly = gy-trace[trace.length-1]*gh*0.92;
-      ctx.beginPath(); ctx.arc(lx,ly,5,0,6.284); ctx.fillStyle=COL.blanc; ctx.fill();
-    }
-    label(ctx, gx+6, gy-gh-8, "TENSION INDUITE", COL.vert, 11);
-    label(ctx, gx+gw, gy+gh+20, "f = " + (rpm/60).toFixed(1).replace('.',',') + " Hz   ·   T = " + fr(1000/(rpm/60)) + " ms", COL.blanc, 12, "right");
-    label(ctx, gx-6, gy+4, "0", "rgba(255,255,255,.5)", 11, "right");
-  });
-  function upd(){
-    rpm = +sn.value;
-    el('a-alt-n').textContent = fr(rpm) + " tr/min";
-    var f = rpm/60;
-    el('a-alt-out').innerHTML =
-      "Fréquence : <b>" + f.toFixed(1).replace('.',',') + " Hz</b><br>" +
-      "Période : <b>" + fr(1000/f) + " ms</b><br>" +
-      (Math.abs(rpm-3000)<80 ? "<b style='color:#c8d834'>3 000 tr/min → 50 Hz : réglage réseau (1 paire de pôles)</b>"
-                             : "Pour 50 Hz avec 1 paire de pôles : <b>3 000 tr/min</b>");
-  }
-  sn.addEventListener('input', upd); upd();
 })();
 
 /* ============ 8. TRIPHASÉ ============ */
