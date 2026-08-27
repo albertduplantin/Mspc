@@ -48,10 +48,10 @@
 </header>
 
 <div class="meta-bar">
-  <div><b>14</b> chapitres</div>
-  <div><b>17</b> animations pilotables</div>
+  <div><b>17</b> chapitres</div>
+  <div><b>19</b> animations pilotables</div>
   <div><b>15</b> fiches TP d'atelier</div>
-  <div><b>40+</b> exercices corrigés</div>
+  <div><b>50+</b> exercices corrigés</div>
   <div>Manips en <b>TBTS ≤ 24 V</b> sauf mention</div>
 </div>
 
@@ -59,25 +59,27 @@
 
 <nav class="sommaire" aria-label="Sommaire">
   <h2>Le fil du cours</h2>
-  <p>Chaque notion est branchée sur la précédente, comme des bornes sur un rail. Ne sautez pas de borne : le chapitre 13 (le court-circuit) ne veut rien dire si le chapitre 1 (les électrons libres) n'est pas passé.</p>
+  <p>Le cours suit une seule ligne, sans jamais utiliser une notion avant de l'avoir construite. On part de la matière (1-2), on en tire les trois grandeurs fondamentales — le courant, la tension, la résistance (3-5) —, on les relie par la loi d'Ohm (6), on en déduit la chaleur et le circuit réel (7-8), puis on passe au magnétisme (9-12), au réseau qui alimente l'atelier (13-15) et enfin aux défauts et à leur protection (16-17).</p>
   <div class="rail">
     <a class="borne" href="#c1"><span class="num">01</span><span class="lbl">L'atome et les électrons libres</span></a>
     <a class="borne" href="#c2"><span class="num">02</span><span class="lbl">Taille d'un électron · combien dans un fil</span></a>
-    <a class="borne" href="#c3"><span class="num">03</span><span class="lbl">Le coulomb et l'ampère</span></a>
-    <a class="borne" href="#c4"><span class="num">04</span><span class="lbl">L'effet Joule</span></a>
-    <a class="borne" href="#c5"><span class="num">05</span><span class="lbl">Courant = champ magnétique</span></a>
-    <a class="borne" href="#c6"><span class="num">06</span><span class="lbl">L'électroaimant</span></a>
-    <a class="borne" href="#c7"><span class="num">07</span><span class="lbl">L'induction</span></a>
-    <a class="borne" href="#c8"><span class="num">08</span><span class="lbl">Alternatif et alternateur</span></a>
-    <a class="borne" href="#c9"><span class="num">09</span><span class="lbl">Centrales et triphasé</span></a>
-    <a class="borne" href="#c10"><span class="num">10</span><span class="lbl">Le transformateur</span></a>
-    <a class="borne" href="#c11"><span class="num">11</span><span class="lbl">Pourquoi la haute tension</span></a>
-    <a class="borne" href="#c12"><span class="num">12</span><span class="lbl">Le circuit simple et la lampe</span></a>
-    <a class="borne" href="#c13"><span class="num">13</span><span class="lbl">Court-circuit et surcharge</span></a>
-    <a class="borne" href="#c14"><span class="num">14</span><span class="lbl">Le disjoncteur magnéto-thermique</span></a>
-    <a class="borne" href="#tps" style="border-top-color:var(--terre)"><span class="num">TP</span><span class="lbl">Les 15 fiches d'atelier</span></a>
-  </div>
-</nav>
+    <a class="borne" href="#c3"><span class="num">03</span><span class="lbl">Le coulomb et l&rsquo;ampère</span></a>
+    <a class="borne" href="#c4"><span class="num">04</span><span class="lbl">Le volt : des joules par coulomb</span></a>
+    <a class="borne" href="#c5"><span class="num">05</span><span class="lbl">La résistance</span></a>
+    <a class="borne" href="#c6"><span class="num">06</span><span class="lbl">La loi d'Ohm : U = R × I</span></a>
+    <a class="borne" href="#c7"><span class="num">07</span><span class="lbl">L'effet Joule</span></a>
+    <a class="borne" href="#c8"><span class="num">08</span><span class="lbl">Le circuit simple et la lampe</span></a>
+    <a class="borne" href="#c9"><span class="num">09</span><span class="lbl">Courant = champ magnétique</span></a>
+    <a class="borne" href="#c10"><span class="num">10</span><span class="lbl">L'électroaimant</span></a>
+    <a class="borne" href="#c11"><span class="num">11</span><span class="lbl">L'induction</span></a>
+    <a class="borne" href="#c12"><span class="num">12</span><span class="lbl">Alternatif et alternateur</span></a>
+    <a class="borne" href="#c13"><span class="num">13</span><span class="lbl">Centrales et triphasé</span></a>
+    <a class="borne" href="#c14"><span class="num">14</span><span class="lbl">Le transformateur</span></a>
+    <a class="borne" href="#c15"><span class="num">15</span><span class="lbl">Pourquoi la haute tension</span></a>
+    <a class="borne" href="#c16"><span class="num">16</span><span class="lbl">Court-circuit et surcharge</span></a>
+    <a class="borne" href="#c17"><span class="num">17</span><span class="lbl">Le disjoncteur magnéto-thermique</span></a>
+    <a class="borne" href="#tps" style="border-top-color:var(--accent)"><span class="num">TP</span><span class="lbl">Les 15 fiches d'atelier</span></a>
+  </div></nav>
 
 <!-- ================= CH 1 ================= -->
 <section class="ch" id="c1">
@@ -103,7 +105,7 @@
     <div class="c"><label>Agitation thermique <span id="a-et-t-l">ambiante</span></label><input type="range" id="a-et-t" min="0" max="100" value="45"></div>
     <div class="c readout" id="a-et-out"></div>
   </div>
-  <figcaption>Six vues, dans l'ordre. <b>L'atome</b> d'abord : un noyau, des couches, et tout au bord un électron mal tenu. Puis les états de la matière — <b>solide</b>, <b>liquide</b>, <b>gaz</b>, <b>plasma</b> — où l'agitation thermique décide de tout : plus il fait chaud, moins les atomes se tiennent. Notez au passage qu'en dehors des métaux, la matière est le plus souvent faite de <b>molécules</b> et non d'atomes isolés : la vue « liquide » montre de vraies molécules d'eau, qui restent <b>constamment au contact</b> les unes des autres — c'est ce qui conserve le volume — tout en <b>glissant</b> sans cesse et en changeant de voisines, ce qui explique qu'un liquide n'ait pas de forme propre. Et enfin le <b>solide métallique</b>, qui est un cas à part et le seul qui nous intéresse vraiment : <span style="color:var(--accent-clair)">les atomes y restent rangés comme dans un solide, mais leurs électrons extérieurs circulent librement comme dans un gaz</span>. Un cristal immobile traversé par une mer d'électrons — voilà ce qu'est un fil de cuivre. <b>Chauffez la vue « métal »</b> : les ions vibrent plus fort, les électrons se cognent davantage. Vous regardez la résistance électrique en train de naître (§ 1.6).</figcaption>
+  <figcaption>Six vues, dans l'ordre. <b>L'atome</b> d'abord : un noyau, des couches, et tout au bord un électron mal tenu. Puis les états de la matière — <b>solide</b>, <b>liquide</b>, <b>gaz</b>, <b>plasma</b> — où l'agitation thermique décide de tout : plus il fait chaud, moins les atomes se tiennent. Notez au passage qu'en dehors des métaux, la matière est le plus souvent faite de <b>molécules</b> et non d'atomes isolés : la vue « liquide » montre de vraies molécules d'eau, qui restent <b>constamment au contact</b> les unes des autres — c'est ce qui conserve le volume — tout en <b>glissant</b> sans cesse et en changeant de voisines, ce qui explique qu'un liquide n'ait pas de forme propre. Et enfin le <b>solide métallique</b>, qui est un cas à part et le seul qui nous intéresse vraiment : <span style="color:var(--accent-clair)">les atomes y restent rangés comme dans un solide, mais leurs électrons extérieurs circulent librement comme dans un gaz</span>. Un cristal immobile traversé par une mer d'électrons — voilà ce qu'est un fil de cuivre. <b>Chauffez la vue « métal »</b> : les ions vibrent plus fort, les électrons se cognent davantage. Vous regardez la résistance électrique en train de naître — tout le chapitre 9 lui est consacré.</figcaption>
 </figure>
 <script>
 (function(){
@@ -531,7 +533,7 @@
 <p>C'est la question que presque personne ne pose, et c'est pourtant là que se joue toute la différence entre les deux électricités que vous croiserez en atelier. Il n'existe que <strong>deux moyens</strong> de pousser les électrons d'un fil, et ils n'ont rien à voir l'un avec l'autre :</p>
 <ul>
 <li><strong>La chimie.</strong> Une réaction arrache des électrons à un métal et les entasse sur une borne. C'est une <em>pompe</em> : elle travaille <strong>en un seul endroit</strong> du circuit, et elle pousse toujours dans le même sens. C'est le <strong>courant continu</strong> — l'objet du paragraphe suivant.</li>
-<li><strong>Le magnétisme.</strong> Un aimant que l'on déplace près d'un conducteur. Ni contact, ni chimie, ni borne : le champ agit <em>à distance</em> et pousse <strong>tous les électrons du conducteur au même instant</strong>. Et comme l'aimant va et vient, la poussée s'inverse : c'est le <strong>courant alternatif</strong>. Ce mécanisme demande les chapitres 5 à 7 ; on le mettra face à la pile, animation contre animation, au <a href="#c8">chapitre 8</a>.</li>
+<li><strong>Le magnétisme.</strong> Un aimant que l'on déplace près d'un conducteur. Ni contact, ni chimie, ni borne : le champ agit <em>à distance</em> et pousse <strong>tous les électrons du conducteur au même instant</strong>. Et comme l'aimant va et vient, la poussée s'inverse : c'est le <strong>courant alternatif</strong>. Ce mécanisme demande les chapitres 5 à 7 ; on le mettra face à la pile, animation contre animation, au <a href="#c12">chapitre 12</a>.</li>
 </ul>
 <p><span class="cle">Retenez la différence dès maintenant : la pile pousse en un point, l'aimant pousse partout à la fois.</span></p>
 
@@ -771,22 +773,389 @@
 <p>En revanche — et c'est tout l'intérêt de ce que vous venez de voir — <span class="cle">le côté négatif fonctionne exactement pareil : c'est du zinc, et il est bel et bien mangé.</span> Dans une pile saline, ce zinc <strong>est l'enveloppe même de la pile</strong>. Quand elle est complètement déchargée, l'enveloppe a été rongée de l'intérieur… et finit par se percer. C'est très précisément pour cela qu'une pile oubliée dans un appareil <strong>coule</strong> et fait des dégâts.</p>
 <p>Réflexe d'atelier : on retire les piles des appareils de mesure et des outils qu'on ne va pas utiliser pendant plusieurs mois. Un multimètre détruit par une pile qui a coulé, ce n'est pas de la malchance — c'est de la chimie parfaitement prévisible.</p></div>
 
-<h3>1.6 — La résistance, sans une seule formule</h3>
+<div class="exo"><span class="tag">Exercice 1.1</span>
+<p>Classez en conducteur / isolant : une mine de crayon · une règle en plastique · une clé plate · un chiffon sec · le même chiffon imbibé d'eau du robinet · le verre d'une ampoule · le filament de la même ampoule.</p>
+<details><summary>Voir la réponse</summary><div class="rep"><p><strong>Conducteurs :</strong> mine de crayon (graphite = carbone conducteur), clé plate (acier), chiffon mouillé (l'eau du robinet contient des sels dissous), filament (tungstène).<br><strong>Isolants :</strong> règle plastique, chiffon sec, verre de l'ampoule.</p><p><em>Le piège pédagogique est le chiffon : le même objet change de camp selon qu'il est sec ou humide. C'est toute la raison d'être des règles de sécurité en milieu humide.</em></p></div></details></div>
+  </div>
+</section>
+
+<section class="ch" id="c2">
+  <div class="ch-head"><div class="ch-num">02</div><div class="ch-title">
+    <span class="kicker">Ordres de grandeur</span><h2>Grand comme quoi, et combien y en a-t-il ?</h2></div></div>
+  <div class="ch-body">
+
+<p class="lede">Deux chiffres à faire sentir plutôt qu'à faire apprendre : un électron est ridiculement petit, et il y en a un nombre proprement délirant dans le moindre bout de fil. C'est la combinaison des deux qui explique tout.</p>
+
+<h3>2.1 — La taille d'un électron</h3>
+<p>Commençons par l'atome, qui est déjà minuscule : environ <span class="mono">0,000 000 000 1 m</span>, soit un dix-milliardième de mètre. Alignez 10 millions d'atomes de cuivre : vous obtenez 1 millimètre.</p>
+<p>Dans cet atome déjà minuscule, le noyau est <strong>100 000 fois plus petit encore</strong>. Et l'électron ? Aucune expérience n'a jamais réussi à lui trouver une taille. On le considère comme <strong>ponctuel</strong> : plus petit que le millième du noyau, et peut-être sans dimension du tout.</p>
+
+<div class="image-mentale"><span class="tag">Image mentale — le Stade de France</span>
+<p>Gonflez un atome de cuivre jusqu'à la taille du <strong>Stade de France</strong> (250 m de diamètre).</p>
+<ul><li>Le <strong>noyau</strong>, avec ses protons et ses neutrons, serait un <strong>petit pois posé au rond central</strong>.</li>
+<li>Les <strong>électrons</strong> seraient <strong>plus petits que des grains de poussière</strong>, quelque part dans les tribunes.</li>
+<li>Entre les deux : <strong>absolument rien</strong>. Du vide.</li></ul>
+<p>Autrement dit : la clé plate que vous tenez en main est vide à <strong>99,999 999 999 %</strong>. Si vous pouviez tasser tous les noyaux de la Tour Eiffel les uns contre les autres, elle tiendrait dans un dé à coudre — et pèserait toujours 10 100 tonnes.</p></div>
+
+<div class="plaque"><span class="tag">Anecdote — l'électron a un an de moins que l'aspirine</span>
+<p>J.J. Thomson identifie l'électron en 1897 ; l'aspirine est commercialisée en 1899. Thomson l'appelle d'abord « corpuscule » et met des années à convaincre ses collègues qu'une particule <strong>1 800 fois plus légère que l'atome d'hydrogène</strong> peut exister. Cerise sur le gâteau : son fils George recevra à son tour le Nobel en 1937 — pour avoir démontré que l'électron se comporte aussi comme une <em>onde</em>. Le père a prouvé que c'était une particule, le fils que c'était une onde, et les deux avaient raison.</p></div>
+
+<h3>2.2 — Combien d'électrons libres dans un fil ?</h3>
+<p>Dans le cuivre, chaque atome cède <strong>un</strong> électron au groupe. Comme il y a énormément d'atomes, il y a énormément d'électrons libres :</p>
+<div class="formule">1 mm³ de cuivre ≈ 85 000 000 000 000 000 000 électrons libres<small>soit 8,5 × 10<sup>19</sup> dans un cube d'un millimètre de côté</small></div>
+<p>Prenons maintenant du concret : <strong>1 mètre de fil de 1,5 mm²</strong>, celui de vos circuits d'éclairage.</p>
+<div class="formule">≈ 130 000 000 000 000 000 000 000 électrons libres<small>1,3 × 10<sup>23</sup> — dans un seul mètre de fil ordinaire</small></div>
+
+<div class="image-mentale"><span class="tag">Image mentale — pour sentir 10<sup>23</sup></span>
+<p>Il y a environ <strong>7,5 × 10<sup>18</sup></strong> grains de sable sur toutes les plages de la Terre. Votre mètre de fil de 1,5 mm² contient donc à peu près <strong>17 000 fois plus d'électrons libres qu'il n'y a de grains de sable sur toutes les plages du monde</strong>. Dans un mètre de fil. Que vous coupez à la pince sans y penser.</p></div>
+
+<h3>2.3 — Le paradoxe de la lampe qui s'allume tout de suite</h3>
+<p>Voici le fait qui surprend tout le monde. Dans un fil de 1,5 mm² parcouru par 10 A, la vitesse de dérive des électrons est d'environ <strong>0,5 millimètre par seconde</strong>. Un escargot fait 30 fois mieux.</p>
+<p>Un électron qui part de votre interrupteur met donc <strong>plus d'une demi-heure</strong> pour atteindre une lampe située à 1 mètre. Et pourtant la lampe s'allume instantanément. Comment ?</p>
+
+<div class="image-mentale"><span class="tag">Image mentale — le tuyau d'arrosage</span>
+<p>Un tuyau de 20 m <strong>déjà plein d'eau</strong>. Vous ouvrez le robinet : l'eau sort au bout <strong>immédiatement</strong>. Ce n'est pas la molécule d'eau du robinet qui a fait 20 m en une fraction de seconde — c'est la <em>poussée</em> qui s'est propagée dans le tuyau plein.</p>
+<p>Le fil est le tuyau. Les électrons libres sont l'eau déjà dedans. La tension est la pression. <span class="cle">Ce qui va vite (200 000 km/s, les deux tiers de la vitesse de la lumière), c'est l'ordre de se mettre en marche. Les électrons, eux, vont à la vitesse de l'escargot.</span></p></div>
+
+<div class="plaque"><span class="tag">Anecdote — c'est même pire que ça</span>
+<p>En courant alternatif 50 Hz, le sens change 100 fois par seconde. Les électrons n'avancent donc pas du tout : ils font <strong>des allers-retours de quelques centièmes de millimètre</strong>, sur place, indéfiniment. L'électron qui est dans le filament de votre lampe de chevet y était probablement déjà quand la lampe est sortie de l'usine. Ce qui voyage, ce n'est jamais la matière : c'est l'<strong>énergie</strong>.</p></div>
+
+<div class="exo"><span class="tag">Exercice 2.1</span>
+<p>Un collègue affirme : « Le courant met du temps à arriver au bout d'une longue ligne, c'est pour ça qu'il y a des chutes de tension. » Que répondez-vous ?</p>
+<details><summary>Voir la réponse</summary><div class="rep"><p>C'est faux <em>et</em> le résultat est vrai, pour une autre raison. Le signal se propage à ~200 000 km/s : sur 1 km, il met 5 microsecondes, autant dire rien. La chute de tension vient de la <strong>résistance du câble</strong> (chapitre 1) et non d'un temps de trajet. Bon réflexe : chute de tension = problème de section, de longueur ou de serrage, jamais de « délai ».</p></div></details></div>
+
+<div class="exo"><span class="tag">Exercice 2.2</span>
+<p>Doublez la section du fil (3 mm² au lieu de 1,5 mm²) en gardant le même courant de 10 A. La vitesse de dérive des électrons augmente-t-elle, diminue-t-elle, ou reste-t-elle identique ?</p>
+<details><summary>Voir la réponse</summary><div class="rep"><p>Elle est <strong>divisée par deux</strong> (≈ 0,25 mm/s). Deux fois plus d'électrons disponibles pour transporter la même quantité par seconde : chacun peut aller deux fois moins vite. C'est exactement pourquoi un gros câble chauffe moins qu'un petit à courant égal.</p></div></details></div>
+
+  </div>
+</section>
+
+<section class="ch" id="c3">
+  <div class="ch-head"><div class="ch-num">03</div><div class="ch-title">
+    <span class="kicker">Les deux unités fondatrices</span><h2>Le coulomb et l'ampère</h2></div></div>
+  <div class="ch-body">
+
+<p class="lede">Compter les électrons un par un est impossible. On les compte donc par paquets — c'est le coulomb — et on mesure le débit de ces paquets — c'est l'ampère. Rien de plus.</p>
+
+<h3>3.1 — Le coulomb : le paquet d'électrons</h3>
+<p>Un électron porte une charge électrique minuscule. Pour travailler avec des nombres humains, on a défini un paquet standard, le <strong>coulomb (C)</strong> :</p>
+<div class="formule">1 coulomb = 6 241 509 000 000 000 000 électrons<small>6,24 × 10<sup>18</sup> — la charge d'un seul électron vaut 1,6 × 10<sup>-19</sup> C</small></div>
+<p>Le coulomb est une <strong>quantité</strong>, pas un débit. Comme le litre : ça ne dit rien de la vitesse à laquelle ça coule.</p>
+
+<div class="plaque"><span class="tag">Anecdote — Coulomb l'ingénieur militaire</span>
+<p>Charles-Augustin de Coulomb (1736-1806) n'était pas un savant de cabinet. Officier du génie, il passe <strong>huit ans en Martinique</strong> à diriger la construction du Fort Bourbon avec 1 200 ouvriers, sous un climat qui ruine sa santé. Il en revient malade — et c'est cette convalescence forcée qui lui laisse le temps de faire de la physique.</p>
+<p>Son instrument, la <strong>balance de torsion</strong>, mesurait des forces si faibles qu'il fallait la protéger des courants d'air de la pièce. Détail savoureux pour des mécaniciens : Coulomb est aussi l'auteur des lois du <strong>frottement solide</strong> que vous utilisez en mécanique. Le même homme a donné son nom à l'unité de charge et à la loi de Coulomb sur le frottement.</p></div>
+
+<h3>3.2 — L'ampère : le débit</h3>
+<p>L'<strong>ampère (A)</strong> répond à la question : combien de coulombs passent par seconde à travers une section du fil ?</p>
+<div class="formule">1 ampère = 1 coulomb par seconde = 6,24 × 10<sup>18</sup> électrons par seconde<small>I = Q / t  ·  Q en coulombs, t en secondes, I en ampères</small></div>
+
+<figure class="anim">
+  <canvas id="a-amp" width="900" height="270" aria-label="Animation : compteur d'électrons traversant une section de fil"></canvas>
+  <div class="ctrls">
+    <div class="c"><label>Intensité <span id="a-amp-i">1 A</span></label><input type="range" id="a-amp-r" min="1" max="60" value="10"></div>
+    <div class="c readout" id="a-amp-out"></div>
+  </div>
+  <figcaption>Le plan de comptage (en vert) est une section du fil. Chaque électron qui le franchit incrémente le compteur. <b>Le nombre affiché est le nombre réel</b> : à 10 A, ce sont 62 milliards de milliards d'électrons qui passent chaque seconde devant votre pince ampèremétrique.</figcaption>
+</figure>
+
+<div class="image-mentale"><span class="tag">Image mentale — le péage</span>
+<p>Le <strong>coulomb</strong>, c'est « 6,24 milliards de milliards de voitures ». L'<strong>ampère</strong>, c'est « tant de voitures par heure au péage ». Le <strong>volt</strong>, c'est la pente de la route qui les pousse. La <strong>résistance</strong>, c'est le nombre de voies fermées pour travaux.</p></div>
+
+<h3>3.3 — Ordres de grandeur à connaître par cœur</h3>
+<table>
+<thead><tr><th>Situation</th><th class="mono">Intensité</th><th>Remarque</th></tr></thead>
+<tbody>
+<tr><td>Entrée d'un automate, capteur PNP</td><td class="mono">5 mA</td><td>0,005 A</td></tr>
+<tr><td>LED de signalisation</td><td class="mono">20 mA</td><td>Seuil de non-lâcher pour l'humain : ~10 mA</td></tr>
+<tr><td>Bobine de contacteur (maintien)</td><td class="mono">30 mA</td><td>Calibre du différentiel de protection des personnes</td></tr>
+<tr><td>Lampe 230 V / 60 W</td><td class="mono">0,26 A</td><td></td></tr>
+<tr><td>Perceuse d'établi 230 V</td><td class="mono">3 à 6 A</td><td></td></tr>
+<tr><td>Moteur asynchrone 3 kW / 400 V tri</td><td class="mono">≈ 6 A</td><td>Mais 40 A à l'enclenchement (courant d'appel)</td></tr>
+<tr><td>Poste à souder à l'arc</td><td class="mono">100 à 200 A</td><td>Sous très basse tension</td></tr>
+<tr><td>Démarreur de voiture</td><td class="mono">300 à 600 A</td><td>Sous 12 V, pendant 1 à 2 secondes</td></tr>
+<tr><td>Court-circuit en tête d'installation</td><td class="mono">3 000 à 6 000 A</td><td>Chapitre 13 — c'est ce que le disjoncteur doit couper</td></tr>
+<tr><td>Coup de foudre</td><td class="mono">30 000 A</td><td>Mais pendant 50 millionièmes de seconde</td></tr>
+</tbody></table>
+
+<div class="plaque"><span class="tag">Anecdote — Ampère, l'enfant de la Terreur</span>
+<p>André-Marie Ampère (1775-1836), Lyonnais, autodidacte : à 13 ans il a lu toute l'<em>Encyclopédie</em> de Diderot, dans l'ordre alphabétique. En <strong>1793</strong>, son père, juge de paix, est guillotiné place des Terreaux. Ampère sombre dans une prostration d'un an. Il est sorti de là, dit la légende, par la lecture d'un traité de botanique et par la vue de quelques fleurs.</p>
+<p>Le 11 septembre 1820, il assiste à la présentation de l'expérience d'Œrsted (chapitre 9). <strong>Une semaine plus tard</strong>, le 18 septembre, il présente à l'Académie la théorie complète de ce qu'il baptise l'<em>électrodynamique</em>. Une semaine. Maxwell l'appellera « le Newton de l'électricité ».</p>
+<p>Détail qui vous concerne directement : jusqu'en <strong>2019</strong>, l'ampère était défini par la force entre deux fils parallèles — donc par du magnétisme. Depuis le 20 mai 2019, il est défini par la charge de l'électron, fixée une fois pour toutes. Le cours que vous lisez suit exactement cette nouvelle définition : on part de l'électron, on arrive à l'ampère.</p></div>
+
+<div class="exo"><span class="tag">Exercice 3.1</span>
+<p>Un chargeur débite 2 A pendant 90 minutes. Quelle quantité de charge a transité ?</p>
+<details><summary>Voir la réponse</summary><div class="rep"><p>Q = I × t = 2 × (90 × 60) = 2 × 5 400 = <strong>10 800 C</strong>.<br>Soit environ 6,7 × 10<sup>22</sup> électrons. À noter : les batteries s'expriment en <strong>Ah</strong> (ampères-heures), et 1 Ah = 3 600 C. Ici : 3 Ah.</p></div></details></div>
+
+<div class="exo"><span class="tag">Exercice 3.2</span>
+<p>Une batterie de voiture est marquée « 60 Ah ». Combien de temps peut-elle théoriquement alimenter une veilleuse consommant 0,5 A ?</p>
+<details><summary>Voir la réponse</summary><div class="rep"><p>t = 60 / 0,5 = <strong>120 heures</strong>, soit 5 jours. <em>En pratique nettement moins</em> : la capacité annoncée vaut pour un régime de décharge lent et normalisé, et une batterie plomb qu'on descend trop bas est détruite. Mais l'ordre de grandeur suffit à expliquer pourquoi une portière mal fermée vide une batterie en un week-end.</p></div></details></div>
+
+<div class="exo"><span class="tag">Exercice 3.3</span>
+<p>Combien d'électrons passent en 1 minute dans une LED parcourue par 20 mA ?</p>
+<details><summary>Voir la réponse</summary><div class="rep"><p>Q = 0,02 × 60 = 1,2 C, soit 1,2 × 6,24 × 10<sup>18</sup> ≈ <strong>7,5 × 10<sup>18</sup> électrons</strong>. Environ le nombre de grains de sable sur toutes les plages de la Terre — en une minute, dans une LED de tableau de commande.</p></div></details></div>
+
+  </div>
+</section>
+
+<!-- ================= CH 4 : LE VOLT ================= -->
+<section class="ch" id="c4">
+  <div class="ch-head"><div class="ch-num">04</div><div class="ch-title">
+    <span class="kicker">Des joules par coulomb</span><h2>Le volt : ce que chaque coulomb transporte</h2></div></div>
+  <div class="ch-body">
+
+<p class="lede">L'ampère compte les électrons qui passent. Il ne dit rien de ce qu'ils apportent. Un fil peut être traversé par 10 A et ne transporter presque aucune énergie — ou en transporter de quoi alimenter un quartier. Ce qui fait la différence, c'est le <strong>volt</strong>. Et le volt n'est ni une force, ni une quantité d'électricité : c'est une <strong>quantité d'énergie par coulomb</strong>.</p>
+
+<h3>4.1 — La définition, et elle tient en une ligne</h3>
+<p>Reprenons le chapitre 3. Le <strong>coulomb</strong> est un paquet de 6,24 milliards de milliards d'électrons. Ce paquet, à lui seul, ne fait rien : encore faut-il qu'il ait reçu de l'énergie pour être capable d'en rendre. La tension mesure exactement cela :</p>
+
+<div class="formule">1 volt = 1 joule par coulomb<small>U = W / Q  ·  W en joules, Q en coulombs, U en volts</small></div>
+
+<p>Traduisez la phrase mot à mot, c'est tout le chapitre : <span class="cle">sous 12 volts, chaque coulomb qui traverse un appareil y dépose 12 joules.</span> Sous 230 volts, le même coulomb en dépose 230. Le coulomb est identique dans les deux cas — c'est ce qu'il porte qui change.</p>
+
+<p>Et comme l'ampère est un débit de coulombs (1 A = 1 C/s), les deux grandeurs se combinent immédiatement :</p>
+
+<div class="formule">P = U × I<small>joules par coulomb × coulombs par seconde = joules par seconde = watts</small></div>
+
+<p>Cette formule n'est pas une recette à mémoriser : c'est une simplification de fractions. Des <em>joules par coulomb</em> multipliés par des <em>coulombs par seconde</em> : les coulombs s'annulent, il reste des joules par seconde. Et un joule par seconde s'appelle un <strong>watt</strong>.</p>
+
+<div class="image-mentale"><span class="tag">Image mentale — le tapis roulant et les seaux</span>
+<p>Imaginez un tapis roulant qui transporte des seaux d'eau. Le <strong>coulomb</strong>, c'est un seau. L'<strong>ampère</strong>, c'est le nombre de seaux qui passent par seconde. Le <strong>volt</strong>, c'est la quantité d'eau <em>dans chaque seau</em>.</p>
+<p>Vous voyez aussitôt les quatre situations possibles : beaucoup de seaux presque vides (fort courant, basse tension — un poste à souder), peu de seaux très pleins (faible courant, haute tension — une ligne THT), peu de seaux presque vides (une LED de voyant), beaucoup de seaux très pleins (un four industriel).</p>
+<p>Et la <strong>puissance</strong>, c'est la quantité d'eau livrée par seconde — donc le produit des deux. <span class="cle">On ne peut jamais juger de la puissance d'un appareil avec le courant seul.</span></p></div>
+
+<h3>4.2 — Pourquoi on dit « différence de potentiel »</h3>
+<p>Voici le point qui fait rater la moitié des mesures au multimètre. <strong>Une tension n'existe jamais en un point. Elle existe toujours entre deux points.</strong> Demander « quelle est la tension sur ce fil ? » n'a pas plus de sens que demander « quelle est la différence de hauteur de ce point ? » — différence avec quoi ?</p>
+<p>C'est pour cette raison qu'un voltmètre a <strong>deux pointes de touche</strong> et se branche <strong>en parallèle</strong>, jamais en série : il compare deux endroits. L'ampèremètre, lui, doit être traversé par le courant, donc il se branche en série. Deux appareils, deux gestes opposés — et c'est la définition même des grandeurs qui l'impose.</p>
+
+<div class="plaque"><span class="tag">L'oiseau sur la ligne à haute tension</span>
+<p>Un moineau se pose sur un conducteur à 400 000 volts et ne ressent rien. Pourquoi ? Parce que ses deux pattes touchent <strong>le même conducteur</strong> : entre elles, la différence de potentiel est de quelques microvolts. Il n'y a pas de <em>chute</em>, donc aucune énergie à céder, donc aucun courant à travers lui.</p>
+<p>Qu'il déploie ses ailes et touche le pylône, et il devient un chemin entre 400 000 V et 0 V. C'est exactement ce qui arrive aux grands rapaces sur les lignes de distribution, et c'est pourquoi on équipe les supports de perchoirs isolés.</p>
+<p><strong>La leçon d'atelier est la même :</strong> ce n'est pas de toucher un conducteur sous tension qui est dangereux — c'est d'en toucher un <em>et</em> d'être relié à autre chose. D'où la règle d'or : <span class="cle">une seule main en action, et jamais l'autre appuyée sur la carcasse.</span></p></div>
+
+<h3>4.3 — Le volt, vu comme une hauteur de chute</h3>
+<p>L'analogie qui marche le mieux — et qui est bien plus qu'une image — est celle de la <strong>chute d'eau</strong>. Le générateur remonte les charges à une certaine hauteur ; le récepteur les laisse retomber et récupère l'énergie de la chute.</p>
+<ul>
+<li>La <strong>hauteur de la chute</strong>, c'est la <strong>tension</strong> en volts.</li>
+<li>Le <strong>débit</strong> qui tombe, c'est le <strong>courant</strong> en ampères.</li>
+<li>La <strong>puissance</strong> récupérée en bas, c'est le produit des deux.</li>
+</ul>
+<p>Cette analogie explique aussi pourquoi seule la <em>différence</em> compte : ce qui fait tourner une turbine, ce n'est pas l'altitude du barrage au-dessus du niveau de la mer, c'est la hauteur entre le haut et le bas de la conduite.</p>
+
+<figure class="anim">
+  <canvas id="a-volt" width="900" height="400" aria-label="Animation : le volt comme energie par coulomb"></canvas>
+  <div class="ctrls">
+    <div class="c"><label>Tension <span id="a-v-u-l">12 V</span></label><input type="range" id="a-v-u" min="0" max="4" value="1"></div>
+    <div class="c"><label>Courant <span id="a-v-i-l">2,0 A</span></label><input type="range" id="a-v-i" min="1" max="80" value="20"></div>
+    <div class="c readout" id="a-v-out"></div>
+  </div>
+  <figcaption>Le générateur, à gauche, <b>remonte</b> chaque coulomb ; le récepteur, à droite, le laisse <b>retomber</b> et récupère l'énergie. <b>La hauteur de la marche, c'est la tension</b> : passez à 230 V et regardez-la grandir — chaque coulomb repart alors avec 230 joules au lieu de 12. <b>Le courant, lui, ne change pas la hauteur</b> : il change le nombre de coulombs qui tombent par seconde. Suivez le coulomb blanc : sa jauge se remplit dans le générateur, se vide dans la lampe, et la valeur inscrite dessus est exactement la tension. <em>L'échelle des hauteurs est logarithmique, sans quoi le 1,5 V serait invisible à côté du 400 V.</em></figcaption>
+</figure>
+<script>
+(function(){
+  "use strict";
+  var UV=[1.5,12,24,230,400];
+  var U=MSPC.ctrl('a-v-u', function(v){ return UV[v]+' V'; }, 'a-v-u-l');
+  var I=MSPC.ctrl('a-v-i', function(v){ return (v/10).toFixed(1).replace('.',',')+' A'; }, 'a-v-i-l');
+  var out=document.getElementById('a-v-out');
+  var chg=[], etinc=[], compteur=0;
+  for(var k=0;k<14;k++) chg.push({u:k/14});
+
+  var xG=190, xR=690, yBas=300, yHautMax=98;
+  function hauteur(u){ return yBas-(yBas-yHautMax)*(Math.log(u)/Math.log(400)); }
+
+  MSPC.anim('a-volt', function(a){
+    var ctx=a.ctx, W=a.W, H=a.H, dt=a.dt;
+    var Uv=UV[U.val], Iv=I.val/10, P=Uv*Iv;
+    var yH=hauteur(Uv), haut=yBas-yH;
+    compteur+=P*dt;
+    MSPC.fond(ctx,W,H);
+
+    MSPC.mono(ctx,'POTENTIEL — joules par coulomb',96,52,10.5,'#8d968b');
+    ctx.strokeStyle='rgba(255,255,255,.25)'; ctx.lineWidth=1.2;
+    ctx.beginPath(); ctx.moveTo(112,70); ctx.lineTo(112,yBas); ctx.stroke();
+    for(var t=0;t<UV.length;t++){
+      var yt=hauteur(UV[t]), act=(UV[t]===Uv);
+      ctx.strokeStyle=act?'rgba(200,216,52,.55)':'rgba(255,255,255,.13)';
+      ctx.lineWidth=act?1.5:1;
+      ctx.beginPath(); ctx.moveTo(106,yt); ctx.lineTo(act?xR+30:120,yt); ctx.stroke();
+      MSPC.mono(ctx,UV[t]+' V',102,yt+4,act?11.5:9.5,act?'#c8d834':'#6f786e','right');
+    }
+    ctx.strokeStyle='rgba(255,255,255,.32)'; ctx.lineWidth=1.4;
+    ctx.beginPath(); ctx.moveTo(106,yBas); ctx.lineTo(xR+30,yBas); ctx.stroke();
+    MSPC.mono(ctx,'0 V',102,yBas+4,10.5,'#8d968b','right');
+
+    ctx.fillStyle='rgba(200,216,52,.06)'; ctx.fillRect(xG,yH,xR-xG,haut);
+
+    ctx.strokeStyle='#8d968b'; ctx.lineWidth=2.4;
+    ctx.beginPath();
+    ctx.moveTo(xG,yBas); ctx.lineTo(xG,yH); ctx.lineTo(xR,yH); ctx.lineTo(xR,yBas); ctx.lineTo(xG,yBas);
+    ctx.stroke();
+
+    ctx.fillStyle='#0d120f'; ctx.fillRect(xG-24,yH-12,48,haut+24);
+    ctx.strokeStyle='#c8d834'; ctx.lineWidth=1.6; ctx.strokeRect(xG-24,yH-12,48,haut+24);
+    MSPC.mono(ctx,'GÉNÉRATEUR',xG,yBas+24,10.5,'#c8d834','center');
+    MSPC.mono(ctx,'il remonte les coulombs',xG,yBas+38,9.5,'#6f786e','center');
+    MSPC.mono(ctx,'RÉCEPTEUR',xR,yBas+24,10.5,'#f0a844','center');
+    MSPC.mono(ctx,'ils y retombent',xR,yBas+38,9.5,'#6f786e','center');
+
+    // Le trajet, dans le sens physique : on MONTE dans le générateur (à gauche),
+    // on traverse en haut, on REDESCEND dans le récepteur (à droite), on revient en bas.
+    var large=xR-xG, per=2*large+2*haut;
+    for(var c=0;c<chg.length;c++){
+      var C=chg[c];
+      if(dt>0) C.u=(C.u+(0.05+Iv*0.045)*dt)%1;
+      var d=C.u*per, x,y,frac=0,desc=false;
+      if(d<haut){                                  // 1. montée dans le générateur
+        x=xG; y=yBas-d; frac=d/haut;
+      } else if(d<haut+large){                     // 2. rail du haut, chargé à bloc
+        x=xG+(d-haut); y=yH; frac=1;
+      } else if(d<2*haut+large){                   // 3. chute dans le récepteur
+        var dd=d-haut-large; x=xR; y=yH+dd; frac=1-dd/haut; desc=true;
+      } else {                                     // 4. retour par le rail du bas, à vide
+        x=xR-(d-2*haut-large); y=yBas; frac=0;
+      }
+      var vedette=(c===0);
+      ctx.fillStyle=vedette?'#fff':'rgba(200,216,52,.8)';
+      ctx.beginPath(); ctx.arc(x,y,vedette?11:6.5,0,6.2832); ctx.fill();
+      if(vedette){
+        MSPC.mono(ctx,'1 C',x,y+4,9,'#0d120f','center');
+        var jx=Math.min(Math.max(x,40),W-40);
+        ctx.fillStyle='rgba(255,255,255,.12)'; ctx.fillRect(jx-16,y-32,32,9);
+        ctx.fillStyle='#c8d834'; ctx.fillRect(jx-16,y-32,32*frac,9);
+        MSPC.mono(ctx,(Uv*frac).toFixed(0)+' J',jx,y-36,10.5,'#c8d834','center');
+      }
+      if(desc && Math.random()<dt*26*Math.min(1,Iv/3)){
+        etinc.push({x:xR+(Math.random()-0.5)*20,y:y,vx:(Math.random()-0.5)*60,vy:(Math.random()-0.5)*60,t:0.4});
+      }
+    }
+
+    for(var e=etinc.length-1;e>=0;e--){
+      var E=etinc[e]; E.t-=dt;
+      if(E.t<=0){ etinc.splice(e,1); continue; }
+      E.x+=E.vx*dt; E.y+=E.vy*dt;
+      ctx.fillStyle='rgba(255,220,120,'+(E.t/0.4)+')';
+      ctx.beginPath(); ctx.arc(E.x,E.y,2.3,0,6.2832); ctx.fill();
+    }
+    var br=Math.min(1,P/900);
+    var gl=ctx.createRadialGradient(xR,yH+haut/2,3,xR,yH+haut/2,64);
+    gl.addColorStop(0,'rgba(255,233,160,'+(0.08+0.45*br)+')'); gl.addColorStop(1,'rgba(255,233,160,0)');
+    ctx.fillStyle=gl; ctx.beginPath(); ctx.arc(xR,yH+haut/2,64,0,6.2832); ctx.fill();
+
+    ctx.strokeStyle='#c8d834'; ctx.lineWidth=1.6; ctx.setLineDash([5,4]);
+    ctx.beginPath(); ctx.moveTo(xR+46,yH); ctx.lineTo(xR+46,yBas); ctx.stroke(); ctx.setLineDash([]);
+    ctx.beginPath(); ctx.moveTo(xR+40,yH+1); ctx.lineTo(xR+52,yH+1);
+    ctx.moveTo(xR+40,yBas-1); ctx.lineTo(xR+52,yBas-1); ctx.stroke();
+    MSPC.titre(ctx,'U = '+Uv+' V',xR+60,yH+haut/2-4,21,'#c8d834');
+    MSPC.mono(ctx,Uv+' joules par coulomb',xR+60,yH+haut/2+14,10.5,'#8d968b');
+
+    function bloc(x,val,lab,col){ MSPC.titre(ctx,val,x,364,25,col); MSPC.mono(ctx,lab,x,380,9.5,'#8d968b'); }
+    bloc(30, Uv+' J/C', 'CE QUE PORTE CHAQUE COULOMB', '#c8d834');
+    bloc(260, Iv.toFixed(1).replace('.',',')+' C/s', 'COULOMBS PAR SECONDE', '#e6ebe4');
+    bloc(490, (P>=1000?(P/1000).toFixed(2)+' kW':P.toFixed(0)+' W'), 'PUISSANCE  P = U × I', P>3000?'#ff6a5e':'#f0a844');
+    bloc(720, (compteur>=1000?(compteur/1000).toFixed(1)+' kJ':compteur.toFixed(0)+' J'), 'ÉNERGIE DÉJÀ LIVRÉE', '#8d968b');
+
+    out.innerHTML='Chaque coulomb emporte <b>'+Uv+' J</b><br>'+Iv.toFixed(1).replace('.',',')+' C/s × '+Uv+' J/C = <b>'+(P>=1000?(P/1000).toFixed(2)+' kW':P.toFixed(0)+' W')+'</b>';
+  }, {fixed:true});
+})();
+</script>
+
+<h3>4.4 — Les tensions que vous croiserez</h3>
+<div class="table-scroll">
+<table>
+<thead><tr><th>Situation</th><th class="mono">Tension</th><th>Ce qu'il faut en retenir</th></tr></thead>
+<tbody>
+<tr><td>Thermocouple de four</td><td class="mono">quelques mV</td><td>Un signal, pas une énergie. On le mesure, on ne s'en sert jamais pour alimenter.</td></tr>
+<tr><td>Pile bâton</td><td class="mono">1,5 V</td><td>Chaque coulomb ne porte que 1,5 J. Il en faut beaucoup pour faire du travail.</td></tr>
+<tr><td>Batterie de voiture</td><td class="mono">12 V</td><td>Faible tension, mais des centaines d'ampères possibles au démarreur.</td></tr>
+<tr><td>Automatisme, TBTS d'atelier</td><td class="mono">24 V</td><td>Sous le seuil de danger : c'est pourquoi vos TP se font là.</td></tr>
+<tr><td>Prise domestique (France)</td><td class="mono">230 V</td><td>Valeur efficace, entre phase et neutre. Mortelle.</td></tr>
+<tr><td>Moteur triphasé d'atelier</td><td class="mono">400 V</td><td>Entre deux phases. Le lien avec les 230 V est expliqué au chapitre 13.</td></tr>
+<tr><td>Caténaire SNCF</td><td class="mono">1,5 kV ou 25 kV</td><td>Deux réseaux différents selon les régions, héritage historique.</td></tr>
+<tr><td>Distribution HTA d'usine</td><td class="mono">20 kV</td><td>Le poste de livraison des grands sites industriels.</td></tr>
+<tr><td>Ligne de transport THT</td><td class="mono">400 kV</td><td>Chaque coulomb y porte 400 000 J. Chapitre 15.</td></tr>
+<tr><td>Décharge d'électricité statique</td><td class="mono">jusqu'à 20 kV</td><td>Tension énorme, énergie ridicule : très peu de coulombs. Désagréable, rarement dangereux — sauf près d'un solvant.</td></tr>
+</tbody></table>
+</div>
+
+<div class="encadre danger"><span class="tag">Tension, courant et danger : remettons les choses en ordre</span>
+<p>Vous entendrez répéter que « c'est le courant qui tue, pas la tension ». C'est exact — et si souvent mal compris que cela en devient dangereux.</p>
+<p>Ce qui traverse le corps et provoque la fibrillation cardiaque, c'est bien un <strong>courant</strong> ; quelques dizaines de milliampères suffisent. Mais ce courant ne naît pas tout seul : <span class="cle">c'est la tension qui le pousse à travers vous.</span> Sans tension, aucun courant ne circule dans un corps humain.</p>
+<p>La bonne formulation est donc : <strong>le courant est la cause immédiate du dommage, la tension en est la cause première.</strong> C'est pour cela que les seuils de sécurité sont exprimés en <strong>volts</strong> — 25 V en alternatif, 60 V en continu en milieu sec — et jamais en ampères : on ne peut pas limiter le courant dans un corps, on ne peut que limiter la tension qui l'y pousse.</p>
+<p>L'électricité statique montre l'autre bord du raisonnement : 20 000 V sur une poignée de porte ne vous font rien, parce que la quantité de coulombs disponibles est minuscule. <strong>Tension élevée n'est pas synonyme d'énergie élevée.</strong> Il faut les deux.</p></div>
+
+<div class="plaque"><span class="tag">Anecdote — le volt a longtemps dormi dans un bocal</span>
+<p>Pendant près d'un siècle, le volt n'a pas été une idée abstraite : c'était un <strong>objet</strong>. En 1893, l'ingénieur américain <strong>Edward Weston</strong> met au point une pile étalon au cadmium et au mercure d'une stabilité stupéfiante : elle délivre 1,018 6 V et ne bouge quasiment pas pendant des années.</p>
+<p>Tous les laboratoires nationaux du monde en gardaient plusieurs, dans des bains thermostatés, à l'abri des vibrations. On ne s'en servait jamais pour alimenter quoi que ce soit : y faire circuler un courant l'aurait dérangée. Le volt était littéralement <strong>conservé dans une cave, dans un bocal de verre</strong>, et l'on comparait à cette référence tous les voltmètres du pays.</p>
+<p>Depuis <strong>1990</strong>, le volt est défini par un effet quantique : une jonction supraconductrice irradiée par des micro-ondes produit une tension qui ne dépend que d'une fréquence et de constantes fondamentales. Reproductible partout, identique à quelques milliardièmes près, et sans le moindre bocal. <span class="cle">On est passé d'un étalon qu'il fallait garder à un étalon qu'on peut refabriquer.</span></p></div>
+
+<div class="exo"><span class="tag">Exercice 4.1</span>
+<p>Une lampe fonctionne sous 230 V et il y passe 0,26 A. Combien de joules chaque coulomb y dépose-t-il ? Combien de coulombs traversent la lampe en une seconde ? Quelle puissance en déduit-on ?</p>
+<details><summary>Voir la réponse</summary><div class="rep">
+<p><strong>Question 1 — les joules par coulomb.</strong><br>C'est la définition même du volt : 1 V = 1 J/C. Il n'y a donc rien à calculer, il suffit de lire la tension.<br>Sous 230 V, chaque coulomb dépose <strong>230 joules</strong>.</p>
+<p><strong>Question 2 — les coulombs par seconde.</strong><br>C'est la définition de l'ampère (chapitre 3) : 1 A = 1 C/s.<br>0,26 A signifie donc <strong>0,26 coulomb par seconde</strong>.</p>
+<p><strong>Question 3 — la puissance.</strong><br>On multiplie ce que porte chaque coulomb par le nombre de coulombs qui passent chaque seconde :<br>P = 230 J/C × 0,26 C/s = <strong>59,8 J/s</strong>, soit environ <strong>60 W</strong>.</p>
+<p><em>Vérifiez l'unité : des joules par coulomb multipliés par des coulombs par seconde — les « coulombs » se simplifient et il reste des joules par seconde, c'est-à-dire des watts. Vous venez de retrouver P = U × I sans l'apprendre par cœur. Et vous venez surtout de retrouver l'ampoule 60 W du commerce.</em></p></div></details></div>
+
+<div class="exo"><span class="tag">Exercice 4.2</span>
+<p>Une batterie de voiture porte l'inscription « 12 V — 60 Ah ». Quelle énergie totale contient-elle, en joules puis en kilowattheures ?</p>
+<details><summary>Voir la réponse</summary><div class="rep">
+<p><strong>Étape 1 — convertir les ampères-heures en coulombs.</strong><br>Un ampère-heure, c'est 1 ampère pendant 1 heure. Or 1 A = 1 C/s, et 1 heure = 3 600 s.<br>Donc 1 Ah = 1 × 3 600 = <strong>3 600 C</strong>.<br>La batterie contient : 60 × 3 600 = <strong>216 000 coulombs</strong>.</p>
+<p><strong>Étape 2 — appliquer la définition du volt.</strong><br>Chaque coulomb porte 12 joules, puisque la batterie est à 12 V.<br>W = Q × U = 216 000 × 12 = <strong>2 592 000 joules</strong>, soit environ 2,6 mégajoules.</p>
+<p><strong>Étape 3 — convertir en kilowattheures.</strong><br>Un wattheure, c'est un watt pendant une heure : 1 J/s × 3 600 s = 3 600 J. Un kilowattheure vaut donc 1 000 × 3 600 = <strong>3 600 000 J</strong>.<br>W = 2 592 000 / 3 600 000 = <strong>0,72 kWh</strong>.</p>
+<p><em>Mise en perspective : 0,72 kWh coûte une vingtaine de centimes au tarif domestique. Toute l'énergie d'une batterie de voiture pleine vaut le prix d'un carré de chocolat — et pourtant elle lance un moteur thermique. Ce n'est pas la quantité d'énergie qui impressionne, c'est la <strong>vitesse</strong> à laquelle elle sait la rendre : 300 A pendant deux secondes.</em></p></div></details></div>
+
+<div class="exo"><span class="tag">Exercice 4.3</span>
+<p>Un chargeur de téléphone est marqué « 5 V — 2 A ». Un four d'atelier est marqué « 230 V — 2 A ». Le courant est identique. Délivrent-ils la même puissance ? Que répondez-vous au collègue qui affirme « c'est pareil, c'est 2 ampères des deux côtés » ?</p>
+<details><summary>Voir la réponse</summary><div class="rep">
+<p><strong>Non — et le rapport est de 46.</strong></p>
+<p><strong>Le chargeur :</strong> chaque coulomb porte 5 J, et il passe 2 coulombs par seconde.<br>P = 5 × 2 = <strong>10 W</strong>.</p>
+<p><strong>Le four :</strong> chaque coulomb porte 230 J, et il passe aussi 2 coulombs par seconde.<br>P = 230 × 2 = <strong>460 W</strong>.</p>
+<p><strong>Ce qu'il faut répondre :</strong> le nombre de coulombs qui passent est bien le même — 2 par seconde de part et d'autre. Mais dans le four, <em>chaque</em> coulomb transporte 46 fois plus d'énergie. Reprenez l'image des seaux : même nombre de seaux par seconde, mais des seaux 46 fois plus remplis.</p>
+<p><em>Voilà pourquoi l'intensité seule ne dit rien de la puissance, et pourquoi une plaque signalétique porte toujours les deux valeurs. C'est aussi la raison pour laquelle un fil de 2,5 mm² convient aussi bien au chargeur qu'au four : la section du conducteur est dictée par le <strong>courant</strong>, jamais par la tension. La tension, elle, dicte l'épaisseur de l'<strong>isolant</strong>.</em></p></div></details></div>
+
+<div class="exo"><span class="tag">Exercice 4.4</span>
+<p>Vous approchez d'une armoire et posez une seule pointe de touche de votre voltmètre sur une borne. L'écran affiche 0 V. Votre collègue en conclut que l'armoire est hors tension. Que lui répondez-vous ?</p>
+<details><summary>Voir la réponse</summary><div class="rep">
+<p><strong>Que la mesure ne veut strictement rien dire</strong> — et qu'il ne faut surtout pas y toucher.</p>
+<p><strong>Le raisonnement :</strong> une tension est une <em>différence</em> entre deux points (§ 4.2). Avec une seule pointe en contact, le voltmètre ne compare rien : il mesure l'écart entre la borne et une seconde pointe qui pend dans le vide. Le résultat n'a aucune signification.</p>
+<p><strong>Ce qu'il faut faire — la VAT, vérification d'absence de tension :</strong></p>
+<ol>
+<li>Utiliser un <strong>vérificateur d'absence de tension</strong> conforme, et non un multimètre quelconque.</li>
+<li><strong>Le tester sur une source connue sous tension</strong> juste avant : on vérifie ainsi que l'appareil fonctionne.</li>
+<li>Vérifier l'absence de tension sur <strong>toutes les combinaisons</strong> : entre chaque phase et le neutre, entre phases, et entre chaque conducteur et la terre.</li>
+<li><strong>Le retester sur la source connue</strong> juste après : on vérifie qu'il n'est pas tombé en panne pendant la mesure.</li>
+</ol>
+<p><em>Ce double test avant/après n'est pas une lubie administrative : un vérificateur dont la pile est morte affiche exactement la même chose qu'une installation consignée. Des accidents graves ne sont dus qu'à cela.</em></p></div></details></div>
+
+  </div>
+</section>
+
+<!-- ================= CH 5 : LA RÉSISTANCE ================= -->
+<section class="ch" id="c5">
+  <div class="ch-head"><div class="ch-num">05</div><div class="ch-title">
+    <span class="kicker">Le prix du trajet</span><h2>La résistance : ce que coûte la traversée</h2></div></div>
+  <div class="ch-body">
+
+<p class="lede">Vous savez compter les coulombs qui passent, et vous savez ce que chacun transporte. Reste la troisième grandeur, celle qui décide de tout le reste : la difficulté du trajet. Un même générateur, branché sur deux fils différents, ne fera pas passer le même courant — et l'écart peut aller de un à mille.</p>
+
+<h3>5.1 — Ce qui freine les électrons</h3>
 <p>Les électrons qui dérivent ne traversent pas le fil tranquillement : ils sont <strong>déviés</strong>, encore et encore. À chaque choc, l'électron perd de la vitesse et cède son énergie au réseau, dont les ions se mettent à vibrer un peu plus fort. Un ion qui vibre plus fort, dans notre langage, ça s'appelle <strong>de la chaleur</strong>.</p>
 <p>La <strong>résistance</strong>, c'est exactement ça : le nombre et la violence des chocs subis par les électrons sur leur trajet. Elle se mesure en <strong>ohms (Ω)</strong>.</p>
 
 <div class="image-mentale"><span class="tag">Image mentale</span>
 <p>Traverser une salle vide au pas de course : facile, résistance faible. Traverser la même salle bondée où tout le monde gigote : vous êtes bousculé en permanence, vous avancez au ralenti et vous avez chaud. <strong>La salle bondée, c'est un fil résistant. Les gens qui gigotent plus fort, c'est un fil chaud.</strong></p></div>
 
-<h4>Quatre choses font varier la résistance</h4>
+<h3>5.2 — Quatre choses font varier la résistance</h3>
 <ul>
 <li><strong>La nature du matériau</strong> — un cristal d'argent ou de cuivre est « propre », les électrons y circulent bien. Un cristal de nichrome (nickel-chrome) est un désordre volontaire : on l'a fabriqué exprès pour freiner.</li>
 <li><strong>La longueur</strong> — deux fois plus long, deux fois plus de chocs, deux fois plus de résistance.</li>
 <li><strong>La section</strong> — un fil deux fois plus gros offre deux fois plus de couloirs : deux fois moins de résistance. C'est pour cette raison qu'on parle de 1,5 mm², 2,5 mm², 6 mm²... et pas de la couleur de la gaine.</li>
-<li><strong>La température</strong> — dans un métal, plus c'est chaud, plus les ions vibrent, plus la résistance monte. <span class="cle">Retenez-le : ça reviendra au chapitre 12 avec la lampe et au chapitre 14 avec le bilame.</span></li>
+<li><strong>La température</strong> — dans un métal, plus c'est chaud, plus les ions vibrent, plus la résistance monte. <span class="cle">Retenez-le : ça reviendra au chapitre 8 avec la lampe et au chapitre 17 avec le bilame.</span></li>
 </ul>
 
-<h4>Déviés par quoi, exactement ?</h4>
+<h3>5.3 — Déviés par quoi, exactement ?</h3>
 <p>Ici se trouve la seule subtilité du chapitre, et elle vaut d'être comprise car elle explique tout le reste. On imagine spontanément l'électron rebondissant contre des atomes comme une bille dans un flipper — <strong>et plus il y aurait d'atomes serrés, plus ce serait dur de passer</strong>. C'est faux, et c'est même le contraire.</p>
 <p>Dans un cristal <strong>parfaitement rangé</strong>, les ions sont alignés en rangées régulières. L'électron ne les percute pas : il se faufile entre eux comme dans un couloir bien droit. Un cristal parfait, à très basse température, laisserait passer les électrons presque sans les gêner.</p>
 <p><span class="cle">Ce qui arrête un électron, ce n'est pas la présence des ions : c'est ce qui rompt leur alignement.</span> Et il n'y a que deux façons de rompre l'alignement d'un cristal :</p>
@@ -995,152 +1364,279 @@
 <div class="plaque"><span class="tag">Anecdote — le métier</span>
 <p>En maintenance, on ne cherche pas les résistances : on cherche celles qui <strong>ne devraient pas être là</strong>. Une borne mal serrée dans une armoire, c'est un contact imparfait, donc une résistance parasite de quelques milliohms. Sur 30 A, ça fait un point chaud à 120 °C dans un coffret fermé. C'est la première cause d'incendie d'origine électrique en industrie, et c'est pour ça qu'on passe les armoires à la <strong>caméra thermique</strong> et qu'on serre les bornes <strong>au couple</strong>, pas « à la sensation ».</p></div>
 
-<div class="exo"><span class="tag">Exercice 1.1</span>
-<p>Classez en conducteur / isolant : une mine de crayon · une règle en plastique · une clé plate · un chiffon sec · le même chiffon imbibé d'eau du robinet · le verre d'une ampoule · le filament de la même ampoule.</p>
-<details><summary>Voir la réponse</summary><div class="rep"><p><strong>Conducteurs :</strong> mine de crayon (graphite = carbone conducteur), clé plate (acier), chiffon mouillé (l'eau du robinet contient des sels dissous), filament (tungstène).<br><strong>Isolants :</strong> règle plastique, chiffon sec, verre de l'ampoule.</p><p><em>Le piège pédagogique est le chiffon : le même objet change de camp selon qu'il est sec ou humide. C'est toute la raison d'être des règles de sécurité en milieu humide.</em></p></div></details></div>
-
-<div class="exo"><span class="tag">Exercice 1.2</span>
+<div class="exo"><span class="tag">Exercice 5.1</span>
 <p>On remplace un câble d'alimentation de 10 m par un câble identique de 30 m. Que devient la résistance ? Et si en plus on double la section ?</p>
 <details><summary>Voir la réponse</summary><div class="rep"><p>×3 avec la longueur, puis ÷2 avec la section : au total <strong>×1,5</strong> par rapport au câble d'origine. C'est le raisonnement exact qu'on fait pour dimensionner une alimentation de moteur éloigné dans un atelier.</p></div></details></div>
 
-<div class="exo"><span class="tag">Exercice 1.3</span>
+<div class="exo"><span class="tag">Exercice 5.2</span>
 <p>Pourquoi un moteur asynchrone qui vient de tourner 2 heures présente-t-il une résistance d'enroulement plus élevée qu'un moteur froid ? Est-ce un défaut ?</p>
 <details><summary>Voir la réponse</summary><div class="rep"><p>Non, c'est normal. Le cuivre des bobinages est chaud, ses ions vibrent davantage, la résistance monte (environ <strong>+40 % entre 20 °C et 120 °C</strong>). Les électriciens s'en servent même comme méthode de mesure indirecte de la température des bobinages, la « méthode de variation de résistance » de la norme moteur.</p></div></details></div>
-
+<div class="exo"><span class="tag">Exercice 5.3</span>
+<p>Calculez la résistance de 25 m de câble cuivre de 1,5 mm², puis celle de 25 m d'aluminium de même section. On donne ρ<sub>cuivre</sub> = 0,0168 Ω·mm²/m et ρ<sub>alu</sub> = 0,0265 Ω·mm²/m. Quelle section d'aluminium faudrait-il pour égaler le cuivre ?</p>
+<details><summary>Voir la réponse</summary><div class="rep">
+<p><strong>Étape 1 — la formule.</strong><br>R = ρ × L / S, où ρ est la résistivité du métal, L la longueur en mètres et S la section en mm².<br>Elle traduit exactement les deux règles du § 5.2 : deux fois plus long, deux fois plus de résistance ; deux fois plus gros, deux fois moins.</p>
+<p><strong>Étape 2 — le cuivre.</strong><br>R = 0,0168 × 25 / 1,5<br>On calcule d'abord le numérateur : 0,0168 × 25 = 0,42<br>Puis on divise : 0,42 / 1,5 = <strong>0,28 Ω</strong></p>
+<p><strong>Étape 3 — l'aluminium.</strong><br>R = 0,0265 × 25 / 1,5<br>Numérateur : 0,0265 × 25 = 0,6625<br>Division : 0,6625 / 1,5 = <strong>0,44 Ω</strong></p>
+<p><strong>Étape 4 — la section d'aluminium équivalente.</strong><br>On veut que l'aluminium donne les mêmes 0,28 Ω. On repart de R = ρ × L / S et on isole S en multipliant les deux membres par S puis en divisant par R :<br>S = ρ × L / R = 0,0265 × 25 / 0,28 = 0,6625 / 0,28 = <strong>2,37 mm²</strong></p>
+<p>Comme les sections normalisées sont 1,5 · 2,5 · 4 · 6 · 10 mm², on retiendrait du <strong>2,5 mm²</strong>.</p>
+<p><em>Le rapport 0,44 / 0,28 = 1,58 n'est rien d'autre que le rapport des deux résistivités : 0,0265 / 0,0168 = 1,58. Autrement dit, à section et longueur égales, l'aluminium résiste toujours 58 % de plus. C'est un nombre qui vaut la peine d'être retenu : il explique à lui seul pourquoi on passe d'un cran de section quand on remplace du cuivre par de l'aluminium.</em></p></div></details></div>
   </div>
 </section>
 
-<!-- ================= CH 2 ================= -->
-<section class="ch" id="c2">
-  <div class="ch-head"><div class="ch-num">02</div><div class="ch-title">
-    <span class="kicker">Ordres de grandeur</span><h2>Grand comme quoi, et combien y en a-t-il ?</h2></div></div>
+<!-- ================= CH 6 : LA LOI D'OHM ================= -->
+<section class="ch" id="c6">
+  <div class="ch-head"><div class="ch-num">06</div><div class="ch-title">
+    <span class="kicker">La seule formule à connaître par cœur</span><h2>La loi d'Ohm : U = R × I</h2></div></div>
   <div class="ch-body">
 
-<p class="lede">Deux chiffres à faire sentir plutôt qu'à faire apprendre : un électron est ridiculement petit, et il y en a un nombre proprement délirant dans le moindre bout de fil. C'est la combinaison des deux qui explique tout.</p>
+<p class="lede">Vous avez maintenant les trois grandeurs, et chacune a été construite à partir de ce qui se passe réellement dans le fil : l'<strong>ampère</strong> compte les coulombs qui passent, le <strong>volt</strong> dit ce que chacun transporte, l'<strong>ohm</strong> mesure la difficulté du trajet. Il ne reste plus qu'à les relier — et elles se relient par une seule multiplication.</p>
 
-<h3>2.1 — La taille d'un électron</h3>
-<p>Commençons par l'atome, qui est déjà minuscule : environ <span class="mono">0,000 000 000 1 m</span>, soit un dix-milliardième de mètre. Alignez 10 millions d'atomes de cuivre : vous obtenez 1 millimètre.</p>
-<p>Dans cet atome déjà minuscule, le noyau est <strong>100 000 fois plus petit encore</strong>. Et l'électron ? Aucune expérience n'a jamais réussi à lui trouver une taille. On le considère comme <strong>ponctuel</strong> : plus petit que le millième du noyau, et peut-être sans dimension du tout.</p>
+<div class="formule">U = R × I<small>U en volts · R en ohms · I en ampères</small></div>
 
-<div class="image-mentale"><span class="tag">Image mentale — le Stade de France</span>
-<p>Gonflez un atome de cuivre jusqu'à la taille du <strong>Stade de France</strong> (250 m de diamètre).</p>
-<ul><li>Le <strong>noyau</strong>, avec ses protons et ses neutrons, serait un <strong>petit pois posé au rond central</strong>.</li>
-<li>Les <strong>électrons</strong> seraient <strong>plus petits que des grains de poussière</strong>, quelque part dans les tribunes.</li>
-<li>Entre les deux : <strong>absolument rien</strong>. Du vide.</li></ul>
-<p>Autrement dit : la clé plate que vous tenez en main est vide à <strong>99,999 999 999 %</strong>. Si vous pouviez tasser tous les noyaux de la Tour Eiffel les uns contre les autres, elle tiendrait dans un dé à coudre — et pèserait toujours 10 100 tonnes.</p></div>
-
-<div class="plaque"><span class="tag">Anecdote — l'électron a un an de moins que l'aspirine</span>
-<p>J.J. Thomson identifie l'électron en 1897 ; l'aspirine est commercialisée en 1899. Thomson l'appelle d'abord « corpuscule » et met des années à convaincre ses collègues qu'une particule <strong>1 800 fois plus légère que l'atome d'hydrogène</strong> peut exister. Cerise sur le gâteau : son fils George recevra à son tour le Nobel en 1937 — pour avoir démontré que l'électron se comporte aussi comme une <em>onde</em>. Le père a prouvé que c'était une particule, le fils que c'était une onde, et les deux avaient raison.</p></div>
-
-<h3>2.2 — Combien d'électrons libres dans un fil ?</h3>
-<p>Dans le cuivre, chaque atome cède <strong>un</strong> électron au groupe. Comme il y a énormément d'atomes, il y a énormément d'électrons libres :</p>
-<div class="formule">1 mm³ de cuivre ≈ 85 000 000 000 000 000 000 électrons libres<small>soit 8,5 × 10<sup>19</sup> dans un cube d'un millimètre de côté</small></div>
-<p>Prenons maintenant du concret : <strong>1 mètre de fil de 1,5 mm²</strong>, celui de vos circuits d'éclairage.</p>
-<div class="formule">≈ 130 000 000 000 000 000 000 000 électrons libres<small>1,3 × 10<sup>23</sup> — dans un seul mètre de fil ordinaire</small></div>
-
-<div class="image-mentale"><span class="tag">Image mentale — pour sentir 10<sup>23</sup></span>
-<p>Il y a environ <strong>7,5 × 10<sup>18</sup></strong> grains de sable sur toutes les plages de la Terre. Votre mètre de fil de 1,5 mm² contient donc à peu près <strong>17 000 fois plus d'électrons libres qu'il n'y a de grains de sable sur toutes les plages du monde</strong>. Dans un mètre de fil. Que vous coupez à la pince sans y penser.</p></div>
-
-<h3>2.3 — Le paradoxe de la lampe qui s'allume tout de suite</h3>
-<p>Voici le fait qui surprend tout le monde. Dans un fil de 1,5 mm² parcouru par 10 A, la vitesse de dérive des électrons est d'environ <strong>0,5 millimètre par seconde</strong>. Un escargot fait 30 fois mieux.</p>
-<p>Un électron qui part de votre interrupteur met donc <strong>plus d'une demi-heure</strong> pour atteindre une lampe située à 1 mètre. Et pourtant la lampe s'allume instantanément. Comment ?</p>
-
-<div class="image-mentale"><span class="tag">Image mentale — le tuyau d'arrosage</span>
-<p>Un tuyau de 20 m <strong>déjà plein d'eau</strong>. Vous ouvrez le robinet : l'eau sort au bout <strong>immédiatement</strong>. Ce n'est pas la molécule d'eau du robinet qui a fait 20 m en une fraction de seconde — c'est la <em>poussée</em> qui s'est propagée dans le tuyau plein.</p>
-<p>Le fil est le tuyau. Les électrons libres sont l'eau déjà dedans. La tension est la pression. <span class="cle">Ce qui va vite (200 000 km/s, les deux tiers de la vitesse de la lumière), c'est l'ordre de se mettre en marche. Les électrons, eux, vont à la vitesse de l'escargot.</span></p></div>
-
-<div class="plaque"><span class="tag">Anecdote — c'est même pire que ça</span>
-<p>En courant alternatif 50 Hz, le sens change 100 fois par seconde. Les électrons n'avancent donc pas du tout : ils font <strong>des allers-retours de quelques centièmes de millimètre</strong>, sur place, indéfiniment. L'électron qui est dans le filament de votre lampe de chevet y était probablement déjà quand la lampe est sortie de l'usine. Ce qui voyage, ce n'est jamais la matière : c'est l'<strong>énergie</strong>.</p></div>
-
-<div class="exo"><span class="tag">Exercice 2.1</span>
-<p>Un collègue affirme : « Le courant met du temps à arriver au bout d'une longue ligne, c'est pour ça qu'il y a des chutes de tension. » Que répondez-vous ?</p>
-<details><summary>Voir la réponse</summary><div class="rep"><p>C'est faux <em>et</em> le résultat est vrai, pour une autre raison. Le signal se propage à ~200 000 km/s : sur 1 km, il met 5 microsecondes, autant dire rien. La chute de tension vient de la <strong>résistance du câble</strong> (chapitre 1) et non d'un temps de trajet. Bon réflexe : chute de tension = problème de section, de longueur ou de serrage, jamais de « délai ».</p></div></details></div>
-
-<div class="exo"><span class="tag">Exercice 2.2</span>
-<p>Doublez la section du fil (3 mm² au lieu de 1,5 mm²) en gardant le même courant de 10 A. La vitesse de dérive des électrons augmente-t-elle, diminue-t-elle, ou reste-t-elle identique ?</p>
-<details><summary>Voir la réponse</summary><div class="rep"><p>Elle est <strong>divisée par deux</strong> (≈ 0,25 mm/s). Deux fois plus d'électrons disponibles pour transporter la même quantité par seconde : chacun peut aller deux fois moins vite. C'est exactement pourquoi un gros câble chauffe moins qu'un petit à courant égal.</p></div></details></div>
-
-  </div>
-</section>
-
-<!-- ================= CH 3 ================= -->
-<section class="ch" id="c3">
-  <div class="ch-head"><div class="ch-num">03</div><div class="ch-title">
-    <span class="kicker">Les deux unités fondatrices</span><h2>Le coulomb et l'ampère</h2></div></div>
-  <div class="ch-body">
-
-<p class="lede">Compter les électrons un par un est impossible. On les compte donc par paquets — c'est le coulomb — et on mesure le débit de ces paquets — c'est l'ampère. Rien de plus.</p>
-
-<h3>3.1 — Le coulomb : le paquet d'électrons</h3>
-<p>Un électron porte une charge électrique minuscule. Pour travailler avec des nombres humains, on a défini un paquet standard, le <strong>coulomb (C)</strong> :</p>
-<div class="formule">1 coulomb = 6 241 509 000 000 000 000 électrons<small>6,24 × 10<sup>18</sup> — la charge d'un seul électron vaut 1,6 × 10<sup>-19</sup> C</small></div>
-<p>Le coulomb est une <strong>quantité</strong>, pas un débit. Comme le litre : ça ne dit rien de la vitesse à laquelle ça coule.</p>
-
-<div class="plaque"><span class="tag">Anecdote — Coulomb l'ingénieur militaire</span>
-<p>Charles-Augustin de Coulomb (1736-1806) n'était pas un savant de cabinet. Officier du génie, il passe <strong>huit ans en Martinique</strong> à diriger la construction du Fort Bourbon avec 1 200 ouvriers, sous un climat qui ruine sa santé. Il en revient malade — et c'est cette convalescence forcée qui lui laisse le temps de faire de la physique.</p>
-<p>Son instrument, la <strong>balance de torsion</strong>, mesurait des forces si faibles qu'il fallait la protéger des courants d'air de la pièce. Détail savoureux pour des mécaniciens : Coulomb est aussi l'auteur des lois du <strong>frottement solide</strong> que vous utilisez en mécanique. Le même homme a donné son nom à l'unité de charge et à la loi de Coulomb sur le frottement.</p></div>
-
-<h3>3.2 — L'ampère : le débit</h3>
-<p>L'<strong>ampère (A)</strong> répond à la question : combien de coulombs passent par seconde à travers une section du fil ?</p>
-<div class="formule">1 ampère = 1 coulomb par seconde = 6,24 × 10<sup>18</sup> électrons par seconde<small>I = Q / t  ·  Q en coulombs, t en secondes, I en ampères</small></div>
-
-<figure class="anim">
-  <canvas id="a-amp" width="900" height="270" aria-label="Animation : compteur d'électrons traversant une section de fil"></canvas>
-  <div class="ctrls">
-    <div class="c"><label>Intensité <span id="a-amp-i">1 A</span></label><input type="range" id="a-amp-r" min="1" max="60" value="10"></div>
-    <div class="c readout" id="a-amp-out"></div>
-  </div>
-  <figcaption>Le plan de comptage (en vert) est une section du fil. Chaque électron qui le franchit incrémente le compteur. <b>Le nombre affiché est le nombre réel</b> : à 10 A, ce sont 62 milliards de milliards d'électrons qui passent chaque seconde devant votre pince ampèremétrique.</figcaption>
-</figure>
+<h3>6.1 — Lire la formule dans les trois sens</h3>
+<p>Une même relation, trois questions différentes. C'est la première chose à savoir faire, et la seule qu'on vous demandera en évaluation.</p>
+<div class="table-scroll">
+<table>
+<thead><tr><th>Ce que je cherche</th><th class="mono">Je calcule</th><th>La question que je me pose</th></tr></thead>
+<tbody>
+<tr><td><strong>La tension</strong> aux bornes d'un récepteur</td><td class="mono">U = R × I</td><td>« Quelle chute de tension ce composant provoque-t-il ? »</td></tr>
+<tr><td><strong>Le courant</strong> qui traverse un récepteur</td><td class="mono">I = U / R</td><td>« Combien d'ampères vont passer si je le branche là ? »</td></tr>
+<tr><td><strong>La résistance</strong> d'un récepteur</td><td class="mono">R = U / I</td><td>« Quelle est la valeur de ce composant, d'après mes mesures ? »</td></tr>
+</tbody></table>
+</div>
+<p>Les trois formes disent la même chose. Si vous ne devez en retenir qu'une, retenez <strong>U = R × I</strong> : les deux autres s'en déduisent en isolant la grandeur cherchée, exactement comme on passe de « prix = quantité × prix unitaire » à « quantité = prix / prix unitaire ».</p>
 
 <div class="image-mentale"><span class="tag">Image mentale — le péage</span>
-<p>Le <strong>coulomb</strong>, c'est « 6,24 milliards de milliards de voitures ». L'<strong>ampère</strong>, c'est « tant de voitures par heure au péage ». Le <strong>volt</strong>, c'est la pente de la route qui les pousse. La <strong>résistance</strong>, c'est le nombre de voies fermées pour travaux.</p></div>
+<p>Reprenez l'image du chapitre 3. Le <strong>courant</strong>, c'est le nombre de voitures qui passent par seconde. La <strong>résistance</strong>, c'est le nombre de barrières de péage à franchir. La <strong>tension</strong>, c'est ce qu'il faut payer à chaque voiture pour traverser.</p>
+<p>Trois barrières au lieu d'une, et pour faire passer le même flot de voitures, il faut payer trois fois plus cher : <strong>U = R × I</strong>. Ou bien, si vous refusez de payer davantage, il passera trois fois moins de voitures : <strong>I = U / R</strong>.</p>
+<p><span class="cle">La résistance, c'est le prix en volts qu'il faut payer par ampère.</span></p></div>
 
-<h3>3.3 — Ordres de grandeur à connaître par cœur</h3>
+<h3>6.2 — Ce que la loi dit vraiment</h3>
+<p>Au-delà du calcul, trois conséquences à s'approprier — ce sont elles qui servent au quotidien en atelier :</p>
+<ul>
+<li><strong>Pour un récepteur donné, la tension commande le courant.</strong> Doublez la tension, vous doublez le courant. C'est pourquoi une résistance de 24 V branchée par erreur sur 230 V voit passer près de dix fois trop de courant — et rend l'âme en quelques secondes.</li>
+<li><strong>Pour une tension donnée, c'est le récepteur qui décide du courant.</strong> Le réseau impose 230 V, point. Ce qui fixe l'intensité, c'est la résistance de ce que vous branchez. <span class="cle">Une prise ne « donne » pas 16 A : elle en autorise jusqu'à 16.</span> C'est tout le sujet du chapitre 8.</li>
+<li><strong>Une résistance qui tend vers zéro fait exploser le courant.</strong> Si R devient minuscule, I = U/R devient énorme. C'est la définition même du court-circuit, et vous en verrez les conséquences au chapitre 16.</li>
+</ul>
+
+<h3>6.3 — Attention : cette loi n'est pas universelle</h3>
+<p>Voici ce que beaucoup de cours passent sous silence, et qui vous évitera des diagnostics faux. <strong>La loi d'Ohm n'est pas une loi de la nature : c'est une propriété que possèdent certains composants et pas d'autres.</strong></p>
+<p>Un composant est dit <strong>ohmique</strong> lorsque sa résistance reste constante quelles que soient la tension et le courant. Tracez alors U en fonction de I : vous obtenez une <strong>droite</strong>. C'est le cas d'une résistance de chauffage, d'un fil, d'un bobinage à température stable.</p>
+<p>Mais beaucoup de composants d'atelier ne sont <em>pas</em> ohmiques :</p>
+<div class="table-scroll">
 <table>
-<thead><tr><th>Situation</th><th class="mono">Intensité</th><th>Remarque</th></tr></thead>
+<thead><tr><th>Composant</th><th>Comportement</th><th>Conséquence pratique</th></tr></thead>
 <tbody>
-<tr><td>Entrée d'un automate, capteur PNP</td><td class="mono">5 mA</td><td>0,005 A</td></tr>
-<tr><td>LED de signalisation</td><td class="mono">20 mA</td><td>Seuil de non-lâcher pour l'humain : ~10 mA</td></tr>
-<tr><td>Bobine de contacteur (maintien)</td><td class="mono">30 mA</td><td>Calibre du différentiel de protection des personnes</td></tr>
-<tr><td>Lampe 230 V / 60 W</td><td class="mono">0,26 A</td><td></td></tr>
-<tr><td>Perceuse d'établi 230 V</td><td class="mono">3 à 6 A</td><td></td></tr>
-<tr><td>Moteur asynchrone 3 kW / 400 V tri</td><td class="mono">≈ 6 A</td><td>Mais 40 A à l'enclenchement (courant d'appel)</td></tr>
-<tr><td>Poste à souder à l'arc</td><td class="mono">100 à 200 A</td><td>Sous très basse tension</td></tr>
-<tr><td>Démarreur de voiture</td><td class="mono">300 à 600 A</td><td>Sous 12 V, pendant 1 à 2 secondes</td></tr>
-<tr><td>Court-circuit en tête d'installation</td><td class="mono">3 000 à 6 000 A</td><td>Chapitre 13 — c'est ce que le disjoncteur doit couper</td></tr>
-<tr><td>Coup de foudre</td><td class="mono">30 000 A</td><td>Mais pendant 50 millionièmes de seconde</td></tr>
+<tr><td><strong>Lampe à incandescence</strong></td><td>Sa résistance augmente fortement en chauffant</td><td>À froid elle appelle un courant bien supérieur au nominal : c'est la pointe à l'allumage (chapitre 8)</td></tr>
+<tr><td><strong>Diode, LED</strong></td><td>Bloque en dessous d'un seuil, conduit brutalement au-delà</td><td>On ne branche jamais une LED sans résistance en série</td></tr>
+<tr><td><strong>Arc électrique</strong></td><td>Sa résistance <em>diminue</em> quand le courant augmente</td><td>L'arc s'auto-entretient : d'où la chambre de coupure du disjoncteur (chapitre 17)</td></tr>
+<tr><td><strong>Moteur en rotation</strong></td><td>Produit une tension qui s'oppose à son alimentation</td><td>À l'arrêt il appelle 5 à 8 fois son courant nominal : le courant d'appel</td></tr>
 </tbody></table>
+</div>
+<p>Pour tous ceux-là, on peut encore écrire R = U / I à un instant donné — on parle alors de <em>résistance apparente</em> — mais cette valeur change avec le point de fonctionnement. <strong>Mesurer la résistance d'une lampe froide à l'ohmmètre et en déduire le courant qu'elle appellera en service donne un résultat totalement faux.</strong></p>
 
-<div class="plaque"><span class="tag">Anecdote — Ampère, l'enfant de la Terreur</span>
-<p>André-Marie Ampère (1775-1836), Lyonnais, autodidacte : à 13 ans il a lu toute l'<em>Encyclopédie</em> de Diderot, dans l'ordre alphabétique. En <strong>1793</strong>, son père, juge de paix, est guillotiné place des Terreaux. Ampère sombre dans une prostration d'un an. Il est sorti de là, dit la légende, par la lecture d'un traité de botanique et par la vue de quelques fleurs.</p>
-<p>Le 11 septembre 1820, il assiste à la présentation de l'expérience d'Œrsted (chapitre 5). <strong>Une semaine plus tard</strong>, le 18 septembre, il présente à l'Académie la théorie complète de ce qu'il baptise l'<em>électrodynamique</em>. Une semaine. Maxwell l'appellera « le Newton de l'électricité ».</p>
-<p>Détail qui vous concerne directement : jusqu'en <strong>2019</strong>, l'ampère était défini par la force entre deux fils parallèles — donc par du magnétisme. Depuis le 20 mai 2019, il est défini par la charge de l'électron, fixée une fois pour toutes. Le cours que vous lisez suit exactement cette nouvelle définition : on part de l'électron, on arrive à l'ampère.</p></div>
+<figure class="anim">
+  <canvas id="a-ohm" width="900" height="380" aria-label="Animation : loi d'Ohm, circuit et caractéristique tension-courant"></canvas>
+  <div class="ctrls">
+    <div class="c"><label>Tension du générateur <span id="a-o-u-l">12,0 V</span></label><input type="range" id="a-o-u" min="0" max="240" value="120"></div>
+    <div class="c"><label>Résistance <span id="a-o-r-l">24 Ω</span></label><input type="range" id="a-o-r" min="2" max="120" value="24"></div>
+    <div class="c"><label>Composant <span id="a-o-c-l">résistance</span></label><input type="range" id="a-o-c" min="0" max="2" value="0"></div>
+    <div class="c readout" id="a-o-out"></div>
+  </div>
+  <figcaption>À gauche le circuit, à droite sa <b>caractéristique</b> : le courant obtenu en fonction de la tension appliquée. <b>Avec une résistance</b>, c'est une <b>droite</b> — doublez la tension, vous doublez le courant, et la pente vaut exactement 1/R. C'est cela, être ohmique. <b>Choisissez la lampe</b> : la courbe se couche, parce qu'en chauffant le filament devient plus résistant. <b>Choisissez la diode</b> : rien ne passe en dessous de 0,7 V, puis le courant s'emballe — brancher une LED sans résistance en série la détruit en un instant. <b>Descendez la résistance à 2 Ω</b> sous forte tension : vous voyez naître le court-circuit.</figcaption>
+</figure>
+<script>
+(function(){
+  "use strict";
+  var COMP=['résistance','lampe à filament','diode / LED'];
+  var U=MSPC.ctrl('a-o-u', function(v){ return (v/10).toFixed(1).replace('.',',')+' V'; }, 'a-o-u-l');
+  var R=MSPC.ctrl('a-o-r', function(v){ return v+' Ω'; }, 'a-o-r-l');
+  var C=MSPC.ctrl('a-o-c', function(v){ return COMP[v]; }, 'a-o-c-l');
+  var out=document.getElementById('a-o-out');
+  var flux=0;
 
-<div class="exo"><span class="tag">Exercice 3.1</span>
-<p>Un chargeur débite 2 A pendant 90 minutes. Quelle quantité de charge a transité ?</p>
-<details><summary>Voir la réponse</summary><div class="rep"><p>Q = I × t = 2 × (90 × 60) = 2 × 5 400 = <strong>10 800 C</strong>.<br>Soit environ 6,7 × 10<sup>22</sup> électrons. À noter : les batteries s'expriment en <strong>Ah</strong> (ampères-heures), et 1 Ah = 3 600 C. Ici : 3 Ah.</p></div></details></div>
+  function courant(u,r,type){
+    if(u<=0) return 0;
+    if(type===0) return u/r;
+    if(type===1){                       // filament : R croît avec l'échauffement
+      var i=u/r;
+      for(var k=0;k<24;k++){ i=u/(r*(1+2.6*Math.pow(i*r/24,1.15))); }
+      return i;
+    }
+    return u<0.7 ? u*0.0008 : (u-0.7)/Math.max(0.6,r*0.05)*0.55;
+  }
 
-<div class="exo"><span class="tag">Exercice 3.2</span>
-<p>Une batterie de voiture est marquée « 60 Ah ». Combien de temps peut-elle théoriquement alimenter une veilleuse consommant 0,5 A ?</p>
-<details><summary>Voir la réponse</summary><div class="rep"><p>t = 60 / 0,5 = <strong>120 heures</strong>, soit 5 jours. <em>En pratique nettement moins</em> : la capacité annoncée vaut pour un régime de décharge lent et normalisé, et une batterie plomb qu'on descend trop bas est détruite. Mais l'ordre de grandeur suffit à expliquer pourquoi une portière mal fermée vide une batterie en un week-end.</p></div></details></div>
+  MSPC.anim('a-ohm', function(a){
+    var ctx=a.ctx, W=a.W, H=a.H, dt=a.dt;
+    var Uv=U.val/10, Rv=R.val, ty=C.val;
+    var Iv=courant(Uv,Rv,ty), P=Uv*Iv, Rapp=Iv>0.0005?Uv/Iv:Infinity;
+    flux+=Iv*dt*0.10;
+    MSPC.fond(ctx,W,H);
 
-<div class="exo"><span class="tag">Exercice 3.3</span>
-<p>Combien d'électrons passent en 1 minute dans une LED parcourue par 20 mA ?</p>
-<details><summary>Voir la réponse</summary><div class="rep"><p>Q = 0,02 × 60 = 1,2 C, soit 1,2 × 6,24 × 10<sup>18</sup> ≈ <strong>7,5 × 10<sup>18</sup> électrons</strong>. Environ le nombre de grains de sable sur toutes les plages de la Terre — en une minute, dans une LED de tableau de commande.</p></div></details></div>
+    /* ---------- le circuit ---------- */
+    var x1=60, x2=400, yh=110, yb=250, cy=(yh+yb)/2;
+    ctx.strokeStyle='#8d968b'; ctx.lineWidth=2.4;
+    ctx.beginPath();
+    ctx.moveTo(x1,yh); ctx.lineTo(x2,yh); ctx.lineTo(x2,yb); ctx.lineTo(x1,yb); ctx.lineTo(x1,yh);
+    ctx.stroke();
+    ctx.fillStyle='#0d120f'; ctx.fillRect(x1-16,cy-30,32,60);
+    ctx.strokeStyle='#c8d834'; ctx.lineWidth=3;
+    ctx.beginPath(); ctx.moveTo(x1,cy-16); ctx.lineTo(x1,cy+16); ctx.stroke();
+    ctx.lineWidth=2;
+    ctx.beginPath(); ctx.moveTo(x1-9,cy-8); ctx.lineTo(x1-9,cy+8); ctx.stroke();
+    MSPC.mono(ctx,Uv.toFixed(1).replace('.',',')+' V',x1-22,cy+52,11.5,'#c8d834','center');
+
+    if(ty===0){
+      ctx.fillStyle='#1a2019'; ctx.fillRect(x2-15,cy-34,30,68);
+      ctx.strokeStyle='#e08b6a'; ctx.lineWidth=2.2; ctx.strokeRect(x2-15,cy-34,30,68);
+    } else if(ty===1){
+      var br=Math.min(1,P/40);
+      if(br>0.02){
+        var g=ctx.createRadialGradient(x2,cy,3,x2,cy,66);
+        g.addColorStop(0,'rgba(255,233,160,'+(0.6*br)+')');
+        g.addColorStop(1,'rgba(255,233,160,0)');
+        ctx.fillStyle=g; ctx.beginPath(); ctx.arc(x2,cy,66,0,6.2832); ctx.fill();
+      }
+      ctx.strokeStyle=br>0.05?'#ffe9a0':'#8d968b'; ctx.lineWidth=2.2;
+      ctx.beginPath(); ctx.arc(x2,cy,21,0,6.2832); ctx.stroke();
+      ctx.beginPath(); ctx.moveTo(x2-14,cy-14); ctx.lineTo(x2+14,cy+14);
+      ctx.moveTo(x2+14,cy-14); ctx.lineTo(x2-14,cy+14); ctx.stroke();
+    } else {
+      ctx.strokeStyle='#5cc4e0'; ctx.lineWidth=2.2; ctx.fillStyle='rgba(92,196,224,.35)';
+      ctx.beginPath(); ctx.moveTo(x2-16,cy-18); ctx.lineTo(x2-16,cy+18); ctx.lineTo(x2+14,cy); ctx.closePath();
+      ctx.fill(); ctx.stroke();
+      ctx.beginPath(); ctx.moveTo(x2+14,cy-18); ctx.lineTo(x2+14,cy+18); ctx.stroke();
+    }
+    MSPC.mono(ctx,COMP[ty].toUpperCase(),x2+32,cy+4,10.5,'#e08b6a');
+
+    var per=2*(x2-x1)+2*(yb-yh);
+    for(var e=0;e<26;e++){
+      var u=((e/26)+flux)%1, d=u*per, px,py;
+      if(d<(x2-x1)){ px=x2-d; py=yb; }
+      else if(d<(x2-x1)+(yb-yh)){ px=x1; py=yb-(d-(x2-x1)); }
+      else if(d<2*(x2-x1)+(yb-yh)){ px=x1+(d-(x2-x1)-(yb-yh)); py=yh; }
+      else { px=x2; py=yh+(d-2*(x2-x1)-(yb-yh)); }
+      ctx.fillStyle='rgba(200,216,52,'+(Iv>0.002?0.9:0.25)+')';
+      ctx.beginPath(); ctx.arc(px,py,3.4,0,6.2832); ctx.fill();
+    }
+    MSPC.mono(ctx,'I = '+(Iv<1?(Iv*1000).toFixed(0)+' mA':Iv.toFixed(2)+' A'),(x1+x2)/2,yb+28,13,'#c8d834','center');
+
+    /* ---------- la caractéristique ---------- */
+    var box={x:520,y:70,w:330,h:196};
+    var Imax=(ty===0)?Math.max(1.2,24/Math.max(2,Rv)*1.1):(ty===1?2.2:2.6);
+    var ax=MSPC.axes(ctx,box,24,Imax,'tension U (V)','courant I (A)');
+    ctx.strokeStyle='#f0a844'; ctx.lineWidth=2.6; ctx.beginPath();
+    for(var s=0;s<=160;s++){
+      var uu=s/160*24, ii=Math.min(courant(uu,Rv,ty),Imax);
+      if(s===0) ctx.moveTo(ax.X(uu),ax.Y(ii)); else ctx.lineTo(ax.X(uu),ax.Y(ii));
+    }
+    ctx.stroke();
+    var leg = ty===0 ? 'une DROITE : la pente vaut 1/R'
+            : (ty===1 ? 'elle se COUCHE : R augmente en chauffant'
+                      : 'un SEUIL, puis une montée brutale');
+    MSPC.mono(ctx,leg,box.x+10,box.y+16,10.5,'#f0a844');
+    var px2=ax.X(Math.min(Uv,24)), py2=ax.Y(Math.min(Iv,Imax));
+    ctx.strokeStyle='rgba(255,255,255,.35)'; ctx.setLineDash([3,3]); ctx.lineWidth=1;
+    ctx.beginPath(); ctx.moveTo(ax.x0,py2); ctx.lineTo(px2,py2); ctx.lineTo(px2,ax.y0); ctx.stroke();
+    ctx.setLineDash([]);
+    ctx.fillStyle='#fff'; ctx.beginPath(); ctx.arc(px2,py2,5.5,0,6.2832); ctx.fill();
+
+    /* ---------- les chiffres ---------- */
+    function bloc(x,val,lab,col){ MSPC.titre(ctx,val,x,332,24,col); MSPC.mono(ctx,lab,x,348,9.5,'#8d968b'); }
+    bloc(60, Uv.toFixed(1).replace('.',',')+' V','TENSION APPLIQUÉE','#c8d834');
+    bloc(228, (Iv<1?(Iv*1000).toFixed(0)+' mA':Iv.toFixed(2)+' A'),'COURANT OBTENU',Iv>8?'#ff6a5e':'#e6ebe4');
+    bloc(398, (isFinite(Rapp)?(Rapp<1000?Rapp.toFixed(1)+' Ω':'—'):'très grande'), ty===0?'RÉSISTANCE  R = U / I':'RÉSISTANCE APPARENTE','#e08b6a');
+    bloc(626, (P<1000?P.toFixed(1)+' W':(P/1000).toFixed(2)+' kW'),'PUISSANCE  P = U × I',P>200?'#ff6a5e':'#f0a844');
+
+    var msg,mc;
+    if(ty===0 && Iv>8){ msg='Résistance très faible sous forte tension : le courant s’emballe. C’est le mécanisme du court-circuit.'; mc='#ff6a5e'; }
+    else if(ty===0){ msg='U = R × I  →  '+Uv.toFixed(1).replace('.',',')+' = '+Rv+' × '+Iv.toFixed(3).replace('.',',')+'   — vraie à chaque instant.'; mc='#8d968b'; }
+    else if(ty===1){ msg='R = U/I vaut '+(isFinite(Rapp)?Rapp.toFixed(1):'—')+' Ω ici, mais cette valeur change dès que la tension change.'; mc='#f0a844'; }
+    else { msg='Une diode n’a pas de résistance : elle a un seuil. La loi d’Ohm ne s’y applique pas.'; mc='#5cc4e0'; }
+    MSPC.mono(ctx,msg,60,370,11,mc);
+
+    out.innerHTML = ty===0
+      ? 'I = U / R = '+Uv.toFixed(1).replace('.',',')+' / '+Rv+' = <b>'+(Iv<1?(Iv*1000).toFixed(0)+' mA':Iv.toFixed(2)+' A')+'</b>'
+      : '<b>Composant non ohmique</b><br>R apparente = '+(isFinite(Rapp)?Rapp.toFixed(1)+' Ω':'très grande')+', et elle varie';
+  }, {fixed:true});
+})();
+</script>
+
+<div class="plaque"><span class="tag">Anecdote — la loi qui a coûté son poste à son auteur</span>
+<p><strong>Georg Simon Ohm</strong> est en 1825 un modeste professeur de mathématiques au collège jésuite de Cologne. Ni laboratoire, ni crédits, ni assistant. Il fabrique lui-même ses fils en étirant du métal, se procure une pile thermoélectrique parce qu'elle est plus stable que les piles chimiques de l'époque, et mesure, mesure, mesure.</p>
+<p>En 1827 il publie ses résultats. L'accueil est brutal. Le ministre prussien de l'Instruction déclare qu'un professeur qui écrit de telles choses n'est pas digne d'enseigner les sciences ; un critique influent qualifie son travail de « <em>tissu de fantaisies nues</em> » dont le seul but serait de « <em>détruire la dignité de la nature</em> ». Le tort d'Ohm ? Avoir osé décrire un phénomène physique par une <strong>équation mathématique</strong>, ce que la philosophie allemande dominante jugeait vulgaire.</p>
+<p>Ohm démissionne de son poste et vit six années difficiles, sans situation stable. La reconnaissance viendra de l'étranger : en <strong>1841</strong>, la Royal Society de Londres lui décerne la <strong>médaille Copley</strong>, sa plus haute distinction. L'Allemagne suit enfin, et il obtient une chaire à Munich en 1852, deux ans avant sa mort.</p>
+<p><span class="cle">La formule la plus utilisée de toute l'électricité a été jugée indigne d'être enseignée.</span> Souvenez-vous-en le jour où l'on vous dira qu'une mesure de terrain ne vaut pas un raisonnement de bureau.</p></div>
+
+<div class="exo"><span class="tag">Exercice 6.1</span>
+<p>Une résistance de chauffage de 46 Ω est branchée sur 230 V. Quel courant la traverse ? Quelle puissance dissipe-t-elle ?</p>
+<details><summary>Voir la réponse</summary><div class="rep">
+<p><strong>Étape 1 — repérer ce qu'on connaît et ce qu'on cherche.</strong><br>On connaît la tension U = 230 V et la résistance R = 46 Ω. On cherche le courant I.</p>
+<p><strong>Étape 2 — choisir la bonne forme de la loi d'Ohm.</strong><br>La forme de base est U = R × I. Comme c'est I qu'on cherche, on isole I en divisant les deux membres par R :<br>I = U / R</p>
+<p><strong>Étape 3 — remplacer par les valeurs.</strong><br>I = 230 / 46 = <strong>5 A</strong></p>
+<p><strong>Étape 4 — la puissance.</strong><br>P = U × I = 230 × 5 = <strong>1 150 W</strong>, soit environ 1,15 kW.</p>
+<p><em>Contrôle de bon sens : 1 150 W sous 230 V, c'est l'ordre de grandeur d'une bouilloire ou d'un radiateur soufflant. Le résultat est donc crédible. Prenez toujours cette seconde de vérification : si vous aviez trouvé 5 mA ou 500 A, quelque chose clocherait.</em></p>
+<p><em>Autre chemin possible : P = R × I² = 46 × 5² = 46 × 25 = 1 150 W. Les deux formules donnent le même résultat, c'est normal — il suffit de remplacer U par R × I dans P = U × I.</em></p></div></details></div>
+
+<div class="exo"><span class="tag">Exercice 6.2</span>
+<p>Sur un moteur à l'arrêt, vous mesurez entre deux bornes 12 V et 8 A. Quelle est la résistance de l'enroulement ? Le même moteur, une fois lancé sous 400 V, n'absorbe que 6 A. Sa résistance a-t-elle changé ?</p>
+<details><summary>Voir la réponse</summary><div class="rep">
+<p><strong>Première mesure — à l'arrêt.</strong><br>On cherche R, on connaît U et I. On part de U = R × I et on isole R en divisant par I :<br>R = U / I = 12 / 8 = <strong>1,5 Ω</strong>.<br>C'est bien la résistance du cuivre de l'enroulement.</p>
+<p><strong>Deuxième mesure — en rotation.</strong><br>Si l'on applique aveuglément la même formule : R = 400 / 6 = <strong>66,7 Ω</strong>.<br>Le résultat est absurde : personne n'a remplacé le cuivre du bobinage, sa résistance vaut toujours 1,5 Ω.</p>
+<p><strong>Alors que s'est-il passé ?</strong><br>Un moteur en rotation ne se comporte pas comme une simple résistance. En tournant, il devient lui-même une petite génératrice (c'est l'induction du chapitre 11) et produit une tension qui <strong>s'oppose</strong> à celle qui l'alimente : la <em>force contre-électromotrice</em>.</p>
+<p>Ce ne sont donc pas 400 V qui poussent le courant dans le cuivre, mais seulement la <strong>différence</strong> entre 400 V et cette tension opposée. Cette différence vaut ici R × I = 1,5 × 6 = 9 V. Le reste, soit 391 V, est converti en énergie mécanique — c'est le travail utile du moteur.</p>
+<p><em>Conséquence capitale en atelier : <strong>un moteur bloqué ne produit plus de force contre-électromotrice.</strong> Il ne reste alors que les 1,5 Ω du cuivre, et le courant devient 400 / 1,5 ≈ 267 A au lieu de 6 A. Voilà pourquoi un moteur calé grille en quelques secondes, et pourquoi il faut un relais thermique.</em></p></div></details></div>
+
+<div class="exo"><span class="tag">Exercice 6.3</span>
+<p>Un câble de cuivre de 2,5 mm², d'une longueur totale de 40 m aller-retour, alimente une machine qui consomme 16 A depuis une prise à 230 V. Quelle est la chute de tension dans le câble ? Quelle tension la machine reçoit-elle réellement ?</p>
+<details><summary>Voir la réponse</summary><div class="rep">
+<p><strong>Étape 1 — la résistance du câble.</strong><br>On reprend le chapitre 5 : R = ρ × L / S, avec pour le cuivre ρ = 0,0168 Ω·mm²/m.<br>Attention à la longueur : le courant fait l'aller <em>et</em> le retour, il parcourt donc bien 40 m de conducteur.<br>R = 0,0168 × 40 / 2,5 = 0,672 / 2,5 = <strong>0,269 Ω</strong>.</p>
+<p><strong>Étape 2 — la chute de tension, par la loi d'Ohm.</strong><br>Cette résistance est traversée par 16 A. La tension qu'elle consomme au passage vaut :<br>U = R × I = 0,269 × 16 = <strong>4,3 V</strong>.</p>
+<p><strong>Étape 3 — ce que reçoit réellement la machine.</strong><br>230 − 4,3 = <strong>225,7 V</strong>. La machine ne reçoit donc pas 230 V.</p>
+<p><strong>Étape 4 — est-ce acceptable ?</strong><br>On exprime la chute en pourcentage : 4,3 / 230 = 0,0187, soit <strong>1,9 %</strong>. La limite usuelle pour un circuit de force étant de 5 %, on est largement dans les clous.</p>
+<p><em>Deux remarques qui servent tous les jours. D'abord, cette chute est <strong>proportionnelle au courant</strong> : la même rallonge sur 32 A ferait chuter 8,6 V. Ensuite, cette tension perdue ne s'évapore pas — elle est dissipée en chaleur dans le câble : P = U × I = 4,3 × 16 ≈ 69 W répartis sur sa longueur. C'est exactement pour cela qu'un enrouleur non déroulé chauffe (chapitre 7).</em></p></div></details></div>
+
+<div class="exo"><span class="tag">Exercice 6.4</span>
+<p>Un collègue mesure à l'ohmmètre le filament d'une ampoule 230 V / 60 W éteinte : il lit 65 Ω. Il en déduit qu'elle appellera 230 / 65 ≈ 3,5 A, soit 815 W. Où est l'erreur ?</p>
+<details><summary>Voir la réponse</summary><div class="rep">
+<p><strong>Son calcul est juste, mais il applique la loi d'Ohm à un composant qui ne la respecte pas.</strong></p>
+<p><strong>Ce que vaut réellement la résistance en service.</strong><br>Partons de la plaque : 60 W sous 230 V. Le courant nominal vaut I = P / U = 60 / 230 = 0,26 A.<br>La résistance en fonctionnement est donc R = U / I = 230 / 0,26 = <strong>885 Ω</strong>.</p>
+<p><strong>Comparons.</strong> 885 Ω à chaud contre 65 Ω à froid : la résistance du filament est environ <strong>13 fois plus grande</strong> une fois porté à 2 500 °C. C'est le mécanisme du chapitre 5 — plus le métal est chaud, plus ses ions vibrent, plus les électrons sont déviés.</p>
+<p><strong>Alors, ces 3,5 A existent-ils ?</strong> Oui — mais pendant quelques millisecondes seulement, à l'instant précis de l'allumage, tant que le filament est encore froid. Puis il chauffe, sa résistance monte, et le courant retombe à 0,26 A.</p>
+<p><em>Cette pointe de courant à l'allumage explique deux choses bien connues : une ampoule grille presque toujours <strong>au moment où on l'allume</strong>, et un circuit d'éclairage comportant beaucoup de lampes peut faire déclencher un disjoncteur à la mise sous tension alors qu'il tient sans problème en régime établi.</em></p></div></details></div>
+
+<div class="exo"><span class="tag">Exercice 6.5</span>
+<p>La résistance du corps humain, mains sèches, est d'environ 5 000 Ω ; mains mouillées, elle tombe vers 1 000 Ω. Calculez le courant qui traverserait une personne touchant 230 V dans les deux cas, puis sous 24 V. Sachant que le seuil de fibrillation cardiaque se situe vers 30 mA, commentez.</p>
+<details><summary>Voir la réponse</summary><div class="rep">
+<p>On applique I = U / R dans les quatre situations.</p>
+<div class="table-scroll"><table>
+<thead><tr><th>Situation</th><th class="mono">Calcul</th><th class="mono">Courant</th><th>Conséquence</th></tr></thead>
+<tbody>
+<tr><td>230 V, mains sèches</td><td class="mono">230 / 5 000</td><td class="mono">46 mA</td><td>Au-dessus du seuil : <strong>potentiellement mortel</strong></td></tr>
+<tr><td>230 V, mains mouillées</td><td class="mono">230 / 1 000</td><td class="mono">230 mA</td><td><strong>Mortel</strong> — près de huit fois le seuil</td></tr>
+<tr><td>24 V, mains sèches</td><td class="mono">24 / 5 000</td><td class="mono">4,8 mA</td><td>Perceptible, sans danger</td></tr>
+<tr><td>24 V, mains mouillées</td><td class="mono">24 / 1 000</td><td class="mono">24 mA</td><td>Désagréable ; sous le seuil, mais on s'en approche</td></tr>
+</tbody></table></div>
+<p><strong>Ce que ces quatre nombres démontrent :</strong></p>
+<ol>
+<li><strong>230 V est dangereux dans tous les cas</strong>, même mains sèches. Il n'existe pas de « bonnes conditions » pour toucher le réseau.</li>
+<li><strong>L'humidité multiplie le courant par cinq</strong> à tension égale. C'est le seul paramètre qui dépende de votre état personnel — d'où l'interdiction d'intervenir les mains moites ou en milieu humide.</li>
+<li><strong>La TBTS 24 V protège réellement</strong>, et c'est un choix de conception : on n'a pas rendu le corps plus résistant, on a baissé la tension qui pousse le courant à travers lui.</li>
+<li>La dernière ligne montre pourtant que <strong>24 V en milieu très humide n'est plus totalement anodin</strong> : c'est pourquoi la norme abaisse le seuil de TBTS à 12 V dans les locaux mouillés, et à 6 V en immersion.</li>
+</ol>
+<p><em>Rappel du chapitre 4 : on exprime les seuils de sécurité en volts et non en ampères, parce qu'on ne peut pas agir sur la résistance d'un corps humain — on ne peut agir que sur la tension.</em></p></div></details></div>
 
   </div>
 </section>
 
-<!-- ================= CH 4 ================= -->
-<section class="ch" id="c4">
-  <div class="ch-head"><div class="ch-num">04</div><div class="ch-title">
+<section class="ch" id="c7">
+  <div class="ch-head"><div class="ch-num">07</div><div class="ch-title">
     <span class="kicker">Quand les chocs deviennent de la chaleur</span><h2>L'effet Joule</h2></div></div>
   <div class="ch-body">
 
 <p class="lede">Chapitre 1 : les électrons percutent les ions du réseau. Chapitre 4 : ces chocs, mis bout à bout, c'est du chauffage. Parfois voulu, souvent subi, toujours présent.</p>
 
-<h3>4.1 — Le mécanisme</h3>
+<h3>7.1 — Le mécanisme</h3>
 <p>Un électron accéléré par la tension percute un ion. Il lui transmet son énergie. L'ion se met à vibrer plus fort autour de sa position. <strong>Des milliards de milliards de chocs par seconde</strong>, et le métal s'échauffe. C'est l'<strong>effet Joule</strong>.</p>
 <p>Point capital : cet effet <span class="cle">n'est jamais nul</span>. Tout conducteur qui porte du courant chauffe. La seule question est : de combien ?</p>
 
@@ -1157,17 +1653,17 @@
   <figcaption>Le même courant dans deux sections différentes ne donne pas du tout le même échauffement. <b>Poussez à 40 A sur du 1,5 mm²</b> et regardez : c'est exactement le scénario d'une multiprise surchargée.</figcaption>
 </figure>
 
-<h3>4.2 — L'effet Joule qu'on veut</h3>
+<h3>7.2 — L'effet Joule qu'on veut</h3>
 <ul>
 <li><strong>Chauffage et cuisson</strong> — radiateur, four, grille-pain, plaque électrique, chauffe-eau. Rendement 100 % : tout ce qui rentre sort en chaleur.</li>
 <li><strong>Le fer à souder, le décapeur thermique, le pistolet à colle</strong> — vos outils d'atelier.</li>
 <li><strong>Les fusibles</strong> — un fil calibré pour fondre avant les autres. C'est de l'effet Joule mis au service de la protection.</li>
 <li><strong>La soudure par points</strong> en carrosserie : deux électrodes, 10 000 A pendant un dixième de seconde, la tôle fond localement.</li>
-<li><strong>Le relais thermique</strong> de vos démarreurs moteur : un bilame que le courant chauffe, chapitre 14.</li>
+<li><strong>Le relais thermique</strong> de vos démarreurs moteur : un bilame que le courant chauffe, chapitre 17.</li>
 <li><strong>La coupe au fil chaud</strong> du polystyrène, la thermosoudeuse à sachets.</li>
 </ul>
 
-<h3>4.3 — L'effet Joule qu'on subit</h3>
+<h3>7.3 — L'effet Joule qu'on subit</h3>
 <ul>
 <li><strong>Les pertes en ligne</strong> sur le réseau électrique — environ <strong>30 TWh par an en France</strong>, soit la production annuelle de trois réacteurs nucléaires, dissipée en pure chaleur dans les câbles. Chapitre 11.</li>
 <li><strong>L'échauffement des moteurs</strong> — les « pertes cuivre » dans les bobinages, qui obligent à ventiler.</li>
@@ -1184,34 +1680,106 @@
 <div class="plaque"><span class="tag">Anecdote — 95 % de chauffage, 5 % de lumière</span>
 <p>L'ampoule à incandescence était un radiateur qui, accessoirement, éclairait : sur 100 W absorbés, <strong>95 W partaient en chaleur</strong>. C'est pour ça qu'on se brûlait en la changeant, et c'est pour ça qu'elle a été retirée du marché européen entre 2009 et 2012. Une LED de même flux consomme 8 W. Le même « défaut » était pourtant un argument de vente pour le <em>Easy-Bake Oven</em>, le petit four à gâteaux pour enfants vendu aux États-Unis à partir de 1963 : il cuisait avec <strong>deux ampoules de 100 W</strong>. Il a fallu le redessiner en 2011, faute d'ampoules à incandescence disponibles.</p></div>
 
-<div class="exo"><span class="tag">Exercice 4.1</span>
+<div class="exo"><span class="tag">Exercice 7.1</span>
 <p>Un câble de résistance 0,2 Ω transporte 10 A. Quelle puissance y est dissipée ? Et si le courant monte à 20 A ?</p>
 <details><summary>Voir la réponse</summary><div class="rep"><p>À 10 A : P = 0,2 × 10² = <strong>20 W</strong>.<br>À 20 A : P = 0,2 × 20² = <strong>80 W</strong>.<br>Le courant a doublé, l'échauffement a quadruplé. 80 W dans un câble, c'est l'équivalent d'un petit radiateur d'appoint réparti sur sa longueur.</p></div></details></div>
 
-<div class="exo"><span class="tag">Exercice 4.2</span>
+<div class="exo"><span class="tag">Exercice 7.2</span>
 <p>Une multiprise 16 A alimente : un radiateur soufflant 2 000 W, un PC 150 W et une lampe 60 W, sous 230 V. Y a-t-il un problème ?</p>
 <details><summary>Voir la réponse</summary><div class="rep"><p>Total = 2 210 W → I = 2 210 / 230 = <strong>9,6 A</strong>. Sous le calibre : pas de surcharge <em>en théorie</em>.<br><strong>En pratique, si.</strong> 9,6 A traversent des contacts de multiprise en laiton mince et souvent des rallonges de 1 mm². Les résistances de contact font le reste. C'est le scénario type d'incendie domestique en hiver. Règle d'atelier : <strong>un appareil de chauffage se branche toujours directement au mur</strong>, jamais sur une multiprise.</p></div></details></div>
 
-<div class="exo"><span class="tag">Exercice 4.3</span>
+<div class="exo"><span class="tag">Exercice 7.3</span>
 <p>Pourquoi les bobinages d'un moteur sont-ils en cuivre, mais les résistances de four en nichrome, alors que le nichrome est bien meilleur marché ?</p>
 <details><summary>Voir la réponse</summary><div class="rep"><p>Parce que les objectifs sont opposés. Dans un moteur, l'effet Joule est une <strong>perte</strong> : on cherche la résistance la plus faible possible → cuivre. Dans un four, l'effet Joule est le <strong>produit</strong> : on cherche une forte résistance qui supporte 1 000 °C sans s'oxyder → nichrome. Le cuivre, lui, s'oxyde et casse dès 300-400 °C à l'air.</p></div></details></div>
 
   </div>
 </section>
 
-<!-- ================= CH 5 ================= -->
-<section class="ch" id="c5">
-  <div class="ch-head"><div class="ch-num">05</div><div class="ch-title">
+<section class="ch" id="c8">
+  <div class="ch-head"><div class="ch-num">08</div><div class="ch-title">
+    <span class="kicker">Retour au concret</span><h2>Le circuit simple : c'est la lampe qui décide</h2></div></div>
+  <div class="ch-body">
+
+<p class="lede">Après le réseau national, revenons à trois composants : une pile, un interrupteur, une lampe. C'est là que se joue l'erreur de raisonnement la plus répandue chez les débutants.</p>
+
+<h3>8.1 — Les quatre éléments d'un circuit</h3>
+<ol>
+<li>Un <strong>générateur</strong> — il impose la tension (pile, prise, alimentation stabilisée)</li>
+<li>Un <strong>récepteur</strong> — il transforme l'énergie électrique en autre chose (lumière, chaleur, mouvement)</li>
+<li>Des <strong>conducteurs</strong> — ils relient, idéalement sans rien consommer</li>
+<li>Un <strong>organe de commande et de protection</strong> — interrupteur, disjoncteur</li>
+</ol>
+<p>Et une condition absolue : <strong>le circuit doit être fermé</strong>. Une boucle complète, sans interruption. Coupez n'importe où, tout s'arrête partout.</p>
+
+<h3>8.2 — L'erreur à corriger tout de suite</h3>
+<div class="encadre"><span class="tag">Idée fausse</span>
+<p><em>« La prise envoie 16 A dans la lampe. »</em> — <strong>Non.</strong></p>
+<p>La prise <strong>propose</strong> une tension (230 V) et <strong>autorise</strong> un courant maximal (16 A, fixé par le disjoncteur). Mais le courant qui circule réellement est déterminé par <strong>la résistance du récepteur branché</strong>.</p>
+<p>Branchez une lampe de 5 W : il passe 22 mA. Branchez un radiateur de 2 000 W : il passe 8,7 A. Même prise, même tension. <span class="cle">C'est le récepteur qui décide.</span></p></div>
+
+<div class="formule">I = U / R<small>Loi d'Ohm — la tension est imposée par la source, la résistance par le récepteur, le courant en découle</small></div>
+
+<div class="image-mentale"><span class="tag">Image mentale</span>
+<p>Un robinet ouvert à fond (la tension) au bout duquel vous branchez successivement une paille, un tuyau d'arrosage, puis une lance à incendie. La pression est la même à chaque fois. Le débit, non. <strong>C'est l'embout qui fixe le débit, pas le robinet.</strong></p></div>
+
+<figure class="anim">
+  <canvas id="a-circ" width="900" height="330" aria-label="Animation : circuit simple avec lampe, interrupteur et mesures"></canvas>
+  <div class="ctrls">
+    <div class="c"><button class="btn" id="a-circ-sw">Fermer l'interrupteur</button></div>
+    <div class="c"><label>Récepteur <span id="a-circ-rl">Lampe 60 W</span></label><input type="range" id="a-circ-rr" min="0" max="4" value="2"></div>
+    <div class="c"><label>Tension source <span id="a-circ-ul">230 V</span></label><input type="range" id="a-circ-ur" min="12" max="240" value="230"></div>
+    <div class="c readout" id="a-circ-out"></div>
+  </div>
+  <figcaption>Changez de récepteur sans toucher à la tension : le courant change tout seul. <b>L'éclat de la lampe suit la puissance, pas la tension.</b> Ouvrez l'interrupteur : le courant tombe à zéro partout instantanément, y compris dans le fil de retour.</figcaption>
+</figure>
+
+<h3>8.3 — Le cas particulier de la lampe à incandescence</h3>
+<p>Une lampe n'est pas une résistance ordinaire : <strong>sa résistance change avec sa température</strong> (chapitre 5, dernier point).</p>
+<table>
+<thead><tr><th>État</th><th class="mono">Température</th><th class="mono">Résistance</th><th class="mono">Courant sous 230 V</th></tr></thead>
+<tbody>
+<tr><td>Froide, éteinte</td><td class="mono">20 °C</td><td class="mono">≈ 60 Ω</td><td class="mono">3,8 A</td></tr>
+<tr><td>Chaude, en régime</td><td class="mono">2 500 °C</td><td class="mono">≈ 880 Ω</td><td class="mono">0,26 A</td></tr>
+</tbody></table>
+<p>À l'instant précis de l'allumage, une lampe de 60 W appelle donc <strong>15 fois son courant nominal</strong> — pendant quelques dizaines de millisecondes, le temps que le filament monte en température.</p>
+
+<div class="plaque"><span class="tag">Anecdote — pourquoi les ampoules grillent toujours à l'allumage</span>
+<p>Vous ne l'avez jamais vue griller en fonctionnement : elle claque toujours au moment où vous appuyez sur l'interrupteur. Ce n'est pas une coïncidence.</p>
+<p>La cause : ce pic de courant à froid, combiné au fait que le filament, usé, présente des zones amincies par sublimation du tungstène. Une zone plus fine = plus résistante = plus chaude = elle s'amincit encore plus vite. Le jour où le pic d'allumage passe, cette zone fond. C'est un <strong>emballement thermique</strong>, et c'est aussi la raison pour laquelle un défaut électrique s'aggrave toujours de lui-même.</p>
+<p>Conséquence directe en atelier : sur un circuit d'éclairage industriel avec 30 tubes ou projecteurs, la somme des courants d'appel peut faire déclencher un disjoncteur courbe C. On monte alors en <strong>courbe D</strong>, ou on répartit sur plusieurs départs.</p></div>
+
+<div class="plaque"><span class="tag">Anecdote — l'ampoule allumée depuis 1901</span>
+<p>Dans la caserne de pompiers n° 6 de Livermore, en Californie, brûle une ampoule à filament de carbone installée en <strong>1901</strong>. Elle est allumée en quasi-permanence depuis 124 ans. Elle a survécu à deux déménagements, et elle dispose de sa propre webcam.</p>
+<p>Son secret ? Elle n'est <strong>presque jamais éteinte</strong> (pas de pic d'allumage), elle fonctionne à puissance très réduite (4 W environ, une lueur orangée), et son filament de carbone est bien plus épais que le tungstène moderne. Elle éclaire très mal — mais elle éclaire encore.</p>
+<p>Cela dit, il faut être honnête : la mode du « cartel Phœbus », qui aurait délibérément limité les ampoules à 1 000 heures, est un fait historique documenté (1924-1939), mais la durée de vie est <strong>aussi</strong> un compromis technique réel — un filament qui dure longtemps éclaire peu et consomme mal. Les deux explications coexistent.</p></div>
+
+<div class="exo"><span class="tag">Exercice 8.1</span>
+<p>Sous 230 V, calculez le courant appelé par : une lampe LED 9 W · un sèche-cheveux 1 800 W · un moteur monophasé 750 W.</p>
+<details><summary>Voir la réponse</summary><div class="rep"><p>LED : 9/230 = <strong>39 mA</strong> · Sèche-cheveux : 1 800/230 = <strong>7,8 A</strong> · Moteur : 750/230 = <strong>3,3 A</strong> <em>(en réalité un peu plus : un moteur a un facteur de puissance inférieur à 1, on trouverait plutôt 4,5 A sur la plaque)</em>.</p></div></details></div>
+
+<div class="exo"><span class="tag">Exercice 8.2</span>
+<p>Une lampe 12 V / 21 W de feu de stop. Quelle est sa résistance à chaud ? Que se passe-t-il si on la branche sur 24 V ?</p>
+<details><summary>Voir la réponse</summary><div class="rep"><p>I = 21/12 = 1,75 A → R = 12/1,75 = <strong>6,9 Ω</strong>.<br>Sous 24 V : le courant tenterait de doubler et la puissance d'être multipliée par 4 (84 W). En pratique le filament, prévu pour 2 500 °C, fond quasi instantanément. <strong>Durée de vie : une fraction de seconde.</strong> C'est ce qui arrive quand on branche du matériel 12 V sur un poids lourd en 24 V.</p></div></details></div>
+
+<div class="exo"><span class="tag">Exercice 8.3</span>
+<p>Deux lampes identiques 230 V / 60 W sont branchées en série sur 230 V. Éclairent-elles normalement ?</p>
+<details><summary>Voir la réponse</summary><div class="rep"><p>Non : chacune reçoit 115 V. Le courant qui les traverse est bien plus faible, elles rougeoient à peine (leur puissance chute à environ 15 W chacune, et encore moins car leur résistance baisse à froid). C'est le montage des anciennes guirlandes de Noël — et c'est pour ça qu'une seule lampe grillée éteignait toute la guirlande.</p></div></details></div>
+
+  </div>
+</section>
+
+<section class="ch" id="c9">
+  <div class="ch-head"><div class="ch-num">09</div><div class="ch-title">
     <span class="kicker">La découverte qui change tout</span><h2>Tout courant fabrique un champ magnétique</h2></div></div>
   <div class="ch-body">
 
 <p class="lede">Jusqu'ici, l'électricité chauffe. À partir de maintenant, elle <strong>bouge</strong>. Moteurs, contacteurs, électrovannes, freins, capteurs, transformateurs, alternateurs : tout votre métier tient dans ce chapitre.</p>
 
-<h3>5.1 — L'expérience d'Œrsted</h3>
+<h3>9.1 — L'expérience d'Œrsted</h3>
 <p>Posez une boussole sous un fil. Tant qu'il n'y a pas de courant, l'aiguille indique le nord. Fermez le circuit : <strong>l'aiguille pivote</strong>. Ouvrez-le : elle revient. Inversez le sens du courant : elle pivote de l'autre côté.</p>
 <p>Conclusion : <span class="cle">un courant électrique crée autour de lui un champ magnétique</span>. Pas d'aimant, pas de fer : juste des électrons en mouvement.</p>
 
-<h3>5.2 — La forme du champ</h3>
+<h3>9.2 — La forme du champ</h3>
 <p>Le champ magnétique autour d'un fil droit forme des <strong>cercles concentriques</strong> autour du fil. Il est d'autant plus intense que le courant est fort, et il faiblit rapidement quand on s'éloigne (deux fois plus loin = deux fois plus faible).</p>
 
 <h4>La règle du tire-bouchon</h4>
@@ -1237,29 +1805,28 @@
 <p>Votre <strong>pince ampèremétrique</strong> ne touche jamais le conducteur. Elle mesure uniquement le champ magnétique créé autour du câble, et en déduit le courant. C'est de l'Œrsted pur, deux siècles plus tard, dans votre caisse à outils. Idem pour les capteurs à effet Hall des variateurs, et pour les tores de mesure des différentiels.</p>
 <p>Corollaire de sécurité, souvent oublié : une pince ampèremétrique <strong>doit enserrer un seul conducteur</strong>. Si vous prenez la phase et le neutre ensemble, les deux champs s'annulent et vous lisez... zéro. Beaucoup de stagiaires ont conclu à tort qu'un circuit n'était pas alimenté.</p></div>
 
-<div class="exo"><span class="tag">Exercice 5.1</span>
+<div class="exo"><span class="tag">Exercice 9.1</span>
 <p>Un câble d'alimentation passe verticalement dans une goulotte. Une boussole posée à sa gauche indique une déviation vers le fond de l'atelier. Où pointera-t-elle si on la déplace à droite du câble ?</p>
 <details><summary>Voir la réponse</summary><div class="rep"><p><strong>Vers l'avant de l'atelier</strong> : à l'opposé. Les lignes de champ étant des cercles autour du fil, elles pointent dans des sens opposés de part et d'autre.</p></div></details></div>
 
-<div class="exo"><span class="tag">Exercice 5.2</span>
+<div class="exo"><span class="tag">Exercice 9.2</span>
 <p>Pourquoi les câbles de commande d'un automate ne doivent-ils jamais cheminer dans la même goulotte que les câbles de puissance d'un variateur ?</p>
-<details><summary>Voir la réponse</summary><div class="rep"><p>Le câble de puissance crée un champ magnétique variable (et fort). Ce champ vient induire des tensions parasites dans les conducteurs de commande voisins (chapitre 7 : l'induction). Résultat : entrées automate qui basculent seules, mesures analogiques bruitées, bus de terrain qui décroche. D'où les règles de <strong>séparation physique</strong> (goulottes distinctes, croisements à 90°) et l'usage de <strong>câbles blindés</strong> avec blindage raccordé à la terre côté armoire.</p></div></details></div>
+<details><summary>Voir la réponse</summary><div class="rep"><p>Le câble de puissance crée un champ magnétique variable (et fort). Ce champ vient induire des tensions parasites dans les conducteurs de commande voisins (chapitre 11 : l'induction). Résultat : entrées automate qui basculent seules, mesures analogiques bruitées, bus de terrain qui décroche. D'où les règles de <strong>séparation physique</strong> (goulottes distinctes, croisements à 90°) et l'usage de <strong>câbles blindés</strong> avec blindage raccordé à la terre côté armoire.</p></div></details></div>
 
   </div>
 </section>
 
-<!-- ================= CH 6 ================= -->
-<section class="ch" id="c6">
-  <div class="ch-head"><div class="ch-num">06</div><div class="ch-title">
+<section class="ch" id="c10">
+  <div class="ch-head"><div class="ch-num">10</div><div class="ch-title">
     <span class="kicker">On concentre le champ</span><h2>L'électroaimant</h2></div></div>
   <div class="ch-body">
 
 <p class="lede">Le champ d'un fil droit est trop faible pour être utile. L'idée géniale tient en deux gestes : <strong>enrouler le fil</strong>, puis <strong>mettre du fer dedans</strong>.</p>
 
-<h3>6.1 — Premier geste : enrouler</h3>
+<h3>10.1 — Premier geste : enrouler</h3>
 <p>Une spire, c'est un petit champ. Deux spires côte à côte, leurs champs s'ajoutent. Cent spires, cent fois plus. La bobine ainsi formée s'appelle un <strong>solénoïde</strong>, et son champ ressemble comme deux gouttes d'eau à celui d'un aimant droit : un pôle nord d'un côté, un pôle sud de l'autre.</p>
 
-<h3>6.2 — Deuxième geste : le noyau de fer</h3>
+<h3>10.2 — Deuxième geste : le noyau de fer</h3>
 <p>Glissez un clou en fer doux à l'intérieur de la bobine : le champ est multiplié par <strong>1 000 à 5 000</strong>. Le fer ne consomme rien, ne reçoit aucun fil — et pourtant il transforme un jouet en outil. Ce qui se passe à l'intérieur mérite qu'on s'y arrête, parce que c'est franchement surprenant.</p>
 
 <h4>Le fer est déjà aimanté — mais en désordre</h4>
@@ -1487,7 +2054,7 @@
 })();
 </script>
 
-<h3>6.3 — Fer doux ou acier : la différence qui compte</h3>
+<h3>10.3 — Fer doux ou acier : la différence qui compte</h3>
 <table>
 <thead><tr><th>Matériau</th><th>Quand le courant est coupé</th><th>Usage</th></tr></thead>
 <tbody>
@@ -1496,7 +2063,7 @@
 </tbody></table>
 <p>C'est pour ça qu'un tournevis oublié dans une armoire finit aimanté (au grand bonheur du monteur) et qu'un noyau de contacteur, lui, doit relâcher instantanément. Un noyau qui « colle » après coupure — c'est un défaut connu : on interpose une <strong>cale amagnétique</strong> de quelques dixièmes de millimètre pour l'éviter.</p>
 
-<h3>6.4 — Où vous en croiserez, tous les jours</h3>
+<h3>10.4 — Où vous en croiserez, tous les jours</h3>
 <ul>
 <li><strong>Le contacteur</strong> — une bobine attire une palette mobile qui ferme les contacts de puissance. Toute la commande industrielle repose là-dessus.</li>
 <li><strong>Le relais</strong> — même principe, en petit.</li>
@@ -1504,7 +2071,7 @@
 <li><strong>Le frein à manque de courant</strong> sur les moteurs de levage : la bobine <em>desserre</em> le frein. Coupure de courant = freinage automatique. Sécurité positive.</li>
 <li><strong>Le distributeur pneumatique 5/2</strong> à commande électrique de vos bancs.</li>
 <li><strong>La grue à ferraille</strong> de la casse, qui soulève une tonne de tôle et la lâche d'un coup.</li>
-<li><strong>La bobine magnétique du disjoncteur</strong> — chapitre 14.</li>
+<li><strong>La bobine magnétique du disjoncteur</strong> — chapitre 17.</li>
 </ul>
 
 <div class="plaque"><span class="tag">Anecdote — de 4 kg à une tonne en six ans</span>
@@ -1513,48 +2080,47 @@
 <p>250 fois mieux en six ans, grâce à un isolant. C'est encore aujourd'hui le vernis d'émail de vos bobinages moteurs qui permet de mettre 800 spires là où le fil nu n'en supporterait pas deux.</p></div>
 
 <div class="plaque"><span class="tag">Anecdote — l'électroaimant le plus puissant du monde</span>
-<p>Au National High Magnetic Field Laboratory de Tallahassee, l'électroaimant résistif record produit un champ d'environ <strong>45 teslas</strong> — près d'un million de fois le champ magnétique terrestre. Il consomme <strong>30 mégawatts</strong>, soit la consommation d'une ville de 30 000 habitants, et il faut <strong>3 800 litres d'eau par minute</strong> pour évacuer l'effet Joule. Vous avez bien lu : le chapitre 4 est le principal obstacle du chapitre 6.</p>
+<p>Au National High Magnetic Field Laboratory de Tallahassee, l'électroaimant résistif record produit un champ d'environ <strong>45 teslas</strong> — près d'un million de fois le champ magnétique terrestre. Il consomme <strong>30 mégawatts</strong>, soit la consommation d'une ville de 30 000 habitants, et il faut <strong>3 800 litres d'eau par minute</strong> pour évacuer l'effet Joule. Vous avez bien lu : le chapitre 7 est le principal obstacle du chapitre 10.</p>
 <p>À l'autre bout de l'échelle : le champ produit par votre système nerveux quand vous pensez est de l'ordre du femtotesla — mille milliards de fois plus faible que ce que produit votre bobine de contacteur.</p></div>
 
 <div class="encadre"><span class="tag">Le TP à faire</span>
 <p>Le <strong>TP 06</strong> (voir les fiches en fin de cours) fait fabriquer un électroaimant clou + fil émaillé + pile 4,5 V, avec protocole de mesure : on compte les trombones en faisant varier N, I et le matériau du noyau. C'est le TP le plus rentable de la séquence : 25 minutes, deux euros de matériel, et la loi N×I sort toute seule des relevés.</p></div>
 
-<div class="exo"><span class="tag">Exercice 6.1</span>
+<div class="exo"><span class="tag">Exercice 10.1</span>
 <p>Une bobine de 500 spires est parcourue par 0,4 A. On veut le même champ avec seulement 200 spires. Quel courant faut-il ?</p>
 <details><summary>Voir la réponse</summary><div class="rep"><p>500 × 0,4 = 200 ampères-tours. Il faut donc I = 200 / 200 = <strong>1 A</strong>.<br>Conséquence à ne pas rater : le courant a été multiplié par 2,5, donc l'effet Joule dans la bobine par <strong>6,25</strong>. Elle chauffera nettement plus. Voilà pourquoi on préfère généralement beaucoup de spires et peu de courant.</p></div></details></div>
 
-<div class="exo"><span class="tag">Exercice 6.2</span>
+<div class="exo"><span class="tag">Exercice 10.2</span>
 <p>Une bobine de contacteur 24 V est alimentée par erreur en 48 V. Que se passe-t-il ?</p>
 <details><summary>Voir la réponse</summary><div class="rep"><p>Le courant double → les ampères-tours doublent (le contacteur colle très fort), mais l'effet Joule est <strong>multiplié par 4</strong>. La bobine, dimensionnée pour dissiper P, doit en dissiper 4P : elle chauffe, l'émail se dégrade, les spires se court-circuitent entre elles et la bobine grille en quelques minutes à quelques heures. Odeur caractéristique de vernis brûlé.</p></div></details></div>
 
-<div class="exo"><span class="tag">Exercice 6.3</span>
+<div class="exo"><span class="tag">Exercice 10.3</span>
 <p>Pourquoi place-t-on une diode (ou un circuit RC) en parallèle sur les bobines de relais commandées par un automate ?</p>
-<details><summary>Voir la réponse</summary><div class="rep"><p>Une bobine stocke de l'énergie dans son champ magnétique. À la coupure, ce champ s'effondre brutalement et <strong>induit une surtension</strong> (chapitre 7) qui peut atteindre plusieurs centaines de volts. Cette surtension détruit les transistors de sortie de l'automate et génère des parasites. La diode de roue libre offre un chemin à ce courant, qui s'éteint doucement au lieu de claquer. <em>C'est du chapitre 7 utilisé pour protéger du chapitre 6.</em></p></div></details></div>
+<details><summary>Voir la réponse</summary><div class="rep"><p>Une bobine stocke de l'énergie dans son champ magnétique. À la coupure, ce champ s'effondre brutalement et <strong>induit une surtension</strong> (chapitre 11) qui peut atteindre plusieurs centaines de volts. Cette surtension détruit les transistors de sortie de l'automate et génère des parasites. La diode de roue libre offre un chemin à ce courant, qui s'éteint doucement au lieu de claquer. <em>C'est du chapitre 11 utilisé pour protéger du chapitre 10.</em></p></div></details></div>
 
   </div>
 </section>
 
-<!-- ================= CH 7 ================= -->
-<section class="ch" id="c7">
-  <div class="ch-head"><div class="ch-num">07</div><div class="ch-title">
+<section class="ch" id="c11">
+  <div class="ch-head"><div class="ch-num">11</div><div class="ch-title">
     <span class="kicker">Le chemin inverse</span><h2>L'induction : fabriquer du courant avec un aimant</h2></div></div>
   <div class="ch-body">
 
 <p class="lede">Chapitre 5 : le courant fabrique du champ. Chapitre 7 : le champ fabrique du courant. Cette symétrie est à l'origine de <strong>toute</strong> l'électricité que vous consommez — sauf le photovoltaïque.</p>
 
-<h3>7.1 — L'expérience de Faraday</h3>
+<h3>11.1 — L'expérience de Faraday</h3>
 <p>Une bobine reliée à un galvanomètre (un ampèremètre très sensible). Aucune pile, aucune source. On approche un aimant : <strong>l'aiguille dévie</strong>. On l'immobilise à l'intérieur de la bobine : <strong>l'aiguille retombe à zéro</strong>. On le retire : elle dévie <strong>dans l'autre sens</strong>.</p>
 
 <div class="formule">Ce n'est pas le champ qui crée le courant.<br>C'est la <strong>variation</strong> du champ.<small>Loi de Faraday — un champ constant, aussi puissant soit-il, n'induit rien</small></div>
 
-<h3>7.2 — Trois façons de faire varier le champ</h3>
+<h3>11.2 — Trois façons de faire varier le champ</h3>
 <ol>
 <li><strong>Déplacer l'aimant</strong> devant la bobine (ou la bobine devant l'aimant) → dynamo de vélo, capteur de vilebrequin, capteur de vitesse ABS.</li>
-<li><strong>Faire tourner</strong> l'aimant ou la bobine → <strong>alternateur</strong>, chapitre 8.</li>
-<li><strong>Alimenter une autre bobine en alternatif</strong> à côté : son champ varie tout seul → <strong>transformateur</strong>, chapitre 10.</li>
+<li><strong>Faire tourner</strong> l'aimant ou la bobine → <strong>alternateur</strong>, chapitre 12.</li>
+<li><strong>Alimenter une autre bobine en alternatif</strong> à côté : son champ varie tout seul → <strong>transformateur</strong>, chapitre 14.</li>
 </ol>
 
-<h3>7.3 — Ce qui fait monter la tension induite</h3>
+<h3>11.3 — Ce qui fait monter la tension induite</h3>
 <ul>
 <li>Un aimant plus <strong>puissant</strong></li>
 <li>Un mouvement plus <strong>rapide</strong> — c'est le facteur dominant</li>
@@ -1573,7 +2139,7 @@
   <figcaption><b>Attrapez l'aimant à la souris ou au doigt et déplacez-le.</b> Immobilisez-le au milieu de la bobine : l'aiguille retombe à zéro alors que le champ est maximal. C'est tout le sens de la loi de Faraday.</figcaption>
 </figure>
 
-<h3>7.4 — La loi de Lenz : la nature est contrariante</h3>
+<h3>11.4 — La loi de Lenz : la nature est contrariante</h3>
 <p>Le courant induit s'oppose <strong>toujours</strong> à la cause qui lui a donné naissance. Approchez un pôle nord d'une bobine : elle fabrique un courant qui crée un pôle nord en face, donc qui vous <strong>repousse</strong>. Retirez l'aimant : elle crée un pôle sud, et le <strong>retient</strong>.</p>
 <p>Conséquence énergétique fondamentale : <span class="cle">produire de l'électricité demande un effort mécanique.</span> Un alternateur qui ne débite rien tourne librement ; dès qu'on branche une charge, il devient dur à entraîner. C'est exactement ce que vous sentez sur une dynamo de vélo, et c'est pour ça qu'une centrale doit brûler du combustible.</p>
 
@@ -1587,36 +2153,35 @@
 <p>Explication : en tombant, l'aimant fait varier le champ dans le cuivre, ce qui y induit des boucles de courant (les <strong>courants de Foucault</strong>), qui créent un champ opposé qui le freine. Loi de Lenz, en direct.</p>
 <p>C'est le principe exact du <strong>freinage électromagnétique</strong> des poids lourds (le « ralentisseur Telma »), des freins de manèges, et du disque en aluminium des anciens compteurs EDF. Ce TP coûte 15 € et déclenche à tous les coups un « c'est pas possible ! ». Fiche <strong>TP 08</strong>.</p></div>
 
-<div class="exo"><span class="tag">Exercice 7.1</span>
+<div class="exo"><span class="tag">Exercice 11.1</span>
 <p>On approche lentement un aimant d'une bobine, puis très rapidement. Dans quel cas la tension induite est-elle la plus forte ? Et si on laisse l'aimant collé à la bobine ?</p>
 <details><summary>Voir la réponse</summary><div class="rep"><p>La tension est la plus forte lors du mouvement <strong>rapide</strong> (variation rapide du flux). Aimant immobile, même collé : tension <strong>nulle</strong>, quel que soit sa puissance. Un aimant posé sur une bobine ne produit strictement rien.</p></div></details></div>
 
-<div class="exo"><span class="tag">Exercice 7.2</span>
+<div class="exo"><span class="tag">Exercice 11.2</span>
 <p>Pourquoi les noyaux de transformateurs et de moteurs sont-ils faits de <strong>tôles minces isolées entre elles</strong> plutôt que d'un bloc de fer massif ?</p>
 <details><summary>Voir la réponse</summary><div class="rep"><p>Le fer massif est lui-même un conducteur plongé dans un champ variable : des courants de Foucault s'y développent et le chauffent par effet Joule — pure perte, plus échauffement. En feuilletant le noyau en tôles de 0,35 mm <strong>isolées par un vernis</strong>, on brise les boucles de courant. Les pertes fer chutent d'un facteur 10 à 100. Regardez la tranche d'un noyau de transfo : vous verrez les tôles.</p></div></details></div>
 
-<div class="exo"><span class="tag">Exercice 7.3</span>
+<div class="exo"><span class="tag">Exercice 11.3</span>
 <p>Une plaque à induction fonctionne-t-elle avec une casserole en aluminium ? En inox ? En fonte ? Pourquoi ?</p>
 <details><summary>Voir la réponse</summary><div class="rep"><p>La plaque contient une bobine parcourue par un courant alternatif à ~25 kHz. Elle induit des courants de Foucault dans le fond de la casserole, qui chauffe par effet Joule.<br><strong>Fonte et inox ferritique : oui</strong> — matériaux ferromagnétiques, le champ s'y concentre.<br><strong>Aluminium, cuivre, inox 18/10 austénitique : non</strong> (ou très mal) — non ferromagnétiques, le couplage est trop faible.<br>Test infaillible en magasin : si un aimant tient au fond, ça marche. Vos trois chapitres 4, 6 et 7 réunis dans une casserole.</p></div></details></div>
 
   </div>
 </section>
 
-<!-- ================= CH 8 ================= -->
-<section class="ch" id="c8">
-  <div class="ch-head"><div class="ch-num">08</div><div class="ch-title">
+<section class="ch" id="c12">
+  <div class="ch-head"><div class="ch-num">12</div><div class="ch-title">
     <span class="kicker">Le courant qui change d'avis 100 fois par seconde</span><h2>L'alternatif et l'alternateur</h2></div></div>
   <div class="ch-body">
 
 <p class="lede">L'induction a une conséquence embêtante : le courant qu'elle produit change de sens dès que le mouvement change de sens. Plutôt que de lutter, l'industrie en a fait un standard mondial. Mais avant d'en arriver là, il faut voir en face les <strong>deux moteurs à électrons</strong> que vous connaissez maintenant tous les deux — et comprendre qu'ils ne se ressemblent en rien.</p>
 
-<h3>8.1 — Deux moteurs à électrons</h3>
+<h3>12.1 — Deux moteurs à électrons</h3>
 <p>Au <a href="#c1">chapitre 1</a>, on a laissé une question en suspens : d'où vient la force qui pousse les électrons ? Vous avez maintenant les deux réponses, et le moment est venu de les mettre côte à côte.</p>
 
 <table>
 <thead><tr><th></th><th>La pile — pompe chimique</th><th>L'alternateur — induction</th></tr></thead>
 <tbody>
-<tr><td><strong>D'où vient la force ?</strong></td><td>D'une réaction chimique qui arrache des électrons à un métal</td><td>D'un champ magnétique <em>qui varie</em> (loi de Faraday, chapitre 7)</td></tr>
+<tr><td><strong>D'où vient la force ?</strong></td><td>D'une réaction chimique qui arrache des électrons à un métal</td><td>D'un champ magnétique <em>qui varie</em> (loi de Faraday, chapitre 11)</td></tr>
 <tr><td><strong>Où s'applique-t-elle ?</strong></td><td><span class="cle">En un seul point du circuit</span> — entre les deux électrodes. Partout ailleurs, les électrons ne font que suivre.</td><td><span class="cle">Sur toute la longueur du conducteur à la fois</span> — chaque électron à portée du champ est poussé au même instant.</td></tr>
 <tr><td><strong>Faut-il un contact ?</strong></td><td>Oui : les électrodes trempent dans l'électrolyte</td><td><strong>Non.</strong> L'aimant ne touche rien. Il agit à distance, à travers l'air, le vide, le carter.</td></tr>
 <tr><td><strong>Sens du courant</strong></td><td>Toujours le même : la chimie ne change pas d'avis → <strong>continu</strong></td><td>S'inverse dès que l'aimant repart en sens inverse → <strong>alternatif</strong></td></tr>
@@ -1827,7 +2392,7 @@
 <p>La <strong>pile</strong>, c'est une <em>écluse</em> sur un canal en boucle : toute l'énergie est fournie en un seul point, et l'eau fait le tour. Bouchez le canal ailleurs et tout s'arrête, mais l'écluse, elle, ne pousse toujours qu'à un seul endroit.</p>
 <p>L'<strong>induction</strong>, c'est une <em>vague qui passe sous une rangée de bateaux</em>. Aucun contact, aucun moteur sur les bateaux : la vague les soulève tous <strong>en même temps</strong>. Et quand elle repart en sens inverse, ils redescendent tous ensemble. Les bateaux ne voyagent pas — ils montent et descendent sur place. <span class="cle">C'est exactement ce que font les électrons d'un fil en 50 Hz : des allers-retours sur place, jamais un voyage.</span></p></div>
 
-<h3>8.2 — Pourquoi une sinusoïde ?</h3>
+<h3>12.2 — Pourquoi une sinusoïde ?</h3>
 <p>Faites tourner une spire dans le champ d'un aimant, à vitesse constante. Selon sa position, elle « coupe » plus ou moins de lignes de champ :</p>
 <ul>
 <li>Spire à plat dans le champ → elle traverse les lignes à pleine vitesse → <strong>tension maximale</strong></li>
@@ -1846,7 +2411,7 @@
   <figcaption>La spire tourne à gauche, la courbe se trace à droite <b>en temps réel</b>. Ralentissez : la période s'allonge, la fréquence baisse. <b>Un alternateur ne peut pas produire n'importe quelle fréquence : elle est imposée par la vitesse de rotation.</b></figcaption>
 </figure>
 
-<h3>8.3 — Le vocabulaire de l'alternatif</h3>
+<h3>12.3 — Le vocabulaire de l'alternatif</h3>
 <table>
 <thead><tr><th>Grandeur</th><th>Définition</th><th class="mono">Valeur en France</th></tr></thead>
 <tbody>
@@ -1855,10 +2420,10 @@
 <tr><td><strong>Valeur maximale</strong></td><td>Le sommet de la sinusoïde</td><td class="mono">325 V</td></tr>
 <tr><td><strong>Valeur efficace</strong></td><td>La tension continue qui chaufferait autant</td><td class="mono">230 V</td></tr>
 </tbody></table>
-<p><strong>Attention à la valeur efficace</strong>, c'est le piège classique : le « 230 V » de votre prise n'est jamais atteint deux fois par période — la tension y culmine en réalité à <strong>325 V</strong>. Un condensateur de filtrage doit donc être choisi pour 400 V minimum, pas pour 250 V. C'est la définition officielle : la valeur efficace est celle qui produit le <em>même effet Joule</em> qu'un courant continu de même valeur. Le chapitre 4 sert à définir le chapitre 8.</p>
+<p><strong>Attention à la valeur efficace</strong>, c'est le piège classique : le « 230 V » de votre prise n'est jamais atteint deux fois par période — la tension y culmine en réalité à <strong>325 V</strong>. Un condensateur de filtrage doit donc être choisi pour 400 V minimum, pas pour 250 V. C'est la définition officielle : la valeur efficace est celle qui produit le <em>même effet Joule</em> qu'un courant continu de même valeur. Le chapitre 7 sert à définir le chapitre 12.</p>
 
-<h3>8.4 — La vraie raison de l'alternatif</h3>
-<p>L'alternatif est moins commode que le continu (les moteurs à courant continu se pilotent plus simplement, les batteries sont en continu). Il a gagné pour <strong>une seule raison</strong> : il permet de changer facilement de tension grâce au transformateur (chapitre 10), qui ne fonctionne qu'avec un champ variable. Et changer de tension, c'est ce qui rend le transport possible (chapitre 11).</p>
+<h3>12.4 — La vraie raison de l'alternatif</h3>
+<p>L'alternatif est moins commode que le continu (les moteurs à courant continu se pilotent plus simplement, les batteries sont en continu). Il a gagné pour <strong>une seule raison</strong> : il permet de changer facilement de tension grâce au transformateur (chapitre 14), qui ne fonctionne qu'avec un champ variable. Et changer de tension, c'est ce qui rend le transport possible (chapitre 15).</p>
 
 <div class="plaque"><span class="tag">Anecdote — la guerre des courants</span>
 <p>Années 1880, États-Unis. <strong>Edison</strong> défend le continu 110 V : c'est son brevet, ses usines, ses réseaux. Problème : le continu ne se transforme pas, donc il ne se transporte pas. Il fallait une centrale <strong>tous les 1,5 km</strong>. New York s'était couverte d'un écheveau de câbles aériens absurde.</p>
@@ -1871,30 +2436,29 @@
 <p>Il a existé des réseaux à <strong>25 Hz</strong> (les chutes du Niagara, jusqu'en 2006 !) et à <strong>16,7 Hz</strong> — cette dernière fréquence alimente encore aujourd'hui les chemins de fer allemands, suisses, autrichiens et norvégiens. Si vous voyez une caténaire suisse, elle est en 15 kV / 16,7 Hz. La France, elle, a choisi 25 kV / 50 Hz pour ses LGV.</p>
 <p>Et le 230 V ? La France était à <strong>220 V</strong>, le Royaume-Uni à <strong>240 V</strong>. L'harmonisation européenne a tranché sur <strong>230 V</strong> — avec une tolérance élastique de +6 %/−10 % puis ±10 %, choisie précisément pour que personne n'ait à changer quoi que ce soit. Votre prise délivre probablement encore 220 à 235 V selon l'heure et le quartier.</p></div>
 
-<div class="exo"><span class="tag">Exercice 8.1</span>
+<div class="exo"><span class="tag">Exercice 12.1</span>
 <p>Un alternateur bipolaire (une paire de pôles) doit produire du 50 Hz. À quelle vitesse doit-il tourner ? Et un alternateur à 2 paires de pôles ?</p>
 <details><summary>Voir la réponse</summary><div class="rep"><p>Une paire de pôles : un tour = une période. 50 tours/s = <strong>3 000 tr/min</strong>.<br>Deux paires de pôles : un tour = deux périodes, donc <strong>1 500 tr/min</strong>.<br>C'est la même formule qui donne les vitesses de synchronisme de vos moteurs asynchrones : 3 000, 1 500, 1 000, 750 tr/min. Un moteur « 1 500 tr/min » sur la plaque tourne en réalité à 1 440 : la différence, c'est le <strong>glissement</strong>.</p></div></details></div>
 
-<div class="exo"><span class="tag">Exercice 8.2</span>
+<div class="exo"><span class="tag">Exercice 12.2</span>
 <p>Un oscilloscope affiche une sinusoïde dont un cycle occupe 4 divisions, la base de temps étant réglée sur 5 ms/div. Quelle est la fréquence ?</p>
 <details><summary>Voir la réponse</summary><div class="rep"><p>T = 4 × 5 = 20 ms = 0,02 s → f = 1 / 0,02 = <strong>50 Hz</strong>. C'est le réseau. Réflexe de dépannage : si vous voyez du 50 Hz là où vous ne devriez rien voir, vous avez un couplage capacitif ou une masse mal reprise.</p></div></details></div>
 
-<div class="exo"><span class="tag">Exercice 8.3</span>
+<div class="exo"><span class="tag">Exercice 12.3</span>
 <p>Pourquoi une lampe alimentée en 50 Hz ne clignote-t-elle pas visiblement, alors que la tension passe par zéro 100 fois par seconde ?</p>
-<details><summary>Voir la réponse</summary><div class="rep"><p>Deux raisons. Pour l'incandescence, le filament a une <strong>inertie thermique</strong> : il n'a pas le temps de refroidir en 10 ms. Pour l'œil, la persistance rétinienne lisse tout au-delà de ~25 Hz.<br><em>Mais le scintillement existe bel et bien</em>, et il devient dangereux en atelier : sous un éclairage fluo ou LED bon marché à 100 Hz, une pièce tournant à 6 000 tr/min peut apparaître <strong>immobile</strong> — c'est l'effet stroboscopique. C'est pour cela qu'on éclaire les machines tournantes avec des luminaires à faible taux de papillotement, ou qu'on répartit l'éclairage sur les <strong>trois phases</strong> (chapitre 9).</p></div></details></div>
+<details><summary>Voir la réponse</summary><div class="rep"><p>Deux raisons. Pour l'incandescence, le filament a une <strong>inertie thermique</strong> : il n'a pas le temps de refroidir en 10 ms. Pour l'œil, la persistance rétinienne lisse tout au-delà de ~25 Hz.<br><em>Mais le scintillement existe bel et bien</em>, et il devient dangereux en atelier : sous un éclairage fluo ou LED bon marché à 100 Hz, une pièce tournant à 6 000 tr/min peut apparaître <strong>immobile</strong> — c'est l'effet stroboscopique. C'est pour cela qu'on éclaire les machines tournantes avec des luminaires à faible taux de papillotement, ou qu'on répartit l'éclairage sur les <strong>trois phases</strong> (chapitre 13).</p></div></details></div>
 
   </div>
 </section>
 
-<!-- ================= CH 9 ================= -->
-<section class="ch" id="c9">
-  <div class="ch-head"><div class="ch-num">09</div><div class="ch-title">
+<section class="ch" id="c13">
+  <div class="ch-head"><div class="ch-num">13</div><div class="ch-title">
     <span class="kicker">De la vapeur à la prise</span><h2>Les centrales et le triphasé</h2></div></div>
   <div class="ch-body">
 
 <p class="lede">Une centrale électrique, quelle qu'elle soit, ne fait qu'une chose : <strong>faire tourner un alternateur</strong>. Tout le reste — l'uranium, le charbon, le barrage, le vent — n'est qu'une manière de trouver de quoi le faire tourner.</p>
 
-<h3>9.1 — Toutes les centrales font la même chose</h3>
+<h3>13.1 — Toutes les centrales font la même chose</h3>
 <table>
 <thead><tr><th>Type</th><th>Ce qui fait tourner l'alternateur</th><th>Puissance typique</th></tr></thead>
 <tbody>
@@ -1905,13 +2469,13 @@
 <tr><td>Géothermie, biomasse</td><td>Vapeur, encore</td><td class="mono">1 à 50 MW</td></tr>
 <tr><td><strong>Photovoltaïque</strong></td><td><strong>Rien ne tourne</strong> — l'effet photoélectrique produit du continu, converti par un onduleur</td><td class="mono">variable</td></tr>
 </tbody></table>
-<p>Autrement dit : à part le solaire, <strong>l'humanité fait bouillir de l'eau pour faire tourner des aimants devant des bobines</strong>. Le chapitre 7 fait tourner la planète.</p>
+<p>Autrement dit : à part le solaire, <strong>l'humanité fait bouillir de l'eau pour faire tourner des aimants devant des bobines</strong>. Le chapitre 11 fait tourner la planète.</p>
 
 <div class="plaque"><span class="tag">Anecdote — l'échelle réelle d'un alternateur de tranche</span>
 <p>L'alternateur d'un réacteur de 1 300 MW pèse <strong>plus de 200 tonnes</strong> pour le seul rotor, tourne à <strong>1 500 tr/min</strong> sans jamais s'arrêter pendant 12 à 18 mois, et son rotor est refroidi à l'<strong>hydrogène</strong> — un gaz explosif — parce que l'air freinerait trop et évacuerait mal la chaleur. Le stator est refroidi à l'eau <strong>déminéralisée</strong>, qui circule à l'intérieur même des conducteurs de cuivre, creux. La tension de sortie est de l'ordre de <strong>20 kV</strong>, et le courant de <strong>20 000 A</strong> par phase.</p>
 <p>Et malgré ces 200 tonnes lancées à 1 500 tr/min, le rotor est équilibré au point que le balourd résiduel se mesure en grammes. Vos cours d'équilibrage dynamique, à cette échelle.</p></div>
 
-<h3>9.2 — Pourquoi trois phases et pas une ?</h3>
+<h3>13.2 — Pourquoi trois phases et pas une ?</h3>
 <p>Puisqu'on fait tourner un rotor aimanté, autant mettre <strong>trois bobines</strong> autour, décalées de 120°. Elles produisent trois tensions identiques, mais décalées d'un tiers de période. C'est le <strong>triphasé</strong>.</p>
 <p>Quatre avantages, tous décisifs :</p>
 <ol>
@@ -1931,7 +2495,7 @@
   <figcaption>À gauche : les trois vecteurs à 120°. Au centre : les trois sinusoïdes engendrées. <b>La ligne blanche est la somme des trois valeurs instantanées : elle reste collée à zéro en permanence.</b> C'est ça, le neutre qui ne travaille pas.</figcaption>
 </figure>
 
-<h3>9.3 — Les deux tensions du triphasé</h3>
+<h3>13.3 — Les deux tensions du triphasé</h3>
 <p>Sur une prise triphasée, on peut mesurer deux tensions différentes selon les bornes choisies. C'est la source de confusion n°1 des débutants.</p>
 <table>
 <thead><tr><th>Entre...</th><th>Nom</th><th class="mono">Valeur</th><th>Usage</th></tr></thead>
@@ -1951,32 +2515,31 @@
 <p><strong>1891, Francfort.</strong> Pour l'Exposition internationale d'électrotechnique, l'ingénieur Michael von Dolivo-Dobrowolsky (AEG) et Oskar von Miller construisent la première ligne triphasée longue distance : <strong>176 km</strong> depuis une centrale hydraulique de Lauffen am Neckar, sous <strong>15 000 V</strong>.</p>
 <p>Le jour de l'inauguration, un moteur alimenté par la ligne fait couler une cascade artificielle, et 1 000 lampes s'allument. Le rendement mesuré atteint <strong>75 %</strong> — bien au-delà de ce que les sceptiques annonçaient. Le débat était clos. Toute l'électrotechnique mondiale du XX<sup>e</sup> siècle est sortie de cette démonstration de foire.</p></div>
 
-<div class="exo"><span class="tag">Exercice 9.1</span>
+<div class="exo"><span class="tag">Exercice 13.1</span>
 <p>On mesure 400 V entre L1 et L2, 400 V entre L2 et L3, mais 0 V entre L1 et L3. Que se passe-t-il ?</p>
 <details><summary>Voir la réponse</summary><div class="rep"><p>Impossible avec un réseau sain. Si L1 et L3 sont au même potentiel, c'est que <strong>l'une des deux est absente et reliée à l'autre par la charge</strong>, ou que les deux sont physiquement raccordées ensemble. Diagnostic : mesurer chaque phase par rapport au neutre. On trouvera typiquement une <strong>phase manquante</strong> — fusible fondu, contact de sectionneur défaillant, ou câble coupé. Sur un moteur, c'est la « marche en monophasé » : il ronfle, ne démarre pas, et grille en quelques minutes.</p></div></details></div>
 
-<div class="exo"><span class="tag">Exercice 9.2</span>
+<div class="exo"><span class="tag">Exercice 13.2</span>
 <p>Un moteur triphasé tourne dans le mauvais sens. Que faites-vous ?</p>
 <details><summary>Voir la réponse</summary><div class="rep"><p>On <strong>croise deux phases quelconques</strong> sur le bornier (par exemple L1 et L2). Cela inverse le sens de rotation du champ tournant, donc du rotor. Deux suffisent : croiser les trois revient au point de départ.<br><em>Après consignation, évidemment.</em> Et sur une installation neuve, on vérifie le sens <strong>avant</strong> d'accoupler la machine entraînée — une pompe qui tourne à l'envers peut se détruire en quelques secondes.</p></div></details></div>
 
-<div class="exo"><span class="tag">Exercice 9.3</span>
+<div class="exo"><span class="tag">Exercice 13.3</span>
 <p>Pourquoi répartit-on les circuits monophasés d'un atelier sur les trois phases, plutôt que de tout brancher sur L1 ?</p>
 <details><summary>Voir la réponse</summary><div class="rep"><p>Pour <strong>équilibrer</strong>. Si tout est sur L1, le neutre doit ramener la totalité du courant (alors qu'il est souvent de section réduite), la chute de tension sur L1 devient importante, et l'abonnement triphasé est sous-exploité (on ne peut tirer qu'un tiers de la puissance souscrite). Un déséquilibre important déforme aussi les tensions et fait chauffer les moteurs triphasés du même tableau.</p></div></details></div>
 
   </div>
 </section>
 
-<!-- ================= CH 10 ================= -->
-<section class="ch" id="c10">
-  <div class="ch-head"><div class="ch-num">10</div><div class="ch-title">
+<section class="ch" id="c14">
+  <div class="ch-head"><div class="ch-num">14</div><div class="ch-title">
     <span class="kicker">Deux bobines et un bout de fer</span><h2>Le transformateur</h2></div></div>
   <div class="ch-body">
 
 <p class="lede">Le transformateur est l'objet le plus simple et le plus important de l'électrotechnique : aucune pièce mobile, aucune usure, un rendement de 99 %, et sans lui il n'y aurait pas de réseau électrique.</p>
 
-<h3>10.1 — Le montage</h3>
-<p>Reprenez l'électroaimant du chapitre 6 : une bobine sur un noyau de fer. Alimentez-la en <strong>alternatif</strong> : son champ magnétique varie constamment, 100 fois par seconde. Cette bobine s'appelle le <strong>primaire</strong>.</p>
-<p>Maintenant, enroulez une <strong>deuxième bobine</strong> sur le même noyau, sans aucune liaison électrique avec la première. Le champ variable la traverse. Par induction (chapitre 7), une tension y apparaît. C'est le <strong>secondaire</strong>.</p>
+<h3>14.1 — Le montage</h3>
+<p>Reprenez l'électroaimant du chapitre 10 : une bobine sur un noyau de fer. Alimentez-la en <strong>alternatif</strong> : son champ magnétique varie constamment, 100 fois par seconde. Cette bobine s'appelle le <strong>primaire</strong>.</p>
+<p>Maintenant, enroulez une <strong>deuxième bobine</strong> sur le même noyau, sans aucune liaison électrique avec la première. Le champ variable la traverse. Par induction (chapitre 11), une tension y apparaît. C'est le <strong>secondaire</strong>.</p>
 <p>Le noyau de fer sert de « canal » : il guide le champ du primaire vers le secondaire sans le laisser s'échapper.</p>
 
 <div class="formule">U₂ / U₁ = N₂ / N₁<small>Le rapport des tensions est égal au rapport des nombres de spires</small></div>
@@ -1992,19 +2555,19 @@
   <figcaption>Plus de spires au secondaire qu'au primaire = <b>élévateur</b>. Moins = <b>abaisseur</b>. Réglez N₂ &gt; N₁ et regardez la tension monter — <b>mais surveillez le courant</b> : ce qu'on gagne en tension, on le perd exactement en courant.</figcaption>
 </figure>
 
-<h3>10.2 — La règle d'or : rien n'est gratuit</h3>
+<h3>14.2 — La règle d'or : rien n'est gratuit</h3>
 <p>Un transformateur ne crée pas d'énergie. La puissance qui sort est (presque) égale à celle qui entre :</p>
 <div class="formule">U₁ × I₁ ≈ U₂ × I₂<small>et donc : I₂ / I₁ = N₁ / N₂ — l'inverse du rapport des tensions</small></div>
-<p><span class="cle">Multiplier la tension par 10, c'est diviser le courant par 10.</span> Cette phrase est la clé du chapitre 11.</p>
+<p><span class="cle">Multiplier la tension par 10, c'est diviser le courant par 10.</span> Cette phrase est la clé du chapitre 15.</p>
 
-<h3>10.3 — Trois conditions à ne jamais oublier</h3>
+<h3>14.3 — Trois conditions à ne jamais oublier</h3>
 <ul>
 <li><strong>Il faut de l'alternatif.</strong> En continu, le champ est constant, il n'y a pas de variation, donc aucune induction. Un transformateur branché en continu ne délivre rien au secondaire — et son primaire, qui n'est plus limité que par sa faible résistance ohmique, grille en quelques secondes. C'est une erreur d'atelier classique et coûteuse.</li>
 <li><strong>Il faut un noyau feuilleté.</strong> Sinon, courants de Foucault et pertes fer (exercice 7.2).</li>
 <li><strong>Isolation galvanique.</strong> Primaire et secondaire ne sont reliés par <em>aucun</em> conducteur. C'est un effet secondaire précieux : c'est ce qui rend possible les <strong>transformateurs de séparation</strong> utilisés pour travailler en sécurité.</li>
 </ul>
 
-<h3>10.4 — Où vous en trouvez</h3>
+<h3>14.4 — Où vous en trouvez</h3>
 <ul>
 <li><strong>Le poste de transformation</strong> de l'atelier : 20 000 V → 400 V.</li>
 <li><strong>Le transformateur de commande</strong> dans votre armoire : 400 V → 24 V pour les bobines et l'automate.</li>
@@ -2022,36 +2585,35 @@
 <p>Démontez un transformateur d'atelier, retirez le secondaire, et remplacez-le par <strong>une seule spire</strong> de gros câble. Rapport 500:1. Vous obtenez au secondaire une tension ridicule (moins de 1 V), mais un courant énorme : plusieurs centaines d'ampères. Mettez un clou entre les deux extrémités : il rougit, puis <strong>fond</strong> en quelques secondes.</p>
 <p>C'est spectaculaire, c'est le principe exact de la <strong>soudure par points</strong> en carrosserie, et c'est la démonstration parfaite que U₁I₁ = U₂I₂. C'est aussi <strong>dangereux</strong> — projections de métal en fusion, court-circuit du réseau si le montage est mal fait. Cette manip se fait <strong>en démonstration professeur uniquement</strong>, derrière un écran, avec des lunettes, jamais par les élèves.</p></div>
 
-<div class="exo"><span class="tag">Exercice 10.1</span>
+<div class="exo"><span class="tag">Exercice 14.1</span>
 <p>Un transformateur d'armoire a 800 spires au primaire, alimenté en 400 V. On veut 24 V au secondaire. Combien de spires ?</p>
 <details><summary>Voir la réponse</summary><div class="rep"><p>N₂ = N₁ × U₂ / U₁ = 800 × 24 / 400 = <strong>48 spires</strong>. Rapport de transformation : 400/24 ≈ 16,7.</p></div></details></div>
 
-<div class="exo"><span class="tag">Exercice 10.2</span>
+<div class="exo"><span class="tag">Exercice 14.2</span>
 <p>Ce même transfo alimente 3 bobines de contacteur consommant chacune 5 W. Quel courant circule au secondaire ? Au primaire ?</p>
 <details><summary>Voir la réponse</summary><div class="rep"><p>P = 15 W. Au secondaire : I₂ = 15 / 24 = <strong>0,63 A</strong>. Au primaire : I₁ = 15 / 400 = <strong>0,037 A</strong>, soit 37 mA.<br>Vérification : 0,63 / 0,037 ≈ 17 = le rapport inverse. Et remarquez que le fil du secondaire devra être <strong>17 fois plus gros</strong> que celui du primaire.</p></div></details></div>
 
-<div class="exo"><span class="tag">Exercice 10.3</span>
+<div class="exo"><span class="tag">Exercice 14.3</span>
 <p>Un stagiaire branche un transformateur 230 V / 24 V sur une batterie 24 V continue, en espérant obtenir 2,5 V. Que se passe-t-il ?</p>
 <details><summary>Voir la réponse</summary><div class="rep"><p><strong>Zéro volt au secondaire</strong> (pas de variation de flux, pas d'induction) et <strong>le primaire fume</strong>. En alternatif, le courant primaire est limité par l'inductance de la bobine, pas par sa résistance. En continu, l'inductance ne joue plus : il ne reste que la résistance ohmique du fil, quelques ohms. 24 V sur 3 Ω = 8 A dans un bobinage prévu pour 0,1 A. L'émail fond, la bobine est perdue.</p></div></details></div>
 
   </div>
 </section>
 
-<!-- ================= CH 11 ================= -->
-<section class="ch" id="c11">
-  <div class="ch-head"><div class="ch-num">11</div><div class="ch-title">
+<section class="ch" id="c15">
+  <div class="ch-head"><div class="ch-num">15</div><div class="ch-title">
     <span class="kicker">Le calcul qui explique les pylônes</span><h2>Pourquoi on transporte en très haute tension</h2></div></div>
   <div class="ch-body">
 
 <p class="lede">Deux formules seulement, et toute l'architecture du réseau électrique français s'explique — y compris pourquoi il y a 400 000 volts au-dessus des champs et 230 dans votre prise.</p>
 
-<h3>11.1 — Les deux puissances à ne pas confondre</h3>
+<h3>15.1 — Les deux puissances à ne pas confondre</h3>
 <div class="formule">P<sub>transportée</sub> = U × I<small>ce que le client reçoit</small></div>
 <div class="formule" style="border-left-color:var(--danger)">P<sub>perdue</sub> = R × I²<small>ce que la ligne dissipe en chaleur — pure perte</small></div>
 <p>Observez bien : la puissance <strong>transportée</strong> dépend de U et I. La puissance <strong>perdue</strong> ne dépend <em>que</em> de I (et de la résistance de la ligne, qu'on ne peut pas beaucoup réduire sans ruiner le cuivre).</p>
 <p><span class="cle">Conclusion : pour transporter la même puissance en perdant moins, il faut baisser le courant. Donc monter la tension.</span> Et c'est justement ce que sait faire un transformateur.</p>
 
-<h3>11.2 — Le calcul qui doit rester en mémoire</h3>
+<h3>15.2 — Le calcul qui doit rester en mémoire</h3>
 <p>Transportons <strong>100 kW</strong> sur une ligne dont la résistance totale vaut <strong>1 Ω</strong> (ordre de grandeur d'une ligne aérienne de quelques kilomètres).</p>
 <table>
 <thead><tr><th>Tension de transport</th><th class="mono">Courant I = P/U</th><th class="mono">Pertes = R × I²</th><th>Verdict</th></tr></thead>
@@ -2073,7 +2635,7 @@
   <figcaption>La ligne rougit d'autant plus que le courant est fort. <b>Mettez-vous en 230 V et regardez la lampe en bout de ligne s'éteindre</b> pendant que le câble devient incandescent : toute l'énergie est consommée par le trajet.</figcaption>
 </figure>
 
-<h3>11.3 — L'architecture du réseau français</h3>
+<h3>15.3 — L'architecture du réseau français</h3>
 <table>
 <thead><tr><th>Étage</th><th class="mono">Tension</th><th>Qui gère</th><th>Repère visuel</th></tr></thead>
 <tbody>
@@ -2097,104 +2659,29 @@
 <p>Les pylônes THT ne sont pas hauts pour l'esthétique. À 400 000 V, <strong>l'air lui-même devient conducteur</strong> au-delà d'un certain champ : il faut environ 3 mètres de distance dans l'air pour tenir cette tension, plus une marge très large pour le vent, le givre, la dilatation des câbles en été (un câble peut descendre de 2 à 3 mètres entre janvier et août) et le passage des engins agricoles.</p>
 <p>Par temps humide, on entend d'ailleurs les lignes <strong>grésiller</strong> : c'est l'<strong>effet couronne</strong>, l'air qui s'ionise partiellement autour des conducteurs. Ce grésillement est une perte d'énergie, et c'est aussi pour le réduire qu'on utilise des <strong>faisceaux de 2 à 4 câbles espacés</strong> plutôt qu'un seul gros conducteur : à section égale, le faisceau présente une surface plus grande, donc un champ électrique plus faible à sa surface.</p></div>
 
-<div class="exo"><span class="tag">Exercice 11.1</span>
+<div class="exo"><span class="tag">Exercice 15.1</span>
 <p>Une ligne de 0,5 Ω transporte 20 kW. Calculez les pertes sous 230 V, puis sous 5 000 V.</p>
 <details><summary>Voir la réponse</summary><div class="rep"><p>Sous 230 V : I = 20 000/230 = 87 A → pertes = 0,5 × 87² = <strong>3 785 W</strong>, soit 19 % de perte.<br>Sous 5 000 V : I = 4 A → pertes = 0,5 × 16 = <strong>8 W</strong>, soit 0,04 %.<br>Tension ×21,7 → pertes ÷473 (soit 21,7²).</p></div></details></div>
 
-<div class="exo"><span class="tag">Exercice 11.2</span>
+<div class="exo"><span class="tag">Exercice 15.2</span>
 <p>Pourquoi ne transporte-t-on pas tout en 400 kV jusqu'à la prise de courant, puisque c'est le plus efficace ?</p>
 <details><summary>Voir la réponse</summary><div class="rep"><p>Parce que la haute tension coûte cher en <strong>isolation et en distances de sécurité</strong>. Il faudrait 3 mètres d'air ou plusieurs centimètres d'isolant autour de chaque fil, des postes gigantesques, et le moindre contact serait mortel à distance sans même toucher. La haute tension est rentable <strong>sur les longues distances</strong> et absurde sur 20 mètres. D'où l'architecture en cascade : on descend progressivement à mesure qu'on se rapproche du client.</p></div></details></div>
 
-<div class="exo"><span class="tag">Exercice 11.3</span>
+<div class="exo"><span class="tag">Exercice 15.3</span>
 <p>Un atelier en bout de ligne se plaint : les moteurs peinent à démarrer quand la presse hydraulique fonctionne. Quel est le mécanisme, et que proposez-vous ?</p>
 <details><summary>Voir la réponse</summary><div class="rep"><p>La presse appelle un fort courant → chute de tension dans le câble d'alimentation (U = R×I) → la tension disponible à l'atelier baisse → le couple d'un moteur asynchrone étant proportionnel au <strong>carré</strong> de la tension, une chute de 10 % coûte 19 % de couple.<br><strong>Pistes :</strong> augmenter la section du câble d'alimentation ; rapprocher le poste de transformation ; démarrer les gros moteurs en étoile-triangle ou par démarreur progressif pour écrêter les appels ; contrôler le serrage de toutes les connexions du départ ; et vérifier la compensation d'énergie réactive.</p></div></details></div>
 
   </div>
 </section>
 
-<!-- ================= CH 12 ================= -->
-<section class="ch" id="c12">
-  <div class="ch-head"><div class="ch-num">12</div><div class="ch-title">
-    <span class="kicker">Retour au concret</span><h2>Le circuit simple : c'est la lampe qui décide</h2></div></div>
-  <div class="ch-body">
-
-<p class="lede">Après le réseau national, revenons à trois composants : une pile, un interrupteur, une lampe. C'est là que se joue l'erreur de raisonnement la plus répandue chez les débutants.</p>
-
-<h3>12.1 — Les quatre éléments d'un circuit</h3>
-<ol>
-<li>Un <strong>générateur</strong> — il impose la tension (pile, prise, alimentation stabilisée)</li>
-<li>Un <strong>récepteur</strong> — il transforme l'énergie électrique en autre chose (lumière, chaleur, mouvement)</li>
-<li>Des <strong>conducteurs</strong> — ils relient, idéalement sans rien consommer</li>
-<li>Un <strong>organe de commande et de protection</strong> — interrupteur, disjoncteur</li>
-</ol>
-<p>Et une condition absolue : <strong>le circuit doit être fermé</strong>. Une boucle complète, sans interruption. Coupez n'importe où, tout s'arrête partout.</p>
-
-<h3>12.2 — L'erreur à corriger tout de suite</h3>
-<div class="encadre"><span class="tag">Idée fausse</span>
-<p><em>« La prise envoie 16 A dans la lampe. »</em> — <strong>Non.</strong></p>
-<p>La prise <strong>propose</strong> une tension (230 V) et <strong>autorise</strong> un courant maximal (16 A, fixé par le disjoncteur). Mais le courant qui circule réellement est déterminé par <strong>la résistance du récepteur branché</strong>.</p>
-<p>Branchez une lampe de 5 W : il passe 22 mA. Branchez un radiateur de 2 000 W : il passe 8,7 A. Même prise, même tension. <span class="cle">C'est le récepteur qui décide.</span></p></div>
-
-<div class="formule">I = U / R<small>Loi d'Ohm — la tension est imposée par la source, la résistance par le récepteur, le courant en découle</small></div>
-
-<div class="image-mentale"><span class="tag">Image mentale</span>
-<p>Un robinet ouvert à fond (la tension) au bout duquel vous branchez successivement une paille, un tuyau d'arrosage, puis une lance à incendie. La pression est la même à chaque fois. Le débit, non. <strong>C'est l'embout qui fixe le débit, pas le robinet.</strong></p></div>
-
-<figure class="anim">
-  <canvas id="a-circ" width="900" height="330" aria-label="Animation : circuit simple avec lampe, interrupteur et mesures"></canvas>
-  <div class="ctrls">
-    <div class="c"><button class="btn" id="a-circ-sw">Fermer l'interrupteur</button></div>
-    <div class="c"><label>Récepteur <span id="a-circ-rl">Lampe 60 W</span></label><input type="range" id="a-circ-rr" min="0" max="4" value="2"></div>
-    <div class="c"><label>Tension source <span id="a-circ-ul">230 V</span></label><input type="range" id="a-circ-ur" min="12" max="240" value="230"></div>
-    <div class="c readout" id="a-circ-out"></div>
-  </div>
-  <figcaption>Changez de récepteur sans toucher à la tension : le courant change tout seul. <b>L'éclat de la lampe suit la puissance, pas la tension.</b> Ouvrez l'interrupteur : le courant tombe à zéro partout instantanément, y compris dans le fil de retour.</figcaption>
-</figure>
-
-<h3>12.3 — Le cas particulier de la lampe à incandescence</h3>
-<p>Une lampe n'est pas une résistance ordinaire : <strong>sa résistance change avec sa température</strong> (chapitre 1, dernier point).</p>
-<table>
-<thead><tr><th>État</th><th class="mono">Température</th><th class="mono">Résistance</th><th class="mono">Courant sous 230 V</th></tr></thead>
-<tbody>
-<tr><td>Froide, éteinte</td><td class="mono">20 °C</td><td class="mono">≈ 60 Ω</td><td class="mono">3,8 A</td></tr>
-<tr><td>Chaude, en régime</td><td class="mono">2 500 °C</td><td class="mono">≈ 880 Ω</td><td class="mono">0,26 A</td></tr>
-</tbody></table>
-<p>À l'instant précis de l'allumage, une lampe de 60 W appelle donc <strong>15 fois son courant nominal</strong> — pendant quelques dizaines de millisecondes, le temps que le filament monte en température.</p>
-
-<div class="plaque"><span class="tag">Anecdote — pourquoi les ampoules grillent toujours à l'allumage</span>
-<p>Vous ne l'avez jamais vue griller en fonctionnement : elle claque toujours au moment où vous appuyez sur l'interrupteur. Ce n'est pas une coïncidence.</p>
-<p>La cause : ce pic de courant à froid, combiné au fait que le filament, usé, présente des zones amincies par sublimation du tungstène. Une zone plus fine = plus résistante = plus chaude = elle s'amincit encore plus vite. Le jour où le pic d'allumage passe, cette zone fond. C'est un <strong>emballement thermique</strong>, et c'est aussi la raison pour laquelle un défaut électrique s'aggrave toujours de lui-même.</p>
-<p>Conséquence directe en atelier : sur un circuit d'éclairage industriel avec 30 tubes ou projecteurs, la somme des courants d'appel peut faire déclencher un disjoncteur courbe C. On monte alors en <strong>courbe D</strong>, ou on répartit sur plusieurs départs.</p></div>
-
-<div class="plaque"><span class="tag">Anecdote — l'ampoule allumée depuis 1901</span>
-<p>Dans la caserne de pompiers n° 6 de Livermore, en Californie, brûle une ampoule à filament de carbone installée en <strong>1901</strong>. Elle est allumée en quasi-permanence depuis 124 ans. Elle a survécu à deux déménagements, et elle dispose de sa propre webcam.</p>
-<p>Son secret ? Elle n'est <strong>presque jamais éteinte</strong> (pas de pic d'allumage), elle fonctionne à puissance très réduite (4 W environ, une lueur orangée), et son filament de carbone est bien plus épais que le tungstène moderne. Elle éclaire très mal — mais elle éclaire encore.</p>
-<p>Cela dit, il faut être honnête : la mode du « cartel Phœbus », qui aurait délibérément limité les ampoules à 1 000 heures, est un fait historique documenté (1924-1939), mais la durée de vie est <strong>aussi</strong> un compromis technique réel — un filament qui dure longtemps éclaire peu et consomme mal. Les deux explications coexistent.</p></div>
-
-<div class="exo"><span class="tag">Exercice 12.1</span>
-<p>Sous 230 V, calculez le courant appelé par : une lampe LED 9 W · un sèche-cheveux 1 800 W · un moteur monophasé 750 W.</p>
-<details><summary>Voir la réponse</summary><div class="rep"><p>LED : 9/230 = <strong>39 mA</strong> · Sèche-cheveux : 1 800/230 = <strong>7,8 A</strong> · Moteur : 750/230 = <strong>3,3 A</strong> <em>(en réalité un peu plus : un moteur a un facteur de puissance inférieur à 1, on trouverait plutôt 4,5 A sur la plaque)</em>.</p></div></details></div>
-
-<div class="exo"><span class="tag">Exercice 12.2</span>
-<p>Une lampe 12 V / 21 W de feu de stop. Quelle est sa résistance à chaud ? Que se passe-t-il si on la branche sur 24 V ?</p>
-<details><summary>Voir la réponse</summary><div class="rep"><p>I = 21/12 = 1,75 A → R = 12/1,75 = <strong>6,9 Ω</strong>.<br>Sous 24 V : le courant tenterait de doubler et la puissance d'être multipliée par 4 (84 W). En pratique le filament, prévu pour 2 500 °C, fond quasi instantanément. <strong>Durée de vie : une fraction de seconde.</strong> C'est ce qui arrive quand on branche du matériel 12 V sur un poids lourd en 24 V.</p></div></details></div>
-
-<div class="exo"><span class="tag">Exercice 12.3</span>
-<p>Deux lampes identiques 230 V / 60 W sont branchées en série sur 230 V. Éclairent-elles normalement ?</p>
-<details><summary>Voir la réponse</summary><div class="rep"><p>Non : chacune reçoit 115 V. Le courant qui les traverse est bien plus faible, elles rougeoient à peine (leur puissance chute à environ 15 W chacune, et encore moins car leur résistance baisse à froid). C'est le montage des anciennes guirlandes de Noël — et c'est pour ça qu'une seule lampe grillée éteignait toute la guirlande.</p></div></details></div>
-
-  </div>
-</section>
-
-<!-- ================= CH 13 ================= -->
-<section class="ch" id="c13">
-  <div class="ch-head"><div class="ch-num">13</div><div class="ch-title">
+<section class="ch" id="c16">
+  <div class="ch-head"><div class="ch-num">16</div><div class="ch-title">
     <span class="kicker">Les deux défauts à ne jamais confondre</span><h2>Court-circuit et surcharge</h2></div></div>
   <div class="ch-body">
 
 <p class="lede">Ce sont deux problèmes <strong>différents</strong>, avec des causes différentes, des vitesses différentes et des conséquences différentes. Un disjoncteur possède deux mécanismes distincts précisément pour cette raison.</p>
 
-<h3>13.1 — Le court-circuit</h3>
+<h3>16.1 — Le court-circuit</h3>
 <p>Un court-circuit, c'est une liaison de <strong>très faible résistance</strong> établie accidentellement entre deux points de potentiels différents : phase et neutre, phase et terre, ou deux phases entre elles.</p>
 <p>Le courant, au lieu de traverser le récepteur, prend ce chemin bien plus facile. Reprenons la loi d'Ohm :</p>
 <table>
@@ -2221,7 +2708,7 @@
 <li>Rongeurs — cause plus fréquente qu'on ne croit dans les faux-plafonds et les caniveaux</li>
 </ul>
 
-<h3>13.2 — La surcharge</h3>
+<h3>16.2 — La surcharge</h3>
 <p>La surcharge, c'est tout autre chose : <strong>le circuit fonctionne normalement, mais on lui demande plus que sa capacité</strong>. Il n'y a pas de défaut d'isolement, pas de fil qui se touche. Juste trop de récepteurs, ou un récepteur qui force.</p>
 <table>
 <thead><tr><th></th><th>Court-circuit</th><th>Surcharge</th></tr></thead>
@@ -2266,30 +2753,29 @@
 <p>Si le courant de court-circuit présumé à cet endroit de l'installation dépasse cette valeur, le disjoncteur ne coupe pas : <strong>il explose</strong>, et l'arc continue. En tête d'installation, près du transformateur, on peut trouver 10, 20, voire 50 kA — d'où les disjoncteurs industriels massifs, avec chambres de coupure à ailettes désionisantes.</p>
 <p>C'est aussi pour ça que dans une armoire industrielle, on associe parfois <strong>fusible + disjoncteur</strong> : le fusible, plus rapide et doté d'un pouvoir de coupure énorme, « limite » le courant que le disjoncteur devra affronter. On appelle ça la <strong>filiation</strong>.</p></div>
 
-<div class="exo"><span class="tag">Exercice 13.1</span>
+<div class="exo"><span class="tag">Exercice 16.1</span>
 <p>Une perceuse d'établi tombe en panne : elle déclenche le disjoncteur <em>instantanément</em>, dès la mise sous tension, même sans charge. Est-ce plutôt une surcharge ou un court-circuit ? Comment le vérifier avant de rebrancher ?</p>
 <details><summary>Voir la réponse</summary><div class="rep"><p>Un déclenchement <strong>instantané et systématique</strong> signe un <strong>court-circuit</strong> (déclencheur magnétique). Une surcharge mettrait plusieurs secondes ou minutes.<br><strong>Vérification, machine consignée et débranchée :</strong> mesure de la résistance entre les bornes d'alimentation à l'ohmmètre — on attend quelques ohms (bobinage) et non zéro. Puis mesure de l'<strong>isolement</strong> phase/masse au mégohmmètre 500 V : on attend au moins 1 MΩ ; quelques kΩ signent un défaut d'isolement du bobinage ou du câble d'alimentation. Suspects habituels : le câble à l'entrée du carter (pincé par le presse-étoupe), et l'humidité dans le bobinage.</p></div></details></div>
 
-<div class="exo"><span class="tag">Exercice 13.2</span>
+<div class="exo"><span class="tag">Exercice 16.2</span>
 <p>Un convoyeur déclenche son relais thermique après 4 à 5 minutes de fonctionnement, systématiquement. Court-circuit ou surcharge ? Quelles pistes ?</p>
 <details><summary>Voir la réponse</summary><div class="rep"><p><strong>Surcharge</strong> : le déclenchement est <em>différé</em> et reproductible.<br><strong>Pistes, dans l'ordre :</strong> mesurer le courant réel sur les 3 phases à la pince (déséquilibre = phase faible ou spire en court-circuit) ; vérifier le réglage du relais par rapport à la plaque moteur ; contrôler mécaniquement — bande trop tendue, rouleau grippé, roulement bruyant, produit qui frotte, réducteur sans huile ; vérifier que le ventilateur du moteur et ses ailettes ne sont pas encrassés ; et contrôler la température ambiante de l'armoire.</p></div></details></div>
 
-<div class="exo"><span class="tag">Exercice 13.3</span>
+<div class="exo"><span class="tag">Exercice 16.3</span>
 <p>Pourquoi une rallonge de 1,5 mm² branchée sur une prise protégée en 16 A peut-elle prendre feu <em>sans que le disjoncteur ne déclenche</em> ?</p>
 <details><summary>Voir la réponse</summary><div class="rep"><p>Parce que le disjoncteur protège <strong>le câble fixe de l'installation</strong>, pas la rallonge. Un 16 A laisse passer 16 A indéfiniment, plus les surcharges tolérées. Si la rallonge est en 1,5 mm², enroulée sur son touret et posée sous un carton, elle ne peut pas évacuer sa chaleur : elle monte à 100 °C alors que le courant reste parfaitement légal.<br><strong>Le disjoncteur n'a rien vu, et il n'avait rien à voir.</strong> D'où : dérouler complètement les enrouleurs, lire les deux calibres marqués dessus, et ne jamais recouvrir un câble en charge.</p></div></details></div>
 
   </div>
 </section>
 
-<!-- ================= CH 14 ================= -->
-<section class="ch" id="c14">
-  <div class="ch-head"><div class="ch-num">14</div><div class="ch-title">
+<section class="ch" id="c17">
+  <div class="ch-head"><div class="ch-num">17</div><div class="ch-title">
     <span class="kicker">Deux défauts, deux mécanismes</span><h2>Le disjoncteur magnéto-thermique</h2></div></div>
   <div class="ch-body">
 
-<p class="lede">Le nom dit tout : <strong>magnéto</strong> (chapitre 6, l'électroaimant) pour les court-circuits, <strong>thermique</strong> (chapitre 4, l'effet Joule) pour les surcharges. Deux capteurs, un seul mécanisme de déclenchement. Le cours entier est dans ce boîtier de 18 mm.</p>
+<p class="lede">Le nom dit tout : <strong>magnéto</strong> (chapitre 10, l'électroaimant) pour les court-circuits, <strong>thermique</strong> (chapitre 7, l'effet Joule) pour les surcharges. Deux capteurs, un seul mécanisme de déclenchement. Le cours entier est dans ce boîtier de 18 mm.</p>
 
-<h3>14.1 — Le déclencheur thermique : le bilame</h3>
+<h3>17.1 — Le déclencheur thermique : le bilame</h3>
 <p>Deux lames métalliques de natures différentes, soudées l'une à l'autre sur toute leur longueur. Elles n'ont pas le même <strong>coefficient de dilatation</strong>. Quand le courant les traverse, elles chauffent par effet Joule. L'une s'allonge plus que l'autre, donc l'ensemble <strong>se courbe</strong>.</p>
 <p>Si le courant reste modéré, la courbure reste faible et l'équilibre thermique s'établit. Si le courant est trop fort trop longtemps, la courbure finit par actionner le mécanisme de déclenchement.</p>
 <ul>
@@ -2298,15 +2784,15 @@
 <li>Il est <strong>sensible à la température ambiante</strong> : un disjoncteur dans une armoire à 50 °C déclenche plus tôt qu'à 20 °C. C'est pour cela qu'on applique des facteurs de déclassement en armoire</li>
 </ul>
 
-<h3>14.2 — Le déclencheur magnétique : la bobine</h3>
-<p>Le courant traverse une bobine enroulée autour d'un noyau mobile — un électroaimant, exactement celui du chapitre 6. En fonctionnement normal, le champ est trop faible pour vaincre le ressort de rappel. En cas de court-circuit, le courant explose, le champ aussi, et le noyau est <strong>projeté</strong> contre le mécanisme.</p>
+<h3>17.2 — Le déclencheur magnétique : la bobine</h3>
+<p>Le courant traverse une bobine enroulée autour d'un noyau mobile — un électroaimant, exactement celui du chapitre 10. En fonctionnement normal, le champ est trop faible pour vaincre le ressort de rappel. En cas de court-circuit, le courant explose, le champ aussi, et le noyau est <strong>projeté</strong> contre le mécanisme.</p>
 <ul>
 <li><strong>Réaction quasi instantanée</strong> : moins de 10 millisecondes</li>
 <li>Insensible à la température</li>
 <li>C'est ce mécanisme qui produit le <em>« clac »</em> sec caractéristique</li>
 </ul>
 
-<h3>14.3 — La chambre de coupure : la partie oubliée</h3>
+<h3>17.3 — La chambre de coupure : la partie oubliée</h3>
 <p>Ouvrir un contact traversé par 4 000 A ne suffit pas : un <strong>arc électrique</strong> s'établit entre les contacts qui s'écartent et le courant continue de passer dans l'air ionisé.</p>
 <p>D'où la <strong>chambre de coupure</strong> : une pile de plaquettes métalliques en chevrons. Le champ magnétique de l'arc lui-même le pousse dans ces plaques, qui le découpent en une série de petits arcs, le refroidissent et le désionisent. L'arc s'éteint au passage par zéro du courant alternatif. C'est cette pièce, invisible, qui détermine le <strong>pouvoir de coupure</strong>.</p>
 
@@ -2321,7 +2807,7 @@
   <figcaption>Disjoncteur <b>16 A</b>. À gauche, le bilame se courbe et la bobine s'excite en temps réel. À droite, la courbe temps/courant : le point rouge, c'est votre situation. <b>Restez à 20 A et attendez</b> : c'est une surcharge, il faut du temps. <b>Passez à 200 A</b> : instantané.</figcaption>
 </figure>
 
-<h3>14.4 — Lire la face avant d'un disjoncteur</h3>
+<h3>17.4 — Lire la face avant d'un disjoncteur</h3>
 <table>
 <thead><tr><th>Marquage</th><th>Signification</th></tr></thead>
 <tbody>
@@ -2360,24 +2846,24 @@
 <p>On ne réarme <strong>jamais</strong> un disjoncteur sans avoir cherché pourquoi il a déclenché. Un déclenchement n'est pas un caprice de l'appareil : c'est un <strong>diagnostic gratuit</strong> qu'il vient de vous offrir.</p>
 <p>Et on ne remplace jamais un C16 par un C20 « parce qu'il saute tout le temps ». Le calibre protège le <strong>câble</strong>, dont la section n'a pas changé.</p></div>
 
-<div class="exo"><span class="tag">Exercice 14.1</span>
+<div class="exo"><span class="tag">Exercice 17.1</span>
 <p>Un disjoncteur C10 protège un circuit d'éclairage. Quel courant fera agir le déclencheur magnétique ? À partir de quel courant le thermique agira-t-il, et en combien de temps environ ?</p>
 <details><summary>Voir la réponse</summary><div class="rep"><p><strong>Magnétique</strong> : entre 5 et 10 × 10 A, soit <strong>50 à 100 A</strong> — instantanément.<br><strong>Thermique</strong> : il tolère 11,3 A pendant plus d'une heure ; il déclenchera à <strong>14,5 A en moins d'une heure</strong>. À 20 A, comptez plutôt quelques dizaines de secondes ; à 40 A, quelques secondes.</p></div></details></div>
 
-<div class="exo"><span class="tag">Exercice 14.2</span>
+<div class="exo"><span class="tag">Exercice 17.2</span>
 <p>Un moteur 400 V dont le courant nominal est 6 A appelle 42 A pendant 0,3 s au démarrage. Un disjoncteur C10 convient-il ? Et un D10 ?</p>
 <details><summary>Voir la réponse</summary><div class="rep"><p><strong>C10</strong> : seuil magnétique entre 50 et 100 A. 42 A est en dessous : ça <em>devrait</em> passer, mais la marge est très faible et le seuil réel varie d'un appareil à l'autre — on aura des déclenchements intempestifs aléatoires.<br><strong>D10</strong> : seuil entre 100 et 200 A. 42 A est très largement en dessous : aucun risque de déclenchement magnétique au démarrage, et la protection thermique reste assurée. <strong>C'est le bon choix.</strong> C'est exactement pour ça que les courbes D existent.</p></div></details></div>
 
-<div class="exo"><span class="tag">Exercice 14.3</span>
+<div class="exo"><span class="tag">Exercice 17.3</span>
 <p>Reliez chaque élément du disjoncteur au chapitre du cours dont il est l'application.</p>
 <details><summary>Voir la réponse</summary><div class="rep">
 <ul style="margin-bottom:0">
-<li><strong>Le bilame</strong> → chapitre 4, effet Joule (P = RI²) + chapitre 1 (dilatation, agitation des ions)</li>
+<li><strong>Le bilame</strong> → chapitre 7, effet Joule (P = RI²) + chapitre 5 (dilatation, agitation des ions)</li>
 <li><strong>La bobine magnétique</strong> → chapitres 5 et 6 (le courant crée un champ, l'électroaimant attire un noyau)</li>
 <li><strong>La chambre de coupure</strong> → chapitres 8 et 13 (l'arc s'éteint au passage par zéro de l'alternatif)</li>
-<li><strong>Les contacts en argent</strong> → chapitre 1 (matériau très conducteur, peu de chocs, peu de pertes)</li>
-<li><strong>Le pouvoir de coupure</strong> → chapitre 13 (l'intensité de court-circuit disponible en ce point)</li>
-<li><strong>Le calibre</strong> → chapitre 4 (l'échauffement admissible du câble qu'il protège)</li>
+<li><strong>Les contacts en argent</strong> → chapitre 5 (matériau très conducteur, peu de chocs, peu de pertes)</li>
+<li><strong>Le pouvoir de coupure</strong> → chapitre 16 (l'intensité de court-circuit disponible en ce point)</li>
+<li><strong>Le calibre</strong> → chapitre 7 (l'échauffement admissible du câble qu'il protège)</li>
 </ul>
 <p style="margin-top:10px"><em>Ce boîtier de 18 mm est le résumé de la séquence entière. C'est pour ça qu'on a commencé par les électrons.</em></p></div></details></div>
 
@@ -2397,7 +2883,6 @@
   </div>
 </section>
 
-<!-- ================= FICHES TP ================= -->
 <section class="ch" id="tps">
   <div class="ch-head"><div class="ch-num">TP</div><div class="ch-title">
     <span class="kicker">15 manipulations réalisables en atelier MSPC</span><h2>Les fiches de travaux pratiques</h2></div></div>
@@ -2423,7 +2908,7 @@
 
 <!-- TP2 -->
 <div class="tp"><div class="tp-head"><span class="ref">TP 02</span><h3>De quoi dépend la résistance d'un fil ?</h3></div><div class="tp-body">
-<div class="tp-meta"><span>Chapitre 1</span><span>40 min</span><span class="tbts">TBTS</span><span>Binôme</span></div>
+<div class="tp-meta"><span>Chapitre 5</span><span>40 min</span><span class="tbts">TBTS</span><span>Binôme</span></div>
 <h4>Objectif</h4><p>Établir expérimentalement que R dépend de la longueur, de la section et de la nature du matériau.</p>
 <h4>Matériel</h4><ul><li>Fil résistif nichrome ø 0,3 mm et ø 0,5 mm, sur réglette graduée d'1 m</li><li>Fil de cuivre nu de même diamètre, même longueur</li><li>Milliohmmètre ou multimètre 4 fils si disponible ; sinon méthode voltampèremétrique</li></ul>
 <h4>Protocole</h4>
@@ -2433,7 +2918,7 @@
 
 <!-- TP3 -->
 <div class="tp"><div class="tp-head"><span class="ref">TP 03</span><h3>Le cuivre chaud résiste plus</h3></div><div class="tp-body">
-<div class="tp-meta"><span>Chapitre 1</span><span>30 min</span><span class="tbts">TBTS</span><span>Groupe</span></div>
+<div class="tp-meta"><span>Chapitre 5</span><span>30 min</span><span class="tbts">TBTS</span><span>Groupe</span></div>
 <h4>Objectif</h4><p>Vérifier que la résistance d'un métal augmente avec la température, et faire le lien avec l'agitation des ions.</p>
 <h4>Matériel</h4><ul><li>Bobine de cuivre émaillé (une bobine de contacteur HS fait parfaitement l'affaire) ou un moteur asynchrone de casse</li><li>Multimètre, thermomètre infrarouge, décapeur thermique, bac d'eau glacée</li></ul>
 <h4>Protocole</h4>
@@ -2443,7 +2928,7 @@
 
 <!-- TP4 -->
 <div class="tp"><div class="tp-head"><span class="ref">TP 04</span><h3>Effet Joule : mesurer P = RI²</h3></div><div class="tp-body">
-<div class="tp-meta"><span>Chapitre 4</span><span>45 min</span><span class="tbts">TBTS · 24 V max</span><span>Binôme</span></div>
+<div class="tp-meta"><span>Chapitre 7</span><span>45 min</span><span class="tbts">TBTS · 24 V max</span><span>Binôme</span></div>
 <h4>Objectif</h4><p>Vérifier expérimentalement le carré, et voir la thermographie en action.</p>
 <h4>Matériel</h4><ul><li>Alimentation de labo 0-24 V limitée à 5 A, fil nichrome tendu sur support isolant</li><li>Ampèremètre, voltmètre, thermomètre IR ou caméra thermique (un smartphone avec module FLIR suffit)</li><li>Chronomètre, plaque isolante support</li></ul>
 <h4>Protocole</h4>
@@ -2454,18 +2939,18 @@
 
 <!-- TP5 -->
 <div class="tp"><div class="tp-head"><span class="ref">TP 05</span><h3>Refaire l'expérience d'Œrsted (21 avril 1820)</h3></div><div class="tp-body">
-<div class="tp-meta"><span>Chapitre 5</span><span>30 min</span><span class="tbts">TBTS · 4,5 V</span><span>Binôme</span></div>
+<div class="tp-meta"><span>Chapitre 9</span><span>30 min</span><span class="tbts">TBTS · 4,5 V</span><span>Binôme</span></div>
 <h4>Objectif</h4><p>Mettre en évidence le champ magnétique créé par un courant, et en tracer la forme.</p>
 <h4>Matériel</h4><ul><li>Pile 4,5 V ou alimentation limitée à 3 A, fil rigide de 1 m, interrupteur</li><li>4 à 8 petites boussoles, limaille de fer, feuille de carton fin, plaque de plexiglas percée</li></ul>
 <h4>Protocole</h4>
 <ol><li>Poser une boussole sous le fil, noter l'orientation. Fermer le circuit 2 secondes maximum, noter la déviation.</li><li>Inverser les polarités. Recommencer. Conclusion sur le sens.</li><li>Placer la boussole au-dessus du fil. Que constate-t-on ?</li><li>Disposer 8 boussoles en cercle autour d'un fil vertical traversant une plaque. Fermer le circuit : photographier la configuration obtenue.</li><li>Saupoudrer la limaille sur un carton traversé par le fil vertical, tapoter, refermer le circuit.</li></ol>
 <h4>Exploitation</h4><ul><li>Dessiner les lignes de champ obtenues. Quelle est leur forme ?</li><li>Vérifier la règle de la main droite sur vos relevés.</li><li>Éloigner une boussole de 5 cm puis 15 cm : que devient la déviation ?</li></ul>
-<h4>Attention</h4><p>Le fil chauffe vite en court-circuit sur la pile : ne pas maintenir le circuit fermé plus de quelques secondes. Occasion parfaite de faire remarquer que <strong>l'expérience d'Œrsted est un petit court-circuit contrôlé</strong> — transition vers le chapitre 13.</p>
+<h4>Attention</h4><p>Le fil chauffe vite en court-circuit sur la pile : ne pas maintenir le circuit fermé plus de quelques secondes. Occasion parfaite de faire remarquer que <strong>l'expérience d'Œrsted est un petit court-circuit contrôlé</strong> — transition vers le chapitre 16.</p>
 </div></div>
 
 <!-- TP6 -->
 <div class="tp"><div class="tp-head"><span class="ref">TP 06</span><h3>Fabriquer un électroaimant et trouver la loi N×I</h3></div><div class="tp-body">
-<div class="tp-meta"><span>Chapitre 6</span><span>55 min</span><span class="tbts">TBTS · 4,5 V</span><span>Binôme</span><span>★ TP phare</span></div>
+<div class="tp-meta"><span>Chapitre 10</span><span>55 min</span><span class="tbts">TBTS · 4,5 V</span><span>Binôme</span><span>★ TP phare</span></div>
 <h4>Objectif</h4><p>Construire un électroaimant et découvrir expérimentalement que le champ dépend du produit N × I et de la nature du noyau.</p>
 <h4>Matériel par binôme</h4><ul><li>1 gros clou en fer doux (ø 6 mm, longueur 100 mm), 1 tige alu, 1 tige laiton, 1 tube plastique de mêmes dimensions</li><li>5 m de fil de cuivre émaillé ø 0,5 mm, papier de verre fin (pour dénuder l'émail !)</li><li>Alimentation de labo 0-6 V limitée à 2 A, ampèremètre, interrupteur</li><li>Une boîte de trombones identiques, une balance de cuisine au gramme</li></ul>
 <h4>Protocole</h4>
@@ -2482,12 +2967,12 @@
 <h4>Protocole</h4>
 <ol><li>Coller l'aimant sous la tête de la vis.</li><li>Poser la pointe de la vis sur le pôle « + » de la pile : l'ensemble tient par magnétisme et pivote librement.</li><li>Tenir un fil sur le pôle « − » et venir toucher le bord de l'aimant avec l'autre extrémité.</li><li>La vis se met à tourner à plusieurs centaines de tours par minute.</li></ol>
 <h4>Exploitation</h4><ul><li>Inverser la pile : que se passe-t-il ?</li><li>Retourner l'aimant : que se passe-t-il ? Conclusion sur le sens de la force.</li><li>Quel rôle joue le fil ? Quel rôle joue l'aimant ? Où est le courant ?</li></ul>
-<h4>Attention</h4><p>C'est un <strong>court-circuit franc</strong> de la pile : elle chauffe très vite. Manipulations de 10 secondes maximum, pile changée régulièrement. Excellente occasion d'introduire le chapitre 13 : les élèves <em>sentent</em> le court-circuit dans leur main.</p>
+<h4>Attention</h4><p>C'est un <strong>court-circuit franc</strong> de la pile : elle chauffe très vite. Manipulations de 10 secondes maximum, pile changée régulièrement. Excellente occasion d'introduire le chapitre 16 : les élèves <em>sentent</em> le court-circuit dans leur main.</p>
 </div></div>
 
 <!-- TP8 -->
 <div class="tp"><div class="tp-head"><span class="ref">TP 08</span><h3>L'aimant qui tombe au ralenti</h3></div><div class="tp-body">
-<div class="tp-meta"><span>Chapitre 7</span><span>25 min</span><span class="tbts">Aucune alimentation</span><span>Groupe</span><span>★ Effet « waouh »</span></div>
+<div class="tp-meta"><span>Chapitre 11</span><span>25 min</span><span class="tbts">Aucune alimentation</span><span>Groupe</span><span>★ Effet « waouh »</span></div>
 <h4>Objectif</h4><p>Faire découvrir les courants de Foucault et la loi de Lenz sans une seule mesure électrique.</p>
 <h4>Matériel</h4><ul><li>Tube de cuivre ø int. 20 mm, longueur 50 cm (chute de plomberie sanitaire)</li><li>Tube d'aluminium et tube PVC de mêmes dimensions</li><li>Aimant néodyme cylindrique passant librement dans le tube, bille d'acier non aimantée de même taille</li><li>Chronomètre, plaque d'aluminium épaisse inclinée</li></ul>
 <h4>Protocole</h4>
@@ -2498,7 +2983,7 @@
 
 <!-- TP9 -->
 <div class="tp"><div class="tp-head"><span class="ref">TP 09</span><h3>Induction : fabriquer de la tension à la main</h3></div><div class="tp-body">
-<div class="tp-meta"><span>Chapitre 7</span><span>45 min</span><span class="tbts">Aucune alimentation</span><span>Binôme</span></div>
+<div class="tp-meta"><span>Chapitre 11</span><span>45 min</span><span class="tbts">Aucune alimentation</span><span>Binôme</span></div>
 <h4>Objectif</h4><p>Établir que seule la <em>variation</em> du flux produit une tension, et identifier les paramètres qui la font monter.</p>
 <h4>Matériel</h4><ul><li>Bobines de 250, 500 et 1 000 spires (matériel de labo standard)</li><li>Aimants droits de puissances différentes, noyau de fer doux</li><li>Multimètre en mV alternatif, ou galvanomètre à zéro central (bien plus parlant), ou oscilloscope</li></ul>
 <h4>Protocole</h4>
@@ -2508,7 +2993,7 @@
 
 <!-- TP10 -->
 <div class="tp"><div class="tp-head"><span class="ref">TP 10</span><h3>Construire un alternateur et voir la sinusoïde</h3></div><div class="tp-body">
-<div class="tp-meta"><span>Chapitre 8</span><span>50 min</span><span class="tbts">TBTS</span><span>Groupe</span></div>
+<div class="tp-meta"><span>Chapitre 12</span><span>50 min</span><span class="tbts">TBTS</span><span>Groupe</span></div>
 <h4>Objectif</h4><p>Produire physiquement une tension alternative et relier sa fréquence à la vitesse de rotation.</p>
 <h4>Matériel</h4><ul><li>Bobine 1 000 spires + noyau, aimant fixé sur un axe (mandrin de perceuse à vitesse variable, ou moteur d'essuie-glace)</li><li>Oscilloscope, tachymètre optique</li><li>Alternative clé en main : une <strong>dynamo de vélo</strong> et un alternateur de voiture de casse</li></ul>
 <h4>Protocole</h4>
@@ -2518,7 +3003,7 @@
 
 <!-- TP11 -->
 <div class="tp"><div class="tp-head"><span class="ref">TP 11</span><h3>Le transformateur démontable</h3></div><div class="tp-body">
-<div class="tp-meta"><span>Chapitre 10</span><span>50 min</span><span class="tbts">TBTS · 24 V alternatif</span><span>Binôme</span></div>
+<div class="tp-meta"><span>Chapitre 14</span><span>50 min</span><span class="tbts">TBTS · 24 V alternatif</span><span>Binôme</span></div>
 <h4>Objectif</h4><p>Vérifier U₂/U₁ = N₂/N₁ et I₂/I₁ = N₁/N₂, et découvrir que le continu ne passe pas.</p>
 <h4>Matériel</h4><ul><li>Noyau démontable en E + I (matériel de labo), bobines 250 / 500 / 1 000 spires</li><li>Alimentation TBTS <strong>alternative</strong> 24 V, alimentation continue 24 V</li><li>2 multimètres, lampes 6 V et 12 V comme charges, rhéostat</li></ul>
 <h4>Protocole</h4>
@@ -2529,7 +3014,7 @@
 
 <!-- TP12 -->
 <div class="tp"><div class="tp-head"><span class="ref">TP 12</span><h3>Maquette de ligne de transport : pourquoi la haute tension</h3></div><div class="tp-body">
-<div class="tp-meta"><span>Chapitre 11</span><span>60 min</span><span class="tbts">TBTS · 24 V alternatif</span><span>Groupe</span><span>★ TP phare</span></div>
+<div class="tp-meta"><span>Chapitre 15</span><span>60 min</span><span class="tbts">TBTS · 24 V alternatif</span><span>Groupe</span><span>★ TP phare</span></div>
 <h4>Objectif</h4><p>Montrer, lampe à l'appui, qu'une même énergie transportée sur la même ligne arrive ou n'arrive pas selon la tension choisie.</p>
 <h4>Matériel</h4><ul><li>2 transformateurs démontables (un élévateur, un abaisseur), bobines assorties</li><li>« Ligne » : 4 à 6 m de fil résistif fin (nichrome ø 0,2 mm) tendu entre deux supports isolants — c'est la résistance de ligne</li><li>Alimentation 24 V~, lampe 6 V ou 12 V en bout de ligne, 2 voltmètres, 2 ampèremètres, thermomètre IR</li></ul>
 <h4>Protocole</h4>
@@ -2540,7 +3025,7 @@
 
 <!-- TP13 -->
 <div class="tp"><div class="tp-head"><span class="ref">TP 13</span><h3>La lampe n'est pas une résistance constante</h3></div><div class="tp-body">
-<div class="tp-meta"><span>Chapitre 12</span><span>40 min</span><span class="tbts">TBTS · 12 V</span><span>Binôme</span></div>
+<div class="tp-meta"><span>Chapitre 8</span><span>40 min</span><span class="tbts">TBTS · 12 V</span><span>Binôme</span></div>
 <h4>Objectif</h4><p>Tracer la caractéristique U(I) d'une lampe et découvrir qu'elle n'est pas une droite.</p>
 <h4>Matériel</h4><ul><li>Alimentation 0-12 V continue réglable, lampe 12 V/21 W (ampoule de feu stop), résistance de 100 Ω pour comparaison</li><li>Voltmètre, ampèremètre, oscilloscope avec sonde de courant si disponible</li></ul>
 <h4>Protocole</h4>
