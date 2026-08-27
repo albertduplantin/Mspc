@@ -3459,15 +3459,183 @@
 <li><strong>Le neutre ne travaille pas.</strong> En charge équilibrée, la somme instantanée des trois courants vaut zéro : le conducteur de neutre ne transporte rien. On peut même s'en passer sur les lignes de transport.</li>
 </ol>
 
+<div class="encadre"><span class="tag">Le moteur de l’animation est-il celui de votre atelier ?</span>
+<p>Presque. Celui de l’animation porte un <strong>aimant permanent</strong> sur son rotor : il se cale sur le champ tournant et tourne exactement à sa vitesse. C’est un <strong>moteur synchrone</strong>, et c’est le plus simple à comprendre — d’où le choix de le montrer.</p>
+<p>Celui que vous démonterez en atelier est le plus souvent un <strong>moteur asynchrone</strong>, sans aucun aimant : son rotor est une simple cage d’écureuil en aluminium. Le champ tournant y induit des courants (chapitre 11), qui créent à leur tour un champ, et l’ensemble se met à tourner. Mais pour qu’il y ait induction, il faut que le champ <em>défile</em> devant le rotor : celui-ci doit donc tourner un peu <strong>moins vite</strong> que le champ. Cet écart s’appelle le <strong>glissement</strong>, et il vaut 3 à 5 % — d’où les plaques marquées 1 440 tr/min pour un champ à 1 500.</p>
+<p><span class="cle">Sans glissement, un moteur asynchrone ne produirait aucun couple.</span> C’est le seul point où il diffère de ce que vous venez de voir — le champ tournant, lui, est rigoureusement le même.</p>
+<p>Deux détails que l’animation escamote, et qu’il faut connaître : un moteur synchrone réel <strong>ne démarre pas tout seul</strong> sur le réseau (il faut l’amener à vitesse d’abord), et un asynchrone appelle 5 à 8 fois son courant nominal à l’enclenchement.</p></div>
+
 <figure class="anim">
-  <canvas id="a-tri" width="900" height="380" aria-label="Animation : triphasé, vecteurs tournants, sinusoïdes et champ tournant"></canvas>
+  <canvas id="a-tri" width="900" height="540" aria-label="Animation : un alternateur triphasé relié par trois fils à un moteur dont le rotor se synchronise"></canvas>
   <div class="ctrls">
-    <div class="c"><label>Vitesse d'affichage <span id="a-tri-v">×1</span></label><input type="range" id="a-tri-vr" min="1" max="10" value="3"></div>
-    <div class="c"><button class="btn" id="a-tri-mode">Montrer le champ tournant</button></div>
+    <div class="c"><label>Vitesse de l&rsquo;alternateur <span id="a-tri-n-l">300 tr/min</span></label><input type="range" id="a-tri-n" min="60" max="3000" value="300" step="30"></div>
+    <div class="c"><label class="switch"><input type="checkbox" id="a-tri-k" checked><span>Relier les trois fils</span></label></div>
     <div class="c readout" id="a-tri-out"></div>
   </div>
-  <figcaption>À gauche : les trois vecteurs à 120°. Au centre : les trois sinusoïdes engendrées. <b>La ligne blanche est la somme des trois valeurs instantanées : elle reste collée à zéro en permanence.</b> C'est ça, le neutre qui ne travaille pas.</figcaption>
+  <figcaption>À gauche la centrale : un aimant tourne au milieu de trois bobines décalées de 120°, et produit trois tensions décalées d&rsquo;un tiers de tour. À droite, dans l&rsquo;atelier, une machine <b>exactement identique</b> — trois bobines, un rotor aimanté. Entre les deux, <b>trois fils, et rien d&rsquo;autre</b>.<br><b>Coupez les trois fils</b> : le moteur ralentit et s&rsquo;arrête. Les trois tensions, elles, sont toujours là — mais sans circuit fermé, aucun courant ne circule, donc aucun champ. <b>Refermez</b> : les courants reviennent, et il se passe quelque chose de remarquable. Les trois bobines du moteur, alimentées chacune à son tour, créent un <b>champ magnétique qui tourne</b> — la flèche verte. Personne ne le fait tourner mécaniquement : il tourne parce que les trois courants se relaient.<br>Le rotor accélère alors, se cale sur ce champ et <span style="color:var(--accent-clair)">tourne exactement à la vitesse de l&rsquo;alternateur</span>, à des centaines de kilomètres de là, sans la moindre liaison mécanique. <b>Changez la vitesse de la centrale</b> : le moteur suit, toujours.<br>Regardez enfin la ligne blanche en pointillé sur les courbes : c&rsquo;est la somme des trois tensions, et elle ne quitte jamais le zéro. Voilà pourquoi le conducteur de neutre ne transporte rien quand les trois phases sont équilibrées.</figcaption>
 </figure>
+<script>
+(function(){
+  "use strict";
+  var PH=[{n:'L1',c:'#f0a844'},{n:'L2',c:'#5cc4e0'},{n:'L3',c:'#c8d834'}];
+  var AL=[Math.PI/2, Math.PI/2+2.0944, Math.PI/2+4.1888];   // les trois bobines à 120°
+  var N =MSPC.ctrl('a-tri-n', function(v){ return (+v).toLocaleString('fr-FR')+' tr/min'; }, 'a-tri-n-l');
+  var K =MSPC.ctrl('a-tri-k');
+  var out=document.getElementById('a-tri-out');
+  var th=0, phiM=0, wM=0;
+
+  var MY=148, RC=70, AX=170, MX=650, BUS=[268,286,304], KX=410;
+
+  function bobine(ctx,cx,al,cur,col){
+    var bx=cx+Math.cos(al)*RC, by=MY-Math.sin(al)*RC;
+    var it=Math.min(1,Math.abs(cur));
+    ctx.save(); ctx.translate(bx,by); ctx.rotate(-al);
+    ctx.globalAlpha=0.22+0.78*it;
+    ctx.strokeStyle=col; ctx.lineWidth=2.6;
+    ctx.beginPath();
+    for(var q=0;q<=1.0001;q+=0.02){
+      var yy=-20+q*40, xx=Math.sin(q*Math.PI*2*4)*7;
+      if(q===0) ctx.moveTo(xx,yy); else ctx.lineTo(xx,yy);
+    }
+    ctx.stroke(); ctx.globalAlpha=1; ctx.restore();
+  }
+
+  function fleche(ctx,x0,y0,x1,y1,col,w){
+    var dx=x1-x0, dy=y1-y0, L=Math.hypot(dx,dy);
+    if(L<5) return;
+    var ux=dx/L, uy=dy/L;
+    ctx.strokeStyle=col; ctx.lineWidth=w;
+    ctx.beginPath(); ctx.moveTo(x0,y0); ctx.lineTo(x1,y1); ctx.stroke();
+    ctx.fillStyle=col;
+    ctx.beginPath(); ctx.moveTo(x1,y1);
+    ctx.lineTo(x1-ux*10+uy*5, y1-uy*10-ux*5);
+    ctx.lineTo(x1-ux*10-uy*5, y1-uy*10+ux*5);
+    ctx.closePath(); ctx.fill();
+  }
+
+  function rotor(ctx,cx,ang,L){
+    ctx.save(); ctx.translate(cx,MY); ctx.rotate(-ang);
+    ctx.fillStyle='#4f7fb8'; ctx.fillRect(-L,-10,L,20);
+    ctx.fillStyle='#b32017'; ctx.fillRect(0,-10,L,20);
+    ctx.strokeStyle='#e6ebe4'; ctx.lineWidth=1.3; ctx.strokeRect(-L,-10,L*2,20);
+    ctx.fillStyle='#fff'; ctx.font='700 11px "Saira Condensed",sans-serif'; ctx.textAlign='center';
+    ctx.fillText('S',-L/2,4); ctx.fillText('N',L/2,4);
+    ctx.restore();
+    ctx.fillStyle='#8d968b'; ctx.beginPath(); ctx.arc(cx,MY,4,0,6.2832); ctx.fill();
+  }
+
+  MSPC.anim('a-tri', function(a){
+    var ctx=a.ctx, W=a.W, H=a.H, dt=Math.min(a.dt,0.05);
+    var rpm=N.val, w=6.2832*rpm/60, relie=K.val;
+    th+=dt*w;
+
+    var e=[0,0,0], i=[0,0,0];
+    for(var k=0;k<3;k++){ e[k]=Math.sin(th-AL[k]); i[k]=relie?e[k]:0; }
+
+    var champ=th-Math.PI/2;
+    if(relie){
+      var d=champ-phiM;
+      while(d>Math.PI) d-=6.2832;
+      while(d<-Math.PI) d+=6.2832;
+      wM += d*26*dt; wM += (w-wM)*3.5*dt;
+    } else { wM *= Math.exp(-1.4*dt); }
+    phiM += wM*dt;
+    var rpmM=Math.abs(wM)*60/6.2832;
+    var accroche=relie && Math.abs(rpmM-rpm)<rpm*0.04+2;
+
+    MSPC.fond(ctx,W,H,0);
+
+    /* ================= les trois fils, en tracé orthogonal ================= */
+    for(var k3=0;k3<3;k3++){
+      var yl=BUS[k3], xa=AX-24+k3*24, xm=MX-24+k3*24;
+      var vif=relie?(0.35+0.65*Math.min(1,Math.abs(i[k3]))):0.20;
+      ctx.strokeStyle=PH[k3].c; ctx.globalAlpha=vif; ctx.lineWidth=2.4;
+      ctx.beginPath();
+      ctx.moveTo(xa,232); ctx.lineTo(xa,yl); ctx.lineTo(KX-34,yl);
+      ctx.moveTo(KX+34,yl); ctx.lineTo(xm,yl); ctx.lineTo(xm,232);
+      ctx.stroke(); ctx.globalAlpha=1;
+      ctx.strokeStyle=relie?PH[k3].c:'#b32017'; ctx.lineWidth=2.6;
+      ctx.beginPath(); ctx.moveTo(KX-34,yl);
+      if(relie) ctx.lineTo(KX+34,yl); else ctx.lineTo(KX+20,yl-15);
+      ctx.stroke();
+      ctx.fillStyle=relie?PH[k3].c:'#b32017';
+      ctx.beginPath(); ctx.arc(KX-34,yl,2.8,0,6.2832); ctx.fill();
+      ctx.beginPath(); ctx.arc(KX+34,yl,2.8,0,6.2832); ctx.fill();
+      MSPC.mono(ctx,PH[k3].n,xa-10,yl+4,9.5,PH[k3].c,'right');
+      MSPC.mono(ctx,PH[k3].n,xm+10,yl+4,9.5,PH[k3].c);
+    }
+    MSPC.mono(ctx, relie?'LES TROIS FILS SONT RELIÉS':'CIRCUIT OUVERT — tension présente, mais aucun courant',
+      KX, BUS[0]-18, 10.5, relie?'#c8d834':'#ff6a5e','center');
+
+    /* ================= les deux machines ================= */
+    [[AX,'ALTERNATEUR DE LA CENTRALE','#c8d834',true],[MX,'MOTEUR DE L’ATELIER','#5cc4e0',false]].forEach(function(M){
+      var cx=M[0], estAlt=M[3];
+      MSPC.titre(ctx,M[1],cx,40,17,M[2],'center');
+      ctx.strokeStyle='rgba(255,255,255,.10)'; ctx.lineWidth=1; ctx.setLineDash([3,4]);
+      ctx.beginPath(); ctx.arc(cx,MY,RC,0,6.2832); ctx.stroke(); ctx.setLineDash([]);
+      for(var k2=0;k2<3;k2++){
+        bobine(ctx,cx,AL[k2],i[k2],PH[k2].c);
+        var lx=cx+Math.cos(AL[k2])*(RC+24), ly=MY-Math.sin(AL[k2])*(RC+24);
+        MSPC.mono(ctx,PH[k2].n,lx,ly+4,10,PH[k2].c,'center');
+        if(!estAlt && relie){
+          var L2=i[k2]*40;
+          fleche(ctx,cx,MY,cx+Math.cos(AL[k2])*L2,MY-Math.sin(AL[k2])*L2,'rgba(255,255,255,.20)',1.6);
+        }
+      }
+      if(estAlt){
+        rotor(ctx,cx,th,46);
+        MSPC.mono(ctx,'une turbine entraîne son rotor',30,320,10.5,'#8d968b');
+      } else {
+        if(relie) fleche(ctx,cx,MY,cx+Math.cos(champ)*58,MY-Math.sin(champ)*58,'rgba(200,216,52,.9)',3);
+        rotor(ctx,cx,phiM,40);
+        MSPC.mono(ctx, relie? (accroche?'son rotor suit le champ, exactement':'son rotor accélère pour rattraper le champ')
+                            : 'plus de champ : son rotor ralentit et s’arrête',
+          W-30,320,10.5, relie?(accroche?'#c8d834':'#f0a844'):'#ff6a5e','right');
+        if(relie) MSPC.mono(ctx,'← champ tournant',cx+RC+26,MY+4,9.5,'#c8d834');
+      }
+    });
+
+    /* ================= les trois sinusoïdes ================= */
+    var g={x:30,y:350,w:W-60,h:98}, mid=g.y+g.h/2, amp=g.h/2-12;
+    ctx.strokeStyle='rgba(255,255,255,.18)'; ctx.lineWidth=1; ctx.strokeRect(g.x+.5,g.y+.5,g.w,g.h);
+    ctx.strokeStyle='rgba(255,255,255,.14)';
+    ctx.beginPath(); ctx.moveTo(g.x,mid); ctx.lineTo(g.x+g.w,mid); ctx.stroke();
+    for(var k4=0;k4<3;k4++){
+      ctx.strokeStyle=PH[k4].c; ctx.lineWidth=2.2; ctx.beginPath();
+      for(var px=0;px<=g.w;px++){
+        var an=th+px/g.w*4*Math.PI;
+        var yy=mid-Math.sin(an-AL[k4])*amp;
+        if(px===0) ctx.moveTo(g.x+px,yy); else ctx.lineTo(g.x+px,yy);
+      }
+      ctx.stroke();
+      ctx.fillStyle=PH[k4].c;
+      ctx.beginPath(); ctx.arc(g.x, mid-e[k4]*amp, 5, 0, 6.2832); ctx.fill();
+    }
+    ctx.strokeStyle='rgba(255,255,255,.85)'; ctx.lineWidth=1.8; ctx.setLineDash([6,4]);
+    ctx.beginPath(); ctx.moveTo(g.x,mid); ctx.lineTo(g.x+g.w,mid); ctx.stroke(); ctx.setLineDash([]);
+    MSPC.mono(ctx,'LES TROIS TENSIONS, DÉCALÉES D’UN TIERS DE TOUR',g.x,g.y-8,10.5,'#8d968b');
+    MSPC.mono(ctx,'leur somme ne quitte jamais le zéro',g.x+g.w-6,g.y-8,10,'#e6ebe4','right');
+
+    /* ================= chiffres ================= */
+    function bloc(x,val,lab,col){ MSPC.titre(ctx,val,x,482,23,col); MSPC.mono(ctx,lab,x,497,9.5,'#8d968b'); }
+    bloc(30,  rpm.toLocaleString('fr-FR'),'ALTERNATEUR (tr/min)','#c8d834');
+    bloc(230, Math.round(rpmM).toLocaleString('fr-FR'),'MOTEUR (tr/min)', accroche?'#c8d834':(relie?'#f0a844':'#ff6a5e'));
+    bloc(420, (rpm/60).toFixed(1).replace('.',',')+' Hz','FRÉQUENCE','#e6ebe4');
+    bloc(580, (e[0]+e[1]+e[2]).toFixed(2).replace('.',','),'L1 + L2 + L3','#e6ebe4');
+
+    MSPC.mono(ctx, accroche
+      ? 'SYNCHRONISME : le moteur tourne exactement à la vitesse de l’alternateur, sans aucune liaison mécanique entre les deux.'
+      : (relie ? 'Le champ tournant entraîne le rotor : il accélère jusqu’à se caler dessus.'
+               : 'Sans courant, plus de champ tournant. Le rotor n’est plus entraîné par rien.'),
+      30, 522, 11, accroche?'#c8d834':(relie?'#f0a844':'#ff6a5e'));
+
+    out.innerHTML = relie
+      ? (accroche ? '<b style="color:#c8d834">Moteur accroché au synchronisme</b><br>'+Math.round(rpmM)+' tr/min, comme l’alternateur — par trois fils seulement.'
+                  : 'Le moteur accélère : '+Math.round(rpmM)+' tr/min<br>il vise les '+rpm+' tr/min de l’alternateur.')
+      : '<b style="color:#ff6a5e">Circuit ouvert.</b><br>Les trois tensions existent toujours, mais aucun courant ne circule.';
+  }, {fixed:true});
+})();
+</script>
 
 <h3>13.3 — Les deux tensions du triphasé</h3>
 <p>Sur une prise triphasée, on peut mesurer deux tensions différentes selon les bornes choisies. C'est la source de confusion n°1 des débutants.</p>
@@ -4559,82 +4727,6 @@ function crystal(st, opts){
       "Loi de Lenz : le courant induit <b>s'oppose</b> au mouvement";
   }
   sv.addEventListener('input', upd); sN.addEventListener('input', upd); upd();
-})();
-
-/* ============ 8. TRIPHASÉ ============ */
-(function(){
-  var sv = el('a-tri-vr'); if(!sv) return;
-  var sp = 3, mode = 0, ang = 0, tr = [[],[],[],[]];
-  el('a-tri-mode').addEventListener('click', function(){
-    mode = 1-mode; this.textContent = mode ? "Montrer les vecteurs" : "Montrer le champ tournant";
-  });
-  var PH = [{c:"#8a5a33", n:"L1"}, {c:"#2b2b2b", n:"L2"}, {c:"#9aa096", n:"L3"}];
-  var PHC = ["#c98a4b", "#b9c0b4", "#e0e6d8"];
-  var st = mk('a-tri', function(ctx, s, dt){
-    var W=s.W, H=s.H, cx=125, cy=H/2, R=88;
-    ang += dt*sp*0.55;
-    if(mode === 0){
-      ctx.beginPath(); ctx.arc(cx,cy,R,0,6.284);
-      ctx.strokeStyle="rgba(255,255,255,.13)"; ctx.lineWidth=1; ctx.stroke();
-      for(var i=0;i<3;i++){
-        var a = ang - i*2.0944;
-        arrow(ctx, cx, cy, cx+Math.cos(a)*R, cy-Math.sin(a)*R, PHC[i], 3);
-        label(ctx, cx+Math.cos(a)*(R+18), cy-Math.sin(a)*(R+18)+4, PH[i].n, PHC[i], 12, "center");
-      }
-      label(ctx, cx, cy+R+42, "3 VECTEURS À 120°", COL.vert, 11, "center");
-    } else {
-      /* stator + champ tournant */
-      ctx.beginPath(); ctx.arc(cx,cy,R,0,6.284);
-      ctx.strokeStyle="rgba(255,255,255,.20)"; ctx.lineWidth=14; ctx.stroke();
-      var bx=0, by=0;
-      for(var k=0;k<3;k++){
-        var pa = -k*2.0944 + 1.5708;
-        var val = Math.cos(ang - k*2.0944);
-        var ex = cx+Math.cos(pa)*R, ey = cy-Math.sin(pa)*R;
-        ctx.beginPath(); ctx.arc(ex, ey, 17, 0, 6.284);
-        ctx.fillStyle = "rgba(200,216,52," + Math.abs(val)*0.55 + ")"; ctx.fill();
-        ctx.strokeStyle = PHC[k]; ctx.lineWidth=2; ctx.stroke();
-        label(ctx, ex, ey+4, PH[k].n, "#fff", 10, "center");
-        bx += Math.cos(pa)*val; by += -Math.sin(pa)*val;
-      }
-      arrow(ctx, cx, cy, cx+bx*R*0.62, cy+by*R*0.62, COL.rouge, 4);
-      label(ctx, cx, cy+R+42, "CHAMP RÉSULTANT : IL TOURNE", COL.rouge, 11, "center");
-      label(ctx, cx, cy+R+58, "→ moteur asynchrone", COL.vert, 10, "center");
-    }
-    /* sinusoïdes */
-    var gx=270, gw=W-300, gy=cy, gh=88;
-    ctx.strokeStyle="rgba(255,255,255,.2)"; ctx.lineWidth=1;
-    ctx.beginPath(); ctx.moveTo(gx,gy); ctx.lineTo(gx+gw,gy); ctx.stroke();
-    for(var p=0;p<3;p++){ tr[p].push(Math.cos(ang-p*2.0944)); if(tr[p].length>gw) tr[p].shift(); }
-    tr[3].push(tr[0][tr[0].length-1]+tr[1][tr[1].length-1]+tr[2][tr[2].length-1]);
-    if(tr[3].length>gw) tr[3].shift();
-    for(var q=0;q<3;q++){
-      ctx.strokeStyle = PHC[q]; ctx.lineWidth=2.2; ctx.beginPath();
-      for(var j=0;j<tr[q].length;j++){
-        var X=gx+gw-tr[q].length+j, Y=gy-tr[q][j]*gh;
-        j?ctx.lineTo(X,Y):ctx.moveTo(X,Y);
-      }
-      ctx.stroke();
-      var ly = gy-tr[q][tr[q].length-1]*gh;
-      label(ctx, gx+gw+8, ly+4, PH[q].n, PHC[q], 11);
-    }
-    ctx.strokeStyle=COL.blanc; ctx.lineWidth=2.6; ctx.setLineDash([5,4]); ctx.beginPath();
-    for(var m=0;m<tr[3].length;m++){
-      var X2=gx+gw-tr[3].length+m, Y2=gy-tr[3][m]*gh;
-      m?ctx.lineTo(X2,Y2):ctx.moveTo(X2,Y2);
-    }
-    ctx.stroke(); ctx.setLineDash([]);
-    label(ctx, gx+4, gy-gh-14, "SOMME DES 3 VALEURS INSTANTANÉES = 0 EN PERMANENCE", COL.blanc, 11);
-    label(ctx, gx+4, gy+gh+24, "→ le conducteur de neutre ne transporte rien (charge équilibrée)", COL.vert, 11);
-  });
-  function upd(){
-    sp = +sv.value; el('a-tri-v').textContent = "×" + sp;
-    el('a-tri-out').innerHTML =
-      "Entre phase et neutre : <b>230 V</b><br>" +
-      "Entre deux phases : <b>400 V</b><br>" +
-      "Rapport : <b>√3 = 1,732</b>";
-  }
-  sv.addEventListener('input', upd); upd();
 })();
 
 /* ============ 9. TRANSFORMATEUR ============ */
