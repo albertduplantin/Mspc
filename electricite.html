@@ -2927,10 +2927,12 @@
 <div class="formule">La valeur efficace d'une tension alternative,<br>c'est la tension continue qui chaufferait exactement autant<small>même résistance, même échauffement, même puissance</small></div>
 
 <p>Autrement dit : on prend deux lampes identiques. On branche la première sur du continu, la seconde sur de l'alternatif, et l'on compare l'éclat. <span class="cle">La tension continue qui donne le même éclat, c'est la valeur efficace de l'alternatif.</span> Il n'y a rien de plus dans cette notion.</p>
-<p>L'animation ci-dessous fait exactement cette expérience — et elle commence par une surprise. Mettez la même tension des deux côtés, 230 V de continu contre 230 V de crête en alternatif : <strong>la lampe alternative brille deux fois moins</strong>. Pour rattraper le continu, il faut monter sa crête à 325 V. Ce n'est pas un défaut de l'alternatif : c'est que sa tension ne reste au sommet qu'un instant, et repasse par zéro cent fois par seconde.</p>
+<p>L'animation ci-dessous fait exactement cette expérience, et il faut la commencer <strong>au ralenti</strong>. À 5 Hz, la lampe alternative bat de façon spectaculaire : impossible de comparer quoi que ce soit. Montez la fréquence vers 50 Hz et le battement disparaît — <em>non pas parce que la tension a cessé de varier</em>, mais parce que le filament n'a plus le temps de refroidir entre deux alternances. Les deux lampes deviennent alors comparables à l'œil.</p>
+<p>Et c'est là que la comparaison devient instructive. Avec 230 V de continu d'un côté et 230 V de crête de l'autre, <strong>la lampe alternative reste nettement plus sombre</strong> : elle ne développe que la moitié de la puissance. Il faut monter sa crête à <strong>325 V</strong> pour retrouver le même éclat.</p>
+<p>Ce n'est pas un défaut de l'alternatif. C'est simplement que sa tension ne reste au sommet qu'un instant : le reste du temps elle vaut moins, et deux fois par période elle vaut zéro. <span class="cle">Sa valeur efficace — 230 V — est donc bien inférieure à sa valeur crête.</span></p>
 
-<h4>Comment on calcule cette valeur : carré, moyenne, racine</h4>
-<p>Le raisonnement se fait en trois gestes, et l'animation les montre l'un après l'autre :</p>
+<h4>Comment on la calcule : carré, moyenne, racine</h4>
+<p>L'expérience des deux lampes donne la valeur efficace, mais on ne va pas allumer des ampoules à chaque fois. Le calcul qui la donne se fait en trois gestes :</p>
 <ol>
 <li><strong>On élève la tension au carré.</strong> Pourquoi le carré ? Parce que c'est la puissance qui chauffe, et qu'elle vaut u²/R. Effet secondaire décisif : <em>un carré est toujours positif</em>. Les alternances négatives chauffent donc autant que les positives — c'est bien pour cela qu'une tension qui change de sens cent fois par seconde parvient malgré tout à faire rougir un filament.</li>
 <li><strong>On prend la moyenne de ce carré.</strong> C'est elle qui détermine la chaleur réellement produite sur une période entière.</li>
@@ -2940,30 +2942,34 @@
 <p><em>Attention à ne pas la confondre avec la moyenne ordinaire : la moyenne d'une sinusoïde est nulle, puisque le positif compense exactement le négatif. Et ce n'est pas non plus la moyenne géométrique, qui est tout autre chose. C'est bien la moyenne <strong>des carrés</strong>.</em></p>
 
 <figure class="anim">
-  <canvas id="a-eff" width="900" height="520" aria-label="Animation : deux circuits identiques, l'un en continu, l'autre en alternatif, et la construction de la valeur efficace"></canvas>
+  <canvas id="a-eff" width="900" height="440" aria-label="Animation : deux lampes identiques, l'une en continu, l'autre en alternatif, avec réglage de la fréquence"></canvas>
   <div class="ctrls">
     <div class="c"><label>Tension continue <span id="a-eff-d-l">230 V</span></label><input type="range" id="a-eff-d" min="0" max="400" step="5" value="230"></div>
     <div class="c"><label>Tension crête de l'alternatif <span id="a-eff-c-l">230 V</span></label><input type="range" id="a-eff-c" min="0" max="500" step="5" value="230"></div>
+    <div class="c"><label>Fréquence <span id="a-eff-f-l">5 Hz</span></label><input type="range" id="a-eff-f" min="2" max="60" value="5"></div>
     <div class="c readout" id="a-eff-out"></div>
   </div>
-  <figcaption>Deux circuits rigoureusement identiques, deux lampes identiques. <b>À gauche du continu, à droite de l'alternatif</b> — et au départ, la même tension de 230 V de part et d'autre.<br>Regardez les lampes : celle de gauche brille sans jamais ciller ; celle de droite <b>scintille</b>, parce que sa tension repasse par zéro deux fois par période. Et surtout, <b>elle brille nettement moins</b> — sa puissance moyenne n'est que la moitié. À tension crête égale, l'alternatif chauffe deux fois moins.<br><b>Montez alors la crête de l'alternatif</b> jusqu'à retrouver le même éclat : il faut aller à <b>325 V</b>. Voilà d'où sort le √2, non pas décrété mais constaté.<br>Les deux courbes du bas montrent pourquoi. On élève la tension au <b>carré</b> — ce qui efface le signe, et explique qu'une tension qui change de sens chauffe quand même —, on en prend la <b>moyenne</b>, puis la <b>racine</b>. Le résultat, en bas, est identique des deux côtés : 230 V. C'est la définition exacte de la valeur efficace, et c'est aussi ce que veut dire son nom anglais, <em>RMS</em> : <em>Root Mean Square</em>, racine de la moyenne des carrés.</figcaption>
+  <figcaption>Deux circuits rigoureusement identiques, deux lampes identiques : du continu à gauche, de l'alternatif à droite.<br><b>Commencez à 5 Hz.</b> La lampe de droite <b>bat visiblement</b> : sa tension repasse par zéro deux fois par période, et le filament a le temps de refroidir entre deux alternances. Impossible, dans ces conditions, de comparer quoi que ce soit.<br><b>Montez la fréquence vers 50 Hz.</b> Le battement s'efface — non pas parce que la tension a cessé de varier, mais parce que le filament n'a plus le temps de refroidir. La lampe se met à briller d'un éclat parfaitement stable, exactement comme celle du continu. <b>Les deux sont enfin comparables.</b><br>Et là, la surprise : à 230 V des deux côtés, <b>la lampe alternative est nettement plus sombre</b>. Il faut monter sa tension crête jusqu'à <b>325 V</b> pour retrouver le même éclat. <span style="color:var(--accent-clair)">Cette tension continue de 230 V qui donne la même lumière, c'est précisément ce qu'on appelle la valeur efficace de l'alternatif</span> — et vous voyez qu'elle vaut bien 325 / √2.</figcaption>
 </figure>
 <script>
 (function(){
   "use strict";
-  var R=100, PER=2;                                  // 2 périodes affichées
+  var R=100, TAU=0.012, FEN=0.20;                   // inertie du filament · fenêtre affichée (s)
   var DC=MSPC.ctrl('a-eff-d', function(v){ return v+' V'; }, 'a-eff-d-l');
   var CR=MSPC.ctrl('a-eff-c', function(v){ return v+' V'; }, 'a-eff-c-l');
+  var FQ=MSPC.ctrl('a-eff-f', function(v){ return v+' Hz'; }, 'a-eff-f-l');
   var out=document.getElementById('a-eff-out');
+
+  var phase=0, bAC=0, bDC=0, bMax=0, bMin=0;
 
   function lampe(ctx,x,y,r,br){
     if(br>0.02){
-      var g=ctx.createRadialGradient(x,y,2,x,y,r*4.2);
-      g.addColorStop(0,'rgba(255,236,170,'+(0.72*br)+')');
+      var g=ctx.createRadialGradient(x,y,2,x,y,r*4.4);
+      g.addColorStop(0,'rgba(255,236,170,'+(0.75*br)+')');
       g.addColorStop(1,'rgba(255,236,170,0)');
-      ctx.fillStyle=g; ctx.beginPath(); ctx.arc(x,y,r*4.2,0,6.2832); ctx.fill();
+      ctx.fillStyle=g; ctx.beginPath(); ctx.arc(x,y,r*4.4,0,6.2832); ctx.fill();
     }
-    ctx.fillStyle='rgb('+Math.round(16+225*br)+','+Math.round(20+200*br)+','+Math.round(18+120*br)+')';
+    ctx.fillStyle='rgb('+Math.round(16+228*br)+','+Math.round(20+202*br)+','+Math.round(18+118*br)+')';
     ctx.beginPath(); ctx.arc(x,y,r,0,6.2832); ctx.fill();
     ctx.strokeStyle=br>0.05?'rgba(255,236,170,'+(0.4+0.6*br)+')':'#6f786e';
     ctx.lineWidth=2.2; ctx.beginPath(); ctx.arc(x,y,r,0,6.2832); ctx.stroke();
@@ -2974,37 +2980,42 @@
   }
 
   MSPC.anim('a-eff', function(a){
-    var ctx=a.ctx, W=a.W, H=a.H;
-    var Udc=DC.val, Ucr=CR.val;
+    var ctx=a.ctx, W=a.W, H=a.H, dt=Math.min(a.dt,0.05);
+    var Udc=DC.val, Ucr=CR.val, F=FQ.val;
     var Ueff=Ucr/Math.SQRT2;
     var Pdc=Udc*Udc/R, Pac=Ueff*Ueff/R;
     var UMAX=420;
 
-    // le curseur balaie les deux périodes, au ralenti
-    var t=(a.t*0.30)%1;
-    var ph=t*PER*2*Math.PI;
-    var uac=Ucr*Math.sin(ph);
-    var pac=uac*uac/R;
+    /* --- le filament suit la puissance avec du retard : c'est son inertie --- */
+    var SUB=240, dts=dt/SUB;
+    for(var i=0;i<SUB;i++){
+      phase+=6.2832*F*dts;
+      var u=Ucr*Math.sin(phase);
+      bAC += (u*u/R - bAC)*dts/TAU;
+      bDC += (Pdc - bDC)*dts/TAU;
+    }
+    if(phase>6.2832e6) phase=0;
+    if(bAC>bMax) bMax=bAC; else bMax+=(bAC-bMax)*dt*1.4;
+    if(bAC<bMin) bMin=bAC; else bMin+=(bAC-bMin)*dt*1.4;
+    var ond=(bMax+bMin>1)?100*(bMax-bMin)/(bMax+bMin):0;
 
     MSPC.fond(ctx,W,H,0);
 
-    var COL=[{x:30,w:400,titre:'COURANT CONTINU',c:'#5cc4e0'},
-             {x:470,w:400,titre:'COURANT ALTERNATIF',c:'#f0a844'}];
+    var COL=[{x:30,w:400,t:'COURANT CONTINU',c:'#5cc4e0'},
+             {x:470,w:400,t:'COURANT ALTERNATIF',c:'#f0a844'}];
 
     for(var k=0;k<2;k++){
       var C=COL[k], alt=(k===1);
-      var U=alt?Ucr:Udc, uInst=alt?uac:Udc, pInst=alt?pac:Pdc, Pmoy=alt?Pac:Pdc;
+      var Pmoy=alt?Pac:Pdc, br=Math.min(1,(alt?bAC:bDC)/900);
 
-      MSPC.titre(ctx,C.titre,C.x,44,20,C.c);
+      MSPC.titre(ctx,C.t,C.x,42,20,C.c);
 
-      /* ----- le circuit ----- */
-      var lx=C.x+40, rx=C.x+300, ty=76, by=192;
+      /* ----- circuit ----- */
+      var lx=C.x+40, rx=C.x+300, ty=70, by=184, cy=(ty+by)/2;
       ctx.strokeStyle='#8d968b'; ctx.lineWidth=2.4;
       ctx.beginPath();
       ctx.moveTo(lx,ty); ctx.lineTo(rx,ty); ctx.lineTo(rx,by); ctx.lineTo(lx,by); ctx.lineTo(lx,ty);
       ctx.stroke();
-      var cy=(ty+by)/2;
-      // la source
       ctx.fillStyle='#0d120f'; ctx.fillRect(lx-22,cy-32,44,64);
       ctx.strokeStyle=C.c; ctx.lineWidth=1.6; ctx.strokeRect(lx-22,cy-32,44,64);
       if(alt){
@@ -3017,90 +3028,75 @@
         ctx.lineWidth=2;
         ctx.beginPath(); ctx.moveTo(lx+7,cy-8); ctx.lineTo(lx+7,cy+8); ctx.stroke();
       }
-      MSPC.mono(ctx, alt? Ucr+' V crête' : Udc+' V continus', lx, by+24, 11.5, C.c, 'center');
-      if(alt) MSPC.mono(ctx, '= '+Ueff.toFixed(0)+' V eff.', lx+96, by+24, 10.5, '#c8d834');
+      lampe(ctx, rx, cy, 24, br);
+      MSPC.mono(ctx, alt? Ucr+' V crête' : Udc+' V continus', lx, by+22, 11.5, C.c, 'center');
+      if(alt) MSPC.mono(ctx,'= '+Ueff.toFixed(0)+' V eff.', lx+92, by+22, 10.5, '#c8d834');
 
-      // la lampe, dont l'éclat suit la puissance instantanée
-      lampe(ctx, rx, cy, 22, Math.min(1, pInst/900));
-      MSPC.mono(ctx, alt?'elle scintille':'elle ne cille jamais', rx, by+24, 10.5, alt?'#f0a844':'#5cc4e0','center');
-
-      /* ----- u(t) ----- */
-      var g1={x:C.x, y:238, w:C.w, h:78};
-      ctx.strokeStyle='rgba(255,255,255,.18)'; ctx.lineWidth=1; ctx.strokeRect(g1.x+.5,g1.y+.5,g1.w,g1.h);
-      var mid=g1.y+g1.h/2, sc=(g1.h/2-6)/UMAX;
-      ctx.strokeStyle='rgba(255,255,255,.14)';
-      ctx.beginPath(); ctx.moveTo(g1.x,mid); ctx.lineTo(g1.x+g1.w,mid); ctx.stroke();
-      ctx.strokeStyle=C.c; ctx.lineWidth=2.2; ctx.beginPath();
-      for(var i=0;i<=g1.w;i++){
-        var u2=alt? Ucr*Math.sin(i/g1.w*PER*2*Math.PI) : Udc;
-        var yy=Math.max(g1.y+3,Math.min(g1.y+g1.h-3,mid-u2*sc));
-        if(i===0) ctx.moveTo(g1.x+i,yy); else ctx.lineTo(g1.x+i,yy);
+      /* ----- u(t) sur une fenêtre fixe de 200 ms ----- */
+      var g={x:C.x, y:236, w:C.w, h:74};
+      ctx.strokeStyle='rgba(255,255,255,.18)'; ctx.lineWidth=1; ctx.strokeRect(g.x+.5,g.y+.5,g.w,g.h);
+      var mid=g.y+g.h/2, sc=(g.h/2-6)/UMAX;
+      ctx.strokeStyle='rgba(255,255,255,.13)';
+      ctx.beginPath(); ctx.moveTo(g.x,mid); ctx.lineTo(g.x+g.w,mid); ctx.stroke();
+      for(var ms=50;ms<200;ms+=50){
+        var xg=g.x+g.w*ms/200;
+        ctx.strokeStyle='rgba(255,255,255,.09)';
+        ctx.beginPath(); ctx.moveTo(xg,g.y); ctx.lineTo(xg,g.y+g.h); ctx.stroke();
+      }
+      ctx.strokeStyle=C.c; ctx.lineWidth=2; ctx.beginPath();
+      for(var px=0;px<=g.w;px++){
+        var tt=px/g.w*FEN;
+        var uu=alt? Ucr*Math.sin(6.2832*F*tt) : Udc;
+        var yy=Math.max(g.y+3,Math.min(g.y+g.h-3,mid-uu*sc));
+        if(px===0) ctx.moveTo(g.x+px,yy); else ctx.lineTo(g.x+px,yy);
       }
       ctx.stroke();
-      MSPC.mono(ctx,'tension u(t)',g1.x,g1.y-8,10,'#8d968b');
       if(alt){
         ctx.strokeStyle='#c8d834'; ctx.setLineDash([4,3]); ctx.lineWidth=1.3;
         [1,-1].forEach(function(sg){
-          ctx.beginPath(); ctx.moveTo(g1.x,mid-sg*Ueff*sc); ctx.lineTo(g1.x+g1.w,mid-sg*Ueff*sc); ctx.stroke();
+          ctx.beginPath(); ctx.moveTo(g.x,mid-sg*Ueff*sc); ctx.lineTo(g.x+g.w,mid-sg*Ueff*sc); ctx.stroke();
         });
         ctx.setLineDash([]);
-        MSPC.mono(ctx,'efficace '+Ueff.toFixed(0)+' V',g1.x+g1.w-4,mid-Ueff*sc-5,9.5,'#c8d834','right');
+        MSPC.mono(ctx,'efficace '+Ueff.toFixed(0)+' V',g.x+g.w-4,mid-Ueff*sc-5,9.5,'#c8d834','right');
       }
+      MSPC.mono(ctx,'tension u(t)',g.x,g.y-8,10,'#8d968b');
+      MSPC.mono(ctx,'200 ms',g.x+g.w-4,g.y+g.h+13,9,'#5e675e','right');
 
-      /* ----- u²(t) ----- */
-      var g2={x:C.x, y:346, w:C.w, h:78};
-      ctx.strokeStyle='rgba(255,255,255,.18)'; ctx.lineWidth=1; ctx.strokeRect(g2.x+.5,g2.y+.5,g2.w,g2.h);
-      var base=g2.y+g2.h, sc2=(g2.h-8)/(UMAX*UMAX);
-      ctx.strokeStyle='#ff6a5e'; ctx.lineWidth=2.2; ctx.beginPath();
-      for(var j=0;j<=g2.w;j++){
-        var v=alt? Ucr*Math.sin(j/g2.w*PER*2*Math.PI) : Udc;
-        var yy2=Math.max(g2.y+3,base-v*v*sc2);
-        if(j===0) ctx.moveTo(g2.x+j,yy2); else ctx.lineTo(g2.x+j,yy2);
-      }
-      ctx.stroke();
-      var moyC=alt? Ucr*Ucr/2 : Udc*Udc;
-      var ym=base-moyC*sc2;
-      ctx.strokeStyle='#c8d834'; ctx.setLineDash([5,4]); ctx.lineWidth=1.8;
-      ctx.beginPath(); ctx.moveTo(g2.x,ym); ctx.lineTo(g2.x+g2.w,ym); ctx.stroke(); ctx.setLineDash([]);
-      MSPC.mono(ctx,'u² — le carré efface le signe',g2.x,g2.y-8,10,'#8d968b');
-      MSPC.mono(ctx,'moyenne de u² = '+Math.round(moyC).toLocaleString('fr-FR')+' V²',g2.x+g2.w-4,ym-6,9.5,'#c8d834','right');
-
-      /* ----- le curseur ----- */
-      [g1,g2].forEach(function(g){
-        var cxp=g.x+t*g.w;
-        ctx.strokeStyle='rgba(255,255,255,.5)'; ctx.lineWidth=1.3;
-        ctx.beginPath(); ctx.moveTo(cxp,g.y); ctx.lineTo(cxp,g.y+g.h); ctx.stroke();
-      });
-      ctx.fillStyle='#fff';
-      ctx.beginPath(); ctx.arc(g1.x+t*g1.w, mid-uInst*sc, 4, 0, 6.2832); ctx.fill();
-      ctx.beginPath(); ctx.arc(g2.x+t*g2.w, base-pInst*R*sc2, 4, 0, 6.2832); ctx.fill();
-
-      /* ----- la racine : on remonte à la tension équivalente ----- */
-      var ry=444;
-      MSPC.mono(ctx,'√ ( moyenne de u² )',C.x,ry,10.5,'#8d968b');
-      MSPC.titre(ctx,Math.sqrt(moyC).toFixed(0)+' V',C.x+140,ry+4,24,'#c8d834');
-      MSPC.mono(ctx,'puissance moyenne',C.x,ry+22,10.5,'#8d968b');
-      MSPC.titre(ctx,Math.round(Pmoy)+' W',C.x+140,ry+26,24, '#e6ebe4');
+      /* ----- luminosité perçue ----- */
+      var yb=344;
+      MSPC.mono(ctx,'LUMINOSITÉ PERÇUE',C.x,yb-8,10,'#8d968b');
+      ctx.fillStyle='rgba(255,255,255,.09)'; ctx.fillRect(C.x,yb,C.w,18);
+      ctx.fillStyle='#ffe9a0'; ctx.fillRect(C.x,yb,C.w*Math.min(1,Pmoy/900),18);
+      var rempli=C.w*Math.min(1,Pmoy/900);
+      MSPC.mono(ctx,Math.round(Pmoy)+' W en moyenne',C.x+C.w-6,yb+13,10.5, rempli>C.w-150?'#0d120f':'#e6ebe4','right');
+      var txtOnd, colOnd;
+      if(!alt){ txtOnd='aucun scintillement : la tension ne bouge jamais'; colOnd='#5cc4e0'; }
+      else if(ond<20){ txtOnd='scintillement résiduel de '+ond.toFixed(0)+' % — invisible à l’œil'; colOnd='#93a415'; }
+      else { txtOnd='scintillement bien visible : '+ond.toFixed(0)+' %'; colOnd='#ff6a5e'; }
+      MSPC.mono(ctx, txtOnd, C.x, yb+34, 10.5, colOnd);
     }
 
     /* ================= verdict ================= */
-    var ecart=Pac/Math.max(Pdc,0.001);
-    var vy=496, msg, mc;
-    if(Math.abs(Ueff-Udc)<4){
-      msg='ÉGALITÉ — même éclat, même puissance. Il a fallu monter la crête à '+Ucr+' V, soit √2 fois la tension continue.';
+    var egal=Math.abs(Ueff-Udc)<4, vy=406;
+    var msg,mc;
+    if(egal){
+      msg='MÊME LUMINOSITÉ — la valeur efficace de cet alternatif vaut donc exactement les '+Udc+' V du continu.';
       mc='#c8d834';
     } else if(Ueff<Udc){
-      msg='L’alternatif chauffe '+(1/Math.max(ecart,0.001)).toFixed(1).replace('.',',')+' fois moins. Montez sa tension crête jusqu’à '+(Udc*Math.SQRT2).toFixed(0)+' V pour égaliser.';
+      msg='La lampe alternative est plus sombre. Montez sa tension crête jusqu’à '+(Udc*Math.SQRT2).toFixed(0)+' V pour égaliser les deux.';
       mc='#f0a844';
     } else {
-      msg='L’alternatif chauffe '+ecart.toFixed(1).replace('.',',')+' fois plus. Sa crête dépasse '+(Udc*Math.SQRT2).toFixed(0)+' V.';
+      msg='La lampe alternative est plus vive : sa crête dépasse les '+(Udc*Math.SQRT2).toFixed(0)+' V nécessaires.';
       mc='#ff6a5e';
     }
     MSPC.mono(ctx,msg,30,vy,11.5,mc);
-    MSPC.mono(ctx,'ralenti — en 50 Hz réel ce scintillement a lieu 100 fois par seconde, et l’inertie du filament l’efface presque entièrement',30,vy+18,9.5,'#6f786e');
+    MSPC.mono(ctx, F<20
+      ? 'À cette fréquence, le filament a le temps de refroidir entre deux alternances : on voit la lampe battre. Montez vers 50 Hz.'
+      : 'À 50 Hz le filament n’a plus le temps de refroidir : le scintillement s’efface et les deux lampes deviennent comparables à l’œil.',
+      30, vy+18, 10, F<20?'#f0a844':'#93a415');
 
-    out.innerHTML = Math.abs(Ueff-Udc)<4
-      ? '<b style="color:#c8d834">'+Ucr+' V crête = '+Ueff.toFixed(0)+' V efficaces</b><br>soit exactement les '+Udc+' V du continu, pour le même éclat.'
+    out.innerHTML = egal
+      ? '<b style="color:#c8d834">'+Ucr+' V crête = '+Ueff.toFixed(0)+' V efficaces</b><br>même luminosité que '+Udc+' V continus : c’est la définition.'
       : 'Continu <b>'+Math.round(Pdc)+' W</b> · alternatif <b>'+Math.round(Pac)+' W</b><br>Crête à viser : <b>'+(Udc*Math.SQRT2).toFixed(0)+' V</b>';
   }, {fixed:true});
 })();
