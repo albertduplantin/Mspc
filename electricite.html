@@ -775,7 +775,20 @@
 
 <div class="exo"><span class="tag">Exercice 1.1</span>
 <p>Classez en conducteur / isolant : une mine de crayon · une règle en plastique · une clé plate · un chiffon sec · le même chiffon imbibé d'eau du robinet · le verre d'une ampoule · le filament de la même ampoule.</p>
-<details><summary>Voir la réponse</summary><div class="rep"><p><strong>Conducteurs :</strong> mine de crayon (graphite = carbone conducteur), clé plate (acier), chiffon mouillé (l'eau du robinet contient des sels dissous), filament (tungstène).<br><strong>Isolants :</strong> règle plastique, chiffon sec, verre de l'ampoule.</p><p><em>Le piège pédagogique est le chiffon : le même objet change de camp selon qu'il est sec ou humide. C'est toute la raison d'être des règles de sécurité en milieu humide.</em></p></div></details></div>
+<details><summary>Voir la réponse</summary><div class="rep">
+<p><strong>Conducteurs :</strong> la mine de crayon, la clé plate, le chiffon mouillé, le filament de l'ampoule.<br><strong>Isolants :</strong> la règle en plastique, le chiffon sec, le verre de l'ampoule.</p>
+<p><strong>Le détail de chaque cas :</strong></p>
+<ul>
+<li><strong>Mine de crayon</strong> → conductrice. Ce n'est pas du plomb mais du <em>graphite</em>, une forme du carbone dont les atomes libèrent des électrons. C'est le seul non-métal courant qui conduise bien.</li>
+<li><strong>Règle en plastique</strong> → isolante. Aucun électron ne se détache de ses molécules.</li>
+<li><strong>Clé plate</strong> → conductrice. C'est de l'acier, donc un métal, donc une mer d'électrons libres.</li>
+<li><strong>Chiffon sec</strong> → isolant. Le coton sec ne libère aucun électron.</li>
+<li><strong>Le même chiffon mouillé</strong> → <strong>conducteur</strong>. Ce n'est pas l'eau elle-même qui conduit, mais les <em>sels dissous</em> qu'elle contient : ils se séparent en ions, et ces ions chargés se déplacent. L'eau distillée, elle, conduit très mal.</li>
+<li><strong>Verre de l'ampoule</strong> → isolant, et c'est précisément pour cela qu'on peut la tenir.</li>
+<li><strong>Filament</strong> → conducteur. C'est du tungstène, un métal choisi parce qu'il supporte 2 500 °C sans fondre.</li>
+</ul>
+<p><em>Le vrai piège de l'exercice est le chiffon : <strong>le même objet change de camp selon son humidité</strong>. Retenez-le, car c'est toute la raison d'être des règles de sécurité en milieu humide — et l'explication des seuils de tension abaissés dans les locaux mouillés.</em></p>
+</div></details></div>
   </div>
 </section>
 
@@ -822,11 +835,23 @@
 
 <div class="exo"><span class="tag">Exercice 2.1</span>
 <p>Un collègue affirme : « Le courant met du temps à arriver au bout d'une longue ligne, c'est pour ça qu'il y a des chutes de tension. » Que répondez-vous ?</p>
-<details><summary>Voir la réponse</summary><div class="rep"><p>C'est faux <em>et</em> le résultat est vrai, pour une autre raison. Le signal se propage à ~200 000 km/s : sur 1 km, il met 5 microsecondes, autant dire rien. La chute de tension vient de la <strong>résistance du câble</strong> (chapitre 1) et non d'un temps de trajet. Bon réflexe : chute de tension = problème de section, de longueur ou de serrage, jamais de « délai ».</p></div></details></div>
+<details><summary>Voir la réponse</summary><div class="rep">
+<p><strong>Sa conclusion est juste, mais son explication est fausse.</strong> Il y a bien une chute de tension ; elle n'a simplement rien à voir avec un temps de trajet.</p>
+<p><strong>Pourquoi l'explication du délai ne tient pas.</strong><br>Ce qui se propage dans un câble, ce n'est pas la matière mais l'ordre de se mettre en marche, et il file à environ <strong>200 000 km/s</strong>. Faisons le calcul sur 1 km :<br>t = distance / vitesse = 1 / 200 000 = 0,000005 s = <strong>5 microsecondes</strong>.<br>Autant dire rien du tout. Sur 50 Hz, dont la période est de 20 000 microsecondes, c'est totalement négligeable.</p>
+<p><strong>D'où vient alors la chute de tension ?</strong><br>De la <strong>résistance du câble</strong> (chapitre 5). Le conducteur n'est pas parfait : il oppose R = ρ × L / S. Le courant qui le traverse y perd donc une tension U = R × I (chapitre 6). Plus le câble est long, plus R est grand, plus la chute est forte — d'où la confusion : <em>la longueur intervient bien, mais par la résistance, pas par le temps.</em></p>
+<p><em>Le bon réflexe de dépannage : devant une chute de tension anormale, cherchez toujours une <strong>section insuffisante</strong>, une <strong>longueur excessive</strong> ou un <strong>serrage défectueux</strong> — jamais un « délai ». Et souvenez-vous que la borne mal serrée est de loin la cause la plus fréquente, parce qu'elle ajoute une résistance là où personne ne l'attend.</em></p>
+</div></details></div>
 
 <div class="exo"><span class="tag">Exercice 2.2</span>
 <p>Doublez la section du fil (3 mm² au lieu de 1,5 mm²) en gardant le même courant de 10 A. La vitesse de dérive des électrons augmente-t-elle, diminue-t-elle, ou reste-t-elle identique ?</p>
-<details><summary>Voir la réponse</summary><div class="rep"><p>Elle est <strong>divisée par deux</strong> (≈ 0,25 mm/s). Deux fois plus d'électrons disponibles pour transporter la même quantité par seconde : chacun peut aller deux fois moins vite. C'est exactement pourquoi un gros câble chauffe moins qu'un petit à courant égal.</p></div></details></div>
+<details><summary>Voir la réponse</summary><div class="rep">
+<p><strong>Elle est divisée par deux</strong> : elle passe d'environ 0,5 mm/s à environ <strong>0,25 mm/s</strong>.</p>
+<p><strong>Le raisonnement.</strong> Reprenons ce que signifie « 10 A » : il passe 10 coulombs par seconde à travers une section du fil. Ce nombre est <em>imposé</em> par l'énoncé, il ne change pas.</p>
+<p>Maintenant, qu'est-ce qui fournit ces 10 coulombs par seconde ? Le nombre d'électrons libres présents, multiplié par leur vitesse. En doublant la section, on double le nombre d'électrons libres disponibles dans le fil.</p>
+<p>Il faut donc toujours le même débit total, mais il y a deux fois plus de porteurs pour l'assurer : <strong>chacun peut aller deux fois moins vite</strong>.</p>
+<p><strong>L'image qui aide.</strong> Un couloir à une voie où mille personnes doivent passer par minute : elles doivent courir. Élargissez le couloir à deux voies : les mêmes mille personnes par minute passent en marchant tranquillement.</p>
+<p><em>La conséquence pratique est majeure : des électrons plus lents se cognent moins souvent aux ions du réseau, donc dissipent moins de chaleur. <strong>C'est exactement pourquoi un gros câble chauffe moins qu'un petit à courant égal</strong> — et pourquoi les tableaux de sections des normes existent.</em></p>
+</div></details></div>
 
   </div>
 </section>
@@ -886,15 +911,35 @@
 
 <div class="exo"><span class="tag">Exercice 3.1</span>
 <p>Un chargeur débite 2 A pendant 90 minutes. Quelle quantité de charge a transité ?</p>
-<details><summary>Voir la réponse</summary><div class="rep"><p>Q = I × t = 2 × (90 × 60) = 2 × 5 400 = <strong>10 800 C</strong>.<br>Soit environ 6,7 × 10<sup>22</sup> électrons. À noter : les batteries s'expriment en <strong>Ah</strong> (ampères-heures), et 1 Ah = 3 600 C. Ici : 3 Ah.</p></div></details></div>
+<details><summary>Voir la réponse</summary><div class="rep">
+<p><strong>Étape 1 — traduire l'énoncé en grandeurs.</strong><br>« Débite 2 A » signifie qu'il passe 2 coulombs chaque seconde (1 A = 1 C/s).<br>« Pendant 90 minutes » est une durée qu'il faut convertir en secondes, car l'ampère est défini <em>par seconde</em>.</p>
+<p><strong>Étape 2 — convertir la durée.</strong><br>t = 90 min × 60 s/min = <strong>5 400 s</strong></p>
+<p><strong>Étape 3 — appliquer la définition de l'ampère.</strong><br>Si 2 coulombs passent chaque seconde pendant 5 400 secondes, alors :<br>Q = I × t = 2 × 5 400 = <strong>10 800 C</strong></p>
+<p><strong>Étape 4 — combien d'électrons cela représente-t-il ?</strong><br>Chaque coulomb contient 6,24 × 10<sup>18</sup> électrons.<br>10 800 × 6,24 × 10<sup>18</sup> ≈ <strong>6,7 × 10<sup>22</sup> électrons</strong>.</p>
+<p><em>Un raccourci utile pour l'atelier : les batteries s'expriment en <strong>ampères-heures</strong>, et 1 Ah = 1 A × 3 600 s = 3 600 C. Ici, 10 800 / 3 600 = <strong>3 Ah</strong>. Vous venez de calculer ce qu'un chargeur a réellement rendu à une batterie — c'est exactement le chiffre qu'affichent les chargeurs intelligents.</em></p>
+</div></details></div>
 
 <div class="exo"><span class="tag">Exercice 3.2</span>
 <p>Une batterie de voiture est marquée « 60 Ah ». Combien de temps peut-elle théoriquement alimenter une veilleuse consommant 0,5 A ?</p>
-<details><summary>Voir la réponse</summary><div class="rep"><p>t = 60 / 0,5 = <strong>120 heures</strong>, soit 5 jours. <em>En pratique nettement moins</em> : la capacité annoncée vaut pour un régime de décharge lent et normalisé, et une batterie plomb qu'on descend trop bas est détruite. Mais l'ordre de grandeur suffit à expliquer pourquoi une portière mal fermée vide une batterie en un week-end.</p></div></details></div>
+<details><summary>Voir la réponse</summary><div class="rep">
+<p><strong>Étape 1 — comprendre ce que signifie « 60 Ah ».</strong><br>Un ampère-heure, c'est la charge transportée par 1 ampère pendant 1 heure. « 60 Ah » veut donc dire : la batterie peut fournir 60 A pendant 1 h, ou 30 A pendant 2 h, ou 1 A pendant 60 h — c'est un <em>produit</em> courant × temps.</p>
+<p><strong>Étape 2 — poser le calcul.</strong><br>Q = I × t, donc t = Q / I<br>t = 60 / 0,5 = <strong>120 heures</strong>, soit <strong>5 jours</strong>.</p>
+<p><strong>Étape 3 — nuancer, parce que la réalité est moins généreuse.</strong> Ce résultat est théorique, pour deux raisons :</p>
+<ul>
+<li>La capacité annoncée vaut pour un <strong>régime de décharge normalisé</strong> (souvent en 20 h). Déchargée plus vite, une batterie plomb restitue nettement moins.</li>
+<li>Une batterie plomb qu'on descend trop bas est <strong>détruite</strong> par sulfatation. On ne va jamais jusqu'au bout : on s'arrête vers 50 % de décharge, ce qui ramène l'autonomie utile à environ 60 h.</li>
+</ul>
+<p><em>L'ordre de grandeur suffit néanmoins à expliquer ce que tout le monde a vécu : une portière mal fermée, un plafonnier de 5 W qui tire 0,4 A, et la batterie est à plat au bout d'un long week-end.</em></p>
+</div></details></div>
 
 <div class="exo"><span class="tag">Exercice 3.3</span>
 <p>Combien d'électrons passent en 1 minute dans une LED parcourue par 20 mA ?</p>
-<details><summary>Voir la réponse</summary><div class="rep"><p>Q = 0,02 × 60 = 1,2 C, soit 1,2 × 6,24 × 10<sup>18</sup> ≈ <strong>7,5 × 10<sup>18</sup> électrons</strong>. Environ le nombre de grains de sable sur toutes les plages de la Terre — en une minute, dans une LED de tableau de commande.</p></div></details></div>
+<details><summary>Voir la réponse</summary><div class="rep">
+<p><strong>Étape 1 — mettre les unités au propre.</strong><br>20 mA, c'est 20 milliampères, donc 20 / 1 000 = <strong>0,02 A</strong>.<br>1 minute = <strong>60 s</strong>.</p>
+<p><strong>Étape 2 — calculer la charge qui a transité.</strong><br>Q = I × t = 0,02 × 60 = <strong>1,2 C</strong></p>
+<p><strong>Étape 3 — convertir en nombre d'électrons.</strong><br>Un coulomb vaut 6,24 × 10<sup>18</sup> électrons, donc :<br>1,2 × 6,24 × 10<sup>18</sup> ≈ <strong>7,5 × 10<sup>18</sup> électrons</strong></p>
+<p><em>Prenez une seconde pour mesurer ce que ce nombre signifie. On estime à environ 7,5 × 10<sup>18</sup> le nombre de grains de sable sur <strong>toutes les plages de la Terre</strong>. Ce nombre-là traverse, en une minute, une LED de voyant que personne ne regarde. C'est tout l'intérêt du coulomb : il rend ces quantités manipulables.</em></p>
+</div></details></div>
 
   </div>
 </section>
@@ -1366,11 +1411,27 @@
 
 <div class="exo"><span class="tag">Exercice 5.1</span>
 <p>On remplace un câble d'alimentation de 10 m par un câble identique de 30 m. Que devient la résistance ? Et si en plus on double la section ?</p>
-<details><summary>Voir la réponse</summary><div class="rep"><p>×3 avec la longueur, puis ÷2 avec la section : au total <strong>×1,5</strong> par rapport au câble d'origine. C'est le raisonnement exact qu'on fait pour dimensionner une alimentation de moteur éloigné dans un atelier.</p></div></details></div>
+<details><summary>Voir la réponse</summary><div class="rep">
+<p><strong>Le principe.</strong> La résistance d'un fil suit R = ρ × L / S. On n'a pas besoin de connaître ρ ici : comme on compare deux câbles du même métal, il suffit de raisonner en proportions.</p>
+<p><strong>Étape 1 — l'effet de la longueur.</strong><br>La longueur passe de 10 m à 30 m, elle est donc multipliée par 30 / 10 = 3.<br>Or L est <em>au numérateur</em> : trois fois plus long, c'est trois fois plus de chocs à subir.<br>→ la résistance est <strong>multipliée par 3</strong>.</p>
+<p><strong>Étape 2 — l'effet de la section.</strong><br>La section est doublée. Or S est <em>au dénominateur</em> : deux fois plus gros, c'est deux fois plus de couloirs en parallèle.<br>→ la résistance est <strong>divisée par 2</strong>.</p>
+<p><strong>Étape 3 — combiner les deux.</strong><br>×3 puis ÷2 : au total <strong>× 1,5</strong>.<br>Si le câble d'origine faisait 0,12 Ω, le nouveau fera 0,18 Ω.</p>
+<p><em>C'est exactement le raisonnement qu'on tient pour alimenter un moteur éloigné : en allongeant, on augmente la chute de tension, et on compense en montant d'un ou deux crans de section. Retenez la logique plutôt que le résultat — longueur au numérateur, section au dénominateur.</em></p>
+</div></details></div>
 
 <div class="exo"><span class="tag">Exercice 5.2</span>
 <p>Pourquoi un moteur asynchrone qui vient de tourner 2 heures présente-t-il une résistance d'enroulement plus élevée qu'un moteur froid ? Est-ce un défaut ?</p>
-<details><summary>Voir la réponse</summary><div class="rep"><p>Non, c'est normal. Le cuivre des bobinages est chaud, ses ions vibrent davantage, la résistance monte (environ <strong>+40 % entre 20 °C et 120 °C</strong>). Les électriciens s'en servent même comme méthode de mesure indirecte de la température des bobinages, la « méthode de variation de résistance » de la norme moteur.</p></div></details></div>
+<details><summary>Voir la réponse</summary><div class="rep">
+<p><strong>Non, ce n'est pas un défaut : c'est parfaitement normal et parfaitement prévisible.</strong></p>
+<p><strong>Le mécanisme, en trois temps.</strong></p>
+<ol>
+<li>Le moteur a tourné deux heures : ses bobinages ont chauffé, par effet Joule et par les pertes fer.</li>
+<li>Dans un métal chaud, les ions du réseau <strong>vibrent plus fort</strong> et sortent davantage de leur alignement (chapitre 5).</li>
+<li>Les électrons sont donc déviés plus souvent : la résistance monte.</li>
+</ol>
+<p><strong>De combien ?</strong> Pour le cuivre, la résistance augmente d'environ 0,4 % par degré. Entre 20 °C et 120 °C, soit 100 °C d'écart :<br>augmentation ≈ 0,4 % × 100 = <strong>40 %</strong>.<br>Un enroulement de 1,5 Ω à froid mesurera donc environ 2,1 Ω à chaud.</p>
+<p><em>Les électriciens ont retourné le phénomène à leur avantage : puisque la résistance dépend de la température de façon connue, <strong>on mesure la résistance pour en déduire la température</strong> des bobinages — là où aucun thermomètre ne peut aller. C'est la « méthode de variation de résistance » des essais d'échauffement normalisés. Un défaut apparent devenu instrument de mesure.</em></p>
+</div></details></div>
 <div class="exo"><span class="tag">Exercice 5.3</span>
 <p>Calculez la résistance de 25 m de câble cuivre de 1,5 mm², puis celle de 25 m d'aluminium de même section. On donne ρ<sub>cuivre</sub> = 0,0168 Ω·mm²/m et ρ<sub>alu</sub> = 0,0265 Ω·mm²/m. Quelle section d'aluminium faudrait-il pour égaler le cuivre ?</p>
 <details><summary>Voir la réponse</summary><div class="rep">
@@ -1682,15 +1743,40 @@
 
 <div class="exo"><span class="tag">Exercice 7.1</span>
 <p>Un câble de résistance 0,2 Ω transporte 10 A. Quelle puissance y est dissipée ? Et si le courant monte à 20 A ?</p>
-<details><summary>Voir la réponse</summary><div class="rep"><p>À 10 A : P = 0,2 × 10² = <strong>20 W</strong>.<br>À 20 A : P = 0,2 × 20² = <strong>80 W</strong>.<br>Le courant a doublé, l'échauffement a quadruplé. 80 W dans un câble, c'est l'équivalent d'un petit radiateur d'appoint réparti sur sa longueur.</p></div></details></div>
+<details><summary>Voir la réponse</summary><div class="rep">
+<p><strong>Étape 1 — la formule et pourquoi c'est celle-là.</strong><br>La puissance dissipée en chaleur dans un conducteur vaut P = R × I². Le carré vient du fait que doubler le courant, c'est à la fois deux fois plus d'électrons <em>et</em> deux fois plus d'énergie cédée par chacun.</p>
+<p><strong>Étape 2 — le cas à 10 A.</strong><br>On calcule d'abord le carré : 10² = 100<br>Puis on multiplie : P = 0,2 × 100 = <strong>20 W</strong></p>
+<p><strong>Étape 3 — le cas à 20 A.</strong><br>20² = 400<br>P = 0,2 × 400 = <strong>80 W</strong></p>
+<p><strong>Étape 4 — comparer.</strong><br>Le courant a été multiplié par 2, mais la puissance par 80 / 20 = <strong>4</strong>. C'est bien 2², le carré du rapport.</p>
+<p><em>Ce que cela veut dire concrètement : 80 W dissipés dans un câble, c'est un petit radiateur d'appoint réparti sur toute sa longueur. Si ce câble est enroulé sur un touret ou passé dans un isolant, cette chaleur ne peut pas s'évacuer — et c'est ainsi que fond une gaine. Vous comprenez du même coup pourquoi un enrouleur porte deux calibres : 16 A déroulé, 8 A enroulé.</em></p>
+</div></details></div>
 
 <div class="exo"><span class="tag">Exercice 7.2</span>
 <p>Une multiprise 16 A alimente : un radiateur soufflant 2 000 W, un PC 150 W et une lampe 60 W, sous 230 V. Y a-t-il un problème ?</p>
-<details><summary>Voir la réponse</summary><div class="rep"><p>Total = 2 210 W → I = 2 210 / 230 = <strong>9,6 A</strong>. Sous le calibre : pas de surcharge <em>en théorie</em>.<br><strong>En pratique, si.</strong> 9,6 A traversent des contacts de multiprise en laiton mince et souvent des rallonges de 1 mm². Les résistances de contact font le reste. C'est le scénario type d'incendie domestique en hiver. Règle d'atelier : <strong>un appareil de chauffage se branche toujours directement au mur</strong>, jamais sur une multiprise.</p></div></details></div>
+<details><summary>Voir la réponse</summary><div class="rep">
+<p><strong>Étape 1 — additionner les puissances.</strong><br>Les trois appareils sont branchés en parallèle sur la même multiprise : leurs puissances s'ajoutent.<br>P = 2 000 + 150 + 60 = <strong>2 210 W</strong></p>
+<p><strong>Étape 2 — en déduire le courant total.</strong><br>On isole I dans P = U × I :<br>I = P / U = 2 210 / 230 = <strong>9,6 A</strong></p>
+<p><strong>Étape 3 — comparer au calibre.</strong><br>9,6 A pour une multiprise donnée pour 16 A : on est à 60 % du calibre. <strong>Sur le papier, aucune surcharge.</strong></p>
+<p><strong>Étape 4 — et pourtant, en pratique, c'est un scénario d'incendie.</strong> Voici ce que le calcul ne dit pas :</p>
+<ul>
+<li>Les contacts d'une multiprise d'entrée de gamme sont en <strong>laiton mince</strong>, avec une pression de contact faible. Chacun ajoute une résistance de quelques milliohms — et P = R × I² s'y applique aussi.</li>
+<li>Le câble de la multiprise fait souvent <strong>1 mm²</strong>, parfois 0,75 mm², et non les 1,5 mm² qu'exigeraient 9,6 A en continu.</li>
+<li>Ce câble est fréquemment lové derrière un meuble, sous un tapis ou dans un enrouleur : la chaleur ne peut pas s'évacuer.</li>
+<li>Un radiateur soufflant fonctionne <strong>en continu pendant des heures</strong>, contrairement à une bouilloire. L'échauffement a tout le temps de s'installer.</li>
+</ul>
+<p><strong>La règle d'atelier qui en découle :</strong> <span class="cle">un appareil de chauffage se branche toujours directement au mur, jamais sur une multiprise ni sur un enrouleur.</span></p>
+<p><em>Retenez la leçon générale : <strong>respecter le calibre ne suffit pas.</strong> Le calibre suppose des contacts sains, une section correcte et une évacuation normale de la chaleur. Dès qu'une de ces trois conditions manque, le calcul devient trompeur.</em></p>
+</div></details></div>
 
 <div class="exo"><span class="tag">Exercice 7.3</span>
 <p>Pourquoi les bobinages d'un moteur sont-ils en cuivre, mais les résistances de four en nichrome, alors que le nichrome est bien meilleur marché ?</p>
-<details><summary>Voir la réponse</summary><div class="rep"><p>Parce que les objectifs sont opposés. Dans un moteur, l'effet Joule est une <strong>perte</strong> : on cherche la résistance la plus faible possible → cuivre. Dans un four, l'effet Joule est le <strong>produit</strong> : on cherche une forte résistance qui supporte 1 000 °C sans s'oxyder → nichrome. Le cuivre, lui, s'oxyde et casse dès 300-400 °C à l'air.</p></div></details></div>
+<details><summary>Voir la réponse</summary><div class="rep">
+<p><strong>Parce que les deux objectifs sont exactement opposés.</strong> Ce n'est pas une question de prix, c'est une question de fonction.</p>
+<p><strong>Dans un moteur, l'effet Joule est une perte.</strong><br>Tout ce qui chauffe dans les bobinages est de l'énergie qui ne devient pas du mouvement. On cherche donc la résistance <strong>la plus faible possible</strong>. Le cuivre, avec 16,8 nΩ·m, est le meilleur compromis entre conductivité et prix — l'argent serait à peine meilleur pour un coût prohibitif.</p>
+<p><strong>Dans un four, l'effet Joule est le produit fini.</strong><br>On veut convertir l'électricité en chaleur, et le rendement est de 100 %. On cherche donc une résistance <strong>élevée</strong> : le nichrome, à environ 1 100 nΩ·m, résiste 65 fois plus que le cuivre à dimensions égales.</p>
+<p><strong>Et la raison décisive, qu'on oublie souvent :</strong> le nichrome supporte de fonctionner au rouge, vers 1 000 °C, en formant une couche d'oxyde de chrome protectrice. Le cuivre, lui, <strong>s'oxyde et casse dès 300 à 400 °C</strong> à l'air libre. Même si l'on voulait faire une résistance de four en cuivre, elle ne tiendrait pas une journée.</p>
+<p><em>Retenez la règle générale : <strong>on choisit un matériau pour la fonction qu'on lui demande, pas pour ses qualités absolues.</strong> Le « mauvais conducteur » qu'est le nichrome est le bon matériau au bon endroit.</em></p>
+</div></details></div>
 
   </div>
 </section>
@@ -1755,15 +1841,38 @@
 
 <div class="exo"><span class="tag">Exercice 8.1</span>
 <p>Sous 230 V, calculez le courant appelé par : une lampe LED 9 W · un sèche-cheveux 1 800 W · un moteur monophasé 750 W.</p>
-<details><summary>Voir la réponse</summary><div class="rep"><p>LED : 9/230 = <strong>39 mA</strong> · Sèche-cheveux : 1 800/230 = <strong>7,8 A</strong> · Moteur : 750/230 = <strong>3,3 A</strong> <em>(en réalité un peu plus : un moteur a un facteur de puissance inférieur à 1, on trouverait plutôt 4,5 A sur la plaque)</em>.</p></div></details></div>
+<details><summary>Voir la réponse</summary><div class="rep">
+<p><strong>Le principe.</strong> La plaque signalétique donne la puissance, le réseau impose la tension. On cherche le courant : on part de P = U × I et on isole I en divisant les deux membres par U, ce qui donne <strong>I = P / U</strong>.</p>
+<p><strong>La lampe LED de 9 W.</strong><br>I = 9 / 230 = 0,039 A = <strong>39 mA</strong></p>
+<p><strong>Le sèche-cheveux de 1 800 W.</strong><br>I = 1 800 / 230 = <strong>7,8 A</strong></p>
+<p><strong>Le moteur de 750 W.</strong><br>I = 750 / 230 = <strong>3,3 A</strong> … en théorie.</p>
+<p><strong>Pourquoi la plaque du moteur affichera plutôt 4,5 A.</strong><br>Un moteur n'est pas une simple résistance : à cause de ses bobinages, le courant et la tension ne sont pas en phase. Une partie du courant fait des allers-retours sans produire de travail. On tient compte de cela par le <em>facteur de puissance</em> cos φ, souvent voisin de 0,75 sur un petit moteur :<br>I = P / (U × cos φ) = 750 / (230 × 0,75) = <strong>4,3 A</strong></p>
+<p><em>Règle pratique : pour un appareil purement résistif — chauffage, lampe à filament, four — I = P/U est exact. Pour tout ce qui contient un bobinage — moteur, transformateur, ballast — le courant réel est toujours <strong>supérieur</strong> au calcul simple. En cas de doute, c'est la plaque qui fait foi, jamais votre division.</em></p>
+</div></details></div>
 
 <div class="exo"><span class="tag">Exercice 8.2</span>
 <p>Une lampe 12 V / 21 W de feu de stop. Quelle est sa résistance à chaud ? Que se passe-t-il si on la branche sur 24 V ?</p>
-<details><summary>Voir la réponse</summary><div class="rep"><p>I = 21/12 = 1,75 A → R = 12/1,75 = <strong>6,9 Ω</strong>.<br>Sous 24 V : le courant tenterait de doubler et la puissance d'être multipliée par 4 (84 W). En pratique le filament, prévu pour 2 500 °C, fond quasi instantanément. <strong>Durée de vie : une fraction de seconde.</strong> C'est ce qui arrive quand on branche du matériel 12 V sur un poids lourd en 24 V.</p></div></details></div>
+<details><summary>Voir la réponse</summary><div class="rep">
+<p><strong>Étape 1 — le courant nominal.</strong><br>La plaque donne 21 W sous 12 V. On part de P = U × I et on isole I :<br>I = P / U = 21 / 12 = <strong>1,75 A</strong></p>
+<p><strong>Étape 2 — la résistance à chaud.</strong><br>On applique la loi d'Ohm sous la forme R = U / I :<br>R = 12 / 1,75 = <strong>6,9 Ω</strong></p>
+<p><strong>Étape 3 — ce qui se passe sous 24 V.</strong><br>Raisonnons d'abord comme si la résistance restait constante :</p>
+<ul>
+<li>Le courant doublerait : I = 24 / 6,9 = 3,5 A</li>
+<li>La puissance serait multipliée par 4 : P = 24 × 3,5 = <strong>84 W</strong> au lieu de 21 W</li>
+</ul>
+<p><strong>Étape 4 — la réalité, encore pire.</strong><br>Le filament est calculé pour atteindre 2 500 °C sous 21 W. Sommé d'en dissiper 84, il monte instantanément au-delà du point de fusion du tungstène (3 400 °C). <strong>Il fond en une fraction de seconde</strong>, avec un éclair blanc caractéristique.</p>
+<p><em>C'est très exactement ce qui arrive quand on monte du matériel 12 V sur un poids lourd en 24 V. Et notez le rapport : la tension est multipliée par 2, mais la puissance par 4 — parce que la tension agit deux fois, une fois sur elle-même et une fois via le courant qu'elle provoque.</em></p>
+</div></details></div>
 
 <div class="exo"><span class="tag">Exercice 8.3</span>
 <p>Deux lampes identiques 230 V / 60 W sont branchées en série sur 230 V. Éclairent-elles normalement ?</p>
-<details><summary>Voir la réponse</summary><div class="rep"><p>Non : chacune reçoit 115 V. Le courant qui les traverse est bien plus faible, elles rougeoient à peine (leur puissance chute à environ 15 W chacune, et encore moins car leur résistance baisse à froid). C'est le montage des anciennes guirlandes de Noël — et c'est pour ça qu'une seule lampe grillée éteignait toute la guirlande.</p></div></details></div>
+<details><summary>Voir la réponse</summary><div class="rep">
+<p><strong>Non. Elles rougeoient à peine.</strong></p>
+<p><strong>Étape 1 — le partage de la tension.</strong><br>En série, les deux lampes sont traversées par le <em>même</em> courant, et la tension du réseau se répartit entre elles. Comme elles sont identiques, chacune reçoit la moitié :<br>230 / 2 = <strong>115 V par lampe</strong>.</p>
+<p><strong>Étape 2 — l'effet sur la puissance, en première approche.</strong><br>Si la résistance de chaque filament restait constante (885 Ω), le courant serait divisé par deux et la puissance de chaque lampe par quatre :<br>60 / 4 = <strong>15 W</strong> au lieu de 60 W.</p>
+<p><strong>Étape 3 — la réalité est encore en dessous.</strong><br>Avec moins de puissance, le filament chauffe moins ; or un filament plus froid est <em>moins</em> résistant (chapitre 5). Sa résistance chute donc, le courant remonte un peu, mais surtout la température reste très basse. Résultat : les lampes émettent une lueur orangée, très loin de la lumière blanche normale — car le rendement lumineux s'effondre bien plus vite que la puissance.</p>
+<p><em>C'était le montage des anciennes guirlandes de Noël : vingt lampes de 12 V en série sur 230 V. D'où le défaut légendaire — <strong>une seule lampe grillée coupait le circuit et éteignait toute la guirlande</strong>, et il fallait les tester une par une. Les guirlandes modernes montent les LED en parallèle par groupes, précisément pour éviter cela.</em></p>
+</div></details></div>
 
   </div>
 </section>
@@ -1807,11 +1916,43 @@
 
 <div class="exo"><span class="tag">Exercice 9.1</span>
 <p>Un câble d'alimentation passe verticalement dans une goulotte. Une boussole posée à sa gauche indique une déviation vers le fond de l'atelier. Où pointera-t-elle si on la déplace à droite du câble ?</p>
-<details><summary>Voir la réponse</summary><div class="rep"><p><strong>Vers l'avant de l'atelier</strong> : à l'opposé. Les lignes de champ étant des cercles autour du fil, elles pointent dans des sens opposés de part et d'autre.</p></div></details></div>
+<details><summary>Voir la réponse</summary><div class="rep">
+<p><strong>La réponse :</strong> elle pointera <strong>vers l'avant de l'atelier</strong>, exactement à l'opposé.</p>
+<p><strong>Le raisonnement, étape par étape.</strong></p>
+<ol>
+<li>Le champ magnétique créé par un fil rectiligne n'est ni « vers le haut » ni « vers la droite » : il s'enroule <strong>en cercles autour du fil</strong>.</li>
+<li>Placez-vous mentalement sur un de ces cercles, à gauche du câble. La tangente au cercle y pointe dans un sens donné — ici vers le fond.</li>
+<li>Faites maintenant un demi-tour sur ce même cercle pour vous retrouver à droite du câble. Vous êtes toujours sur le même cercle, mais du côté opposé : la tangente y pointe forcément <strong>dans l'autre sens</strong>.</li>
+</ol>
+<p><strong>L'image qui aide :</strong> imaginez une ronde d'enfants tournant autour d'un arbre. Un enfant à gauche de l'arbre avance vers le fond ; au même instant, celui qui lui fait face, à droite, avance vers l'avant. Ils tournent pourtant tous dans le même sens.</p>
+<p><em>Application en dépannage : c'est ce qui permet de repérer un câble parcouru par du courant continu sans rien démonter, à la simple boussole — et de déterminer le sens du courant. Sur un câble alternatif 50 Hz, en revanche, l'aiguille ne fera que vibrer, puisque le sens s'inverse cent fois par seconde.</em></p>
+</div></details></div>
 
 <div class="exo"><span class="tag">Exercice 9.2</span>
 <p>Pourquoi les câbles de commande d'un automate ne doivent-ils jamais cheminer dans la même goulotte que les câbles de puissance d'un variateur ?</p>
-<details><summary>Voir la réponse</summary><div class="rep"><p>Le câble de puissance crée un champ magnétique variable (et fort). Ce champ vient induire des tensions parasites dans les conducteurs de commande voisins (chapitre 11 : l'induction). Résultat : entrées automate qui basculent seules, mesures analogiques bruitées, bus de terrain qui décroche. D'où les règles de <strong>séparation physique</strong> (goulottes distinctes, croisements à 90°) et l'usage de <strong>câbles blindés</strong> avec blindage raccordé à la terre côté armoire.</p></div></details></div>
+<details><summary>Voir la réponse</summary><div class="rep">
+<p><strong>Parce que le câble de puissance transforme la goulotte en transformateur involontaire.</strong></p>
+<p><strong>Le mécanisme, en trois étapes.</strong></p>
+<ol>
+<li>Le câble d'un variateur porte un courant fort <em>et</em> qui varie très vite — un variateur découpe la tension à plusieurs kilohertz. Ce courant crée autour de lui un <strong>champ magnétique variable</strong> (chapitre 9).</li>
+<li>Les conducteurs de commande qui cheminent à côté baignent dans ce champ. Or tout conducteur soumis à un flux variable voit apparaître à ses bornes une <strong>tension induite</strong> (chapitre 11). Ils se comportent comme le secondaire d'un transformateur dont personne n'a voulu.</li>
+<li>Ces tensions parasites viennent s'ajouter aux signaux utiles, qui sont souvent de faible niveau — 24 V en tout ou rien, et seulement quelques volts, voire quelques millivolts, en analogique.</li>
+</ol>
+<p><strong>Les symptômes que cela produit en atelier :</strong></p>
+<ul>
+<li>Des entrées d'automate qui basculent toutes seules, sans qu'aucun capteur n'ait bougé.</li>
+<li>Des mesures analogiques bruitées, une sonde de température qui « saute » de quelques degrés.</li>
+<li>Un bus de terrain qui décroche par intermittence, typiquement quand le moteur accélère.</li>
+</ul>
+<p><strong>Les parades, dans l'ordre d'efficacité :</strong></p>
+<ol>
+<li><strong>Séparer physiquement</strong> : goulottes distinctes, avec au moins 20 à 30 cm entre puissance et commande.</li>
+<li><strong>Croiser à 90°</strong> quand un croisement est inévitable — le couplage devient alors quasi nul.</li>
+<li><strong>Blinder</strong> les câbles de commande, et raccorder le blindage à la terre <em>côté armoire</em>, sur un collier de masse et non par une queue de cochon.</li>
+<li>Utiliser du <strong>câble moteur blindé</strong> pour le variateur, blindage repris aux deux extrémités sur 360°.</li>
+</ol>
+<p><em>Le diagnostic qui trahit ce défaut : la panne apparaît ou disparaît <strong>selon que le variateur tourne ou non</strong>. Si une entrée devient instable dès que le moteur démarre, ne changez pas le capteur — regardez le chemin de câbles.</em></p>
+</div></details></div>
 
   </div>
 </section>
@@ -2088,15 +2229,48 @@
 
 <div class="exo"><span class="tag">Exercice 10.1</span>
 <p>Une bobine de 500 spires est parcourue par 0,4 A. On veut le même champ avec seulement 200 spires. Quel courant faut-il ?</p>
-<details><summary>Voir la réponse</summary><div class="rep"><p>500 × 0,4 = 200 ampères-tours. Il faut donc I = 200 / 200 = <strong>1 A</strong>.<br>Conséquence à ne pas rater : le courant a été multiplié par 2,5, donc l'effet Joule dans la bobine par <strong>6,25</strong>. Elle chauffera nettement plus. Voilà pourquoi on préfère généralement beaucoup de spires et peu de courant.</p></div></details></div>
+<details><summary>Voir la réponse</summary><div class="rep">
+<p><strong>Étape 1 — la grandeur qui compte vraiment.</strong><br>Le champ d'une bobine ne dépend ni du nombre de spires seul, ni du courant seul, mais de leur <em>produit</em> : les <strong>ampères-tours</strong> (N × I). Deux bobines qui ont le même produit produisent le même champ.</p>
+<p><strong>Étape 2 — calculer les ampères-tours à conserver.</strong><br>N × I = 500 × 0,4 = <strong>200 ampères-tours</strong></p>
+<p><strong>Étape 3 — en déduire le nouveau courant.</strong><br>On veut 200 At avec seulement 200 spires :<br>I = 200 / 200 = <strong>1 A</strong></p>
+<p><strong>Étape 4 — le piège de l'exercice, qu'il ne faut surtout pas rater.</strong><br>Le champ est identique, mais l'échauffement ne l'est pas du tout. Le courant est passé de 0,4 A à 1 A, soit ×2,5. Or l'effet Joule vaut P = R × I², donc il est multiplié par 2,5² = <strong>6,25</strong>.</p>
+<p><em>La bobine à 200 spires chauffera plus de six fois plus pour rendre le même service. Voilà pourquoi, à chaque fois qu'on en a la place, <strong>on préfère beaucoup de spires et peu de courant</strong> : c'est le nombre de spires qui est gratuit, pas les ampères. Un bobinage de contacteur, un électroaimant de frein, une bobine de relais — tous suivent cette logique.</em></p>
+</div></details></div>
 
 <div class="exo"><span class="tag">Exercice 10.2</span>
 <p>Une bobine de contacteur 24 V est alimentée par erreur en 48 V. Que se passe-t-il ?</p>
-<details><summary>Voir la réponse</summary><div class="rep"><p>Le courant double → les ampères-tours doublent (le contacteur colle très fort), mais l'effet Joule est <strong>multiplié par 4</strong>. La bobine, dimensionnée pour dissiper P, doit en dissiper 4P : elle chauffe, l'émail se dégrade, les spires se court-circuitent entre elles et la bobine grille en quelques minutes à quelques heures. Odeur caractéristique de vernis brûlé.</p></div></details></div>
+<details><summary>Voir la réponse</summary><div class="rep">
+<p><strong>La bobine grille.</strong> Voici pourquoi, dans l'ordre.</p>
+<p><strong>Étape 1 — le courant.</strong><br>La résistance du bobinage ne change pas. Par la loi d'Ohm, I = U / R : en doublant la tension, on <strong>double le courant</strong>.</p>
+<p><strong>Étape 2 — le champ magnétique.</strong><br>Les ampères-tours doublent eux aussi. Le contacteur colle donc très fort — et c'est trompeur, car tout semble mieux fonctionner qu'avant.</p>
+<p><strong>Étape 3 — la chaleur, qui elle ne double pas.</strong><br>P = R × I². Le courant étant multiplié par 2, la puissance dissipée est multipliée par 2² = <strong>4</strong>. Une bobine conçue pour évacuer 3 W doit soudain en évacuer 12.</p>
+<p><strong>Étape 4 — la destruction, en chaîne.</strong></p>
+<ol>
+<li>La température du bobinage s'emballe, car il ne peut évacuer que ce pour quoi il a été dimensionné.</li>
+<li>L'émail isolant qui entoure le fil se dégrade — souvenez-vous de la règle des 10 °C.</li>
+<li>Deux spires voisines finissent par se toucher : c'est un court-circuit entre spires.</li>
+<li>La résistance chute encore, le courant grimpe encore, et l'emballement devient irréversible.</li>
+</ol>
+<p><em>Le tout prend de quelques minutes à quelques heures selon la taille de la bobine. Le symptôme qui doit vous alerter avant la panne est l'<strong>odeur de vernis chaud</strong>, âcre et un peu sucrée : à ce stade, la bobine est déjà en train de perdre sa durée de vie.</em></p>
+</div></details></div>
 
 <div class="exo"><span class="tag">Exercice 10.3</span>
 <p>Pourquoi place-t-on une diode (ou un circuit RC) en parallèle sur les bobines de relais commandées par un automate ?</p>
-<details><summary>Voir la réponse</summary><div class="rep"><p>Une bobine stocke de l'énergie dans son champ magnétique. À la coupure, ce champ s'effondre brutalement et <strong>induit une surtension</strong> (chapitre 11) qui peut atteindre plusieurs centaines de volts. Cette surtension détruit les transistors de sortie de l'automate et génère des parasites. La diode de roue libre offre un chemin à ce courant, qui s'éteint doucement au lieu de claquer. <em>C'est du chapitre 11 utilisé pour protéger du chapitre 10.</em></p></div></details></div>
+<details><summary>Voir la réponse</summary><div class="rep">
+<p><strong>Pour absorber la surtension que produit la bobine au moment de la coupure.</strong></p>
+<p><strong>Étape 1 — ce que contient une bobine alimentée.</strong><br>Tant que le courant circule, la bobine entretient un champ magnétique. Ce champ est une <strong>réserve d'énergie</strong>, exactement comme un volant d'inertie en mécanique.</p>
+<p><strong>Étape 2 — ce qui se passe à l'ouverture.</strong><br>Quand la sortie de l'automate coupe, le courant est brutalement interrompu. Le champ s'effondre donc en un temps très court. Or la tension induite est proportionnelle à la <strong>rapidité</strong> de la variation de flux (chapitre 11) : une variation quasi instantanée produit une tension énorme.</p>
+<p><strong>Étape 3 — l'ordre de grandeur.</strong><br>Une bobine alimentée en 24 V peut développer à la coupure une pointe de <strong>plusieurs centaines de volts</strong>, de polarité inverse. Cette surtension apparaît directement aux bornes du transistor de sortie qui vient de couper.</p>
+<p><strong>Étape 4 — les dégâts.</strong></p>
+<ul>
+<li>Le transistor de sortie de l'automate est <strong>détruit</strong>, ou vieillit prématurément à chaque manœuvre.</li>
+<li>Sur un contact sec, il se forme un <strong>arc</strong> qui érode les contacts à chaque ouverture.</li>
+<li>Le front très raide rayonne des <strong>parasites</strong> dans toute l'armoire.</li>
+</ul>
+<p><strong>Étape 5 — comment la diode règle le problème.</strong><br>Montée en inverse aux bornes de la bobine, la <strong>diode de roue libre</strong> ne conduit pas en fonctionnement normal. À la coupure, la tension s'inverse : la diode devient passante et offre au courant un chemin où continuer à circuler. Le courant s'éteint alors doucement dans la boucle bobine-diode, en dissipant son énergie au lieu de la libérer d'un coup.</p>
+<p><em>Deux points à connaître. D'abord, la diode <strong>ralentit légèrement le relâchement</strong> du relais ; là où cela gêne, on lui préfère un circuit RC ou une diode Zener. Ensuite, la diode a un sens : montée à l'envers, elle court-circuite l'alimentation dès la mise sous tension. C'est une erreur de câblage classique, et elle se voit tout de suite.</em></p>
+<p><em>Joli résumé de tout le cours : on se sert du chapitre 11 pour protéger le chapitre 10.</em></p>
+</div></details></div>
 
   </div>
 </section>
@@ -2155,11 +2329,24 @@
 
 <div class="exo"><span class="tag">Exercice 11.1</span>
 <p>On approche lentement un aimant d'une bobine, puis très rapidement. Dans quel cas la tension induite est-elle la plus forte ? Et si on laisse l'aimant collé à la bobine ?</p>
-<details><summary>Voir la réponse</summary><div class="rep"><p>La tension est la plus forte lors du mouvement <strong>rapide</strong> (variation rapide du flux). Aimant immobile, même collé : tension <strong>nulle</strong>, quel que soit sa puissance. Un aimant posé sur une bobine ne produit strictement rien.</p></div></details></div>
+<details><summary>Voir la réponse</summary><div class="rep">
+<p><strong>Premier cas — mouvement lent contre mouvement rapide.</strong><br>La tension induite est nettement plus forte lors du <strong>mouvement rapide</strong>.</p>
+<p>Ce qui compte n'est pas la position de l'aimant, ni sa force, mais la <strong>vitesse à laquelle le flux change</strong>. C'est la loi de Faraday : la tension induite est proportionnelle à la <em>rapidité de la variation</em>. Bougez deux fois plus vite, vous obtenez deux fois plus de tension.</p>
+<p><strong>Second cas — l'aimant posé, immobile, collé à la bobine.</strong><br>La tension induite est <strong>rigoureusement nulle</strong>, et cela quelle que soit la puissance de l'aimant.</p>
+<p>C'est le point le plus contre-intuitif de tout le chapitre. L'aimant est bien là, le flux à travers la bobine est maximal — mais il ne <em>varie</em> plus. Or ce n'est pas le flux qui crée la tension, c'est sa <strong>variation</strong>. Un flux énorme et constant produit exactement autant qu'un flux nul : rien.</p>
+<p><em>Vérification que vous pouvez faire en trente secondes en TP : branchez un voltmètre sur une bobine et posez un aimant dessus. L'aiguille bouge à l'instant où vous le posez, retombe à zéro, et rebouge à l'instant où vous le retirez — en sens inverse. Entre les deux, rien. C'est aussi pour cette raison qu'un alternateur doit <strong>tourner</strong> : à l'arrêt, il ne produit rien, même avec les aimants les plus puissants du monde.</em></p>
+</div></details></div>
 
 <div class="exo"><span class="tag">Exercice 11.2</span>
 <p>Pourquoi les noyaux de transformateurs et de moteurs sont-ils faits de <strong>tôles minces isolées entre elles</strong> plutôt que d'un bloc de fer massif ?</p>
-<details><summary>Voir la réponse</summary><div class="rep"><p>Le fer massif est lui-même un conducteur plongé dans un champ variable : des courants de Foucault s'y développent et le chauffent par effet Joule — pure perte, plus échauffement. En feuilletant le noyau en tôles de 0,35 mm <strong>isolées par un vernis</strong>, on brise les boucles de courant. Les pertes fer chutent d'un facteur 10 à 100. Regardez la tranche d'un noyau de transfo : vous verrez les tôles.</p></div></details></div>
+<details><summary>Voir la réponse</summary><div class="rep">
+<p><strong>Le problème : le fer est lui-même un conducteur.</strong></p>
+<p><strong>Étape 1 — ce qui se passe dans un noyau massif.</strong><br>Le noyau baigne dans un champ magnétique qui varie 100 fois par seconde. Or l'induction (chapitre 11) ne fait pas le tri : elle crée une tension induite dans <em>tout</em> conducteur soumis à un flux variable — y compris dans le fer du noyau lui-même.</p>
+<p><strong>Étape 2 — la conséquence.</strong><br>Cette tension fait circuler des boucles de courant à l'intérieur même du métal : les <strong>courants de Foucault</strong>. Ils ne servent strictement à rien et chauffent le noyau par effet Joule. C'est de la perte pure, doublée d'un échauffement à évacuer.</p>
+<p><strong>Étape 3 — la parade.</strong><br>On empile des tôles minces, typiquement <strong>0,35 mm</strong>, isolées les unes des autres par un vernis. Le champ magnétique traverse toujours l'empilement sans difficulté, mais les boucles de courant, elles, sont <strong>coupées</strong> : elles ne peuvent plus faire le tour d'une grande section, seulement d'une tôle très fine.</p>
+<p><strong>Le résultat.</strong> Les pertes fer chutent d'un facteur 10 à 100 selon la finesse des tôles et la qualité de l'acier.</p>
+<p><em>Vous pouvez le vérifier de vos yeux : regardez la tranche d'un noyau de transformateur ou le stator d'un moteur démonté — les tôles y sont parfaitement visibles. Et si vous voyez un jour un noyau dont les tôles sont soudées ou rouillées ensemble, vous savez qu'il chauffera anormalement : le vernis isolant a été mis en défaut.</em></p>
+</div></details></div>
 
 <div class="exo"><span class="tag">Exercice 11.3</span>
 <p>Une plaque à induction fonctionne-t-elle avec une casserole en aluminium ? En inox ? En fonte ? Pourquoi ?</p>
@@ -2438,11 +2625,23 @@
 
 <div class="exo"><span class="tag">Exercice 12.1</span>
 <p>Un alternateur bipolaire (une paire de pôles) doit produire du 50 Hz. À quelle vitesse doit-il tourner ? Et un alternateur à 2 paires de pôles ?</p>
-<details><summary>Voir la réponse</summary><div class="rep"><p>Une paire de pôles : un tour = une période. 50 tours/s = <strong>3 000 tr/min</strong>.<br>Deux paires de pôles : un tour = deux périodes, donc <strong>1 500 tr/min</strong>.<br>C'est la même formule qui donne les vitesses de synchronisme de vos moteurs asynchrones : 3 000, 1 500, 1 000, 750 tr/min. Un moteur « 1 500 tr/min » sur la plaque tourne en réalité à 1 440 : la différence, c'est le <strong>glissement</strong>.</p></div></details></div>
+<details><summary>Voir la réponse</summary><div class="rep">
+<p><strong>Étape 1 — le lien entre un tour et une période.</strong><br>Un alternateur à <strong>une paire de pôles</strong> (un nord et un sud) produit une sinusoïde complète par tour : le conducteur passe une fois devant le nord et une fois devant le sud.<br>Donc : 1 tour = 1 période.</p>
+<p><strong>Étape 2 — le cas d'une paire de pôles.</strong><br>Il faut 50 périodes par seconde, donc 50 tours par seconde.<br>50 × 60 = <strong>3 000 tr/min</strong></p>
+<p><strong>Étape 3 — le cas de deux paires de pôles.</strong><br>Avec deux paires, le conducteur croise deux nords et deux sud par tour : chaque tour produit <strong>deux</strong> périodes.<br>Il ne faut donc plus que 25 tours par seconde :<br>25 × 60 = <strong>1 500 tr/min</strong></p>
+<p><strong>La formule générale :</strong> n = 60 × f / p, où p est le nombre de <em>paires</em> de pôles.</p>
+<p><em>Cette même formule donne les vitesses de synchronisme de tous vos moteurs asynchrones : 3 000, 1 500, 1 000, 750 tr/min pour 1, 2, 3 et 4 paires de pôles. C'est pour cela que ces valeurs reviennent sans cesse sur les plaques. Et si une plaque annonce <strong>1 440 tr/min</strong>, ce n'est pas une fantaisie du constructeur : le rotor tourne toujours un peu moins vite que le champ, et cet écart s'appelle le <strong>glissement</strong>. Sans lui, il n'y aurait aucune induction, donc aucun couple.</em></p>
+</div></details></div>
 
 <div class="exo"><span class="tag">Exercice 12.2</span>
 <p>Un oscilloscope affiche une sinusoïde dont un cycle occupe 4 divisions, la base de temps étant réglée sur 5 ms/div. Quelle est la fréquence ?</p>
-<details><summary>Voir la réponse</summary><div class="rep"><p>T = 4 × 5 = 20 ms = 0,02 s → f = 1 / 0,02 = <strong>50 Hz</strong>. C'est le réseau. Réflexe de dépannage : si vous voyez du 50 Hz là où vous ne devriez rien voir, vous avez un couplage capacitif ou une masse mal reprise.</p></div></details></div>
+<details><summary>Voir la réponse</summary><div class="rep">
+<p><strong>Étape 1 — lire la durée d'un cycle sur l'écran.</strong><br>Un cycle complet occupe 4 divisions horizontales, et chaque division vaut 5 ms.<br>T = 4 × 5 = <strong>20 ms</strong></p>
+<p><strong>Étape 2 — convertir en secondes.</strong><br>Une milliseconde vaut un millième de seconde, donc :<br>T = 20 / 1 000 = <strong>0,02 s</strong></p>
+<p><strong>Étape 3 — passer de la période à la fréquence.</strong><br>La fréquence est le nombre de cycles par seconde. Si un cycle dure 0,02 s, on en case 1 / 0,02 = 50 dans une seconde.<br>f = 1 / T = 1 / 0,02 = <strong>50 Hz</strong></p>
+<p><strong>Contrôle de bon sens.</strong> 50 Hz, c'est la fréquence du réseau français. Le résultat est donc parfaitement crédible.</p>
+<p><em>Réflexe de dépannage à en tirer : si vous voyez du 50 Hz là où il ne devrait rien y avoir — sur une entrée analogique d'automate, sur un blindage, sur un signal de capteur — vous n'avez pas un défaut du capteur. Vous avez un <strong>couplage capacitif</strong> avec un câble de puissance voisin, ou une masse mal reprise. On ne le règle pas en changeant le capteur, mais en séparant les chemins de câbles et en raccordant correctement les blindages.</em></p>
+</div></details></div>
 
 <div class="exo"><span class="tag">Exercice 12.3</span>
 <p>Pourquoi une lampe alimentée en 50 Hz ne clignote-t-elle pas visiblement, alors que la tension passe par zéro 100 fois par seconde ?</p>
@@ -2521,11 +2720,32 @@
 
 <div class="exo"><span class="tag">Exercice 13.2</span>
 <p>Un moteur triphasé tourne dans le mauvais sens. Que faites-vous ?</p>
-<details><summary>Voir la réponse</summary><div class="rep"><p>On <strong>croise deux phases quelconques</strong> sur le bornier (par exemple L1 et L2). Cela inverse le sens de rotation du champ tournant, donc du rotor. Deux suffisent : croiser les trois revient au point de départ.<br><em>Après consignation, évidemment.</em> Et sur une installation neuve, on vérifie le sens <strong>avant</strong> d'accoupler la machine entraînée — une pompe qui tourne à l'envers peut se détruire en quelques secondes.</p></div></details></div>
+<details><summary>Voir la réponse</summary><div class="rep">
+<p><strong>On croise deux phases quelconques sur le bornier</strong> — par exemple L1 et L2 — et le moteur repart dans l'autre sens.</p>
+<p><strong>Pourquoi cela fonctionne.</strong><br>Le sens de rotation d'un moteur triphasé est donné par l'ordre dans lequel les trois phases atteignent leur maximum : L1, puis L2, puis L3. C'est cette succession qui fait tourner le champ magnétique dans le stator, et le rotor ne fait que le suivre.</p>
+<p>En permutant deux phases, on inverse cet ordre de succession, donc le sens de rotation du champ, donc celui du rotor.</p>
+<p><strong>Pourquoi deux, et pas trois.</strong><br>Permuter les trois revient simplement à décaler l'ordre — L2, L3, L1 est la même succession que L1, L2, L3, seulement commencée plus tard. Le moteur tournerait dans le même sens qu'au départ. <strong>Deux suffisent, et trois ne servent à rien.</strong></p>
+<p><strong>La méthode, dans l'ordre :</strong></p>
+<ol>
+<li><strong>Consigner</strong> l'installation en cinq étapes — séparer, condamner, identifier, VAT, dissiper.</li>
+<li>Permuter deux conducteurs de phase au bornier du moteur, ou en amont au départ moteur.</li>
+<li>Déconsigner, puis vérifier le sens <strong>à vide</strong> par une brève impulsion.</li>
+</ol>
+<p><em>Réflexe capital sur une installation neuve : <strong>on contrôle le sens de rotation avant d'accoupler la machine entraînée.</strong> Une pompe centrifuge qui tourne à l'envers ne débite presque rien mais ne se signale pas ; un compresseur à vis, une vis d'Archimède ou une pompe volumétrique, eux, peuvent se détruire en quelques secondes.</em></p>
+</div></details></div>
 
 <div class="exo"><span class="tag">Exercice 13.3</span>
 <p>Pourquoi répartit-on les circuits monophasés d'un atelier sur les trois phases, plutôt que de tout brancher sur L1 ?</p>
-<details><summary>Voir la réponse</summary><div class="rep"><p>Pour <strong>équilibrer</strong>. Si tout est sur L1, le neutre doit ramener la totalité du courant (alors qu'il est souvent de section réduite), la chute de tension sur L1 devient importante, et l'abonnement triphasé est sous-exploité (on ne peut tirer qu'un tiers de la puissance souscrite). Un déséquilibre important déforme aussi les tensions et fait chauffer les moteurs triphasés du même tableau.</p></div></details></div>
+<details><summary>Voir la réponse</summary><div class="rep">
+<p><strong>Pour équilibrer les trois phases.</strong> Quatre conséquences, si l'on ne le fait pas.</p>
+<ol>
+<li><strong>Le neutre chauffe.</strong> Quand les trois phases portent des courants égaux, leurs retours s'annulent presque entièrement dans le neutre. Si tout est sur L1, le neutre doit ramener la <em>totalité</em> du courant — alors que sa section est souvent réduite par rapport aux phases.</li>
+<li><strong>La chute de tension explose sur L1.</strong> Trois fois plus de courant dans le même conducteur, c'est trois fois plus de chute (U = R × I). Les appareils branchés en bout de ligne reçoivent une tension dégradée.</li>
+<li><strong>L'abonnement est gaspillé.</strong> Un branchement triphasé de 36 kVA n'autorise que 12 kVA par phase. En chargeant une seule phase, on plafonne à un tiers de la puissance souscrite tout en la payant intégralement.</li>
+<li><strong>Les moteurs triphasés du même tableau souffrent.</strong> Un fort déséquilibre déforme le système de tensions ; les moteurs alimentés par ce tableau voient alors des courants inégaux dans leurs enroulements, chauffent davantage et perdent en durée de vie.</li>
+</ol>
+<p><em>En pratique on répartit à l'installation, puis on <strong>vérifie à la pince ampèremétrique</strong> en charge réelle : on mesure les trois phases et l'on rééquilibre en déplaçant quelques départs. C'est un contrôle qui prend dix minutes et que presque personne ne fait — alors qu'il figure dans toute bonne gamme de maintenance d'armoire.</em></p>
+</div></details></div>
 
   </div>
 </section>
@@ -2587,15 +2807,35 @@
 
 <div class="exo"><span class="tag">Exercice 14.1</span>
 <p>Un transformateur d'armoire a 800 spires au primaire, alimenté en 400 V. On veut 24 V au secondaire. Combien de spires ?</p>
-<details><summary>Voir la réponse</summary><div class="rep"><p>N₂ = N₁ × U₂ / U₁ = 800 × 24 / 400 = <strong>48 spires</strong>. Rapport de transformation : 400/24 ≈ 16,7.</p></div></details></div>
+<details><summary>Voir la réponse</summary><div class="rep">
+<p><strong>Le principe.</strong> Dans un transformateur, le rapport des tensions est égal au rapport des nombres de spires :<br>U₁ / U₂ = N₁ / N₂</p>
+<p><strong>Étape 1 — recenser les données.</strong><br>N₁ = 800 spires (primaire) · U₁ = 400 V (primaire) · U₂ = 24 V (secondaire souhaité) · N₂ = ? (inconnue)</p>
+<p><strong>Étape 2 — isoler l'inconnue.</strong><br>On part de U₁ / U₂ = N₁ / N₂. Pour faire sortir N₂ du dénominateur, on multiplie en croix :<br>U₁ × N₂ = U₂ × N₁<br>puis on divise les deux membres par U₁ :<br>N₂ = N₁ × U₂ / U₁</p>
+<p><strong>Étape 3 — remplacer par les valeurs.</strong><br>N₂ = 800 × 24 / 400<br>Numérateur : 800 × 24 = 19 200<br>Division : 19 200 / 400 = <strong>48 spires</strong></p>
+<p><strong>Contrôle de bon sens.</strong> On veut abaisser la tension de 400 V à 24 V, soit un rapport de 400 / 24 ≈ 16,7. Le secondaire doit donc avoir environ 16,7 fois moins de spires que le primaire : 800 / 16,7 = 48. Cohérent.</p>
+<p><em>Vérifiez toujours le sens de votre résultat : si vous aviez trouvé <em>plus</em> de spires au secondaire alors que vous voulez <em>moins</em> de tension, vous auriez inversé le rapport. C'est l'erreur la plus courante sur cet exercice.</em></p>
+</div></details></div>
 
 <div class="exo"><span class="tag">Exercice 14.2</span>
 <p>Ce même transfo alimente 3 bobines de contacteur consommant chacune 5 W. Quel courant circule au secondaire ? Au primaire ?</p>
-<details><summary>Voir la réponse</summary><div class="rep"><p>P = 15 W. Au secondaire : I₂ = 15 / 24 = <strong>0,63 A</strong>. Au primaire : I₁ = 15 / 400 = <strong>0,037 A</strong>, soit 37 mA.<br>Vérification : 0,63 / 0,037 ≈ 17 = le rapport inverse. Et remarquez que le fil du secondaire devra être <strong>17 fois plus gros</strong> que celui du primaire.</p></div></details></div>
+<details><summary>Voir la réponse</summary><div class="rep">
+<p><strong>Étape 1 — la puissance totale à fournir.</strong><br>Trois bobines de 5 W chacune :<br>P = 3 × 5 = <strong>15 W</strong></p>
+<p><strong>Étape 2 — le courant au secondaire.</strong><br>C'est le secondaire qui alimente les bobines, sous 24 V. On isole I dans P = U × I :<br>I₂ = P / U₂ = 15 / 24 = <strong>0,63 A</strong></p>
+<p><strong>Étape 3 — le courant au primaire.</strong><br>Un transformateur ne crée pas d'énergie : à pertes négligées, il restitue au secondaire ce qu'il prend au primaire. La puissance côté primaire est donc aussi de 15 W, mais sous 400 V :<br>I₁ = P / U₁ = 15 / 400 = 0,037 A = <strong>37 mA</strong></p>
+<p><strong>Étape 4 — vérifier la cohérence.</strong><br>Le rapport des courants doit être l'inverse du rapport des tensions.<br>Rapport des courants : 0,63 / 0,037 ≈ 17<br>Rapport des tensions : 400 / 24 ≈ 17 ✔<br>Le transformateur abaisse la tension de 17 fois, il élève donc le courant de 17 fois.</p>
+<p><em>Conséquence très concrète pour le bobinage : le fil du <strong>secondaire</strong> doit être bien plus gros que celui du primaire, puisqu'il porte 17 fois plus de courant. Démontez un transformateur d'armoire, vous le verrez immédiatement à l'œil nu : quelques centaines de spires de fil fin d'un côté, quelques dizaines de spires de gros fil de l'autre. C'est un moyen simple et fiable de repérer le primaire du secondaire sur un transfo non repéré.</em></p>
+</div></details></div>
 
 <div class="exo"><span class="tag">Exercice 14.3</span>
 <p>Un stagiaire branche un transformateur 230 V / 24 V sur une batterie 24 V continue, en espérant obtenir 2,5 V. Que se passe-t-il ?</p>
-<details><summary>Voir la réponse</summary><div class="rep"><p><strong>Zéro volt au secondaire</strong> (pas de variation de flux, pas d'induction) et <strong>le primaire fume</strong>. En alternatif, le courant primaire est limité par l'inductance de la bobine, pas par sa résistance. En continu, l'inductance ne joue plus : il ne reste que la résistance ohmique du fil, quelques ohms. 24 V sur 3 Ω = 8 A dans un bobinage prévu pour 0,1 A. L'émail fond, la bobine est perdue.</p></div></details></div>
+<details><summary>Voir la réponse</summary><div class="rep">
+<p><strong>Deux choses se produisent, et la seconde est coûteuse : zéro volt au secondaire, et le primaire fume.</strong></p>
+<p><strong>Premier point — pourquoi zéro volt.</strong><br>Un transformateur ne fonctionne que par induction, et l'induction exige un <strong>flux variable</strong> (chapitre 11). Une batterie délivre une tension parfaitement continue : le courant dans le primaire est constant, le flux dans le noyau est constant, et un flux constant n'induit strictement rien. Le secondaire reste à 0 V.</p>
+<p><strong>Second point — pourquoi le primaire grille.</strong><br>Voici ce que le stagiaire ne pouvait pas deviner. En alternatif, le courant dans le primaire n'est <em>pas</em> limité par la résistance du fil, mais par l'<strong>inductance</strong> de la bobine, qui s'oppose aux variations de courant. C'est elle qui maintient le courant à vide à quelques dizaines de milliampères.</p>
+<p>En continu, l'inductance ne joue plus aucun rôle : elle ne s'oppose qu'aux <em>variations</em>. Il ne reste donc que la résistance ohmique du fil, quelques ohms à peine. Appliquons la loi d'Ohm :<br>I = U / R = 24 / 3 = <strong>8 A</strong><br>… dans un bobinage dimensionné pour 0,1 A.</p>
+<p><strong>Le résultat.</strong> P = R × I² = 3 × 64 = 192 W dissipés dans une bobine prévue pour quelques watts. L'émail fond, les spires se court-circuitent, le transformateur est perdu.</p>
+<p><em>Retenez la formulation générale : <strong>une bobine ne limite le courant qu'en alternatif.</strong> C'est vrai d'un transformateur, d'un contacteur, d'un ballast, d'une électrovanne. Appliquer du continu à une bobine prévue pour l'alternatif la détruit presque toujours.</em></p>
+</div></details></div>
 
   </div>
 </section>
@@ -2661,11 +2901,41 @@
 
 <div class="exo"><span class="tag">Exercice 15.1</span>
 <p>Une ligne de 0,5 Ω transporte 20 kW. Calculez les pertes sous 230 V, puis sous 5 000 V.</p>
-<details><summary>Voir la réponse</summary><div class="rep"><p>Sous 230 V : I = 20 000/230 = 87 A → pertes = 0,5 × 87² = <strong>3 785 W</strong>, soit 19 % de perte.<br>Sous 5 000 V : I = 4 A → pertes = 0,5 × 16 = <strong>8 W</strong>, soit 0,04 %.<br>Tension ×21,7 → pertes ÷473 (soit 21,7²).</p></div></details></div>
+<details><summary>Voir la réponse</summary><div class="rep">
+<p><strong>Le principe.</strong> Les pertes dans une ligne valent P = R × I². La résistance de la ligne, elle, ne change pas. Tout se joue donc sur le <strong>courant</strong> — et le courant dépend de la tension choisie pour transporter la même puissance.</p>
+<p><strong>Cas 1 — transport sous 230 V.</strong></p>
+<ol>
+<li>Courant nécessaire : I = P / U = 20 000 / 230 = <strong>87 A</strong></li>
+<li>Carré du courant : 87² = 7 569</li>
+<li>Pertes : P = R × I² = 0,5 × 7 569 = <strong>3 785 W</strong></li>
+<li>Proportion perdue : 3 785 / 20 000 = <strong>19 %</strong></li>
+</ol>
+<p><strong>Cas 2 — transport sous 5 000 V.</strong></p>
+<ol>
+<li>Courant nécessaire : I = 20 000 / 5 000 = <strong>4 A</strong></li>
+<li>Carré du courant : 4² = 16</li>
+<li>Pertes : P = 0,5 × 16 = <strong>8 W</strong></li>
+<li>Proportion perdue : 8 / 20 000 = <strong>0,04 %</strong></li>
+</ol>
+<p><strong>Le rapport, et pourquoi il est si brutal.</strong><br>La tension a été multipliée par 5 000 / 230 = 21,7. Le courant a donc été <em>divisé</em> par 21,7. Mais comme les pertes dépendent du <strong>carré</strong> du courant, elles ont été divisées par 21,7² = <strong>473</strong>.</p>
+<p><em>C'est toute la justification des lignes à haute tension, et elle tient en une phrase : <span class="cle">multiplier la tension par 10 divise les pertes par 100.</span> Les 400 000 V des grandes lignes ne servent à rien d'autre qu'à faire circuler le moins d'ampères possible. Notez au passage que la puissance transportée est identique dans les deux cas — 20 kW — mais que dans le premier on en gaspille près d'un cinquième en chauffant l'air.</em></p>
+</div></details></div>
 
 <div class="exo"><span class="tag">Exercice 15.2</span>
 <p>Pourquoi ne transporte-t-on pas tout en 400 kV jusqu'à la prise de courant, puisque c'est le plus efficace ?</p>
-<details><summary>Voir la réponse</summary><div class="rep"><p>Parce que la haute tension coûte cher en <strong>isolation et en distances de sécurité</strong>. Il faudrait 3 mètres d'air ou plusieurs centimètres d'isolant autour de chaque fil, des postes gigantesques, et le moindre contact serait mortel à distance sans même toucher. La haute tension est rentable <strong>sur les longues distances</strong> et absurde sur 20 mètres. D'où l'architecture en cascade : on descend progressivement à mesure qu'on se rapproche du client.</p></div></details></div>
+<details><summary>Voir la réponse</summary><div class="rep">
+<p><strong>Parce que la haute tension est rentable sur les longues distances et absurde sur vingt mètres.</strong> Elle fait économiser du cuivre, mais coûte cher en isolation et en place.</p>
+<p><strong>Ce que coûte la haute tension.</strong></p>
+<ul>
+<li><strong>Des distances d'isolement énormes.</strong> Sous 400 kV, l'arc peut jaillir à plusieurs mètres dans l'air. Il faut donc des pylônes hauts, de longues chaînes d'isolateurs, et des couloirs de sécurité larges.</li>
+<li><strong>Des matériels hors de prix.</strong> Un disjoncteur 400 kV est un appareil de plusieurs mètres, à coupure dans le SF6 ou le vide. Le comparer à un disjoncteur domestique n'a aucun sens.</li>
+<li><strong>Des postes gigantesques.</strong> Un poste de transformation THT occupe plusieurs hectares.</li>
+<li><strong>Un danger à distance.</strong> Sous très haute tension, il n'est même pas nécessaire de toucher : l'amorçage peut se produire à travers l'air. Impossible d'en approcher un local d'habitation ou un atelier.</li>
+</ul>
+<p><strong>Ce qu'elle rapporte.</strong> Uniquement la réduction des pertes, qui varient en R × I² (exercice 15.1). Or ces pertes sont proportionnelles à la <strong>longueur</strong> de la ligne.</p>
+<p><strong>Le raisonnement décisif.</strong> Sur 400 km, les pertes sont considérables : payer une isolation coûteuse est très largement rentable. Sur les 20 m qui séparent votre tableau de la machine, la résistance du câble est infime et les pertes négligeables : la haute tension n'apporterait rien et coûterait tout.</p>
+<p><em>D'où l'architecture en cascade du réseau : <strong>400 kV</strong> pour traverser le pays, <strong>63 à 90 kV</strong> pour desservir une région, <strong>20 kV</strong> pour alimenter une usine ou un quartier, <strong>400 / 230 V</strong> pour arriver à la machine. On descend d'un cran chaque fois qu'on se rapproche du client, parce qu'à chaque cran la distance restante diminue et l'intérêt de la haute tension avec elle.</em></p>
+</div></details></div>
 
 <div class="exo"><span class="tag">Exercice 15.3</span>
 <p>Un atelier en bout de ligne se plaint : les moteurs peinent à démarrer quand la presse hydraulique fonctionne. Quel est le mécanisme, et que proposez-vous ?</p>
@@ -2848,7 +3118,19 @@
 
 <div class="exo"><span class="tag">Exercice 17.1</span>
 <p>Un disjoncteur C10 protège un circuit d'éclairage. Quel courant fera agir le déclencheur magnétique ? À partir de quel courant le thermique agira-t-il, et en combien de temps environ ?</p>
-<details><summary>Voir la réponse</summary><div class="rep"><p><strong>Magnétique</strong> : entre 5 et 10 × 10 A, soit <strong>50 à 100 A</strong> — instantanément.<br><strong>Thermique</strong> : il tolère 11,3 A pendant plus d'une heure ; il déclenchera à <strong>14,5 A en moins d'une heure</strong>. À 20 A, comptez plutôt quelques dizaines de secondes ; à 40 A, quelques secondes.</p></div></details></div>
+<details><summary>Voir la réponse</summary><div class="rep">
+<p><strong>Décodons d'abord le marquage « C10 ».</strong><br>Le <strong>10</strong> est le calibre : le courant que le disjoncteur accepte indéfiniment, soit 10 A.<br>Le <strong>C</strong> est la courbe de déclenchement, qui fixe le seuil magnétique entre <strong>5 et 10 fois</strong> le calibre.</p>
+<p><strong>Le déclencheur magnétique.</strong><br>Seuil = 5 à 10 × 10 A, soit <strong>50 à 100 A</strong>.<br>Au-delà, il agit en <strong>quelques millisecondes</strong> — c'est instantané à l'échelle humaine. C'est le rôle du court-circuit.</p>
+<p><strong>Le déclencheur thermique.</strong><br>Il fonctionne par bilame et raisonne en énergie accumulée, donc en temps :</p>
+<ul>
+<li>À <strong>1,13 × In</strong>, soit 11,3 A : il <em>ne doit pas</em> déclencher avant une heure. C'est le courant conventionnel de non-déclenchement.</li>
+<li>À <strong>1,45 × In</strong>, soit 14,5 A : il <em>doit</em> déclencher en moins d'une heure. C'est le courant conventionnel de déclenchement.</li>
+<li>À 20 A, soit 2 fois le calibre : comptez quelques dizaines de secondes.</li>
+<li>À 40 A, soit 4 fois : quelques secondes.</li>
+</ul>
+<p><strong>Pourquoi cette lenteur est voulue.</strong> Un léger dépassement ne présente aucun danger immédiat : le câble met du temps à chauffer. Le disjoncteur imite donc l'échauffement du câble qu'il protège. S'il déclenchait instantanément à 11 A, aucun moteur ne pourrait démarrer.</p>
+<p><em>C'est très exactement pourquoi il existe des courbes B, C et D : la <strong>B</strong> (3 à 5 In) protège les circuits sans pointe de courant, la <strong>C</strong> (5 à 10 In) est la courbe universelle des circuits mixtes, la <strong>D</strong> (10 à 20 In) laisse passer les fortes pointes des transformateurs et des gros moteurs. Choisir la mauvaise courbe, c'est soit des déclenchements intempestifs au démarrage, soit une protection insuffisante.</em></p>
+</div></details></div>
 
 <div class="exo"><span class="tag">Exercice 17.2</span>
 <p>Un moteur 400 V dont le courant nominal est 6 A appelle 42 A pendant 0,3 s au démarrage. Un disjoncteur C10 convient-il ? Et un D10 ?</p>
