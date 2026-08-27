@@ -2942,7 +2942,7 @@
 <p><em>Attention à ne pas la confondre avec la moyenne ordinaire : la moyenne d'une sinusoïde est nulle, puisque le positif compense exactement le négatif. Et ce n'est pas non plus la moyenne géométrique, qui est tout autre chose. C'est bien la moyenne <strong>des carrés</strong>.</em></p>
 
 <figure class="anim">
-  <canvas id="a-eff" width="900" height="440" aria-label="Animation : deux lampes identiques, l'une en continu, l'autre en alternatif, avec réglage de la fréquence"></canvas>
+  <canvas id="a-eff" width="900" height="470" aria-label="Animation : deux lampes identiques, l'une en continu, l'autre en alternatif, avec réglage de la fréquence"></canvas>
   <div class="ctrls">
     <div class="c"><label>Tension continue <span id="a-eff-d-l">230 V</span></label><input type="range" id="a-eff-d" min="0" max="400" step="5" value="230"></div>
     <div class="c"><label>Tension crête de l'alternatif <span id="a-eff-c-l">230 V</span></label><input type="range" id="a-eff-c" min="0" max="500" step="5" value="230"></div>
@@ -2954,7 +2954,7 @@
 <script>
 (function(){
   "use strict";
-  var R=100, TAU=0.012, FEN=0.20;                   // inertie du filament · fenêtre affichée (s)
+  var R=100, TAU=0.012, FEN=0.20, UMAX=420;        // inertie du filament · fenêtre 200 ms · pleine échelle
   var DC=MSPC.ctrl('a-eff-d', function(v){ return v+' V'; }, 'a-eff-d-l');
   var CR=MSPC.ctrl('a-eff-c', function(v){ return v+' V'; }, 'a-eff-c-l');
   var FQ=MSPC.ctrl('a-eff-f', function(v){ return v+' Hz'; }, 'a-eff-f-l');
@@ -2984,9 +2984,8 @@
     var Udc=DC.val, Ucr=CR.val, F=FQ.val;
     var Ueff=Ucr/Math.SQRT2;
     var Pdc=Udc*Udc/R, Pac=Ueff*Ueff/R;
-    var UMAX=420;
 
-    /* --- le filament suit la puissance avec du retard : c'est son inertie --- */
+    /* --- le filament suit la puissance avec du retard : son inertie --- */
     var SUB=240, dts=dt/SUB;
     for(var i=0;i<SUB;i++){
       phase+=6.2832*F*dts;
@@ -3008,42 +3007,54 @@
       var C=COL[k], alt=(k===1);
       var Pmoy=alt?Pac:Pdc, br=Math.min(1,(alt?bAC:bDC)/900);
 
-      MSPC.titre(ctx,C.t,C.x,42,20,C.c);
+      MSPC.titre(ctx,C.t,C.x,40,20,C.c);
 
       /* ----- circuit ----- */
-      var lx=C.x+40, rx=C.x+300, ty=70, by=184, cy=(ty+by)/2;
+      var lx=C.x+40, rx=C.x+300, ty=64, by=170, cy=(ty+by)/2;
       ctx.strokeStyle='#8d968b'; ctx.lineWidth=2.4;
       ctx.beginPath();
       ctx.moveTo(lx,ty); ctx.lineTo(rx,ty); ctx.lineTo(rx,by); ctx.lineTo(lx,by); ctx.lineTo(lx,ty);
       ctx.stroke();
-      ctx.fillStyle='#0d120f'; ctx.fillRect(lx-22,cy-32,44,64);
-      ctx.strokeStyle=C.c; ctx.lineWidth=1.6; ctx.strokeRect(lx-22,cy-32,44,64);
+      ctx.fillStyle='#0d120f'; ctx.fillRect(lx-22,cy-30,44,60);
+      ctx.strokeStyle=C.c; ctx.lineWidth=1.6; ctx.strokeRect(lx-22,cy-30,44,60);
       if(alt){
         ctx.strokeStyle=C.c; ctx.lineWidth=2.2; ctx.beginPath();
         for(var s=-14;s<=14;s++) ctx.lineTo(lx+s, cy-Math.sin(s/14*Math.PI*2)*9);
         ctx.stroke();
       } else {
         ctx.strokeStyle=C.c; ctx.lineWidth=3;
-        ctx.beginPath(); ctx.moveTo(lx-6,cy-15); ctx.lineTo(lx-6,cy+15); ctx.stroke();
+        ctx.beginPath(); ctx.moveTo(lx-6,cy-14); ctx.lineTo(lx-6,cy+14); ctx.stroke();
         ctx.lineWidth=2;
-        ctx.beginPath(); ctx.moveTo(lx+7,cy-8); ctx.lineTo(lx+7,cy+8); ctx.stroke();
+        ctx.beginPath(); ctx.moveTo(lx+7,cy-7); ctx.lineTo(lx+7,cy+7); ctx.stroke();
       }
-      lampe(ctx, rx, cy, 24, br);
+      lampe(ctx, rx, cy, 23, br);
       MSPC.mono(ctx, alt? Ucr+' V crête' : Udc+' V continus', lx, by+22, 11.5, C.c, 'center');
       if(alt) MSPC.mono(ctx,'= '+Ueff.toFixed(0)+' V eff.', lx+92, by+22, 10.5, '#c8d834');
 
-      /* ----- u(t) sur une fenêtre fixe de 200 ms ----- */
-      var g={x:C.x, y:236, w:C.w, h:74};
+      /* ----- u(t), avec une échelle graduée en volts ----- */
+      var g={x:C.x, y:212, w:C.w, h:118};
       ctx.strokeStyle='rgba(255,255,255,.18)'; ctx.lineWidth=1; ctx.strokeRect(g.x+.5,g.y+.5,g.w,g.h);
-      var mid=g.y+g.h/2, sc=(g.h/2-6)/UMAX;
-      ctx.strokeStyle='rgba(255,255,255,.13)';
+      var mid=g.y+g.h/2, sc=(g.h/2-7)/UMAX;
+
+      // graduations : sans elles, impossible de juger d'un écart de tension
+      for(var v=100;v<=400;v+=100){
+        [1,-1].forEach(function(sg){
+          var yg=mid-sg*v*sc;
+          ctx.strokeStyle='rgba(255,255,255,.07)'; ctx.lineWidth=1;
+          ctx.beginPath(); ctx.moveTo(g.x+1,yg); ctx.lineTo(g.x+g.w-1,yg); ctx.stroke();
+        });
+      }
+      ctx.strokeStyle='rgba(255,255,255,.28)'; ctx.lineWidth=1.2;
       ctx.beginPath(); ctx.moveTo(g.x,mid); ctx.lineTo(g.x+g.w,mid); ctx.stroke();
+
       for(var ms=50;ms<200;ms+=50){
         var xg=g.x+g.w*ms/200;
-        ctx.strokeStyle='rgba(255,255,255,.09)';
-        ctx.beginPath(); ctx.moveTo(xg,g.y); ctx.lineTo(xg,g.y+g.h); ctx.stroke();
+        ctx.strokeStyle='rgba(255,255,255,.06)';
+        ctx.beginPath(); ctx.moveTo(xg,g.y+1); ctx.lineTo(xg,g.y+g.h-1); ctx.stroke();
       }
-      ctx.strokeStyle=C.c; ctx.lineWidth=2; ctx.beginPath();
+
+      // la courbe
+      ctx.strokeStyle=C.c; ctx.lineWidth=2.2; ctx.beginPath();
       for(var px=0;px<=g.w;px++){
         var tt=px/g.w*FEN;
         var uu=alt? Ucr*Math.sin(6.2832*F*tt) : Udc;
@@ -3051,25 +3062,38 @@
         if(px===0) ctx.moveTo(g.x+px,yy); else ctx.lineTo(g.x+px,yy);
       }
       ctx.stroke();
+
+      // la valeur efficace : un nombre positif, donc une seule ligne
+      var rep=alt?Ueff:Udc;
+      ctx.strokeStyle='#c8d834'; ctx.setLineDash([5,4]); ctx.lineWidth=1.6;
+      ctx.beginPath(); ctx.moveTo(g.x,mid-rep*sc); ctx.lineTo(g.x+g.w,mid-rep*sc); ctx.stroke();
+      ctx.setLineDash([]);
+      MSPC.mono(ctx, alt?('efficace '+Ueff.toFixed(0)+' V'):('continu '+Udc+' V'),
+        g.x+g.w-5, mid-rep*sc+(alt?13:-6), 10, '#c8d834','right');
       if(alt){
-        ctx.strokeStyle='#c8d834'; ctx.setLineDash([4,3]); ctx.lineWidth=1.3;
-        [1,-1].forEach(function(sg){
-          ctx.beginPath(); ctx.moveTo(g.x,mid-sg*Ueff*sc); ctx.lineTo(g.x+g.w,mid-sg*Ueff*sc); ctx.stroke();
-        });
+        // la crête, pour que l'écart avec l'efficace se voie
+        ctx.strokeStyle='rgba(255,106,94,.55)'; ctx.setLineDash([3,3]); ctx.lineWidth=1.2;
+        ctx.beginPath(); ctx.moveTo(g.x,mid-Ucr*sc); ctx.lineTo(g.x+g.w,mid-Ucr*sc); ctx.stroke();
         ctx.setLineDash([]);
-        MSPC.mono(ctx,'efficace '+Ueff.toFixed(0)+' V',g.x+g.w-4,mid-Ueff*sc-5,9.5,'#c8d834','right');
+        MSPC.mono(ctx,'crête '+Ucr+' V',g.x+g.w-5,mid-Ucr*sc-6,10,'#ff6a5e','right');
       }
-      MSPC.mono(ctx,'tension u(t)',g.x,g.y-8,10,'#8d968b');
+      // échelle en volts, posée par-dessus pour rester lisible
+      for(var vg=0;vg<=400;vg+=100){
+        var yg2=mid-vg*sc;
+        ctx.fillStyle='rgba(13,18,15,.85)'; ctx.fillRect(g.x+1,yg2-8,26,11);
+        MSPC.mono(ctx,String(vg),g.x+4,yg2-0.5,8.5,vg===0?'#7f8a7e':'#6f786e');
+      }
+      MSPC.mono(ctx,'tension u(t) — volts',g.x,g.y-8,10,'#8d968b');
       MSPC.mono(ctx,'200 ms',g.x+g.w-4,g.y+g.h+13,9,'#5e675e','right');
 
       /* ----- luminosité perçue ----- */
-      var yb=344;
+      var yb=364;
       MSPC.mono(ctx,'LUMINOSITÉ PERÇUE',C.x,yb-8,10,'#8d968b');
       ctx.fillStyle='rgba(255,255,255,.09)'; ctx.fillRect(C.x,yb,C.w,18);
-      ctx.fillStyle='#ffe9a0'; ctx.fillRect(C.x,yb,C.w*Math.min(1,Pmoy/900),18);
       var rempli=C.w*Math.min(1,Pmoy/900);
+      ctx.fillStyle='#ffe9a0'; ctx.fillRect(C.x,yb,rempli,18);
       MSPC.mono(ctx,Math.round(Pmoy)+' W en moyenne',C.x+C.w-6,yb+13,10.5, rempli>C.w-150?'#0d120f':'#e6ebe4','right');
-      var txtOnd, colOnd;
+      var txtOnd,colOnd;
       if(!alt){ txtOnd='aucun scintillement : la tension ne bouge jamais'; colOnd='#5cc4e0'; }
       else if(ond<20){ txtOnd='scintillement résiduel de '+ond.toFixed(0)+' % — invisible à l’œil'; colOnd='#93a415'; }
       else { txtOnd='scintillement bien visible : '+ond.toFixed(0)+' %'; colOnd='#ff6a5e'; }
@@ -3077,7 +3101,7 @@
     }
 
     /* ================= verdict ================= */
-    var egal=Math.abs(Ueff-Udc)<4, vy=406;
+    var egal=Math.abs(Ueff-Udc)<4, vy=436;
     var msg,mc;
     if(egal){
       msg='MÊME LUMINOSITÉ — la valeur efficace de cet alternatif vaut donc exactement les '+Udc+' V du continu.';
