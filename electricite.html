@@ -1804,26 +1804,237 @@
     <span class="kicker">Quand les chocs deviennent de la chaleur</span><h2>L'effet Joule</h2></div></div>
   <div class="ch-body">
 
-<p class="lede">Chapitre 1 : les électrons percutent les ions du réseau. Chapitre 4 : ces chocs, mis bout à bout, c'est du chauffage. Parfois voulu, souvent subi, toujours présent.</p>
+<p class="lede">Au chapitre 5, les électrons se faisaient dévier par les irrégularités du réseau. Ces déviations, mises bout à bout, ne disparaissent pas dans le néant : elles deviennent de la chaleur. Parfois voulue, souvent subie, <strong>toujours présente</strong>.</p>
 
 <h3>7.1 — Le mécanisme</h3>
-<p>Un électron accéléré par la tension percute un ion. Il lui transmet son énergie. L'ion se met à vibrer plus fort autour de sa position. <strong>Des milliards de milliards de chocs par seconde</strong>, et le métal s'échauffe. C'est l'<strong>effet Joule</strong>.</p>
+<p>Reprenons le film au ralenti. Un électron poussé par la tension percute un ion du réseau. Il lui cède une partie de son énergie, et l'ion se met à <strong>vibrer plus fort</strong> autour de sa position. Or un réseau d'ions qui vibrent plus fort, dans notre langage de tous les jours, cela porte un nom : <strong>c'est de la chaleur</strong>. Il n'y a rien d'autre derrière le mot.</p>
+<p>Un seul choc ne réchauffe rien du tout. Mais il s'en produit des <strong>milliards de milliards par seconde</strong> dans le moindre bout de fil, et leur somme est parfaitement mesurable au thermomètre. C'est l'<strong>effet Joule</strong>.</p>
+<p><span class="cle">Chaque joule de chaleur produit ici a été prélevé sur l'énergie que le générateur avait confiée aux coulombs</span> (§ 4.4). Rien n'apparaît, rien ne disparaît : de l'énergie électrique s'est convertie en agitation thermique.</p>
 <p>Point capital : cet effet <span class="cle">n'est jamais nul</span>. Tout conducteur qui porte du courant chauffe. La seule question est : de combien ?</p>
 
 <div class="formule">P = R × I²<small>Puissance dissipée en watts · R en ohms · I en ampères</small></div>
 <p>Le carré est ce qu'il faut retenir. <strong>Doubler le courant, c'est quadrupler l'échauffement.</strong> Tripler le courant, c'est multiplier l'échauffement par neuf. Un câble qui tient parfaitement à 16 A dissipe <strong>4 fois plus</strong> à 32 A.</p>
 
 <figure class="anim">
-  <canvas id="a-joule" width="900" height="300" aria-label="Animation : échauffement d'un conducteur par effet Joule"></canvas>
+  <canvas id="a-joule" width="900" height="470" aria-label="Animation : effet Joule, chocs des électrons, chaleur produite et chaleur évacuée"></canvas>
   <div class="ctrls">
     <div class="c"><label>Courant <span id="a-joule-i">6 A</span></label><input type="range" id="a-joule-r" min="0" max="40" value="6"></div>
-    <div class="c"><label>Section du conducteur <span id="a-joule-s">2,5 mm²</span></label><input type="range" id="a-joule-sr" min="0" max="4" value="1"></div>
+    <div class="c"><label>Section du conducteur <span id="a-joule-s">2,5 mm²</span></label><input type="range" id="a-joule-sr" min="0" max="4" value="2"></div>
+    <div class="c"><label>Pose du câble <span id="a-joule-p-l">à l'air libre</span></label><input type="range" id="a-joule-p" min="0" max="2" value="0"></div>
     <div class="c readout" id="a-joule-out"></div>
   </div>
-  <figcaption>Le même courant dans deux sections différentes ne donne pas du tout le même échauffement. <b>Poussez à 40 A sur du 1,5 mm²</b> et regardez : c'est exactement le scénario d'une multiprise surchargée.</figcaption>
+  <figcaption>Vous voyez le mécanisme lui-même : les électrons bleus dérivent, percutent les ions, et <b>chaque choc libère un grain de chaleur orange</b> qui s'échappe du métal. Montez le courant : les chocs se multiplient et le flot de grains devient un torrent.<br>Les deux barres du milieu sont le cœur du sujet. La rouge est la chaleur <b>produite</b> à chaque seconde, la bleue celle qui est <b>évacuée</b>. Tant que la rouge dépasse la bleue, la température grimpe ; quand elles s'égalisent, elle se fige — <b>c'est cet équilibre qui fixe la température d'un câble</b>, pas le courant tout seul. <b>Passez la pose sur « enroulé sur touret »</b> à courant inchangé : rien ne change côté production, mais les grains de chaleur restent piégés, l'évacuation s'effondre et le câble grimpe vers le rouge. Voilà pourquoi un enrouleur porte deux calibres.<br>À droite, la courbe P = R·I² : ce n'est pas une droite, c'est une parabole. <b>Doublez le courant, la chaleur est multipliée par quatre.</b></figcaption>
 </figure>
+<script>
+(function(){
+  "use strict";
+  var SECT=[0.75,1.5,2.5,4,6], IZ=[10,16,21,27,34];
+  var POSE=[
+    {n:'à l’air libre',       k:1.00, conf:false},
+    {n:'sous gaine isolante', k:0.62, conf:false},
+    {n:'enroulé sur touret',  k:0.33, conf:true}
+  ];
+  var RHO=0.0175, KBASE=0.078, TAMB=30;
 
-<h3>7.2 — L'effet Joule qu'on veut</h3>
+  var I =MSPC.ctrl('a-joule-r',  function(v){ return v+' A'; }, 'a-joule-i');
+  var S =MSPC.ctrl('a-joule-sr', function(v){ return String(SECT[v]).replace('.',',')+' mm²'; }, 'a-joule-s');
+  var PO=MSPC.ctrl('a-joule-p',  function(v){ return POSE[v].n; }, 'a-joule-p-l');
+  var out=document.getElementById('a-joule-out');
+
+  var T=TAMB, ions=[], elec=[], quanta=[], flash=[], sig=null;
+
+  /* Palette thermique : du cuivre froid au blanc éblouissant */
+  function thermo(u){
+    u=Math.max(0,Math.min(1,u));
+    var st=[[68,46,32],[112,52,38],[168,62,40],[224,92,38],[255,158,26],[255,232,148],[255,255,255]];
+    var p=u*(st.length-1), i=Math.floor(p), f=p-i;
+    var a=st[i], b=st[Math.min(i+1,st.length-1)];
+    return 'rgb('+Math.round(a[0]+(b[0]-a[0])*f)+','+Math.round(a[1]+(b[1]-a[1])*f)+','+Math.round(a[2]+(b[2]-a[2])*f)+')';
+  }
+  function chaud(T){ return 0.08+((T-TAMB)/200)*0.85; }
+
+  function bati(x0,y0,w,h){
+    ions=[]; elec=[];
+    var pas=26;
+    for(var y=pas/2;y<h;y+=pas) for(var x=pas/2;x<w;x+=pas)
+      ions.push({x:x0+x, y:y0+y, ph:Math.random()*6.2832});
+    for(var e=0;e<32;e++)
+      elec.push({x:x0+Math.random()*w, y:y0+8+Math.random()*(h-16), cd:0});
+  }
+
+  MSPC.anim('a-joule', function(a){
+    var ctx=a.ctx, W=a.W, H=a.H, dt=a.dt;
+    var Iv=I.val, Sv=SECT[S.val], Izv=IZ[S.val], pose=POSE[PO.val];
+
+    /* ---------- physique ---------- */
+    var R=RHO/Sv;                       // ohms par mètre
+    var P=R*Iv*Iv;                      // watts par mètre produits
+    var k=KBASE*pose.k;                 // aptitude à évacuer, W/(m·K)
+    var Pevac=k*(T-TAMB);
+    if(dt>0) T += (P-Pevac)/(3.2*KBASE)*dt;
+    T=Math.max(TAMB,Math.min(420,T));
+    var Teq=TAMB+P/k;
+
+    MSPC.fond(ctx,W,H,0);
+
+    /* ---------- le conducteur, vu de très près ---------- */
+    var cx0=44, cy0=104, cw=596, ch=104;
+    var clef=S.val+'|'+cw;
+    if(clef!==sig){ sig=clef; bati(cx0,cy0,cw,ch); }
+
+    MSPC.mono(ctx,'UN MÈTRE DE CUIVRE, VU DE TRÈS PRÈS',cx0,cy0-52,10.5,'#8d968b');
+    MSPC.mono(ctx,'chaque choc d’un électron sur un ion libère un grain de chaleur',cx0,cy0-36,9.5,'#6f786e');
+
+    ctx.fillStyle=thermo(chaud(T)); ctx.fillRect(cx0,cy0,cw,ch);
+    ctx.strokeStyle='rgba(255,255,255,.22)'; ctx.lineWidth=1.4; ctx.strokeRect(cx0+.5,cy0+.5,cw,ch);
+
+    if(pose.conf){
+      ctx.strokeStyle='rgba(255,106,94,.45)'; ctx.lineWidth=1.6; ctx.setLineDash([5,4]);
+      ctx.strokeRect(cx0-14.5,cy0-28.5,cw+29,ch+58); ctx.setLineDash([]);
+      MSPC.mono(ctx,'la chaleur reste piégée',cx0+cw-4,cy0-36,9.5,'#ff6a5e','right');
+    }
+
+    var amp=1+Math.min(1,(T-TAMB)/170)*7;
+    for(var i2=0;i2<ions.length;i2++){
+      var io=ions[i2];
+      io._x=io.x+Math.sin(a.t*7+io.ph)*amp;
+      io._y=io.y+Math.cos(a.t*6.1+io.ph*1.6)*amp;
+      ctx.fillStyle='rgba(255,238,214,.55)';
+      ctx.beginPath(); ctx.arc(io._x,io._y,4.5,0,6.2832); ctx.fill();
+    }
+
+    var vit=14+Iv*11;
+    for(var e2=0;e2<elec.length;e2++){
+      var p=elec[e2];
+      if(dt>0){
+        if(p.cd>0) p.cd-=dt;
+        p.x+=vit*dt;
+        if(p.x>cx0+cw){ p.x=cx0; p.y=cy0+8+Math.random()*(ch-16); }
+        if(p.cd<=0 && Iv>0){
+          for(var q=0;q<ions.length;q++){
+            if(Math.abs(p.x-ions[q]._x)>7 || Math.abs(p.y-ions[q]._y)>7) continue;
+            p.cd=0.06;
+            p.y+=(Math.random()-0.5)*16;
+            p.y=Math.max(cy0+6,Math.min(cy0+ch-6,p.y));
+            flash.push({x:ions[q]._x,y:ions[q]._y,t:0.22});
+            quanta.push({x:ions[q]._x,y:ions[q]._y,vx:(Math.random()-0.5)*26,vy:-26-Math.random()*38,t:1.0});
+            break;
+          }
+        }
+      }
+      ctx.fillStyle='rgba(200,240,255,.92)';
+      ctx.beginPath(); ctx.arc(p.x,p.y,3,0,6.2832); ctx.fill();
+    }
+
+    for(var f=flash.length-1;f>=0;f--){
+      var fl=flash[f]; fl.t-=dt;
+      if(fl.t<=0){ flash.splice(f,1); continue; }
+      ctx.strokeStyle='rgba(255,226,140,'+(fl.t/0.22)+')'; ctx.lineWidth=2;
+      ctx.beginPath(); ctx.arc(fl.x,fl.y,3+(0.22-fl.t)*46,0,6.2832); ctx.stroke();
+    }
+
+    var plafond=cy0-24;
+    for(var g=quanta.length-1;g>=0;g--){
+      var Q=quanta[g]; Q.t-=dt*(pose.conf?0.45:1);
+      if(Q.t<=0 || quanta.length>420){ quanta.splice(g,1); continue; }
+      Q.x+=Q.vx*dt; Q.y+=Q.vy*dt;
+      if(pose.conf && Q.y<plafond){ Q.y=plafond; Q.vy=Math.abs(Q.vy)*0.35; }
+      ctx.fillStyle='rgba(255,150,40,'+(Q.t*0.8)+')';
+      ctx.beginPath(); ctx.arc(Q.x,Q.y,2.7,0,6.2832); ctx.fill();
+    }
+
+    /* ---------- thermomètre ---------- */
+    var tx=676, ty=72, tw=26, th2=176;
+    MSPC.mono(ctx,'°C',tx+tw/2,ty-10,10,'#8d968b','center');
+    for(var s2=0;s2<th2;s2++){ ctx.fillStyle=thermo(0.08+(1-s2/th2)*0.85); ctx.fillRect(tx,ty+s2,tw,1.4); }
+    ctx.strokeStyle='rgba(255,255,255,.3)'; ctx.lineWidth=1; ctx.strokeRect(tx+.5,ty+.5,tw,th2);
+    function yDe(t){ return ty+th2-th2*Math.min(1,(t-TAMB)/200); }
+    [[70,'#f0a844'],[110,'#ff6a5e']].forEach(function(sq){
+      var y2=yDe(sq[0]);
+      ctx.strokeStyle=sq[1]; ctx.lineWidth=1.4;
+      ctx.beginPath(); ctx.moveTo(tx-5,y2); ctx.lineTo(tx+tw+5,y2); ctx.stroke();
+    });
+    var yT=yDe(T);
+    ctx.strokeStyle='#fff'; ctx.lineWidth=2.6;
+    ctx.beginPath(); ctx.moveTo(tx-9,yT); ctx.lineTo(tx+tw+9,yT); ctx.stroke();
+
+    var lx=tx+tw+18;
+    MSPC.titre(ctx,Math.round(T)+' °C',lx,ty+62,30,T<70?'#c8d834':(T<110?'#f0a844':'#ff6a5e'));
+    MSPC.mono(ctx,'température du câble',lx,ty+78,9.5,'#8d968b');
+    ctx.fillStyle='#f0a844'; ctx.fillRect(lx,ty+104,9,3);
+    MSPC.mono(ctx,'70 °C — limite du PVC',lx+15,ty+108,9.5,'#f0a844');
+    ctx.fillStyle='#ff6a5e'; ctx.fillRect(lx,ty+124,9,3);
+    MSPC.mono(ctx,'110 °C — l’isolant se dégrade',lx+15,ty+128,9.5,'#ff6a5e');
+
+    /* ---------- production contre évacuation ---------- */
+    var by=272, bw=470;
+    MSPC.mono(ctx,'LE BILAN THERMIQUE, À CHAQUE SECONDE',cx0,by-10,10.5,'#8d968b');
+    var ech=Math.max(P,Pevac,1)*1.15;
+    function barre(y,val,lab,col){
+      ctx.fillStyle='rgba(255,255,255,.09)'; ctx.fillRect(cx0,y,bw,16);
+      ctx.fillStyle=col; ctx.fillRect(cx0,y,bw*Math.min(1,val/ech),16);
+      MSPC.mono(ctx,lab,cx0+7,y+12,10,'#0d120f');
+      MSPC.mono(ctx,val.toFixed(2).replace('.',',')+' W/m',cx0+bw+9,y+12,10.5,col);
+    }
+    barre(by,    P,     'PRODUITE   P = R × I²','#ff6a5e');
+    barre(by+23, Pevac, 'ÉVACUÉE   ·  '+pose.n,'#5cc4e0');
+    var ecart=P-Pevac;
+    MSPC.mono(ctx, Math.abs(ecart)<0.02
+        ? 'Équilibre : tout ce qui est produit est évacué. La température ne bouge plus.'
+        : (ecart>0 ? 'On produit plus qu’on n’évacue → la température monte encore.'
+                   : 'On évacue plus qu’on ne produit → la température redescend.'),
+      cx0, by+60, 10.5, Math.abs(ecart)<0.02?'#c8d834':'#f0a844');
+
+    /* ---------- la parabole ---------- */
+    var box={x:600,y:268,w:246,h:96};
+    var Pmax=Math.max(R*40*40,0.2);
+    var ax=MSPC.axes(ctx,box,40,Pmax,'I (A)','W/m');
+    ctx.strokeStyle='#ff6a5e'; ctx.lineWidth=2.2; ctx.beginPath();
+    for(var j=0;j<=80;j++){ var ii=j/80*40; if(j===0) ctx.moveTo(ax.X(ii),ax.Y(R*ii*ii)); else ctx.lineTo(ax.X(ii),ax.Y(R*ii*ii)); }
+    ctx.stroke();
+    ctx.strokeStyle='rgba(200,216,52,.6)'; ctx.setLineDash([4,3]); ctx.lineWidth=1.3;
+    ctx.beginPath(); ctx.moveTo(ax.X(Izv),ax.y0); ctx.lineTo(ax.X(Izv),ax.y1); ctx.stroke(); ctx.setLineDash([]);
+    MSPC.mono(ctx,'Iz '+Izv+' A',ax.X(Izv)+4,ax.y1+11,9.5,'#c8d834');
+    ctx.fillStyle='#fff'; ctx.beginPath(); ctx.arc(ax.X(Iv),ax.Y(Math.min(P,Pmax)),5,0,6.2832); ctx.fill();
+    MSPC.mono(ctx,'P = R × I² : une parabole, pas une droite',box.x,box.y-26,10,'#ff6a5e');
+    MSPC.mono(ctx,'doubler le courant, c’est ×4 la chaleur',box.x,box.y+box.h+30,10,'#8d968b');
+
+    /* ---------- chiffres et verdict ---------- */
+    function bloc(x,val,lab,col){ MSPC.titre(ctx,val,x,414,23,col); MSPC.mono(ctx,lab,x,429,9.5,'#8d968b'); }
+    bloc(44,  R.toFixed(4).replace('.',',')+' Ω/m','RÉSISTANCE PAR MÈTRE','#e08b6a');
+    bloc(226, P.toFixed(2).replace('.',',')+' W/m','CHALEUR PRODUITE','#ff6a5e');
+    bloc(400, Math.round(Teq)+' °C','ÉQUILIBRE VISÉ',Teq<70?'#c8d834':(Teq<110?'#f0a844':'#ff6a5e'));
+    bloc(566, Math.round(100*Iv/Izv)+' %','DU COURANT ADMISSIBLE',Iv<=Izv?'#c8d834':'#ff6a5e');
+    bloc(742, Izv+' A','ADMISSIBLE  (Iz)','#8d968b');
+
+    var msg,mc;
+    if(Teq<70){ msg='Régime normal : le câble se stabilise sous la limite de son isolant.'; mc='#93a415'; }
+    else if(Teq<110){ msg='ÉCHAUFFEMENT ANORMAL — l’isolant vieillit prématurément à chaque heure passée ainsi.'; mc='#f0a844'; }
+    else { msg='DANGER — au-delà de 110 °C le PVC se dégrade, se fissure, et finit par ne plus isoler du tout.'; mc='#ff6a5e'; }
+    MSPC.mono(ctx,msg,44,452,11,mc);
+
+    out.innerHTML='P = R × I² = '+R.toFixed(4).replace('.',',')+' × '+Iv+'² = <b>'+P.toFixed(2).replace('.',',')+' W/m</b><br>'
+      +'Équilibre à <b>'+Math.round(Teq)+' °C</b> — '+pose.n;
+  }, {fixed:true});
+})();
+</script>
+
+<h3>7.2 — Ce n'est pas la chaleur produite qui brûle, c'est celle qui ne part pas</h3>
+<p>Voici ce que la formule P = R × I² ne dit pas, et qui explique la plupart des sinistres. Un conducteur ne s'échauffe pas indéfiniment : à mesure que sa température monte, il évacue de mieux en mieux vers l'air ambiant. Il finit donc par se stabiliser à la température où <strong>la chaleur évacuée égale exactement la chaleur produite</strong>.</p>
+<p>Cette température d'équilibre dépend de deux choses, et pas d'une seule :</p>
+<ul>
+<li><strong>Ce qu'on produit</strong> — c'est P = R × I², donc le courant et la section.</li>
+<li><strong>Ce qu'on arrive à évacuer</strong> — et cela dépend entièrement de la <em>pose</em> : à l'air libre, sous gaine, noyé dans l'isolant d'un mur, ou enroulé sur lui-même.</li>
+</ul>
+<p>Deux câbles identiques parcourus par le même courant peuvent donc se stabiliser l'un à 50 °C et l'autre à 100 °C. <span class="cle">Le courant admissible d'un câble n'est pas une propriété du câble : c'est une propriété du câble <em>et</em> de sa pose.</span> C'est pour cette raison que les tableaux de sections des normes comportent toujours une colonne « mode de pose », et qu'un même 2,5 mm² est donné pour 21 A dans un cas et 16 A dans un autre.</p>
+
+<div class="encadre danger"><span class="tag">L'enrouleur, cas d'école</span>
+<p>Regardez l'étiquette d'un enrouleur de chantier : elle porte <strong>deux</strong> calibres, par exemple <span class="mono">16 A déroulé</span> et <span class="mono">8 A enroulé</span>. Ce n'est pas une précaution commerciale.</p>
+<p>Déroulé, chaque mètre de câble touche l'air et évacue sa chaleur. Enroulé, les spires se chauffent mutuellement et seule la couche extérieure voit l'air : les spires du centre sont dans un four. La chaleur produite est exactement la même — mais elle ne peut plus sortir.</p>
+<p>Faites-en l'essai dans l'animation : gardez 16 A sur du 2,5 mm² et basculez simplement la pose sur « enroulé sur touret ». La barre rouge ne bouge pas d'un millimètre. La bleue s'effondre. Et la température part.</p>
+<p><strong>C'est ainsi que fondent les enrouleurs de chantier sur lesquels on branche un chauffage d'appoint sans les dérouler.</strong></p></div>
+
+<h3>7.3 — L'effet Joule qu'on veut</h3>
 <ul>
 <li><strong>Chauffage et cuisson</strong> — radiateur, four, grille-pain, plaque électrique, chauffe-eau. Rendement 100 % : tout ce qui rentre sort en chaleur.</li>
 <li><strong>Le fer à souder, le décapeur thermique, le pistolet à colle</strong> — vos outils d'atelier.</li>
@@ -1833,7 +2044,7 @@
 <li><strong>La coupe au fil chaud</strong> du polystyrène, la thermosoudeuse à sachets.</li>
 </ul>
 
-<h3>7.3 — L'effet Joule qu'on subit</h3>
+<h3>7.4 — L'effet Joule qu'on subit</h3>
 <ul>
 <li><strong>Les pertes en ligne</strong> sur le réseau électrique — environ <strong>30 TWh par an en France</strong>, soit la production annuelle de trois réacteurs nucléaires, dissipée en pure chaleur dans les câbles. Chapitre 11.</li>
 <li><strong>L'échauffement des moteurs</strong> — les « pertes cuivre » dans les bobinages, qui obligent à ventiler.</li>
@@ -3703,67 +3914,6 @@ function crystal(st, opts){
       "Électrons en 1 min : <b>" + sci(I*60*6.241509e18) + "</b>";
   }
   slider.addEventListener('input', upd); upd();
-})();
-
-/* ============ 3. EFFET JOULE ============ */
-(function(){
-  var si = el('a-joule-r'), ss = el('a-joule-sr'); if(!si) return;
-  var SECT = [0.75, 1.5, 2.5, 4, 6];
-  var IZ   = [10, 16, 21, 27, 34];
-  var I = 6, idx = 1, ratio = 0, shown = 0;
-  var st = mk('a-joule', function(ctx, s, dt){
-    var W = s.W, H = s.H, yc = 118;
-    shown += (ratio - shown) * Math.min(1, dt*2.2);
-    var th = 12 + idx*7;
-    /* halo */
-    if(shown > 0.35){
-      var g = ctx.createLinearGradient(0, yc-70, 0, yc+70);
-      g.addColorStop(0, "rgba(255,80,0,0)");
-      g.addColorStop(0.5, "rgba(255,120,20," + Math.min(.45,(shown-0.35)*0.6) + ")");
-      g.addColorStop(1, "rgba(255,80,0,0)");
-      ctx.fillStyle = g; ctx.fillRect(0, yc-70, W, 140);
-    }
-    ctx.fillStyle = hot(shown); ctx.fillRect(0, yc-th, W, th*2);
-    ctx.strokeStyle = "rgba(255,255,255,.18)"; ctx.lineWidth=1;
-    ctx.strokeRect(0, yc-th, W, th*2);
-
-    /* électrons + chocs */
-    var nb = 34;
-    for(var k=0;k<nb;k++){
-      var x = ((s.t*(30+I*5) + k*W/nb) % (W+20)) - 10;
-      var y = yc - th + 6 + ((k*37)%(th*2-12));
-      ctx.beginPath(); ctx.arc(x, y, 2.4, 0, 6.284);
-      ctx.fillStyle = "rgba(200,240,255,.85)"; ctx.fill();
-    }
-    var chocs = Math.round(shown*26);
-    for(var c=0;c<chocs;c++){
-      var cx = ((c*97 + Math.floor(s.t*60)*13) % W);
-      var cy = yc - th + 4 + ((c*53)%(th*2-8));
-      var r = 2 + (Math.sin(s.t*30+c)+1)*2.4;
-      ctx.beginPath(); ctx.arc(cx, cy, r, 0, 6.284);
-      ctx.fillStyle = "rgba(255,220,120,.5)"; ctx.fill();
-    }
-
-    label(ctx, 14, 26, "CONDUCTEUR CUIVRE — " + fr(SECT[idx],2).replace(',00',',0') + " mm²  ·  1 mètre", COL.vert, 12);
-    var R = 0.0175/SECT[idx], P = R*I*I, dT = 45*Math.pow(I/IZ[idx],2), T = 25+dT;
-    ctx.fillStyle="rgba(0,0,0,.5)"; ctx.fillRect(0,H-62,W,62);
-    label(ctx, 14, H-38, "P = R × I²  =  " + R.toFixed(4).replace('.',',') + " × " + fr(I) + "²  =  " + P.toFixed(2).replace('.',',') + " W par mètre", COL.blanc, 14);
-    var msg = T<70 ? "Régime normal" : (T<110 ? "ÉCHAUFFEMENT ANORMAL — vieillissement de l'isolant" : "DANGER — l'isolant se dégrade, risque d'incendie");
-    label(ctx, 14, H-16, "Température estimée du conducteur : " + fr(T) + " °C   ·   " + msg,
-          T<70?COL.vert:(T<110?COL.jaune:COL.rouge), 13);
-  });
-  function upd(){
-    I = +si.value; idx = +ss.value;
-    ratio = Math.min(1.4, Math.pow(I/IZ[idx], 1.7));
-    el('a-joule-i').textContent = fr(I) + " A";
-    el('a-joule-s').textContent = fr(SECT[idx],2).replace(',00',',0') + " mm²";
-    var R = 0.0175/SECT[idx];
-    el('a-joule-out').innerHTML =
-      "Résistance : <b>" + R.toFixed(4).replace('.',',') + " Ω/m</b><br>" +
-      "Courant admissible : <b>" + IZ[idx] + " A</b><br>" +
-      "Charge : <b>" + fr(100*I/IZ[idx]) + " %</b> du calibre";
-  }
-  si.addEventListener('input', upd); ss.addEventListener('input', upd); upd();
 })();
 
 /* ============ 4. ŒRSTED ============ */
