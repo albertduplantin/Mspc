@@ -3478,26 +3478,38 @@
 (function(){
   "use strict";
   var PH=[{n:'L1',c:'#f0a844'},{n:'L2',c:'#5cc4e0'},{n:'L3',c:'#c8d834'}];
-  var AL=[Math.PI/2, Math.PI/2+2.0944, Math.PI/2+4.1888];   // les trois bobines à 120°
+  // Les trois bobines : une en bas, deux en haut, pour que les fils sortent sans croiser les machines.
+  var AL=[Math.PI*5/6, Math.PI*3/2, Math.PI/6];
   var N =MSPC.ctrl('a-tri-n', function(v){ return (+v).toLocaleString('fr-FR')+' tr/min'; }, 'a-tri-n-l');
   var K =MSPC.ctrl('a-tri-k');
   var out=document.getElementById('a-tri-out');
   var th=0, phiM=0, wM=0;
 
-  var MY=148, RC=70, AX=170, MX=650, BUS=[268,286,304], KX=410;
+  var MY=150, RB=50, R0=56, R1=96;      // alésage · rayon intérieur et extérieur des bobines
+  var AX=170, MX=650, BUS=[270,288,306], KX=410;
 
+  // Le raccordement se fait à l'extrémité EXTÉRIEURE de chaque bobine
+  function borne(cx,k){ return [cx+Math.cos(AL[k])*R1, MY-Math.sin(AL[k])*R1]; }
+
+  /* Une bobine de stator : son axe magnétique est RADIAL, dirigé vers le rotor.
+     Les spires sont donc empilées le long du rayon, pas tangentiellement. */
   function bobine(ctx,cx,al,cur,col){
-    var bx=cx+Math.cos(al)*RC, by=MY-Math.sin(al)*RC;
+    var mx=cx+Math.cos(al)*(R0+R1)/2, my=MY-Math.sin(al)*(R0+R1)/2;
     var it=Math.min(1,Math.abs(cur));
-    ctx.save(); ctx.translate(bx,by); ctx.rotate(-al);
-    ctx.globalAlpha=0.22+0.78*it;
-    ctx.strokeStyle=col; ctx.lineWidth=2.6;
+    ctx.save(); ctx.translate(mx,my); ctx.rotate(-al);   // +x local = vers l'extérieur
+    var L=(R1-R0)/2;
+    // noyau
+    ctx.fillStyle='rgba(255,255,255,.05)'; ctx.fillRect(-L,-9,L*2,18);
+    // spires empilées radialement
+    ctx.globalAlpha=0.24+0.76*it;
+    ctx.strokeStyle=col; ctx.lineWidth=2.4;
     ctx.beginPath();
     for(var q=0;q<=1.0001;q+=0.02){
-      var yy=-20+q*40, xx=Math.sin(q*Math.PI*2*4)*7;
+      var xx=-L+q*L*2, yy=Math.sin(q*Math.PI*2*5)*10;
       if(q===0) ctx.moveTo(xx,yy); else ctx.lineTo(xx,yy);
     }
-    ctx.stroke(); ctx.globalAlpha=1; ctx.restore();
+    ctx.stroke(); ctx.globalAlpha=1;
+    ctx.restore();
   }
 
   function fleche(ctx,x0,y0,x1,y1,col,w){
@@ -3545,15 +3557,20 @@
 
     MSPC.fond(ctx,W,H,0);
 
-    /* ================= les trois fils, en tracé orthogonal ================= */
+    /* ================= les trois fils, raccordés aux extrémités extérieures ================= */
     for(var k3=0;k3<3;k3++){
-      var yl=BUS[k3], xa=AX-24+k3*24, xm=MX-24+k3*24;
+      var yl=BUS[k3], ba=borne(AX,k3), bm=borne(MX,k3);
       var vif=relie?(0.35+0.65*Math.min(1,Math.abs(i[k3]))):0.20;
       ctx.strokeStyle=PH[k3].c; ctx.globalAlpha=vif; ctx.lineWidth=2.4;
       ctx.beginPath();
-      ctx.moveTo(xa,232); ctx.lineTo(xa,yl); ctx.lineTo(KX-34,yl);
-      ctx.moveTo(KX+34,yl); ctx.lineTo(xm,yl); ctx.lineTo(xm,232);
+      ctx.moveTo(ba[0],ba[1]); ctx.lineTo(ba[0],yl); ctx.lineTo(KX-34,yl);
+      ctx.moveTo(KX+34,yl); ctx.lineTo(bm[0],yl); ctx.lineTo(bm[0],bm[1]);
       ctx.stroke(); ctx.globalAlpha=1;
+      // les cosses
+      ctx.fillStyle=PH[k3].c;
+      ctx.beginPath(); ctx.arc(ba[0],ba[1],3.4,0,6.2832); ctx.fill();
+      ctx.beginPath(); ctx.arc(bm[0],bm[1],3.4,0,6.2832); ctx.fill();
+      // l'interrupteur tripolaire
       ctx.strokeStyle=relie?PH[k3].c:'#b32017'; ctx.lineWidth=2.6;
       ctx.beginPath(); ctx.moveTo(KX-34,yl);
       if(relie) ctx.lineTo(KX+34,yl); else ctx.lineTo(KX+20,yl-15);
@@ -3561,42 +3578,44 @@
       ctx.fillStyle=relie?PH[k3].c:'#b32017';
       ctx.beginPath(); ctx.arc(KX-34,yl,2.8,0,6.2832); ctx.fill();
       ctx.beginPath(); ctx.arc(KX+34,yl,2.8,0,6.2832); ctx.fill();
-      MSPC.mono(ctx,PH[k3].n,xa-10,yl+4,9.5,PH[k3].c,'right');
-      MSPC.mono(ctx,PH[k3].n,xm+10,yl+4,9.5,PH[k3].c);
     }
     MSPC.mono(ctx, relie?'LES TROIS FILS SONT RELIÉS':'CIRCUIT OUVERT — tension présente, mais aucun courant',
-      KX, BUS[0]-18, 10.5, relie?'#c8d834':'#ff6a5e','center');
+      KX, BUS[0]-16, 10.5, relie?'#c8d834':'#ff6a5e','center');
 
     /* ================= les deux machines ================= */
     [[AX,'ALTERNATEUR DE LA CENTRALE','#c8d834',true],[MX,'MOTEUR DE L’ATELIER','#5cc4e0',false]].forEach(function(M){
       var cx=M[0], estAlt=M[3];
       MSPC.titre(ctx,M[1],cx,40,17,M[2],'center');
-      ctx.strokeStyle='rgba(255,255,255,.10)'; ctx.lineWidth=1; ctx.setLineDash([3,4]);
-      ctx.beginPath(); ctx.arc(cx,MY,RC,0,6.2832); ctx.stroke(); ctx.setLineDash([]);
+      ctx.strokeStyle='rgba(255,255,255,.12)'; ctx.lineWidth=1; ctx.setLineDash([3,4]);
+      ctx.beginPath(); ctx.arc(cx,MY,RB,0,6.2832); ctx.stroke(); ctx.setLineDash([]);
       for(var k2=0;k2<3;k2++){
         bobine(ctx,cx,AL[k2],i[k2],PH[k2].c);
-        var lx=cx+Math.cos(AL[k2])*(RC+24), ly=MY-Math.sin(AL[k2])*(RC+24);
-        MSPC.mono(ctx,PH[k2].n,lx,ly+4,10,PH[k2].c,'center');
+        var b=borne(cx,k2);
+        var ox=Math.cos(AL[k2])*16, oy=-Math.sin(AL[k2])*16;
+        MSPC.mono(ctx,PH[k2].n,b[0]+ox,b[1]+oy+4,10,PH[k2].c,'center');
+        // le champ que pousse chaque bobine, le long de son axe radial
         if(!estAlt && relie){
-          var L2=i[k2]*40;
-          fleche(ctx,cx,MY,cx+Math.cos(AL[k2])*L2,MY-Math.sin(AL[k2])*L2,'rgba(255,255,255,.20)',1.6);
+          var L2=i[k2]*34;
+          fleche(ctx,cx,MY,cx+Math.cos(AL[k2])*L2,MY-Math.sin(AL[k2])*L2,'rgba(255,255,255,.22)',1.6);
         }
       }
-      if(estAlt){
-        rotor(ctx,cx,th,46);
-        MSPC.mono(ctx,'une turbine entraîne son rotor',30,320,10.5,'#8d968b');
-      } else {
-        if(relie) fleche(ctx,cx,MY,cx+Math.cos(champ)*58,MY-Math.sin(champ)*58,'rgba(200,216,52,.9)',3);
-        rotor(ctx,cx,phiM,40);
-        MSPC.mono(ctx, relie? (accroche?'son rotor suit le champ, exactement':'son rotor accélère pour rattraper le champ')
-                            : 'plus de champ : son rotor ralentit et s’arrête',
-          W-30,320,10.5, relie?(accroche?'#c8d834':'#f0a844'):'#ff6a5e','right');
-        if(relie) MSPC.mono(ctx,'← champ tournant',cx+RC+26,MY+4,9.5,'#c8d834');
+      if(estAlt){ rotor(ctx,cx,th,44); }
+      else {
+        rotor(ctx,cx,phiM,38);
+        if(relie){
+          fleche(ctx,cx,MY,cx+Math.cos(champ)*52,MY-Math.sin(champ)*52,'rgba(13,18,15,.9)',6);
+          fleche(ctx,cx,MY,cx+Math.cos(champ)*52,MY-Math.sin(champ)*52,'#c8d834',3);
+          MSPC.mono(ctx,'← champ tournant',cx+R1+14,MY+4,9.5,'#c8d834');
+        }
       }
     });
+    MSPC.mono(ctx,'une turbine entraîne son rotor',30,328,10.5,'#8d968b');
+    MSPC.mono(ctx, relie? (accroche?'son rotor suit le champ, exactement':'son rotor accélère pour rattraper le champ')
+                        : 'plus de champ : son rotor ralentit et s’arrête',
+      W-30,328,10.5, relie?(accroche?'#c8d834':'#f0a844'):'#ff6a5e','right');
 
     /* ================= les trois sinusoïdes ================= */
-    var g={x:30,y:350,w:W-60,h:98}, mid=g.y+g.h/2, amp=g.h/2-12;
+    var g={x:30,y:366,w:W-60,h:90}, mid=g.y+g.h/2, amp=g.h/2-11;
     ctx.strokeStyle='rgba(255,255,255,.18)'; ctx.lineWidth=1; ctx.strokeRect(g.x+.5,g.y+.5,g.w,g.h);
     ctx.strokeStyle='rgba(255,255,255,.14)';
     ctx.beginPath(); ctx.moveTo(g.x,mid); ctx.lineTo(g.x+g.w,mid); ctx.stroke();
@@ -3617,7 +3636,7 @@
     MSPC.mono(ctx,'leur somme ne quitte jamais le zéro',g.x+g.w-6,g.y-8,10,'#e6ebe4','right');
 
     /* ================= chiffres ================= */
-    function bloc(x,val,lab,col){ MSPC.titre(ctx,val,x,482,23,col); MSPC.mono(ctx,lab,x,497,9.5,'#8d968b'); }
+    function bloc(x,val,lab,col){ MSPC.titre(ctx,val,x,486,23,col); MSPC.mono(ctx,lab,x,501,9.5,'#8d968b'); }
     bloc(30,  rpm.toLocaleString('fr-FR'),'ALTERNATEUR (tr/min)','#c8d834');
     bloc(230, Math.round(rpmM).toLocaleString('fr-FR'),'MOTEUR (tr/min)', accroche?'#c8d834':(relie?'#f0a844':'#ff6a5e'));
     bloc(420, (rpm/60).toFixed(1).replace('.',',')+' Hz','FRÉQUENCE','#e6ebe4');
@@ -3627,7 +3646,7 @@
       ? 'SYNCHRONISME : le moteur tourne exactement à la vitesse de l’alternateur, sans aucune liaison mécanique entre les deux.'
       : (relie ? 'Le champ tournant entraîne le rotor : il accélère jusqu’à se caler dessus.'
                : 'Sans courant, plus de champ tournant. Le rotor n’est plus entraîné par rien.'),
-      30, 522, 11, accroche?'#c8d834':(relie?'#f0a844':'#ff6a5e'));
+      30, 526, 11, accroche?'#c8d834':(relie?'#f0a844':'#ff6a5e'));
 
     out.innerHTML = relie
       ? (accroche ? '<b style="color:#c8d834">Moteur accroché au synchronisme</b><br>'+Math.round(rpmM)+' tr/min, comme l’alternateur — par trois fils seulement.'
