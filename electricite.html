@@ -991,91 +991,153 @@
 <figure class="anim">
   <canvas id="a-volt" width="900" height="400" aria-label="Animation : le volt comme energie par coulomb"></canvas>
   <div class="ctrls">
-    <div class="c"><label>Tension <span id="a-v-u-l">12 V</span></label><input type="range" id="a-v-u" min="0" max="4" value="1"></div>
-    <div class="c"><label>Courant <span id="a-v-i-l">2,0 A</span></label><input type="range" id="a-v-i" min="1" max="80" value="20"></div>
+    <div class="c"><label>Tension <span id="a-v-u-l">230 V</span></label><input type="range" id="a-v-u" min="0" max="4" value="3"></div>
+    <div class="c"><label>Récepteur <span id="a-v-r-l">lampe à filament</span></label><input type="range" id="a-v-r" min="0" max="3" value="0"></div>
+    <div class="c"><label>Longueur du câble <span id="a-v-l-l">40 m</span></label><input type="range" id="a-v-l" min="5" max="220" step="5" value="40"></div>
     <div class="c readout" id="a-v-out"></div>
   </div>
-  <figcaption>Le générateur, à gauche, <b>remonte</b> chaque coulomb ; le récepteur, à droite, le laisse <b>retomber</b> et récupère l'énergie. <b>La hauteur de la marche, c'est la tension</b> : passez à 230 V et regardez-la grandir — chaque coulomb repart alors avec 230 joules au lieu de 12. <b>Le courant, lui, ne change pas la hauteur</b> : il change le nombre de coulombs qui tombent par seconde. Suivez le coulomb blanc : sa jauge se remplit dans le générateur, se vide dans la lampe, et la valeur inscrite dessus est exactement la tension. <em>L'échelle des hauteurs est logarithmique, sans quoi le 1,5 V serait invisible à côté du 400 V.</em></figcaption>
+  <figcaption><b>Suivez le coulomb blanc et sa jauge : elle raconte tout le voyage.</b> Il sort du générateur chargé à bloc, en perd un peu dans le fil aller, presque tout dans le récepteur, encore un peu dans le fil retour — et revient à <b>zéro</b> exactement. Le générateur le recharge, et ça recommence.<br>Le circuit est dessiné <b>à la hauteur du potentiel réel</b> : si les fils penchent, c'est qu'ils prennent leur part au passage. <b>Allongez le câble à 200 m</b> et regardez la pente apparaître et la barre orange grossir. <b>Changez de récepteur</b> — lampe, LED, moteur, four — pour voir ce que chacun fait des joules qu'il reçoit. <b>Puis descendez la tension à 24 V en gardant le four</b> : pour la même puissance il faut dix fois plus de coulombs par seconde, les fils s'échauffent d'autant, et le câble finit par ne plus suivre du tout.</figcaption>
 </figure>
 <script>
 (function(){
   "use strict";
   var UV=[1.5,12,24,230,400];
+  var REC=[
+    {n:'lampe à filament', P:60,   ic:'lampe', conv:[['lumière',0.05,'#ffe9a0'],['chaleur',0.95,'#ff6a5e']]},
+    {n:'lampe LED',        P:9,    ic:'led',   conv:[['lumière',0.40,'#ffe9a0'],['chaleur',0.60,'#ff6a5e']]},
+    {n:'moteur',           P:750,  ic:'moteur',conv:[['mouvement',0.80,'#5cc4e0'],['chaleur',0.20,'#ff6a5e']]},
+    {n:'four',             P:2000, ic:'four',  conv:[['chaleur utile',1.00,'#ff6a5e']]}
+  ];
   var U=MSPC.ctrl('a-v-u', function(v){ return UV[v]+' V'; }, 'a-v-u-l');
-  var I=MSPC.ctrl('a-v-i', function(v){ return (v/10).toFixed(1).replace('.',',')+' A'; }, 'a-v-i-l');
+  var Rc=MSPC.ctrl('a-v-r', function(v){ return REC[v].n; }, 'a-v-r-l');
+  var LG=MSPC.ctrl('a-v-l', function(v){ return v+' m'; }, 'a-v-l-l');
   var out=document.getElementById('a-v-out');
   var chg=[], etinc=[], compteur=0;
-  for(var k=0;k<14;k++) chg.push({u:k/14});
+  for(var k=0;k<16;k++) chg.push({u:k/16});
 
-  var xG=190, xR=690, yBas=300, yHautMax=98;
+  var xG=200, xR=660, yBas=286, yHautMax=104;
   function hauteur(u){ return yBas-(yBas-yHautMax)*(Math.log(u)/Math.log(400)); }
 
   MSPC.anim('a-volt', function(a){
     var ctx=a.ctx, W=a.W, H=a.H, dt=a.dt;
-    var Uv=UV[U.val], Iv=I.val/10, P=Uv*Iv;
+    var Uv=UV[U.val], rec=REC[Rc.val], Lm=LG.val;
+    // câble cuivre 2,5 mm², aller + retour
+    var Rcab=2*0.0168*Lm/2.5, Ra=Rcab/2;
+
+    // Le câble et le récepteur sont en série : R.I² - U.I + P = 0
+    var disc=Uv*Uv-4*Rcab*rec.P, possible=disc>0;
+    var Iv = possible ? (Uv-Math.sqrt(disc))/(2*Rcab) : Uv/(2*Rcab);
+    var Ufil=Rcab*Iv, Urec=Uv-Ufil;
+    var Pfil=Ufil*Iv, Prec=Urec*Iv, Ptot=Uv*Iv;
+    var fA=(Ra*Iv)/Uv, fR=Urec/Uv, fB=(Ra*Iv)/Uv;
+    compteur+=Ptot*dt;
+
     var yH=hauteur(Uv), haut=yBas-yH;
-    compteur+=P*dt;
+    function yPot(v){ return yBas-haut*(v/Uv); }          // hauteur d'un potentiel donné
+    var vB=Uv-Ra*Iv, vC=Ra*Iv;                            // entrée et sortie du récepteur
+    var yA=yH, yB=yPot(vB), yC=yPot(vC), yD=yBas;
+
     MSPC.fond(ctx,W,H);
 
-    MSPC.mono(ctx,'POTENTIEL — joules par coulomb',96,52,10.5,'#8d968b');
+    /* ---- échelle des potentiels ---- */
+    MSPC.mono(ctx,'POTENTIEL — joules par coulomb',108,54,10.5,'#8d968b');
     ctx.strokeStyle='rgba(255,255,255,.25)'; ctx.lineWidth=1.2;
-    ctx.beginPath(); ctx.moveTo(112,70); ctx.lineTo(112,yBas); ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(122,72); ctx.lineTo(122,yBas); ctx.stroke();
     for(var t=0;t<UV.length;t++){
       var yt=hauteur(UV[t]), act=(UV[t]===Uv);
-      ctx.strokeStyle=act?'rgba(200,216,52,.55)':'rgba(255,255,255,.13)';
-      ctx.lineWidth=act?1.5:1;
-      ctx.beginPath(); ctx.moveTo(106,yt); ctx.lineTo(act?xR+30:120,yt); ctx.stroke();
-      MSPC.mono(ctx,UV[t]+' V',102,yt+4,act?11.5:9.5,act?'#c8d834':'#6f786e','right');
+      ctx.strokeStyle=act?'rgba(200,216,52,.5)':'rgba(255,255,255,.12)'; ctx.lineWidth=act?1.5:1;
+      ctx.beginPath(); ctx.moveTo(116,yt); ctx.lineTo(act?xR+24:130,yt); ctx.stroke();
+      MSPC.mono(ctx,UV[t]+' V',112,yt+4,act?11.5:9.5,act?'#c8d834':'#6f786e','right');
     }
     ctx.strokeStyle='rgba(255,255,255,.32)'; ctx.lineWidth=1.4;
-    ctx.beginPath(); ctx.moveTo(106,yBas); ctx.lineTo(xR+30,yBas); ctx.stroke();
-    MSPC.mono(ctx,'0 V',102,yBas+4,10.5,'#8d968b','right');
+    ctx.beginPath(); ctx.moveTo(116,yBas); ctx.lineTo(xR+24,yBas); ctx.stroke();
+    MSPC.mono(ctx,'0 V',112,yBas+4,10.5,'#8d968b','right');
 
-    ctx.fillStyle='rgba(200,216,52,.06)'; ctx.fillRect(xG,yH,xR-xG,haut);
-
+    /* ---- le circuit, dessiné à la hauteur du potentiel réel ---- */
     ctx.strokeStyle='#8d968b'; ctx.lineWidth=2.4;
     ctx.beginPath();
-    ctx.moveTo(xG,yBas); ctx.lineTo(xG,yH); ctx.lineTo(xR,yH); ctx.lineTo(xR,yBas); ctx.lineTo(xG,yBas);
+    ctx.moveTo(xG,yD); ctx.lineTo(xG,yA); ctx.lineTo(xR,yB); ctx.lineTo(xR,yC); ctx.lineTo(xG,yD);
     ctx.stroke();
+    // la pente des fils = ce qu'ils prennent au passage
+    if(fA>0.012){
+      MSPC.mono(ctx,'le fil en prend '+(fA*100).toFixed(1)+' %',(xG+xR)/2,(yA+yB)/2-10,10,'#f0a844','center');
+      MSPC.mono(ctx,'le retour aussi : '+(fB*100).toFixed(1)+' %',(xG+xR)/2,(yC+yD)/2+18,10,'#f0a844','center');
+    }
 
-    ctx.fillStyle='#0d120f'; ctx.fillRect(xG-24,yH-12,48,haut+24);
-    ctx.strokeStyle='#c8d834'; ctx.lineWidth=1.6; ctx.strokeRect(xG-24,yH-12,48,haut+24);
-    MSPC.mono(ctx,'GÉNÉRATEUR',xG,yBas+24,10.5,'#c8d834','center');
-    MSPC.mono(ctx,'il remonte les coulombs',xG,yBas+38,9.5,'#6f786e','center');
-    MSPC.mono(ctx,'RÉCEPTEUR',xR,yBas+24,10.5,'#f0a844','center');
-    MSPC.mono(ctx,'ils y retombent',xR,yBas+38,9.5,'#6f786e','center');
+    /* ---- générateur ---- */
+    ctx.fillStyle='#0d120f'; ctx.fillRect(xG-24,yA-12,48,(yD-yA)+24);
+    ctx.strokeStyle='#c8d834'; ctx.lineWidth=1.6; ctx.strokeRect(xG-24,yA-12,48,(yD-yA)+24);
+    MSPC.mono(ctx,'GÉNÉRATEUR — il recharge chaque coulomb',xG-30,yBas+22,10.5,'#c8d834');
 
-    // Le trajet, dans le sens physique : on MONTE dans le générateur (à gauche),
-    // on traverse en haut, on REDESCEND dans le récepteur (à droite), on revient en bas.
-    var large=xR-xG, per=2*large+2*haut;
+    /* ---- récepteur ---- */
+    var yc=(yB+yC)/2, br=Math.min(1,Prec/700);
+    if(rec.ic!=='moteur' && br>0.02){
+      var g=ctx.createRadialGradient(xR,yc,3,xR,yc,60);
+      g.addColorStop(0,'rgba(255,233,160,'+(0.45*br)+')'); g.addColorStop(1,'rgba(255,233,160,0)');
+      ctx.fillStyle=g; ctx.beginPath(); ctx.arc(xR,yc,60,0,6.2832); ctx.fill();
+    }
+    ctx.strokeStyle='#f0a844'; ctx.lineWidth=2.2; ctx.fillStyle='#1a2019';
+    if(rec.ic==='lampe'){
+      ctx.beginPath(); ctx.arc(xR,yc,19,0,6.2832); ctx.fill(); ctx.stroke();
+      ctx.beginPath(); ctx.moveTo(xR-13,yc-13); ctx.lineTo(xR+13,yc+13);
+      ctx.moveTo(xR+13,yc-13); ctx.lineTo(xR-13,yc+13); ctx.stroke();
+    } else if(rec.ic==='led'){
+      ctx.beginPath(); ctx.moveTo(xR-14,yc-16); ctx.lineTo(xR-14,yc+16); ctx.lineTo(xR+13,yc); ctx.closePath();
+      ctx.fill(); ctx.stroke();
+      ctx.beginPath(); ctx.moveTo(xR+13,yc-16); ctx.lineTo(xR+13,yc+16); ctx.stroke();
+      ctx.strokeStyle='#ffe9a0'; ctx.lineWidth=1.6;
+      ctx.beginPath(); ctx.moveTo(xR+18,yc-14); ctx.lineTo(xR+30,yc-24);
+      ctx.moveTo(xR+18,yc-4); ctx.lineTo(xR+30,yc-14); ctx.stroke();
+    } else if(rec.ic==='moteur'){
+      ctx.beginPath(); ctx.arc(xR,yc,20,0,6.2832); ctx.fill(); ctx.stroke();
+      MSPC.titre(ctx,'M',xR,yc+7,20,'#f0a844','center');
+      ctx.strokeStyle='rgba(92,196,224,.8)'; ctx.lineWidth=2;
+      var ro=a.t*Math.min(9,Prec/90);
+      ctx.beginPath(); ctx.arc(xR,yc,29,ro,ro+1.7); ctx.stroke();
+      ctx.beginPath(); ctx.arc(xR,yc,29,ro+3.14,ro+4.84); ctx.stroke();
+    } else {
+      ctx.fillRect(xR-22,yc-22,44,44); ctx.strokeRect(xR-22,yc-22,44,44);
+      ctx.strokeStyle='#ff6a5e'; ctx.lineWidth=2;
+      for(var q=0;q<3;q++){
+        ctx.beginPath();
+        for(var w=0;w<=16;w++) ctx.lineTo(xR-16+w*2, yc-13+q*13+((w%2)?4:-4));
+        ctx.stroke();
+      }
+    }
+    MSPC.mono(ctx,rec.n.toUpperCase(),xR+42,yc-6,10.5,'#f0a844');
+    MSPC.mono(ctx,'il en prend '+(fR*100).toFixed(1)+' %',xR+42,yc+9,10.5,'#c8d834');
+
+    /* ---- les coulombs et leur jauge d'énergie ---- */
+    var large=xR-xG, per=2*large+(yD-yA)+(yC-yB);
+    var mA=(yD-yA), mR=(yC-yB);
     for(var c=0;c<chg.length;c++){
       var C=chg[c];
-      if(dt>0) C.u=(C.u+(0.05+Iv*0.045)*dt)%1;
-      var d=C.u*per, x,y,frac=0,desc=false;
-      if(d<haut){                                  // 1. montée dans le générateur
-        x=xG; y=yBas-d; frac=d/haut;
-      } else if(d<haut+large){                     // 2. rail du haut, chargé à bloc
-        x=xG+(d-haut); y=yH; frac=1;
-      } else if(d<2*haut+large){                   // 3. chute dans le récepteur
-        var dd=d-haut-large; x=xR; y=yH+dd; frac=1-dd/haut; desc=true;
-      } else {                                     // 4. retour par le rail du bas, à vide
-        x=xR-(d-2*haut-large); y=yBas; frac=0;
+      if(dt>0) C.u=(C.u+(0.05+Math.min(Iv,12)*0.035)*dt)%1;
+      var d=C.u*per, x,y,frac,desc=false;
+      if(d<mA){                                  // remontée dans le générateur
+        var p1=d/mA; x=xG; y=yD-(yD-yA)*p1; frac=p1;
+      } else if(d<mA+large){                     // fil aller : il en perd un peu
+        var p2=(d-mA)/large; x=xG+large*p2; y=yA+(yB-yA)*p2; frac=1-fA*p2;
+      } else if(d<mA+large+mR){                  // le récepteur : il perd presque tout
+        var p3=(d-mA-large)/mR; x=xR; y=yB+(yC-yB)*p3; frac=(1-fA)-fR*p3; desc=true;
+      } else {                                   // fil retour : il perd le reste
+        var p4=(d-mA-large-mR)/large; x=xR-large*p4; y=yC+(yD-yC)*p4; frac=fB*(1-p4);
       }
+      frac=Math.max(0,Math.min(1,frac));
       var vedette=(c===0);
-      ctx.fillStyle=vedette?'#fff':'rgba(200,216,52,.8)';
+      ctx.fillStyle=vedette?'#fff':'rgba(200,216,52,'+(0.35+0.55*frac)+')';
       ctx.beginPath(); ctx.arc(x,y,vedette?11:6.5,0,6.2832); ctx.fill();
       if(vedette){
         MSPC.mono(ctx,'1 C',x,y+4,9,'#0d120f','center');
-        var jx=Math.min(Math.max(x,40),W-40);
-        ctx.fillStyle='rgba(255,255,255,.12)'; ctx.fillRect(jx-16,y-32,32,9);
-        ctx.fillStyle='#c8d834'; ctx.fillRect(jx-16,y-32,32*frac,9);
-        MSPC.mono(ctx,(Uv*frac).toFixed(0)+' J',jx,y-36,10.5,'#c8d834','center');
+        var jx=Math.min(Math.max(x,44),W-44);
+        ctx.fillStyle='rgba(255,255,255,.12)'; ctx.fillRect(jx-17,y-32,34,9);
+        ctx.fillStyle='#c8d834'; ctx.fillRect(jx-17,y-32,34*frac,9);
+        MSPC.mono(ctx,(Uv*frac).toFixed(Uv<10?2:0)+' J',jx,y-36,10.5,'#c8d834','center');
       }
-      if(desc && Math.random()<dt*26*Math.min(1,Iv/3)){
-        etinc.push({x:xR+(Math.random()-0.5)*20,y:y,vx:(Math.random()-0.5)*60,vy:(Math.random()-0.5)*60,t:0.4});
+      if(desc && Math.random()<dt*24*Math.min(1,Iv/3)){
+        etinc.push({x:xR+(Math.random()-0.5)*24,y:y,vx:(Math.random()-0.5)*60,vy:(Math.random()-0.5)*60,t:0.4});
       }
     }
-
     for(var e=etinc.length-1;e>=0;e--){
       var E=etinc[e]; E.t-=dt;
       if(E.t<=0){ etinc.splice(e,1); continue; }
@@ -1083,30 +1145,77 @@
       ctx.fillStyle='rgba(255,220,120,'+(E.t/0.4)+')';
       ctx.beginPath(); ctx.arc(E.x,E.y,2.3,0,6.2832); ctx.fill();
     }
-    var br=Math.min(1,P/900);
-    var gl=ctx.createRadialGradient(xR,yH+haut/2,3,xR,yH+haut/2,64);
-    gl.addColorStop(0,'rgba(255,233,160,'+(0.08+0.45*br)+')'); gl.addColorStop(1,'rgba(255,233,160,0)');
-    ctx.fillStyle=gl; ctx.beginPath(); ctx.arc(xR,yH+haut/2,64,0,6.2832); ctx.fill();
 
-    ctx.strokeStyle='#c8d834'; ctx.lineWidth=1.6; ctx.setLineDash([5,4]);
-    ctx.beginPath(); ctx.moveTo(xR+46,yH); ctx.lineTo(xR+46,yBas); ctx.stroke(); ctx.setLineDash([]);
-    ctx.beginPath(); ctx.moveTo(xR+40,yH+1); ctx.lineTo(xR+52,yH+1);
-    ctx.moveTo(xR+40,yBas-1); ctx.lineTo(xR+52,yBas-1); ctx.stroke();
-    MSPC.titre(ctx,'U = '+Uv+' V',xR+60,yH+haut/2-4,21,'#c8d834');
-    MSPC.mono(ctx,Uv+' joules par coulomb',xR+60,yH+haut/2+14,10.5,'#8d968b');
+    /* ---- le bilan : où sont passés les joules ---- */
+    var bx=44, by=328, bw=W-88;
+    MSPC.mono(ctx,'CE QUE DEVIENNENT LES '+Uv+' JOULES DE CHAQUE COULOMB',bx,by-8,10.5,'#8d968b');
+    var seg=[['fil aller',fA,'#f0a844'],['RÉCEPTEUR',fR,'#c8d834'],['fil retour',fB,'#f0a844']];
+    var cx0=bx;
+    for(var s2=0;s2<seg.length;s2++){
+      var lw=bw*seg[s2][1];
+      ctx.fillStyle=seg[s2][2]; ctx.fillRect(cx0,by,Math.max(lw,1.5),16);
+      if(lw>78) MSPC.mono(ctx,seg[s2][0]+'  '+(seg[s2][1]*100).toFixed(1)+' %',cx0+7,by+12,10,'#0d120f');
+      cx0+=lw;
+    }
+    ctx.strokeStyle='rgba(255,255,255,.25)'; ctx.lineWidth=1; ctx.strokeRect(bx+.5,by+.5,bw,16);
+    if(bw*fA<=78) MSPC.mono(ctx,'les deux fils : '+((fA+fB)*100).toFixed(1)+' %',bx+bw*0.60,by-8,10,'#f0a844','right');
 
-    function bloc(x,val,lab,col){ MSPC.titre(ctx,val,x,364,25,col); MSPC.mono(ctx,lab,x,380,9.5,'#8d968b'); }
-    bloc(30, Uv+' J/C', 'CE QUE PORTE CHAQUE COULOMB', '#c8d834');
-    bloc(260, Iv.toFixed(1).replace('.',',')+' C/s', 'COULOMBS PAR SECONDE', '#e6ebe4');
-    bloc(490, (P>=1000?(P/1000).toFixed(2)+' kW':P.toFixed(0)+' W'), 'PUISSANCE  P = U × I', P>3000?'#ff6a5e':'#f0a844');
-    bloc(720, (compteur>=1000?(compteur/1000).toFixed(1)+' kJ':compteur.toFixed(0)+' J'), 'ÉNERGIE DÉJÀ LIVRÉE', '#8d968b');
+    // ce que le récepteur en fait
+    var kx=bx+bw, ktxt=[];
+    for(var v2=0;v2<rec.conv.length;v2++) ktxt.push(rec.conv[v2][0]+' '+Math.round(rec.conv[v2][1]*100)+' %');
+    MSPC.mono(ctx,'dans le récepteur → '+ktxt.join('  ·  '),kx,by-8,10,'#8d968b','right');
 
-    out.innerHTML='Chaque coulomb emporte <b>'+Uv+' J</b><br>'+Iv.toFixed(1).replace('.',',')+' C/s × '+Uv+' J/C = <b>'+(P>=1000?(P/1000).toFixed(2)+' kW':P.toFixed(0)+' W')+'</b>';
+    /* ---- chiffres ---- */
+    function bloc(x,val,lab,col){ MSPC.titre(ctx,val,x,376,23,col); MSPC.mono(ctx,lab,x,391,9.5,'#8d968b'); }
+    bloc(44, Uv+' J/C','CHAQUE COULOMB REÇOIT','#c8d834');
+    bloc(228, Iv.toFixed(Iv<10?2:0).replace('.',',')+' A','COULOMBS PAR SECONDE','#e6ebe4');
+    bloc(412, (Prec>=1000?(Prec/1000).toFixed(2)+' kW':Prec.toFixed(0)+' W'),'UTILE, AU RÉCEPTEUR','#c8d834');
+    bloc(596, (Pfil>=1000?(Pfil/1000).toFixed(2)+' kW':Pfil.toFixed(1)+' W'),'PERDU DANS LES FILS',Pfil>Prec*0.1?'#ff6a5e':'#f0a844');
+    bloc(770, (compteur>=1000?(compteur/1000).toFixed(1)+' kJ':compteur.toFixed(0)+' J'),'ÉNERGIE DÉJÀ LIVRÉE','#8d968b');
+
+    if(!possible){
+      var Pmax=Uv*Uv/(4*Rcab);
+      ctx.fillStyle='rgba(179,32,23,.18)'; ctx.fillRect(0,0,W,H);
+      MSPC.titre(ctx,'LE CÂBLE SATURE',W/2,46,22,'#ff6a5e','center');
+      MSPC.mono(ctx,'sous '+Uv+' V, ces '+Lm+' m ne peuvent pas délivrer '+rec.P+' W : au mieux '+Pmax.toFixed(0)+' W, et encore en gaspillant autant dans les fils',W/2,64,11,'#ffb0a8','center');
+      MSPC.mono(ctx,'montez la tension, ou raccourcissez le câble',W/2,80,11,'#ffb0a8','center');
+    }
+
+    out.innerHTML = !possible
+      ? '<b style="color:#ff6a5e">Le câble sature.</b><br>Il faudrait '+(rec.P/Uv).toFixed(0)+' A : ces fils n’en laissent pas passer autant.'
+      : 'Sur '+Uv+' J reçus, chaque coulomb en laisse<br><b>'+(Uv*fR).toFixed(Uv<10?2:1)+' J</b> au récepteur et <b>'+(Uv*(fA+fB)).toFixed(Uv<10?2:1)+' J</b> dans les fils';
   }, {fixed:true});
 })();
 </script>
 
-<h3>4.4 — Les tensions que vous croiserez</h3>
+<h3>4.4 — Où passent les joules ?</h3>
+<p>Suivons un coulomb sur un tour complet, puisque c'est ce que montre l'animation. Il sort du générateur avec U joules. Il revient au générateur avec <strong>exactement zéro</strong>. Entre les deux, il a tout laissé — et la question intéressante est : <em>où</em> ?</p>
+<p>Première précision, qui n'est pas un détail : cette énergie n'est <strong>pas</strong> dépensée « pour avancer ». Les électrons ne prennent pas de vitesse, ils dérivent lentement et régulièrement (chapitre 2). L'énergie n'est pas de l'élan : c'est de l'énergie de position, exactement comme celle d'un objet en haut d'un escalier. Elle est cédée <span class="cle">partout où il y a de la résistance, et seulement là</span>.</p>
+<p>Sur le trajet, il y a trois résistances en série :</p>
+<ul>
+<li><strong>Le fil aller</strong>, qui prend une petite part — quelques pour cent en général, et d'autant plus qu'il est long et fin.</li>
+<li><strong>Le récepteur</strong>, qui prend la quasi-totalité. C'est le but : c'est lui qui rend un service.</li>
+<li><strong>Le fil retour</strong>, qui prend une part identique à celle de l'aller. Attention à l'idée fausse ici : <strong>revenir au générateur ne coûte rien en soi.</strong> Le conducteur de retour n'a rien de particulier — c'est un fil comme l'autre, avec la même résistance, donc la même perte. Si l'aller prend 2 %, le retour prend 2 %.</li>
+</ul>
+<p>Et ces trois parts s'additionnent exactement :</p>
+<div class="formule">U = U<sub>fil aller</sub> + U<sub>récepteur</sub> + U<sub>fil retour</sub><small>c'est la loi des mailles : sur une boucle fermée, tout ce qui est fourni est repris</small></div>
+<p>C'est pour cela que le circuit est dessiné, dans l'animation, <strong>à la hauteur du potentiel réel</strong>. Les fils y penchent légèrement : cette pente <em>est</em> la tension qu'ils prennent au passage. Allongez le câble, la pente s'accentue.</p>
+
+<div class="encadre"><span class="tag">Ce que le récepteur fait des joules qu'il reçoit</span>
+<p>Le générateur fournit de l'énergie électrique ; le récepteur la <strong>convertit</strong>. Et selon ce qu'on branche, le résultat n'a rien à voir :</p>
+<div class="table-scroll">
+<table>
+<thead><tr><th>Récepteur</th><th>Convertit l'énergie électrique en…</th><th>Rendement utile</th></tr></thead>
+<tbody>
+<tr><td><strong>Four, radiateur</strong></td><td>Chaleur, et rien d'autre</td><td><strong>100 %</strong> — le seul appareil qui ne gaspille rien, puisque la chaleur <em>est</em> le but</td></tr>
+<tr><td><strong>Moteur</strong></td><td>Mouvement, plus de la chaleur dans les bobinages et les paliers</td><td>75 à 95 % selon la taille</td></tr>
+<tr><td><strong>Lampe LED</strong></td><td>Lumière, plus de la chaleur</td><td>30 à 50 %</td></tr>
+<tr><td><strong>Lampe à filament</strong></td><td>Chaleur, plus un peu de lumière</td><td><strong>5 %</strong> — c'était un radiateur qui éclairait accessoirement</td></tr>
+</tbody></table>
+</div>
+<p><span class="cle">Un rendement n'a de sens que rapporté à ce qu'on cherche.</span> Un radiateur et une ampoule à filament transforment tous deux l'électricité en chaleur à plus de 95 %. Le premier est excellent, le second a été interdit à la vente — la seule différence est ce qu'on lui demandait.</p></div>
+
+<h3>4.5 — Les tensions que vous croiserez</h3>
 <div class="table-scroll">
 <table>
 <thead><tr><th>Situation</th><th class="mono">Tension</th><th>Ce qu'il faut en retenir</th></tr></thead>
