@@ -48,10 +48,10 @@
 </header>
 
 <div class="meta-bar">
-  <div><b>18</b> chapitres</div>
-  <div><b>22</b> animations pilotables</div>
+  <div><b>19</b> chapitres</div>
+  <div><b>25</b> animations pilotables</div>
   <div><b>15</b> fiches TP d'atelier</div>
-  <div><b>53</b> exercices corrigés</div>
+  <div><b>56</b> exercices corrigés</div>
   <div>Manips en <b>TBTS ≤ 24 V</b> sauf mention</div>
 </div>
 
@@ -79,6 +79,7 @@
     <a class="borne" href="#c16"><span class="num">16</span><span class="lbl">Court-circuit et surcharge</span></a>
     <a class="borne" href="#c17"><span class="num">17</span><span class="lbl">Le disjoncteur magnéto-thermique</span></a>
     <a class="borne" href="#c18"><span class="num">18</span><span class="lbl">Le risque électrique</span></a>
+    <a class="borne" href="#c19"><span class="num">19</span><span class="lbl">Consigner</span></a>
     <a class="borne" href="#tps" style="border-top-color:var(--accent)"><span class="num">TP</span><span class="lbl">Les 15 fiches d'atelier</span></a>
   </div></nav>
 
@@ -4666,6 +4667,546 @@
       42, by+48, 11.5, '#8d968b');
 
     out.innerHTML='F = <b>'+tr.f.toFixed(2).replace('.',',')+'</b> · cœur : <b style="color:'+coul+'">'+Ieq.toFixed(Ieq<10?1:0).replace('.',',')+' mA</b><br>'+effet;
+  }, {fixed:true});
+})();
+</script>
+
+
+<!-- ================= CH 19 ================= -->
+<section class="ch" id="c19">
+  <div class="ch-head"><div class="ch-num">19</div><div class="ch-title">
+    <span class="kicker">Le seul état vraiment sûr</span><h2>Consigner</h2></div></div>
+  <div class="ch-body">
+
+<div class="savoirs">
+  <span class="savoir n3"><b>S4.5</b> <i>Mise à l'arrêt, consignation, EPI et EPC</i></span>
+  <span class="savoir n3"><b>S6.2.3</b> <i>Mise en sécurité avant intervention</i></span>
+</div>
+
+<p class="lede">Le chapitre précédent a montré ce que fait le courant à un corps. Celui-ci montre la seule parade qui fonctionne à tous les coups : <strong>faire en sorte qu'il n'y ait plus de courant du tout</strong>, et pouvoir le prouver. Ce n'est ni un réflexe ni une précaution — c'est une procédure écrite, dans un ordre imposé, dont chaque étape corrige la faiblesse de la précédente.</p>
+
+<h3>19.1 — Quatre opérations pour l'électricité</h3>
+<p>La norme <strong>NF C 18-510</strong> définit la consignation électrique en quatre opérations. L'ordre n'est pas négociable : chacune ne vaut que parce que la précédente a été faite.</p>
+
+<table>
+<thead><tr><th>#</th><th>Opération</th><th>Ce qu'on fait</th><th>Ce que ça ne prouve pas</th></tr></thead>
+<tbody>
+<tr><td><strong>1</strong></td><td><strong>Séparer</strong></td><td>Ouvrir <em>toutes</em> les sources d'alimentation, de façon visible ou avec une coupure certaine.</td><td>Que personne ne va refermer derrière vous.</td></tr>
+<tr><td><strong>2</strong></td><td><strong>Condamner</strong></td><td>Bloquer l'organe en position ouverte : cadenas nominatif + pancarte d'interdiction de manœuvre.</td><td>Que c'est bien le bon organe.</td></tr>
+<tr><td><strong>3</strong></td><td><strong>Identifier</strong></td><td>S'assurer, sur le lieu de travail, que l'ouvrage consigné est bien celui sur lequel on va intervenir. Schémas, repérage, plaques.</td><td>Qu'il n'y a plus de tension.</td></tr>
+<tr><td><strong>4</strong></td><td><strong>Vérifier l'absence de tension</strong><br>(VAT), suivie si nécessaire de la <strong>mise à la terre et en court-circuit</strong></td><td>Mesurer, sur place, entre tous les conducteurs, avec un vérificateur d'absence de tension.</td><td>—<br>C'est la seule étape qui <em>prouve</em> quelque chose.</td></tr>
+</tbody></table>
+
+<p><span class="cle">Chaque étape existe parce que la précédente a un trou.</span> Séparer ne suffit pas — quelqu'un referme. Condamner ne suffit pas — on peut condamner le mauvais départ. Identifier ne suffit pas — il peut rester une seconde alimentation dont personne n'a parlé. Seule la VAT constate un fait.</p>
+
+<h3>19.2 — Consigner <em>toutes</em> les énergies</h3>
+<p>En maintenance industrielle, l'électricité n'est jamais seule. Le référentiel MSPC exige explicitement la <em>« consignation d'un système (toutes énergies) »</em>, et cela ajoute une cinquième opération à la liste précédente.</p>
+
+<div class="formule">séparer · condamner · identifier · vérifier · <b>dissiper</b><small>Consignation toutes énergies — la cinquième est celle qu'on oublie</small></div>
+
+<p>Une machine électriquement morte peut encore vous tuer avec :</p>
+<ul>
+<li><strong>le condensateur du variateur de vitesse</strong>, qui reste chargé à 560 V pendant plusieurs minutes après la coupure ;</li>
+<li><strong>l'accumulateur hydraulique</strong>, sous 200 bar, qui refermera la presse même sans pompe ;</li>
+<li><strong>le réservoir d'air</strong> du circuit pneumatique, qui sortira le vérin ;</li>
+<li><strong>la charge suspendue</strong>, qui descend dès qu'on desserre le frein ;</li>
+<li><strong>le ressort comprimé</strong> d'un dispositif de sécurité positive ;</li>
+<li><strong>le volant d'inertie</strong>, qui tourne encore une minute après l'arrêt du moteur ;</li>
+<li><strong>les pièces chaudes</strong> — moules, résistances, huile.</li>
+</ul>
+
+<figure class="anim">
+  <canvas id="a-consign" width="900" height="450" aria-label="Animation : les cinq opérations de la consignation sur une machine, et ce qui reste dangereux à chaque étape"></canvas>
+  <div class="ctrls">
+    <div class="c"><label>Opérations réalisées <span id="a-consign-e-l">aucune</span></label><input type="range" id="a-consign-e" min="0" max="5" value="0"></div>
+    <div class="c"><label class="switch"><input type="checkbox" id="a-consign-c"><span>Un collègue tente de refermer</span></label></div>
+    <div class="c"><label class="switch"><input type="checkbox" id="a-consign-s"><span>Seconde alimentation oubliée</span></label></div>
+    <div class="c readout" id="a-consign-out"></div>
+  </div>
+  <figcaption>Une presse : armoire, variateur, moteur, vérin hydraulique avec accumulateur, et une masse suspendue. <b>Avancez opération par opération</b> et regardez ce qui passe du rouge au vert. <b>Cochez « un collègue tente de refermer »</b> : avant la condamnation, il y parvient et tout se remet sous tension ; après, le cadenas l'en empêche. <b>Cochez « seconde alimentation oubliée »</b> : l'identification révèle le second départ, que la séparation avait manqué. <b>Et notez qu'après la VAT, trois dangers restent rouges</b> — ce sont ceux que seule la cinquième opération éteint.</figcaption>
+  <div class="autableau">
+    <b class="entete">Au tableau <i>· 12 minutes · animation 1 sur 3</i></b>
+    <ol>
+      <li>Tout à zéro. Demander : <span class="q">« la machine est à l'arrêt, le bouton est sur STOP. Est-ce qu'on peut y aller ? »</span> Laisser répondre, puis montrer tout le rouge.</li>
+      <li>Avancer sur <b>séparer</b>. <span class="q">« Et maintenant ? »</span> Cocher « un collègue tente de refermer » — la machine repart. Décocher.</li>
+      <li>Avancer sur <b>condamner</b>, recocher le collègue : le cadenas tient. <span class="q">« Qu'est-ce qui a changé ? »</span></li>
+      <li>Cocher <b>seconde alimentation oubliée</b> avant l'identification : montrer qu'un départ reste vivant. Avancer sur <b>identifier</b> : il apparaît.</li>
+      <li>Avancer sur <b>VAT</b>. Puis demander, en montrant les trois pastilles encore rouges : <span class="q">« l'électricité est coupée. Qu'est-ce qui peut encore me tuer ? »</span></li>
+    </ol>
+    <div class="piege">Le piège : après la VAT, la plupart des élèves déclarent la machine sûre. Le condensateur du variateur est encore à 560 V, l'accumulateur à 200 bar, et la masse est toujours en l'air. La cinquième opération n'est pas un supplément de zèle.</div>
+  </div>
+</figure>
+
+<h3>19.3 — La VAT : la seule étape qui prouve quelque chose</h3>
+<p>Le vérificateur d'absence de tension n'est pas un multimètre. C'est un appareil dédié, conçu pour une seule chose, et qui s'utilise selon une procédure en <strong>trois temps</strong> — jamais en un seul.</p>
+
+<div class="encadre danger"><span class="tag">La procédure en trois temps — et pourquoi</span>
+<ol>
+<li><strong>Tester le VAT sur une source sous tension connue.</strong> Il doit s'allumer. <em>On vient de prouver que le VAT fonctionne.</em></li>
+<li><strong>Vérifier l'installation consignée</strong>, entre tous les conducteurs actifs, deux à deux, et par rapport à la terre. Il ne doit rien indiquer.</li>
+<li><strong>Retester le VAT sur la source connue.</strong> Il doit s'allumer <em>encore</em>. <em>On vient de prouver qu'il n'est pas tombé en panne entre-temps.</em></li>
+</ol>
+<p><span class="cle">Sans les temps 1 et 3, un VAT en panne indique « pas de tension » sur une installation parfaitement vivante — et vous n'avez aucun moyen de le savoir.</span> C'est un accident classique, et il ne pardonne pas.</p>
+<p>Deux règles complémentaires : le VAT s'utilise <strong>avec des gants isolants et un écran facial</strong>, puisqu'on l'applique par définition sur ce qui est peut-être encore sous tension ; et il se vérifie <strong>à chaque usage</strong>, pas une fois par semaine.</p></div>
+
+<figure class="anim">
+  <canvas id="a-vat" width="900" height="420" aria-label="Animation : la procédure du vérificateur d'absence de tension en trois temps"></canvas>
+  <div class="ctrls">
+    <div class="c"><label>Étape de la procédure <span id="a-vat-e-l">1 · test préalable</span></label><input type="range" id="a-vat-e" min="0" max="3" value="0"></div>
+    <div class="c"><label class="switch"><input type="checkbox" id="a-vat-p"><span>Le VAT est en panne</span></label></div>
+    <div class="c"><label class="switch"><input type="checkbox" id="a-vat-t" checked><span>Installation réellement hors tension</span></label></div>
+    <div class="c readout" id="a-vat-out"></div>
+  </div>
+  <figcaption>À gauche la source témoin sous tension, à droite l'installation à vérifier. <b>Déroulez les trois temps</b> avec un VAT sain : allumé, éteint, allumé — la conclusion est valide. <b>Cochez « le VAT est en panne »</b> et refaites : au temps 1 il ne s'allume pas, la procédure s'arrête là, et vous changez d'appareil. <b>Maintenant décochez « installation hors tension » et gardez le VAT en panne</b> : au temps 2 il n'indique rien — exactement comme s'il n'y avait pas de tension. Sans le temps 3, vous poseriez les mains dessus.</figcaption>
+  <div class="autableau">
+    <b class="entete">Au tableau <i>· 8 minutes · animation 2 sur 3</i></b>
+    <ol>
+      <li>VAT sain, installation hors tension. Dérouler les trois temps sans commenter. <span class="q">« À quoi sert le troisième test, puisque c'est le même que le premier ? »</span> Laisser chercher.</li>
+      <li>Cocher <b>VAT en panne</b>, revenir au temps 1. La procédure s'arrête. <span class="q">« Qu'est-ce qu'on fait ? »</span> On change de VAT, on ne discute pas.</li>
+      <li>Le moment décisif : <b>VAT en panne</b> ET <b>installation sous tension</b>. Aller directement au temps 2. Faire lire l'afficheur : rien. <span class="q">« Est-ce qu'il y a de la tension ? »</span></li>
+      <li>Aller au temps 3 : le VAT reste éteint sur la source témoin. <span class="q">« Qu'est-ce que ça vous apprend ? »</span> Que le test précédent ne valait rien.</li>
+    </ol>
+    <div class="piege">Le piège : un élève dira qu'il vaut mieux prendre un multimètre, « qui affiche des volts ». Un multimètre sur le mauvais calibre, avec un fusible fondu ou une pile morte, affiche 0,00 V avec le même aplomb. Le VAT, lui, est fait pour n'avoir qu'une seule façon de tomber en panne — et la procédure en trois temps la détecte.</div>
+  </div>
+</figure>
+
+<h3>19.4 — Les énergies résiduelles, une par une</h3>
+<p>La cinquième opération est celle que les procédures d'atelier oublient le plus souvent, parce qu'elle demande de connaître la machine et pas seulement la norme.</p>
+
+<figure class="anim">
+  <canvas id="a-energies" width="900" height="440" aria-label="Animation : les énergies résiduelles d'une machine après coupure et leur dissipation"></canvas>
+  <div class="ctrls">
+    <div class="c"><label>Temps depuis la coupure <span id="a-energies-t-l">0 s</span></label><input type="range" id="a-energies-t" min="0" max="600" value="0"></div>
+    <div class="c"><label>Énergie examinée <span id="a-energies-s-l">toutes</span></label><input type="range" id="a-energies-s" min="0" max="6" value="0"></div>
+    <div class="c"><button class="btn" id="a-energies-go">Dissiper celle-ci</button></div>
+    <div class="c readout" id="a-energies-out"></div>
+  </div>
+  <figcaption>Six énergies qui survivent à la coupure. <b>Faites avancer le temps</b> : seul le condensateur se décharge tout seul — et il lui faut <b>cinq minutes</b>, pas cinq secondes. <b>Les cinq autres ne s'épuisent jamais</b> : l'accumulateur restera sous pression un an, la masse restera en l'air jusqu'à ce qu'on la descende. <b>Sélectionnez une énergie et dissipez-la</b> pour voir le geste correspondant. La machine n'est consignée que lorsque les six pastilles sont vertes.</figcaption>
+  <div class="autableau">
+    <b class="entete">Au tableau <i>· 10 minutes · animation 3 sur 3</i></b>
+    <ol>
+      <li>Temps à zéro, toutes les énergies. <span class="q">« On vient de couper le sectionneur. Combien de temps avant que ce soit sûr ? »</span> Recueillir les réponses au tableau.</li>
+      <li>Faire glisser le temps jusqu'à 30 s, puis 2 min, puis 5 min. Le condensateur descend seul. <span class="q">« Et les cinq autres ? »</span></li>
+      <li>Insister sur le variateur : <span class="q">« combien de temps la plaque du constructeur demande-t-elle d'attendre ? »</span> Faire lire la valeur affichée.</li>
+      <li>Sélectionner chaque énergie et la dissiper : montrer que chacune demande <b>un geste différent</b>, pas une attente.</li>
+    </ol>
+    <div class="piege">Le piège : « on attend cinq minutes et c'est bon ». Le temps ne dissipe qu'une seule des six énergies. Les autres attendent votre main.</div>
+  </div>
+</figure>
+
+<h3>19.5 — Le cadenas est nominatif</h3>
+<p>Un point de procédure qui a l'air administratif et qui est en réalité une garantie physique.</p>
+<ul>
+<li><strong>Un cadenas par intervenant</strong>, avec sa clé unique dans sa poche. Sur un moraillon, cinq intervenants posent cinq cadenas.</li>
+<li><strong>Personne ne peut refermer tant qu'un seul cadenas reste.</strong> Le dernier à partir est le dernier à retirer le sien.</li>
+<li><strong>On ne retire jamais le cadenas d'un autre.</strong> Jamais, sous aucun prétexte, même s'il est parti en week-end. La levée d'une condamnation en l'absence de son auteur suit une procédure écrite avec la hiérarchie.</li>
+</ul>
+<p>La déconsignation se fait dans l'ordre <em>inverse</em>, et elle commence par un geste qu'on oublie : <span class="cle">s'assurer que plus personne n'est sur la machine, et que les protecteurs sont remontés.</span></p>
+
+<div class="rappel"><span class="tag">EPI, EPC, EIS — trois familles à ne pas confondre</span>
+<ul>
+<li><strong>EPC — protection collective.</strong> Elle protège tout le monde sans que personne n'ait rien à faire : carter, barrière, écran, nappe isolante posée sur les pièces nues voisines. <em>Toujours à privilégier.</em></li>
+<li><strong>EPI — protection individuelle.</strong> Elle ne protège que celui qui la porte, et seulement s'il la porte : gants isolants classe 00 ou 0, écran facial anti-arc, vêtements sans partie métallique, chaussures isolantes, casque.</li>
+<li><strong>EIS — équipements individuels de sécurité.</strong> Ce ne sont pas des protections mais les outils qui rendent l'opération sûre : VAT, outillage isolé 1000 V, tapis isolant, cadenas et pancartes, banderole de balisage.</li>
+</ul>
+<p><span class="cle">L'ordre de priorité est réglementaire : supprimer le risque, puis protection collective, puis protection individuelle en dernier recours.</span> Les gants ne sont pas la première réponse — ils sont la dernière.</p></div>
+
+<div class="exo"><span class="tag">Exercice 19.1</span>
+<p>Un technicien doit changer un capteur sur une presse à injection. Il coupe le sectionneur général, pose son cadenas, et commence. Trente secondes plus tard, le plateau descend et lui écrase la main. Le sectionneur était bien ouvert. Que s'est-il passé, et quelle opération a-t-il sautée ?</p>
+<details><summary>Voir la réponse</summary><div class="rep">
+<p><strong>L'opération sautée est la cinquième : dissiper les énergies résiduelles.</strong></p>
+<p><strong>Ce qui s'est passé.</strong> Une presse à injection possède un <strong>accumulateur hydraulique</strong> — un réservoir d'huile maintenu sous pression par un gaz comprimé, qui sert à fournir un débit important au moment de la fermeture. Cet accumulateur reste chargé à 150 ou 200 bar <em>indépendamment de la pompe</em>. Couper le courant arrête la pompe ; ça ne vide pas l'accumulateur.</p>
+<p>Il a suffi qu'une vibration, un contact, ou simplement le déplacement du capteur ouvre le circuit de commande du distributeur pour que l'huile sous pression fasse descendre le plateau. La gravité seule aurait pu suffire si le plateau n'était pas mécaniquement calé.</p>
+<p><strong>Ce qu'il aurait fallu faire, dans l'ordre :</strong></p>
+<ol>
+<li>Séparer <strong>toutes</strong> les énergies : électrique (sectionneur), hydraulique (vanne d'isolement), pneumatique si présente.</li>
+<li>Condamner chacune avec son cadenas.</li>
+<li>Identifier la machine sur place.</li>
+<li>VAT électrique en trois temps, et vérification de <strong>l'absence de pression</strong> au manomètre.</li>
+<li><strong>Purger l'accumulateur</strong> par sa vanne de décharge, contrôler que le manomètre est bien à zéro, <strong>et caler mécaniquement le plateau</strong> avec la béquille de sécurité prévue par le constructeur.</li>
+</ol>
+<p><span class="cle">Un manomètre à zéro ne dispense pas de la béquille : la masse du plateau reste de la masse.</span></p>
+<p><em>Cet accident est l'un des plus documentés en injection plastique, et la béquille de sécurité existe sur toutes les presses précisément à cause de lui. Elle est souvent peinte en rouge vif, et souvent inutilisée.</em></p>
+</div></details></div>
+
+<div class="exo"><span class="tag">Exercice 19.2</span>
+<p>Vous devez intervenir dans une armoire contenant un variateur de vitesse. La plaque indique « attendre 5 min après coupure ». Vous êtes pressé, vous attendez 1 minute et vous mesurez la tension sur le bus continu : 180 V. Est-ce dangereux ? Que faites-vous ?</p>
+<details><summary>Voir la réponse</summary><div class="rep">
+<p><strong>Oui, c'est dangereux — et sur deux plans.</strong></p>
+<p><strong>1. 180 V continus, c'est mortel.</strong> On est très au-dessus de la tension limite de 50 V. Sous 180 V, avec des mains moites (R ≈ 800 Ω), le courant vaut :</p>
+<p class="mono">I = 180 / 800 = 225 mA</p>
+<p>Le continu est environ quatre fois moins agressif que l'alternatif pour la fibrillation, mais 225 mA restent au-delà du seuil, et les brûlures par électrolyse sont sévères. Le condensateur d'un bus continu stocke plusieurs joules : il se décharge d'un coup, dans vous.</p>
+<p><strong>2. Et surtout : la décharge n'est pas linéaire.</strong> C'est le point que l'exercice veut faire comprendre. Un condensateur se décharge de façon <em>exponentielle</em> à travers ses résistances de décharge. La tension chute vite au début puis de plus en plus lentement. Constater 180 V à 1 minute ne dit rien de simple sur ce qu'il restera à 2 minutes — et cela ne permet <strong>en aucun cas</strong> d'extrapoler que « ça va assez vite ».</p>
+<p><strong>Ce qu'il faut faire.</strong></p>
+<ol>
+<li><strong>Attendre les 5 minutes prescrites.</strong> Le constructeur a calculé cette durée pour son propre condensateur et sa propre résistance de décharge ; vous ne pouvez pas la recalculer sur le terrain.</li>
+<li><strong>Puis vérifier</strong> l'absence de tension sur le bus continu, aux bornes repérées <span class="mono">+</span> et <span class="mono">−</span> ou <span class="mono">PA/PC</span>, au VAT en trois temps.</li>
+<li>Ne jamais court-circuiter un bus continu avec un tournevis pour « le vider » : l'arc est violent, le condensateur est détruit, et le variateur avec.</li>
+</ol>
+<p><em>Une remarque de terrain : sur un variateur qui a été alimenté pendant des années, les résistances de décharge sont parfois hors service sans que rien ne le signale. Le condensateur reste alors chargé bien plus longtemps que la plaque ne l'annonce — voire indéfiniment. C'est exactement pourquoi la plaque dit « attendre » ET la procédure dit « vérifier ». <span class="cle">L'attente ne remplace jamais la mesure.</span></em></p>
+</div></details></div>
+
+<div class="exo"><span class="tag">Exercice 19.3</span>
+<p>Trois intervenants travaillent sur la même ligne : un électricien, un mécanicien et un automaticien. L'électricien a consigné et posé son cadenas. Le mécanicien arrive une heure plus tard. Que doit-il faire ? Et si l'électricien part à 16 h alors que les deux autres continuent ?</p>
+<details><summary>Voir la réponse</summary><div class="rep">
+<p><strong>Ce que doit faire le mécanicien : poser SON propre cadenas.</strong></p>
+<p>Il ne se contente pas de constater que la machine est consignée. Il ajoute son cadenas nominatif sur le <strong>moraillon</strong> — cette pièce en forme de mâchoire qui permet de poser jusqu'à six cadenas sur un seul organe. Chacun a sa clé, dans sa poche, et une seule.</p>
+<p><strong>Pourquoi c'est indispensable, et pas une formalité.</strong> Le cadenas de l'électricien protège l'électricien. Rien ne garantit au mécanicien que l'électricien ne va pas finir, retirer son cadenas et remettre en service — puisque de son point de vue, le travail est terminé. En posant le sien, le mécanicien rend la remise sous tension <em>physiquement impossible</em> tant qu'il n'a pas lui-même retiré sa protection.</p>
+<p><strong>Et à 16 h, quand l'électricien part.</strong> Il retire son cadenas et s'en va. C'est parfaitement normal : la machine reste condamnée par les deux autres cadenas. <span class="cle">Le dernier à retirer son cadenas est celui qui autorise la remise en service — et c'est forcément le dernier à quitter la machine.</span></p>
+<p><strong>Avant de retirer le dernier cadenas</strong>, celui qui le fait doit vérifier trois choses :</p>
+<ul>
+<li>Que <strong>plus personne</strong> n'est sur ou dans la machine — on regarde, on appelle, on ne suppose pas.</li>
+<li>Que les <strong>protecteurs et carters</strong> sont remontés et fixés.</li>
+<li>Qu'aucun <strong>outil</strong> n'est resté dans la machine ou dans l'armoire.</li>
+</ul>
+<p><strong>Le cas qu'il faut avoir prévu :</strong> l'électricien part en oubliant son cadenas, et il est en congés trois semaines. On ne coupe pas le cadenas parce que la production attend. La levée d'une condamnation en l'absence de son auteur suit une <strong>procédure écrite</strong>, avec accord hiérarchique, vérification physique de la machine par un tiers habilité, et traçabilité. C'est long, c'est pénible, et c'est ce qui fait que personne n'oublie deux fois.</p>
+</div></details></div>
+
+</div>
+</section>
+
+<script>
+/* ======================= CH 19 · les cinq opérations de la consignation ======================= */
+(function(){
+  "use strict";
+  var OP=['aucune','1 · séparer','2 · condamner','3 · identifier','4 · vérifier (VAT)','5 · dissiper'];
+  var E=MSPC.ctrl('a-consign-e', function(v){ return OP[v]; }, 'a-consign-e-l');
+  var C=MSPC.ctrl('a-consign-c');
+  var S=MSPC.ctrl('a-consign-s');
+  var out=document.getElementById('a-consign-out');
+
+  function pastille(ctx,x,y,ok,txt,det){
+    ctx.fillStyle=ok?'#c8d834':'#ff6a5e';
+    ctx.beginPath(); ctx.arc(x,y,7,0,6.2832); ctx.fill();
+    MSPC.mono(ctx,txt,x+16,y+4,11,ok?'#c8d834':'#ff6a5e');
+    if(det) MSPC.mono(ctx,det,x+16,y+18,9.5,'#6f786e');
+  }
+
+  MSPC.anim('a-consign', function(a){
+    var ctx=a.ctx, W=a.W, H=a.H;
+    var e=E.val, colle=C.val, sec=S.val;
+
+    /* état réel de chaque danger */
+    var reseau = (e<1) || (colle && e<2);            // le départ principal est-il vivant ?
+    var second = sec && e<3;                          // la seconde alimentation oubliée
+    var sousTension = reseau || second;
+    var bus  = e<5;                                   // condensateur du variateur
+    var hydro= e<5;                                   // accumulateur
+    var masse= e<5;                                   // charge suspendue
+    var sur  = !sousTension && !bus && !hydro && !masse;
+
+    MSPC.fond(ctx,W,H,0);
+    MSPC.mono(ctx,'UNE PRESSE — CONSIGNATION TOUTES ÉNERGIES',26,30,11.5,'#8d968b');
+    MSPC.mono(ctx,'opération '+OP[e],W-26,30,10,'#6f786e','right');
+
+    /* ---------- l'armoire ---------- */
+    ctx.fillStyle='rgba(255,255,255,.05)'; ctx.fillRect(56,64,158,208);
+    ctx.strokeStyle='#5a6258'; ctx.lineWidth=2; ctx.strokeRect(56.5,64.5,158,208);
+    MSPC.mono(ctx,'ARMOIRE',135,84,10,'#8d968b','center');
+
+    // le sectionneur principal
+    var ouvert = e>=1;
+    ctx.strokeStyle=reseau?'#ff6a5e':'#c8d834'; ctx.lineWidth=3;
+    ctx.beginPath(); ctx.moveTo(90,100); ctx.lineTo(90,116); ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(90,116);
+    if(ouvert && !(colle&&e<2)) ctx.lineTo(110,138); else ctx.lineTo(90,146);
+    ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(90,146); ctx.lineTo(90,164); ctx.stroke();
+    ctx.fillStyle=reseau?'#ff6a5e':'#c8d834';
+    ctx.beginPath(); ctx.arc(90,116,3.4,0,6.2832); ctx.fill();
+    ctx.beginPath(); ctx.arc(90,146,3.4,0,6.2832); ctx.fill();
+    MSPC.mono(ctx,'Q1',70,124,10,'#8d968b','right');
+    // le cadenas
+    if(e>=2){
+      ctx.strokeStyle='#c8d834'; ctx.lineWidth=2.4;
+      ctx.beginPath(); ctx.arc(112,158,6,Math.PI,0); ctx.stroke();
+      ctx.fillStyle='#c8d834'; ctx.fillRect(105,158,14,12);
+      MSPC.mono(ctx,'cadenas',124,168,9.5,'#c8d834');
+    }
+    // la seconde alimentation
+    if(sec){
+      ctx.strokeStyle=second?'#ff6a5e':'#c8d834'; ctx.lineWidth=2.6;
+      ctx.beginPath(); ctx.moveTo(178,100); ctx.lineTo(178,116); ctx.stroke();
+      ctx.beginPath(); ctx.moveTo(178,116);
+      if(e>=3) ctx.lineTo(196,138); else ctx.lineTo(178,146);
+      ctx.stroke();
+      ctx.beginPath(); ctx.moveTo(178,146); ctx.lineTo(178,164); ctx.stroke();
+      MSPC.mono(ctx,'Q2',198,124,10, second?'#ff6a5e':'#c8d834');
+      MSPC.mono(ctx, second?'oublié !':'trouvé',198,138,9.5, second?'#ff6a5e':'#c8d834');
+    }
+
+    // le variateur et son bus continu
+    ctx.fillStyle=bus?'rgba(255,106,94,.16)':'rgba(200,216,52,.14)';
+    ctx.fillRect(72,188,126,66);
+    ctx.strokeStyle=bus?'#ff6a5e':'#c8d834'; ctx.lineWidth=2; ctx.strokeRect(72.5,188.5,126,66);
+    MSPC.mono(ctx,'VARIATEUR',135,206,10,'#8d968b','center');
+    MSPC.titre(ctx, bus?'560 V':'0 V',135,236,24,bus?'#ff6a5e':'#c8d834','center');
+    MSPC.mono(ctx,'bus continu',135,250,9,'#6f786e','center');
+
+    /* ---------- le moteur et la presse ---------- */
+    ctx.fillStyle='rgba(255,255,255,.05)'; ctx.fillRect(246,196,74,56);
+    ctx.strokeStyle=sousTension?'#ff6a5e':'#5a6258'; ctx.lineWidth=2; ctx.strokeRect(246.5,196.5,74,56);
+    MSPC.titre(ctx,'M',283,232,26,sousTension?'#ff6a5e':'#8d968b','center');
+    ctx.strokeStyle=sousTension?'#ff6a5e':'#4d5a4d'; ctx.lineWidth=2.4;
+    ctx.beginPath(); ctx.moveTo(214,224); ctx.lineTo(246,224); ctx.stroke();
+
+    // l'accumulateur hydraulique
+    ctx.fillStyle=hydro?'rgba(255,106,94,.16)':'rgba(200,216,52,.14)';
+    ctx.fillRect(360,86,58,92);
+    ctx.strokeStyle=hydro?'#ff6a5e':'#c8d834'; ctx.lineWidth=2; ctx.strokeRect(360.5,86.5,58,92);
+    ctx.fillStyle=hydro?'rgba(255,106,94,.3)':'rgba(200,216,52,.2)';
+    ctx.fillRect(362,132,54,44);
+    MSPC.mono(ctx,'ACCU.',389,104,9.5,'#8d968b','center');
+    MSPC.titre(ctx, hydro?'200 bar':'0 bar',389,126,17,hydro?'#ff6a5e':'#c8d834','center');
+    // le vérin
+    ctx.strokeStyle='#5a6258'; ctx.lineWidth=2;
+    ctx.strokeRect(444.5,96.5,76,40);
+    ctx.fillStyle=hydro?'rgba(255,106,94,.2)':'rgba(255,255,255,.06)';
+    ctx.fillRect(446,98,30,36);
+    ctx.beginPath(); ctx.moveTo(476,116); ctx.lineTo(540,116); ctx.stroke();
+    ctx.strokeStyle=hydro?'#ff6a5e':'#5a6258'; ctx.lineWidth=2.4;
+    ctx.beginPath(); ctx.moveTo(418,116); ctx.lineTo(444,116); ctx.stroke();
+
+    // la masse suspendue
+    ctx.strokeStyle=masse?'#ff6a5e':'#c8d834'; ctx.lineWidth=2;
+    ctx.beginPath(); ctx.moveTo(478,136); ctx.lineTo(478, masse?214:250); ctx.stroke();
+    ctx.fillStyle=masse?'rgba(255,106,94,.20)':'rgba(200,216,52,.16)';
+    ctx.fillRect(444, masse?214:250, 68, 40);
+    ctx.strokeStyle=masse?'#ff6a5e':'#c8d834'; ctx.lineWidth=2;
+    ctx.strokeRect(444.5, (masse?214:250)+.5, 68, 40);
+    MSPC.mono(ctx,'plateau',478,(masse?214:250)+24,10,'#cfe2ee','center');
+    if(!masse){
+      ctx.strokeStyle='#c8d834'; ctx.lineWidth=3;
+      ctx.beginPath(); ctx.moveTo(430,250); ctx.lineTo(430,296); ctx.stroke();
+      MSPC.mono(ctx,'béquille',424,308,9.5,'#c8d834','center');
+    }
+    ctx.strokeStyle='rgba(255,255,255,.16)'; ctx.lineWidth=1.4;
+    ctx.beginPath(); ctx.moveTo(340,296); ctx.lineTo(560,296); ctx.stroke();
+
+    /* ---------- le panneau des opérations ---------- */
+    var px=616, pw=W-px-26;
+    ctx.fillStyle='rgba(255,255,255,.04)'; ctx.fillRect(px,64,pw,208);
+    ctx.strokeStyle='rgba(255,255,255,.20)'; ctx.lineWidth=1.4; ctx.strokeRect(px+.5,64.5,pw,208);
+    MSPC.mono(ctx,'LES CINQ OPÉRATIONS',px+16,88,10,'#8d968b');
+    ['séparer','condamner','identifier','vérifier (VAT)','dissiper'].forEach(function(n,i){
+      var fait=e>=i+1, y=112+i*32;
+      ctx.fillStyle=fait?'#c8d834':'rgba(255,255,255,.10)';
+      ctx.fillRect(px+16,y-11,15,15);
+      if(fait){ ctx.strokeStyle='#0d120f'; ctx.lineWidth=2.2;
+        ctx.beginPath(); ctx.moveTo(px+19,y-4); ctx.lineTo(px+22,y-1); ctx.lineTo(px+28,y-8); ctx.stroke(); }
+      MSPC.mono(ctx,(i+1)+' · '+n,px+42,y+1,12.5,fait?'#e6ebe4':'#6f786e');
+    });
+
+    /* ---------- ce qui est encore dangereux ---------- */
+    var dy=330;
+    MSPC.mono(ctx,'CE QUI PEUT ENCORE VOUS TUER',26,dy,10.5,'#8d968b');
+    pastille(ctx,34,dy+24,!sousTension,'Tension réseau', sousTension?(second?'la seconde alimentation Q2 est vivante':'le départ Q1 est fermé'):'séparé, condamné, vérifié');
+    pastille(ctx,254,dy+24,!bus,'Bus continu 560 V', bus?'le condensateur est chargé':'déchargé et vérifié');
+    pastille(ctx,494,dy+24,!hydro,'Accumulateur', hydro?'200 bar en réserve':'purgé, manomètre à zéro');
+    pastille(ctx,694,dy+24,!masse,'Masse suspendue', masse?'le plateau est en l’air':'descendu et béquillé');
+
+    /* ---------- verdict ---------- */
+    var vy=404;
+    ctx.fillStyle=sur?'rgba(200,216,52,.10)':'rgba(255,106,94,.10)';
+    ctx.fillRect(26,vy-22,W-52,40);
+    var msg;
+    if(sur) msg='CONSIGNÉE. Les cinq opérations sont faites et les quatre dangers sont éteints.';
+    else if(colle&&e===1) msg='Le collègue a refermé Q1 : séparer sans condamner ne protège de rien.';
+    else if(sec&&e<3) msg='Une seconde alimentation reste vivante. C’est l’identification qui la fait apparaître.';
+    else if(e>=4&&e<5) msg='L’électricité est morte et vérifiée — mais trois énergies restent armées.';
+    else if(e===0) msg='La machine est à l’arrêt. Elle n’est pas consignée pour autant : tout est encore vivant.';
+    else msg='Consignation en cours : '+(5-e)+' opération'+(5-e>1?'s':'')+' restante'+(5-e>1?'s':'')+'.';
+    MSPC.mono(ctx,msg,42,vy+3,12,sur?'#c8d834':'#ff6a5e');
+
+    out.innerHTML = sur ? '<b style="color:#c8d834">Machine consignée</b><br>les quatre dangers sont éteints'
+      : '<b style="color:#ff6a5e">'+[sousTension?'réseau':null,bus?'bus continu':null,hydro?'accumulateur':null,masse?'masse':null].filter(Boolean).length
+        +' danger(s) actif(s)</b><br>'+msg.slice(0,52)+'…';
+  }, {fixed:true});
+})();
+
+/* ======================= CH 19 · le VAT en trois temps ======================= */
+(function(){
+  "use strict";
+  var ET=['1 · test préalable','2 · vérification','3 · contre-test','conclusion'];
+  var E=MSPC.ctrl('a-vat-e', function(v){ return ET[v]; }, 'a-vat-e-l');
+  var P=MSPC.ctrl('a-vat-p');
+  var T=MSPC.ctrl('a-vat-t');
+  var out=document.getElementById('a-vat-out');
+
+  MSPC.anim('a-vat', function(a){
+    var ctx=a.ctx, W=a.W, H=a.H;
+    var et=E.val, panne=P.val, horsTension=T.val;
+
+    // où se trouve le VAT, et ce qu'il indique
+    var surTemoin = (et===0 || et===2);
+    var tensionPresente = surTemoin ? true : !horsTension;
+    var allume = tensionPresente && !panne && et<3;
+
+    MSPC.fond(ctx,W,H,0);
+    MSPC.mono(ctx,'VÉRIFICATION D’ABSENCE DE TENSION — LA PROCÉDURE EN TROIS TEMPS',26,30,11.5,'#8d968b');
+
+    /* ---------- la source témoin ---------- */
+    var tx=120, ty=140;
+    ctx.fillStyle='rgba(255,106,94,.12)'; ctx.fillRect(tx-52,ty-48,104,116);
+    ctx.strokeStyle='#ff6a5e'; ctx.lineWidth=2; ctx.strokeRect(tx-51.5,ty-47.5,104,116);
+    MSPC.mono(ctx,'SOURCE TÉMOIN',tx,ty-28,10,'#ff6a5e','center');
+    MSPC.titre(ctx,'230 V',tx,ty+6,26,'#ff6a5e','center');
+    MSPC.mono(ctx,'toujours sous tension',tx,ty+26,9.5,'#8d968b','center');
+    ctx.fillStyle='#ff6a5e';
+    ctx.beginPath(); ctx.arc(tx-16,ty+48,5,0,6.2832); ctx.fill();
+    ctx.beginPath(); ctx.arc(tx+16,ty+48,5,0,6.2832); ctx.fill();
+
+    /* ---------- l'installation ---------- */
+    var ix=470, iy=140;
+    var viv=!horsTension;
+    ctx.fillStyle=viv?'rgba(255,106,94,.12)':'rgba(200,216,52,.10)';
+    ctx.fillRect(ix-72,iy-48,144,116);
+    ctx.strokeStyle=viv?'#ff6a5e':'#c8d834'; ctx.lineWidth=2; ctx.strokeRect(ix-71.5,iy-47.5,144,116);
+    MSPC.mono(ctx,'INSTALLATION À VÉRIFIER',ix,iy-28,10,viv?'#ff6a5e':'#c8d834','center');
+    MSPC.titre(ctx, viv?'230 V':'0 V', ix, iy+6, 26, viv?'#ff6a5e':'#c8d834','center');
+    MSPC.mono(ctx, viv?'la consignation a échoué quelque part':'consignée, séparée, condamnée', ix, iy+26, 9.5,'#8d968b','center');
+    ctx.fillStyle=viv?'#ff6a5e':'#4d5a4d';
+    ctx.beginPath(); ctx.arc(ix-20,iy+48,5,0,6.2832); ctx.fill();
+    ctx.beginPath(); ctx.arc(ix+20,iy+48,5,0,6.2832); ctx.fill();
+    MSPC.mono(ctx,'vous ne le savez pas — c’est justement ce que vous cherchez',ix,iy+92,9.5,'#6f786e','center');
+
+    /* ---------- le VAT ---------- */
+    var vx = surTemoin ? tx : ix;
+    var vy = 262;
+    ctx.strokeStyle='#8d968b'; ctx.lineWidth=2.4;
+    ctx.beginPath(); ctx.moveTo(vx-16,vy-26); ctx.lineTo(vx-16,(surTemoin?ty+48:iy+48)); ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(vx+16,vy-26); ctx.lineTo(vx+16,(surTemoin?ty+48:iy+48)); ctx.stroke();
+    ctx.fillStyle=panne?'rgba(255,255,255,.05)':'rgba(255,255,255,.09)';
+    ctx.fillRect(vx-46,vy-26,92,66);
+    ctx.strokeStyle=panne?'#6f786e':'#cfe2ee'; ctx.lineWidth=2; ctx.strokeRect(vx-45.5,vy-25.5,92,66);
+    MSPC.mono(ctx,'VAT',vx,vy-8,10,'#8d968b','center');
+    // l'afficheur
+    ctx.fillStyle=allume?'#ff6a5e':'#161d18';
+    ctx.fillRect(vx-30,vy,60,26);
+    ctx.strokeStyle='#2a322b'; ctx.lineWidth=1.4; ctx.strokeRect(vx-30.5,vy-.5,61,27);
+    MSPC.titre(ctx, allume?'230 V':'—', vx, vy+20, 19, allume?'#0d120f':'#4d5a4d','center');
+    if(panne) MSPC.mono(ctx,'appareil en panne',vx,vy+58,10,'#f0a844','center');
+
+    /* ---------- les trois temps ---------- */
+    var sy=336;
+    MSPC.mono(ctx,'LA PROCÉDURE',26,sy-10,10.5,'#8d968b');
+    var att=[ ['1 · sur la source témoin','doit s’allumer'],
+              ['2 · sur l’installation','ne doit rien indiquer'],
+              ['3 · sur la source témoin','doit s’allumer ENCORE'] ];
+    att.forEach(function(x,i){
+      var xx=26+i*208, actif=(et===i), fait=(et>i);
+      ctx.fillStyle=actif?'rgba(200,216,52,.14)':'rgba(255,255,255,.04)';
+      ctx.fillRect(xx,sy,192,52);
+      ctx.strokeStyle=actif?'#c8d834':'rgba(255,255,255,.16)'; ctx.lineWidth=actif?2:1;
+      ctx.strokeRect(xx+.5,sy+.5,192,52);
+      MSPC.mono(ctx,x[0],xx+12,sy+21,11,actif?'#c8d834':(fait?'#8d968b':'#5d665e'));
+      MSPC.mono(ctx,x[1],xx+12,sy+38,9.5,actif?'#e6ebe4':'#5d665e');
+    });
+
+    /* ---------- verdict ---------- */
+    var msg, coul;
+    if(panne && et===0){ msg='Le VAT ne s’allume pas sur une source pourtant vivante : il est HORS SERVICE. On s’arrête là, on en prend un autre.'; coul='#f0a844'; }
+    else if(panne && et===1){ msg='Le VAT n’indique rien — exactement comme s’il n’y avait pas de tension. RIEN ne permet de conclure : c’est le piège.'; coul='#ff6a5e'; }
+    else if(panne && et>=2){ msg='Le contre-test échoue : l’appareil était déjà mort au temps 2. La vérification précédente ne valait rien.'; coul='#ff6a5e'; }
+    else if(et===0){ msg='Le VAT s’allume : il fonctionne. On peut aller vérifier l’installation.'; coul='#c8d834'; }
+    else if(et===1 && horsTension){ msg='Le VAT n’indique rien. Ce n’est pas encore une conclusion : il faut le contre-test.'; coul='#8d968b'; }
+    else if(et===1 && !horsTension){ msg='Le VAT s’allume sur l’installation : IL Y A DE LA TENSION. La consignation a échoué, on reprend tout.'; coul='#ff6a5e'; }
+    else if(et===2){ msg='Le VAT s’allume encore : il fonctionnait toujours au moment du test. La vérification est valide.'; coul='#c8d834'; }
+    else if(horsTension){ msg='CONCLUSION VALIDE : l’installation est hors tension, et on peut le prouver.'; coul='#c8d834'; }
+    else { msg='CONCLUSION : il y avait de la tension. Sans les temps 1 et 3, vous ne l’auriez jamais su.'; coul='#ff6a5e'; }
+    ctx.fillStyle='rgba(255,255,255,.05)'; ctx.fillRect(26,398,W-52,2);
+    MSPC.mono(ctx,msg,26,H-12,12,coul);
+
+    out.innerHTML='<b style="color:'+coul+'">'+ET[et]+'</b><br>'+(allume?'le VAT indique 230 V':'le VAT n’indique rien');
+  }, {fixed:true});
+})();
+
+/* ======================= CH 19 · les énergies résiduelles ======================= */
+(function(){
+  "use strict";
+  var EN=[
+    {n:'Condensateur du variateur', u:'560 V', geste:'attendre 5 min PUIS vérifier au VAT sur le bus continu', auto:true},
+    {n:'Accumulateur hydraulique',  u:'200 bar', geste:'ouvrir la vanne de purge, contrôler le manomètre à zéro', auto:false},
+    {n:'Réservoir d’air',           u:'7 bar', geste:'fermer la vanne d’arrivée, purger le réseau aval', auto:false},
+    {n:'Masse suspendue',           u:'450 kg', geste:'descendre la charge, ou caler avec la béquille de sécurité', auto:false},
+    {n:'Ressort de sécurité',       u:'comprimé', geste:'détendre selon la procédure constructeur, jamais à l’arrache', auto:false},
+    {n:'Volant d’inertie',          u:'1 400 tr/min', geste:'attendre l’arrêt complet, vérifier visuellement', auto:false},
+    {n:'Pièces chaudes',            u:'280 °C', geste:'laisser refroidir, contrôler au thermomètre infrarouge', auto:false}
+  ];
+  var T=MSPC.ctrl('a-energies-t', function(v){ return v<60 ? Math.round(v)+' s' : (v/60).toFixed(1).replace('.',',')+' min'; }, 'a-energies-t-l');
+  var S=MSPC.ctrl('a-energies-s', function(v){ return v===0?'toutes':EN[v-1].n.toLowerCase(); }, 'a-energies-s-l');
+  var out=document.getElementById('a-energies-out');
+  var btn=document.getElementById('a-energies-go');
+  var diss=[false,false,false,false,false,false,false];
+  if(btn) btn.addEventListener('click', function(){
+    if(S.val===0) diss=[false,false,false,false,false,false,false];
+    else diss[S.val-1]=true;
+  });
+
+  MSPC.anim('a-energies', function(a){
+    var ctx=a.ctx, W=a.W, H=a.H;
+    var t=T.val, sel=S.val;
+    var Ubus=560*Math.exp(-t/95);
+    var etat=EN.map(function(e,i){
+      if(i===0) return diss[0] || Ubus<50;
+      return diss[i];
+    });
+    var reste=etat.filter(function(x){ return !x; }).length;
+
+    MSPC.fond(ctx,W,H,0);
+    MSPC.mono(ctx,'CE QUI SURVIT À LA COUPURE — SEPT ÉNERGIES RÉSIDUELLES',26,30,11.5,'#8d968b');
+    MSPC.mono(ctx,'une seule s’éteint toute seule',W-26,30,10,'#6f786e','right');
+
+    /* les cartes */
+    for(var i=0;i<7;i++){
+      var col=i%2, lig=Math.floor(i/2);
+      var x=26+col*300, y=52+lig*66;
+      var ok=etat[i], vise=(sel===i+1);
+      ctx.fillStyle=ok?'rgba(200,216,52,.09)':'rgba(255,106,94,.09)';
+      ctx.fillRect(x,y,286,58);
+      ctx.strokeStyle=vise?'#cfe2ee':(ok?'#c8d834':'#ff6a5e'); ctx.lineWidth=vise?2.4:1.4;
+      ctx.strokeRect(x+.5,y+.5,286,58);
+      ctx.fillStyle=ok?'#c8d834':'#ff6a5e';
+      ctx.beginPath(); ctx.arc(x+22,y+29,9,0,6.2832); ctx.fill();
+      if(ok){ ctx.strokeStyle='#0d120f'; ctx.lineWidth=2.2;
+        ctx.beginPath(); ctx.moveTo(x+17,y+29); ctx.lineTo(x+21,y+33); ctx.lineTo(x+28,y+24); ctx.stroke(); }
+      MSPC.mono(ctx,EN[i].n,x+42,y+24,11.5,ok?'#8d968b':'#e6ebe4');
+      var val = (i===0 && !diss[0]) ? Math.round(Ubus)+' V' : (ok?'dissipée':EN[i].u);
+      MSPC.titre(ctx,val,x+42,y+47,19,ok?'#c8d834':'#ff6a5e');
+      if(i===0 && !ok) MSPC.mono(ctx,'décroît seul',x+272,y+47,9.5,'#f0a844','right');
+      else if(!ok) MSPC.mono(ctx,'n’attend que vous',x+272,y+47,9.5,'#6f786e','right');
+    }
+    /* la case libre : l'avancement */
+    var fx=326, fy=250, faits=7-reste;
+    ctx.fillStyle='rgba(255,255,255,.04)'; ctx.fillRect(fx,fy,286,58);
+    ctx.strokeStyle='rgba(255,255,255,.18)'; ctx.lineWidth=1.4; ctx.strokeRect(fx+.5,fy+.5,286,58);
+    MSPC.mono(ctx,'DISSIPÉES',fx+16,fy+22,10,'#8d968b');
+    MSPC.titre(ctx,faits+' / 7',fx+16,fy+46,22, faits===7?'#c8d834':'#f0a844');
+    ctx.fillStyle='rgba(255,255,255,.10)'; ctx.fillRect(fx+96,fy+30,174,14);
+    ctx.fillStyle=faits===7?'#c8d834':'#f0a844'; ctx.fillRect(fx+96,fy+30,174*faits/7,14);
+
+    /* la carte de détail */
+    var dx=26, dy=320;
+    ctx.fillStyle='rgba(255,255,255,.05)'; ctx.fillRect(dx,dy,W-52,58);
+    if(sel===0){
+      MSPC.mono(ctx,'Le temps ne dissipe qu’une seule des sept énergies : le condensateur. Les six autres attendent un geste.',dx+16,dy+23,12,'#e6ebe4');
+      MSPC.mono(ctx,'Sélectionnez-en une ci-dessus pour voir lequel.',dx+16,dy+42,10.5,'#8d968b');
+    } else {
+      MSPC.mono(ctx,EN[sel-1].n.toUpperCase(),dx+16,dy+21,11,'#cfe2ee');
+      MSPC.mono(ctx,'→ '+EN[sel-1].geste,dx+16,dy+42,12,etat[sel-1]?'#c8d834':'#f0a844');
+    }
+
+    /* verdict */
+    ctx.fillStyle=reste?'rgba(255,106,94,.10)':'rgba(200,216,52,.12)';
+    ctx.fillRect(26,H-38,W-52,28);
+    MSPC.mono(ctx, reste
+      ? reste+' énergie'+(reste>1?'s':'')+' encore armée'+(reste>1?'s':'')+' — la machine n’est PAS consignée.'
+      : 'Les sept énergies sont dissipées. La machine est enfin sûre.',
+      42, H-19, 12.5, reste?'#ff6a5e':'#c8d834');
+
+    out.innerHTML = reste
+      ? '<b style="color:#ff6a5e">'+reste+' énergie'+(reste>1?'s':'')+' active'+(reste>1?'s':'')+'</b><br>bus continu : '+Math.round(Ubus)+' V'
+      : '<b style="color:#c8d834">Tout est dissipé</b><br>la machine est consignée';
   }, {fixed:true});
 })();
 </script>
