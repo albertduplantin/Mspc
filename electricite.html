@@ -48,10 +48,10 @@
 </header>
 
 <div class="meta-bar">
-  <div><b>23</b> chapitres</div>
-  <div><b>34</b> animations pilotables</div>
+  <div><b>25</b> chapitres</div>
+  <div><b>40</b> animations pilotables</div>
   <div><b>15</b> fiches TP d'atelier</div>
-  <div><b>67</b> exercices corrigés</div>
+  <div><b>73</b> exercices corrigés</div>
   <div>Manips en <b>TBTS ≤ 24 V</b> sauf mention</div>
 </div>
 
@@ -84,6 +84,8 @@
     <a class="borne" href="#c21"><span class="num">21</span><span class="lbl">Lire un schéma électrique</span></a>
     <a class="borne" href="#c22"><span class="num">22</span><span class="lbl">Le moteur asynchrone triphasé</span></a>
     <a class="borne" href="#c23"><span class="num">23</span><span class="lbl">La plaque et le couplage</span></a>
+    <a class="borne" href="#c24"><span class="num">24</span><span class="lbl">Démarrer et protéger</span></a>
+    <a class="borne" href="#c25"><span class="num">25</span><span class="lbl">Le variateur de vitesse</span></a>
     <a class="borne" href="#tps" style="border-top-color:var(--accent)"><span class="num">TP</span><span class="lbl">Les 15 fiches d'atelier</span></a>
   </div></nav>
 
@@ -7053,6 +7055,1097 @@
       42,438,10.5,'#6f786e');
 
     out.innerHTML='<b style="color:'+coul+'">'+etat+'</b><br>'+Math.round(Ub)+' V sur un enroulement de '+UNOM+' V ('+Math.round(taux*100)+' %)';
+  }, {fixed:true});
+})();
+</script>
+
+
+<!-- ================= CH 24 ================= -->
+<section class="ch" id="c24">
+  <div class="ch-head"><div class="ch-num">24</div><div class="ch-title">
+    <span class="kicker">Quatre appareils, quatre métiers différents</span><h2>Démarrer et protéger un moteur</h2></div></div>
+  <div class="ch-body">
+
+<div class="savoirs">
+  <span class="savoir n3"><b>S2.4</b> <i>Solutions constructives : distribuer, protéger</i></span>
+  <span class="savoir n3"><b>S2.4</b> <i>Influence des paramètres et des réglages</i></span>
+</div>
+
+<p class="lede">Dans une armoire, quatre appareils se suivent en série entre le réseau et le moteur. Ils se ressemblent, ils sont côte à côte, ils coupent tous le courant — et pourtant <strong>aucun ne fait le travail d'un autre</strong>. Confondre leurs rôles, c'est croire qu'on est protégé alors qu'on ne l'est pas.</p>
+
+<h3>24.1 — Qui protège contre quoi</h3>
+
+<table>
+<thead><tr><th>Appareil</th><th>Son métier</th><th>Ce qu'il ne fait PAS</th></tr></thead>
+<tbody>
+<tr><td><strong>Q1 · Sectionneur</strong></td><td>Établir une <strong>coupure visible et condamnable</strong> pour consigner. Il se manœuvre à vide.</td><td>Il ne coupe pas en charge, ne protège de rien, et ne se commande pas à distance.</td></tr>
+<tr><td><strong>Fusibles aM ou disjoncteur</strong></td><td>Protéger contre le <strong>court-circuit</strong> — des milliers d'ampères, coupés en quelques millisecondes.</td><td>Il ne voit pas une surcharge de 20 %, et ne protège aucune personne.</td></tr>
+<tr><td><strong>KM1 · Contacteur</strong></td><td><strong>Établir et couper en charge</strong>, à distance, aussi souvent qu'on veut. C'est l'organe de commande.</td><td>Il ne protège absolument rien. Il obéit, c'est tout.</td></tr>
+<tr><td><strong>F1 · Relais thermique</strong></td><td>Protéger le moteur contre la <strong>surcharge prolongée</strong> — une image thermique de son échauffement.</td><td>Il ne coupe pas un court-circuit — il n'en a pas le pouvoir — et il ne coupe pas lui-même la puissance.</td></tr>
+</tbody></table>
+
+<p><span class="cle">Et aucun des quatre ne protège une personne.</span> Cela, c'est le rôle du différentiel du chapitre 18 — un cinquième appareil, avec un cinquième métier.</p>
+
+<figure class="anim">
+  <canvas id="a-appareillage" width="900" height="470" aria-label="Animation : les quatre appareils d'un départ-moteur et lequel réagit selon le défaut"></canvas>
+  <div class="ctrls">
+    <div class="c"><label>Situation <span id="a-appareillage-s-l">marche normale</span></label><input type="range" id="a-appareillage-s" min="0" max="5" value="0"></div>
+    <div class="c readout" id="a-appareillage-out"></div>
+  </div>
+  <figcaption>Les quatre appareils en série, du réseau au moteur. <b>Choisissez une situation</b> et regardez lequel réagit — et surtout lesquels restent impassibles. <b>Sur « court-circuit »</b>, seul le disjoncteur bouge, en quelques millisecondes. <b>Sur « surcharge de 30 % »</b>, il ne se passe rien pendant plusieurs minutes, puis le thermique lâche. <b>Sur « une personne touche une masse »</b>, <b>aucun des quatre ne bronche</b> : la case du différentiel s'allume en rouge pour dire ce qui manque.</figcaption>
+  <div class="autableau">
+    <b class="entete">Au tableau <i>· 10 minutes · animation 1 sur 3</i></b>
+    <ol>
+      <li>Marche normale. Demander de nommer les quatre appareils. <span class="q">« Lequel est en train de travailler en ce moment ? »</span> Le contacteur — les autres attendent.</li>
+      <li>Passer sur <b>court-circuit</b>. <span class="q">« Combien de temps a-t-il fallu ? »</span> Faire lire les millisecondes.</li>
+      <li>Passer sur <b>surcharge 30 %</b>. Laisser tourner. <span class="q">« Pourquoi le disjoncteur ne fait-il rien ? »</span> 1,3 fois In, c'est loin de son seuil.</li>
+      <li>Passer sur <b>contact d'une personne</b>. Silence. <span class="q">« Qui me protège ? »</span> Laisser le vide s'installer, puis montrer la case rouge.</li>
+      <li>Finir sur <b>consignation</b> : <span class="q">« lequel des quatre puis-je cadenasser ? »</span> Le sectionneur, et lui seul.</li>
+    </ol>
+    <div class="piege">Le piège : « le disjoncteur protège le moteur ». Non — il protège le CÂBLE. Le moteur est protégé par le relais thermique, et les personnes par le différentiel. Trois appareils, trois métiers, et on ne peut en supprimer aucun.</div>
+  </div>
+</figure>
+
+<h3>24.2 — Le relais thermique et son réglage</h3>
+<p>Le relais thermique n'est pas un ampèremètre à seuil : c'est une <strong>image thermique</strong> du moteur. Trois bilames, chauffés par le courant des trois phases, se déforment plus ou moins vite selon la surcharge — exactement comme les enroulements chauffent.</p>
+<p>D'où deux propriétés qui déroutent :</p>
+<ul>
+<li><strong>Plus la surcharge est forte, plus il déclenche vite.</strong> C'est une courbe, pas un seuil. À 1,2 fois le réglage il peut mettre une demi-heure ; à 7 fois, quelques secondes.</li>
+<li><strong>Il laisse volontairement passer le démarrage.</strong> Six fois le nominal pendant deux secondes ne doit pas le faire déclencher. C'est ce que désigne sa <em>classe</em>.</li>
+</ul>
+
+<table>
+<thead><tr><th>Classe</th><th>Temps de déclenchement à 7,2 × I<sub>r</sub></th><th>Pour quel démarrage</th></tr></thead>
+<tbody>
+<tr><td><strong>10 A</strong></td><td>2 à 10 s</td><td>Démarrages très courts</td></tr>
+<tr><td><strong>10</strong></td><td>4 à 10 s</td><td>Le cas standard — pompes, convoyeurs</td></tr>
+<tr><td><strong>20</strong></td><td>6 à 20 s</td><td>Démarrages longs — ventilateurs, centrifugeuses</td></tr>
+<tr><td><strong>30</strong></td><td>9 à 30 s</td><td>Très forte inertie — broyeurs, essoreuses</td></tr>
+</tbody></table>
+
+<div class="encadre danger"><span class="tag">La règle de réglage, et l'erreur qui la ruine</span>
+<p>On règle le courant <span class="mono">I<sub>r</sub></span> du relais sur <strong>le courant nominal du moteur, dans le couplage réellement câblé</strong> — la valeur lue sur la plaque, ou mieux, celle mesurée à la pince en charge normale.</p>
+<p><span class="cle">Un relais réglé trop haut ne protège rien : le moteur cuit lentement sans que rien ne déclenche.</span> C'est le défaut le plus fréquent, et il a une cause banale : le moteur déclenchait, quelqu'un a monté la molette pour « qu'il arrête d'embêter la production ». Le vrai problème — bande grippée, roulement mort, produit coincé — est toujours là, et le moteur y passera.</p>
+<p><strong>Le réflexe :</strong> un thermique qui déclenche est un thermique qui fait son travail. On cherche <em>pourquoi</em>, on ne monte pas la molette.</p></div>
+
+<figure class="anim">
+  <canvas id="a-thermique" width="900" height="470" aria-label="Animation : courbe de déclenchement d'un relais thermique selon son réglage et sa classe"></canvas>
+  <div class="ctrls">
+    <div class="c"><label>Réglage I<sub>r</sub> du relais <span id="a-thermique-r-l">5,0 A</span></label><input type="range" id="a-thermique-r" min="30" max="120" value="50"></div>
+    <div class="c"><label>Courant réel du moteur <span id="a-thermique-i-l">7,5 A</span></label><input type="range" id="a-thermique-i" min="10" max="400" value="75"></div>
+    <div class="c"><label>Classe <span id="a-thermique-c-l">10</span></label><input type="range" id="a-thermique-c" min="0" max="3" value="1"></div>
+    <div class="c readout" id="a-thermique-out"></div>
+  </div>
+  <figcaption>La courbe de déclenchement, en échelles logarithmiques. <b>L'axe horizontal est le rapport I / I<sub>r</sub></b>, pas des ampères : c'est le réglage qui fixe l'échelle. <b>Placez le courant réel à 6 fois le réglage</b> — c'est un démarrage : le déclenchement viendrait en quelques secondes, mais le démarrage est fini avant. <b>Descendez à 1,3 fois</b> : plusieurs minutes, ce qui laisse le temps à une surcharge passagère de retomber. <b>Puis montez le réglage à 9 A pour un moteur de 5 A</b> : le point sort de la courbe et le relais ne déclenchera <b>jamais</b>. C'est exactement ce que fait celui qui monte la molette.</figcaption>
+  <div class="autableau">
+    <b class="entete">Au tableau <i>· 10 minutes · animation 2 sur 3</i></b>
+    <ol>
+      <li>Réglage 5 A, courant 5 A. <span class="q">« Le relais va-t-il déclencher ? »</span> Non, on est à 1,0 fois : il est fait pour ça.</li>
+      <li>Monter le courant à 6 A (1,2 fois). Faire lire le temps. <span class="q">« C'est long. Pourquoi ne coupe-t-il pas tout de suite ? »</span></li>
+      <li>Monter à 30 A (6 fois) : quelques secondes. <span class="q">« Est-ce qu'un démarrage va le faire déclencher ? »</span> Comparer au temps de démarrage réel.</li>
+      <li>Le moment décisif : <b>remettre le courant à 6 A et monter le réglage à 9 A</b>. Le point sort de la courbe. <span class="q">« Que se passe-t-il pour le moteur ? »</span></li>
+      <li>Changer la <b>classe</b> de 10 à 30 sans rien toucher d'autre : la courbe se décale. <span class="q">« Qu'est-ce que ça change au démarrage ? »</span></li>
+    </ol>
+    <div class="piege">Le piège : croire qu'un relais thermique « voit » les ampères. Il voit une TEMPÉRATURE, celle de ses bilames, qui est l'image de celle du moteur. C'est pour cela qu'après un déclenchement il faut attendre qu'il refroidisse avant de réarmer — et que le réarmement immédiat, forcé, est ce qui achève les moteurs.</div>
+  </div>
+</figure>
+
+<h3>24.3 — Démarrer : quatre méthodes, un compromis</h3>
+<p>Le problème est toujours le même : au démarrage, un moteur asynchrone tire <strong>six à huit fois son courant nominal</strong>. Sur une petite installation, cela fait chuter la tension de tout l'atelier et fait clignoter l'éclairage. Sur un gros moteur, le distributeur l'interdit.</p>
+<p>Toutes les solutions consistent à <strong>réduire la tension au démarrage</strong> — et comme le couple varie avec le carré de la tension, on paie toujours en couple ce qu'on gagne en courant.</p>
+
+<figure class="anim">
+  <canvas id="a-demarrage" width="900" height="500" aria-label="Animation : comparaison des quatre méthodes de démarrage d'un moteur asynchrone"></canvas>
+  <div class="ctrls">
+    <div class="c"><label>Méthode <span id="a-demarrage-m-l">direct</span></label><input type="range" id="a-demarrage-m" min="0" max="3" value="0"></div>
+    <div class="c"><label>Couple résistant <span id="a-demarrage-c-l">60 % de Cn</span></label><input type="range" id="a-demarrage-c" min="0" max="150" value="60"></div>
+    <div class="c"><button class="btn" id="a-demarrage-go">Démarrer</button></div>
+    <div class="c readout" id="a-demarrage-out"></div>
+  </div>
+  <figcaption>Le démarrage simulé en direct, avec l'inertie de la machine. <b>Appuyez sur DÉMARRER</b> et regardez le courant monter à 6,5 fois le nominal puis retomber quand le moteur atteint sa vitesse. <b>Passez en étoile-triangle</b> : le courant est divisé par trois — mais le couple aussi, et le démarrage est plus long. <b>Montez le couple résistant à 60 %</b> et refaites : en étoile-triangle, <b>le moteur ne décolle plus</b>, parce que le tiers du couple de démarrage ne suffit plus. <b>Le variateur</b> fait mieux que tout : plein couple avec un courant qui ne dépasse jamais le nominal — et c'est pour ça qu'il a tout remplacé.</figcaption>
+  <div class="autableau">
+    <b class="entete">Au tableau <i>· 14 minutes · animation 3 sur 3</i></b>
+    <ol>
+      <li>Méthode <b>direct</b>, charge 20 %. Démarrer. Faire lire la pointe de courant. <span class="q">« Six fois le nominal. Sur un moteur de 30 kW, ça fait combien d'ampères ? »</span></li>
+      <li>Passer en <b>étoile-triangle</b>, même charge. Démarrer. <span class="q">« Le courant a été divisé par combien ? »</span> Trois. <span class="q">« Et le couple ? »</span> Aussi par trois.</li>
+      <li>Faire remarquer <b>le second pic</b> au moment du basculement en triangle — celui que tout le monde oublie.</li>
+      <li>Monter la charge à <b>60 %</b> et refaire en étoile-triangle. Le moteur cale. <span class="q">« Qu'est-ce qui s'est passé ? »</span> Question centrale.</li>
+      <li>Passer au <b>variateur</b>, même charge. Il démarre sans effort. <span class="q">« Pourquoi peut-il donner tout son couple sans tirer de courant ? »</span> Ouvre le chapitre 25.</li>
+    </ol>
+    <div class="piege">Le piège : « l'étoile-triangle, c'est mieux ». C'est mieux <b>pour le réseau</b>, et moins bien pour la machine. Sur une charge qui demande du couple à l'arrêt — convoyeur chargé, broyeur, compresseur non délesté — il ne démarre tout simplement pas. Le choix d'un démarreur se fait sur la courbe de la charge, jamais par habitude.</div>
+  </div>
+</figure>
+
+<div class="exo"><span class="tag">Exercice 24.1</span>
+<p>Un relais thermique est réglé sur 8 A. Le moteur, dont la plaque annonce 5,0 A en étoile, tire 6,2 A en fonctionnement. Le thermique n'a jamais déclenché. Est-ce normal ? Que faites-vous ?</p>
+<details><summary>Voir la réponse</summary><div class="rep">
+<p><strong>Le relais fonctionne parfaitement. C'est le réglage qui est faux, et il y a deux problèmes empilés.</strong></p>
+<p><strong>Problème 1 — le réglage.</strong> Le relais est réglé sur 8 A pour un moteur de 5,0 A, soit <strong>160 % du nominal</strong>. Le moteur tirant 6,2 A, le relais voit :</p>
+<p class="mono">6,2 / 8 = <strong>0,78 fois son réglage</strong></p>
+<p>Il est très en dessous de son seuil : il ne déclenchera jamais, quoi qu'il arrive au moteur — sauf court-circuit franc, qu'il ne sait de toute façon pas couper.</p>
+<p><strong>Problème 2 — la surcharge, bien réelle.</strong> Le moteur tire 6,2 A pour un nominal de 5,0 A :</p>
+<p class="mono">6,2 / 5,0 = <strong>124 % du courant nominal</strong></p>
+<p>Un moteur à 124 % chauffe environ 1,24² = <strong>1,54 fois</strong> plus que prévu. Sa durée de vie s'effondre : la règle empirique dit qu'une élévation de 10 °C au-dessus de la classe divise la durée de vie de l'isolant par deux.</p>
+<p><strong>Ce que ce réglage raconte.</strong> Quelqu'un a monté la molette parce que le relais déclenchait. Le relais déclenchait parce que le moteur était surchargé. La surcharge est toujours là.</p>
+<p><strong>Ce qu'il faut faire, dans l'ordre :</strong></p>
+<ol>
+<li><strong>Chercher la cause de la surcharge</strong> — c'est le vrai travail. Vérifier la mécanique : tension de courroie, roulements, alignement, jeu de la transmission, produit accumulé, racleur trop serré. Un ampère de trop est presque toujours mécanique.</li>
+<li>Vérifier que le <strong>couplage</strong> est bien celui de la plaque, et que la tension réseau est correcte sur les trois phases — un déséquilibre de tension fait monter le courant.</li>
+<li><strong>Une fois la cause traitée</strong>, remesurer le courant et <strong>régler le relais dessus</strong>, soit environ 5,2 A.</li>
+<li><strong>Tracer l'intervention</strong> dans la GMAO, avec la valeur trouvée et la valeur remise. C'est ce qui empêchera le prochain de refaire la même chose.</li>
+</ol>
+<p><em>Et si la surcharge est structurelle — la machine a été modifiée, la charge a augmenté — alors le moteur est sous-dimensionné et il faut le remplacer, pas le protéger moins.</em></p>
+</div></details></div>
+
+<div class="exo"><span class="tag">Exercice 24.2</span>
+<p>On veut démarrer un broyeur de 15 kW dont le couple résistant à l'arrêt vaut 80 % du couple nominal du moteur. Le démarrage étoile-triangle est-il envisageable ? Sinon, que proposez-vous ?</p>
+<details><summary>Voir la réponse</summary><div class="rep">
+<p><strong>Non, l'étoile-triangle est impossible ici. Le calcul le montre en deux lignes.</strong></p>
+<p><strong>Le couple disponible en étoile.</strong> Le couple de démarrage du moteur en direct vaut environ 1,8 × C<sub>n</sub> (chapitre 22). En étoile, la tension par enroulement est divisée par √3, et le couple varie comme le carré de la tension :</p>
+<p class="mono">C<sub>démarrage, étoile</sub> = 1,8 / 3 = <strong>0,60 × C<sub>n</sub></strong></p>
+<p><strong>La comparaison.</strong> Le broyeur demande <strong>0,80 × C<sub>n</sub></strong> à l'arrêt. Or le moteur n'en fournit que 0,60.</p>
+<p class="mono">0,60 &lt; 0,80  →  <strong>le moteur ne décolle pas</strong></p>
+<p><strong>Ce qui se passe concrètement :</strong> on appuie sur marche, le moteur ronfle, ne tourne pas, tire son courant de démarrage en permanence, et le thermique déclenche au bout de quelques secondes. Ou pire : il tourne très lentement, la temporisation arrive à échéance, le contacteur de triangle colle sur un moteur presque à l'arrêt — et on récupère la pointe de courant du démarrage direct, en pire.</p>
+<p><strong>Les solutions, de la plus indiquée à la moins bonne :</strong></p>
+<ol>
+<li><strong>Un variateur de fréquence.</strong> C'est la bonne réponse pour un broyeur : plein couple disponible dès le premier tour, courant limité au nominal, rampe réglable, et en prime la possibilité de ralentir la machine si la charge le demande. C'est le chapitre 25.</li>
+<li><strong>Un démarreur progressif électronique.</strong> Il monte la tension en rampe et permet de choisir le compromis courant/couple. Moins cher qu'un variateur, mais il ne fait que démarrer — pas de variation en service.</li>
+<li><strong>Le démarrage direct</strong>, si le réseau le supporte. Sur 15 kW, la pointe atteint 180 à 240 A : c'est acceptable sur une installation correctement dimensionnée, et c'est ce qu'on faisait avant. À vérifier avec le distributeur ou la puissance souscrite.</li>
+<li><strong>Délester la machine au démarrage</strong> — vider le broyeur avant de le lancer. C'est une modification de procédé, pas d'électricité, mais c'est parfois la solution la moins chère.</li>
+</ol>
+<p><span class="cle">Règle générale : l'étoile-triangle n'est utilisable que si le couple résistant au démarrage reste sous 50 % du couple nominal.</span> Cela couvre les pompes centrifuges et les ventilateurs, et à peu près rien d'autre.</p>
+</div></details></div>
+
+<div class="exo"><span class="tag">Exercice 24.3</span>
+<p>Pourquoi trouve-t-on des fusibles de type <span class="mono">aM</span> et non <span class="mono">gG</span> dans un départ-moteur ? Que se passerait-il avec des gG calibrés au courant nominal ?</p>
+<details><summary>Voir la réponse</summary><div class="rep">
+<p><strong>Les deux types ne protègent pas contre la même chose, et c'est écrit dans leurs lettres.</strong></p>
+<ul>
+<li><strong>gG</strong> — usage <em>général</em>. Il protège à la fois contre les <strong>surcharges</strong> et contre les <strong>courts-circuits</strong>. C'est le fusible d'un circuit d'éclairage ou de prises, où rien ne tire de pointe.</li>
+<li><strong>aM</strong> — <em>accompagnement moteur</em>. Il ne protège <strong>que contre le court-circuit</strong>. Il laisse délibérément passer les surcharges et les pointes de démarrage, parce que quelqu'un d'autre s'en occupe : le relais thermique.</li>
+</ul>
+<p><strong>Avec des gG calibrés au nominal : ils fondraient à chaque démarrage.</strong></p>
+<p>Un fusible gG de 6 A fond en quelques secondes à 5 fois son calibre. Or un moteur de 6 A tire 36 à 48 A pendant une à trois secondes au démarrage. Le fusible fond avant que le moteur ait atteint sa vitesse — parfois dès le premier essai, parfois au troisième, ce qui est encore plus pénible à diagnostiquer.</p>
+<p><strong>Et si on surcalibre les gG pour tenir le démarrage ?</strong> Il faudrait monter à 25 ou 32 A pour un moteur de 6 A. Ils tiendraient le démarrage — mais ils ne protégeraient plus rien du tout, et surtout <strong>plus le câble</strong>, qui est dimensionné pour 6 A. C'est le pire des deux mondes : on perd la protection contre le court-circuit sur un câble sous-dimensionné.</p>
+<p><strong>La répartition correcte, celle qu'on trouve dans toutes les armoires :</strong></p>
+<table>
+<thead><tr><th>Défaut</th><th>Protégé par</th></tr></thead>
+<tbody>
+<tr><td>Court-circuit (des milliers d'ampères)</td><td>Fusibles <strong>aM</strong>, ou disjoncteur magnétique</td></tr>
+<tr><td>Surcharge prolongée (1,2 à 3 fois I<sub>n</sub>)</td><td>Relais <strong>thermique</strong> F1</td></tr>
+<tr><td>Contact d'une personne</td><td><strong>Différentiel</strong> 30 mA</td></tr>
+</tbody></table>
+<p><em>Le disjoncteur moteur intégré — un seul boîtier qui contient le magnétique et le thermique réglable — remplace aujourd'hui souvent le couple fusibles aM + relais. Il fait exactement les deux métiers, dans une seule enveloppe, et il se réarme sans changer de cartouche.</em></p>
+</div></details></div>
+
+</div>
+</section>
+
+<script>
+/* ======================= CH 24 · qui protège contre quoi ======================= */
+(function(){
+  "use strict";
+  /* Pour chaque situation : qui réagit, en combien de temps, et le mot de la fin. */
+  var SIT=[
+    {n:'marche normale', r:[0,0,2,0], d:'—',
+     m:'Le contacteur est collé, les trois autres attendent. C’est le seul des quatre qui travaille en service normal.'},
+    {n:'commande d’arrêt', r:[0,0,3,0], d:'50 ms',
+     m:'Le contacteur lâche sur ordre. Il coupe en charge, autant de fois qu’on veut — c’est son métier, et le seul.'},
+    {n:'court-circuit', r:[0,1,0,0], d:'5 ms',
+     m:'Des milliers d’ampères. Seul le disjoncteur a le pouvoir de couper ça, et il le fait avant que le câble n’ait chauffé.'},
+    {n:'surcharge de 30 %', r:[0,0,0,1], d:'≈ 4 min',
+     m:'1,3 fois le nominal : bien trop peu pour le disjoncteur, bien trop pour le moteur à la longue. Le thermique prend son temps, puis coupe la commande.'},
+    {n:'une personne touche une masse', r:[0,0,0,0], d:'jamais',
+     m:'250 mA à travers un corps. AUCUN des quatre ne le verra jamais. Il manque un différentiel — et lui seul protège les personnes.'},
+    {n:'consigner pour intervenir', r:[1,0,0,0], d:'—',
+     m:'Le sectionneur s’ouvre à vide, se cadenasse et se voit. C’est le seul des quatre qu’on a le droit de condamner.'}
+  ];
+  var AP=[
+    {n:'Q1', t:'SECTIONNEUR', s:'coupure visible\net condamnable', c:'#8d968b'},
+    {n:'Q2', t:'DISJONCTEUR', s:'court-circuit\nquelques ms', c:'#f0a844'},
+    {n:'KM1',t:'CONTACTEUR',  s:'établir et couper\nen charge', c:'#c8d834'},
+    {n:'F1', t:'RELAIS THERM.',s:'surcharge lente\nimage thermique', c:'#79a6c4'}
+  ];
+  var S=MSPC.ctrl('a-appareillage-s', function(v){ return SIT[v].n; }, 'a-appareillage-s-l');
+  var out=document.getElementById('a-appareillage-out');
+
+  MSPC.anim('a-appareillage', function(a){
+    var ctx=a.ctx, W=a.W, H=a.H;
+    var si=SIT[S.val], manque=(S.val===4);
+
+    MSPC.fond(ctx,W,H,0);
+    MSPC.mono(ctx,'LES QUATRE APPAREILS D’UN DÉPART-MOTEUR — ET LEQUEL RÉAGIT',26,30,11.5,'#8d968b');
+
+    /* ---------- la ligne des appareils ---------- */
+    var bx=40, bw=176, gap=18, by=76, bh=150;
+    for(var i=0;i<4;i++){
+      var x=bx+i*(bw+gap), et=si.r[i];
+      var actif = et>0;
+      var coul = et===1 ? '#ff6a5e' : (et===2 ? '#c8d834' : (et===3 ? '#f0a844' : '#4d5a4d'));
+      ctx.fillStyle = actif ? (et===2?'rgba(200,216,52,.12)':'rgba(255,106,94,.10)') : 'rgba(255,255,255,.035)';
+      ctx.fillRect(x,by,bw,bh);
+      ctx.strokeStyle = actif ? coul : '#3a443a';
+      ctx.lineWidth = actif ? 2.6 : 1.4;
+      ctx.strokeRect(x+.5,by+.5,bw,bh);
+
+      MSPC.titre(ctx,AP[i].n,x+16,by+34,26, actif?coul:AP[i].c);
+      MSPC.mono(ctx,AP[i].t,x+16,by+54,10, actif?coul:'#6f786e');
+      AP[i].s.split('\n').forEach(function(t,j){
+        MSPC.mono(ctx,t,x+16,by+76+j*14,9.5,'#6f786e');
+      });
+
+      // le symbole : contact ouvert ou fermé
+      var ferme = !(et===1 || et===3);
+      if(si.r[i]===1 && S.val===5) ferme=false;             // consignation : ouvert
+      ctx.strokeStyle = actif?coul:'#8d968b'; ctx.lineWidth=2.6;
+      var sxx=x+bw-46, syy=by+96;
+      ctx.beginPath(); ctx.moveTo(sxx,syy-24); ctx.lineTo(sxx,syy-10); ctx.stroke();
+      ctx.beginPath(); ctx.moveTo(sxx,syy+24); ctx.lineTo(sxx,syy+10); ctx.stroke();
+      ctx.beginPath(); ctx.moveTo(sxx,syy-10);
+      if(ferme) ctx.lineTo(sxx,syy+10); else ctx.lineTo(sxx+20,syy+8);
+      ctx.stroke();
+      ctx.fillStyle=actif?coul:'#8d968b';
+      ctx.beginPath(); ctx.arc(sxx,syy-10,3.4,0,6.2832); ctx.fill();
+      ctx.beginPath(); ctx.arc(sxx,syy+10,3.4,0,6.2832); ctx.fill();
+
+      if(et===1){ MSPC.titre(ctx,'IL COUPE',x+16,by+134,19,'#ff6a5e'); }
+      else if(et===3){ MSPC.titre(ctx,'IL LÂCHE',x+16,by+134,19,'#f0a844'); }
+      else if(et===2){ MSPC.titre(ctx,'IL TIENT',x+16,by+134,19,'#c8d834'); }
+      else MSPC.mono(ctx,'ne bronche pas',x+16,by+132,11,'#4d5a4d');
+
+      // le fil vers le suivant
+      if(i<3){
+        ctx.strokeStyle='#4d5a4d'; ctx.lineWidth=2.4;
+        ctx.beginPath(); ctx.moveTo(x+bw,by+bh/2); ctx.lineTo(x+bw+gap,by+bh/2); ctx.stroke();
+      }
+    }
+    ctx.strokeStyle='#ff6a5e'; ctx.lineWidth=2.6;
+    ctx.beginPath(); ctx.moveTo(bx-14,by+bh/2); ctx.lineTo(bx,by+bh/2); ctx.stroke();
+    MSPC.mono(ctx,'du réseau →',bx,by-10,10,'#ff6a5e');
+    MSPC.mono(ctx,'→ vers le moteur',W-40,by-10,10,'#8d968b','right');
+
+    /* ---------- le moteur ---------- */
+    var mx=bx+4*(bw+gap)-gap+30;
+    ctx.strokeStyle='#4d5a4d'; ctx.lineWidth=2.4;
+    ctx.beginPath(); ctx.moveTo(mx-30,by+bh/2); ctx.lineTo(mx-6,by+bh/2); ctx.stroke();
+
+    /* ---------- la case du différentiel ---------- */
+    var dx=40, dy=250, dw=W-80, dh=58;
+    ctx.fillStyle = manque ? 'rgba(255,106,94,.14)' : 'rgba(255,255,255,.03)';
+    ctx.fillRect(dx,dy,dw,dh);
+    ctx.strokeStyle = manque ? '#ff6a5e' : '#3a443a';
+    ctx.lineWidth = manque ? 2.6 : 1.4;
+    if(!manque) ctx.setLineDash([6,5]);
+    ctx.strokeRect(dx+.5,dy+.5,dw,dh); ctx.setLineDash([]);
+    MSPC.titre(ctx,'DIFFÉRENTIEL 30 mA',dx+18,dy+34,24, manque?'#ff6a5e':'#4d5a4d');
+    MSPC.mono(ctx, manque ? 'ABSENT — et c’est le seul qui aurait protégé la personne.'
+                          : 'ni le câble, ni le moteur : les PERSONNES.',
+      dx+330, dy+34, 12, manque?'#ff6a5e':'#4d5a4d');
+
+    /* ---------- le verdict ---------- */
+    var vy=330;
+    ctx.fillStyle='rgba(255,255,255,.05)'; ctx.fillRect(40,vy,W-80,110);
+    MSPC.mono(ctx,'SITUATION',58,vy+26,10,'#8d968b');
+    MSPC.titre(ctx,si.n.toUpperCase(),58,vy+56,26, manque?'#ff6a5e':'#e6ebe4');
+    MSPC.mono(ctx,'TEMPS DE RÉACTION',W-58,vy+26,10,'#8d968b','right');
+    MSPC.titre(ctx,si.d,W-58,vy+56,26, si.d==='jamais'?'#ff6a5e':'#c8d834','right');
+    var m=si.m, l1=m, l2='';
+    if(m.length>92){ var mots=m.split(' '); l1=''; l2='';
+      for(var w=0;w<mots.length;w++){ if((l1+' '+mots[w]).length<=92 && !l2) l1=(l1?l1+' ':'')+mots[w]; else l2=(l2?l2+' ':'')+mots[w]; } }
+    MSPC.mono(ctx,l1,58,vy+84,11.5,'#cfe2ee');
+    if(l2) MSPC.mono(ctx,l2,58,vy+101,11.5,'#cfe2ee');
+
+    out.innerHTML = manque
+      ? '<b style="color:#ff6a5e">Aucun des quatre ne réagit</b><br>il manque le différentiel'
+      : '<b>'+si.n+'</b><br>réaction en '+si.d;
+  }, {fixed:true});
+})();
+
+/* ======================= CH 24 · la courbe du relais thermique ======================= */
+(function(){
+  "use strict";
+  /* Modèle thermique : t = k / ((I/Ir)² − 1). k est calé sur la classe,
+     définie par le temps de déclenchement à 7,2 × Ir. */
+  var CL=[{n:'10 A', t72:5},{n:'10', t72:8},{n:'20', t72:14},{n:'30', t72:22}];
+  var R=MSPC.ctrl('a-thermique-r', function(v){ return (v/10).toFixed(1).replace('.',',')+' A'; }, 'a-thermique-r-l');
+  var I=MSPC.ctrl('a-thermique-i', function(v){ return (v/10).toFixed(1).replace('.',',')+' A'; }, 'a-thermique-i-l');
+  var C=MSPC.ctrl('a-thermique-c', function(v){ return CL[v].n; }, 'a-thermique-c-l');
+  var out=document.getElementById('a-thermique-out');
+
+  var g={x:88,y:64,w:470,h:298};
+  var XMIN=0.8, XMAX=12, TMIN=1, TMAX=7200;
+  function X(x){ return g.x + (Math.log10(x)-Math.log10(XMIN))/(Math.log10(XMAX)-Math.log10(XMIN))*g.w; }
+  function Y(t){ return g.y+g.h - (Math.log10(Math.max(TMIN,t))-Math.log10(TMIN))/(Math.log10(TMAX)-Math.log10(TMIN))*g.h; }
+
+  MSPC.anim('a-thermique', function(a){
+    var ctx=a.ctx, W=a.W, H=a.H;
+    var Ir=R.val/10, Iv=I.val/10, cl=CL[C.val];
+    var k=cl.t72*(7.2*7.2-1);
+    var x=Iv/Ir;
+    var t = x<=1.05 ? Infinity : k/(x*x-1);
+
+    MSPC.fond(ctx,W,H,0);
+    MSPC.mono(ctx,'COURBE DE DÉCLENCHEMENT D’UN RELAIS THERMIQUE — CLASSE '+cl.n,26,30,11.5,'#8d968b');
+    MSPC.mono(ctx,'échelles logarithmiques',W-26,30,10,'#6f786e','right');
+
+    /* zones */
+    ctx.save(); ctx.beginPath(); ctx.rect(g.x,g.y,g.w,g.h); ctx.clip();
+    ctx.fillStyle='rgba(200,216,52,.06)'; ctx.fillRect(g.x,g.y,X(1.05)-g.x,g.h);
+    ctx.restore();
+
+    /* graduations */
+    ctx.strokeStyle='rgba(255,255,255,.09)'; ctx.lineWidth=1;
+    [1,1.5,2,3,5,7.2,10].forEach(function(v){
+      ctx.beginPath(); ctx.moveTo(X(v),g.y); ctx.lineTo(X(v),g.y+g.h); ctx.stroke();
+      MSPC.mono(ctx,String(v).replace('.',','),X(v),g.y+g.h+18,9.5,'#7f8a7e','center');
+    });
+    [[1,'1 s'],[10,'10 s'],[60,'1 min'],[600,'10 min'],[3600,'1 h']].forEach(function(z){
+      ctx.beginPath(); ctx.moveTo(g.x,Y(z[0])); ctx.lineTo(g.x+g.w,Y(z[0])); ctx.stroke();
+      MSPC.mono(ctx,z[1],g.x-8,Y(z[0])+4,9.5,'#7f8a7e','right');
+    });
+    ctx.strokeStyle='rgba(255,255,255,.25)'; ctx.lineWidth=1.3; ctx.strokeRect(g.x+.5,g.y+.5,g.w,g.h);
+    MSPC.mono(ctx,'I / Ir  —  le RÉGLAGE fixe l’échelle',g.x+g.w,g.y+g.h+36,10,'#8d968b','right');
+    MSPC.mono(ctx,'TEMPS',g.x,g.y-10,10,'#8d968b');
+
+    /* la courbe, et sa bande de tolérance */
+    ctx.fillStyle='rgba(121,166,196,.16)';
+    ctx.beginPath();
+    for(var v1=1.06;v1<=XMAX;v1*=1.02) ctx.lineTo(X(v1), Y(k*0.75/(v1*v1-1)));
+    for(var v2=XMAX;v2>=1.06;v2/=1.02) ctx.lineTo(X(v2), Y(k*1.35/(v2*v2-1)));
+    ctx.closePath(); ctx.fill();
+    ctx.strokeStyle='#79a6c4'; ctx.lineWidth=2.8; ctx.beginPath();
+    for(var v3=1.06;v3<=XMAX;v3*=1.02){
+      var xx=X(v3), yy=Y(k/(v3*v3-1));
+      if(v3<1.07) ctx.moveTo(xx,yy); else ctx.lineTo(xx,yy);
+    }
+    ctx.stroke();
+    // l'asymptote : en dessous de 1,05, il ne déclenche jamais
+    ctx.strokeStyle='rgba(200,216,52,.6)'; ctx.lineWidth=1.6; ctx.setLineDash([5,4]);
+    ctx.beginPath(); ctx.moveTo(X(1.05),g.y); ctx.lineTo(X(1.05),g.y+g.h); ctx.stroke(); ctx.setLineDash([]);
+    MSPC.mono(ctx,'1,05',X(1.05),g.y+16,10,'#c8d834','center');
+    MSPC.mono(ctx,'jamais',X(0.92),g.y+g.h/2,10,'#c8d834','center');
+
+    /* le point de fonctionnement */
+    var dedans = x>1.05 && x<XMAX;
+    var px=X(Math.max(XMIN,Math.min(XMAX,x)));
+    if(dedans){
+      var py=Y(t);
+      ctx.strokeStyle='rgba(255,255,255,.30)'; ctx.lineWidth=1; ctx.setLineDash([3,3]);
+      ctx.beginPath(); ctx.moveTo(px,g.y+g.h); ctx.lineTo(px,py); ctx.lineTo(g.x,py); ctx.stroke(); ctx.setLineDash([]);
+      ctx.fillStyle='#c8d834'; ctx.beginPath(); ctx.arc(px,py,8,0,6.2832); ctx.fill();
+      ctx.strokeStyle='#0d120f'; ctx.lineWidth=2; ctx.stroke();
+    } else {
+      ctx.strokeStyle='#ff6a5e'; ctx.lineWidth=2.4; ctx.setLineDash([5,4]);
+      ctx.beginPath(); ctx.moveTo(px,g.y); ctx.lineTo(px,g.y+g.h); ctx.stroke(); ctx.setLineDash([]);
+      MSPC.titre(ctx, x<=1.05?'AUCUN DÉCLENCHEMENT':'HORS COURBE', px+(x<=1.05?10:-10), g.y+g.h/2, 20, '#ff6a5e', x<=1.05?'left':'right');
+    }
+
+    /* ---------- panneau ---------- */
+    var qx=584, qw=W-qx-26;
+    var coul = x<=1.05 ? '#ff6a5e' : (x<1.3 ? '#f0a844' : '#c8d834');
+    ctx.fillStyle='rgba(255,255,255,.04)'; ctx.fillRect(qx,64,qw,298);
+    ctx.strokeStyle=coul; ctx.lineWidth=1.8; ctx.strokeRect(qx+.5,64.5,qw,298);
+    MSPC.mono(ctx,'RÉGLAGE DU RELAIS  Ir',qx+16,88,10,'#8d968b');
+    MSPC.titre(ctx,Ir.toFixed(1).replace('.',',')+' A',qx+16,120,28,'#cfe2ee');
+    MSPC.mono(ctx,'COURANT RÉEL DU MOTEUR',qx+16,150,10,'#8d968b');
+    MSPC.titre(ctx,Iv.toFixed(1).replace('.',',')+' A',qx+16,182,28,'#cfe2ee');
+    MSPC.mono(ctx,'SOIT',qx+16,212,10,'#8d968b');
+    MSPC.titre(ctx,x.toFixed(2).replace('.',',')+' × Ir',qx+16,244,30,coul);
+    MSPC.mono(ctx,'DÉCLENCHEMENT DANS',qx+16,276,10,'#8d968b');
+    MSPC.titre(ctx, x<=1.05 ? 'jamais' : (t<60 ? t.toFixed(1).replace('.',',')+' s' : (t<3600 ? (t/60).toFixed(1).replace('.',',')+' min' : '> 1 h')),
+      qx+16,312,30,coul);
+    MSPC.mono(ctx,'classe '+cl.n+' — '+cl.t72+' s à 7,2 × Ir',qx+16,340,10,'#6f786e');
+
+    /* ---------- bandeau ---------- */
+    var msg;
+    if(x<=1.05) msg='Le relais ne déclenchera JAMAIS. Si le moteur est réellement surchargé, il cuira sans que rien ne bouge.';
+    else if(x>4) msg='Zone de démarrage : ce courant est normal pendant quelques secondes. La classe du relais est faite pour le laisser passer.';
+    else if(x>1.3) msg='Surcharge franche. Le relais coupera, mais en prenant son temps : c’est voulu, une surcharge passagère doit pouvoir retomber.';
+    else msg='Surcharge légère, à la limite du seuil. Le relais mettra très longtemps — vérifiez plutôt pourquoi le moteur tire autant.';
+    ctx.fillStyle='rgba(255,255,255,.05)'; ctx.fillRect(26,392,W-52,52);
+    MSPC.mono(ctx,msg,42,416,11.5,coul);
+    MSPC.mono(ctx,'La bande bleue est la dispersion admise entre deux exemplaires du même relais.',42,436,10,'#6f786e');
+
+    out.innerHTML = x<=1.05
+      ? '<b style="color:#ff6a5e">Ne déclenchera jamais</b><br>'+x.toFixed(2).replace('.',',')+' × Ir'
+      : '<b style="color:'+coul+'">'+(t<60?t.toFixed(1).replace('.',',')+' s':(t/60).toFixed(1).replace('.',',')+' min')+'</b><br>à '+x.toFixed(2).replace('.',',')+' × Ir';
+  }, {fixed:true});
+})();
+
+/* ======================= CH 24 · comparer les quatre démarrages ======================= */
+(function(){
+  "use strict";
+  var MET=[
+    {n:'direct',            u:1,    lim:99, c:'#ff6a5e'},
+    {n:'étoile-triangle',   u:0.577,lim:99, c:'#f0a844'},
+    {n:'démarreur progressif',u:0.6, lim:3.2,c:'#79a6c4'},
+    {n:'variateur',         u:1,    lim:1.5,c:'#c8d834'}
+  ];
+  var M=MSPC.ctrl('a-demarrage-m', function(v){ return MET[v].n; }, 'a-demarrage-m-l');
+  var C=MSPC.ctrl('a-demarrage-c', function(v){ return Math.round(v)+' % de Cn'; }, 'a-demarrage-c-l');
+  var out=document.getElementById('a-demarrage-out');
+  var btn=document.getElementById('a-demarrage-go');
+
+  var NS=1500, gm=0.20, CMAX=2.6, KD=0.8, ID=6.5, J=0.9;
+  function Cmot(n,u){ var g=(NS-n)/NS; if(g<=0.0002) return 0;
+    return 2*CMAX/(g/gm + gm/g)*(1+KD*g*g)*u*u; }
+  function Imot(n,u){ var g=(NS-n)/NS; return (0.35+(ID-0.35)*Math.pow(g,0.62))*u; }
+
+  var n=0, t=0, hist=[], etoile=true, marche=false, sig=-1, pic=0, tfin=0;
+  function relancer(){ n=0; t=0; hist=[]; etoile=true; marche=true; pic=0; tfin=0; }
+  if(btn) btn.addEventListener('click', relancer);
+
+  MSPC.anim('a-demarrage', function(a){
+    var ctx=a.ctx, W=a.W, H=a.H, dt=Math.min(a.dt,0.04);
+    var me=MET[M.val], cr=C.val/100;
+    if(sig!==M.val){ sig=M.val; relancer(); }
+
+    if(marche && t<6){
+      var u=me.u, f=1;
+      if(M.val===1){ u = etoile?0.577:1; if(n>NS*0.82) etoile=false; }
+      if(M.val===2){ u = Math.min(1, 0.55+t*0.55); }
+      if(M.val===3){ f = Math.min(1, 0.06+t*0.55); }        // le variateur monte la fréquence
+      var nsy = NS*f;
+      var gg = nsy>1 ? (nsy-n)/nsy : 1;
+      var Cm, Ii;
+      if(M.val===3){
+        // à U/f constant, le moteur travaille toujours à faible glissement
+        Cm = Math.max(0, Math.min(CMAX, 2*CMAX/(Math.max(0.02,gg)/gm + gm/Math.max(0.02,gg))*(1+KD*gg*gg)));
+        Cm = Math.min(Cm, Math.max(cr*1.5, 1.5));
+        Ii = Math.min(me.lim, 0.35+0.75*Cm);
+      } else {
+        Cm = Cmot(n,u);
+        Ii = Math.min(me.lim, Imot(n,u));
+      }
+      n += (Cm-cr)/J*dt*NS*0.55;
+      if(n<0) n=0;
+      if(n>NS*0.999) n=NS*0.999;
+      pic=Math.max(pic,Ii);
+      t += dt;
+      if(hist.length===0 || t-hist[hist.length-1][0]>0.012) hist.push([t,Ii,n,Cm]);
+      if(n>NS*0.96 && !tfin) tfin=t;
+      if(t>=6) marche=false;
+    }
+
+    MSPC.fond(ctx,W,H,0);
+    MSPC.mono(ctx,'LE DÉMARRAGE, SIMULÉ AVEC L’INERTIE DE LA MACHINE',26,30,11.5,'#8d968b');
+    MSPC.mono(ctx,'méthode : '+me.n,W-26,30,10.5,me.c,'right');
+
+    /* ---------- le graphe ---------- */
+    var g={x:78,y:60,w:504,h:300}, TMAX=6, IMAX=7.5;
+    function X(x){ return g.x + x/TMAX*g.w; }
+    function Yi(i){ return g.y+g.h - i/IMAX*g.h; }
+    function Yn(v){ return g.y+g.h - v/NS*g.h; }
+
+    ctx.strokeStyle='rgba(255,255,255,.09)'; ctx.lineWidth=1;
+    for(var q=0;q<=7;q++){ ctx.beginPath(); ctx.moveTo(g.x,Yi(q)); ctx.lineTo(g.x+g.w,Yi(q)); ctx.stroke();
+      MSPC.mono(ctx,q+'×',g.x-8,Yi(q)+4,9.5,'#7f8a7e','right'); }
+    for(var s=0;s<=6;s++){ ctx.beginPath(); ctx.moveTo(X(s),g.y); ctx.lineTo(X(s),g.y+g.h); ctx.stroke();
+      MSPC.mono(ctx,s+' s',X(s),g.y+g.h+18,9.5,'#7f8a7e','center'); }
+    ctx.strokeStyle='rgba(255,255,255,.25)'; ctx.lineWidth=1.3; ctx.strokeRect(g.x+.5,g.y+.5,g.w,g.h);
+    MSPC.mono(ctx,'COURANT (× In)',g.x,g.y-10,10,'#ff6a5e');
+    MSPC.mono(ctx,'VITESSE',g.x+g.w,g.y-10,10,'#c8d834','right');
+
+    // la vitesse
+    ctx.strokeStyle='rgba(200,216,52,.85)'; ctx.lineWidth=2.4; ctx.beginPath();
+    hist.forEach(function(h,i){ var xx=X(h[0]), yy=Yn(h[2]); if(i===0) ctx.moveTo(xx,yy); else ctx.lineTo(xx,yy); });
+    ctx.stroke();
+    // le courant
+    ctx.strokeStyle='#ff6a5e'; ctx.lineWidth=2.8; ctx.beginPath();
+    hist.forEach(function(h,i){ var xx=X(h[0]), yy=Yi(h[1]); if(i===0) ctx.moveTo(xx,yy); else ctx.lineTo(xx,yy); });
+    ctx.stroke();
+    // le repère du nominal
+    ctx.strokeStyle='rgba(255,255,255,.35)'; ctx.lineWidth=1.4; ctx.setLineDash([5,4]);
+    ctx.beginPath(); ctx.moveTo(g.x,Yi(1)); ctx.lineTo(g.x+g.w,Yi(1)); ctx.stroke(); ctx.setLineDash([]);
+    MSPC.mono(ctx,'In',g.x+g.w-8,Yi(1)-7,10,'#cfe2ee','right');
+
+    if(!hist.length) MSPC.titre(ctx,'appuyez sur DÉMARRER',g.x+g.w/2,g.y+g.h/2,26,'#4d5a4d','center');
+    MSPC.mono(ctx,'rouge : le courant appelé   ·   vert : la vitesse',g.x,g.y+g.h+36,10,'#8d968b');
+
+    /* ---------- panneau ---------- */
+    var qx=606, qw=W-qx-26;
+    var cale = (t>2.5 && n<NS*0.3);
+    var coul = cale?'#ff6a5e':me.c;
+    ctx.fillStyle='rgba(255,255,255,.04)'; ctx.fillRect(qx,60,qw,300);
+    ctx.strokeStyle=coul; ctx.lineWidth=1.8; ctx.strokeRect(qx+.5,60.5,qw,300);
+    MSPC.mono(ctx,'POINTE DE COURANT',qx+16,84,10,'#8d968b');
+    MSPC.titre(ctx,pic.toFixed(1).replace('.',',')+' × In',qx+16,118,30, pic>4?'#ff6a5e':(pic>2.5?'#f0a844':'#c8d834'));
+    MSPC.mono(ctx,'TEMPS DE DÉMARRAGE',qx+16,148,10,'#8d968b');
+    MSPC.titre(ctx, tfin?tfin.toFixed(1).replace('.',',')+' s':(cale?'jamais':'—'), qx+16,182,28, cale?'#ff6a5e':'#cfe2ee');
+    MSPC.mono(ctx,'VITESSE ATTEINTE',qx+16,212,10,'#8d968b');
+    MSPC.titre(ctx,MSPC.nb(n)+' tr/min',qx+16,246,26,coul);
+    MSPC.mono(ctx,'COUPLE DISPONIBLE AU DÉMARRAGE',qx+16,278,10,'#8d968b');
+    var cd = M.val===3 ? 1.5 : Cmot(0, M.val===1?0.577:(M.val===2?0.55:1));
+    MSPC.titre(ctx,cd.toFixed(2).replace('.',',')+' × Cn',qx+16,312,26, cd>cr?'#c8d834':'#ff6a5e');
+    MSPC.mono(ctx,'la charge en demande '+cr.toFixed(2).replace('.',','),qx+16,336,10, cd>cr?'#6f786e':'#ff6a5e');
+
+    /* ---------- bandeau ---------- */
+    var msg;
+    if(cale) msg='LE MOTEUR NE DÉCOLLE PAS : le couple disponible ('+cd.toFixed(2).replace('.',',')+') est inférieur à ce que la charge demande ('+cr.toFixed(2).replace('.',',')+').';
+    else if(!hist.length) msg='Choisissez une méthode et une charge, puis appuyez sur DÉMARRER.';
+    else if(M.val===0) msg='Démarrage direct : le plus simple, le plus brutal. Six fois le nominal, et toute l’installation le sent passer.';
+    else if(M.val===1) msg='Étoile-triangle : courant divisé par trois — et couple aussi. Notez le second pic au basculement en triangle.';
+    else if(M.val===2) msg='Démarreur progressif : la tension monte en rampe, le courant est plafonné. Il ne sert qu’au démarrage.';
+    else msg='Variateur : plein couple sans dépasser le courant nominal, parce qu’il joue sur la FRÉQUENCE et non sur la tension seule.';
+    ctx.fillStyle='rgba(255,255,255,.05)'; ctx.fillRect(26,394,W-52,50);
+    MSPC.mono(ctx,msg,42,424,11.5,coul);
+
+    out.innerHTML = cale ? '<b style="color:#ff6a5e">Le moteur cale</b><br>couple insuffisant en '+me.n
+      : '<b style="color:'+coul+'">pointe '+pic.toFixed(1).replace('.',',')+' × In</b><br>'+(tfin?'lancé en '+tfin.toFixed(1).replace('.',',')+' s':'en cours…');
+  }, {fixed:true});
+})();
+</script>
+
+
+<!-- ================= CH 25 ================= -->
+<section class="ch" id="c25">
+  <div class="ch-head"><div class="ch-num">25</div><div class="ch-title">
+    <span class="kicker">L'appareil qui a tout changé</span><h2>Le variateur de vitesse</h2></div></div>
+  <div class="ch-body">
+
+<div class="savoirs">
+  <span class="savoir n3"><b>S2.6</b> <i>Le principe de variation et ses solutions constructives</i></span>
+  <span class="savoir n3"><b>S2.1</b> <i>Énergie, puissance et rendement</i></span>
+</div>
+
+<p class="lede">Le chapitre 22 l'a établi : la vitesse d'un moteur asynchrone est fixée par la fréquence du réseau et le nombre de pôles. Le nombre de pôles est coulé dans le fer — mais la fréquence, elle, peut se fabriquer. C'est tout ce que fait un variateur, et c'est ce qui a rendu obsolètes le démarreur étoile-triangle, la poulie à gradins et la vanne de réglage.</p>
+
+<div class="rappel"><span class="tag">Ce que le référentiel exclut</span>
+<p>Le texte est net sur ce point : <span class="cle">« La théorie de l'asservissement ne sera pas abordée. »</span></p>
+<p>On n'attend donc de vous ni boucle de régulation, ni correcteur, ni fonction de transfert. Ce qu'on attend, c'est que vous sachiez <strong>identifier les paramètres à régler</strong> et comprendre ce que chacun change sur la machine. C'est exactement le cadrage de ce chapitre.</p></div>
+
+<h3>25.1 — La loi U/f : pourquoi la tension doit suivre</h3>
+<p>Baisser la fréquence ne suffit pas. Si on alimentait un moteur à 25 Hz sous 400 V, il grillerait — et la raison remonte au chapitre 11.</p>
+<p>Le flux dans le fer du stator dépend du rapport entre la tension et la fréquence :</p>
+
+<div class="formule">Φ ∝ U / f<small>Diviser f par deux à U constant, c'est doubler le flux</small></div>
+
+<p>Or le fer sature : au-delà d'un certain flux, il ne magnétise plus davantage, mais le courant magnétisant s'emballe et le moteur chauffe furieusement. Le variateur maintient donc le rapport constant : <strong>quand il baisse la fréquence, il baisse la tension dans la même proportion</strong>.</p>
+<p><span class="cle">À U/f constant, le flux est constant, donc le couple maximal disponible est constant.</span> C'est ce qui rend le variateur si efficace : il donne tout son couple à n'importe quelle vitesse.</p>
+
+<h3>25.2 — Au-delà de 50 Hz : le défluxage</h3>
+<p>Passé la fréquence nominale, le variateur ne peut plus monter la tension : il est limité par le réseau qui l'alimente. Le rapport U/f se met donc à décroître, le flux avec lui, et le couple maximal chute comme le carré du flux.</p>
+
+<table>
+<thead><tr><th>Zone</th><th>Tension</th><th>Flux</th><th>Couple <em>utilisable</em></th><th>Couple max<br>avant décrochage</th><th>Puissance</th></tr></thead>
+<tbody>
+<tr><td><strong>0 à 50 Hz</strong><br>couple constant</td><td>monte avec f</td><td><strong>constant</strong></td><td><strong>constant</strong></td><td><strong>constant</strong></td><td>monte avec f</td></tr>
+<tr><td><strong>au-delà de 50 Hz</strong><br>défluxage</td><td><strong>bloquée</strong> à 400 V</td><td>chute en 1/f</td><td>chute en <strong>1/f</strong></td><td>chute en <strong>1/f²</strong></td><td><strong>constante</strong></td></tr>
+</tbody></table>
+
+<p><span class="cle">Deux couples différents chutent, et pas à la même vitesse — c'est le point que tout le monde mélange.</span> Le <strong>couple utilisable</strong> en continu chute en 1/f, parce qu'il est limité par le courant que le moteur sait supporter ; c'est lui qui, multiplié par la vitesse, donne une puissance constante. Le <strong>couple maximal avant décrochage</strong>, lui, chute en 1/f² : c'est la marge qui vous reste avant que le moteur ne cale.</p>
+<p>D'où une règle qu'on oublie souvent : <strong>à 75 Hz, un moteur ne fournit plus que 67 % de son couple utilisable, et sa marge avant décrochage tombe à 44 %.</strong> Sur un ventilateur, cela passe ; sur un convoyeur chargé, non.</p>
+
+<figure class="anim">
+  <canvas id="a-uf" width="900" height="480" aria-label="Animation : loi U sur f, zone à couple constant et défluxage au-delà de la fréquence nominale"></canvas>
+  <div class="ctrls">
+    <div class="c"><label>Fréquence de sortie <span id="a-uf-f-l">50 Hz</span></label><input type="range" id="a-uf-f" min="2" max="100" value="50"></div>
+    <div class="c"><label>Ventilation du moteur <span id="a-uf-v-l">auto-ventilé</span></label><input type="range" id="a-uf-v" min="0" max="1" value="0"></div>
+    <div class="c"><label class="switch"><input type="checkbox" id="a-uf-b"><span>Boost de tension à basse fréquence</span></label></div>
+    <div class="c readout" id="a-uf-out"></div>
+  </div>
+  <figcaption>Quatre grandeurs en fonction de la fréquence. <b>Jusqu'à 50 Hz</b>, la tension monte avec la fréquence : le flux reste constant, et le couple disponible aussi. <b>Au-delà</b>, la tension bute sur les 400 V du réseau : le flux s’effondre. Le <b>couple utilisable</b> (trait plein) chute en 1/f, ce qui laisse la puissance constante ; le <b>couple maximal avant décrochage</b> (pointillé) chute deux fois plus vite, en 1/f². <b>Descendez sous 20 Hz avec un moteur auto-ventilé</b> : la zone rouge apparaît — son propre ventilateur tourne trop lentement pour le refroidir, et il faut déclasser le couple admissible. <b>Cochez le boost</b> : le variateur ajoute quelques volts à très basse fréquence pour compenser la chute dans la résistance du stator, sans quoi le couple de démarrage s'effondre.</figcaption>
+  <div class="autableau">
+    <b class="entete">Au tableau <i>· 12 minutes · animation 1 sur 3</i></b>
+    <ol>
+      <li>Placer sur 50 Hz. <span class="q">« C'est le point nominal. Que valent la tension et le couple ? »</span> 400 V, 100 %.</li>
+      <li>Descendre à 25 Hz. <span class="q">« La tension a fait quoi ? »</span> Elle a été divisée par deux, exactement comme la fréquence. <span class="q">« Pourquoi ? »</span></li>
+      <li>Monter à 75 Hz. <span class="q">« La tension peut-elle suivre ? »</span> Non — elle est bloquée. Faire lire les deux chiffres : 67 % de couple utilisable, mais seulement 44 % de marge avant décrochage.</li>
+      <li>Redescendre à 10 Hz, moteur <b>auto-ventilé</b> : montrer la zone de déclassement. <span class="q">« Le moteur tourne. Pourquoi ne peut-il pas donner tout son couple ? »</span></li>
+      <li>Passer en <b>moto-ventilé</b> : la zone rouge disparaît. <span class="q">« Qu'est-ce qui a changé sur le moteur ? »</span> Un ventilateur indépendant.</li>
+    </ol>
+    <div class="piege">Le piège : « avec un variateur, je peux faire tourner mon moteur à n'importe quelle vitesse ». Vrai pour la vitesse, faux pour le couple. En bas, il chauffe faute de ventilation ; en haut, il perd son flux. La plage réellement utilisable d'un moteur auto-ventilé va d'environ 20 à 50 Hz à couple plein.</div>
+  </div>
+</figure>
+
+<h3>25.3 — Ce qu'il y a dedans</h3>
+<p>Un variateur ne « transforme » pas le 50 Hz : il le détruit et le refabrique. Trois étages, toujours les mêmes.</p>
+<ol>
+<li><strong>Le redresseur</strong> — six diodes qui transforment le triphasé 400 V en continu. Aucun réglage, aucune pièce mobile.</li>
+<li><strong>Le bus continu</strong> — un gros condensateur qui lisse et stocke, à environ 560 V. C'est lui qui reste chargé plusieurs minutes après la coupure (chapitre 19), et c'est lui qui monte en surtension quand le moteur freine (chapitre 22).</li>
+<li><strong>L'onduleur</strong> — six transistors IGBT qui hachent le continu à quelques kilohertz pour reconstituer trois tensions alternatives à la fréquence voulue. C'est là que tout se joue.</li>
+</ol>
+
+<figure class="anim">
+  <canvas id="a-onduleur" width="900" height="490" aria-label="Animation : les trois étages d'un variateur et la modulation de largeur d'impulsion"></canvas>
+  <div class="ctrls">
+    <div class="c"><label>Fréquence de découpage <span id="a-onduleur-d-l">4 kHz</span></label><input type="range" id="a-onduleur-d" min="1" max="16" value="4"></div>
+    <div class="c"><label>Fréquence de sortie <span id="a-onduleur-s-l">50 Hz</span></label><input type="range" id="a-onduleur-s" min="10" max="50" value="50"></div>
+    <div class="c readout" id="a-onduleur-out"></div>
+  </div>
+  <figcaption>En haut les trois étages ; en bas, ce que fabrique réellement l'onduleur. <b>La tension n'est jamais sinusoïdale</b> : ce sont des créneaux à 560 V, plus ou moins larges — c'est la modulation de largeur d'impulsion. <b>Le courant, lui, l'est</b>, parce que l'inductance du moteur intègre les créneaux. <b>Montez la fréquence de découpage</b> : les créneaux se resserrent, l'ondulation du courant diminue, le moteur chauffe moins — mais les transistors commutent plus souvent et le variateur, lui, chauffe davantage. <b>Descendez à 2 kHz</b> : l'ondulation devient visible, et c'est cette fréquence-là que vous entendez siffler dans un atelier.</figcaption>
+  <div class="autableau">
+    <b class="entete">Au tableau <i>· 10 minutes · animation 2 sur 3</i></b>
+    <ol>
+      <li>Montrer les trois étages. <span class="q">« Où se trouve le condensateur qui reste chargé après la coupure ? »</span> Rappel du chapitre 19.</li>
+      <li>Regarder la tension de sortie. <span class="q">« Est-ce que ça ressemble à du 50 Hz ? »</span> Pas du tout. <span class="q">« Alors pourquoi le moteur tourne-t-il rond ? »</span></li>
+      <li>Faire remarquer que <b>les créneaux sont larges au sommet de la sinusoïde et étroits au passage par zéro</b>. C'est là toute l'astuce.</li>
+      <li>Descendre le découpage à <b>2 kHz</b> : l'ondulation du courant devient visible. <span class="q">« Qu'est-ce que ça fait au moteur ? »</span> Des pertes et du bruit.</li>
+      <li>Monter à <b>12 kHz</b> : courant lisse. <span class="q">« Alors pourquoi ne pas toujours mettre le maximum ? »</span> Le variateur chauffe et il faut le déclasser.</li>
+    </ol>
+    <div class="piege">Le piège : croire que le variateur « produit du 50 Hz propre ». Il produit des créneaux à 560 V dont la valeur moyenne suit une sinusoïde. C'est pour cela qu'un câble de variateur doit être blindé, que les roulements peuvent être perforés par des courants induits, et qu'un multimètre ordinaire y affiche n'importe quoi.</div>
+  </div>
+</figure>
+
+<h3>25.4 — La loi en cube, ou pourquoi un variateur se paie tout seul</h3>
+<p>Sur une pompe centrifuge ou un ventilateur, la physique offre un cadeau considérable — et c'est l'argument qui a mis un variateur sur presque toutes les machines de ce type.</p>
+
+<div class="formule">Q ∝ n&nbsp;&nbsp;·&nbsp;&nbsp;p ∝ n²&nbsp;&nbsp;·&nbsp;&nbsp;<b>P ∝ n³</b><small>Débit, pression et puissance en fonction de la vitesse — les lois de similitude</small></div>
+
+<p>La puissance varie comme le <strong>cube</strong> de la vitesse. Ralentir de 20 % ne fait pas économiser 20 % : cela fait économiser <strong>la moitié</strong>.</p>
+<p>C'est à comparer à la méthode d'avant, encore très répandue : faire tourner la pompe à pleine vitesse et <strong>étrangler le débit avec une vanne</strong>. La vanne réduit le débit — mais la pompe continue de tourner à fond, et l'énergie excédentaire part en pure perte dans la vanne, sous forme de turbulence et de chaleur.</p>
+
+<figure class="anim">
+  <canvas id="a-cube" width="900" height="470" aria-label="Animation : loi en cube, comparaison entre réglage par vanne et par variateur"></canvas>
+  <div class="ctrls">
+    <div class="c"><label>Débit voulu <span id="a-cube-q-l">70 %</span></label><input type="range" id="a-cube-q" min="30" max="100" value="70"></div>
+    <div class="c"><label>Puissance de la pompe <span id="a-cube-p-l">15 kW</span></label><input type="range" id="a-cube-p" min="2" max="75" value="15"></div>
+    <div class="c"><label>Heures de marche <span id="a-cube-h-l">6 000 h/an</span></label><input type="range" id="a-cube-h" min="1000" max="8760" value="6000"></div>
+    <div class="c readout" id="a-cube-out"></div>
+  </div>
+  <figcaption>La même pompe, le même débit voulu, deux façons de l'obtenir. <b>À gauche la vanne</b> : la pompe tourne à fond et on étrangle — l'énergie en trop se dissipe dans la vanne. <b>À droite le variateur</b> : on ralentit la pompe, et la puissance suit la loi en cube. <b>Réglez le débit à 70 %</b> : la vanne consomme encore 82 % de la puissance, le variateur seulement 34 %. <b>L'économie annuelle s'affiche en euros</b>, et c'est elle qui justifie l'investissement — la plupart des variateurs sur pompe sont amortis en moins de deux ans.</figcaption>
+  <div class="autableau">
+    <b class="entete">Au tableau <i>· 10 minutes · animation 3 sur 3</i></b>
+    <ol>
+      <li>Débit à 100 %. <span class="q">« Les deux méthodes consomment-elles pareil ? »</span> Oui — à pleine ouverture, le variateur n'apporte rien.</li>
+      <li>Descendre à 70 %. <span class="q">« De combien la vanne a-t-elle fait baisser la consommation ? »</span> Presque rien. <span class="q">« Et le variateur ? »</span></li>
+      <li>Faire calculer de tête : 0,7³. <span class="q">« Ça fait combien ? »</span> 0,34. Écrire au tableau.</li>
+      <li>Descendre à 50 % : le variateur ne consomme plus que 12,5 %. <span class="q">« Où est passée l'énergie, avec la vanne ? »</span> En chaleur et en bruit dans la vanne.</li>
+      <li>Faire varier la puissance et les heures. <span class="q">« À partir de quelle taille ça devient sérieux ? »</span> Laisser lire les euros.</li>
+    </ol>
+    <div class="piege">Le piège : croire que la loi en cube vaut pour tout. Elle ne vaut que pour les machines <b>centrifuges</b> — pompes, ventilateurs, compresseurs centrifuges. Sur un convoyeur, un treuil ou une extrudeuse, le couple est constant et la puissance ne varie que proportionnellement à la vitesse. Le variateur y reste utile pour le procédé, mais l'argument énergétique disparaît.</div>
+  </div>
+</figure>
+
+<h3>25.5 — Les paramètres qu'on règle vraiment</h3>
+<p>Un variateur moderne comporte plusieurs centaines de paramètres. Cinq suffisent à faire tourner une machine, et ce sont ceux que vous toucherez.</p>
+
+<table>
+<thead><tr><th>Paramètre</th><th>Ce qu'il fait</th><th>L'erreur classique</th></tr></thead>
+<tbody>
+<tr><td><strong>Courant nominal moteur</strong></td><td>Cale toutes les protections internes sur la plaque du moteur</td><td>Laissé au réglage d'usine : le variateur protège un moteur qui n'est pas le vôtre</td></tr>
+<tr><td><strong>Fréquence min / max</strong></td><td>Borne la plage de vitesse</td><td>Maxi laissé à 50 Hz alors que la machine pourrait aller plus vite — ou monté à 80 Hz sans vérifier le couple</td></tr>
+<tr><td><strong>Rampe d'accélération</strong></td><td>Temps pour passer de 0 à la fréquence maxi</td><td>Trop courte : défaut de surintensité, ou produits qui tombent (chapitre 8 du dossier mécanique)</td></tr>
+<tr><td><strong>Rampe de décélération</strong></td><td>Temps pour s'arrêter</td><td>Trop courte : défaut de surtension bus, faute de résistance de freinage</td></tr>
+<tr><td><strong>Fréquence de découpage</strong></td><td>Compromis bruit / pertes</td><td>Montée au maximum « pour que ça ne siffle plus », sans déclasser le variateur</td></tr>
+</tbody></table>
+
+<div class="encadre"><span class="tag">Avant de toucher un paramètre</span>
+<p><strong>Sauvegardez la configuration existante.</strong> Console de paramétrage, logiciel constructeur, ou à défaut une photo de chaque écran. Le référentiel le demande explicitement au savoir S4.6.2 : <em>« transfert, sauvegarde et lecture d'un programme »</em>.</p>
+<p>Un variateur remplacé sans sa configuration, c'est une machine à l'arrêt le temps de tout reparamétrer — et il n'y a jamais de documentation à jour au moment où on en a besoin.</p></div>
+
+<div class="exo"><span class="tag">Exercice 25.1</span>
+<p>Un ventilateur de 22 kW tourne en permanence à pleine vitesse ; un registre en aval limite le débit à 65 %. On envisage un variateur. Estimez l'économie annuelle pour 8 000 h de marche à 0,18 €/kWh, et le temps de retour si le variateur coûte 3 500 € posé.</p>
+<details><summary>Voir la réponse</summary><div class="rep">
+<p><strong>Consommation actuelle, avec le registre.</strong> Un ventilateur étranglé ne consomme pas beaucoup moins qu'à pleine ouverture : sa courbe de puissance décroît lentement. On retient couramment, à 65 % de débit, environ <strong>80 % de la puissance absorbée</strong>.</p>
+<p class="mono">P<sub>registre</sub> ≈ 22 × 0,80 = <strong>17,6 kW</strong></p>
+<p><strong>Consommation avec variateur.</strong> Le débit d'un ventilateur centrifuge est proportionnel à sa vitesse : pour 65 % de débit, on tourne à 65 % de la vitesse. La puissance suit le cube :</p>
+<p class="mono">P<sub>variateur</sub> = 22 × 0,65³ = 22 × 0,275 = <strong>6,0 kW</strong></p>
+<p><em>À quoi il faut ajouter les pertes du variateur lui-même, de l'ordre de 3 % : environ 6,2 kW.</em></p>
+<p><strong>L'économie.</strong></p>
+<p class="mono">ΔP = 17,6 − 6,2 = <strong>11,4 kW</strong><br>énergie = 11,4 × 8000 = 91 200 kWh/an<br>économie = 91 200 × 0,18 = <strong>16 400 € par an</strong></p>
+<p><strong>Le temps de retour.</strong></p>
+<p class="mono">3 500 / 16 400 = 0,21 an = <strong>environ 11 semaines</strong></p>
+<p><strong>Deux remarques qui comptent autant que le chiffre.</strong></p>
+<ul>
+<li>Un retour sur investissement de trois mois est spectaculaire, et c'est pourtant un ordre de grandeur courant sur un ventilateur étranglé qui tourne en continu. <span class="cle">Le gisement d'économies le plus important d'une usine, ce sont les machines centrifuges bridées par une vanne ou un registre.</span></li>
+<li>Une fois le variateur posé, <strong>il faut ouvrir le registre en grand</strong>. Le laisser en place annulerait tout le bénéfice : on paierait la perte de charge du registre en plus.</li>
+</ul>
+<p><em>C'est le genre de calcul qu'un technicien de maintenance est le mieux placé pour faire, parce que c'est lui qui sait quelles machines tournent bridées. Le savoir S4.1 en fait d'ailleurs une compétence attendue : proposer des améliorations.</em></p>
+</div></details></div>
+
+<div class="exo"><span class="tag">Exercice 25.2</span>
+<p>Un convoyeur équipé d'un variateur déclenche en « surintensité » à chaque démarrage depuis qu'on a augmenté la charge. Quels paramètres examinez-vous, et dans quel ordre ?</p>
+<details><summary>Voir la réponse</summary><div class="rep">
+<p><strong>Dans l'ordre, du plus probable et du moins coûteux au plus lourd.</strong></p>
+<ol>
+<li><strong>La rampe d'accélération.</strong> C'est le premier suspect. Accélérer plus vite exige plus de couple, donc plus de courant. Allonger la rampe de 2 à 5 secondes suffit très souvent, et cela ne coûte rien. Vérifiez au passage que le produit ne glisse pas sur la bande — c'est l'exercice 8.3 du dossier mécanique.</li>
+<li><strong>Le courant nominal moteur paramétré.</strong> S'il est resté au réglage d'usine, le variateur protège selon un moteur qui n'est pas le vôtre. Le remettre à la valeur de la plaque, dans le couplage câblé.</li>
+<li><strong>La limitation de courant.</strong> La plupart des variateurs permettent de plafonner le courant pendant l'accélération : le variateur allonge alors la rampe tout seul plutôt que de déclencher. C'est le bon réglage pour une charge variable.</li>
+<li><strong>Le boost de tension à basse fréquence.</strong> Trop élevé, il sature le fer au démarrage et fait grimper le courant sans produire de couple. Le baisser peut paradoxalement résoudre le problème.</li>
+<li><strong>La loi U/f choisie.</strong> Certains variateurs proposent une loi quadratique, destinée aux pompes et ventilateurs. Sur un convoyeur, qui demande du couple constant, elle prive le moteur de couple à basse vitesse. Vérifier qu'on est bien en loi linéaire.</li>
+</ol>
+<p><strong>Et si tout cela ne suffit pas</strong>, c'est que le problème n'est pas dans le variateur :</p>
+<ul>
+<li><strong>La charge a réellement dépassé ce que la machine peut faire.</strong> Mesurez le courant en marche établie : s'il dépasse déjà le nominal, le moteur est sous-dimensionné, et aucun paramètre n'y changera rien.</li>
+<li><strong>Quelque chose freine mécaniquement.</strong> Roulement de tambour, bande trop tendue, racleur, produit coincé. <span class="cle">Un défaut électrique qui apparaît « depuis qu'on a changé la charge » est très souvent mécanique.</span></li>
+</ul>
+<p><em>Méthode : avant de toucher au moindre paramètre, sauvegardez la configuration. Et notez chaque valeur modifiée avec sa date — un variateur reparamétré à l'aveugle par trois personnes successives devient impossible à diagnostiquer.</em></p>
+</div></details></div>
+
+<div class="exo"><span class="tag">Exercice 25.3</span>
+<p>Un moteur 4 pôles doit entraîner une machine à 1 800 tr/min. Le variateur peut-il le faire ? Quelles précautions prenez-vous ?</p>
+<details><summary>Voir la réponse</summary><div class="rep">
+<p><strong>Oui, techniquement — mais avec trois vérifications, et la troisième est décisive.</strong></p>
+<p><strong>La fréquence nécessaire.</strong> Un moteur 4 pôles a un synchronisme de 1 500 tr/min à 50 Hz. Pour 1 800 tr/min :</p>
+<p class="mono">f = 50 × 1800 / 1500 = <strong>60 Hz</strong></p>
+<p>Il faut donc régler la fréquence maximale du variateur à 60 Hz. C'est un simple paramètre.</p>
+<p><strong>Vérification 1 — le couple disponible.</strong> Au-delà de 50 Hz, on entre en défluxage. Le couple maximal chute comme 1/f² :</p>
+<p class="mono">C<sub>max</sub>(60 Hz) = C<sub>max</sub>(50 Hz) × (50/60)² = <strong>69 %</strong></p>
+<p>Il reste 69 % du couple. <strong>Si la machine demande son couple nominal à 1 800 tr/min, le moteur ne suivra pas.</strong> Comme la puissance est constante dans cette zone, un moteur qui tourne 20 % plus vite ne peut fournir que 83 % de son couple nominal — et il est à la limite.</p>
+<p><strong>Vérification 2 — la mécanique.</strong> Vingt pour cent de vitesse en plus, ce n'est pas rien :</p>
+<ul>
+<li><strong>Les roulements</strong> voient leur durée de vie réduite ; vérifier la vitesse limite du catalogue.</li>
+<li><strong>Le balourd</strong> produit une force centrifuge qui croît comme le carré de la vitesse : +44 % de vibration pour la même excentricité.</li>
+<li><strong>Le ventilateur du moteur</strong> tourne plus vite : il refroidit mieux, mais il fait aussi plus de bruit.</li>
+<li><strong>La transmission en aval</strong> — courroie, réducteur, accouplement — a une vitesse maximale admissible qu'il faut lire.</li>
+</ul>
+<p><strong>Vérification 3 — la plus importante, et celle qu'on oublie.</strong> <span class="cle">Vérifier que la machine entraînée supporte 1 800 tr/min.</span> C'est presque toujours elle la limite, pas le moteur : vitesse critique d'un arbre, tenue d'une meule, régime maximal d'une pompe, résonance d'un carter.</p>
+<p><em>Et une alternative souvent meilleure : plutôt que de défluxer un moteur 4 pôles, prendre un moteur 2 pôles (3 000 tr/min de synchronisme) piloté à 30 Hz. On reste dans la zone à couple constant, avec toute la marge — au prix d'un moteur différent.</em></p>
+</div></details></div>
+
+</div>
+</section>
+
+<script>
+/* ======================= CH 25 · la loi U/f et le défluxage ======================= */
+(function(){
+  "use strict";
+  var F=MSPC.ctrl('a-uf-f', function(v){ return Math.round(v)+' Hz'; }, 'a-uf-f-l');
+  var V=MSPC.ctrl('a-uf-v', function(v){ return v?'moto-ventilé':'auto-ventilé'; }, 'a-uf-v-l');
+  var B=MSPC.ctrl('a-uf-b');
+  var out=document.getElementById('a-uf-out');
+  var FN=50, UN=400;
+
+  function U(f,boost){
+    var u = f<=FN ? UN*f/FN : UN;
+    if(boost && f<12) u = Math.max(u, UN*0.06 + u*0.75);   // le boost relève les basses fréquences
+    return Math.min(UN,u);
+  }
+  function flux(f,boost){ return f<1 ? 1 : (U(f,boost)/f)/(UN/FN); }
+  /* Couple MAXIMAL avant décrochage : il suit le carré du flux, donc 1/f². */
+  function cmax(f,boost){ var p=flux(f,boost); return p*p; }
+  /* Couple UTILISABLE en continu : limité par le courant admissible, il suit
+     le flux lui-même, donc 1/f. C'est lui qui rend la puissance constante. */
+  function cutile(f,boost){ return Math.min(1, flux(f,boost)); }
+
+  MSPC.anim('a-uf', function(a){
+    var ctx=a.ctx, W=a.W, H=a.H;
+    var f=F.val, moto=V.val, boost=B.val;
+    var u=U(f,boost), ph=flux(f,boost), cm=cmax(f,boost);
+    // déclassement thermique : un moteur auto-ventilé ne se refroidit plus en bas
+    var declass = moto ? 1 : Math.min(1, 0.55+0.45*Math.min(1,f/25));
+    var cdispo = Math.min(cutile(f,boost), declass);
+    var puiss = cdispo*(f/FN);
+
+    MSPC.fond(ctx,W,H,0);
+    MSPC.mono(ctx,'LA LOI U/f — TENSION, FLUX, COUPLE ET PUISSANCE EN FONCTION DE LA FRÉQUENCE',26,30,11.5,'#8d968b');
+
+    var g={x:74,y:64,w:492,h:296}, FMAX=100;
+    function X(x){ return g.x + x/FMAX*g.w; }
+    function Y(v){ return g.y+g.h - Math.min(1.35,v)/1.35*g.h; }
+
+    /* les deux zones */
+    ctx.fillStyle='rgba(200,216,52,.05)'; ctx.fillRect(g.x,g.y,X(FN)-g.x,g.h);
+    ctx.fillStyle='rgba(240,168,68,.05)'; ctx.fillRect(X(FN),g.y,g.x+g.w-X(FN),g.h);
+    if(!moto){ ctx.fillStyle='rgba(255,106,94,.10)'; ctx.fillRect(g.x,g.y,X(25)-g.x,g.h); }
+
+    /* graduations */
+    ctx.strokeStyle='rgba(255,255,255,.09)'; ctx.lineWidth=1;
+    for(var v=0;v<=1.2;v+=0.2){ ctx.beginPath(); ctx.moveTo(g.x,Y(v)); ctx.lineTo(g.x+g.w,Y(v)); ctx.stroke();
+      MSPC.mono(ctx,Math.round(v*100)+'%',g.x-8,Y(v)+4,9.5,'#7f8a7e','right'); }
+    for(var ff=0;ff<=FMAX;ff+=25){ ctx.beginPath(); ctx.moveTo(X(ff),g.y); ctx.lineTo(X(ff),g.y+g.h); ctx.stroke();
+      MSPC.mono(ctx,ff+' Hz',X(ff),g.y+g.h+18,9.5,'#7f8a7e','center'); }
+    ctx.strokeStyle='rgba(255,255,255,.25)'; ctx.lineWidth=1.3; ctx.strokeRect(g.x+.5,g.y+.5,g.w,g.h);
+
+    /* la frontière du nominal */
+    ctx.strokeStyle='rgba(255,255,255,.40)'; ctx.lineWidth=1.6; ctx.setLineDash([5,4]);
+    ctx.beginPath(); ctx.moveTo(X(FN),g.y); ctx.lineTo(X(FN),g.y+g.h); ctx.stroke(); ctx.setLineDash([]);
+    MSPC.mono(ctx,'COUPLE CONSTANT',(g.x+X(FN))/2,g.y+18,10.5,'#c8d834','center');
+    MSPC.mono(ctx,'DÉFLUXAGE — PUISSANCE CONSTANTE',(X(FN)+g.x+g.w)/2,g.y+18,10.5,'#f0a844','center');
+    if(!moto) MSPC.mono(ctx,'déclassement',(g.x+X(25))/2,g.y+g.h-14,9.5,'#ff6a5e','center');
+
+    /* les quatre courbes */
+    function dcl(x){ return moto?1:Math.min(1,0.55+0.45*Math.min(1,x/25)); }
+    var CR=[
+      {n:'tension U',        c:'#79a6c4', t:0, v:function(x){ return U(x,boost)/UN; }},
+      {n:'flux Φ',           c:'#cfe2ee', t:0, v:function(x){ return flux(x,boost); }},
+      {n:'couple max',       c:'#7f9a2e', t:1, v:function(x){ return Math.min(cmax(x,boost), dcl(x)); }},
+      {n:'couple utilisable',c:'#c8d834', t:2, v:function(x){ return Math.min(cutile(x,boost), dcl(x)); }},
+      {n:'puissance',        c:'#f0a844', t:0, v:function(x){ return Math.min(cutile(x,boost), dcl(x))*(x/FN); }}
+    ];
+    CR.forEach(function(c,i){
+      ctx.strokeStyle=c.c; ctx.lineWidth=c.t===2?3.4:2.2;
+      if(c.t===1) ctx.setLineDash([6,4]);
+      ctx.beginPath();
+      for(var x=1;x<=FMAX;x+=0.6){ var yy=Y(c.v(x)); if(x<=1.1) ctx.moveTo(X(x),yy); else ctx.lineTo(X(x),yy); }
+      ctx.stroke(); ctx.setLineDash([]);
+      MSPC.mono(ctx,c.n,g.x+g.w-8,g.y+44+i*16,10,c.c,'right');
+    });
+
+    /* le point de fonctionnement */
+    ctx.strokeStyle='rgba(255,255,255,.35)'; ctx.lineWidth=1.4; ctx.setLineDash([3,3]);
+    ctx.beginPath(); ctx.moveTo(X(f),g.y); ctx.lineTo(X(f),g.y+g.h); ctx.stroke(); ctx.setLineDash([]);
+    CR.forEach(function(c){
+      if(c.t===1) return;
+      ctx.fillStyle=c.c; ctx.beginPath(); ctx.arc(X(f),Y(c.v(f)),5.5,0,6.2832); ctx.fill();
+      ctx.strokeStyle='#0d120f'; ctx.lineWidth=1.6; ctx.stroke();
+    });
+
+    /* ---------- panneau ---------- */
+    var qx=592, qw=W-qx-26;
+    var coul = cdispo>0.9 ? '#c8d834' : (cdispo>0.6 ? '#f0a844' : '#ff6a5e');
+    ctx.fillStyle='rgba(255,255,255,.04)'; ctx.fillRect(qx,64,qw,296);
+    ctx.strokeStyle=coul; ctx.lineWidth=1.8; ctx.strokeRect(qx+.5,64.5,qw,296);
+    MSPC.mono(ctx,'TENSION APPLIQUÉE',qx+16,88,10,'#8d968b');
+    MSPC.titre(ctx,Math.round(u)+' V',qx+16,120,28,'#79a6c4');
+    MSPC.mono(ctx,'VITESSE DU CHAMP',qx+16,150,10,'#8d968b');
+    MSPC.titre(ctx,MSPC.nb(1500*f/FN)+' tr/min',qx+16,182,26,'#cfe2ee');
+    MSPC.mono(ctx,'COUPLE DISPONIBLE',qx+16,212,10,'#8d968b');
+    MSPC.titre(ctx,Math.round(cdispo*100)+' %',qx+16,250,36,coul);
+    ctx.fillStyle='rgba(255,255,255,.09)'; ctx.fillRect(qx+16,262,qw-32,10);
+    ctx.fillStyle=coul; ctx.fillRect(qx+16,262,(qw-32)*cdispo,10);
+    MSPC.mono(ctx,'PUISSANCE DISPONIBLE',qx+16,296,10,'#8d968b');
+    MSPC.titre(ctx,Math.round(puiss*100)+' %',qx+16,330,28,'#f0a844');
+    MSPC.mono(ctx, moto?'moteur moto-ventilé : refroidi à toute vitesse':'moteur auto-ventilé : mal refroidi en bas',
+      qx+16, 338, 9.5, moto?'#c8d834':'#ff6a5e');
+    MSPC.mono(ctx,'marge avant décrochage : '+Math.round(Math.min(cmax(f,boost),1)*100)+' %',qx+16,353,9.5,'#7f9a2e');
+
+    /* ---------- bandeau ---------- */
+    var msg;
+    if(f>FN) msg='DÉFLUXAGE : la tension bute sur les 400 V. Le couple utilisable chute en 1/f — donc la puissance reste constante — et la marge avant décrochage chute en 1/f².';
+    else if(!moto && f<20) msg='Le ventilateur du moteur est calé sur son arbre : à cette vitesse il ne refroidit plus. Le couple admissible en continu doit être déclassé.';
+    else if(boost && f<12) msg='Le boost compense la chute de tension dans la résistance du stator, qui devient prépondérante quand U est faible.';
+    else msg='Zone à couple constant : la tension suit la fréquence, le flux reste constant, et le moteur donne tout son couple.';
+    ctx.fillStyle='rgba(255,255,255,.05)'; ctx.fillRect(26,398,W-52,52);
+    MSPC.mono(ctx,msg,42,424,11.5,coul);
+    MSPC.mono(ctx,'U/f = '+(u/f).toFixed(1).replace('.',',')+' V/Hz   ·   nominal : '+(UN/FN).toFixed(1).replace('.',',')+' V/Hz',42,444,10,'#6f786e');
+
+    out.innerHTML=Math.round(u)+' V à '+f+' Hz · couple <b style="color:'+coul+'">'+Math.round(cdispo*100)+' %</b><br>'
+      +(f>FN?'défluxage':(!moto&&f<20?'déclassement thermique':'couple constant'));
+  }, {fixed:true});
+})();
+
+/* ======================= CH 25 · dedans : redresseur, bus, onduleur MLI ======================= */
+(function(){
+  "use strict";
+  var D=MSPC.ctrl('a-onduleur-d', function(v){ return v+' kHz'; }, 'a-onduleur-d-l');
+  var S=MSPC.ctrl('a-onduleur-s', function(v){ return Math.round(v)+' Hz'; }, 'a-onduleur-s-l');
+  var out=document.getElementById('a-onduleur-out');
+
+  MSPC.anim('a-onduleur', function(a){
+    var ctx=a.ctx, W=a.W, H=a.H;
+    var fdec=D.val*1000, fout=S.val;
+    var N=Math.round(fdec/fout);                       // porteuses par période de sortie
+    var m=Math.min(1,fout/50);                         // profondeur de modulation, loi U/f
+
+    MSPC.fond(ctx,W,H,0);
+    MSPC.mono(ctx,'À L’INTÉRIEUR D’UN VARIATEUR — TROIS ÉTAGES',26,30,11.5,'#8d968b');
+
+    /* ---------- les trois étages ---------- */
+    var by=52, bh=120;
+    var ET=[
+      {x:40,  w:200, n:'REDRESSEUR', s:'six diodes', d:'400 V ~ → continu'},
+      {x:262, w:180, n:'BUS CONTINU', s:'condensateur', d:'560 V lissés'},
+      {x:464, w:200, n:'ONDULEUR', s:'six IGBT', d:'hachage à '+D.val+' kHz'}
+    ];
+    ET.forEach(function(e,i){
+      ctx.fillStyle='rgba(255,255,255,.045)'; ctx.fillRect(e.x,by,e.w,bh);
+      ctx.strokeStyle=i===2?'#c8d834':'#5a6258'; ctx.lineWidth=i===2?2.4:1.6;
+      ctx.strokeRect(e.x+.5,by+.5,e.w,bh);
+      MSPC.mono(ctx,e.n,e.x+14,by+22,10.5,i===2?'#c8d834':'#8d968b');
+      MSPC.mono(ctx,e.s,e.x+14,by+38,9.5,'#6f786e');
+      MSPC.titre(ctx,e.d,e.x+14,by+110,19,i===1?'#ff6a5e':'#cfe2ee');
+    });
+    // les symboles
+    for(var d=0;d<6;d++){
+      var dx0=64+(d%3)*54, dy0=by+(d<3?58:80);
+      ctx.strokeStyle='#8d968b'; ctx.lineWidth=1.6;
+      ctx.beginPath(); ctx.moveTo(dx0,dy0-7); ctx.lineTo(dx0+12,dy0); ctx.lineTo(dx0,dy0+7); ctx.closePath(); ctx.stroke();
+      ctx.beginPath(); ctx.moveTo(dx0+12,dy0-7); ctx.lineTo(dx0+12,dy0+7); ctx.stroke();
+    }
+    ctx.strokeStyle='#ff6a5e'; ctx.lineWidth=3;
+    ctx.beginPath(); ctx.moveTo(340,by+50); ctx.lineTo(340,by+64); ctx.moveTo(324,by+64); ctx.lineTo(356,by+64);
+    ctx.moveTo(324,by+72); ctx.lineTo(356,by+72); ctx.moveTo(340,by+72); ctx.lineTo(340,by+88); ctx.stroke();
+    for(var g2=0;g2<6;g2++){
+      var gx0=490+(g2%3)*58, gy0=by+(g2<3?58:82);
+      ctx.strokeStyle='#c8d834'; ctx.lineWidth=1.8;
+      ctx.strokeRect(gx0,gy0-9,17,18);
+      ctx.beginPath(); ctx.moveTo(gx0+17,gy0); ctx.lineTo(gx0+30,gy0); ctx.stroke();
+    }
+    // les liaisons
+    ctx.strokeStyle='#4d5a4d'; ctx.lineWidth=2.4;
+    ctx.beginPath(); ctx.moveTo(240,by+bh/2); ctx.lineTo(262,by+bh/2);
+    ctx.moveTo(442,by+bh/2); ctx.lineTo(464,by+bh/2);
+    ctx.moveTo(664,by+bh/2); ctx.lineTo(700,by+bh/2); ctx.stroke();
+    ctx.strokeStyle='#c8d834'; ctx.lineWidth=2.4;
+    ctx.beginPath(); ctx.arc(730,by+bh/2,28,0,6.2832); ctx.stroke();
+    MSPC.titre(ctx,'M',730,by+bh/2+10,26,'#c8d834','center');
+    MSPC.mono(ctx,'réseau →',40,by-10,10,'#ff6a5e');
+    MSPC.mono(ctx,'→ moteur',700,by-10,10,'#c8d834');
+
+    /* ---------- la MLI ---------- */
+    var g={x:74,y:196,w:604,h:132};
+    ctx.fillStyle='rgba(255,255,255,.03)'; ctx.fillRect(g.x,g.y,g.w,g.h);
+    ctx.strokeStyle='rgba(255,255,255,.20)'; ctx.lineWidth=1.3; ctx.strokeRect(g.x+.5,g.y+.5,g.w,g.h);
+    var mid=g.y+g.h/2;
+    ctx.strokeStyle='rgba(255,255,255,.16)';
+    ctx.beginPath(); ctx.moveTo(g.x,mid); ctx.lineTo(g.x+g.w,mid); ctx.stroke();
+    MSPC.mono(ctx,'TENSION DE SORTIE — DES CRÉNEAUX À 560 V, JAMAIS UNE SINUSOÏDE',g.x,g.y-10,10.5,'#8d968b');
+
+    // les créneaux : la porteuse triangulaire comparée à la référence sinusoïdale
+    var pas=g.w/Math.max(40,N)/2;
+    ctx.strokeStyle='#ff6a5e'; ctx.lineWidth=1.1;
+    ctx.beginPath();
+    var prev=null;
+    for(var px=0;px<=g.w;px+=0.5){
+      var ph=px/g.w*6.2832;
+      var ref=m*Math.sin(ph);
+      var por=2*Math.abs(((px/g.w*N)%1)-0.5)*2-1;        // triangle -1..1
+      var lvl=(ref>por)?1:-1;
+      var yy=mid-lvl*(g.h/2-8);
+      if(prev===null){ ctx.moveTo(g.x+px,yy); }
+      else if(prev!==lvl){ ctx.lineTo(g.x+px,mid-prev*(g.h/2-8)); ctx.lineTo(g.x+px,yy); }
+      else ctx.lineTo(g.x+px,yy);
+      prev=lvl;
+    }
+    ctx.stroke();
+    // la référence
+    ctx.strokeStyle='rgba(207,226,238,.55)'; ctx.lineWidth=1.8; ctx.setLineDash([5,4]);
+    ctx.beginPath();
+    for(var px2=0;px2<=g.w;px2+=2){
+      var yy2=mid-m*Math.sin(px2/g.w*6.2832)*(g.h/2-8);
+      if(px2===0) ctx.moveTo(g.x+px2,yy2); else ctx.lineTo(g.x+px2,yy2);
+    }
+    ctx.stroke(); ctx.setLineDash([]);
+    ctx.fillStyle='#11160f'; ctx.fillRect(g.x+g.w-126,g.y+6,120,16);
+    MSPC.mono(ctx,'la sinusoïde visée',g.x+g.w-10,g.y+18,9.5,'#cfe2ee','right');
+
+    /* ---------- le courant ---------- */
+    var c={x:74,y:352,w:604,h:104};
+    ctx.fillStyle='rgba(255,255,255,.03)'; ctx.fillRect(c.x,c.y,c.w,c.h);
+    ctx.strokeStyle='rgba(255,255,255,.20)'; ctx.lineWidth=1.3; ctx.strokeRect(c.x+.5,c.y+.5,c.w,c.h);
+    var cmid=c.y+c.h/2;
+    ctx.strokeStyle='rgba(255,255,255,.16)';
+    ctx.beginPath(); ctx.moveTo(c.x,cmid); ctx.lineTo(c.x+c.w,cmid); ctx.stroke();
+    MSPC.mono(ctx,'COURANT DANS LE MOTEUR — L’INDUCTANCE INTÈGRE LES CRÉNEAUX',c.x,c.y-10,10.5,'#8d968b');
+
+    // intégration : l'ondulation décroît quand la découpe s'accélère
+    var ripple=(c.h/2-10)*Math.min(0.6, 26/N);
+    ctx.strokeStyle='#c8d834'; ctx.lineWidth=2.2; ctx.beginPath();
+    for(var qx=0;qx<=c.w;qx+=0.6){
+      var ph2=qx/c.w*6.2832;
+      var base=-m*Math.cos(ph2-0.5)*(c.h/2-14);
+      var tri=2*Math.abs(((qx/c.w*N)%1)-0.5)*2-1;
+      var yy3=cmid+base+tri*ripple;
+      if(qx===0) ctx.moveTo(c.x+qx,yy3); else ctx.lineTo(c.x+qx,yy3);
+    }
+    ctx.stroke();
+
+    /* ---------- panneau ---------- */
+    var qx2=700, qw=W-qx2-26;
+    ctx.fillStyle='rgba(255,255,255,.04)'; ctx.fillRect(qx2,196,qw,260);
+    ctx.strokeStyle='rgba(255,255,255,.20)'; ctx.lineWidth=1.4; ctx.strokeRect(qx2+.5,196.5,qw,260);
+    MSPC.mono(ctx,'CRÉNEAUX PAR PÉRIODE',qx2+14,220,10,'#8d968b');
+    MSPC.titre(ctx,MSPC.nb(N),qx2+14,254,30,'#cfe2ee');
+    MSPC.mono(ctx,'ONDULATION DU COURANT',qx2+14,284,10,'#8d968b');
+    MSPC.titre(ctx,Math.round(Math.min(60,2600/N))+' %',qx2+14,318,28, N>120?'#c8d834':(N>50?'#f0a844':'#ff6a5e'));
+    MSPC.mono(ctx,'PERTES DANS LE VARIATEUR',qx2+14,348,10,'#8d968b');
+    MSPC.titre(ctx,(1.4+D.val*0.22).toFixed(1).replace('.',',')+' %',qx2+14,382,26, D.val>10?'#ff6a5e':'#c8d834');
+    MSPC.mono(ctx, D.val<=4?'sifflement AUDIBLE':'sifflement inaudible', qx2+14,414,11.5, D.val<=4?'#f0a844':'#c8d834');
+    MSPC.mono(ctx,'le hachage se propage',qx2+14,434,9.5,'#6f786e');
+    MSPC.mono(ctx,'dans tout le câble',qx2+14,448,9.5,'#6f786e');
+
+    MSPC.mono(ctx,'Monter la découpe lisse le courant et fait taire le moteur — mais chauffe le variateur, qu’il faut alors déclasser.',26,H-12,11,'#6f786e');
+
+    out.innerHTML=N+' créneaux par période<br>ondulation <b>'+Math.round(Math.min(60,2600/N))+' %</b> · pertes '+(1.4+D.val*0.22).toFixed(1).replace('.',',')+' %';
+  }, {fixed:true});
+})();
+
+/* ======================= CH 25 · la loi en cube ======================= */
+(function(){
+  "use strict";
+  var Q=MSPC.ctrl('a-cube-q', function(v){ return Math.round(v)+' %'; }, 'a-cube-q-l');
+  var P=MSPC.ctrl('a-cube-p', function(v){ return v+' kW'; }, 'a-cube-p-l');
+  var Hh=MSPC.ctrl('a-cube-h', function(v){ return MSPC.nb(v)+' h/an'; }, 'a-cube-h-l');
+  var out=document.getElementById('a-cube-out');
+  var PRIX=0.18;
+
+  MSPC.anim('a-cube', function(a){
+    var ctx=a.ctx, W=a.W, H=a.H;
+    var q=Q.val/100, Pn=P.val, heures=Hh.val;
+    var fVanne=0.40+0.60*q;              // une pompe étranglée consomme encore beaucoup
+    var fVar=Math.pow(q,3)*1.03;         // loi en cube, plus les pertes du variateur
+    var Pv=Pn*fVanne, Pd=Pn*fVar;
+    var eco=(Pv-Pd)*heures*PRIX;
+
+    MSPC.fond(ctx,W,H,0);
+    MSPC.mono(ctx,'MÊME DÉBIT, DEUX MÉTHODES — POMPE OU VENTILATEUR CENTRIFUGE',26,30,11.5,'#8d968b');
+    MSPC.mono(ctx,'la loi en cube ne vaut que pour les machines centrifuges',W-26,30,10,'#6f786e','right');
+
+    /* ---------- les deux colonnes ---------- */
+    var COL=[
+      {x:52, n:'RÉGLAGE PAR VANNE', s:'la pompe tourne à fond, on étrangle', f:fVanne, p:Pv, c:'#ff6a5e', v:1},
+      {x:352,n:'RÉGLAGE PAR VARIATEUR', s:'on ralentit la pompe', f:fVar, p:Pd, c:'#c8d834', v:q}
+    ];
+    COL.forEach(function(z){
+      var cw=254;
+      ctx.fillStyle='rgba(255,255,255,.035)'; ctx.fillRect(z.x,58,cw,300);
+      ctx.strokeStyle=z.c; ctx.lineWidth=1.8; ctx.strokeRect(z.x+.5,58.5,cw,300);
+      MSPC.mono(ctx,z.n,z.x+16,82,10.5,z.c);
+      MSPC.mono(ctx,z.s,z.x+16,98,9.5,'#6f786e');
+
+      // la pompe et son moteur
+      var px=z.x+62, py=170;
+      ctx.strokeStyle=z.c; ctx.lineWidth=2.4;
+      ctx.beginPath(); ctx.arc(px,py,30,0,6.2832); ctx.stroke();
+      ctx.fillStyle='rgba(255,255,255,.05)'; ctx.fill();
+      for(var b=0;b<5;b++){
+        var an=a.t*z.v*5+b*1.2566;
+        ctx.beginPath(); ctx.moveTo(px,py);
+        ctx.lineTo(px+Math.cos(an)*26,py+Math.sin(an)*26); ctx.stroke();
+      }
+      MSPC.mono(ctx,Math.round(z.v*100)+' % vitesse',px,py+50,10,'#cfe2ee','center');
+
+      // la canalisation
+      ctx.strokeStyle='#5a6258'; ctx.lineWidth=2;
+      ctx.strokeRect(z.x+104,py-16,130,32);
+      var ouv = z.x<300 ? q : 1;
+      ctx.fillStyle=z.c; ctx.globalAlpha=0.30;
+      ctx.fillRect(z.x+106,py-14+16*(1-ouv), 126, 28*ouv);
+      ctx.globalAlpha=1;
+      if(z.x<300){
+        // la vanne
+        ctx.strokeStyle='#ff6a5e'; ctx.lineWidth=3;
+        ctx.beginPath(); ctx.moveTo(z.x+180,py-16); ctx.lineTo(z.x+180,py-16+30*(1-q)); ctx.stroke();
+        ctx.beginPath(); ctx.moveTo(z.x+180,py+16); ctx.lineTo(z.x+180,py+16-30*(1-q)); ctx.stroke();
+        MSPC.mono(ctx,'vanne',z.x+180,py+34,9.5,'#ff6a5e','center');
+      }
+      MSPC.mono(ctx,'débit '+Math.round(q*100)+' %',z.x+168,py+50,10,'#cfe2ee','center');
+
+      // la barre de puissance
+      MSPC.mono(ctx,'PUISSANCE ABSORBÉE',z.x+16,250,10,'#8d968b');
+      ctx.fillStyle='rgba(255,255,255,.09)'; ctx.fillRect(z.x+16,258,cw-32,22);
+      ctx.fillStyle=z.c; ctx.fillRect(z.x+16,258,(cw-32)*Math.min(1,z.f),22);
+      MSPC.titre(ctx,z.p.toFixed(1).replace('.',',')+' kW',z.x+16,318,30,z.c);
+      MSPC.mono(ctx,Math.round(z.f*100)+' % de la puissance nominale',z.x+16,340,10,'#6f786e');
+    });
+
+    /* ---------- l'économie ---------- */
+    var qx=628, qw=W-qx-26;
+    ctx.fillStyle='rgba(200,216,52,.08)'; ctx.fillRect(qx,58,qw,300);
+    ctx.strokeStyle='#c8d834'; ctx.lineWidth=2; ctx.strokeRect(qx+.5,58.5,qw,300);
+    MSPC.mono(ctx,'PUISSANCE ÉCONOMISÉE',qx+16,84,10,'#8d968b');
+    MSPC.titre(ctx,(Pv-Pd).toFixed(1).replace('.',',')+' kW',qx+16,118,30,'#c8d834');
+    MSPC.mono(ctx,'SUR '+MSPC.nb(heures)+' HEURES',qx+16,150,10,'#8d968b');
+    MSPC.titre(ctx,MSPC.nb((Pv-Pd)*heures)+' kWh',qx+16,182,24,'#cfe2ee');
+    MSPC.mono(ctx,'ÉCONOMIE ANNUELLE  à 0,18 €/kWh',qx+16,216,10,'#8d968b');
+    MSPC.titre(ctx,MSPC.nb(eco)+' €',qx+16,266,44,'#c8d834');
+    MSPC.mono(ctx,'RETOUR SUR INVESTISSEMENT',qx+16,300,10,'#8d968b');
+    var cout=800+Pn*180;
+    var mois=eco>0 ? cout/eco*12 : 999;
+    MSPC.titre(ctx, mois<1?'moins d’un mois':(mois<36?Math.round(mois)+' mois':'> 3 ans'), qx+16,334,24, mois<24?'#c8d834':'#f0a844');
+    MSPC.mono(ctx,'variateur estimé à '+MSPC.nb(cout)+' € posé',qx+16,352,9.5,'#6f786e');
+
+    /* ---------- bandeau ---------- */
+    ctx.fillStyle='rgba(255,255,255,.05)'; ctx.fillRect(26,378,W-52,60);
+    MSPC.titre(ctx,'P ∝ n³',44,412,30,'#c8d834');
+    MSPC.mono(ctx,'Ralentir de '+Math.round((1-q)*100)+' % divise la puissance par '+(1/Math.pow(q,3)).toFixed(1).replace('.',',')+'.',150,402,12,'#e6ebe4');
+    MSPC.mono(ctx,'Avec une vanne, la pompe tourne toujours à fond : l’énergie en trop se dissipe en turbulence et en chaleur.',150,424,11,'#8d968b');
+    MSPC.mono(ctx,'Après la pose d’un variateur, il faut ouvrir la vanne en grand — sinon on paie sa perte de charge en plus.',26,H-12,10.5,'#6f786e');
+
+    out.innerHTML='vanne <b style="color:#ff6a5e">'+Pv.toFixed(1).replace('.',',')+' kW</b> · variateur <b style="color:#c8d834">'+Pd.toFixed(1).replace('.',',')+' kW</b><br>'
+      +MSPC.nb(eco)+' € économisés par an';
   }, {fixed:true});
 })();
 </script>
