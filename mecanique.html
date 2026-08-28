@@ -1,0 +1,1728 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Transmettre, guider, tenir — Cours de mécanique Bac Pro MSPC</title>
+<meta name="description" content="Cours de mécanique pour le Bac Pro MSPC, calé sur le référentiel officiel : chaîne d'énergie, liaisons et degrés de liberté, actions mécaniques, adhérence, statique graphique, ajustements et tolérances, guidages, lubrification, étanchéité, loi entrée-sortie, résistance des matériaux.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Saira+Condensed:wght@500;600;700&family=Public+Sans:ital,wght@0,400;0,600;0,800;1,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/site.css">
+<script src="assets/site.js"></script>
+<style>
+/* Accent de la matière : le bleu acier des plans mécaniques */
+:root{--accent:#3f6b8a; --accent-clair:#79a6c4; --accent-sombre:#254054}
+.hero-canvas-wrap>canvas{position:absolute; inset:0; width:100%; height:100%; display:block}
+.switch{display:flex; align-items:center; gap:9px; cursor:pointer; margin:0 0 12px}
+.switch input{width:auto; margin:0}
+.switch span{font-family:"IBM Plex Mono",monospace; font-size:10.5px; letter-spacing:.11em; text-transform:uppercase; color:#fff}
+</style>
+</head>
+<body>
+
+<nav class="sitenav" aria-label="Navigation entre les cours">
+  <a class="marque" href="index.html"><span class="sig">Atelier <b>MSPC</b></span></a>
+  <div class="liens">
+    <a href="index.html">Accueil</a>
+    <a class="m-elec" href="electricite.html"><i class="pastille"></i>Électricité</a>
+    <a class="m-maint" href="maintenance-preventive.html"><i class="pastille"></i>Maintenance préventive</a>
+    <a class="m-meca" href="mecanique.html" aria-current="page"><i class="pastille"></i>Mécanique</a>
+    <a class="m-pneu" href="pneumatique.html"><i class="pastille"></i>Pneumatique</a>
+    <a class="m-hydro" href="hydraulique.html"><i class="pastille"></i>Hydraulique</a>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="hero-canvas-wrap">
+    <canvas id="chaine" aria-label="Animation : la chaîne d'énergie d'un convoyeur, du réseau électrique à la bande, avec le rendement de chaque étage"></canvas>
+    <div class="hero-ctrl">
+      <label>Charge sur le convoyeur <span id="hch">40 %</span></label>
+      <input type="range" id="hcharge" min="0" max="100" value="40" aria-label="Charge sur le convoyeur">
+      <label>Rapport du réducteur <span id="hrd">1 / 20</span></label>
+      <input type="range" id="hred" min="1" max="60" value="20" aria-label="Rapport du réducteur">
+      <div class="verdict" id="hverdict">Suivez la puissance de gauche à droite. Regardez ce qu'il en reste à l'arrivée.</div>
+    </div>
+    <div class="hero-text">
+      <span class="eyebrow">Bac Pro MSPC · Mécanique · Savoirs S1 et S2</span>
+      <h1>Transmettre,<br><em>guider</em>, tenir</h1>
+      <p>Une machine ne fabrique pas d'énergie : elle la fait voyager. Du réseau jusqu'à la pièce, chaque organe en prend sa part au passage. Toute la mécanique de maintenance tient dans une question — <em>où part ce qui manque à l'arrivée ?</em></p>
+    </div>
+  </div>
+</header>
+
+<div class="meta-bar">
+  <div><b>6</b> chapitres sur 18 publiés</div>
+  <div><b>7</b> animations pilotables</div>
+  <div><b>15</b> exercices corrigés</div>
+  <div>Fiches TP <b>en préparation</b></div>
+  <div>Calé sur le <b>référentiel MSPC</b></div>
+</div>
+
+<div class="wrap">
+
+<div class="encadre"><span class="tag">Comment lire ce dossier</span>
+<p>Chaque chapitre porte, sous son titre, la <strong>pastille du savoir associé</strong> qu'il traite et son <strong>niveau taxonomique</strong> — tels qu'ils figurent au référentiel du Bac Pro MSPC. Trois niveaux seulement sont utilisés dans ce diplôme :</p>
+<ul>
+<li><strong>Niveau 1 — information</strong> : décrire, identifier, sélectionner.</li>
+<li><strong>Niveau 2 — compréhension</strong> : expliquer, interpréter, lire, reconnaître, utiliser.</li>
+<li><strong>Niveau 3 — application</strong> : appliquer, calculer, déterminer.</li>
+</ul>
+<p>Les niveaux supérieurs de la taxonomie de Bloom — analyser, synthétiser, évaluer — <em>ne sont pas exigés</em> en Bac Pro MSPC. Un chapitre marqué « niveau 2 » n'attend donc de vous ni calcul ni dimensionnement : savoir lire et expliquer suffit.</p>
+<p>Ce qui déborde du référentiel n'a pas été supprimé pour autant : c'est souvent ce qui rend une notion mémorable. Mais c'est placé dans des <strong>encadrés gris hachurés</strong> comme celui-ci, étiquetés « pour aller plus loin ». <span class="cle">Vous pouvez les sauter intégralement sans perdre le fil du cours.</span></p></div>
+
+<nav class="sommaire" aria-label="Sommaire">
+  <h2>Le fil du cours</h2>
+  <p>On commence par apprendre à <em>lire</em> une machine, avant de chercher à la réparer : la chaîne d'énergie, les outils qui la décrivent, puis les liaisons qui tiennent les pièces ensemble. Viennent ensuite les efforts et les mouvements, puis le cœur mécanique du métier — jeux, ajustements, guidages, lubrification, étanchéité. On finit par la transmission de la puissance et par ce qui casse quand elle est mal transmise.</p>
+  <div class="rail">
+    <a class="borne" href="#c1"><span class="num">01</span><span class="lbl">Lire une machine : la chaîne d'énergie</span></a>
+    <a class="borne" href="#c2"><span class="num">02</span><span class="lbl">Les outils qui décrivent un mécanisme</span></a>
+    <a class="borne" href="#c3"><span class="num">03</span><span class="lbl">Degrés de liberté et liaisons</span></a>
+    <a class="borne" href="#c4"><span class="num">04</span><span class="lbl">Classes d'équivalence et graphe</span></a>
+    <a class="borne" href="#c5"><span class="num">05</span><span class="lbl">Forces, moments et couples</span></a>
+    <a class="borne" href="#c6"><span class="num">06</span><span class="lbl">Adhérence et frottement</span></a>
+    <a class="borne" href="#c7"><span class="num">07</span><span class="lbl">Isoler et résoudre : la statique</span></a>
+    <a class="borne" href="#c8"><span class="num">08</span><span class="lbl">Mouvements et vitesses</span></a>
+    <a class="borne" href="#c9"><span class="num">09</span><span class="lbl">Énergie, puissance, rendement</span></a>
+    <a class="borne" href="#c10"><span class="num">10</span><span class="lbl">Ajustements, jeux et tolérances</span></a>
+    <a class="borne" href="#c11"><span class="num">11</span><span class="lbl">États de surface et usure</span></a>
+    <a class="borne" href="#c12"><span class="num">12</span><span class="lbl">La lubrification</span></a>
+    <a class="borne" href="#c13"><span class="num">13</span><span class="lbl">L'étanchéité</span></a>
+    <a class="borne" href="#c14"><span class="num">14</span><span class="lbl">Le guidage en rotation</span></a>
+    <a class="borne" href="#c15"><span class="num">15</span><span class="lbl">Le guidage en translation</span></a>
+    <a class="borne" href="#c16"><span class="num">16</span><span class="lbl">Transmettre : la loi entrée-sortie</span></a>
+    <a class="borne" href="#c17"><span class="num">17</span><span class="lbl">Transformer le mouvement</span></a>
+    <a class="borne" href="#c18"><span class="num">18</span><span class="lbl">Matériaux et sollicitations</span></a>
+    <a class="borne" href="#tps" style="border-top-color:var(--accent)"><span class="num">TP</span><span class="lbl">Les 15 fiches d'atelier</span></a>
+  </div>
+</nav>
+
+<!-- ================= CH 1 ================= -->
+<section class="ch" id="c1">
+  <div class="ch-head"><div class="ch-num">01</div><div class="ch-title">
+    <span class="kicker">Avant de réparer, savoir lire</span><h2>Lire une machine : la chaîne d'énergie</h2></div></div>
+  <div class="ch-body">
+
+<div class="savoirs">
+  <span class="savoir n2"><b>S1.1.1</b> <i>Description externe</i></span>
+  <span class="savoir n2"><b>S1.1.2</b> <i>Description interne</i></span>
+</div>
+
+<p class="lede">Un technicien de maintenance débutant regarde une machine et voit un tas de pièces. Un technicien expérimenté regarde la même machine et voit <strong>un chemin</strong> : quelque chose entre par un bout, se transforme plusieurs fois, et ressort par l'autre en ayant fait un travail. Apprendre à voir ce chemin, c'est la première compétence du métier — avant toute clé, avant tout multimètre.</p>
+
+<h3>1.1 — Une machine ne fabrique rien</h3>
+<p>Commençons par une évidence qui n'en est pas une. <span class="cle">Aucune machine ne produit d'énergie.</span> Elle en reçoit, la transforme, la déplace, et en restitue une partie sous la forme utile. Le reste — car il y a toujours un reste — part en chaleur, en bruit, en vibrations.</p>
+<p>Un convoyeur ne « fait » pas avancer des cartons : il prend de l'énergie électrique au réseau, la convertit en rotation, ralentit cette rotation pour gagner de la force, et pousse enfin une bande. À chaque étage, une partie se perd. Votre travail consiste très souvent à répondre à une seule question : <strong>pourquoi la part perdue a-t-elle augmenté ?</strong></p>
+
+<h3>1.2 — Les sept fonctions de la chaîne d'énergie</h3>
+<p>Le référentiel MSPC impose un vocabulaire précis, et il vaut mieux l'adopter tout de suite : c'est celui de vos épreuves, de vos dossiers techniques, et de vos collègues. Toute chaîne d'énergie se décompose en sept fonctions.</p>
+
+<table>
+<thead><tr><th>Fonction</th><th>Ce qu'elle fait</th><th>Exemples de composants</th></tr></thead>
+<tbody>
+<tr><td><strong>Alimenter</strong></td><td>Amener l'énergie depuis sa source jusqu'au système</td><td>Sectionneur, prise réseau, compresseur, centrale hydraulique</td></tr>
+<tr><td><strong>Protéger</strong></td><td>Interrompre en cas de défaut, avant la casse</td><td>Disjoncteur, fusible, limiteur de pression, limiteur de couple</td></tr>
+<tr><td><strong>Distribuer</strong></td><td>Envoyer l'énergie vers le bon actionneur, au bon moment</td><td>Contacteur, distributeur pneumatique ou hydraulique</td></tr>
+<tr><td><strong>Convertir</strong></td><td>Changer la <em>nature</em> de l'énergie</td><td>Moteur électrique, vérin, pompe, résistance chauffante</td></tr>
+<tr><td><strong>Moduler</strong></td><td>Doser l'énergie transmise, faire varier la vitesse ou l'effort</td><td>Variateur de vitesse, réducteur de pression, régulateur de débit</td></tr>
+<tr><td><strong>Stocker</strong></td><td>Mettre en réserve pour restituer plus tard</td><td>Volant d'inertie, ressort, batterie, accumulateur, réservoir d'air</td></tr>
+<tr><td><strong>Transmettre</strong></td><td>Acheminer l'énergie mécanique sans en changer la nature</td><td>Accouplement, réducteur, courroie, chaîne, arbre, engrenage</td></tr>
+<tr><td><strong>Agir</strong></td><td>Faire l'action utile sur la matière d'œuvre</td><td>Bande transporteuse, pince, outil de coupe, ventouse</td></tr>
+</tbody></table>
+
+<p><span class="cle">Retenez l'ordre : alimenter · protéger · distribuer · convertir · moduler · stocker · transmettre · agir.</span> Vous le retrouverez dans chaque dossier technique, dans chaque sujet d'examen, et — c'est le plus utile — dans chaque diagnostic. Devant une machine à l'arrêt, remonter la chaîne fonction par fonction vous évite de démonter au hasard.</p>
+
+<div class="image-mentale"><span class="tag">Image mentale — le circuit d'eau de la ville</span>
+<p>La source, c'est le barrage : il <strong>alimente</strong>. La station de pompage <strong>convertit</strong> l'électricité en pression d'eau. Le château d'eau <strong>stocke</strong>. Le réseau de canalisations <strong>transmet</strong>. Les vannes de quartier <strong>distribuent</strong>. Le réducteur de pression de votre immeuble <strong>module</strong>. Le clapet anti-retour <strong>protège</strong>. Et le robinet de votre cuisine <strong>agit</strong>.</p>
+<p>Si l'eau n'arrive plus, vous ne commencez pas par démonter le robinet. Vous remontez la chaîne. Une machine, c'est exactement pareil.</p></div>
+
+<h3>1.3 — Deux chaînes qui se parlent</h3>
+<p>À côté de la chaîne d'énergie court une seconde chaîne, qui ne transporte pas de puissance mais de l'<strong>information</strong> : acquérir · traiter · communiquer · dialoguer. Un capteur acquiert la position d'un vérin, l'automate traite, l'IHM dialogue avec l'opérateur.</p>
+<p>Les deux chaînes se rejoignent en deux points, toujours les mêmes :</p>
+<ul>
+<li>La chaîne d'information <strong>commande</strong> la chaîne d'énergie — l'automate pilote un distributeur, un variateur, un contacteur.</li>
+<li>La chaîne d'énergie <strong>renseigne</strong> la chaîne d'information — un capteur va lire l'effet produit.</li>
+</ul>
+<p>Quand ce second lien existe, on parle de <strong>boucle fermée</strong> : le système vérifie ce qu'il a fait et se corrige. Quand il n'existe pas, c'est une <strong>boucle ouverte</strong> : le système commande sans jamais vérifier. Un vérin sans capteur de fin de course fonctionne en boucle ouverte — l'automate croit qu'il est sorti, il n'en sait rien.</p>
+
+<div class="encadre"><span class="tag">Le réflexe de diagnostic</span>
+<p>Devant une machine qui ne fait plus ce qu'on lui demande, la première question n'est jamais « quelle pièce est cassée ? ». Elle est : <span class="cle">jusqu'où l'énergie arrive-t-elle encore ?</span></p>
+<p>On remonte la chaîne à l'envers, en partant de l'effecteur. Le vérin ne sort pas. L'air arrive-t-il au vérin ? Non. Le distributeur commute-t-il ? Non. Sa bobine est-elle alimentée ? Non. L'automate envoie-t-il l'ordre ? Oui. Le défaut est donc entre la sortie automate et la bobine : câble, connecteur, bornier. <strong>Vous n'avez rien démonté et le défaut est localisé.</strong></p>
+<p>C'est cette méthode que les épreuves de diagnostic évaluent, bien plus que votre habileté à la clé.</p></div>
+
+<figure class="anim">
+  <canvas id="a-chaine" width="900" height="420" aria-label="Animation : la chaîne d'énergie d'un convoyeur, fonction par fonction, avec le bilan de puissance"></canvas>
+  <div class="ctrls">
+    <div class="c"><label>Charge transportée <span id="a-chaine-q-l">40 %</span></label><input type="range" id="a-chaine-q" min="0" max="100" value="40"></div>
+    <div class="c"><label>Consigne du variateur <span id="a-chaine-v-l">100 %</span></label><input type="range" id="a-chaine-v" min="10" max="100" value="100"></div>
+    <div class="c"><label>Étage examiné <span id="a-chaine-f-l">tous</span></label><input type="range" id="a-chaine-f" min="0" max="5" value="0"></div>
+    <div class="c readout" id="a-chaine-out"></div>
+  </div>
+  <figcaption>La chaîne d'énergie d'un convoyeur, dans l'ordre du référentiel. La <b>largeur du flux</b> est proportionnelle à la puissance qui passe : regardez-la maigrir à chaque étage. <b>Déplacez le curseur « étage examiné »</b> pour isoler une fonction et lire ce qu'elle prend au passage. <b>Chargez le convoyeur</b> : la puissance utile monte, mais les pertes aussi — et pas dans les mêmes proportions. <b>Baissez la consigne du variateur</b> : le moteur tourne moins vite, le rendement se dégrade. Un moteur asynchrone donne son meilleur rendement près de sa vitesse nominale, jamais au ralenti.</figcaption>
+</figure>
+
+<div class="exo"><span class="tag">Exercice 1.1</span>
+<p>Classez chacun de ces composants dans l'une des huit fonctions de la chaîne d'énergie : a) un accouplement élastique ; b) un accumulateur oléopneumatique ; c) un disjoncteur moteur ; d) une ventouse ; e) un variateur de fréquence ; f) un distributeur 5/2.</p>
+<details><summary>Voir la réponse</summary><div class="rep">
+<p><strong>a) Accouplement élastique → TRANSMETTRE.</strong> Il fait passer le couple du moteur au réducteur sans changer la nature de l'énergie : c'est de la mécanique qui entre, c'est de la mécanique qui sort.</p>
+<p><strong>b) Accumulateur oléopneumatique → STOCKER.</strong> Il met de l'énergie hydraulique en réserve sous pression pour la restituer lors d'un appel de débit.</p>
+<p><strong>c) Disjoncteur moteur → PROTÉGER.</strong> Attention au piège : il coupe le courant, mais sa fonction n'est pas de distribuer, c'est d'interrompre <em>en cas de défaut</em>. Un contacteur, lui, coupe le courant pour distribuer.</p>
+<p><strong>d) Ventouse → AGIR.</strong> C'est l'effecteur : elle agit directement sur la matière d'œuvre, la pièce à déplacer.</p>
+<p><strong>e) Variateur de fréquence → MODULER.</strong> Il dose l'énergie envoyée au moteur pour en régler la vitesse. Il ne change pas la nature de l'énergie — électrique en entrée, électrique en sortie.</p>
+<p><strong>f) Distributeur 5/2 → DISTRIBUER.</strong> Le nom le dit. Il aiguille l'air vers l'une ou l'autre chambre du vérin.</p>
+<p><em>Le piège récurrent est le couple protéger / distribuer. Posez-vous la question : ce composant agit-il pendant le fonctionnement normal (distribuer) ou seulement quand ça se passe mal (protéger) ?</em></p>
+</div></details></div>
+
+<div class="exo"><span class="tag">Exercice 1.2</span>
+<p>Sur une perceuse à colonne, le foret ne tourne plus alors que le moteur, lui, tourne. En raisonnant par la chaîne d'énergie, indiquez quelles fonctions restent saines et où se situe nécessairement le défaut.</p>
+<details><summary>Voir la réponse</summary><div class="rep">
+<p><strong>Ce qui est prouvé sain.</strong> Le moteur tourne : donc <em>alimenter</em>, <em>protéger</em>, <em>distribuer</em> et <em>convertir</em> fonctionnent. L'énergie électrique arrive bien et se convertit bien en énergie mécanique de rotation.</p>
+<p><strong>Ce qui est prouvé défaillant.</strong> Le foret ne tourne pas : <em>agir</em> ne se produit pas.</p>
+<p><strong>Donc le défaut est nécessairement dans TRANSMETTRE</strong>, entre l'arbre moteur et la broche. C'est la seule fonction située entre un point sain prouvé et un point défaillant prouvé.</p>
+<p><strong>Pistes concrètes, dans cet ordre :</strong> courroie rompue ou déchaussée, courroie détendue qui patine sur les poulies, clavette cisaillée entre poulie et arbre, vis de poulie desserrée, ou accouplement cassé.</p>
+<p><em>Remarquez ce que ce raisonnement vous a économisé : vous n'avez ni mesuré une tension, ni ouvert l'armoire, ni testé le moteur. Deux observations bien lues ont éliminé les quatre premières fonctions de la chaîne. C'est exactement ce qu'on attend de vous en épreuve de diagnostic.</em></p>
+</div></details></div>
+
+<div class="exo"><span class="tag">Exercice 1.3</span>
+<p>Un vérin pneumatique sort, mais l'automate déclare un défaut « vérin non sorti » et bloque le cycle. Boucle ouverte ou boucle fermée ? Où est le défaut ?</p>
+<details><summary>Voir la réponse</summary><div class="rep">
+<p><strong>Boucle fermée</strong>, sans aucun doute possible. Si le système était en boucle ouverte, l'automate n'aurait aucun moyen de savoir si le vérin est sorti : il commanderait, attendrait un temps fixe, et passerait à la suite. Le fait même qu'il puisse <em>contester</em> la sortie prouve qu'un capteur le renseigne.</p>
+<p><strong>Le défaut n'est donc pas dans la chaîne d'énergie</strong> — elle a fait son travail, le vérin est sorti. Il est dans la <strong>chaîne d'information</strong>, sur le chemin du retour.</p>
+<p><strong>Pistes, dans l'ordre :</strong> capteur de fin de course mal positionné ou décalé par les vibrations (le plus fréquent de loin) ; capteur défaillant ; câble ou connecteur coupé ; entrée automate en défaut ; ou temporisation d'attente trop courte dans le programme, qui déclare le défaut avant que le vérin ait fini sa course.</p>
+<p><em>La leçon vaut pour toute votre carrière : quand ce que la machine fait et ce que la machine croit ne coïncident pas, le défaut est presque toujours du côté de ce qu'elle croit.</em></p>
+</div></details></div>
+
+<div class="horsref"><span class="tag">Pour aller plus loin — hors référentiel</span>
+<h4>D'où vient ce découpage en fonctions ?</h4>
+<p>Cette manière de découper une machine n'a rien d'universel ni d'éternel : c'est une <strong>convention pédagogique française</strong>, issue de l'analyse fonctionnelle développée dans l'industrie aéronautique et automobile dans les années 1960-1970, puis reprise par l'Éducation nationale.</p>
+<p>Ailleurs, on découpe autrement. La littérature technique anglo-saxonne parle plutôt de <em>power train</em> et de <em>control system</em>, sans ce découpage fin en huit fonctions. Les normes d'automatisme, elles, préfèrent raisonner en niveaux (terrain, contrôle, supervision).</p>
+<p>Cela ne rend pas le découpage moins utile — au contraire, il est remarquablement efficace pour diagnostiquer. Mais gardez en tête que c'est <strong>une grille de lecture, pas une propriété de la machine</strong>. Un même composant peut d'ailleurs remplir deux fonctions : un moto-réducteur convertit <em>et</em> transmet. Ne vous crispez pas sur le classement ; ce qui compte est le chemin.</p></div>
+
+</div>
+</section>
+
+<!-- ================= CH 2 ================= -->
+<section class="ch" id="c2">
+  <div class="ch-head"><div class="ch-num">02</div><div class="ch-title">
+    <span class="kicker">Le dessin qui dit l'essentiel</span><h2>Les outils qui décrivent un mécanisme</h2></div></div>
+  <div class="ch-body">
+
+<div class="savoirs">
+  <span class="savoir n2"><b>S1.1.3</b> <i>Les outils descripteurs</i></span>
+</div>
+
+<p class="lede">Un mécanisme réel comporte des centaines de pièces : vis, rondelles, joints, carters, graisseurs. Pour comprendre <em>comment il bouge</em>, presque tout cela est du bruit. Le schéma cinématique est l'outil qui jette le bruit et ne garde que le mouvement. C'est un dessin qu'on apprend d'abord à <strong>lire</strong>, avant, un jour, de savoir le tracer.</p>
+
+<div class="encadre"><span class="tag">Ce que le référentiel attend exactement de vous</span>
+<p>Sur ce point, le référentiel MSPC est explicite, et il vaut mieux le savoir : <span class="cle">« Le schéma cinématique est complété et commenté, et non élaboré dans son ensemble. »</span></p>
+<p>Autrement dit, on ne vous demandera pas de partir d'une machine nue et d'en tracer le schéma de A à Z. On vous donnera un schéma partiel, et vous devrez y placer une liaison manquante, l'identifier, ou expliquer ce qu'il représente. Les normes de représentation vous sont fournies. <strong>L'effort porte sur la lecture, pas sur le tracé.</strong></p>
+<p>Ce chapitre est donc calibré là-dessus : reconnaître, interpréter, compléter.</p></div>
+
+<h3>2.1 — Quatre outils, quatre questions différentes</h3>
+<p>On ne choisit pas un outil de description au hasard : chacun répond à une question, et à une seule.</p>
+
+<table>
+<thead><tr><th>Outil</th><th>Il répond à la question</th><th>Ce qu'il montre · ce qu'il cache</th></tr></thead>
+<tbody>
+<tr><td><strong>Le dessin d'ensemble</strong><br>(plan 2D, maquette 3D)</td><td>À quoi ça ressemble, comment c'est fabriqué ?</td><td>Montre les formes réelles, les dimensions, les matières.<br>Cache le mouvement dans un enchevêtrement de traits.</td></tr>
+<tr><td><strong>La nomenclature</strong></td><td>Quelles pièces, combien, en quoi ?</td><td>Montre le repère, la quantité, la désignation, la matière. Indispensable pour commander une pièce.<br>Ne dit rien du fonctionnement.</td></tr>
+<tr><td><strong>Le graphe de liaisons</strong></td><td>Qui est lié à qui, et comment ?</td><td>Montre la structure des contacts : un cercle par groupe de pièces, un trait par liaison.<br>Ne dit rien des dimensions ni des positions.</td></tr>
+<tr><td><strong>Le schéma cinématique</strong></td><td>Comment ça bouge ?</td><td>Montre le mouvement, à l'échelle des positions relatives.<br>Cache tout le reste : formes, matières, vis, étanchéité.</td></tr>
+</tbody></table>
+
+<p><span class="cle">Devant un dossier technique, la question n'est pas « quel document est le meilleur », mais « qu'est-ce que je cherche en ce moment ? ».</span> Pour commander un roulement, c'est la nomenclature. Pour comprendre pourquoi la broche a du jeu, c'est le schéma cinématique.</p>
+
+<h3>2.2 — Lire un schéma cinématique</h3>
+<p>Trois conventions suffisent à en décoder l'immense majorité.</p>
+<ol>
+<li><strong>Chaque trait continu est un solide indéformable.</strong> Peu importe qu'il représente une pièce ou quinze pièces boulonnées ensemble : si elles ne bougent pas les unes par rapport aux autres, c'est un seul solide sur le schéma. On appelle cela une <em>classe d'équivalence</em> (chapitre 4).</li>
+<li><strong>Chaque symbole entre deux traits est une liaison</strong>, et son symbole dit exactement quels mouvements elle autorise (chapitre 3).</li>
+<li><strong>Les hachures signalent le bâti</strong> — la pièce considérée comme fixe, la référence de tous les mouvements. Il y en a toujours un, et un seul.</li>
+</ol>
+<p>Un schéma cinématique est <strong>à l'échelle des positions</strong> : la distance entre deux liaisons y est respectée, parce qu'elle détermine les courses et les vitesses. En revanche, l'épaisseur des traits, la forme des pièces et leur volume ne veulent rien dire.</p>
+
+<figure class="anim">
+  <canvas id="a-schema" width="900" height="400" aria-label="Animation : un système bielle-manivelle réel et son schéma cinématique, animés ensemble"></canvas>
+  <div class="ctrls">
+    <div class="c"><label>Position de la manivelle <span id="a-schema-a-l">0°</span></label><input type="range" id="a-schema-a" min="0" max="359" value="35"></div>
+    <div class="c"><label>Rotation continue <span id="a-schema-r-l">arrêt</span></label><input type="range" id="a-schema-r" min="0" max="60" value="0"></div>
+    <div class="c"><label class="switch"><input type="checkbox" id="a-schema-e" checked><span>Afficher les repères</span></label></div>
+    <div class="c readout" id="a-schema-out"></div>
+  </div>
+  <figcaption>Le même mécanisme, deux fois. <b>À gauche</b>, le système bielle-manivelle tel qu'il existe : un carter, un vilebrequin, une bielle, un piston. <b>À droite</b>, son schéma cinématique : quatre traits et quatre symboles, rien de plus. <b>Tournez la manivelle</b> et vérifiez que les deux bougent exactement pareil — c'est tout l'intérêt du schéma, il ne perd aucune information de mouvement. <b>Comptez les liaisons</b> : trois pivots et une glissière suffisent à décrire un moteur thermique complet.</figcaption>
+</figure>
+
+<h3>2.3 — Le graphe de liaisons, le brouillon qui sauve</h3>
+<p>Avant de lire un schéma cinématique compliqué, il existe un intermédiaire très économique : le <strong>graphe de liaisons</strong>. On dessine un cercle par solide, et on relie deux cercles chaque fois qu'il existe un contact entre eux, en écrivant le nom de la liaison sur le trait.</p>
+<p>Ce petit dessin, qu'on trace en trente secondes sur un coin de feuille, répond immédiatement à deux questions utiles en maintenance :</p>
+<ul>
+<li><strong>Le graphe est-il une boucle ou une chaîne ouverte ?</strong> Une boucle fermée signifie que les pièces se contraignent mutuellement — un défaut d'alignement quelque part se répercute partout. Une chaîne ouverte (un bras de robot) est beaucoup plus tolérante.</li>
+<li><strong>Combien de liaisons transmettent l'effort ?</strong> S'il n'y en a qu'une sur le chemin, c'est un point de passage obligé : elle travaille seule, elle s'usera la première.</li>
+</ul>
+
+<div class="image-mentale"><span class="tag">Image mentale — le plan du métro</span>
+<p>Un plan de métro ne respecte ni les distances, ni la géographie, ni la forme des rues. Il ne garde qu'une seule information : <strong>quelle station est reliée à quelle autre</strong>. C'est faux géographiquement, et c'est exactement pour ça qu'il est utile — vous ne cherchez pas à connaître Paris, vous cherchez à savoir où changer.</p>
+<p>Le graphe de liaisons est le plan de métro d'un mécanisme. Le schéma cinématique en est la carte routière : il respecte les distances. Et le dessin d'ensemble en est la photo aérienne : tout y est, y compris ce dont vous n'avez que faire.</p></div>
+
+<div class="exo"><span class="tag">Exercice 2.1</span>
+<p>Pour chacune de ces cinq tâches, indiquez quel document du dossier technique vous ouvrez : a) commander le joint d'étanchéité de l'arbre de sortie ; b) comprendre pourquoi le chariot part de travers en fin de course ; c) vérifier la matière d'un axe avant de le refabriquer ; d) savoir si le réducteur est réversible ; e) repérer l'ordre de démontage d'un palier.</p>
+<details><summary>Voir la réponse</summary><div class="rep">
+<p><strong>a) Le joint à commander → la nomenclature.</strong> C'est le seul document qui porte la désignation exacte et la référence commerciale. Le schéma cinématique ignore purement et simplement les joints : ils ne participent à aucun mouvement.</p>
+<p><strong>b) Le chariot de travers → le schéma cinématique.</strong> Un défaut de guidage est un problème de <em>mouvement</em> : quelle liaison autorise cette rotation parasite ? Le schéma vous dit quels degrés de liberté auraient dû être supprimés.</p>
+<p><strong>c) La matière de l'axe → la nomenclature.</strong> Elle porte la désignation normalisée du matériau (voir chapitre 18). Ni le schéma ni le graphe ne mentionnent jamais une matière.</p>
+<p><strong>d) La réversibilité du réducteur → le schéma cinématique</strong>, complété par la documentation constructeur. Le schéma vous montre s'il s'agit d'une roue et vis sans fin (généralement irréversible) ou d'un train d'engrenages droits (réversible) — voir chapitre 17.</p>
+<p><strong>e) L'ordre de démontage → le dessin d'ensemble</strong>, éventuellement complété par un graphe ou une gamme de démontage. C'est le seul document qui montre ce qui recouvre quoi, donc ce qu'il faut retirer en premier.</p>
+<p><em>La règle qui synthétise tout : si votre question contient le mot « bouger », prenez le schéma cinématique. Si elle contient le mot « pièce », prenez la nomenclature ou le dessin d'ensemble.</em></p>
+</div></details></div>
+
+<div class="exo"><span class="tag">Exercice 2.2</span>
+<p>On vous donne le schéma cinématique d'une presse. Vous y comptez 5 traits distincts, dont un hachuré, et 6 symboles de liaison. Combien de solides le mécanisme comporte-t-il au sens cinématique ? Le graphe est-il une chaîne ouverte ou fermée ? Justifiez.</p>
+<details><summary>Voir la réponse</summary><div class="rep">
+<p><strong>Cinq solides au sens cinématique</strong> — un par trait distinct, le bâti hachuré compris. Attention : cela ne veut pas dire cinq <em>pièces</em>. Chacun de ces cinq traits peut représenter un assemblage de dix ou vingt pièces solidaires ; au sens du mouvement, elles ne font qu'un.</p>
+<p><strong>La chaîne est fermée.</strong> Voici le raisonnement, qui est un vrai outil et pas une astuce d'examen : dans un graphe, une chaîne strictement ouverte reliant <em>n</em> solides comporte exactement <em>n − 1</em> liaisons. Ici, 5 solides en chaîne ouverte donneraient 4 liaisons. On en compte 6, soit <strong>deux de plus</strong> : il y a donc deux boucles fermées dans le mécanisme.</p>
+<p><strong>Ce que cela vous dit concrètement.</strong> Une boucle fermée signifie que les pièces se contraignent mutuellement. Conséquence en maintenance : un défaut géométrique — un alésage désaxé, un palier usé, un bâti déformé — ne reste pas local. Il se propage à toute la boucle et se traduit par des efforts internes que rien ne demandait. C'est la raison pour laquelle un remontage approximatif sur un mécanisme en boucle fermée chauffe, vibre et casse, alors que le même remontage sur un bras articulé passerait inaperçu.</p>
+</div></details></div>
+
+<div class="horsref"><span class="tag">Pour aller plus loin — hors référentiel</span>
+<h4>Hyperstatisme : pourquoi trois pieds valent mieux que quatre</h4>
+<p>Quand une boucle fermée comporte plus de liaisons qu'il n'en faut pour tenir les pièces, le mécanisme est dit <strong>hyperstatique</strong>. Les liaisons en trop ne servent à rien tant que tout est parfait — mais dès qu'un défaut de fabrication apparaît, elles se mettent à lutter les unes contre les autres.</p>
+<p>L'exemple que tout le monde connaît : une table à <strong>quatre</strong> pieds bancale sur un sol irrégulier, alors qu'une table à <strong>trois</strong> pieds ne l'est jamais. Le quatrième pied est une liaison surabondante. Il n'ajoute aucune tenue ; il ajoute seulement la possibilité que ça coince.</p>
+<p>En mécanique industrielle, c'est la même chose avec un arbre monté sur <strong>trois</strong> paliers alignés : si les trois alésages ne sont pas rigoureusement dans le prolongement l'un de l'autre — et ils ne le sont jamais — l'arbre est mis en flexion permanente au montage. Il s'échauffe, les roulements prennent une charge qui n'était pas prévue, et l'un des trois lâche prématurément.</p>
+<p>Le calcul du degré d'hyperstatisme n'est pas au programme du Bac Pro MSPC. Mais l'idée, elle, vous servira dès votre premier remontage : <span class="cle">ajouter un appui n'améliore pas forcément une tenue — ça peut la ruiner.</span></p></div>
+
+</div>
+</section>
+
+<!-- ================= CH 3 ================= -->
+<section class="ch" id="c3">
+  <div class="ch-head"><div class="ch-num">03</div><div class="ch-title">
+    <span class="kicker">Ce qu'on autorise, ce qu'on interdit</span><h2>Degrés de liberté et liaisons</h2></div></div>
+  <div class="ch-body">
+
+<div class="savoirs">
+  <span class="savoir n3"><b>S1.4.1</b> <i>Modélisation des mécanismes</i></span>
+  <span class="savoir n3"><b>S1.2.1</b> <i>Nature du contact</i></span>
+</div>
+
+<p class="lede">Concevoir une liaison, ce n'est pas « attacher deux pièces ». C'est décider, mouvement par mouvement, <strong>lesquels on autorise et lesquels on interdit</strong>. Un roulement autorise une rotation et en interdit cinq autres. Une glissière autorise une translation et en interdit cinq. Toute la mécanique tient dans cet inventaire — et la plupart des pannes viennent d'un mouvement qui aurait dû être interdit et qui ne l'est plus.</p>
+
+<h3>3.1 — Six mouvements, pas un de plus</h3>
+<p>Prenez un objet, une gomme par exemple, et tenez-la en l'air. De combien de façons <em>indépendantes</em> pouvez-vous la déplacer ? La réponse est six, toujours six, quel que soit l'objet :</p>
+<ul>
+<li><strong>Trois translations</strong> — elle peut glisser selon l'axe x, selon y, selon z. On les note T<sub>x</sub>, T<sub>y</sub>, T<sub>z</sub>.</li>
+<li><strong>Trois rotations</strong> — elle peut tourner autour de x, autour de y, autour de z. On les note R<sub>x</sub>, R<sub>y</sub>, R<sub>z</sub>.</li>
+</ul>
+<p>Ces six mouvements s'appellent les <strong>degrés de liberté</strong>, abrégés en <span class="mono">ddl</span>. Un solide totalement libre dans l'espace en possède 6. Un solide soudé à un autre en possède 0.</p>
+<p><span class="cle">Une liaison mécanique se définit entièrement par la liste des degrés de liberté qu'elle laisse subsister.</span> C'est une définition, pas une image : deux liaisons qui laissent exactement les mêmes ddl sont la même liaison, même si l'une est un roulement à billes et l'autre un palier lisse en bronze.</p>
+
+<div class="formule">nombre de ddl supprimés + nombre de ddl restants = 6<small>Pour toute liaison entre deux solides, sans exception</small></div>
+
+<figure class="anim">
+  <canvas id="a-ddl" width="900" height="430" aria-label="Animation : les six degrés de liberté d'un solide et les liaisons normalisées obtenues en les supprimant"></canvas>
+  <div class="ctrls">
+    <div class="c"><label class="switch"><input type="checkbox" id="a-ddl-tx"><span>T<sub>x</sub> · translation en x</span></label>
+      <label class="switch"><input type="checkbox" id="a-ddl-ty"><span>T<sub>y</sub> · translation en y</span></label>
+      <label class="switch"><input type="checkbox" id="a-ddl-tz"><span>T<sub>z</sub> · translation en z</span></label></div>
+    <div class="c"><label class="switch"><input type="checkbox" id="a-ddl-rx" checked><span>R<sub>x</sub> · rotation autour de x</span></label>
+      <label class="switch"><input type="checkbox" id="a-ddl-ry"><span>R<sub>y</sub> · rotation autour de y</span></label>
+      <label class="switch"><input type="checkbox" id="a-ddl-rz"><span>R<sub>z</sub> · rotation autour de z</span></label></div>
+    <div class="c readout" id="a-ddl-out"></div>
+  </div>
+  <figcaption>Cochez les mouvements que la liaison <b>autorise</b> ; tous les autres sont interdits. Le solide bleu ne bouge que selon ce que vous avez coché, et la liaison correspondante est nommée en bas à droite, avec son symbole normalisé et un exemple réel. <b>Ne cochez rien</b> : c'est l'<b>encastrement</b>, zéro liberté. <b>Cochez tout</b> : la pièce est libre, il n'y a plus de liaison du tout. <b>R<sub>x</sub> seul</b> donne le <b>pivot</b> — la liaison la plus répandue de toute la mécanique. Ajoutez-lui T<sub>x</sub> et vous obtenez le <b>pivot glissant</b> : c'est exactement ce que devient un pivot dont on a oublié l'arrêt axial.</figcaption>
+</figure>
+
+<h3>3.2 — Les liaisons normalisées à connaître</h3>
+<p>Sur les 64 combinaisons possibles, une dizaine seulement porte un nom normalisé — ce sont celles qu'on sait fabriquer proprement et qu'on retrouve partout.</p>
+
+<table>
+<thead><tr><th>Liaison</th><th>ddl</th><th>Mouvements autorisés</th><th>Où vous la rencontrez</th></tr></thead>
+<tbody>
+<tr><td><strong>Encastrement</strong></td><td>0</td><td>aucun</td><td>Assemblage vissé, soudé, clavette + circlip, emmanchement fretté</td></tr>
+<tr><td><strong>Pivot</strong></td><td>1</td><td>1 rotation</td><td>Arbre sur deux roulements, charnière, axe de galet</td></tr>
+<tr><td><strong>Glissière</strong></td><td>1</td><td>1 translation</td><td>Chariot de tour, tiroir de distributeur, rail de guidage</td></tr>
+<tr><td><strong>Hélicoïdale</strong></td><td>1</td><td>1 rotation <em>liée</em> à 1 translation</td><td>Vis-écrou, vérin électrique, étau d'établi</td></tr>
+<tr><td><strong>Pivot glissant</strong></td><td>2</td><td>1 rotation + 1 translation, même axe</td><td>Piston dans son cylindre, arbre cannelé coulissant</td></tr>
+<tr><td><strong>Rotule (sphérique)</strong></td><td>3</td><td>3 rotations</td><td>Rotule de direction, joint à billes, tête de bielle</td></tr>
+<tr><td><strong>Appui plan</strong></td><td>3</td><td>2 translations + 1 rotation</td><td>Pièce posée sur un marbre, semelle de moteur sur son socle</td></tr>
+<tr><td><strong>Linéaire annulaire</strong></td><td>4</td><td>3 rotations + 1 translation</td><td>Palier auto-aligneur, arbre long dans une bague courte</td></tr>
+<tr><td><strong>Linéaire rectiligne</strong></td><td>4</td><td>2 rotations + 2 translations</td><td>Cylindre posé sur un plan, galet sur un rail</td></tr>
+<tr><td><strong>Ponctuelle (sphère-plan)</strong></td><td>5</td><td>3 rotations + 2 translations</td><td>Bille sur un plan, pointeau de vérin sur sa portée</td></tr>
+</tbody></table>
+
+<p><strong>Un cas à part : la liaison hélicoïdale.</strong> Elle est la seule où deux mouvements existent mais <em>ne sont pas indépendants</em> : tourner d'un tour <em>oblige</em> à avancer d'un pas. C'est pour cela qu'on lui compte 1 degré de liberté et non 2. Retenez-la, elle explique le vérin électrique, la vis d'étau et le serrage d'une vis.</p>
+
+<h3>3.3 — La nature du contact commande la liaison</h3>
+<p>Une liaison n'est pas une idée abstraite : elle est obtenue par un <strong>contact</strong> entre deux surfaces, et c'est la géométrie de ce contact qui décide de tout.</p>
+<table>
+<thead><tr><th>Nature du contact</th><th>Géométrie</th><th>Liaison obtenue</th><th>Pression de contact</th></tr></thead>
+<tbody>
+<tr><td><strong>Ponctuel</strong></td><td>Une sphère sur un plan : le contact est un point</td><td>Ponctuelle, 5 ddl</td><td>Très élevée — le point s'écrase et marque</td></tr>
+<tr><td><strong>Linéique</strong></td><td>Un cylindre sur un plan : le contact est une ligne</td><td>Linéaire rectiligne, 4 ddl</td><td>Élevée, mais répartie sur une longueur</td></tr>
+<tr><td><strong>Surfacique</strong></td><td>Deux plans, deux cylindres de même diamètre</td><td>Appui plan, pivot glissant…</td><td>Faible — l'effort est réparti</td></tr>
+</tbody></table>
+<p><span class="cle">Plus le contact est petit, plus la liaison est libre — et plus la pression est forte.</span> C'est le grand compromis de la mécanique : on ne peut pas à la fois laisser une pièce très libre et lui faire passer un gros effort. La bille d'un roulement supporte des pressions énormes sur une surface minuscule ; c'est pour cela qu'elle est en acier trempé rectifié, et qu'un seul grain de poussière suffit à la marquer.</p>
+
+<div class="encadre"><span class="tag">Le lien direct avec votre métier</span>
+<p>Presque toutes les pannes mécaniques que vous rencontrerez se lisent comme <strong>l'apparition d'un degré de liberté qui n'était pas prévu</strong>.</p>
+<ul>
+<li>Un roulement usé : le pivot (1 ddl) devient peu à peu une liaison à 2 ou 3 ddl. L'arbre se met à bouger axialement et à basculer. Résultat : vibrations, bruit, usure de l'accouplement voisin.</li>
+<li>Une vis desserrée : l'encastrement (0 ddl) laisse apparaître un micro-mouvement. Ce micro-mouvement use le contact, le jeu augmente, la vis se desserre encore plus vite. C'est un emballement.</li>
+<li>Une glissière encrassée : le mouvement autorisé, lui, disparaît. Le défaut inverse — une liaison qui <em>interdit</em> ce qu'elle devait permettre — provoque une surcharge de l'actionneur.</li>
+</ul>
+<p>D'où le réflexe de diagnostic : <span class="cle">devant un jeu anormal, demandez-vous quel degré de liberté est apparu, et quelle surface aurait dû l'empêcher.</span> Vous saurez alors quoi aller regarder.</p></div>
+
+<div class="exo"><span class="tag">Exercice 3.1</span>
+<p>Un arbre est monté sur deux roulements à billes à contact radial. L'un est bloqué latéralement des deux côtés, l'autre est libre de coulisser dans son logement. Quelle liaison globale l'arbre a-t-il avec le bâti ? Pourquoi ce montage plutôt que deux roulements bloqués ?</p>
+<details><summary>Voir la réponse</summary><div class="rep">
+<p><strong>La liaison globale est un pivot, 1 ddl.</strong> L'arbre ne peut que tourner autour de son axe.</p>
+<p><strong>Détail du raisonnement, roulement par roulement :</strong></p>
+<ul>
+<li>Le roulement <em>bloqué</em> supprime les trois translations et les deux rotations de basculement. Il ne laisse que la rotation propre. À lui seul, il réalise déjà un pivot.</li>
+<li>Le roulement <em>libre axialement</em> supprime deux translations (radiales) et les deux basculements, mais laisse la translation axiale. Il réalise un pivot glissant, 2 ddl.</li>
+</ul>
+<p>La combinaison des deux ne garde que ce qui est autorisé par les deux à la fois : la rotation seule. <strong>Un pivot.</strong></p>
+<p><strong>Pourquoi ne pas bloquer les deux ?</strong> Parce qu'un arbre s'allonge en chauffant. Un arbre en acier d'un mètre qui passe de 20 à 60 °C s'allonge d'environ un demi-millimètre. Si les deux roulements étaient bloqués, cette dilatation n'aurait nulle part où aller : elle se transformerait en un effort axial considérable, écrasant les billes contre leurs pistes. Les roulements chaufferaient davantage, ce qui les dilaterait davantage — <em>et l'emballement thermique détruirait le montage en quelques heures</em>.</p>
+<p><strong>Vocabulaire d'atelier :</strong> on appelle le roulement bloqué le <em>palier fixe</em> (il tient l'effort axial et positionne l'arbre) et l'autre le <em>palier libre</em> (il ne fait que guider en laissant respirer). C'est le montage le plus répandu de toute la mécanique industrielle, et vous le retrouverez au chapitre 14.</p>
+<p><em>Erreur de remontage classique : bloquer par erreur le palier libre avec un circlip « qui traînait ». La machine tourne très bien pendant une demi-heure, puis le roulement grille. Toujours vérifier lequel des deux paliers doit rester libre.</em></p>
+</div></details></div>
+
+<div class="exo"><span class="tag">Exercice 3.2</span>
+<p>Donnez pour chaque cas les degrés de liberté restants, puis le nom de la liaison : a) une porte sur ses gonds ; b) le tiroir d'un distributeur pneumatique ; c) une bille de stylo dans son logement ; d) une pièce simplement posée sur la table d'une perceuse ; e) la vis d'un étau d'établi.</p>
+<details><summary>Voir la réponse</summary><div class="rep">
+<p><strong>a) Porte sur ses gonds → 1 ddl : R<sub>z</sub> (rotation autour de l'axe vertical des gonds). C'est un PIVOT.</strong> Les deux gonds à eux deux suppriment les trois translations et les deux basculements.</p>
+<p><strong>b) Tiroir de distributeur → 1 ddl : T<sub>x</sub> (translation selon l'axe du corps). C'est une GLISSIÈRE.</strong> Attention au piège : géométriquement, le tiroir est un cylindre dans un alésage cylindrique, ce qui autoriserait aussi la rotation R<sub>x</sub> — la liaison serait alors un pivot glissant. Mais la rotation n'a ici aucune conséquence fonctionnelle et n'est pas guidée ; on modélise donc en glissière, qui est le mouvement utile.</p>
+<p><strong>c) Bille de stylo → 3 ddl : R<sub>x</sub>, R<sub>y</sub>, R<sub>z</sub>. C'est une ROTULE (liaison sphérique).</strong> La bille peut tourner dans tous les sens mais ne peut pas sortir de son logement : aucune translation.</p>
+<p><strong>d) Pièce posée sur une table → 3 ddl : deux translations dans le plan de la table et une rotation autour de la normale. C'est un APPUI PLAN.</strong> Elle peut glisser dans les deux directions et pivoter à plat, mais elle ne peut ni s'enfoncer ni basculer.</p>
+<p><em>C'est précisément pour cette raison qu'on bride une pièce avant de percer : le foret, en sortant, exerce un couple qui fait tourner la pièce autour de la normale — le degré de liberté qu'on avait négligé. La pièce devient un projectile. Ce n'est pas une consigne de sécurité arbitraire, c'est une conséquence directe de l'appui plan.</em></p>
+<p><strong>e) Vis d'étau d'établi → 1 ddl. C'est une liaison HÉLICOÏDALE.</strong> Elle tourne <em>et</em> avance, mais les deux ne sont pas indépendants : un tour de manivelle correspond exactement à un pas d'avance du mors. Comme la position est entièrement déterminée par un seul paramètre — l'angle — on compte 1 seul degré de liberté, et non 2.</p>
+</div></details></div>
+
+<div class="exo"><span class="tag">Exercice 3.3</span>
+<p>Sur un convoyeur, l'arbre du tambour d'entraînement présente un jeu axial d'environ 3 mm qu'on ne constatait pas au montage. La bande se met à dériver latéralement. Analysez le défaut en termes de degrés de liberté et proposez trois causes possibles.</p>
+<details><summary>Voir la réponse</summary><div class="rep">
+<p><strong>Analyse en degrés de liberté.</strong> La liaison arbre / bâti devait être un <strong>pivot (1 ddl : R<sub>x</sub>)</strong>. Elle s'est transformée en <strong>pivot glissant (2 ddl : R<sub>x</sub> + T<sub>x</sub>)</strong>. Un degré de liberté est apparu : la translation axiale.</p>
+<p><strong>Conséquence sur la bande.</strong> Le tambour n'est plus tenu latéralement. Sous l'effet de la moindre dissymétrie — charge décentrée, tension inégale des deux côtés — il se déplace axialement, la bande suit, et elle finit par frotter contre la structure. La dérive de bande est le <em>symptôme</em>, le jeu axial est le <em>défaut</em>.</p>
+<p><strong>Trois causes possibles, de la plus fréquente à la moins fréquente :</strong></p>
+<ol>
+<li><strong>L'arrêt axial a lâché.</strong> Circlip sorti de sa gorge, écrou à encoches desserré, vis de pression de moyeu desserrée, rondelle-frein rompue. C'est de loin la cause la plus courante, et la plus facile à vérifier : on démonte le carter et on regarde.</li>
+<li><strong>Le roulement du palier fixe est usé.</strong> Les chemins de roulement se sont creusés, ou la bague extérieure tourne dans son logement (« laminage »), et l'ensemble ne tient plus la position axiale. On le repère au bruit et à la chaleur du palier.</li>
+<li><strong>Erreur de remontage lors d'une intervention précédente.</strong> Les deux paliers ont été montés libres, ou bien on a inversé le palier fixe et le palier libre. Le jeu n'existait pas « au montage » d'origine mais est apparu après la dernière intervention — c'est ce que suggère l'énoncé.</li>
+</ol>
+<p><strong>Méthode de vérification, dans l'ordre :</strong> consigner la machine, puis mesurer le jeu axial au comparateur en poussant et tirant l'arbre à la main. Si le jeu se voit entre l'arbre et la bague intérieure, c'est un problème d'arrêt axial. S'il se voit entre la bague extérieure et le logement, c'est le palier. S'il se voit à l'intérieur du roulement lui-même, le roulement est mort.</p>
+</div></details></div>
+
+<div class="horsref"><span class="tag">Pour aller plus loin — hors référentiel</span>
+<h4>Pourquoi exactement six, et pas cinq ou sept ?</h4>
+<p>Le nombre six n'a rien d'arbitraire : il découle de la géométrie de l'espace. Pour placer complètement un solide rigide, il faut et il suffit de connaître la position d'un de ses points (trois nombres : x, y, z) et l'orientation de l'objet autour de ce point (trois angles). Trois plus trois : six.</p>
+<p>On peut le vérifier autrement, et c'est joli. Prenez trois points distincts et non alignés du solide : leurs positions font 3 × 3 = 9 nombres. Mais ces neuf nombres ne sont pas libres, car le solide est indéformable : les trois distances entre les points sont fixées, ce qui impose 3 contraintes. Il reste 9 − 3 = <strong>6</strong>.</p>
+<p>Ce raisonnement vaut pour <em>tout</em> solide rigide, de la bille de roulement au pont roulant. Un solide déformable, lui — une courroie, un câble, un joint — possède une infinité de degrés de liberté, et c'est précisément pour cela qu'on ne peut pas le représenter sur un schéma cinématique.</p></div>
+
+</div>
+</section>
+
+<!-- ================= CH 4 ================= -->
+<section class="ch" id="c4">
+  <div class="ch-head"><div class="ch-num">04</div><div class="ch-title">
+    <span class="kicker">Regrouper avant de compter</span><h2>Classes d'équivalence et graphe de liaisons</h2></div></div>
+  <div class="ch-body">
+
+<div class="savoirs">
+  <span class="savoir n3"><b>S1.4.1</b> <i>Description des chaînes de liaisons</i></span>
+</div>
+
+<p class="lede">Un étau d'établi comporte une trentaine de pièces. Au sens du mouvement, il n'en comporte que trois. Savoir passer de trente à trois est le geste qui rend lisible n'importe quel mécanisme — et c'est un geste qui s'apprend en quelques minutes.</p>
+
+<h3>4.1 — Une classe d'équivalence, c'est un paquet de pièces qui voyagent ensemble</h3>
+<p>Deux pièces appartiennent à la même <strong>classe d'équivalence cinématique</strong> si elles n'ont <em>aucun mouvement possible l'une par rapport à l'autre</em>. Elles sont encastrées, directement ou par l'intermédiaire d'autres pièces.</p>
+<p>La méthode tient en trois règles, et elle ne se trompe jamais :</p>
+<ol>
+<li><strong>Prenez une pièce au hasard</strong> et donnez-lui une couleur.</li>
+<li><strong>Coloriez de la même couleur toutes les pièces qui lui sont encastrées</strong> : vis, goupilles, clavettes, rondelles, bagues frettées, pièces soudées. Une vis appartient toujours à l'une des deux pièces qu'elle assemble — jamais aux deux, jamais à aucune.</li>
+<li><strong>Recommencez avec une pièce non coloriée</strong>, jusqu'à ce qu'il n'en reste plus.</li>
+</ol>
+<p>Le nombre de couleurs utilisées est le nombre de solides du schéma cinématique. <span class="cle">Tout ce qui sert à assembler disparaît dans une classe ; seul ce qui sert à bouger reste visible.</span></p>
+
+<div class="encadre"><span class="tag">Les pièces qui piègent tout le monde</span>
+<ul>
+<li><strong>Les roulements.</strong> Un roulement n'est pas une pièce, c'est une <em>liaison</em>. Sa bague intérieure appartient à l'arbre, sa bague extérieure appartient au bâti, et les billes ne sont dans aucune classe. Sur le schéma, il devient un symbole de pivot — il n'apparaît jamais comme un solide.</li>
+<li><strong>Les ressorts.</strong> Un ressort est déformable : il n'appartient à aucune classe d'équivalence, puisque ses deux extrémités bougent l'une par rapport à l'autre. On le représente par son propre symbole.</li>
+<li><strong>Les joints d'étanchéité.</strong> Ils n'apparaissent tout simplement pas. Ils ne participent à aucun mouvement utile.</li>
+<li><strong>Les clavettes et les goupilles.</strong> Elles réalisent un encastrement : elles fusionnent deux pièces dans une même classe. Une poulie clavetée sur un arbre, c'est <em>un seul</em> solide.</li>
+</ul></div>
+
+<h3>4.2 — Du coloriage au graphe</h3>
+<p>Une fois les classes identifiées, le graphe de liaisons s'écrit tout seul :</p>
+<ul>
+<li>Un <strong>cercle</strong> par classe, numéroté. Le bâti porte traditionnellement le repère 0.</li>
+<li>Un <strong>trait</strong> entre deux cercles chaque fois qu'il existe un contact entre les deux classes, avec le nom de la liaison écrit dessus.</li>
+</ul>
+<p>Ce graphe est le brouillon indispensable avant de lire un schéma cinématique compliqué. Et il porte une information que le schéma cache : <strong>le nombre de boucles</strong>.</p>
+
+<div class="formule">nombre de boucles = nombre de liaisons − nombre de classes + 1<small>Zéro boucle : chaîne ouverte. Une ou plus : chaîne fermée</small></div>
+
+<figure class="anim">
+  <canvas id="a-classes" width="900" height="420" aria-label="Animation : identification des classes d'équivalence d'un étau et construction de son graphe de liaisons"></canvas>
+  <div class="ctrls">
+    <div class="c"><label>Ouverture de l'étau <span id="a-classes-o-l">30 %</span></label><input type="range" id="a-classes-o" min="0" max="100" value="30"></div>
+    <div class="c"><label>Étape <span id="a-classes-e-l">les pièces</span></label><input type="range" id="a-classes-e" min="0" max="3" value="0"></div>
+    <div class="c readout" id="a-classes-out"></div>
+  </div>
+  <figcaption>Un étau d'établi, de la pièce brute au graphe. <b>Faites avancer le curseur « étape »</b> : d'abord les pièces réelles avec leurs repères, puis le coloriage des classes d'équivalence, puis le schéma cinématique, puis le graphe de liaisons. <b>Trente pièces deviennent trois solides</b> — le corps et son mors fixe, le mors mobile, et la vis. <b>Tournez la vis</b> et vérifiez que les quatre représentations bougent ensemble. Notez qu'il n'y a que 3 solides et 3 liaisons : le graphe comporte donc <b>une boucle fermée</b>, ce qui explique que l'étau se coince si le corps est voilé.</figcaption>
+</figure>
+
+<div class="exo"><span class="tag">Exercice 4.1</span>
+<p>Un réducteur comprend : un carter en deux parties boulonnées, un arbre d'entrée clavetée à un pignon, un arbre de sortie sur lequel une roue dentée est frettée, quatre roulements, deux joints à lèvres, douze vis et un bouchon de vidange. Combien de classes d'équivalence ? Combien de liaisons ? Combien de boucles ?</p>
+<details><summary>Voir la réponse</summary><div class="rep">
+<p><strong>Trois classes d'équivalence.</strong></p>
+<ul>
+<li><strong>Classe 0 (le bâti)</strong> : les deux demi-carters, les douze vis qui les assemblent, le bouchon de vidange, et les quatre bagues extérieures de roulements. Tout cela est solidaire.</li>
+<li><strong>Classe 1 (arbre d'entrée)</strong> : l'arbre, sa clavette, le pignon, et les deux bagues intérieures de ses roulements.</li>
+<li><strong>Classe 2 (arbre de sortie)</strong> : l'arbre, la roue frettée, et les deux bagues intérieures de ses roulements.</li>
+</ul>
+<p><em>Les joints à lèvres n'appartiennent à aucune classe : ils sont déformables et ne transmettent aucun mouvement. Les billes non plus.</em></p>
+<p><strong>Trois liaisons.</strong> Pivot entre 0 et 1 (réalisé par deux roulements). Pivot entre 0 et 2 (deux roulements également). Et — c'est celle qu'on oublie — l'<strong>engrènement entre 1 et 2</strong>. Deux dents en contact, c'est bien une liaison : elle impose une relation entre les deux rotations.</p>
+<p><strong>Une boucle.</strong> Application de la formule : 3 liaisons − 3 classes + 1 = <strong>1</strong>. Le graphe est un triangle 0-1-2.</p>
+<p><em>Pourquoi cela vous concerne : une boucle fermée signifie que les trois liaisons se contraignent mutuellement. Si l'entraxe entre les deux arbres n'est pas respecté — carter déformé, alésage usé, roulement laminé — l'engrènement se fait mal. Les dents portent sur une arête au lieu de porter sur toute leur largeur, le bruit change, et la denture s'écaille. Un réducteur bruyant après un choc sur le carter, c'est exactement ce mécanisme.</em></p>
+</div></details></div>
+
+<div class="exo"><span class="tag">Exercice 4.2</span>
+<p>Sur le graphe d'un système de levage, vous relevez 5 classes et 4 liaisons. Chaîne ouverte ou fermée ? Quelle conséquence pratique pour le réglage ?</p>
+<details><summary>Voir la réponse</summary><div class="rep">
+<p><strong>Chaîne ouverte.</strong> 4 liaisons − 5 classes + 1 = <strong>0 boucle</strong>.</p>
+<p><strong>Conséquence pratique, et elle est double.</strong></p>
+<p><strong>Bonne nouvelle au montage :</strong> une chaîne ouverte est <em>isostatique</em>, c'est-à-dire qu'elle ne se contraint pas elle-même. Chaque liaison est libre de se placer où la géométrie l'amène. Un petit défaut d'alignement ne crée aucun effort interne : rien ne coince, rien ne force. Vous pouvez remonter le système sans réglage fin particulier, et il fonctionnera.</p>
+<p><strong>Mauvaise nouvelle en service :</strong> personne ne tient la position. Dans une chaîne fermée, les liaisons se soutiennent mutuellement ; dans une chaîne ouverte, chaque liaison encaisse seule la totalité de l'effort qui la traverse, et les jeux <em>s'additionnent</em> d'un bout à l'autre. Un jeu de 0,1 mm dans chacune des quatre liaisons donne, en bout de chaîne, un flottement bien plus important — amplifié en plus par les bras de levier.</p>
+<p><strong>Ce que ça change pour vous :</strong> sur un système en chaîne ouverte, ne cherchez pas le défaut d'alignement, il n'y en a pas. Cherchez les <strong>jeux</strong>, et traquez-les liaison par liaison en partant de la charge. C'est exactement la démarche pour un bras manipulateur ou une grue qui « flotte » en bout de flèche.</p>
+</div></details></div>
+
+</div>
+</section>
+
+<!-- ================= CH 5 ================= -->
+<section class="ch" id="c5">
+  <div class="ch-head"><div class="ch-num">05</div><div class="ch-title">
+    <span class="kicker">Où l'on découvre que la distance compte autant que l'effort</span><h2>Forces, moments et couples</h2></div></div>
+  <div class="ch-body">
+
+<div class="savoirs">
+  <span class="savoir n3"><b>S1.4.2</b> <i>Modélisation des actions mécaniques</i></span>
+</div>
+
+<p class="lede">Serrer une vis avec une clé de 15 cm ou avec une clé de 45 cm ne demande pas le même effort — tout le monde le sait. Ce que tout le monde ne sait pas, c'est que <strong>trois fois plus long</strong> veut dire exactement <strong>trois fois moins d'effort</strong>, et que cette proportion se calcule. C'est le moment, la grandeur la plus utile de toute la mécanique de maintenance.</p>
+
+<h3>5.1 — Une action mécanique se décrit par quatre choses</h3>
+<p>Dire « j'appuie fort » ne veut rien dire en mécanique. Une action se décrit par un <strong>vecteur force</strong>, et un vecteur porte quatre informations indissociables :</p>
+<ul>
+<li>son <strong>point d'application</strong> — où l'effort s'exerce ;</li>
+<li>sa <strong>direction</strong> — la droite qui le porte ;</li>
+<li>son <strong>sens</strong> — de quel côté sur cette droite ;</li>
+<li>son <strong>intensité</strong> — en newtons (N).</li>
+</ul>
+<p>Retirez une seule de ces quatre informations et le problème devient insoluble. C'est la raison pour laquelle on <em>dessine</em> les forces : un vecteur tracé porte les quatre à la fois.</p>
+
+<div class="rappel"><span class="tag">Ordre de grandeur du newton</span>
+<p>Un newton, c'est le poids d'environ <strong>100 grammes</strong> — une pomme, la fameuse. Retenez le facteur : <span class="mono">1 kg ≈ 10 N</span> (9,81 exactement, mais 10 suffit à tout vérifier de tête).</p>
+<ul>
+<li>Un carton de 20 kg sur un convoyeur : <strong>200 N</strong>.</li>
+<li>Un moteur de 150 kg : <strong>1 500 N</strong>, soit 1,5 kN.</li>
+<li>Un opérateur qui pousse fort avec les bras : <strong>300 à 400 N</strong>.</li>
+<li>La précontrainte dans une vis M12 correctement serrée : <strong>30 000 N</strong>. Oui, 3 tonnes.</li>
+</ul></div>
+
+<h3>5.2 — Le moment : l'effort multiplié par le bras de levier</h3>
+<p>Une force appliquée à distance d'un axe ne se contente pas de pousser : elle <strong>fait tourner</strong>. Cet effet de rotation s'appelle le <strong>moment</strong>, et il se calcule très simplement.</p>
+
+<div class="formule">M = F × d<small>M en newton-mètre (N·m) · F en newton (N) · d en mètre (m)</small></div>
+
+<p>Le piège est entièrement dans le <strong>d</strong>. Ce n'est pas la longueur de la clé, ni la distance jusqu'au point d'application : c'est la <strong>distance perpendiculaire entre l'axe de rotation et la droite d'action de la force</strong>. On l'appelle le <em>bras de levier</em>.</p>
+<p><span class="cle">Si vous tirez dans l'axe de la clé, le bras de levier est nul et le moment est nul — quelle que soit votre force.</span> C'est pour cela qu'on tire toujours <em>perpendiculairement</em> à la clé.</p>
+
+<figure class="anim">
+  <canvas id="a-moment" width="900" height="410" aria-label="Animation : moment d'une force, bras de levier et couple de serrage sur un écrou"></canvas>
+  <div class="ctrls">
+    <div class="c"><label>Effort exercé <span id="a-moment-f-l">200 N</span></label><input type="range" id="a-moment-f" min="0" max="500" value="200"></div>
+    <div class="c"><label>Longueur de la clé <span id="a-moment-l-l">250 mm</span></label><input type="range" id="a-moment-l" min="80" max="600" value="250"></div>
+    <div class="c"><label>Angle de tirage <span id="a-moment-a-l">90°</span></label><input type="range" id="a-moment-a" min="0" max="90" value="90"></div>
+    <div class="c readout" id="a-moment-out"></div>
+  </div>
+  <figcaption>Une clé sur un écrou M12, dont le couple de serrage prescrit est de <b>80 N·m</b>. <b>Le trait pointillé est le bras de levier réel</b> : la perpendiculaire entre l'axe de l'écrou et la droite d'action de votre effort. <b>Inclinez le tirage</b> et regardez ce bras raccourcir alors que la clé, elle, n'a pas bougé : à 45° vous ne délivrez plus que 71 % du couple, à 30° plus que la moitié. <b>Rallongez la clé</b> : le même effort donne un couple proportionnellement plus grand — c'est le principe de la rallonge, et aussi celui des dégâts qu'elle provoque quand on l'utilise sans clé dynamométrique.</figcaption>
+</figure>
+
+<h3>5.3 — Le couple : deux forces qui ne font que tourner</h3>
+<p>Un <strong>couple</strong> est un cas particulier remarquable : deux forces d'intensités égales, de directions parallèles, mais de sens opposés.</p>
+<p>Leur somme est nulle — un couple ne pousse donc rien du tout, il ne déplace pas la pièce. Mais leurs moments, eux, s'ajoutent : <strong>un couple ne fait que tourner</strong>. C'est exactement ce que produit un moteur électrique sur son arbre, ce que produisent vos deux mains sur un volant, et ce que produit un tournevis.</p>
+<p><span class="cle">Le couple a la même unité que le moment — le N·m — mais ce n'est pas la même chose : le moment dépend du point qu'on choisit, le couple non.</span></p>
+
+<div class="image-mentale"><span class="tag">Image mentale — la porte</span>
+<p>Poussez une porte tout près de ses gonds : elle résiste, il faut forcer. Poussez-la à l'autre bout, près de la poignée : elle s'ouvre du bout du doigt. Vous n'avez pas changé de force — vous avez changé de <strong>bras de levier</strong>.</p>
+<p>C'est aussi pour cela que la poignée n'est jamais du côté des gonds. Personne n'a jamais eu à calculer quoi que ce soit pour le savoir : la mécanique du moment est une chose que votre corps connaît depuis l'enfance. Le cours ne fait que lui donner un nom et une formule.</p></div>
+
+<div class="encadre"><span class="tag">L'application quotidienne : la clé dynamométrique</span>
+<p>Serrer une vis « à fond » ne veut rien dire. Ce qu'on cherche en serrant, ce n'est pas un couple : c'est une <strong>tension dans la vis</strong>, la précontrainte, qui plaque les pièces l'une contre l'autre et les empêche de bouger. Le couple n'est qu'un moyen indirect d'y arriver — et un moyen assez mauvais, comme vous le verrez au chapitre 6.</p>
+<p><strong>Trois règles de terrain :</strong></p>
+<ul>
+<li><strong>Tirez perpendiculairement à la clé</strong>, sinon le couple annoncé n'est pas le couple appliqué.</li>
+<li><strong>Ne rallongez jamais une clé dynamométrique</strong> avec un tube : sa graduation ne vaut plus rien. Si le couple est trop élevé pour vous, prenez une clé plus grande, pas un tube.</li>
+<li><strong>Détendez la clé après usage</strong> (revenir à la valeur minimale) : le ressort d'une clé à déclenchement laissée armée se tasse et la clé se dérègle.</li>
+</ul></div>
+
+<div class="exo"><span class="tag">Exercice 5.1</span>
+<p>Le couple prescrit sur une vis est de 120 N·m. Vous disposez d'une clé de 400 mm. Quel effort devez-vous exercer à son extrémité, perpendiculairement ? Et si vous tirez à 60° au lieu de 90° ?</p>
+<details><summary>Voir la réponse</summary><div class="rep">
+<p><strong>Cas perpendiculaire.</strong> On part de M = F × d, qu'on retourne pour trouver F :</p>
+<p class="mono">F = M / d = 120 / 0,400 = <strong>300 N</strong></p>
+<p><em>Attention à l'unité : la formule exige des mètres. 400 mm = 0,400 m. C'est l'erreur la plus fréquente sur ce calcul, et elle donne un résultat 1000 fois trop petit.</em></p>
+<p>300 N, c'est le poids de 30 kg. C'est beaucoup mais faisable : vous tirez avec le poids du corps, pas avec le bras.</p>
+<p><strong>Cas à 60°.</strong> Le bras de levier n'est plus la longueur de la clé, mais sa projection perpendiculaire :</p>
+<p class="mono">d<sub>réel</sub> = 0,400 × sin(60°) = 0,400 × 0,866 = 0,346 m</p>
+<p>Pour obtenir malgré tout 120 N·m, il faut donc :</p>
+<p class="mono">F = 120 / 0,346 = <strong>347 N</strong></p>
+<p><strong>Soit 16 % d'effort en plus pour le même résultat.</strong> Et la conséquence pratique est le vrai enseignement de cet exercice : si vous tirez à 60° sur une clé <em>dynamométrique</em> réglée à 120 N·m, elle déclenchera bien à 120 N·m — mais elle mesure le moment autour de <em>son</em> pivot, et une composante de votre effort part en poussée latérale sur la vis. Le serrage est faussé et la vis est mal sollicitée.</p>
+<p><em>D'où la règle : perpendiculaire, toujours. Ce n'est pas du formalisme, c'est ce qui rend la mesure valide.</em></p>
+</div></details></div>
+
+<div class="exo"><span class="tag">Exercice 5.2</span>
+<p>Un moteur délivre un couple de 15 N·m sur son arbre de 30 mm de diamètre. Quel effort tangentiel cela représente-t-il à la surface de l'arbre ? Que devient cet effort sur une poulie de 200 mm de diamètre calée sur ce même arbre ?</p>
+<details><summary>Voir la réponse</summary><div class="rep">
+<p><strong>À la surface de l'arbre.</strong> Le bras de levier est le <em>rayon</em>, pas le diamètre — erreur classique. Rayon = 30 / 2 = 15 mm = 0,015 m.</p>
+<p class="mono">F = M / r = 15 / 0,015 = <strong>1 000 N</strong></p>
+<p><strong>À la surface de la poulie.</strong> Rayon = 200 / 2 = 100 mm = 0,100 m.</p>
+<p class="mono">F = 15 / 0,100 = <strong>150 N</strong></p>
+<p><strong>Ce que ce résultat vous apprend.</strong> C'est le <em>même</em> couple, le <em>même</em> arbre, et pourtant l'effort tangentiel est près de sept fois plus faible sur la poulie. Le couple est la grandeur qui se conserve ; la force, elle, dépend entièrement du rayon où on la mesure.</p>
+<p><strong>Conséquence directe en maintenance :</strong> les 1 000 N sont bien réels et s'exercent sur la <em>clavette</em>, qui est logée au diamètre de l'arbre. C'est pourquoi les clavettes cisaillent alors que les courroies, qui transmettent le même couple, ne cassent pas : la clavette travaille au petit rayon, là où l'effort est énorme. <span class="cle">Plus on transmet un couple près de l'axe, plus les efforts locaux sont violents.</span></p>
+<p><em>C'est aussi l'explication du frettage : on préfère souvent une liaison par serrage sur un grand diamètre plutôt qu'une clavette, précisément pour répartir cet effort au lieu de le concentrer sur une seule arête.</em></p>
+</div></details></div>
+
+<div class="exo"><span class="tag">Exercice 5.3</span>
+<p>Une porte de 900 mm de large pèse 35 kg. Ses gonds sont espacés de 1,50 m verticalement. Estimez l'effort horizontal encaissé par chaque gond. Pourquoi le gond du haut souffre-t-il davantage ?</p>
+<details><summary>Voir la réponse</summary><div class="rep">
+<p><strong>Le poids.</strong> P = 35 × 10 = <strong>350 N</strong>, appliqué au centre de gravité de la porte, soit à mi-largeur : 900 / 2 = 450 mm de l'axe des gonds.</p>
+<p><strong>Le moment de basculement.</strong> Ce poids, décalé de 0,450 m, cherche à faire basculer la porte vers l'avant :</p>
+<p class="mono">M = 350 × 0,450 = <strong>157,5 N·m</strong></p>
+<p><strong>Comment les gonds s'y opposent.</strong> Ils ne peuvent pas produire un moment chacun de leur côté : ils forment un <strong>couple</strong>. Le gond du haut tire vers le mur, celui du bas pousse vers l'extérieur, et l'écart de 1,50 m entre eux fait le bras de levier :</p>
+<p class="mono">F = 157,5 / 1,50 = <strong>105 N par gond</strong>, en sens opposés</p>
+<p><strong>Pourquoi le gond du haut souffre le plus.</strong> Les deux encaissent le même effort horizontal de 105 N, mais pas dans les mêmes conditions :</p>
+<ul>
+<li>Le gond du <strong>haut travaille en arrachement</strong> : il tire sur ses vis dans le sens qui les extrait du bois ou du mur. Une vis en traction pure est bien moins tenue qu'une vis en cisaillement.</li>
+<li>Le gond du <strong>bas travaille en compression</strong> contre le dormant, qui reprend une partie de l'effort. Ses vis sont beaucoup moins sollicitées.</li>
+<li>Le gond du haut supporte en plus <strong>tout le poids vertical</strong> de la porte (350 N) si c'est lui qui porte.</li>
+</ul>
+<p><em>C'est exactement pour cette raison qu'une porte qui « tombe » se répare par le haut, et qu'on ajoute un troisième gond en partie haute sur les portes lourdes. Rallonger la distance entre gonds — ce que fait un troisième gond bien placé — réduit l'effort dans chacun. Vous venez d'appliquer la notion de couple à un problème que vous rencontrerez chez vous.</em></p>
+</div></details></div>
+
+</div>
+</section>
+
+<!-- ================= CH 6 ================= -->
+<section class="ch" id="c6">
+  <div class="ch-head"><div class="ch-num">06</div><div class="ch-title">
+    <span class="kicker">Ce qui retient, ce qui use</span><h2>Adhérence et frottement</h2></div></div>
+  <div class="ch-body">
+
+<div class="savoirs">
+  <span class="savoir n3"><b>S1.4.2</b> <i>Étude du contact entre solides</i></span>
+</div>
+
+<p class="lede">Le frottement est le seul phénomène mécanique dont on veuille tantôt le maximum, tantôt le minimum — parfois sur la même machine, à quelques centimètres d'écart. On le veut énorme sous les mors d'un étau et dans un frein ; on le veut quasi nul dans un roulement et sur une glissière. Savoir de quel côté on se trouve est le début de la compréhension.</p>
+
+<h3>6.1 — Adhérence et frottement, deux mots différents</h3>
+<p>Poussez une caisse posée au sol. Tant qu'elle ne bouge pas, une force s'oppose exactement à la vôtre : c'est l'<strong>adhérence</strong>. Poussez plus fort : à partir d'un certain seuil, elle décolle et glisse. La force qui s'oppose alors s'appelle le <strong>frottement</strong> — et elle est <em>plus faible</em> que le seuil qu'il a fallu franchir.</p>
+<p><span class="cle">Il est toujours plus difficile de faire démarrer un glissement que de l'entretenir.</span> Cet écart explique une quantité de phénomènes d'atelier : le broutement d'une glissière mal graissée, le grincement d'un frein, le fait qu'une pièce coincée parte d'un coup dès qu'elle cède.</p>
+
+<div class="formule">T ≤ f × N<small>T : effort tangentiel (N) · N : effort normal, perpendiculaire au contact (N) · f : coefficient sans unité</small></div>
+
+<p>Cette relation dit trois choses, et il faut les lire une par une :</p>
+<ul>
+<li><strong>Tant que T reste sous f × N, rien ne bouge.</strong> L'adhérence s'ajuste d'elle-même à ce qu'on lui demande.</li>
+<li><strong>Ce qui compte est l'effort qui presse (N), pas la surface de contact.</strong> C'est contre-intuitif et pourtant vérifié : une brique posée à plat ou sur la tranche glisse au même effort.</li>
+<li><strong>f dépend du couple de matériaux et de l'état des surfaces</strong>, pas de leur taille.</li>
+</ul>
+
+<table>
+<thead><tr><th>Contact</th><th>f (adhérence, à sec)</th><th>Ce qu'on en fait</th></tr></thead>
+<tbody>
+<tr><td>Acier sur acier, sec</td><td>0,15 à 0,20</td><td>Assemblages serrés, frettage</td></tr>
+<tr><td>Acier sur acier, lubrifié</td><td>0,05 à 0,10</td><td>Glissières, paliers lisses</td></tr>
+<tr><td>Acier sur bronze, lubrifié</td><td>0,05 à 0,10</td><td>Coussinets, écrous de vis-mère</td></tr>
+<tr><td>Garniture de frein sur fonte</td><td>0,35 à 0,45</td><td>Freins, embrayages</td></tr>
+<tr><td>Caoutchouc sur béton sec</td><td>0,8 à 1,0</td><td>Pneus, patins antidérapants</td></tr>
+<tr><td>Roulement à billes (équivalent)</td><td>0,001 à 0,005</td><td>Guidage en rotation</td></tr>
+<tr><td>PTFE (téflon) sur acier</td><td>0,04</td><td>Patins de glissement, bagues sèches</td></tr>
+</tbody></table>
+
+<p>Regardez la dernière ligne du bloc central : un roulement à billes divise le frottement par <strong>trente à cent</strong> par rapport à un contact glissant lubrifié. Ce n'est pas une amélioration marginale, c'est un changement de nature — et c'est toute la raison d'être du roulement (chapitre 14).</p>
+
+<figure class="anim">
+  <canvas id="a-frot" width="900" height="420" aria-label="Animation : adhérence, glissement, cône de frottement et angle limite sur un plan incliné"></canvas>
+  <div class="ctrls">
+    <div class="c"><label>Inclinaison du plan <span id="a-frot-a-l">10°</span></label><input type="range" id="a-frot-a" min="0" max="45" value="10"></div>
+    <div class="c"><label>Coefficient d'adhérence <span id="a-frot-f-l">0,20</span></label><input type="range" id="a-frot-f" min="2" max="100" value="20"></div>
+    <div class="c"><label>Masse de la caisse <span id="a-frot-m-l">40 kg</span></label><input type="range" id="a-frot-m" min="5" max="200" value="40"></div>
+    <div class="c readout" id="a-frot-out"></div>
+  </div>
+  <figcaption>Une caisse sur un plan inclinable. <b>Montez l'inclinaison</b> jusqu'au décrochage : l'angle où la caisse part s'appelle l'<b>angle limite d'adhérence</b>, et il vérifie tan(φ) = f. <b>Changez la masse</b> — et constatez que l'angle de décrochage <b>ne bouge pas d'un degré</b>. C'est le résultat le plus surprenant de ce chapitre : une caisse de 5 kg et une caisse de 200 kg glissent exactement à la même pente. <b>Changez le coefficient</b> : là, tout change. Le <b>cône de frottement</b> dessiné au point de contact matérialise la zone où l'effort peut s'orienter sans qu'il y ait glissement.</figcaption>
+</figure>
+
+<h3>6.2 — Le cas qui vous concerne tous les jours : la vis</h3>
+<p>Voici un chiffre qui devrait choquer, et qui est pourtant la réalité de tous les serrages au couple.</p>
+<p>Quand vous serrez une vis à 80 N·m, ce couple ne sert presque pas à tendre la vis. Il se répartit ainsi :</p>
+<ul>
+<li><strong>environ 50 %</strong> est absorbé par le frottement <em>sous la tête</em> de la vis ou de l'écrou ;</li>
+<li><strong>environ 40 %</strong> est absorbé par le frottement <em>dans les filets</em> ;</li>
+<li><strong>environ 10 %</strong> seulement produit réellement la <strong>tension utile</strong> dans la vis.</li>
+</ul>
+<p><span class="cle">Neuf dixièmes de votre effort partent en frottement. Le serrage au couple est une méthode indirecte et imprécise — mais c'est la moins mauvaise dont on dispose sur le terrain.</span></p>
+<p>Conséquence immédiate et très concrète : <strong>l'état des filets change tout</strong>. Une vis graissée atteint sa tension utile bien plus tôt qu'une vis sèche, à couple identique. Serrer au couple prescrit une vis huilée alors que le constructeur l'avait prévue sèche, c'est la sur-tendre de 20 à 40 % — et parfois la rompre.</p>
+
+<div class="encadre danger"><span class="tag">Règle d'atelier — l'état de la vis fait partie de la consigne</span>
+<p>Un couple de serrage n'a de sens que <strong>couplé à un état de surface donné</strong>. Le constructeur qui écrit « 80 N·m » écrit implicitement « 80 N·m sur filet propre et sec » ou « 80 N·m sur filet légèrement huilé ». Les deux ne donnent pas la même précontrainte.</p>
+<p><strong>En pratique :</strong></p>
+<ul>
+<li>Ne graissez jamais un filet de votre propre initiative sur un assemblage critique.</li>
+<li>Nettoyez le filetage avant serrage : un filet encrassé ou corrodé peut absorber tellement de couple que la vis n'est <em>pas assez</em> tendue alors que la clé a déclenché.</li>
+<li>Remplacez les vis à haute résistance (classe 10.9, 12.9) plutôt que de les réutiliser sur les assemblages de sécurité — elles se plastifient au serrage.</li>
+<li>Respectez l'ordre de serrage (en étoile) et la progression en plusieurs passes : sinon les premières vis se détendent quand vous serrez les dernières.</li>
+</ul></div>
+
+<div class="exo"><span class="tag">Exercice 6.1</span>
+<p>Une caisse de 60 kg est posée sur un sol horizontal. Le coefficient d'adhérence est de 0,30. Quel effort horizontal faut-il pour la faire démarrer ? La même caisse sur un chariot à roulettes demande 25 N. Quel « coefficient équivalent » cela représente-t-il ?</p>
+<details><summary>Voir la réponse</summary><div class="rep">
+<p><strong>Effort de démarrage au sol.</strong> D'abord l'effort normal, c'est-à-dire ici le poids :</p>
+<p class="mono">N = m × g = 60 × 10 = 600 N</p>
+<p>Puis le seuil d'adhérence :</p>
+<p class="mono">T = f × N = 0,30 × 600 = <strong>180 N</strong></p>
+<p>180 N, c'est le poids de 18 kg : il faut vraiment s'arc-bouter. C'est faisable, mais dangereux pour le dos.</p>
+<p><strong>Coefficient équivalent sur roulettes.</strong> On retourne la formule :</p>
+<p class="mono">f<sub>éq</sub> = T / N = 25 / 600 = <strong>0,042</strong></p>
+<p><strong>Le rapport est de 180 / 25 ≈ 7.</strong> Le chariot divise l'effort par sept.</p>
+<p><strong>Ce qu'il faut comprendre derrière ce chiffre.</strong> Le chariot ne « supprime » pas le frottement : il le <em>déplace</em>. Au lieu de faire glisser une grande surface contre le sol, il fait rouler une roue — et le peu de frottement qui reste se joue dans le petit roulement de l'axe, plus la résistance au roulement du bandage sur le sol.</p>
+<p><em>Notez que 0,042 est bien plus élevé que le 0,001 à 0,005 annoncé pour un roulement seul. La différence vient de la déformation du bandage sur le sol, des irrégularités, et souvent d'un roulement de roulette de médiocre qualité. Sur un sol dégradé, ce coefficient équivalent peut doubler — ce que tout manutentionnaire sait dans ses bras.</em></p>
+</div></details></div>
+
+<div class="exo"><span class="tag">Exercice 6.2</span>
+<p>Un carton posé sur un convoyeur incliné à 12° ne glisse pas. À quelle condition sur le coefficient d'adhérence ? Le convoyeur transporte maintenant des cartons deux fois plus lourds : faut-il s'inquiéter ?</p>
+<details><summary>Voir la réponse</summary><div class="rep">
+<p><strong>La condition.</strong> Sur un plan incliné, le carton reste en place tant que l'angle est inférieur à l'angle limite d'adhérence φ, qui vérifie :</p>
+<p class="mono">tan(φ) = f</p>
+<p>Pour que rien ne glisse à 12°, il faut donc :</p>
+<p class="mono">f ≥ tan(12°) = <strong>0,21</strong></p>
+<p><strong>Démonstration, parce qu'elle éclaire le résultat suivant.</strong> Sur une pente d'angle α, le poids P se décompose en deux : une composante qui presse la bande, N = P·cos(α), et une composante qui tire vers le bas, T = P·sin(α). La condition de non-glissement s'écrit T ≤ f·N, soit :</p>
+<p class="mono">P·sin(α) ≤ f · P·cos(α)  →  tan(α) ≤ f</p>
+<p><strong>Et voici le point décisif : le P se simplifie.</strong> Il disparaît des deux côtés.</p>
+<p><strong>Réponse à la seconde question : non, il n'y a rien à craindre.</strong> Des cartons deux fois plus lourds ne glissent pas davantage. Le poids augmente la composante qui tire vers le bas, mais il augmente <em>dans la même proportion</em> la composante qui presse la bande, donc l'adhérence disponible. Les deux effets se compensent exactement.</p>
+<p><strong>Ce qui, en revanche, doit vous inquiéter :</strong></p>
+<ul>
+<li>Une bande <strong>humide, huileuse ou poussiéreuse</strong> — là, f chute et tout part.</li>
+<li>Une bande <strong>usée</strong>, dont le revêtement lisse a perdu son grain.</li>
+<li>Un changement de <strong>nature des cartons</strong> (film plastique lisse au lieu de carton brut).</li>
+<li>Une <strong>accélération</strong> au démarrage ou à l'arrêt du convoyeur, qui ajoute un effort dont le calcul ci-dessus ne tient pas compte.</li>
+</ul>
+<p><em>La leçon générale : quand une pente pose problème, ne cherchez pas du côté de la charge — cherchez du côté de l'état des surfaces.</em></p>
+</div></details></div>
+
+<div class="horsref"><span class="tag">Pour aller plus loin — hors référentiel</span>
+<h4>Pourquoi la surface de contact n'intervient-elle pas ?</h4>
+<p>C'est le résultat le plus troublant du chapitre, et il mérite son explication. Deux surfaces métalliques qui semblent parfaitement lisses ne se touchent en réalité que par le sommet de leurs aspérités microscopiques. <strong>La surface réellement en contact représente moins de 1 % de la surface apparente.</strong></p>
+<p>Or cette surface réelle de contact ne dépend pas de la taille des pièces : elle dépend de l'effort qui les presse. Doublez l'effort, et les aspérités s'écrasent deux fois plus : la surface réelle double. Doublez au contraire la surface apparente à effort constant, et la pression sur chaque aspérité est divisée par deux — elles s'écrasent moins, et la surface réelle reste identique.</p>
+<p>C'est ce mécanisme, décrit par les physiciens <strong>Bowden et Tabor</strong> dans les années 1940, qui explique la loi de Coulomb énoncée un siècle et demi plus tôt sans qu'on sache pourquoi elle marchait. Il explique aussi le <strong>grippage</strong> : sous forte pression et sans lubrifiant, ces sommets d'aspérités se soudent littéralement entre eux, et il faut arracher la matière pour redémarrer le mouvement.</p>
+<p>Et il explique enfin pourquoi la loi <em>cesse</em> d'être vraie quand la pression devient énorme : quand les aspérités sont complètement écrasées, la surface réelle finit par rejoindre la surface apparente, et le frottement se remet à dépendre de l'aire. C'est ce qui se passe sous un pneu de course, ou sous un mors d'étau serré à mort.</p></div>
+
+</div>
+</section>
+
+<section class="ch" id="suite">
+  <div class="ch-head"><div class="ch-num">…</div><div class="ch-title">
+    <span class="kicker">Rédaction en cours</span><h2>Les chapitres 7 à 18</h2></div></div>
+  <div class="ch-body">
+<p class="lede">Cette première tranche couvre l'approche système et les actions mécaniques. La suite est en cours d'écriture, dans le même format et avec le même calage sur le référentiel.</p>
+<ul>
+<li><strong>07 · Isoler et résoudre : la statique graphique</strong> — S1.4.5, niveau 3, résolution graphique à 2 ou 3 forces</li>
+<li><strong>08 · Mouvements et vitesses</strong> — S1.4.3 et S1.4.4</li>
+<li><strong>09 · Énergie, puissance, rendement</strong> — S2.1, niveau 3, et l'analogie des quatre puissances</li>
+<li><strong>10 · Ajustements, jeux et tolérances</strong> — S1.2.1, niveau 3</li>
+<li><strong>11 · États de surface et usure</strong> — S1.2.1, niveau 3</li>
+<li><strong>12 · La lubrification</strong> — S1.2.1, niveau 3, désignation normalisée et viscosité</li>
+<li><strong>13 · L'étanchéité</strong> — S1.2.1, statique et dynamique</li>
+<li><strong>14 · Le guidage en rotation</strong> — paliers, roulements, montages, balourd</li>
+<li><strong>15 · Le guidage en translation</strong></li>
+<li><strong>16 · Transmettre : la loi entrée-sortie</strong> — S2.5, niveau 3</li>
+<li><strong>17 · Transformer le mouvement, réversibilité et irréversibilité</strong> — S2.5</li>
+<li><strong>18 · Matériaux et sollicitations</strong> — S1.3.1 et S1.4.6</li>
+<li><strong>TP</strong> — les 15 fiches d'atelier</li>
+</ul>
+</div>
+</section>
+
+<footer class="fin">
+  <p><strong>Transmettre, guider, tenir</strong> — dossier de mécanique pour le Baccalauréat Professionnel MSPC. Chaque chapitre est calé sur le référentiel officiel du diplôme : savoir associé visé et niveau taxonomique indiqués sous le titre. <em>Dossier en cours de rédaction : 6 chapitres sur 18 sont publiés.</em></p>
+  <p>Le référentiel retenu est celui du <strong>baccalauréat professionnel Maintenance des Systèmes de Production Connectés</strong>, mise à jour du 3 décembre 2019, savoirs <strong>S1 — L'approche système</strong> et <strong>S2 — La chaîne d'énergie</strong>. Les valeurs numériques, coefficients et ordres de grandeur cités le sont à titre pédagogique : sur une intervention réelle, la documentation constructeur et les référentiels internes de l'entreprise font toujours foi.</p>
+  <p><a href="index.html">← Retour au portail Atelier MSPC</a></p>
+</footer>
+
+</div>
+
+<a class="top-link" href="#c1">↑ Sommaire</a>
+<script>
+/* ======================= HÉROS : la chaîne d'énergie d'un convoyeur =======================
+   Contrainte de mise en page : le titre occupe le bas-gauche et les curseurs
+   le haut-droite. La scène est donc répartie sur les deux zones qui restent —
+   la bande supérieure pour la machine, la bande inférieure droite pour le
+   bilan de puissance. */
+(function(){
+  "use strict";
+  var CH = MSPC.ctrl('hcharge', function(v){ return Math.round(v)+' %'; }, 'hch');
+  var RD = MSPC.ctrl('hred', function(v){ return '1 / '+Math.round(v); }, 'hrd');
+  var verdict = document.getElementById('hverdict');
+  var boites = [], phase = 0;
+  for(var b=0;b<10;b++) boites.push({x:Math.random(), h:18+Math.random()*12});
+
+  /* Rendements : ordres de grandeur industriels, pas des valeurs de catalogue.
+     Un moteur asynchrone perd énormément à faible charge ; un réducteur perd
+     d'autant plus qu'il comporte d'étages. */
+  function etages(r){ return r<=6 ? 1 : (r<=30 ? 2 : 3); }
+
+  MSPC.anim('chaine', function(a){
+    var ctx=a.ctx, W=a.W, H=a.H, dt=a.dt;
+    var q=CH.val/100, r=RD.val;
+
+    var nM=1450, wM=6.2832*nM/60;
+    var wS=wM/r, Rtamb=0.09, v=wS*Rtamb;
+    var F=120+q*2600;
+    var Putile=F*v;
+
+    var nE=etages(r), etaRed=Math.pow(0.975,nE), etaCour=0.96;
+    var Parbre=Putile/(etaRed*etaCour);
+    var tx=Parbre/3000;
+    var etaMot=Math.max(0.16, Math.min(0.89, 0.16+0.73*Math.min(1, tx/0.62)));
+    var Pelec=Parbre/etaMot/0.97;
+    var etaTot=Pelec>0 ? Putile/Pelec : 0;
+
+    phase += dt*v*11;
+    MSPC.fond(ctx,W,H,44);
+
+    var s=Math.min(W/1200, H/560);
+    ctx.save();
+    ctx.translate(W/2 - 600*s, H/2 - 280*s);
+    ctx.scale(s,s);
+
+    /* ---------- le convoyeur, dans la bande supérieure ---------- */
+    var by=176, bx0=400, bx1=938;
+    ctx.strokeStyle='#3a443a'; ctx.lineWidth=5;
+    ctx.beginPath(); ctx.moveTo(bx0,by); ctx.lineTo(bx1,by);
+    ctx.moveTo(bx0,by+62); ctx.lineTo(bx1,by+62); ctx.stroke();
+    [[bx0,'#79a6c4'],[bx1,'#4d5a4d']].forEach(function(T){
+      ctx.fillStyle=T[1]; ctx.beginPath(); ctx.arc(T[0],by+31,31,0,6.2832); ctx.fill();
+      ctx.strokeStyle='#0d120f'; ctx.lineWidth=2;
+      for(var k=0;k<4;k++){
+        var an=phase/31+k*Math.PI/2;
+        ctx.beginPath(); ctx.moveTo(T[0],by+31);
+        ctx.lineTo(T[0]+Math.cos(an)*29, by+31+Math.sin(an)*29); ctx.stroke();
+      }
+    });
+    ctx.strokeStyle='#2c332b'; ctx.lineWidth=6;
+    [bx0+110,bx1-110].forEach(function(pxx){ ctx.beginPath(); ctx.moveTo(pxx,by+62); ctx.lineTo(pxx,by+104); ctx.stroke(); });
+    for(var i2=0;i2<boites.length;i2++){
+      var B=boites[i2];
+      B.x += dt*v/9;
+      if(B.x>1.05) B.x -= 1.12;
+      var px2=bx0+B.x*(bx1-bx0);
+      if(px2<bx0-14||px2>bx1+14) continue;
+      ctx.fillStyle='#8a7048'; ctx.fillRect(px2-16, by-B.h, 32, B.h);
+      ctx.strokeStyle='#5d4b30'; ctx.lineWidth=1.5; ctx.strokeRect(px2-16, by-B.h, 32, B.h);
+      ctx.beginPath(); ctx.moveTo(px2,by-B.h); ctx.lineTo(px2,by); ctx.stroke();
+    }
+
+    /* ---------- le groupe motorisation ---------- */
+    ctx.fillStyle='#4a5a68'; ctx.fillRect(96,170,118,74);
+    ctx.strokeStyle='#79a6c4'; ctx.lineWidth=2; ctx.strokeRect(96,170,118,74);
+    for(var f=0;f<7;f++){ ctx.beginPath(); ctx.moveTo(102+f*16,172); ctx.lineTo(102+f*16,242); ctx.stroke(); }
+    MSPC.titre(ctx,'M',155,218,30,'#cfe2ee','center');
+    MSPC.mono(ctx,'CONVERTIR',155,262,11,'#79a6c4','center');
+
+    ctx.fillStyle='#3f4a54'; ctx.fillRect(238,176,96,62);
+    ctx.strokeStyle='#79a6c4'; ctx.lineWidth=2; ctx.strokeRect(238,176,96,62);
+    var ga=phase/26;
+    ctx.strokeStyle='#a9d0e6'; ctx.lineWidth=2;
+    ctx.beginPath(); ctx.arc(264,207,15,0,6.2832); ctx.stroke();
+    ctx.beginPath(); ctx.arc(306,207,22,0,6.2832); ctx.stroke();
+    for(var g=0;g<8;g++){
+      var an2=ga+g*0.7854;
+      ctx.beginPath(); ctx.moveTo(264+Math.cos(an2)*9,207+Math.sin(an2)*9);
+      ctx.lineTo(264+Math.cos(an2)*15,207+Math.sin(an2)*15); ctx.stroke();
+      var an3=-ga/2+g*0.7854;
+      ctx.beginPath(); ctx.moveTo(306+Math.cos(an3)*14,207+Math.sin(an3)*14);
+      ctx.lineTo(306+Math.cos(an3)*22,207+Math.sin(an3)*22); ctx.stroke();
+    }
+    MSPC.mono(ctx,'TRANSMETTRE',286,262,11,'#79a6c4','center');
+    ctx.strokeStyle='#5a6258'; ctx.lineWidth=4;
+    ctx.beginPath(); ctx.moveTo(334,192); ctx.lineTo(bx0-26,by+10);
+    ctx.moveTo(334,222); ctx.lineTo(bx0-26,by+52); ctx.stroke();
+    ctx.strokeStyle='#8f9a86'; ctx.lineWidth=7;
+    ctx.beginPath(); ctx.moveTo(214,207); ctx.lineTo(238,207); ctx.stroke();
+
+    /* ---------- l'armoire ---------- */
+    ctx.fillStyle='#232b23'; ctx.fillRect(96,24,238,124);
+    ctx.strokeStyle='#4d5a4d'; ctx.lineWidth=2; ctx.strokeRect(96,24,238,124);
+    MSPC.mono(ctx,'ALIMENTER · PROTÉGER · DISTRIBUER · MODULER',215,44,10,'#7f8a7e','center');
+    var mods=[['SECT.','#8d968b'],['DISJ.','#f0a844'],['CONT.','#c8d834'],['VAR.','#79a6c4']];
+    for(var m=0;m<4;m++){
+      ctx.fillStyle='#31392f'; ctx.fillRect(112+m*56,56,48,66);
+      ctx.strokeStyle=mods[m][1]; ctx.lineWidth=1.6; ctx.strokeRect(112+m*56,56,48,66);
+      MSPC.mono(ctx,mods[m][0],136+m*56,138,9,mods[m][1],'center');
+      if(m===3){
+        ctx.fillStyle='#79a6c4';
+        var hh=Math.round(52*Math.min(1,tx));
+        ctx.fillRect(118+m*56, 118-hh, 36, hh);
+      }
+    }
+    ctx.strokeStyle='#c8d834'; ctx.lineWidth=3; ctx.globalAlpha=.55;
+    ctx.beginPath(); ctx.moveTo(215,148); ctx.lineTo(215,160); ctx.lineTo(155,160); ctx.lineTo(155,170); ctx.stroke();
+    ctx.globalAlpha=1;
+
+    /* ---------- le bilan de puissance, à droite du titre ---------- */
+    var py=444, px0=644, pw=506;
+    var et=[Pelec, Pelec*0.97, Parbre, Parbre*etaRed, Putile, Putile];
+    var nom=['RÉSEAU','VARIATEUR','MOTEUR','RÉDUCTEUR','COURROIE'];
+    var hmax=30;
+    MSPC.mono(ctx,'CE QUE LA CHAÎNE PREND AU PASSAGE',px0,py-98,11,'#7f8a7e');
+    for(var e=0;e<5;e++){
+      var x1=px0+e*(pw/5), x2=px0+(e+1)*(pw/5);
+      var h1=hmax*et[e]/Math.max(1,Pelec), h2=hmax*et[e+1]/Math.max(1,Pelec);
+      ctx.fillStyle='rgba(121,166,196,.55)';
+      ctx.beginPath();
+      ctx.moveTo(x1,py-h1); ctx.lineTo(x2,py-h2); ctx.lineTo(x2,py+h2); ctx.lineTo(x1,py+h1);
+      ctx.closePath(); ctx.fill();
+      var perte=et[e]-et[e+1];
+      if(perte>15){
+        var lg=Math.min(30, 8+perte/22);
+        ctx.strokeStyle='rgba(240,168,68,'+Math.min(.8,0.25+perte/700)+')'; ctx.lineWidth=2;
+        ctx.beginPath(); ctx.moveTo(x2-16,py-h2); ctx.lineTo(x2-16,py-h2-lg); ctx.stroke();
+        MSPC.mono(ctx,'−'+Math.round(perte)+' W',x2-16,py-h2-lg-6,9.5,'#f0a844','center');
+      }
+      MSPC.mono(ctx,nom[e],x1+3,py+hmax+18,9,'#9aa494');
+    }
+    ctx.fillStyle='#c8d834';
+    var hu=hmax*Putile/Math.max(1,Pelec);
+    ctx.fillRect(px0+pw-4,py-hu,7,2*hu);
+    MSPC.mono(ctx,'UTILE',px0+pw+12,py+4,10,'#c8d834');
+
+    ctx.restore();
+    verdict.innerHTML = 'Le réseau fournit <b>'+Math.round(Pelec)+' W</b>, la bande en reçoit <b>'+Math.round(Putile)+' W</b>.'
+      + ' Rendement global <b>'+Math.round(etaTot*100)+' %</b> · bande à <b>'+v.toFixed(2).replace('.',',')+' m/s</b>'
+      + (tx<0.25 ? '<br><span style="color:#f0a844">Moteur très peu chargé : son rendement s’effondre.</span>' : '');
+  }, {fill:true});
+})();
+
+/* ======================= CH 1 · la chaîne d'énergie, fonction par fonction ======================= */
+(function(){
+  "use strict";
+  var FN=[
+    {n:'ALIMENTER',  c:'#8d968b', o:'Sectionneur porte-fusibles',      r:1.000, d:'Amène l’énergie du réseau jusqu’au système.'},
+    {n:'PROTÉGER',   c:'#f0a844', o:'Disjoncteur moteur',              r:0.999, d:'Coupe en cas de défaut. Ne consomme presque rien.'},
+    {n:'DISTRIBUER', c:'#c8d834', o:'Contacteur',                      r:0.999, d:'Envoie l’énergie vers le bon actionneur, au bon moment.'},
+    {n:'MODULER',    c:'#79a6c4', o:'Variateur de fréquence',          r:0.970, d:'Dose l’énergie : c’est lui qui règle la vitesse.'},
+    {n:'CONVERTIR',  c:'#a9d0e6', o:'Moteur asynchrone triphasé',      r:0.000, d:'Change la NATURE de l’énergie : électrique → mécanique.'},
+    {n:'TRANSMETTRE',c:'#cfe2ee', o:'Réducteur et courroie',           r:0.930, d:'Achemine sans changer de nature. Ralentit, donc démultiplie le couple.'},
+    {n:'AGIR',       c:'#c8d834', o:'Tambour et bande',                r:1.000, d:'Fait le travail utile sur la matière d’œuvre.'}
+  ];
+  var Q=MSPC.ctrl('a-chaine-q', function(v){ return Math.round(v)+' %'; }, 'a-chaine-q-l');
+  var V=MSPC.ctrl('a-chaine-v', function(v){ return Math.round(v)+' %'; }, 'a-chaine-v-l');
+  var F=MSPC.ctrl('a-chaine-f', function(v){ return v==0?'tous':FN[v+1].n.toLowerCase(); }, 'a-chaine-f-l');
+  var out=document.getElementById('a-chaine-out');
+
+  MSPC.anim('a-chaine', function(a){
+    var ctx=a.ctx, W=a.W, H=a.H;
+    var q=Q.val/100, cons=V.val/100, sel=F.val;
+
+    var v=1.35*cons;
+    var Feff=120+q*2600;
+    var Putile=Feff*v;
+    var etaMot=Math.max(0.16, Math.min(0.88, 0.16+0.72*Math.min(1,(Putile/0.93)/(3000*0.60))))*(0.42+0.58*cons);
+    FN[4].r=etaMot;
+
+    var P=[]; P[6]=Putile;
+    for(var k=5;k>=0;k--) P[k]=P[k+1]/FN[k].r;
+    var Pin=P[0];
+
+    MSPC.fond(ctx,W,H,0);
+
+    var bx=26, bw=108, gap=15, by=64, bh=92;
+    for(var i=0;i<7;i++){
+      var x=bx+i*(bw+gap);
+      var actif = (sel===0) || (sel===i-1);
+      ctx.globalAlpha=actif?1:0.28;
+      ctx.fillStyle='rgba(255,255,255,.045)'; ctx.fillRect(x,by,bw,bh);
+      ctx.strokeStyle=FN[i].c; ctx.lineWidth=actif?2.2:1.2; ctx.strokeRect(x+.5,by+.5,bw,bh);
+      MSPC.titre(ctx,FN[i].n,x+bw/2,by+26,14,FN[i].c,'center');
+      var mots=FN[i].o.split(' '), l1='', l2='';
+      for(var w=0;w<mots.length;w++){ if((l1+' '+mots[w]).length<=14 && !l2) l1=(l1?l1+' ':'')+mots[w]; else l2=(l2?l2+' ':'')+mots[w]; }
+      MSPC.mono(ctx,l1,x+bw/2,by+46,8.5,'#8d968b','center');
+      if(l2) MSPC.mono(ctx,l2,x+bw/2,by+58,8.5,'#8d968b','center');
+      MSPC.mono(ctx,Math.round(P[i])+' W',x+bw/2,by+80,11.5,actif?'#e6ebe4':'#6f786e','center');
+      ctx.globalAlpha=1;
+
+      if(i<6){
+        var xa=x+bw, xb=x+bw+gap;
+        var e1=Math.max(2,30*P[i]/Pin), e2=Math.max(2,30*P[i+1]/Pin);
+        ctx.fillStyle='rgba(121,166,196,.45)';
+        ctx.beginPath();
+        ctx.moveTo(xa,by+bh/2-e1); ctx.lineTo(xb,by+bh/2-e2);
+        ctx.lineTo(xb,by+bh/2+e2); ctx.lineTo(xa,by+bh/2+e1);
+        ctx.closePath(); ctx.fill();
+      }
+    }
+    MSPC.mono(ctx,'LA CHAÎNE D’ÉNERGIE D’UN CONVOYEUR — la largeur du flux entre deux blocs est la puissance qui passe',26,44,11,'#8d968b');
+
+    var gy=196;
+    MSPC.mono(ctx,'CE QUE CHAQUE ÉTAGE PREND AU PASSAGE',26,gy-10,10.5,'#8d968b');
+    var maxP=1; for(var p=0;p<6;p++) maxP=Math.max(maxP,P[p]-P[p+1]);
+    for(var j=0;j<6;j++){
+      var perte=P[j]-P[j+1], xj=bx+j*(bw+gap);
+      var hj=Math.max(3,Math.round(56*perte/maxP));
+      ctx.globalAlpha=(sel===0||sel===j-1)?1:0.3;
+      if(perte>=1){
+        ctx.fillStyle=perte>Pin*0.05?'#f0a844':'#4d5a4d';
+        ctx.fillRect(xj+14, gy+58-hj, bw-28, hj);
+      }
+      MSPC.mono(ctx, perte<1?'—':Math.round(perte)+' W', xj+bw/2, gy+74, 10, perte>Pin*0.05?'#f0a844':'#6f786e','center');
+      MSPC.mono(ctx, perte<1?'':'η '+(FN[j].r*100).toFixed(1).replace('.',',')+' %', xj+bw/2, gy+88, 9, '#6f786e','center');
+      ctx.globalAlpha=1;
+    }
+
+    var ey=310;
+    ctx.fillStyle='rgba(255,255,255,.05)'; ctx.fillRect(26,ey,W-52,44);
+    if(sel===0){
+      MSPC.mono(ctx,'Vue d’ensemble. Le moteur et la transmission concentrent la quasi-totalité des pertes : c’est toujours',38,ey+18,11,'#e6ebe4');
+      MSPC.mono(ctx,'là qu’on cherche les économies d’énergie, jamais dans les organes de protection ou de distribution.',38,ey+34,11,'#8d968b');
+    } else {
+      MSPC.titre(ctx,FN[sel+1].n,38,ey+22,17,FN[sel+1].c);
+      MSPC.mono(ctx,FN[sel+1].d,166,ey+18,11,'#e6ebe4');
+      MSPC.mono(ctx,'Composant réel : '+FN[sel+1].o,166,ey+34,10,'#8d968b');
+    }
+
+    var eta=Putile/Pin;
+    MSPC.titre(ctx,Math.round(Pin)+' W',26,392,26,'#e6ebe4');
+    MSPC.mono(ctx,'PRIS AU RÉSEAU',26,408,9.5,'#8d968b');
+    MSPC.titre(ctx,Math.round(Putile)+' W',176,392,26,'#c8d834');
+    MSPC.mono(ctx,'ARRIVÉ À LA BANDE',176,408,9.5,'#8d968b');
+    MSPC.titre(ctx,Math.round(Pin-Putile)+' W',346,392,26,'#f0a844');
+    MSPC.mono(ctx,'PERDU EN CHALEUR',346,408,9.5,'#8d968b');
+    MSPC.titre(ctx,Math.round(eta*100)+' %',516,392,26,eta>0.7?'#c8d834':(eta>0.5?'#f0a844':'#ff6a5e'));
+    MSPC.mono(ctx,'RENDEMENT GLOBAL',516,408,9.5,'#8d968b');
+    MSPC.mono(ctx, cons<0.6 ? 'Au ralenti, le moteur est loin de son point nominal'
+                            : (q<0.15 ? 'Convoyeur presque vide : on ne paie que les pertes'
+                                      : 'Bien chargée : c’est là que le rendement est le meilleur'),
+      W-26, 386, 10.5, cons<0.6||q<0.15 ? '#f0a844' : '#c8d834', 'right');
+    MSPC.mono(ctx, cons<0.6||q<0.15 ? 'un moteur surdimensionné coûte cher toute l’année'
+                                    : 'la charge utile compte, pas la puissance installée',
+      W-26, 404, 10.5, '#6f786e', 'right');
+
+    out.innerHTML='Réseau <b>'+Math.round(Pin)+' W</b> → bande <b>'+Math.round(Putile)+' W</b><br>rendement global <b>'+Math.round(eta*100)+' %</b>';
+  }, {fixed:true});
+})();
+</script>
+<script>
+/* ======================= CH 2 · mécanisme réel et schéma cinématique ======================= */
+(function(){
+  "use strict";
+  var A=MSPC.ctrl('a-schema-a', function(v){ return Math.round(v)+'°'; }, 'a-schema-a-l');
+  var R=MSPC.ctrl('a-schema-r', function(v){ return v==0?'arrêt':(v+' tr/min'); }, 'a-schema-r-l');
+  var E=MSPC.ctrl('a-schema-e');
+  var out=document.getElementById('a-schema-out');
+  var th=0, libre=0;
+
+  var RM=52, LB=152, CY=196;
+
+  function hachures(ctx,x,y,w,cote){
+    ctx.strokeStyle='#8d968b'; ctx.lineWidth=1.2;
+    ctx.beginPath(); ctx.moveTo(x,y); ctx.lineTo(x+w,y); ctx.stroke();
+    for(var i=0;i<=w;i+=8){
+      ctx.beginPath(); ctx.moveTo(x+i,y); ctx.lineTo(x+i-6, y+cote*7); ctx.stroke();
+    }
+  }
+  function pivot(ctx,x,y,col){
+    ctx.fillStyle='#11160f'; ctx.beginPath(); ctx.arc(x,y,6,0,6.2832); ctx.fill();
+    ctx.strokeStyle=col||'#e6ebe4'; ctx.lineWidth=2; ctx.beginPath(); ctx.arc(x,y,6,0,6.2832); ctx.stroke();
+    ctx.fillStyle=col||'#e6ebe4'; ctx.beginPath(); ctx.arc(x,y,2.2,0,6.2832); ctx.fill();
+  }
+
+  MSPC.anim('a-schema', function(a){
+    var ctx=a.ctx, W=a.W, H=a.H;
+    var rpm=R.val;
+    if(rpm>0){ libre += a.dt*6.2832*rpm/60; th=libre; }
+    else { th = A.val*Math.PI/180; libre=th; }
+    var c=Math.cos(th), s=Math.sin(th);
+    var dep = RM*c + Math.sqrt(LB*LB - RM*RM*s*s);
+
+    MSPC.fond(ctx,W,H,0);
+    ctx.strokeStyle='rgba(255,255,255,.10)'; ctx.lineWidth=1;
+    ctx.beginPath(); ctx.moveTo(450,34); ctx.lineTo(450,H-16); ctx.stroke();
+
+    /* ================== GAUCHE : le mécanisme réel ================== */
+    var ox=132;
+    MSPC.mono(ctx,'LE MÉCANISME RÉEL',26,28,11,'#8d968b');
+    // le carter
+    ctx.fillStyle='rgba(255,255,255,.045)'; ctx.fillRect(52,120,196,190);
+    ctx.strokeStyle='#5a6258'; ctx.lineWidth=2; ctx.strokeRect(52.5,120.5,196,190);
+    // le cylindre
+    ctx.fillStyle='rgba(255,255,255,.045)'; ctx.fillRect(248,CY-40,178,80);
+    ctx.strokeStyle='#5a6258'; ctx.lineWidth=3;
+    ctx.beginPath(); ctx.moveTo(248,CY-40); ctx.lineTo(426,CY-40);
+    ctx.moveTo(248,CY+40); ctx.lineTo(426,CY+40); ctx.stroke();
+    // le vilebrequin
+    var ax=ox+RM*c, ay=CY-RM*s;
+    ctx.strokeStyle='#79a6c4'; ctx.lineWidth=15; ctx.lineCap='round';
+    ctx.beginPath(); ctx.moveTo(ox,CY); ctx.lineTo(ax,ay); ctx.stroke();
+    ctx.lineCap='butt';
+    ctx.fillStyle='#3f6b8a'; ctx.beginPath(); ctx.arc(ox,CY,26,0,6.2832); ctx.fill();
+    ctx.strokeStyle='#79a6c4'; ctx.lineWidth=2; ctx.beginPath(); ctx.arc(ox,CY,26,0,6.2832); ctx.stroke();
+    // la bielle
+    var bx=ox+dep;
+    ctx.strokeStyle='#cfe2ee'; ctx.lineWidth=11; ctx.lineCap='round';
+    ctx.beginPath(); ctx.moveTo(ax,ay); ctx.lineTo(bx,CY); ctx.stroke();
+    ctx.lineCap='butt';
+    // le piston
+    ctx.fillStyle='#8f9a86'; ctx.fillRect(bx-24,CY-37,58,74);
+    ctx.strokeStyle='#cfe2ee'; ctx.lineWidth=2; ctx.strokeRect(bx-24,CY-37,58,74);
+    ctx.strokeStyle='#5a6258'; ctx.lineWidth=1.6;
+    for(var sg=0;sg<3;sg++){ ctx.beginPath(); ctx.moveTo(bx+18,CY-30+sg*8); ctx.lineTo(bx+32,CY-30+sg*8); ctx.stroke(); }
+    ctx.fillStyle='#11160f'; ctx.beginPath(); ctx.arc(bx,CY,7,0,6.2832); ctx.fill();
+    ctx.fillStyle='#cfe2ee'; ctx.beginPath(); ctx.arc(ax,ay,5,0,6.2832); ctx.fill();
+
+    if(E.val){
+      MSPC.mono(ctx,'0 · carter',60,138,10,'#8d968b');
+      MSPC.mono(ctx,'1 · vilebrequin',ox-4,CY+46,10,'#79a6c4','center');
+      MSPC.mono(ctx,'2 · bielle',(ax+bx)/2,(ay+CY)/2-16,10,'#cfe2ee','center');
+      MSPC.mono(ctx,'3 · piston',bx+5,CY-50,10,'#8f9a86','center');
+    }
+
+    /* ================== DROITE : le schéma cinématique ================== */
+    var sx=548;
+    MSPC.mono(ctx,'SON SCHÉMA CINÉMATIQUE',474,28,11,'#8d968b');
+    // le bâti
+    hachures(ctx,sx-46,CY+58,92,1);
+    ctx.strokeStyle='#8d968b'; ctx.lineWidth=2;
+    ctx.beginPath(); ctx.moveTo(sx,CY); ctx.lineTo(sx,CY+58); ctx.stroke();
+    // la glissière : rail + patin
+    var gx0=sx+96, gx1=sx+250;
+    hachures(ctx,gx0,CY-52,gx1-gx0,-1);
+    ctx.strokeStyle='#8d968b'; ctx.lineWidth=2;
+    ctx.beginPath(); ctx.moveTo(gx0,CY-52); ctx.lineTo(gx1,CY-52); ctx.stroke();
+    // la manivelle
+    var ax2=sx+RM*c, ay2=CY-RM*s, bx2=sx+dep;
+    ctx.strokeStyle='#79a6c4'; ctx.lineWidth=4;
+    ctx.beginPath(); ctx.moveTo(sx,CY); ctx.lineTo(ax2,ay2); ctx.stroke();
+    // la bielle
+    ctx.strokeStyle='#cfe2ee'; ctx.lineWidth=4;
+    ctx.beginPath(); ctx.moveTo(ax2,ay2); ctx.lineTo(bx2,CY); ctx.stroke();
+    // le patin de glissière
+    ctx.fillStyle='rgba(143,154,134,.35)'; ctx.fillRect(bx2-22,CY-52,44,52);
+    ctx.strokeStyle='#8f9a86'; ctx.lineWidth=2.4; ctx.strokeRect(bx2-22,CY-52,44,52);
+    ctx.beginPath(); ctx.moveTo(bx2,CY); ctx.lineTo(bx2,CY-26); ctx.stroke();
+    pivot(ctx,sx,CY,'#79a6c4'); pivot(ctx,ax2,ay2,'#cfe2ee'); pivot(ctx,bx2,CY,'#8f9a86');
+
+    if(E.val){
+      MSPC.mono(ctx,'0',sx-38,CY+50,11,'#8d968b');
+      MSPC.mono(ctx,'1',sx+RM*c*0.5-12,CY-RM*s*0.5+4,11,'#79a6c4');
+      MSPC.mono(ctx,'2',(ax2+bx2)/2,(ay2+CY)/2-12,11,'#cfe2ee','center');
+      MSPC.mono(ctx,'3',bx2,CY-62,11,'#8f9a86','center');
+      MSPC.mono(ctx,'pivot 0/1',sx,CY+26,9.5,'#7f8a7e','center');
+      MSPC.mono(ctx,'pivot 1/2',ax2+14,ay2-10,9.5,'#7f8a7e');
+      MSPC.mono(ctx,'pivot 2/3',bx2+8,CY+22,9.5,'#7f8a7e');
+      MSPC.mono(ctx,'glissière 3/0',(gx0+gx1)/2,CY-78,9.5,'#7f8a7e','center');
+    }
+
+    /* ================== bilan ================== */
+    var by=316;
+    ctx.fillStyle='rgba(255,255,255,.05)'; ctx.fillRect(26,by,W-52,62);
+    MSPC.mono(ctx,'4 solides · 3 pivots + 1 glissière · 1 boucle fermée',36,by+22,11.5,'#e6ebe4');
+    MSPC.mono(ctx,'Angle manivelle '+Math.round(((th*180/Math.PI)%360+360)%360)+'°  ·  position du piston '+Math.round(dep)+' unités  ·  course totale '+(2*RM)+' unités',
+      36,by+43,10.5,'#8d968b');
+    var pmh = (Math.cos(th)>0.999), pmb=(Math.cos(th)<-0.999);
+    MSPC.mono(ctx, pmh?'POINT MORT HAUT — le piston s’arrête,'
+                     :(pmb?'POINT MORT BAS — le piston s’arrête,'
+                          :'Le piston va vite au milieu de sa course,'),
+      W-36, by+22, 10.5, (pmh||pmb)?'#f0a844':'#7f8a7e','right');
+    MSPC.mono(ctx, (pmh||pmb)?'la manivelle, elle, tourne toujours':'lentement aux deux extrémités',
+      W-36, by+43, 10.5, (pmh||pmb)?'#f0a844':'#7f8a7e','right');
+
+    out.innerHTML='Piston à <b>'+Math.round(dep)+'</b> unités du centre<br>Le schéma reproduit le mouvement <b>exactement</b>';
+  }, {fixed:true});
+})();
+
+/* ======================= CH 3 · les six degrés de liberté ======================= */
+(function(){
+  "use strict";
+  var ids=['tx','ty','tz','rx','ry','rz'], C={};
+  ids.forEach(function(k){ C[k]=MSPC.ctrl('a-ddl-'+k); });
+  var out=document.getElementById('a-ddl-out');
+
+  /* Table des liaisons normalisées, indexée par la liste triée des mobilités.
+     Tout ce qui n'y figure pas est une combinaison sans nom normalisé. */
+  var TAB={
+    ''            :['Encastrement','—','Vis, soudure, clavette + circlip'],
+    'rx'          :['Pivot d’axe x','1 rotation','Arbre sur deux roulements, charnière'],
+    'ry'          :['Pivot d’axe y','1 rotation','Arbre sur deux roulements, charnière'],
+    'rz'          :['Pivot d’axe z','1 rotation','Arbre sur deux roulements, charnière'],
+    'tx'          :['Glissière de direction x','1 translation','Chariot de tour, tiroir de distributeur'],
+    'ty'          :['Glissière de direction y','1 translation','Chariot de tour, tiroir de distributeur'],
+    'tz'          :['Glissière de direction z','1 translation','Chariot de tour, tiroir de distributeur'],
+    'rx,tx'       :['Pivot glissant d’axe x','1 rot. + 1 transl. même axe','Piston dans son cylindre, arbre cannelé'],
+    'ry,ty'       :['Pivot glissant d’axe y','1 rot. + 1 transl. même axe','Piston dans son cylindre, arbre cannelé'],
+    'rz,tz'       :['Pivot glissant d’axe z','1 rot. + 1 transl. même axe','Piston dans son cylindre, arbre cannelé'],
+    'rx,ry,rz'    :['Rotule (sphérique)','3 rotations','Rotule de direction, tête de bielle'],
+    'rx,ry,rz,tx' :['Linéaire annulaire d’axe x','3 rot. + 1 transl.','Palier auto-aligneur, bague courte'],
+    'rx,ry,rz,ty' :['Linéaire annulaire d’axe y','3 rot. + 1 transl.','Palier auto-aligneur, bague courte'],
+    'rx,ry,rz,tz' :['Linéaire annulaire d’axe z','3 rot. + 1 transl.','Palier auto-aligneur, bague courte'],
+    'rz,tx,ty'    :['Appui plan de normale z','2 transl. + 1 rot.','Pièce posée sur un marbre, semelle de moteur'],
+    'ry,tx,tz'    :['Appui plan de normale y','2 transl. + 1 rot.','Pièce posée sur un marbre, semelle de moteur'],
+    'rx,ty,tz'    :['Appui plan de normale x','2 transl. + 1 rot.','Pièce posée sur un marbre, semelle de moteur'],
+    'rx,rz,tx,ty' :['Linéaire rectiligne','2 transl. + 2 rot.','Cylindre posé sur un plan, galet sur rail'],
+    'ry,rz,tx,tz' :['Linéaire rectiligne','2 transl. + 2 rot.','Cylindre posé sur un plan, galet sur rail'],
+    'rx,ry,ty,tz' :['Linéaire rectiligne','2 transl. + 2 rot.','Cylindre posé sur un plan, galet sur rail'],
+    'rx,ry,rz,tx,ty':['Ponctuelle (sphère-plan) de normale z','3 rot. + 2 transl.','Bille sur un plan, pointeau sur sa portée'],
+    'rx,ry,rz,tx,tz':['Ponctuelle (sphère-plan) de normale y','3 rot. + 2 transl.','Bille sur un plan, pointeau sur sa portée'],
+    'rx,ry,rz,ty,tz':['Ponctuelle (sphère-plan) de normale x','3 rot. + 2 transl.','Bille sur un plan, pointeau sur sa portée'],
+    'rx,ry,rz,tx,ty,tz':['Aucune liaison — solide libre','les 6','La pièce n’est tenue par rien']
+  };
+
+  function iso(p){ return [ (p[0]-p[1])*0.866, (p[0]+p[1])*0.5 - p[2] ]; }
+  function rot(p,rx,ry,rz){
+    var x=p[0],y=p[1],z=p[2],c,s,t;
+    c=Math.cos(rx); s=Math.sin(rx); t=y*c-z*s; z=y*s+z*c; y=t;
+    c=Math.cos(ry); s=Math.sin(ry); t=x*c+z*s; z=-x*s+z*c; x=t;
+    c=Math.cos(rz); s=Math.sin(rz); t=x*c-y*s; y=x*s+y*c; x=t;
+    return [x,y,z];
+  }
+  var SOM=[[-36,-36,-20],[36,-36,-20],[36,36,-20],[-36,36,-20],[-36,-36,20],[36,-36,20],[36,36,20],[-36,36,20]];
+  var SOCLE=[[-48,-48,-8],[48,-48,-8],[48,48,-8],[-48,48,-8],[-48,-48,8],[48,-48,8],[48,48,8],[-48,48,8]];
+  var FACES=[[0,1,2,3],[4,5,6,7],[0,1,5,4],[2,3,7,6],[1,2,6,5],[0,3,7,4]];
+
+  function cube(ctx,cx,cy,tr,rr,base,alpha){
+    var pts=(base?SOCLE:SOM).map(function(p){
+      var q = base ? p.slice() : rot(p, rr[0], rr[1], rr[2]);
+      q=[q[0]+tr[0], q[1]+tr[1], q[2]+tr[2]];
+      var i2=iso(q);
+      return [cx+i2[0], cy+i2[1], q[0]+q[1]+q[2]];
+    });
+    var ordre=FACES.map(function(f,i){
+      var d=0; f.forEach(function(k){ d+=pts[k][2]; });
+      return {f:f, d:d/4};
+    }).sort(function(u,v){ return u.d-v.d; });
+    ordre.forEach(function(o,i){
+      ctx.beginPath();
+      o.f.forEach(function(k,j){ if(j===0) ctx.moveTo(pts[k][0],pts[k][1]); else ctx.lineTo(pts[k][0],pts[k][1]); });
+      ctx.closePath();
+      ctx.globalAlpha=alpha;
+      ctx.fillStyle = base ? ['#2f3a2f','#3a463a','#333f33','#39453a','#364236','#313d31'][i]
+                           : ['#2c4a5e','#5d8fae','#3f6b8a','#4d7c9c','#456f8f','#39607d'][i];
+      ctx.fill();
+      ctx.globalAlpha=1;
+      ctx.strokeStyle = base ? 'rgba(255,255,255,.16)' : 'rgba(207,226,238,.55)';
+      ctx.lineWidth=1.3; ctx.stroke();
+    });
+  }
+
+  function axe(ctx,cx,cy,v,lab,col){
+    var p=iso([v[0]*122,v[1]*122,v[2]*122]);
+    ctx.strokeStyle=col; ctx.lineWidth=1.6;
+    ctx.beginPath(); ctx.moveTo(cx,cy); ctx.lineTo(cx+p[0],cy+p[1]); ctx.stroke();
+    MSPC.mono(ctx,lab,cx+p[0]*1.14,cy+p[1]*1.14+4,11,col,'center');
+  }
+
+  MSPC.anim('a-ddl', function(a){
+    var ctx=a.ctx, W=a.W, H=a.H, t=a.t;
+    var on={}; var libres=[];
+    ids.forEach(function(k){ on[k]=C[k].val; if(on[k]) libres.push(k); });
+    var cle=libres.slice().sort().join(',');
+    var info=TAB[cle] || ['Combinaison sans nom normalisé','—','On la réalise en associant plusieurs liaisons élémentaires (liaison composée)'];
+    var n=libres.length;
+
+    MSPC.fond(ctx,W,H,0);
+
+    var cx=238, cy=210;
+    // le solide de référence, immobile
+    cube(ctx,cx,cy,[0,0,-48],[0,0,0],true,1);
+    // le repère, tracé APRÈS le socle pour rester visible
+    axe(ctx,cx,cy,[1,0,0],'x','#8d968b');
+    axe(ctx,cx,cy,[0,1,0],'y','#8d968b');
+    axe(ctx,cx,cy,[0,0,1],'z','#8d968b');
+    MSPC.mono(ctx,'solide de référence — immobile',cx,cy+124,10,'#7f8a7e','center');
+
+    // le solide mobile
+    var tr=[ on.tx?Math.sin(t*1.15)*26:0, on.ty?Math.sin(t*0.94+1.1)*26:0, on.tz?Math.sin(t*1.32+2.2)*22:0 ];
+    var rr=[ on.rx?t*1.15:0, on.ry?t*0.87:0, on.rz?t*0.63:0 ];
+    cube(ctx,cx,cy,[tr[0],tr[1],tr[2]+36],rr,false,1);
+
+    /* ---------- le panneau de droite ---------- */
+    var px=478, pw=W-px-26;
+    ctx.fillStyle='rgba(255,255,255,.04)'; ctx.fillRect(px,52,pw,300);
+    ctx.strokeStyle='rgba(255,255,255,.20)'; ctx.lineWidth=1.4; ctx.strokeRect(px+.5,52.5,pw,300);
+
+    MSPC.mono(ctx,'LA LIAISON OBTENUE',px+18,80,10.5,'#8d968b');
+    // le nom, sur deux lignes si nécessaire
+    var nom=info[0], l1=nom, l2='';
+    if(nom.length>26){
+      var mots=nom.split(' '); l1=''; l2='';
+      for(var w=0;w<mots.length;w++){ if((l1+' '+mots[w]).length<=26 && !l2) l1=(l1?l1+' ':'')+mots[w]; else l2=(l2?l2+' ':'')+mots[w]; }
+    }
+    MSPC.titre(ctx,l1,px+18,112,25,n===0?'#f0a844':(n===6?'#ff6a5e':'#a9d0e6'));
+    if(l2) MSPC.titre(ctx,l2,px+18,138,25,n===0?'#f0a844':(n===6?'#ff6a5e':'#a9d0e6'));
+
+    var yy = l2?166:146;
+    MSPC.mono(ctx,'MOBILITÉS AUTORISÉES',px+18,yy,10,'#8d968b');
+    MSPC.mono(ctx,info[1],px+18,yy+18,12,'#e6ebe4');
+
+    MSPC.mono(ctx,'OÙ VOUS LA RENCONTREZ',px+18,yy+48,10,'#8d968b');
+    var ex=info[2], e1=ex, e2='';
+    if(ex.length>34){
+      var m2=ex.split(' '); e1=''; e2='';
+      for(var w2=0;w2<m2.length;w2++){ if((e1+' '+m2[w2]).length<=34 && !e2) e1=(e1?e1+' ':'')+m2[w2]; else e2=(e2?e2+' ':'')+m2[w2]; }
+    }
+    MSPC.mono(ctx,e1,px+18,yy+66,11,'#cfe2ee');
+    if(e2) MSPC.mono(ctx,e2,px+18,yy+82,11,'#cfe2ee');
+
+    // les compteurs
+    var cy2=306;
+    MSPC.titre(ctx,String(n),px+18,cy2,34,'#e6ebe4');
+    MSPC.mono(ctx,'DEGRÉS DE LIBERTÉ',px+52,cy2-14,9.5,'#8d968b');
+    MSPC.mono(ctx,'RESTANTS',px+52,cy2-2,9.5,'#8d968b');
+    MSPC.titre(ctx,String(6-n),px+180,cy2,34,'#f0a844');
+    MSPC.mono(ctx,'SUPPRIMÉS PAR',px+216,cy2-14,9.5,'#8d968b');
+    MSPC.mono(ctx,'LA LIAISON',px+216,cy2-2,9.5,'#8d968b');
+    MSPC.mono(ctx,'n + (6−n) = 6, toujours',px+18,cy2+24,10,'#6f786e');
+
+    // les six pastilles de mobilité
+    var mx=26, my=384;
+    MSPC.mono(ctx,'LES SIX MOBILITÉS',mx,my-10,10.5,'#8d968b');
+    ids.forEach(function(k,i){
+      var x=mx+i*74;
+      ctx.fillStyle=on[k]?'rgba(121,166,196,.30)':'rgba(255,255,255,.05)';
+      ctx.fillRect(x,my,66,26);
+      ctx.strokeStyle=on[k]?'#79a6c4':'#3a443a'; ctx.lineWidth=1.4; ctx.strokeRect(x+.5,my+.5,66,26);
+      MSPC.mono(ctx,k.toUpperCase(),x+33,my+13,11,on[k]?'#cfe2ee':'#4d5a4d','center');
+      MSPC.mono(ctx,on[k]?'libre':'bloqué',x+33,my+23,7.5,on[k]?'#79a6c4':'#4d5a4d','center');
+    });
+    MSPC.mono(ctx, n===0 ? 'les deux solides n’en font plus qu’un'
+                         : (n===6 ? 'rien ne retient la pièce'
+                                  : 'chaque case cochée est un mouvement qui passe'),
+      W-26, my+18, 10.5, n===0?'#f0a844':(n===6?'#ff6a5e':'#8d968b'), 'right');
+
+    out.innerHTML='<b style="color:#a9d0e6">'+info[0]+'</b><br>'+n+' degré'+(n>1?'s':'')+' de liberté sur 6';
+  }, {fixed:true});
+})();
+</script>
+<script>
+/* ======================= CH 4 · classes d'équivalence et graphe ======================= */
+(function(){
+  "use strict";
+  var ETAPES=['les pièces','les classes','le schéma','le graphe'];
+  var O=MSPC.ctrl('a-classes-o', function(v){ return Math.round(v)+' %'; }, 'a-classes-o-l');
+  var E=MSPC.ctrl('a-classes-e', function(v){ return ETAPES[v]; }, 'a-classes-e-l');
+  var out=document.getElementById('a-classes-out');
+  var COL=['#79a6c4','#c8d834','#f0a844'];
+  var Y0=258;                       // ligne du dessus du corps de l'étau
+
+  function hach(ctx,x,y,w,sens){
+    ctx.strokeStyle='#8d968b'; ctx.lineWidth=1.4;
+    ctx.beginPath(); ctx.moveTo(x,y); ctx.lineTo(x+w,y); ctx.stroke();
+    ctx.lineWidth=1;
+    for(var i=0;i<=w;i+=9){ ctx.beginPath(); ctx.moveTo(x+i,y); ctx.lineTo(x+i-6,y+sens*8); ctx.stroke(); }
+  }
+  function bulle(ctx,x,y,txt){
+    ctx.fillStyle='#11160f'; ctx.beginPath(); ctx.arc(x,y,10,0,6.2832); ctx.fill();
+    ctx.strokeStyle='#cfe2ee'; ctx.lineWidth=1.6; ctx.beginPath(); ctx.arc(x,y,10,0,6.2832); ctx.stroke();
+    MSPC.mono(ctx,txt,x,y+4,11,'#cfe2ee','center');
+  }
+
+  MSPC.anim('a-classes', function(a){
+    var ctx=a.ctx, W=a.W, H=a.H;
+    var ouv=O.val/100, et=E.val;
+    var dx=ouv*118;
+
+    MSPC.fond(ctx,W,H,0);
+    MSPC.mono(ctx,'UN ÉTAU D’ÉTABLI — ÉTAPE '+(et+1)+' SUR 4 : '+ETAPES[et].toUpperCase(),26,30,11.5,'#8d968b');
+
+    if(et<=1){
+      var cA = et===1 ? COL[0] : '#8f9a86';
+      var cB = et===1 ? COL[1] : '#8f9a86';
+      var cC = et===1 ? COL[2] : '#8f9a86';
+      var alp = et===1 ? 0.30 : 0.14;
+      var vy = Y0-42;                                   // axe de la vis
+
+      // le corps et son mors fixe
+      ctx.fillStyle='rgba(255,255,255,'+alp+')';
+      ctx.fillRect(110,Y0,470,42); ctx.fillRect(236,Y0-104,44,104);
+      ctx.strokeStyle=cA; ctx.lineWidth=2.4;
+      ctx.strokeRect(110.5,Y0+.5,470,42); ctx.strokeRect(236.5,Y0-103.5,44,104);
+      ctx.fillStyle='rgba(255,255,255,.10)'; ctx.fillRect(280,Y0-94,12,84);
+      ctx.strokeStyle=cA; ctx.lineWidth=1.6; ctx.strokeRect(280.5,Y0-93.5,12,84);
+      // la butée de la vis
+      ctx.fillStyle='rgba(255,255,255,.10)'; ctx.fillRect(568,vy-20,26,40);
+      ctx.strokeStyle=cA; ctx.lineWidth=1.6; ctx.strokeRect(568.5,vy-19.5,26,40);
+
+      // le mors mobile
+      var mx=306+dx;
+      ctx.fillStyle='rgba(255,255,255,'+alp+')';
+      ctx.fillRect(mx,Y0-104,44,104); ctx.fillRect(mx+8,Y0,150,26);
+      ctx.strokeStyle=cB; ctx.lineWidth=2.4;
+      ctx.strokeRect(mx+.5,Y0-103.5,44,104); ctx.strokeRect(mx+8.5,Y0+.5,150,26);
+      ctx.fillStyle='rgba(255,255,255,.10)'; ctx.fillRect(mx-12,Y0-94,12,84);
+      ctx.strokeStyle=cB; ctx.lineWidth=1.6; ctx.strokeRect(mx-11.5,Y0-93.5,12,84);
+      ctx.fillStyle='rgba(255,255,255,.10)'; ctx.fillRect(mx+14,vy-12,22,24);
+      ctx.strokeStyle=cB; ctx.lineWidth=1.6; ctx.strokeRect(mx+14.5,vy-11.5,22,24);
+
+      // la vis et sa manivelle
+      ctx.strokeStyle=cC; ctx.lineWidth=3;
+      ctx.beginPath(); ctx.moveTo(mx+22,vy); ctx.lineTo(626,vy); ctx.stroke();
+      ctx.lineWidth=1.6;
+      for(var f=0;f<26;f++){ var fx=mx+30+f*8; if(fx>612) break;
+        ctx.beginPath(); ctx.moveTo(fx,vy-8); ctx.lineTo(fx+5,vy+8); ctx.stroke(); }
+      ctx.lineWidth=6;
+      ctx.beginPath(); ctx.moveTo(626,vy-44); ctx.lineTo(626,vy+44); ctx.stroke();
+      ctx.fillStyle=cC;
+      ctx.beginPath(); ctx.arc(626,vy-44,7,0,6.2832); ctx.fill();
+      ctx.beginPath(); ctx.arc(626,vy+44,7,0,6.2832); ctx.fill();
+
+      if(et===0){
+        MSPC.mono(ctx,'mors fixe',258,Y0-146,9.5,'#7f8a7e','center');
+        MSPC.mono(ctx,'mors mobile',mx+22,Y0-146,9.5,'#7f8a7e','center');
+        MSPC.mono(ctx,'vis',470,vy-46,9.5,'#7f8a7e','center');
+        MSPC.mono(ctx,'corps',150,Y0+60,9.5,'#7f8a7e','center');
+        MSPC.mono(ctx,'manivelle',668,vy+22,9.5,'#7f8a7e');
+        bulle(ctx,150,Y0+22,'1');
+        bulle(ctx,258,Y0-128,'2');  bulle(ctx,290,Y0-110,'3');
+        bulle(ctx,mx+22,Y0-128,'4'); bulle(ctx,mx-6,Y0-110,'5');
+        bulle(ctx,mx+25,vy,'6');
+        bulle(ctx,470,vy-24,'7');
+        bulle(ctx,581,vy-34,'8');
+        bulle(ctx,652,vy,'9');
+        MSPC.mono(ctx,'Neuf repères visibles — et bien davantage en réalité : vis d’assemblage, goupille, rondelles, ressort de rappel.',26,386,11,'#8d968b');
+        MSPC.mono(ctx,'Combien de solides pour décrire le MOUVEMENT ? Passez à l’étape suivante.',26,404,11,'#f0a844');
+      } else {
+        var leg=[['A · corps, mors fixe, plaques, butée — LE BÂTI',COL[0]],
+                 ['B · mors mobile, sa plaque, son écrou',COL[1]],
+                 ['C · vis et manivelle, goupillées ensemble',COL[2]]];
+        for(var l=0;l<3;l++){
+          ctx.fillStyle=leg[l][1]; ctx.fillRect(26,370+l*17,12,12);
+          MSPC.mono(ctx,leg[l][0],46,380+l*17,10.5,'#cfe2ee');
+        }
+        MSPC.mono(ctx,'Neuf pièces deviennent TROIS classes.',W-26,380,11.5,'#c8d834','right');
+        MSPC.mono(ctx,'Tout ce qui sert à ASSEMBLER a disparu dans une classe.',W-26,397,10.5,'#8d968b','right');
+        MSPC.mono(ctx,'Seul ce qui sert à BOUGER reste distinct.',W-26,414,10.5,'#8d968b','right');
+      }
+    }
+
+    if(et===2){
+      var gy=272, sx=300+dx;
+      hach(ctx,150,gy,470,1);
+      ctx.strokeStyle='#8d968b'; ctx.lineWidth=2;
+      ctx.beginPath(); ctx.moveTo(210,gy-24); ctx.lineTo(600,gy-24); ctx.stroke();
+      // le mors mobile sur sa glissière
+      ctx.fillStyle='rgba(200,216,52,.12)'; ctx.fillRect(sx-34,gy-108,68,108);
+      ctx.strokeStyle=COL[1]; ctx.lineWidth=3; ctx.strokeRect(sx-34,gy-108,68,108);
+      ctx.lineWidth=2.4; ctx.strokeRect(sx-22,gy-36,44,24);
+      MSPC.mono(ctx,'GLISSIÈRE  B / A',330,gy+24,10.5,'#8d968b');
+      // la vis
+      ctx.strokeStyle=COL[2]; ctx.lineWidth=3;
+      ctx.beginPath(); ctx.moveTo(sx,gy-64); ctx.lineTo(606,gy-64); ctx.stroke();
+      ctx.lineWidth=1.6;
+      for(var h=0;h<20;h++){ var hx=sx+16+h*13; if(hx>596) break;
+        ctx.beginPath(); ctx.moveTo(hx,gy-72); ctx.lineTo(hx+7,gy-56); ctx.stroke(); }
+      ctx.fillStyle='#11160f'; ctx.beginPath(); ctx.arc(606,gy-64,7,0,6.2832); ctx.fill();
+      ctx.strokeStyle=COL[2]; ctx.lineWidth=2.4; ctx.beginPath(); ctx.arc(606,gy-64,7,0,6.2832); ctx.stroke();
+      ctx.strokeStyle='#8d968b'; ctx.lineWidth=2;
+      ctx.beginPath(); ctx.moveTo(606,gy-57); ctx.lineTo(606,gy); ctx.stroke();
+      MSPC.mono(ctx,'PIVOT  C / A',628,gy-30,10.5,'#8d968b');
+      MSPC.mono(ctx,'HÉLICOÏDALE  C / B',sx+22,gy-84,10.5,'#8d968b');
+      MSPC.mono(ctx,'A · bâti',160,gy+24,10.5,COL[0]);
+      MSPC.mono(ctx,'B · mors mobile',sx,gy-122,10.5,COL[1],'center');
+      MSPC.mono(ctx,'C · vis',628,gy-78,10.5,COL[2]);
+      MSPC.mono(ctx,'Trois traits, trois symboles. Un étau tient tout entier là-dedans.',26,386,11.5,'#e6ebe4');
+      MSPC.mono(ctx,'La liaison hélicoïdale est la seule à n’avoir qu’UN degré de liberté malgré ses deux mouvements : tourner OBLIGE à avancer.',26,404,10.5,'#8d968b');
+    }
+
+    if(et===3){
+      var N=[[300,140,'A',COL[0],'bâti'],[610,140,'B',COL[1],'mors mobile'],[455,282,'C',COL[2],'vis']];
+      var L=[[0,1,'glissière'],[0,2,'pivot'],[1,2,'hélicoïdale']];
+      L.forEach(function(e){
+        var p=N[e[0]], q=N[e[1]];
+        ctx.strokeStyle='rgba(207,226,238,.55)'; ctx.lineWidth=2.2;
+        ctx.beginPath(); ctx.moveTo(p[0],p[1]); ctx.lineTo(q[0],q[1]); ctx.stroke();
+        var mxx=(p[0]+q[0])/2, myy=(p[1]+q[1])/2;
+        ctx.fillStyle='#11160f'; ctx.fillRect(mxx-52,myy-9,104,18);
+        MSPC.mono(ctx,e[2],mxx,myy+4,10.5,'#cfe2ee','center');
+      });
+      N.forEach(function(p){
+        ctx.fillStyle='#11160f'; ctx.beginPath(); ctx.arc(p[0],p[1],28,0,6.2832); ctx.fill();
+        ctx.strokeStyle=p[3]; ctx.lineWidth=2.6; ctx.beginPath(); ctx.arc(p[0],p[1],28,0,6.2832); ctx.stroke();
+        MSPC.titre(ctx,p[2],p[0],p[1]+8,24,p[3],'center');
+        MSPC.mono(ctx,p[4],p[0],p[1]+46,10,'#8d968b','center');
+      });
+      MSPC.mono(ctx,'3 classes · 3 liaisons',26,368,11.5,'#e6ebe4');
+      MSPC.mono(ctx,'nombre de boucles = 3 − 3 + 1 = 1  →  CHAÎNE FERMÉE',26,388,11.5,'#f0a844');
+      MSPC.mono(ctx,'Conséquence : les trois liaisons se contraignent mutuellement. Si le corps est voilé, la vis force et l’étau se coince.',26,408,10.5,'#8d968b');
+    }
+
+    out.innerHTML = et===0 ? '<b>9 pièces</b> visibles<br>combien de solides au sens du mouvement ?'
+      : (et===1 ? '<b style="color:#c8d834">3 classes d’équivalence</b><br>A · bâti · B · mors mobile · C · vis'
+      : (et===2 ? '<b>3 liaisons</b><br>glissière, pivot, hélicoïdale' : '<b style="color:#f0a844">1 boucle fermée</b><br>3 − 3 + 1 = 1'));
+  }, {fixed:true});
+})();
+
+/* ======================= CH 5 · moment d'une force ======================= */
+(function(){
+  "use strict";
+  var F=MSPC.ctrl('a-moment-f', function(v){ return Math.round(v)+' N'; }, 'a-moment-f-l');
+  var L=MSPC.ctrl('a-moment-l', function(v){ return Math.round(v)+' mm'; }, 'a-moment-l-l');
+  var A=MSPC.ctrl('a-moment-a', function(v){ return Math.round(v)+'°'; }, 'a-moment-a-l');
+  var out=document.getElementById('a-moment-out');
+  var CIBLE=80;
+
+  function fleche(ctx,x0,y0,x1,y1,col,w,t){
+    var dx=x1-x0, dy=y1-y0, d=Math.hypot(dx,dy); if(d<4) return;
+    var ux=dx/d, uy=dy/d; t=t||11;
+    ctx.strokeStyle=col; ctx.lineWidth=w;
+    ctx.beginPath(); ctx.moveTo(x0,y0); ctx.lineTo(x1-ux*t,y1-uy*t); ctx.stroke();
+    ctx.fillStyle=col;
+    ctx.beginPath(); ctx.moveTo(x1,y1);
+    ctx.lineTo(x1-ux*t+uy*t*0.48, y1-uy*t-ux*t*0.48);
+    ctx.lineTo(x1-ux*t-uy*t*0.48, y1-uy*t+ux*t*0.48);
+    ctx.closePath(); ctx.fill();
+  }
+
+  MSPC.anim('a-moment', function(a){
+    var ctx=a.ctx, W=a.W, H=a.H;
+    var Fv=F.val, Lmm=L.val, al=A.val*Math.PI/180;
+    var Lpx=Lmm*0.42;
+    var bras=Lmm*Math.sin(al)/1000;
+    var M=Fv*bras;
+
+    MSPC.fond(ctx,W,H,0);
+    MSPC.mono(ctx,'SERRAGE D’UNE VIS M12 — COUPLE PRESCRIT 80 N·m',26,30,11.5,'#8d968b');
+
+    var cx=176, cy=214;
+    ctx.save(); ctx.beginPath(); ctx.rect(20,44,570,250); ctx.clip();
+
+    // les deux pièces assemblées
+    ctx.fillStyle='rgba(255,255,255,.05)'; ctx.fillRect(58,cy+34,300,26);
+    ctx.fillStyle='rgba(255,255,255,.08)'; ctx.fillRect(58,cy+60,300,26);
+    ctx.strokeStyle='#5a6258'; ctx.lineWidth=1.6;
+    ctx.strokeRect(58.5,cy+34.5,300,26); ctx.strokeRect(58.5,cy+60.5,300,26);
+    MSPC.mono(ctx,'les deux pièces à plaquer l’une contre l’autre',58,cy+104,9.5,'#5a6258');
+    // la vis, en transparence dans les pièces
+    ctx.strokeStyle='#4d5a4d'; ctx.lineWidth=2;
+    ctx.beginPath(); ctx.moveTo(cx-7,cy); ctx.lineTo(cx-7,cy+86); ctx.moveTo(cx+7,cy); ctx.lineTo(cx+7,cy+86); ctx.stroke();
+
+    // la droite d'action de l'effort, prolongée
+    var fux=Math.cos(-al), fuy=Math.sin(-al);
+    var kx=cx+Lpx, ky=cy;
+    ctx.strokeStyle='rgba(255,106,94,.28)'; ctx.lineWidth=1.4; ctx.setLineDash([5,5]);
+    ctx.beginPath(); ctx.moveTo(kx-fux*500,ky-fuy*500); ctx.lineTo(kx+fux*500,ky+fuy*500); ctx.stroke();
+    ctx.setLineDash([]);
+
+    // l'écrou
+    ctx.fillStyle='#4d5a4d'; ctx.beginPath();
+    for(var k=0;k<6;k++){ var an=k*1.0472; var xx=cx+Math.cos(an)*24, yy=cy+Math.sin(an)*24;
+      if(k===0) ctx.moveTo(xx,yy); else ctx.lineTo(xx,yy); }
+    ctx.closePath(); ctx.fill();
+    ctx.strokeStyle='#8f9a86'; ctx.lineWidth=2; ctx.stroke();
+
+    // la clé
+    ctx.strokeStyle='#8f9a86'; ctx.lineWidth=16; ctx.lineCap='round';
+    ctx.beginPath(); ctx.moveTo(cx,cy); ctx.lineTo(kx,ky); ctx.stroke();
+    ctx.lineCap='butt';
+    ctx.strokeStyle='#cfe2ee'; ctx.lineWidth=3; ctx.beginPath(); ctx.arc(cx,cy,28,0,6.2832); ctx.stroke();
+
+    // le bras de levier : perpendiculaire du centre sur la droite d'action
+    var proj=(cx-kx)*fux+(cy-ky)*fuy;
+    var hx=kx+fux*proj, hy=ky+fuy*proj;
+    ctx.strokeStyle='#c8d834'; ctx.lineWidth=2.6; ctx.setLineDash([6,4]);
+    ctx.beginPath(); ctx.moveTo(cx,cy); ctx.lineTo(hx,hy); ctx.stroke();
+    ctx.setLineDash([]);
+
+    // l'effort
+    var flon=Fv*0.20+18;
+    fleche(ctx,kx,ky,kx+fux*flon,ky+fuy*flon,'#ff6a5e',4,13);
+    MSPC.mono(ctx,'F = '+Math.round(Fv)+' N',kx+fux*flon+10,ky+fuy*flon-4,11.5,'#ff6a5e');
+    ctx.strokeStyle='rgba(207,226,238,.5)'; ctx.lineWidth=1.4;
+    ctx.beginPath(); ctx.arc(kx,ky,30,-al,0); ctx.stroke();
+    MSPC.mono(ctx,Math.round(A.val)+'°',kx+42*Math.cos(-al/2),ky+42*Math.sin(-al/2)+4,10.5,'#cfe2ee','center');
+    ctx.restore();
+
+    // l'étiquette du bras, sur fond opaque pour rester lisible
+    var bmx=(cx+hx)/2, bmy=(cy+hy)/2-16;
+    ctx.fillStyle='#11160f'; ctx.fillRect(bmx-48,bmy-10,96,19);
+    MSPC.mono(ctx,'d = '+Math.round(bras*1000)+' mm',bmx,bmy+4,10.5,'#c8d834','center');
+
+    /* ---------- panneau de droite ---------- */
+    var px=612, pw=W-px-26;
+    ctx.fillStyle='rgba(255,255,255,.04)'; ctx.fillRect(px,60,pw,232);
+    ctx.strokeStyle='rgba(255,255,255,.20)'; ctx.lineWidth=1.4; ctx.strokeRect(px+.5,60.5,pw,232);
+    MSPC.mono(ctx,'COUPLE RÉELLEMENT APPLIQUÉ',px+16,86,10,'#8d968b');
+    MSPC.titre(ctx,M.toFixed(1).replace('.',',')+' N·m',px+16,124,32,M>CIBLE*1.12?'#ff6a5e':(M>CIBLE*0.88?'#c8d834':'#f0a844'));
+    MSPC.mono(ctx,'CONSIGNE CONSTRUCTEUR',px+16,152,10,'#8d968b');
+    MSPC.titre(ctx,CIBLE+' N·m',px+16,180,24,'#cfe2ee');
+    // la jauge
+    var jy=206, jw=pw-32;
+    ctx.fillStyle='rgba(255,255,255,.09)'; ctx.fillRect(px+16,jy,jw,16);
+    var frac=Math.min(1.35,M/CIBLE);
+    ctx.fillStyle=frac>1.12?'#ff6a5e':(frac>0.88?'#c8d834':'#f0a844');
+    ctx.fillRect(px+16,jy,jw*frac/1.35,16);
+    ctx.strokeStyle='#cfe2ee'; ctx.lineWidth=2;
+    ctx.beginPath(); ctx.moveTo(px+16+jw/1.35,jy-4); ctx.lineTo(px+16+jw/1.35,jy+20); ctx.stroke();
+    MSPC.mono(ctx,'consigne',px+16+jw/1.35,jy-9,9,'#cfe2ee','center');
+    MSPC.mono(ctx, M<CIBLE*0.88 ? 'SERRAGE INSUFFISANT' : (M>CIBLE*1.12 ? 'SERRAGE EXCESSIF' : 'SERRAGE CORRECT'),
+      px+16, jy+42, 12, M<CIBLE*0.88?'#f0a844':(M>CIBLE*1.12?'#ff6a5e':'#c8d834'));
+    MSPC.mono(ctx, M<CIBLE*0.88 ? 'l’assemblage se desserrera' : (M>CIBLE*1.12 ? 'risque de plastifier la vis' : 'la précontrainte est bonne'),
+      px+16, jy+58, 10, '#8d968b');
+
+    /* ---------- bandeau du bas ---------- */
+    var by=318;
+    ctx.fillStyle='rgba(255,255,255,.05)'; ctx.fillRect(26,by,W-52,80);
+    MSPC.titre(ctx,'M = F × d',44,by+32,26,'#e6ebe4');
+    MSPC.mono(ctx,'d n’est PAS la longueur de la clé :',180,by+22,11,'#cfe2ee');
+    MSPC.mono(ctx,'c’est la distance PERPENDICULAIRE à l’effort.',180,by+40,11,'#8d968b');
+    MSPC.mono(ctx,'Tirez de biais et le bras de levier raccourcit — alors que la clé, elle, n’a pas bougé d’un millimètre.',44,by+66,10.5,'#6f786e');
+    MSPC.titre(ctx,Math.round(Math.sin(al)*100)+' %',W-44,by+32,26,al>1.4?'#c8d834':'#f0a844','right');
+    MSPC.mono(ctx,'DE LA CLÉ RÉELLEMENT UTILISÉE',W-44,by+52,9.5,'#8d968b','right');
+    MSPC.mono(ctx,'sin(angle de tirage)',W-44,by+68,9.5,'#8d968b','right');
+
+    out.innerHTML='M = '+Math.round(Fv)+' × '+bras.toFixed(3).replace('.',',')+' = <b>'+M.toFixed(1).replace('.',',')+' N·m</b><br>'
+      +(Math.abs(M-CIBLE)<CIBLE*0.12?'<b style="color:#c8d834">dans la tolérance</b>':'consigne : '+CIBLE+' N·m');
+  }, {fixed:true});
+})();
+
+/* ======================= CH 6 · adhérence et glissement ======================= */
+(function(){
+  "use strict";
+  var A=MSPC.ctrl('a-frot-a', function(v){ return Math.round(v)+'°'; }, 'a-frot-a-l');
+  var Fc=MSPC.ctrl('a-frot-f', function(v){ return (v/100).toFixed(2).replace('.',','); }, 'a-frot-f-l');
+  var Mm=MSPC.ctrl('a-frot-m', function(v){ return Math.round(v)+' kg'; }, 'a-frot-m-l');
+  var out=document.getElementById('a-frot-out');
+  var s=0, vg=0;
+
+  function fleche(ctx,x0,y0,x1,y1,col,w){
+    var dx=x1-x0, dy=y1-y0, d=Math.hypot(dx,dy); if(d<5) return;
+    var ux=dx/d, uy=dy/d;
+    ctx.strokeStyle=col; ctx.lineWidth=w;
+    ctx.beginPath(); ctx.moveTo(x0,y0); ctx.lineTo(x1-ux*9,y1-uy*9); ctx.stroke();
+    ctx.fillStyle=col;
+    ctx.beginPath(); ctx.moveTo(x1,y1);
+    ctx.lineTo(x1-ux*9+uy*4.5, y1-uy*9-ux*4.5);
+    ctx.lineTo(x1-ux*9-uy*4.5, y1-uy*9+ux*4.5);
+    ctx.closePath(); ctx.fill();
+  }
+
+  MSPC.anim('a-frot', function(a){
+    var ctx=a.ctx, W=a.W, H=a.H, dt=Math.min(a.dt,0.05);
+    var al=A.val*Math.PI/180, f=Fc.val/100, m=Mm.val;
+    var P=m*9.81;
+    var N=P*Math.cos(al), Tn=P*Math.sin(al), Tmax=f*N;
+    var glisse = Math.tan(al) > f + 1e-9;
+    var phi=Math.atan(f);
+
+    if(glisse){ vg += (Tn-Tmax)/m*dt*7; s += vg*dt*10; }
+    else { vg=0; s += (0-s)*Math.min(1,dt*3); }
+    if(s>210){ s=0; vg=0; }
+
+    MSPC.fond(ctx,W,H,0);
+    MSPC.mono(ctx, glisse ? 'ÇA GLISSE : tan(α) dépasse f'
+                          : 'ÇA TIENT : tan(α) reste sous f',
+      26, 30, 12.5, glisse?'#ff6a5e':'#c8d834');
+    MSPC.mono(ctx,'Changez la masse : l’angle de décrochage ne bouge pas d’un degré. Le poids augmente ce qui tire ET ce qui retient, en même proportion.',
+      26, 48, 10.5, '#8d968b');
+
+    var px=64, py=298, Lp=430;
+    var ex=px+Math.cos(-al)*Lp, ey=py+Math.sin(-al)*Lp;
+
+    ctx.strokeStyle='rgba(255,255,255,.14)'; ctx.lineWidth=1.4;
+    ctx.beginPath(); ctx.moveTo(px,py); ctx.lineTo(px+Lp,py); ctx.stroke();
+    ctx.strokeStyle='rgba(207,226,238,.45)'; ctx.lineWidth=1.4;
+    ctx.beginPath(); ctx.arc(px,py,72,-al,0); ctx.stroke();
+    MSPC.mono(ctx,Math.round(A.val)+'°',px+90*Math.cos(-al/2),py+90*Math.sin(-al/2)+4,12,'#cfe2ee','center');
+
+    ctx.strokeStyle='#8f9a86'; ctx.lineWidth=5;
+    ctx.beginPath(); ctx.moveTo(px,py); ctx.lineTo(ex,ey); ctx.stroke();
+    ctx.strokeStyle='#5a6258'; ctx.lineWidth=1.2;
+    for(var i=0;i<Lp;i+=13){
+      var hx=px+Math.cos(-al)*i, hy=py+Math.sin(-al)*i;
+      ctx.beginPath(); ctx.moveTo(hx,hy); ctx.lineTo(hx-5,hy+9); ctx.stroke();
+    }
+
+    var d0=250-s;
+    var cxx=px+Math.cos(-al)*d0, cyy=py+Math.sin(-al)*d0;
+    var nx=Math.sin(al), ny=-Math.cos(al);
+    var tx2=Math.cos(-al), ty2=Math.sin(-al);          // vers le haut de la pente
+    var cw=Math.max(34,Math.min(64, 28+m*0.18)), ch=cw*0.72;
+
+    // le cône de frottement, sous la caisse
+    ctx.fillStyle=glisse?'rgba(255,106,94,.10)':'rgba(200,216,52,.13)';
+    ctx.beginPath(); ctx.moveTo(cxx,cyy);
+    for(var q=-phi;q<=phi+0.001;q+=0.03){
+      var dxx=nx*Math.cos(q)-ny*Math.sin(q), dyy=nx*Math.sin(q)+ny*Math.cos(q);
+      ctx.lineTo(cxx+dxx*150, cyy+dyy*150);
+    }
+    ctx.closePath(); ctx.fill();
+    ctx.strokeStyle=glisse?'rgba(255,106,94,.45)':'rgba(200,216,52,.5)'; ctx.lineWidth=1.3; ctx.stroke();
+
+    // la caisse
+    ctx.save(); ctx.translate(cxx,cyy); ctx.rotate(-al);
+    ctx.fillStyle=glisse?'rgba(255,106,94,.20)':'rgba(121,166,196,.20)';
+    ctx.fillRect(-cw/2,-ch,cw,ch);
+    ctx.strokeStyle=glisse?'#ff6a5e':'#79a6c4'; ctx.lineWidth=2.2;
+    ctx.strokeRect(-cw/2,-ch,cw,ch);
+    MSPC.mono(ctx,Math.round(m)+' kg',0,-ch/2+4,10.5,'#e6ebe4','center');
+    ctx.restore();
+
+    // les vecteurs, à l'échelle : le poids fait toujours 92 px
+    var ech=92/Math.max(1,P);
+    var gx=cxx+nx*ch*0.5, gy2=cyy+ny*ch*0.5;
+    fleche(ctx,gx,gy2,gx,gy2+P*ech,'#cfe2ee',3);
+    MSPC.mono(ctx,'P = '+Math.round(P)+' N',gx+9,gy2+P*ech+2,10.5,'#cfe2ee');
+    fleche(ctx,cxx,cyy,cxx+nx*N*ech,cyy+ny*N*ech,'#79a6c4',3);
+    MSPC.mono(ctx,'N = '+Math.round(N)+' N',cxx+nx*N*ech-12,cyy+ny*N*ech-6,10.5,'#79a6c4','right');
+    fleche(ctx,cxx,cyy,cxx-tx2*Tn*ech,cyy-ty2*Tn*ech,'#f0a844',3);
+    fleche(ctx,cxx,cyy,cxx+tx2*Tmax*ech,cyy+ty2*Tmax*ech,'#c8d834',3);
+    MSPC.mono(ctx,'cône de frottement  φ = '+(phi*180/Math.PI).toFixed(1).replace('.',',')+'°',
+      cxx+nx*168, cyy+ny*168, 10, glisse?'#ff6a5e':'#c8d834','center');
+
+    /* ---------- la balance, à droite ---------- */
+    var bx=620, bw=W-bx-26;
+    ctx.fillStyle='rgba(255,255,255,.04)'; ctx.fillRect(bx,80,bw,212);
+    ctx.strokeStyle='rgba(255,255,255,.20)'; ctx.lineWidth=1.4; ctx.strokeRect(bx+.5,80.5,bw,212);
+    MSPC.mono(ctx,'CE QUI TIRE  ·  CE QUI RETIENT',bx+16,104,10,'#8d968b');
+    var b0=bx+40, bh=112, base=242, ech2=bh/Math.max(1,Math.max(Tn,Tmax,1));
+    ctx.fillStyle='#f0a844'; ctx.fillRect(b0, base-Tn*ech2, 52, Tn*ech2);
+    ctx.fillStyle='#c8d834'; ctx.fillRect(b0+90, base-Tmax*ech2, 52, Tmax*ech2);
+    ctx.strokeStyle='rgba(255,255,255,.20)'; ctx.lineWidth=1;
+    ctx.beginPath(); ctx.moveTo(bx+16,base); ctx.lineTo(bx+bw-16,base); ctx.stroke();
+    MSPC.mono(ctx,Math.round(Tn)+' N',b0+26,base-Tn*ech2-8,11,'#f0a844','center');
+    MSPC.mono(ctx,Math.round(Tmax)+' N',b0+116,base-Tmax*ech2-8,11,'#c8d834','center');
+    MSPC.mono(ctx,'T',b0+26,base+16,11,'#f0a844','center');
+    MSPC.mono(ctx,'f × N',b0+116,base+16,11,'#c8d834','center');
+    MSPC.mono(ctx, glisse?'la barre orange dépasse : ça part':'la verte domine : ça tient',
+      bx+16, 282, 10, glisse?'#ff6a5e':'#c8d834');
+
+    /* ---------- les chiffres ---------- */
+    var by=372;
+    MSPC.titre(ctx,Math.tan(al).toFixed(3).replace('.',','),26,by,26,glisse?'#ff6a5e':'#c8d834');
+    MSPC.mono(ctx,'tan(α) — CE QUI TIRE',26,by+17,9.5,'#8d968b');
+    MSPC.titre(ctx,f.toFixed(2).replace('.',','),176,by,26,'#79a6c4');
+    MSPC.mono(ctx,'f — CE QUI RETIENT',176,by+17,9.5,'#8d968b');
+    MSPC.titre(ctx,Math.round(Tn)+' N',306,by,26,'#f0a844');
+    MSPC.mono(ctx,'EFFORT QUI TIRE',306,by+17,9.5,'#8d968b');
+    MSPC.titre(ctx,Math.round(Tmax)+' N',446,by,26,'#c8d834');
+    MSPC.mono(ctx,'ADHÉRENCE DISPONIBLE',446,by+17,9.5,'#8d968b');
+    MSPC.titre(ctx,(phi*180/Math.PI).toFixed(1).replace('.',',')+'°',626,by,26,'#cfe2ee');
+    MSPC.mono(ctx,'ANGLE LIMITE  tan φ = f',626,by+17,9.5,'#8d968b');
+
+    out.innerHTML = glisse
+      ? '<b style="color:#ff6a5e">Glissement</b><br>tan('+Math.round(A.val)+'°) = '+Math.tan(al).toFixed(2).replace('.',',')+' > f = '+f.toFixed(2).replace('.',',')
+      : '<b style="color:#c8d834">Équilibre</b><br>il reste '+Math.round(Tmax-Tn)+' N d’adhérence en réserve';
+  }, {fixed:true});
+})();
+</script>
+
+</body>
+</html>

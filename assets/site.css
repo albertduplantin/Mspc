@@ -280,3 +280,27 @@ footer.fin{margin-top:70px; border-top:6px solid var(--encre); padding-top:22px;
   .top-link{display:none}
   details[open] .rep{border-color:#999}
 }
+
+/* ---------- CONFORMITÉ AU RÉFÉRENTIEL ----------
+   .savoir : pastille discrète en tête de chapitre, rappelant le savoir associé
+             visé et son niveau taxonomique (1 information, 2 compréhension,
+             3 application — les niveaux supérieurs de Bloom ne sont pas
+             utilisés en Bac Pro MSPC).
+   .horsref : ce qui dépasse le référentiel. Visuellement mis à distance du
+             corps du cours pour qu'on puisse le sauter sans rien casser. */
+.savoirs{display:flex; flex-wrap:wrap; gap:6px; margin:0 0 14px}
+.savoir{font-family:"IBM Plex Mono",monospace; font-size:9.5px; letter-spacing:.12em; text-transform:uppercase;
+  border:1px solid var(--accent); color:var(--accent); padding:2px 7px; white-space:nowrap}
+.savoir b{font-weight:600; color:var(--encre)}
+.savoir i{font-style:normal; opacity:.75}
+.savoir.n1::after{content:" · niv 1"}
+.savoir.n2::after{content:" · niv 2"}
+.savoir.n3::after{content:" · niv 3"}
+
+.horsref{position:relative; margin:24px 0; padding:15px 19px 16px; background:#f4f2ee;
+  border:1px dashed #9aa096; border-left:4px solid #9aa096; color:var(--encre-doux)}
+.horsref .tag{font-family:"IBM Plex Mono",monospace; font-size:10px; letter-spacing:.2em; text-transform:uppercase;
+  color:#6d746a; display:block; margin-bottom:6px}
+.horsref .tag::before{content:"↗ "; opacity:.7}
+.horsref p:last-child{margin-bottom:0}
+.horsref h4{margin-top:0; color:#585f56}
