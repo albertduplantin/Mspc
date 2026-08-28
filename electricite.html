@@ -48,10 +48,10 @@
 </header>
 
 <div class="meta-bar">
-  <div><b>27</b> chapitres</div>
-  <div><b>47</b> animations pilotables</div>
+  <div><b>28</b> chapitres</div>
+  <div><b>50</b> animations pilotables</div>
   <div><b>15</b> fiches TP d'atelier</div>
-  <div><b>79</b> exercices corrigés</div>
+  <div><b>82</b> exercices corrigés</div>
   <div>Manips en <b>TBTS ≤ 24 V</b> sauf mention</div>
 </div>
 
@@ -88,6 +88,7 @@
     <a class="borne" href="#c25"><span class="num">25</span><span class="lbl">Le variateur de vitesse</span></a>
     <a class="borne" href="#c26"><span class="num">26</span><span class="lbl">Mesurer</span></a>
     <a class="borne" href="#c27"><span class="num">27</span><span class="lbl">Câbles et connexions</span></a>
+    <a class="borne" href="#c28"><span class="num">28</span><span class="lbl">Les capteurs</span></a>
     <a class="borne" href="#tps" style="border-top-color:var(--accent)"><span class="num">TP</span><span class="lbl">Les 15 fiches d'atelier</span></a>
   </div></nav>
 
@@ -9322,6 +9323,580 @@
     MSPC.mono(ctx,'Le courant reste rigoureusement normal : aucune protection ne verra ce défaut.',26,H-8,10,'#6f786e');
 
     out.innerHTML='<b style="color:'+coul+'">'+etat+'</b><br>'+rc.toFixed(2).replace('.',',')+' mΩ · '+Math.round(T)+' °C';
+  }, {fixed:true});
+})();
+</script>
+
+
+<!-- ================= CH 28 ================= -->
+<section class="ch" id="c28">
+  <div class="ch-head"><div class="ch-num">28</div><div class="ch-title">
+    <span class="kicker">Les yeux de la machine</span><h2>Les capteurs</h2></div></div>
+  <div class="ch-body">
+
+<div class="savoirs">
+  <span class="savoir n3"><b>S3.1</b> <i>Acquisition des informations</i></span>
+  <span class="savoir n3"><b>S3.1</b> <i>Les solutions constructives : TOR, numérique, analogique, intelligent</i></span>
+  <span class="savoir n3"><b>S4.6.1</b> <i>Câblages, connexions et réglages d'un capteur</i></span>
+</div>
+
+<p class="lede">Jusqu'ici, tout ce dossier parlait de la <strong>chaîne d'énergie</strong> : faire tourner, faire chauffer, faire avancer. Ce chapitre ouvre l'autre chaîne, celle de l'<strong>information</strong>. Un capteur ne fait rien bouger : il regarde, et il raconte. Et quand une machine s'arrête sans raison apparente, c'est presque toujours parce qu'un capteur a mal regardé — ou parce qu'on l'a mal câblé.</p>
+
+<h3>28.1 — Trois familles de sortie</h3>
+<p>Le référentiel nomme précisément les quatre types que vous rencontrerez. Ils se distinguent par <strong>la nature de l'information qui sort</strong>, pas par ce qu'ils détectent.</p>
+
+<table>
+<thead><tr><th>Type</th><th>Ce qui sort</th><th>Il répond à</th><th>Exemple</th></tr></thead>
+<tbody>
+<tr><td><strong>TOR</strong><br>tout ou rien</td><td>Deux états : 0 ou 24 V</td><td>« Y a-t-il quelque chose ? »</td><td>Détecteur de présence de pièce, fin de course</td></tr>
+<tr><td><strong>Analogique</strong></td><td>Une grandeur continue :<br>4-20 mA ou 0-10 V</td><td>« Combien ? »</td><td>Capteur de niveau, de pression, de température</td></tr>
+<tr><td><strong>Numérique</strong></td><td>Une valeur codée sur un bus</td><td>« Combien, exactement, et depuis quand ? »</td><td>Codeur incrémental, capteur de position</td></tr>
+<tr><td><strong>Intelligent</strong><br>(IO-Link)</td><td>La valeur <em>et</em> ses paramètres, ses défauts, son identité</td><td>« Comment vas-tu ? »</td><td>Détecteur IO-Link qui signale son encrassement</td></tr>
+</tbody></table>
+
+<p><span class="cle">Le capteur intelligent est ce qui distingue MSPC de l'ancien MEI.</span> Il ne se contente plus de dire ce qu'il voit : il dit aussi qu'il commence à mal voir. C'est de la maintenance prévisionnelle intégrée au capteur.</p>
+
+<h3>28.2 — Les principes physiques, et ce qu'ils peuvent voir</h3>
+<p>Le choix d'un capteur ne se fait presque jamais sur la portée : il se fait sur <strong>ce que la cible est faite</strong>. Un détecteur inductif ne verra jamais une bouteille en plastique, quelle que soit la distance.</p>
+
+<figure class="anim">
+  <canvas id="a-capteurs" width="900" height="490" aria-label="Animation : quatre principes de détection et ce qu'ils peuvent voir selon le matériau de la cible"></canvas>
+  <div class="ctrls">
+    <div class="c"><label>Principe <span id="a-capteurs-p-l">inductif</span></label><input type="range" id="a-capteurs-p" min="0" max="4" value="0"></div>
+    <div class="c"><label>Matériau de la cible <span id="a-capteurs-m-l">acier</span></label><input type="range" id="a-capteurs-m" min="0" max="6" value="0"></div>
+    <div class="c"><label>Distance <span id="a-capteurs-d-l">4 mm</span></label><input type="range" id="a-capteurs-d" min="0" max="45" value="4"></div>
+    <div class="c readout" id="a-capteurs-out"></div>
+  </div>
+  <figcaption>Cinq principes, sept matériaux, et une distance que vous faites varier. <b>Le tableau de droite dit, pour chaque matériau, ce que le capteur choisi peut voir.</b> <b>Prenez l'inductif</b> et faites défiler les matériaux : il perd la cible dès qu'elle n'est plus métallique, et sa portée fond de 8 mm sur l'acier à 2,8 mm sur l'aluminium. <b>Passez au capacitif</b> : il voit tout, y compris le carton — mais il voit aussi la buée et la poussière, ce qui est son défaut. <b>Essayez le photoélectrique sur du verre</b> : la lumière traverse, et l'objet passe inaperçu. <b>Approchez lentement puis reculez</b> : le point de déclenchement et le point de relâchement ne sont pas les mêmes — c'est l'<b>hystérésis</b>, et c'est elle qui empêche le capteur de battre.</figcaption>
+  <div class="autableau">
+    <b class="entete">Au tableau <i>· 12 minutes · animation 1 sur 3</i></b>
+    <ol>
+      <li>Inductif sur acier, distance 4 mm : détecté. Faire lire la portée nominale.</li>
+      <li>Passer le matériau sur <b>aluminium</b> sans bouger la distance. <span class="q">« Toujours détecté ? »</span> Faire lire le facteur de correction 0,35.</li>
+      <li>Passer sur <b>plastique</b>. <span class="q">« Et si j'approche encore ? »</span> Coller la cible au capteur : toujours rien.</li>
+      <li>Passer en <b>capacitif</b> : le plastique apparaît. <span class="q">« Alors pourquoi ne met-on pas des capacitifs partout ? »</span></li>
+      <li>Passer en <b>photoélectrique</b> avec du <b>verre</b> : rien. Faire chercher pourquoi.</li>
+      <li>Revenir sur inductif/acier et balayer lentement la distance dans les deux sens pour faire voir l'<b>hystérésis</b>.</li>
+    </ol>
+    <div class="piege">Le piège : « le capteur ne détecte plus, il est mort ». Avant de le changer, vérifiez ce qu'il doit voir. Un inductif réglé pour de l'acier ne verra pas la même pièce en inox à la même distance — et l'inox, ce n'est pas du plastique, ça reste du métal. La plupart des « capteurs HS » sont des capteurs mal choisis ou déréglés.</div>
+  </div>
+</figure>
+
+<h3>28.3 — PNP ou NPN : la question qui bloque tout le monde</h3>
+<p>Un détecteur à trois fils comporte deux fils d'alimentation — brun <span class="mono">+24 V</span>, bleu <span class="mono">0 V</span> — et un fil de signal, noir. La question est : <strong>quand il détecte, ce fil noir passe-t-il à 24 V ou à 0 V ?</strong></p>
+
+<table>
+<thead><tr><th></th><th><strong>PNP</strong> — sortie positive</th><th><strong>NPN</strong> — sortie négative</th></tr></thead>
+<tbody>
+<tr><td>Au repos</td><td>Le fil noir est en l'air</td><td>Le fil noir est en l'air</td></tr>
+<tr><td>À la détection</td><td>Le fil noir est relié au <strong>+24 V</strong></td><td>Le fil noir est relié au <strong>0 V</strong></td></tr>
+<tr><td>Le capteur…</td><td><strong>fournit</strong> le courant à l'entrée</td><td><strong>absorbe</strong> le courant venu de l'entrée</td></tr>
+<tr><td>Le commun de l'automate</td><td>doit être au <strong>0 V</strong></td><td>doit être au <strong>+24 V</strong></td></tr>
+<tr><td>Où c'est la norme</td><td><strong>Europe</strong> — c'est ce que vous verrez</td><td>Asie, et quelques machines importées</td></tr>
+</tbody></table>
+
+<p><span class="cle">Un capteur PNP branché sur une entrée câblée pour du NPN ne fonctionne pas — et il ne casse rien, ce qui rend le défaut long à trouver.</span> L'entrée reste éteinte quoi qu'il arrive, ou reste allumée en permanence, selon le montage.</p>
+
+<figure class="anim">
+  <canvas id="a-pnpnpn" width="900" height="480" aria-label="Animation : câblage d'un capteur PNP ou NPN sur une entrée automate"></canvas>
+  <div class="ctrls">
+    <div class="c"><label>Type de capteur <span id="a-pnpnpn-c-l">PNP</span></label><input type="range" id="a-pnpnpn-c" min="0" max="1" value="0"></div>
+    <div class="c"><label>Commun de l'automate <span id="a-pnpnpn-a-l">au 0 V</span></label><input type="range" id="a-pnpnpn-a" min="0" max="1" value="0"></div>
+    <div class="c"><label class="switch"><input type="checkbox" id="a-pnpnpn-d" checked><span>Le capteur détecte</span></label></div>
+    <div class="c readout" id="a-pnpnpn-out"></div>
+  </div>
+  <figcaption>Le capteur, ses trois fils, et l'entrée de l'automate. <b>Le trait vert suit le courant</b> : il doit partir du 24 V, traverser le capteur, traverser l'entrée, et revenir au 0 V. S'il manque un maillon, rien ne circule. <b>Croisez les deux premiers réglages</b> : sur quatre combinaisons, deux fonctionnent et deux ne font rien du tout. <b>Le capteur détecte, sa LED s'allume, et l'entrée de l'automate reste éteinte</b> — c'est exactement le symptôme qui fait perdre une heure quand on ne connaît pas ce chapitre.</figcaption>
+  <div class="autableau">
+    <b class="entete">Au tableau <i>· 10 minutes · animation 2 sur 3</i></b>
+    <ol>
+      <li>PNP, commun au 0 V, détection active. <span class="q">« Suivez le courant du doigt : d'où part-il, où revient-il ? »</span></li>
+      <li>Basculer le commun de l'automate <b>au 24 V</b> sans rien changer d'autre. <span class="q">« Que se passe-t-il ? »</span> Plus de circuit.</li>
+      <li>Point clé : <span class="q">« la LED du capteur est-elle allumée ? »</span> Oui. <span class="q">« Et l'entrée de l'automate ? »</span> Non. <span class="q">« Que conclut le dépanneur pressé ? »</span> Que le capteur est mort.</li>
+      <li>Passer le capteur en <b>NPN</b> : le circuit se referme. <span class="q">« Qu'est-ce que j'ai changé ? »</span> Le sens du courant.</li>
+      <li>Finir sur le repère des couleurs : brun, bleu, noir. <span class="q">« Que fait-on du blanc, sur un capteur à quatre fils ? »</span></li>
+    </ol>
+    <div class="piege">Le piège : croire qu'un capteur PNP et un NPN se distinguent à l'œil. Rien ne les différencie extérieurement — la mention est gravée en petit sur le corps ou imprimée sur l'étiquette. En cas de doute, mesurer : capteur alimenté, détection active, on mesure entre le fil noir et le 0 V. On lit 24 V pour un PNP, 0 V pour un NPN.</div>
+  </div>
+</figure>
+
+<h3>28.4 — Deux, trois ou quatre fils</h3>
+<ul>
+<li><strong>Deux fils</strong> — le capteur se câble comme un simple interrupteur, en série avec la charge. Simple, mais il laisse passer un petit <em>courant résiduel</em> même au repos, ce qui peut suffire à maintenir une entrée automate à l'état haut. À éviter sur une entrée logique moderne.</li>
+<li><strong>Trois fils</strong> — brun, bleu, noir. Alimentation séparée, une sortie. C'est le cas standard, et 90 % de ce que vous verrez.</li>
+<li><strong>Quatre fils</strong> — on ajoute un fil blanc : soit une <strong>seconde sortie</strong> (l'une travail, l'autre repos), soit une <strong>entrée</strong> de commande, soit — sur un capteur IO-Link — la <strong>voie de communication</strong>.</li>
+</ul>
+<p>Les couleurs sont normalisées et ne changent jamais : <span class="mono">brun = +24 V</span>, <span class="mono">bleu = 0 V</span>, <span class="mono">noir = sortie principale</span>, <span class="mono">blanc = seconde sortie ou IO-Link</span>.</p>
+
+<h3>28.5 — L'analogique : pourquoi 4-20 mA plutôt que 0-10 V</h3>
+<p>Un capteur analogique doit transmettre une valeur sur une distance parfois longue, dans un atelier plein de variateurs qui hachent du 560 V à 4 kHz. Deux formats existent, et l'un est très supérieur à l'autre.</p>
+
+<div class="encadre"><span class="tag">Les trois avantages décisifs de la boucle de courant</span>
+<ol>
+<li><strong>Le courant est le même partout dans une boucle série.</strong> La résistance des fils ne le change pas d'un microampère, et le récepteur reçoit exactement ce que le capteur a émis. Une tension, elle, se dégrade de deux façons dans un atelier : elle <strong>capte le bruit</strong> rayonné par les variateurs le long du câble, et elle subit le <strong>décalage de potentiel entre les deux masses</strong>, qui ne sont jamais rigoureusement au même niveau dès qu'on s'éloigne.</li>
+<li><strong>Le zéro est vivant.</strong> La mesure minimale vaut 4 mA, pas 0. Si un fil casse, le récepteur lit <strong>0 mA</strong> — une valeur impossible, donc un défaut identifié. Avec du 0-10 V, une rupture donne 0 V, exactement comme une mesure nulle : <span class="cle">on ne sait pas si le réservoir est vide ou si le câble est coupé.</span></li>
+<li><strong>Une boucle de courant encaisse les parasites.</strong> Une perturbation électromagnétique induit essentiellement une tension ; dans une boucle de faible impédance, cette tension ne produit qu'un courant négligeable. C'est la même perturbation qui, sur une liaison en tension à haute impédance, se retrouve intégralement dans la mesure.</li>
+</ol>
+<p>Le 0-10 V garde un usage : les liaisons très courtes à l'intérieur d'une armoire, où il coûte moins cher.</p></div>
+
+<figure class="anim">
+  <canvas id="a-420" width="900" height="490" aria-label="Animation : boucle 4-20 mA comparée au 0-10 V, effet de la longueur de ligne et d'une rupture"></canvas>
+  <div class="ctrls">
+    <div class="c"><label>Niveau dans la cuve <span id="a-420-n-l">60 %</span></label><input type="range" id="a-420-n" min="0" max="100" value="60"></div>
+    <div class="c"><label>Longueur de ligne <span id="a-420-l-l">50 m</span></label><input type="range" id="a-420-l" min="1" max="300" value="50"></div>
+    <div class="c"><label class="switch"><input type="checkbox" id="a-420-r"><span>Un fil est coupé</span></label></div>
+    <div class="c readout" id="a-420-out"></div>
+  </div>
+  <figcaption>La même mesure de niveau, transmise deux fois : en <b>4-20 mA</b> à gauche, en <b>0-10 V</b> à droite. <b>Allongez la ligne à 300 m</b> : la boucle de courant ne bouge pas d'un microampère, tandis que la tension se met à danser — bruit capté le long du câble et décalage des masses — et l'automate lit un niveau qui fluctue. <b>Cochez « un fil est coupé »</b> : la boucle affiche <b>0 mA</b>, une valeur impossible que l'automate reconnaît comme un défaut — alors que le 0-10 V affiche <b>0 V</b>, indiscernable d'une cuve vide. <b>C'est cette ambiguïté qui a fait déborder des cuves.</b></figcaption>
+  <div class="autableau">
+    <b class="entete">Au tableau <i>· 12 minutes · animation 3 sur 3</i></b>
+    <ol>
+      <li>Niveau 60 %, ligne 50 m. Faire lire les deux valeurs : elles concordent. <span class="q">« À quoi correspondent les 4 mA du bas d'échelle ? »</span></li>
+      <li>Allonger la ligne à 300 m. <span class="q">« Quelle valeur a bougé ? »</span> Laisser regarder quelques secondes : le 0-10 V oscille, la boucle est immobile.</li>
+      <li><span class="q">« Pourquoi le courant, lui, ne bouge-t-il pas ? »</span> Question centrale — laisser trouver : dans une boucle série, le courant est le même partout.</li>
+      <li>Cocher <b>fil coupé</b>. Faire lire 0 mA d'un côté, 0 V de l'autre. <span class="q">« Lequel des deux automates sait qu'il a un problème ? »</span></li>
+      <li>Conclure : <span class="q">« si cette mesure pilote une pompe de remplissage, laquelle des deux installations déborde ? »</span></li>
+    </ol>
+    <div class="piege">Le piège : croire que le 4 mA est un défaut de conception, « du courant qui ne sert à rien ». C'est exactement l'inverse : ces 4 mA sont ce qui permet de distinguer une mesure nulle d'une liaison morte. On appelle cela le zéro vivant, et c'est une idée d'ingénieur, pas un compromis.</div>
+  </div>
+</figure>
+
+<h3>28.6 — La mise à l'échelle</h3>
+<p>L'automate ne lit pas des milliampères : il lit un <strong>nombre entier</strong>, produit par son convertisseur analogique-numérique. Le passage de ce nombre à une grandeur physique s'appelle la mise à l'échelle, et c'est un réglage qu'on fait, qu'on vérifie et qu'on refait après chaque remplacement de capteur.</p>
+
+<div class="formule">grandeur = (N − N<sub>min</sub>) / (N<sub>max</sub> − N<sub>min</sub>) × (G<sub>max</sub> − G<sub>min</sub>) + G<sub>min</sub><small>N : la valeur brute de l'automate · G : la grandeur physique</small></div>
+
+<p>Une erreur classique : remplacer un capteur 0-6 bar par un 0-10 bar et oublier de reprendre l'échelle. La machine fonctionne, les chiffres sont plausibles, et toutes les mesures sont fausses de 67 %.</p>
+
+<h3>28.7 — Régler un capteur</h3>
+<ul>
+<li><strong>La distance.</strong> On règle à environ <strong>70 à 80 % de la portée nominale</strong>, jamais à la limite : la portée dérive avec la température et l'encrassement.</li>
+<li><strong>L'hystérésis.</strong> Le point de déclenchement et le point de relâchement diffèrent de 10 à 20 %. C'est voulu : sans hystérésis, une cible qui vibre à la limite ferait battre la sortie des dizaines de fois par seconde.</li>
+<li><strong>La temporisation.</strong> Beaucoup de capteurs permettent un retard à l'enclenchement ou au déclenchement, pour ignorer les passages parasites.</li>
+<li><strong>Le nettoyage.</strong> Sur un capteur optique ou capacitif, l'encrassement de la face avant réduit la portée bien avant de la supprimer. C'est une opération de maintenance de premier niveau.</li>
+</ul>
+
+<div class="exo"><span class="tag">Exercice 28.1</span>
+<p>Un détecteur inductif M18, portée nominale 8 mm, est réglé à 6 mm d'une pièce en acier. On change la pièce pour un modèle identique en inox. Le capteur détecte-t-il encore ? Que faites-vous ?</p>
+<details><summary>Voir la réponse</summary><div class="rep">
+<p><strong>Non, il ne détecte plus. Et le calcul se fait en une ligne.</strong></p>
+<p>Un détecteur inductif voit les métaux, mais pas tous avec la même sensibilité. Sa portée nominale est donnée pour l'<strong>acier doux</strong> ; pour les autres métaux, on applique un facteur de correction :</p>
+<table>
+<thead><tr><th>Matériau</th><th>Facteur</th><th>Portée réelle sur un M18 (S<sub>n</sub> = 8 mm)</th></tr></thead>
+<tbody>
+<tr><td>Acier doux</td><td>1,00</td><td>8,0 mm</td></tr>
+<tr><td><strong>Inox</strong></td><td><strong>0,70</strong></td><td><strong>5,6 mm</strong></td></tr>
+<tr><td>Laiton</td><td>0,40</td><td>3,2 mm</td></tr>
+<tr><td>Aluminium</td><td>0,35</td><td>2,8 mm</td></tr>
+<tr><td>Cuivre</td><td>0,30</td><td>2,4 mm</td></tr>
+</tbody></table>
+<p class="mono">Portée sur inox = 8 × 0,70 = <strong>5,6 mm</strong>  &lt;  6 mm de réglage</p>
+<p>La pièce est hors de portée, de 0,4 mm. <strong>Rien n'est cassé, rien n'a bougé, et pourtant la machine s'arrête.</strong></p>
+<p><strong>Ce qu'il faut faire, par ordre de robustesse :</strong></p>
+<ol>
+<li><strong>Rapprocher le capteur à 4 mm</strong> — soit 70 % de la portée corrigée de 5,6 mm. C'est la solution immédiate et gratuite.<br>
+<em>Ne réglez jamais à la portée limite : la portée d'un inductif baisse quand il chauffe, et la dérive atteint couramment 10 %.</em></li>
+<li><strong>Ou prendre un capteur de portée supérieure</strong> — un M30 monte à 15 mm, donc 10,5 mm sur inox. C'est plus tolérant, mais plus encombrant.</li>
+<li><strong>Ou choisir un détecteur « tous métaux »</strong> — certains modèles corrigent électroniquement le facteur et donnent la même portée sur tous les métaux. Plus cher, mais on ne se pose plus la question.</li>
+</ol>
+<p><em>La leçon générale, et elle vaut pour tout le chapitre : <span class="cle">un capteur qui ne détecte plus n'est presque jamais un capteur en panne.</span> C'est un capteur mal choisi, déréglé, encrassé, ou dont la cible a changé. Vérifiez ces quatre choses avant d'en commander un neuf.</em></p>
+</div></details></div>
+
+<div class="exo"><span class="tag">Exercice 28.2</span>
+<p>Un capteur de pression 4-20 mA mesure de 0 à 10 bar. L'automate lit une valeur brute de 15 000 sur une échelle 0-27648 correspondant à 0-20 mA. Quelle pression réelle ? Que lirait-on si le fil était coupé ?</p>
+<details><summary>Voir la réponse</summary><div class="rep">
+<p><strong>Étape 1 — de la valeur brute au courant.</strong></p>
+<p class="mono">I = 15 000 / 27 648 × 20 = <strong>10,85 mA</strong></p>
+<p><strong>Étape 2 — du courant à la pression.</strong> Attention : l'échelle utile va de 4 à 20 mA, soit une plage de <strong>16 mA</strong> et non 20. C'est ici que se glisse l'erreur classique.</p>
+<p class="mono">p = (I − 4) / 16 × 10<br>p = (10,85 − 4) / 16 × 10<br>p = 6,85 / 16 × 10 = <strong>4,28 bar</strong></p>
+<p><em>Si l'on avait oublié le décalage des 4 mA et calculé 10,85/20 × 10, on aurait trouvé 5,43 bar — soit une erreur de 27 %. C'est exactement le genre de faute qui passe inaperçue parce que le résultat reste plausible.</em></p>
+<p><strong>Étape 3 — le fil coupé.</strong> Plus aucun courant ne circule :</p>
+<p class="mono">I = 0 mA  →  valeur brute = 0</p>
+<p>Or 0 mA est <strong>en dehors de la plage utile</strong>, qui commence à 4 mA. C'est une valeur physiquement impossible en fonctionnement normal.</p>
+<p><span class="cle">L'automate reconnaît donc immédiatement un défaut de liaison, et non une pression nulle.</span> Les modules d'entrée analogiques modernes disposent pour cela d'un bit de diagnostic « rupture de fil » qui bascule dès que le courant tombe sous 3,6 mA.</p>
+<p><strong>Le point à retenir pour la programmation :</strong> le traitement doit toujours prévoir ce cas. Une pompe pilotée par une mesure de pression doit <strong>s'arrêter</strong> si le capteur est en défaut, jamais continuer avec la dernière valeur connue. C'est le principe de sécurité positive du chapitre 21, appliqué à la chaîne d'information.</p>
+</div></details></div>
+
+<div class="exo"><span class="tag">Exercice 28.3</span>
+<p>Sur un convoyeur, un détecteur doit repérer des bouteilles. On envisage successivement du verre, du plastique opaque et des packs en carton, en atmosphère humide. Quel principe choisissez-vous, et pourquoi les autres échouent-ils ?</p>
+<details><summary>Voir la réponse</summary><div class="rep">
+<p><strong>Le meilleur choix ici est un détecteur photoélectrique à barrage, ou à réflexion polarisée.</strong></p>
+<p><strong>Pourquoi les autres échouent :</strong></p>
+<table>
+<thead><tr><th>Principe</th><th>Verdict</th><th>Pourquoi</th></tr></thead>
+<tbody>
+<tr><td><strong>Inductif</strong></td><td>Éliminé d'emblée</td><td>Il ne voit que les métaux. Ni le verre, ni le plastique, ni le carton ne seront détectés — à aucune distance.</td></tr>
+<tr><td><strong>Capacitif</strong></td><td>Techniquement possible, mais mauvais choix</td><td>Il verrait les trois matériaux. Mais il voit aussi <strong>l'eau</strong> : en atmosphère humide, la buée sur sa face avant et la condensation sur le convoyeur le font déclencher tout seul. Portée courte de surcroît.</td></tr>
+<tr><td><strong>Photoélectrique proximité</strong></td><td>Risqué</td><td>Il dépend de la réflectivité de la cible. Un carton brun et une bouteille transparente renvoient des quantités de lumière sans rapport : impossible de régler un seuil unique.</td></tr>
+<tr><td><strong>Photoélectrique barrage</strong></td><td><strong>Le bon choix</strong></td><td>Émetteur et récepteur face à face. Tout objet qui coupe le faisceau est détecté, quelle que soit sa couleur ou sa matière. Portée jusqu'à plusieurs dizaines de mètres, et grande marge de signal — donc tolérant à l'encrassement.</td></tr>
+</tbody></table>
+<p><strong>Le cas particulier du verre.</strong> Le verre transparent laisse passer une partie de la lumière : un barrage classique peut ne pas voir une bouteille vide. Deux réponses :</p>
+<ul>
+<li>Un <strong>réflex polarisé</strong> — l'émetteur envoie une lumière polarisée, le réflecteur en retourne la polarisation, et le récepteur ne compte que ce retour. Le verre modifie suffisamment le signal pour être vu.</li>
+<li>Ou un barrage réglé en <strong>mode transparent</strong>, dont le seuil détecte l'atténuation partielle plutôt que la coupure franche.</li>
+</ul>
+<p><strong>Et les précautions liées à l'humidité, quel que soit le capteur retenu :</strong></p>
+<ul>
+<li><strong>Indice de protection IP67 au minimum</strong>, IP69K si l'installation est lavée au jet haute pression.</li>
+<li><strong>Orienter la face optique vers le bas ou de côté</strong>, jamais vers le haut, pour que les gouttes ne s'y accumulent pas.</li>
+<li><strong>Prévoir le nettoyage périodique</strong> de l'optique dans le plan de maintenance : c'est une opération de premier niveau, elle prend dix secondes, et elle évite des arrêts de production inexpliqués.</li>
+</ul>
+<p><em>Notez la démarche : on part de <strong>ce que la cible est faite</strong>, on élimine les principes incompatibles, puis on arbitre sur l'environnement. La portée n'intervient qu'en dernier.</em></p>
+</div></details></div>
+
+</div>
+</section>
+
+<script>
+/* ======================= CH 28 · les principes de détection ======================= */
+(function(){
+  "use strict";
+  var MAT=['acier','inox','aluminium','laiton','plastique','verre','carton'];
+  /* Facteur de correction par principe et par matériau. 0 = jamais détecté. */
+  var PR=[
+    {n:'inductif',            sn:8,  f:[1.00,0.70,0.35,0.40,0,0,0],
+     d:'Champ magnétique haute fréquence. Ne voit QUE les métaux.'},
+    {n:'capacitif',           sn:12, f:[1.00,1.00,1.00,1.00,0.45,0.55,0.35],
+     d:'Variation de capacité. Voit tout — y compris la buée et la poussière.'},
+    {n:'photoélectrique barrage', sn:45, f:[1,1,1,1,1,0.15,1],
+     d:'Émetteur et récepteur face à face. Tout objet opaque coupe le faisceau.'},
+    {n:'photoélectrique réflex',  sn:32, f:[1,1,1,1,0.9,0.25,0.85],
+     d:'Faisceau renvoyé par un réflecteur. Sensible au brillant et au transparent.'},
+    {n:'magnétique (ILS)',    sn:20, f:[0.35,0,0,0,0,0,0],
+     d:'Ne réagit qu’à un aimant. C’est le capteur des vérins.'}
+  ];
+  var P=MSPC.ctrl('a-capteurs-p', function(v){ return PR[v].n; }, 'a-capteurs-p-l');
+  var M=MSPC.ctrl('a-capteurs-m', function(v){ return MAT[v]; }, 'a-capteurs-m-l');
+  var D=MSPC.ctrl('a-capteurs-d', function(v){ return v+' mm'; }, 'a-capteurs-d-l');
+  var out=document.getElementById('a-capteurs-out');
+  var etatPrec=false;
+
+  MSPC.anim('a-capteurs', function(a){
+    var ctx=a.ctx, W=a.W, H=a.H;
+    var pr=PR[P.val], mi=M.val, d=D.val;
+    var f=pr.f[mi];
+    var portee=pr.sn*f;
+    /* hystérésis de 15 % : on enclenche à la portée, on relâche 15 % plus loin */
+    var seuilOn=portee, seuilOff=portee*1.15;
+    var det = etatPrec ? (d<=seuilOff) : (d<=seuilOn);
+    if(f===0) det=false;
+    etatPrec=det;
+
+    MSPC.fond(ctx,W,H,0);
+    MSPC.mono(ctx,'CINQ PRINCIPES DE DÉTECTION — ET CE QUE CHACUN PEUT VOIR',26,30,11.5,'#8d968b');
+
+    /* ---------- la scène ---------- */
+    /* Échelle dilatée près du capteur : les 15 premiers millimètres occupent
+       225 px, le reste est comprimé — sinon un inductif de 8 mm serait
+       illisible à côté d un barrage de 45 mm. */
+    var sx=60, sy=182;
+    function X(d){ return sx+90 + (d<=15 ? d*15 : 225+(d-15)*4.5); }
+    // le capteur
+    ctx.fillStyle='rgba(143,154,134,.25)'; ctx.fillRect(sx,sy-26,74,52);
+    ctx.strokeStyle='#8f9a86'; ctx.lineWidth=2.2; ctx.strokeRect(sx,sy-26,74,52);
+    ctx.fillStyle='#5a6258'; ctx.fillRect(sx+74,sy-18,16,36);
+    ctx.strokeStyle='#8f9a86'; ctx.strokeRect(sx+74,sy-18,16,36);
+    // la LED
+    ctx.fillStyle=det?'#c8d834':'#31392f';
+    ctx.beginPath(); ctx.arc(sx+18,sy-14,6,0,6.2832); ctx.fill();
+    ctx.strokeStyle='#8f9a86'; ctx.lineWidth=1.2; ctx.stroke();
+    MSPC.mono(ctx,'LED',sx+30,sy-10,9.5, det?'#c8d834':'#5d665e');
+    MSPC.mono(ctx,pr.n.split(' ')[0].toUpperCase(),sx+37,sy+44,10,'#8d968b','center');
+
+    // le champ de détection
+    var xf=sx+90;
+    if(f>0){
+      ctx.fillStyle='rgba(200,216,52,.12)';
+      ctx.fillRect(xf, sy-30, X(portee)-xf, 60);
+      ctx.strokeStyle='rgba(200,216,52,.5)'; ctx.lineWidth=1.8; ctx.setLineDash([5,4]);
+      ctx.beginPath(); ctx.moveTo(X(portee),sy-42); ctx.lineTo(X(portee),sy+42); ctx.stroke();
+      ctx.setLineDash([]);
+      MSPC.mono(ctx,'portée '+portee.toFixed(1).replace('.',',')+' mm',X(portee),sy-52,10,'#c8d834','center');
+      ctx.fillStyle='rgba(240,168,68,.20)';
+      ctx.fillRect(X(seuilOn), sy-30, X(seuilOff)-X(seuilOn), 60);
+      MSPC.mono(ctx,'hystérésis',X((seuilOn+seuilOff)/2), sy-68, 9.5,'#f0a844','center');
+    } else {
+      MSPC.mono(ctx,'ce principe ne voit pas ce matériau',xf+16,sy-52,11.5,'#ff6a5e');
+    }
+
+    // la cible
+    var cxx=X(d);
+    var COL={0:'#8d968b',1:'#a9b2a8',2:'#cfd6cd',3:'#c9a04a',4:'#5a7fa8',5:'rgba(140,200,210,.35)',6:'#8a7048'};
+    ctx.fillStyle=COL[mi]; ctx.fillRect(cxx,sy-42,44,84);
+    ctx.strokeStyle=det?'#c8d834':'#5a6258'; ctx.lineWidth=det?3:1.8;
+    ctx.strokeRect(cxx,sy-42,44,84);
+    MSPC.mono(ctx,MAT[mi],cxx+22,sy+62,10.5,'#cfe2ee','center');
+    // la cote
+    ctx.strokeStyle='rgba(255,255,255,.30)'; ctx.lineWidth=1;
+    ctx.beginPath(); ctx.moveTo(xf,sy+88); ctx.lineTo(cxx,sy+88);
+    ctx.moveTo(xf,sy+82); ctx.lineTo(xf,sy+94);
+    ctx.moveTo(cxx,sy+82); ctx.lineTo(cxx,sy+94); ctx.stroke();
+    ctx.fillStyle='#11160f'; ctx.fillRect((xf+cxx)/2-30,sy+80,64,17);
+    MSPC.mono(ctx,d+' mm',(xf+cxx)/2+2,sy+93,10.5,'#cfe2ee','center');
+
+    /* ---------- le tableau des matériaux ---------- */
+    var tx=560, tw=W-tx-26;
+    ctx.fillStyle='rgba(255,255,255,.04)'; ctx.fillRect(tx,64,tw,260);
+    ctx.strokeStyle='rgba(255,255,255,.20)'; ctx.lineWidth=1.4; ctx.strokeRect(tx+.5,64.5,tw,260);
+    MSPC.mono(ctx,'CE QUE CE CAPTEUR PEUT VOIR',tx+14,88,10,'#8d968b');
+    MAT.forEach(function(m,i){
+      var y=112+i*30, act=(i===mi), ff=pr.f[i];
+      if(act){ ctx.fillStyle='rgba(255,255,255,.08)'; ctx.fillRect(tx+8,y-16,tw-16,26); }
+      ctx.fillStyle= ff>0 ? '#c8d834' : '#ff6a5e';
+      ctx.beginPath(); ctx.arc(tx+24,y-4,5,0,6.2832); ctx.fill();
+      MSPC.mono(ctx,m,tx+40,y,11, act?'#e6ebe4':'#8d968b');
+      MSPC.mono(ctx, ff>0 ? (pr.sn*ff).toFixed(1).replace('.',',')+' mm' : 'jamais',
+        tx+tw-14, y, 11, ff>0?'#c8d834':'#ff6a5e','right');
+    });
+
+    /* ---------- le verdict ---------- */
+    var coul = det?'#c8d834':(f===0?'#ff6a5e':'#f0a844');
+    ctx.fillStyle= det?'rgba(200,216,52,.10)':'rgba(255,106,94,.08)';
+    ctx.fillRect(60,300,470,86);
+    ctx.strokeStyle=coul; ctx.lineWidth=2; ctx.strokeRect(60.5,300.5,470,86);
+    MSPC.titre(ctx, det?'DÉTECTÉ':'NON DÉTECTÉ', 80, 342, 32, coul);
+    MSPC.mono(ctx, f===0 ? 'aucune portée sur ce matériau'
+                        : (det ? 'à '+d+' mm, dans les '+portee.toFixed(1).replace('.',',')+' mm de portée'
+                               : 'à '+d+' mm, hors des '+portee.toFixed(1).replace('.',',')+' mm de portée'),
+      80, 368, 11.5, '#8d968b');
+    MSPC.mono(ctx,'FACTEUR DE CORRECTION',330,322,10,'#8d968b');
+    MSPC.titre(ctx, f>0 ? '× '+f.toFixed(2).replace('.',',') : '—', 330, 358, 30, f>0?'#cfe2ee':'#ff6a5e');
+
+    /* ---------- bandeau ---------- */
+    ctx.fillStyle='rgba(255,255,255,.05)'; ctx.fillRect(26,400,W-52,58);
+    MSPC.mono(ctx,pr.d,42,426,12,'#cfe2ee');
+    MSPC.mono(ctx,'Réglez toujours à 70-80 % de la portée corrigée : elle dérive avec la température et l’encrassement.',42,448,10.5,'#6f786e');
+
+    out.innerHTML='<b style="color:'+coul+'">'+(det?'détecté':'non détecté')+'</b><br>portée '
+      +(f>0?portee.toFixed(1).replace('.',',')+' mm sur '+MAT[mi]:'nulle sur '+MAT[mi]);
+  }, {fixed:true});
+})();
+
+/* ======================= CH 28 · PNP ou NPN ======================= */
+(function(){
+  "use strict";
+  var C=MSPC.ctrl('a-pnpnpn-c', function(v){ return v?'NPN':'PNP'; }, 'a-pnpnpn-c-l');
+  var A=MSPC.ctrl('a-pnpnpn-a', function(v){ return v?'au +24 V':'au 0 V'; }, 'a-pnpnpn-a-l');
+  var D=MSPC.ctrl('a-pnpnpn-d');
+  var out=document.getElementById('a-pnpnpn-out');
+
+  MSPC.anim('a-pnpnpn', function(a){
+    var ctx=a.ctx, W=a.W, H=a.H;
+    var npn=C.val===1, com24=A.val===1, det=D.val;
+    /* Le circuit se ferme si le capteur pousse d'un côté et le commun tire de l'autre */
+    var passe = det && ((!npn && !com24) || (npn && com24));
+
+    MSPC.fond(ctx,W,H,0);
+    MSPC.mono(ctx,'CÂBLER UN CAPTEUR — LE COURANT DOIT POUVOIR FAIRE LE TOUR',26,30,11.5,'#8d968b');
+
+    var V24=88, V0=402, xC=180, xA=580;
+    /* les deux rails */
+    ctx.strokeStyle='#ff6a5e'; ctx.lineWidth=3;
+    ctx.beginPath(); ctx.moveTo(60,V24); ctx.lineTo(W-40,V24); ctx.stroke();
+    MSPC.mono(ctx,'+24 V',60,V24-12,11,'#ff6a5e');
+    ctx.strokeStyle='#79a6c4'; ctx.lineWidth=3;
+    ctx.beginPath(); ctx.moveTo(60,V0); ctx.lineTo(W-40,V0); ctx.stroke();
+    MSPC.mono(ctx,'0 V',60,V0+20,11,'#79a6c4');
+
+    /* le capteur */
+    ctx.fillStyle='rgba(143,154,134,.22)'; ctx.fillRect(xC-70,168,140,110);
+    ctx.strokeStyle='#8f9a86'; ctx.lineWidth=2.2; ctx.strokeRect(xC-70,168,140,110);
+    MSPC.mono(ctx,'CAPTEUR '+(npn?'NPN':'PNP'),xC,192,11,'#cfe2ee','center');
+    ctx.fillStyle=det?'#c8d834':'#31392f';
+    ctx.beginPath(); ctx.arc(xC,216,9,0,6.2832); ctx.fill();
+    ctx.strokeStyle='#8f9a86'; ctx.lineWidth=1.4; ctx.stroke();
+    MSPC.mono(ctx, det?'LED allumée':'LED éteinte', xC, 246, 10.5, det?'#c8d834':'#5d665e','center');
+    MSPC.mono(ctx, npn?'commute vers le 0 V':'commute vers le +24 V', xC, 264, 9.5,'#6f786e','center');
+    // alimentation du capteur : les deux fils toujours présents
+    ctx.strokeStyle='#b06a2c'; ctx.lineWidth=2.6;
+    ctx.beginPath(); ctx.moveTo(xC-40,168); ctx.lineTo(xC-40,V24); ctx.stroke();
+    MSPC.mono(ctx,'brun',xC-56,150,9.5,'#b06a2c','right');
+    ctx.strokeStyle='#5cc4e0'; ctx.lineWidth=2.6;
+    ctx.beginPath(); ctx.moveTo(xC-40,278); ctx.lineTo(xC-40,V0); ctx.stroke();
+    MSPC.mono(ctx,'bleu',xC-56,300,9.5,'#5cc4e0','right');
+    // le fil de signal
+    ctx.strokeStyle=passe?'#c8d834':'#8d968b'; ctx.lineWidth=passe?3.4:2.6;
+    ctx.beginPath(); ctx.moveTo(xC+70,223); ctx.lineTo(xA-70,223); ctx.stroke();
+    MSPC.mono(ctx,'noir — signal',(xC+xA)/2,210,10,passe?'#c8d834':'#8d968b','center');
+    // l'interrupteur interne du capteur
+    ctx.strokeStyle=det?'#c8d834':'#8d968b'; ctx.lineWidth=2.6;
+    var yi = npn ? 278 : 168;
+    ctx.beginPath(); ctx.moveTo(xC+40,223); ctx.lineTo(xC+40, det ? yi : (npn?258:188)); ctx.stroke();
+    if(!det){ ctx.beginPath(); ctx.moveTo(xC+40,npn?258:188); ctx.lineTo(xC+58,npn?248:198); ctx.stroke(); }
+    ctx.strokeStyle=det?'#c8d834':'#4d5a4d'; ctx.lineWidth=2.6;
+    ctx.beginPath(); ctx.moveTo(xC+40,yi); ctx.lineTo(xC+40, npn?V0:V24); ctx.stroke();
+
+    /* l'automate */
+    ctx.fillStyle='rgba(121,166,196,.14)'; ctx.fillRect(xA-70,150,190,146);
+    ctx.strokeStyle='#79a6c4'; ctx.lineWidth=2.2; ctx.strokeRect(xA-70,150,190,146);
+    MSPC.mono(ctx,'AUTOMATE — ENTRÉE I0.0',xA+25,174,10.5,'#79a6c4','center');
+    // l'optocoupleur symbolisé
+    ctx.strokeStyle=passe?'#c8d834':'#5a6258'; ctx.lineWidth=2.4;
+    ctx.strokeRect(xA-40,206,60,34);
+    ctx.fillStyle=passe?'rgba(200,216,52,.25)':'rgba(255,255,255,.04)';
+    ctx.fillRect(xA-40,206,60,34);
+    MSPC.mono(ctx,'entrée',xA-10,228,10,passe?'#c8d834':'#6f786e','center');
+    ctx.beginPath(); ctx.moveTo(xA-70,223); ctx.lineTo(xA-40,223); ctx.stroke();
+    // le commun
+    ctx.strokeStyle=com24?'#ff6a5e':'#79a6c4'; ctx.lineWidth=2.8;
+    ctx.beginPath(); ctx.moveTo(xA+20,223); ctx.lineTo(xA+70,223);
+    ctx.lineTo(xA+70, com24?V24:V0); ctx.stroke();
+    MSPC.mono(ctx,'commun',xA+78,219,10,com24?'#ff6a5e':'#79a6c4');
+    MSPC.mono(ctx, com24?'au +24 V':'au 0 V',xA+78,234,9.5,'#6f786e');
+    // le voyant d'entrée
+    ctx.fillStyle=passe?'#c8d834':'#31392f';
+    ctx.beginPath(); ctx.arc(xA+25,268,9,0,6.2832); ctx.fill();
+    ctx.strokeStyle='#79a6c4'; ctx.lineWidth=1.4; ctx.stroke();
+    MSPC.mono(ctx, passe?'I0.0 = 1':'I0.0 = 0', xA+44, 272, 11.5, passe?'#c8d834':'#5d665e');
+
+    /* les électrons qui circulent */
+    if(passe){
+      var pts=[[xC+40,npn?V0:V24],[xC+40,223],[xA-70,223],[xA+20,223],[xA+70,223],[xA+70,com24?V24:V0]];
+      for(var e=0;e<6;e++){
+        var ph=((a.t*0.55+e/6)%1);
+        var seg=Math.floor(ph*(pts.length-1)), lo=ph*(pts.length-1)-seg;
+        var p1=pts[seg], p2=pts[seg+1];
+        ctx.fillStyle='#c8d834';
+        ctx.beginPath(); ctx.arc(p1[0]+(p2[0]-p1[0])*lo, p1[1]+(p2[1]-p1[1])*lo, 4.5, 0, 6.2832); ctx.fill();
+      }
+    }
+
+    /* ---------- le verdict ---------- */
+    var coul=passe?'#c8d834':(det?'#ff6a5e':'#8d968b');
+    var msg;
+    if(!det) msg='Le capteur ne détecte rien : sa sortie est en l’air, aucun courant ne peut circuler. C’est l’état normal au repos.';
+    else if(passe) msg='Le courant part du 24 V, traverse le capteur, traverse l’entrée, revient au 0 V. L’entrée passe à 1.';
+    else msg='LE CAPTEUR DÉTECTE, SA LED EST ALLUMÉE — et l’entrée reste à 0. Les deux extrémités tirent du même côté : le circuit ne se referme jamais.';
+    ctx.fillStyle=passe?'rgba(200,216,52,.08)':(det?'rgba(255,106,94,.08)':'rgba(255,255,255,.04)');
+    ctx.fillRect(26,430,W-52,50);
+    var l1=msg,l2='';
+    if(msg.length>96){ var mo=msg.split(' '); l1=''; l2='';
+      for(var w=0;w<mo.length;w++){ if((l1+' '+mo[w]).length<=96 && !l2) l1=(l1?l1+' ':'')+mo[w]; else l2=(l2?l2+' ':'')+mo[w]; } }
+    MSPC.mono(ctx,l1,42,454,11.5,coul);
+    if(l2) MSPC.mono(ctx,l2,42,472,11.5,coul);
+
+    out.innerHTML='<b style="color:'+coul+'">'+(passe?'I0.0 = 1':'I0.0 = 0')+'</b><br>capteur '+(npn?'NPN':'PNP')+' · commun '+(com24?'+24 V':'0 V');
+  }, {fixed:true});
+})();
+
+/* ======================= CH 28 · 4-20 mA contre 0-10 V ======================= */
+(function(){
+  "use strict";
+  var N=MSPC.ctrl('a-420-n', function(v){ return Math.round(v)+' %'; }, 'a-420-n-l');
+  var L=MSPC.ctrl('a-420-l', function(v){ return Math.round(v)+' m'; }, 'a-420-l-l');
+  var R=MSPC.ctrl('a-420-r');
+  var out=document.getElementById('a-420-out');
+  var RLIN=0.017;                       // ohms par mètre, aller-retour, 1,5 mm²
+
+  MSPC.anim('a-420', function(a){
+    var ctx=a.ctx, W=a.W, H=a.H;
+    var niv=N.val/100, lg=L.val, coupe=R.val;
+    var Rl=RLIN*lg;
+
+    /* boucle de courant : le courant ne dépend pas de la ligne */
+    var I = coupe ? 0 : 4+16*niv + Math.pow(lg/300,1.15)*0.012*Math.sin(a.t*7.1);
+    var nivI = coupe ? null : (I-4)/16;
+
+    /* Ce qui dégrade une liaison 0-10 V sur une longue ligne n'est pas la
+        chute ohmique — l'entrée analogique est de très haute impédance — mais
+        deux phénomènes bien réels dans un atelier :
+        • le BRUIT capté par la ligne, qui rayonne autour des variateurs ;
+        • le DÉCALAGE DE MASSE entre les deux extrémités, jamais au même
+          potentiel dès qu'on s'éloigne. */
+    var k=Math.pow(lg/300,1.15);
+    var bruit = k*(0.85*Math.sin(a.t*7.1) + 0.62*Math.sin(a.t*13.3+1.7));
+    var offset = k*0.45;
+    var U = coupe ? 0 : Math.max(0, Math.min(10, 10*niv + offset + bruit));
+    var nivU = coupe ? null : U/10;
+
+    MSPC.fond(ctx,W,H,0);
+    MSPC.mono(ctx,'LA MÊME MESURE, TRANSMISE DEUX FOIS',26,30,11.5,'#8d968b');
+    MSPC.mono(ctx,'capteur de niveau · cuve de 5 m',W-26,30,10,'#6f786e','right');
+
+    /* ---------- la cuve ---------- */
+    var cx=44, cy=76, cw=96, chh=250;
+    ctx.strokeStyle='#8f9a86'; ctx.lineWidth=2.4; ctx.strokeRect(cx,cy,cw,chh);
+    ctx.fillStyle='rgba(92,196,224,.28)';
+    ctx.fillRect(cx+2,cy+chh-niv*(chh-4)-2,cw-4,niv*(chh-4));
+    MSPC.mono(ctx,'CUVE',cx+cw/2,cy-12,10,'#8d968b','center');
+    MSPC.titre(ctx,(niv*5).toFixed(2).replace('.',',')+' m',cx+cw/2,cy+chh+28,22,'#5cc4e0','center');
+    MSPC.mono(ctx,'niveau réel',cx+cw/2,cy+chh+46,9.5,'#6f786e','center');
+    // le capteur
+    ctx.fillStyle='rgba(143,154,134,.3)'; ctx.fillRect(cx+cw-18,cy-26,36,26);
+    ctx.strokeStyle='#8f9a86'; ctx.lineWidth=1.8; ctx.strokeRect(cx+cw-18,cy-26,36,26);
+
+    /* ---------- les deux transmissions ---------- */
+    var COLS=[
+      {x:190, n:'BOUCLE 4-20 mA', c:'#c8d834',
+       val: coupe?'0,00 mA':I.toFixed(2).replace('.',',')+' mA',
+       lu:  coupe?null:(nivI*5),
+       def: coupe, unite:'mA'},
+      {x:520, n:'LIAISON 0-10 V', c:'#f0a844',
+       val: coupe?'0,00 V':U.toFixed(2).replace('.',',')+' V',
+       lu:  coupe?0:(nivU*5),
+       def: false, unite:'V'}
+    ];
+    COLS.forEach(function(z){
+      var zw=300;
+      var faux = !z.def && z.lu!==null && Math.abs(z.lu-niv*5)>0.05;
+      var bord = z.def ? '#ff6a5e' : (faux ? '#f0a844' : z.c);
+      ctx.fillStyle='rgba(255,255,255,.035)'; ctx.fillRect(z.x,cy-30,zw,332);
+      ctx.strokeStyle=bord; ctx.lineWidth=1.8; ctx.strokeRect(z.x+.5,cy-29.5,zw,332);
+      MSPC.mono(ctx,z.n,z.x+16,cy-8,11,z.c);
+
+      // le câble
+      var wy=cy+40;
+      ctx.strokeStyle= z.def?'#ff6a5e':z.c; ctx.lineWidth=2.6;
+      ctx.beginPath(); ctx.moveTo(z.x+16,wy); ctx.lineTo(z.x+zw-16,wy); ctx.stroke();
+      ctx.beginPath(); ctx.moveTo(z.x+16,wy+34); ctx.lineTo(z.x+zw-16,wy+34); ctx.stroke();
+      if(z.def){
+        ctx.strokeStyle='#0d120f'; ctx.lineWidth=7;
+        ctx.beginPath(); ctx.moveTo(z.x+130,wy); ctx.lineTo(z.x+160,wy); ctx.stroke();
+        ctx.strokeStyle='#ff6a5e'; ctx.lineWidth=2.4;
+        ctx.beginPath(); ctx.moveTo(z.x+128,wy-9); ctx.lineTo(z.x+140,wy+9);
+        ctx.moveTo(z.x+150,wy-9); ctx.lineTo(z.x+162,wy+9); ctx.stroke();
+        MSPC.mono(ctx,'fil coupé',z.x+145,wy-16,10,'#ff6a5e','center');
+      } else {
+        for(var e=0;e<4;e++){
+          var px=z.x+22+((a.t*54+e*70)%(zw-44));
+          ctx.fillStyle=z.c;
+          ctx.beginPath(); ctx.arc(px,wy,4,0,6.2832); ctx.fill();
+        }
+      }
+      MSPC.mono(ctx, z.c==='#c8d834' ? lg+' m  ·  le courant est le même partout'
+                                      : lg+' m  ·  bruit capté et masses décalées',
+        z.x+zw/2,wy+58,10,'#6f786e','center');
+
+      // l'afficheur
+      ctx.fillStyle='#161d18'; ctx.fillRect(z.x+16,wy+80,zw-32,58);
+      ctx.strokeStyle='rgba(255,255,255,.18)'; ctx.lineWidth=1.4; ctx.strokeRect(z.x+16,wy+80,zw-32,58);
+      MSPC.titre(ctx,z.val,z.x+zw/2,wy+122,34,bord,'center');
+      MSPC.mono(ctx,'ce que reçoit l’automate',z.x+zw/2,wy+156,10,'#6f786e','center');
+
+      // la valeur interprétée
+      MSPC.mono(ctx,'NIVEAU CALCULÉ',z.x+16,wy+192,10,'#8d968b');
+      MSPC.titre(ctx, z.def ? 'DÉFAUT' : z.lu.toFixed(2).replace('.',',')+' m', z.x+16, wy+228, 30, bord);
+      MSPC.mono(ctx, z.def ? '0 mA est impossible : rupture détectée'
+                           : (faux ? 'erreur de '+Math.abs(z.lu-niv*5).toFixed(2).replace('.',',')+' m'
+                                   : 'conforme au niveau réel'),
+        z.x+16, wy+250, 10.5, bord);
+    });
+
+    /* ---------- bandeau ---------- */
+    var msg, coul;
+    if(coupe){ msg='La boucle affiche 0 mA — valeur impossible, donc DÉFAUT identifié. Le 0-10 V affiche 0 V, indiscernable d’une cuve vide.'; coul='#ff6a5e'; }
+    else if(lg>150){ msg='Sur '+lg+' m, le courant ne bouge pas d’un microampère. La tension, elle, danse : elle capte le bruit de l’atelier et subit le décalage des masses.'; coul='#f0a844'; }
+    else { msg='Ligne courte : les deux formats concordent. C’est en allongeant la ligne, ou en coupant un fil, que tout change.'; coul='#c8d834'; }
+    ctx.fillStyle='rgba(255,255,255,.05)'; ctx.fillRect(26,420,W-52,56);
+    var m1=msg, m2='';
+    if(msg.length>84){ var mo=msg.split(' '); m1=''; m2='';
+      for(var w=0;w<mo.length;w++){ if((m1+' '+mo[w]).length<=84 && !m2) m1=(m1?m1+' ':'')+mo[w]; else m2=(m2?m2+' ':'')+mo[w]; } }
+    MSPC.mono(ctx,m1,42,444,12,coul);
+    if(m2) MSPC.mono(ctx,m2,42,463,12,coul);
+    MSPC.mono(ctx,'4 mA au lieu de 0 : le « zéro vivant », ce qui rend la rupture détectable.',42,H-8,10,'#6f786e');
+
+    out.innerHTML = coupe
+      ? '<b style="color:#ff6a5e">0 mA — défaut détecté</b><br>le 0-10 V, lui, affiche une cuve vide'
+      : '<b style="color:#c8d834">'+I.toFixed(2).replace('.',',')+' mA</b> = '+(nivI*5).toFixed(2).replace('.',',')+' m<br>0-10 V : '+U.toFixed(2).replace('.',',')+' V = '+(nivU*5).toFixed(2).replace('.',',')+' m';
   }, {fixed:true});
 })();
 </script>
