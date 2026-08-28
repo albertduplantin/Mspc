@@ -161,3 +161,261 @@
     fond: fond, mono: mono, titre: titre, axes: axes, jauge: jauge
   };
 })(window);
+
+/* =========================================================================
+   MSPC.nav() — navigation de lecture pour les pages de cours.
+   Ces pages font 200 à 450 Ko et comptent jusqu'à 18 chapitres : le
+   défilement seul ne suffit plus. Tout est engendré ici, aucune page
+   n'a de balisage à ajouter.
+
+   • une barre collante qui suit la lecture, avec barre de progression ;
+   • un tiroir de sommaire indexant les chapitres ET leurs sous-titres,
+     filtrable — c'est au niveau du sous-titre qu'on cherche vraiment ;
+   • le repli de chaque chapitre, pour ne projeter que celui du jour ;
+   • un « mode cours » : typographie agrandie, exercices repliés,
+     fiches professeur révélées.
+   ========================================================================= */
+(function(global){
+  "use strict";
+  if(!global.MSPC) return;
+
+  function memo(cle, val){
+    try{
+      if(val === undefined) return global.localStorage.getItem(cle);
+      global.localStorage.setItem(cle, val);
+    }catch(e){ return null; }
+  }
+
+  function nav(){
+    var chs = [].slice.call(document.querySelectorAll('section.ch'));
+    if(chs.length < 3) return null;
+
+    var doc = document.documentElement;
+    var entrees = [];
+
+    chs.forEach(function(ch, i){
+      if(!ch.id) ch.id = 'ch-auto-' + i;
+      var h2 = ch.querySelector('.ch-title h2');
+      var num = ch.querySelector('.ch-num');
+      entrees.push({
+        el: ch, id: ch.id,
+        num: num ? num.textContent.trim() : String(i + 1),
+        titre: h2 ? h2.textContent.trim() : ('Chapitre ' + (i + 1)),
+        sous: [],
+        texte: (ch.textContent || '').toLowerCase()
+      });
+      var e = entrees[entrees.length - 1];
+      [].slice.call(ch.querySelectorAll('.ch-body h3')).forEach(function(h3, j){
+        if(!h3.id) h3.id = ch.id + '-s' + j;
+        e.sous.push({ id: h3.id, titre: h3.textContent.trim() });
+      });
+    });
+
+    /* ---------------- la barre collante ---------------- */
+    var bar = document.createElement('div');
+    bar.className = 'lecture';
+    bar.innerHTML =
+      '<button type="button" data-act="tiroir" aria-label="Ouvrir le sommaire">☰ <span class="lbl">Sommaire</span></button>' +
+      '<div class="titre"><span class="n"></span><span class="t"></span></div>' +
+      '<button type="button" data-act="cours" aria-pressed="false"><span class="lbl">Mode cours</span></button>' +
+      '<div class="fleches">' +
+        '<button type="button" data-act="prec" aria-label="Chapitre précédent">◀</button>' +
+        '<button type="button" data-act="suiv" aria-label="Chapitre suivant">▶</button>' +
+      '</div>' +
+      '<div class="prog"></div>';
+
+    var nav0 = document.querySelector('.sitenav');
+    if(nav0 && nav0.parentNode) nav0.parentNode.insertBefore(bar, nav0.nextSibling);
+    else document.body.insertBefore(bar, document.body.firstChild);
+
+    var elNum = bar.querySelector('.titre .n');
+    var elTit = bar.querySelector('.titre .t');
+    var elProg = bar.querySelector('.prog');
+    var btnCours = bar.querySelector('[data-act=cours]');
+
+    /* ---------------- le tiroir ---------------- */
+    var voile = document.createElement('div');
+    voile.className = 'voile';
+    var tiroir = document.createElement('nav');
+    tiroir.className = 'tiroir';
+    tiroir.setAttribute('aria-label', 'Sommaire du cours');
+    tiroir.innerHTML =
+      '<div class="tete"><h3>Sommaire</h3>' +
+      '<input type="search" placeholder="chercher dans tout le cours…" aria-label="Filtrer le sommaire"></div>' +
+      '<div class="liste"></div>' +
+      '<div class="pied"><kbd>←</kbd> <kbd>→</kbd> chapitre précédent / suivant<br>' +
+      '<kbd>S</kbd> sommaire &nbsp;·&nbsp; <kbd>C</kbd> mode cours &nbsp;·&nbsp; <kbd>Échap</kbd> fermer</div>';
+    document.body.appendChild(voile);
+    document.body.appendChild(tiroir);
+
+    var liste = tiroir.querySelector('.liste');
+    var filtre = tiroir.querySelector('input[type=search]');
+
+    function peupler(q){
+      q = (q || '').trim().toLowerCase();
+      var html = '', trouve = 0;
+      entrees.forEach(function(e){
+        var okTitre = !q || e.titre.toLowerCase().indexOf(q) >= 0;
+        var subs = e.sous.filter(function(s){ return !q || s.titre.toLowerCase().indexOf(q) >= 0; });
+        var okTexte = !q || e.texte.indexOf(q) >= 0;
+        if(!okTitre && !subs.length && !okTexte) return;
+        trouve++;
+        html += '<a class="ch" href="#' + e.id + '" data-ch="' + e.id + '">' +
+                '<span class="n">' + e.num + '</span>' + e.titre + '</a>';
+        // sans filtre on n'ouvre que le chapitre courant, sinon la liste devient illisible
+        var montrer = q ? subs : (e.id === courantId ? e.sous : []);
+        montrer.forEach(function(s){
+          html += '<a class="sub" href="#' + s.id + '">' + s.titre + '</a>';
+        });
+      });
+      liste.innerHTML = trouve ? html : '<div class="vide">aucun résultat</div>';
+      majCourant();
+    }
+
+    var ouvert = false;
+    function basculeTiroir(force){
+      ouvert = (force === undefined) ? !ouvert : force;
+      voile.classList.toggle('ouvert', ouvert);
+      tiroir.classList.toggle('ouvert', ouvert);
+      if(ouvert){ peupler(filtre.value); filtre.focus(); }
+    }
+
+    /* ---------------- repli des chapitres ---------------- */
+    entrees.forEach(function(e){
+      var tete = e.el.querySelector('.ch-head');
+      if(!tete) return;
+      var b = document.createElement('button');
+      b.type = 'button';
+      b.className = 'ch-plier';
+      b.setAttribute('aria-label', 'Replier ou déplier ce chapitre');
+      b.textContent = '–';
+      b.addEventListener('click', function(){
+        var plie = e.el.classList.toggle('plie');
+        b.textContent = plie ? '+' : '–';
+        b.setAttribute('aria-expanded', plie ? 'false' : 'true');
+      });
+      tete.appendChild(b);
+      e.bouton = b;
+    });
+
+    function replierTout(sauf){
+      entrees.forEach(function(e){
+        var plie = e.id !== sauf;
+        e.el.classList.toggle('plie', plie);
+        if(e.bouton) e.bouton.textContent = plie ? '+' : '–';
+      });
+    }
+    function deplierTout(){
+      entrees.forEach(function(e){
+        e.el.classList.remove('plie');
+        if(e.bouton) e.bouton.textContent = '–';
+      });
+    }
+
+    /* ---------------- mode cours ---------------- */
+    function modeCours(on){
+      document.body.classList.toggle('mode-cours', on);
+      document.body.classList.toggle('prof', on);
+      btnCours.classList.toggle('actif', on);
+      btnCours.setAttribute('aria-pressed', on ? 'true' : 'false');
+      memo('mspc-cours', on ? '1' : '0');
+      if(on) replierTout(courantId); else deplierTout();
+    }
+    if(memo('mspc-cours') === '1') modeCours(true);
+
+    /* ---------------- suivi de la lecture ---------------- */
+    var courantId = entrees[0].id, idx = 0;
+
+    function majCourant(){
+      [].slice.call(liste.querySelectorAll('a')).forEach(function(a){
+        a.classList.toggle('courant', a.getAttribute('href') === '#' + courantId);
+      });
+    }
+
+    function aller(i){
+      i = Math.max(0, Math.min(entrees.length - 1, i));
+      var e = entrees[i];
+      if(document.body.classList.contains('mode-cours')) replierTout(e.id);
+      e.el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    var tic = false;
+    function suivre(){
+      if(tic) return;
+      tic = true;
+      global.requestAnimationFrame(function(){
+        tic = false;
+        var y = global.scrollY || doc.scrollTop;
+        bar.classList.toggle('visible', y > 180);
+
+        var h = doc.scrollHeight - global.innerHeight;
+        elProg.style.width = (h > 0 ? Math.min(100, y / h * 100) : 0) + '%';
+
+        var n = 0;
+        for(var i = 0; i < entrees.length; i++){
+          if(entrees[i].el.getBoundingClientRect().top <= 96) n = i; else break;
+        }
+        if(entrees[n].id !== courantId){
+          courantId = entrees[n].id; idx = n;
+          elNum.textContent = entrees[n].num;
+          elTit.textContent = entrees[n].titre;
+          if(ouvert) peupler(filtre.value); else majCourant();
+        }
+      });
+    }
+    elNum.textContent = entrees[0].num;
+    elTit.textContent = entrees[0].titre;
+    global.addEventListener('scroll', suivre, { passive: true });
+    global.addEventListener('resize', suivre);
+    suivre();
+
+    /* ---------------- branchements ---------------- */
+    bar.addEventListener('click', function(ev){
+      var b = ev.target.closest('button');
+      if(!b) return;
+      var a = b.getAttribute('data-act');
+      if(a === 'tiroir') basculeTiroir();
+      else if(a === 'cours') modeCours(!document.body.classList.contains('mode-cours'));
+      else if(a === 'prec') aller(idx - 1);
+      else if(a === 'suiv') aller(idx + 1);
+    });
+    voile.addEventListener('click', function(){ basculeTiroir(false); });
+    liste.addEventListener('click', function(ev){
+      var a = ev.target.closest('a');
+      if(!a) return;
+      if(document.body.classList.contains('mode-cours')){
+        var cible = a.getAttribute('data-ch') || (a.closest ? null : null);
+        if(cible) replierTout(cible);
+        else {
+          // un sous-titre : on déplie le chapitre qui le contient
+          var el = document.querySelector(a.getAttribute('href'));
+          var ch = el && el.closest('section.ch');
+          if(ch) replierTout(ch.id);
+        }
+      }
+      basculeTiroir(false);
+    });
+    filtre.addEventListener('input', function(){ peupler(filtre.value); });
+
+    document.addEventListener('keydown', function(ev){
+      var t = ev.target.tagName;
+      if(t === 'INPUT' || t === 'TEXTAREA' || t === 'SELECT' || ev.metaKey || ev.ctrlKey || ev.altKey){
+        if(ev.key === 'Escape' && ouvert){ basculeTiroir(false); filtre.blur(); }
+        return;
+      }
+      if(ev.key === 'Escape'){ basculeTiroir(false); }
+      else if(ev.key === 'ArrowRight'){ aller(idx + 1); }
+      else if(ev.key === 'ArrowLeft'){ aller(idx - 1); }
+      else if(ev.key === 's' || ev.key === 'S'){ ev.preventDefault(); basculeTiroir(); }
+      else if(ev.key === 'c' || ev.key === 'C'){ modeCours(!document.body.classList.contains('mode-cours')); }
+    });
+
+    document.body.classList.add('nav-on');
+    peupler('');
+    return { aller: aller, modeCours: modeCours, tiroir: basculeTiroir };
+  }
+
+  global.MSPC.nav = nav;
+  if(document.readyState === 'loading') document.addEventListener('DOMContentLoaded', nav);
+  else nav();
+})(window);
