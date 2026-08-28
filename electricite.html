@@ -48,10 +48,10 @@
 </header>
 
 <div class="meta-bar">
-  <div><b>26</b> chapitres</div>
-  <div><b>44</b> animations pilotables</div>
+  <div><b>27</b> chapitres</div>
+  <div><b>47</b> animations pilotables</div>
   <div><b>15</b> fiches TP d'atelier</div>
-  <div><b>76</b> exercices corrigés</div>
+  <div><b>79</b> exercices corrigés</div>
   <div>Manips en <b>TBTS ≤ 24 V</b> sauf mention</div>
 </div>
 
@@ -87,6 +87,7 @@
     <a class="borne" href="#c24"><span class="num">24</span><span class="lbl">Démarrer et protéger</span></a>
     <a class="borne" href="#c25"><span class="num">25</span><span class="lbl">Le variateur de vitesse</span></a>
     <a class="borne" href="#c26"><span class="num">26</span><span class="lbl">Mesurer</span></a>
+    <a class="borne" href="#c27"><span class="num">27</span><span class="lbl">Câbles et connexions</span></a>
     <a class="borne" href="#tps" style="border-top-color:var(--accent)"><span class="num">TP</span><span class="lbl">Les 15 fiches d'atelier</span></a>
   </div></nav>
 
@@ -8743,6 +8744,584 @@
 
     out.innerHTML = vari ? '<b style="color:#ff6a5e">Variateur détruit</b><br>il fallait le débrancher avant'
       : '<b style="color:'+coul+'">'+(R>=10?R.toFixed(0):R.toFixed(2).replace('.',','))+' MΩ</b><br>'+(R>=5?'bon':(R>=1?'à surveiller':'hors service'));
+  }, {fixed:true});
+})();
+</script>
+
+
+<!-- ================= CH 27 ================= -->
+<section class="ch" id="c27">
+  <div class="ch-head"><div class="ch-num">27</div><div class="ch-title">
+    <span class="kicker">Ce qui passe dedans, et ce qui se passe aux bouts</span><h2>Câbles et connexions</h2></div></div>
+  <div class="ch-body">
+
+<div class="savoirs">
+  <span class="savoir n3"><b>S2.3</b> <i>Nature des supports de transmission</i></span>
+  <span class="savoir n3"><b>S2.3</b> <i>Procédures d'assemblage : mettre en œuvre les procédures de connexion</i></span>
+  <span class="savoir n2"><b>S2.3</b> <i>Caractéristiques : chutes de tension</i></span>
+</div>
+
+<p class="lede">Un câble n'est pas seulement un fil : c'est une résistance qui chauffe et qui fait perdre de la tension. Et ses deux extrémités posent un problème que le câble lui-même ne pose pas — <strong>c'est aux connexions que naissent la moitié des incendies d'origine électrique</strong>, pas au milieu des câbles.</p>
+
+<h3>27.1 — Un câble se choisit sur deux critères, pas un</h3>
+<p>Les élèves n'en retiennent généralement qu'un. Il en faut deux, et c'est souvent le second qui décide.</p>
+<ol>
+<li><strong>Le courant admissible.</strong> Le câble ne doit pas dépasser une température qui détruirait son isolant — 70 °C pour du PVC, 90 °C pour du polyéthylène réticulé. C'est le critère de <em>sécurité</em>.</li>
+<li><strong>La chute de tension.</strong> Le récepteur doit recevoir une tension suffisante. C'est le critère de <em>fonctionnement</em>, et il devient contraignant dès que la ligne est longue.</li>
+</ol>
+<p><span class="cle">Sur une ligne courte, c'est l'échauffement qui commande. Au-delà de quelques dizaines de mètres, c'est presque toujours la chute de tension.</span> Un câble parfaitement froid peut être totalement inadapté.</p>
+
+<h3>27.2 — Le courant admissible, et tout ce qui le réduit</h3>
+<p>Les tableaux donnent un courant admissible <em>de référence</em>, dans des conditions précises : cuivre, isolant PVC, 30 °C ambiants, un seul circuit. Dès qu'on s'en écarte, on applique des <strong>facteurs de correction</strong>, et ils se multiplient.</p>
+
+<table>
+<thead><tr><th>Ce qui change</th><th>Facteur</th><th>Pourquoi</th></tr></thead>
+<tbody>
+<tr><td>Ambiante à 40 °C</td><td>× 0,87</td><td>Le câble part de plus haut : il lui reste moins de marge avant 70 °C</td></tr>
+<tr><td>Ambiante à 50 °C</td><td>× 0,71</td><td>Cas des chemins de câbles en toiture ou près d'un four</td></tr>
+<tr><td>3 circuits jointifs</td><td>× 0,70</td><td>Chacun chauffe ses voisins ; aucun n'évacue plus rien</td></tr>
+<tr><td>6 circuits jointifs</td><td>× 0,57</td><td>Le cas d'un chemin de câbles bien rempli</td></tr>
+<tr><td>Pose en conduit encastré</td><td>× 0,77 environ</td><td>Rien ne ventile</td></tr>
+</tbody></table>
+
+<p>Ces facteurs se cumulent. Un câble de 10 mm² donné pour 50 A, posé à six dans un chemin de câbles à 40 °C, ne vaut plus que <span class="mono">50 × 0,87 × 0,57 = 25 A</span>. <strong>La moitié.</strong> C'est l'erreur la plus fréquente en rénovation : on ajoute des départs dans un chemin existant sans redimensionner ce qui était déjà là.</p>
+
+<h3>27.3 — La chute de tension</h3>
+
+<div class="formule">ΔU = b × ρ × L × I × cos φ / S<small>b = 2 en monophasé, √3 en triphasé · ρ ≈ 0,023 Ω·mm²/m pour le cuivre chaud · L en mètres · S en mm²</small></div>
+
+<p>Les limites réglementaires dépendent de l'usage, parce qu'un éclairage supporte moins bien la baisse qu'un moteur :</p>
+<ul>
+<li><strong>Éclairage : 3 %</strong> — au-delà, les lampes faiblissent visiblement et les ballasts électroniques décrochent.</li>
+<li><strong>Force motrice : 5 %</strong> — un moteur sous 380 V au lieu de 400 perd déjà 10 % de couple, puisque le couple varie comme le carré de la tension.</li>
+</ul>
+
+<figure class="anim">
+  <canvas id="a-section" width="900" height="480" aria-label="Animation : choix de la section d'un câble selon l'échauffement et la chute de tension"></canvas>
+  <div class="ctrls">
+    <div class="c"><label>Section <span id="a-section-s-l">4 mm²</span></label><input type="range" id="a-section-s" min="0" max="7" value="2"></div>
+    <div class="c"><label>Courant <span id="a-section-i-l">28 A</span></label><input type="range" id="a-section-i" min="5" max="120" value="28"></div>
+    <div class="c"><label>Longueur de ligne <span id="a-section-l-l">40 m</span></label><input type="range" id="a-section-l" min="5" max="250" value="40"></div>
+    <div class="c"><label>Conditions de pose <span id="a-section-p-l">favorables</span></label><input type="range" id="a-section-p" min="0" max="3" value="0"></div>
+    <div class="c readout" id="a-section-out"></div>
+  </div>
+  <figcaption>Les deux critères côte à côte, sur deux jauges. <b>Le câble n'est bon que si les deux sont vertes.</b> <b>Partez de 40 m</b> : c'est l'échauffement qui décide, et 4 mm² suffisent. <b>Poussez la longueur à 150 m</b> sans rien changer d'autre : le câble reste parfaitement froid, mais la chute de tension explose et il faut monter la section. <b>Dégradez les conditions de pose</b> — six circuits jointifs à 40 °C — et le même câble perd la moitié de son courant admissible sans qu'aucun chiffre n'ait bougé sur le plan.</figcaption>
+  <div class="autableau">
+    <b class="entete">Au tableau <i>· 12 minutes · animation 1 sur 3</i></b>
+    <ol>
+      <li>Réglages par défaut. <span class="q">« Ce câble convient-il ? »</span> Les deux jauges sont vertes.</li>
+      <li>Monter la longueur à 150 m. <span class="q">« Le câble chauffe-t-il davantage ? »</span> Non, pas d'un degré. <span class="q">« Alors où est le problème ? »</span></li>
+      <li>Faire chercher la section qui rétablit les deux critères. <span class="q">« On a multiplié la section par combien ? »</span></li>
+      <li>Revenir à 40 m et dégrader les <b>conditions de pose</b>. <span class="q">« Qu'est-ce qui a changé dans le câble ? »</span> Rien. C'est son environnement.</li>
+      <li>Passer l'usage en <b>éclairage</b> : la limite tombe à 3 %. <span class="q">« Pourquoi plus sévère pour l'éclairage ? »</span></li>
+    </ol>
+    <div class="piege">Le piège : « mon câble ne chauffe pas, donc il est bien dimensionné ». Les deux critères sont indépendants. Sur une longue ligne, le câble reste froid et le moteur en bout démarre mal, sans que rien ne signale la cause.</div>
+  </div>
+</figure>
+
+<h3>27.4 — Lire une désignation de câble</h3>
+<p>Un câble porte son identité imprimée sur sa gaine, caractère par caractère. Deux systèmes coexistent : la désignation <strong>harmonisée européenne</strong>, qui commence par <span class="mono">H</span>, et la désignation <strong>nationale</strong>, qui commence par <span class="mono">U</span>.</p>
+
+<figure class="anim">
+  <canvas id="a-designation" width="900" height="450" aria-label="Animation : décoder la désignation normalisée d'un câble électrique"></canvas>
+  <div class="ctrls">
+    <div class="c"><label>Câble <span id="a-designation-c-l">H07 V-K</span></label><input type="range" id="a-designation-c" min="0" max="4" value="0"></div>
+    <div class="c readout" id="a-designation-out"></div>
+  </div>
+  <figcaption>Cinq câbles que vous aurez tous en main. <b>Chaque caractère s'explique</b> : la tension assignée, la nature de l'isolant, la souplesse de l'âme, la présence d'une gaine. <b>Comparez H07 V-U et H07 V-K</b> : même isolant, même tension, mais l'un a une âme massive qui se pose sous conduit et l'autre une âme souple qu'on câble dans une armoire. <b>Puis U-1000 R2V</b> : deux gaines et un isolant réticulé, c'est le câble de distribution qu'on enterre ou qu'on pose en chemin de câbles.</figcaption>
+  <div class="autableau">
+    <b class="entete">Au tableau <i>· 8 minutes · animation 2 sur 3</i></b>
+    <ol>
+      <li>Afficher <b>H07 V-K</b>. <span class="q">« Que veut dire le 07 ? »</span> Faire lire 450/750 V, et faire remarquer que ce n'est pas 700 V.</li>
+      <li>Passer à <b>H07 V-U</b>. <span class="q">« Une seule lettre a changé. Qu'est-ce que ça change en pratique ? »</span></li>
+      <li>Passer à <b>H07 RN-F</b>. <span class="q">« Pourquoi du caoutchouc plutôt que du PVC ? »</span> Le chantier, le froid, l'abrasion.</li>
+      <li>Passer à <b>U-1000 R2V</b>. <span class="q">« Combien d'enveloppes autour du cuivre ? »</span> Isolant, bourrage, gaine.</li>
+      <li>Finir sur <b>A05 VV-F</b> : <span class="q">« pourrait-on l'utiliser dans une armoire industrielle ? »</span> Non — 300/500 V et non harmonisé.</li>
+    </ol>
+    <div class="piege">Le piège : croire que la tension de la désignation est celle du réseau. <span class="mono">07</span> signifie 450 V entre conducteur et terre, 750 V entre conducteurs. C'est une tenue d'isolant, pas une tension d'emploi — et c'est ce qui rend le H05 inutilisable en 400 V triphasé.</div>
+  </div>
+</figure>
+
+<h3>27.5 — Les procédures de connexion</h3>
+<p>C'est le savoir que le référentiel place au niveau 3, et il se juge à un centimètre près.</p>
+
+<div class="encadre"><span class="tag">Les cinq gestes, et les cinq façons de les rater</span>
+<ol>
+<li><strong>Dénuder à la bonne longueur.</strong> Elle est indiquée sur la borne ou dans la notice — typiquement 8 à 12 mm. <em>Trop long</em> : du cuivre nu dépasse, à quelques millimètres du conducteur voisin. <em>Trop court</em> : la borne serre sur l'isolant et il n'y a aucun contact.</li>
+<li><strong>Ne jamais entailler les brins.</strong> Une pince à dénuder réglable, jamais un cutter. Un brin coupé sur sept, c'est 15 % de section en moins <em>à cet endroit précis</em>, donc un point chaud.</li>
+<li><strong>Sertir un embout sur tout conducteur souple.</strong> Sans embout, les brins s'écartent au serrage, certains restent hors de la borne, et la section utile s'effondre.</li>
+<li><strong>Sertir avec la bonne pince.</strong> Une pince à sertir à profil carré ou trapézoïdal, calibrée pour la section. Une pince universelle écrase sans sertir.</li>
+<li><strong>Serrer au couple prescrit.</strong> Il est marqué sur l'appareil ou dans sa notice. Ni au jugé, ni « bien fort ».</li>
+</ol>
+<p><span class="cle">Et un sixième geste, qu'on oublie : resserrer après quelques semaines de service.</span> Le cuivre flue sous pression et les cycles thermiques desserrent. C'est une opération de maintenance préventive à part entière.</p></div>
+
+<h3>27.6 — Pourquoi une borne desserrée s'emballe</h3>
+<p>Voici le mécanisme complet, parce qu'il explique la moitié des interventions de thermographie du dossier maintenance.</p>
+<ol>
+<li>Une borne mal serrée présente une <strong>résistance de contact</strong> élevée — quelques milliohms au lieu de quelques dixièmes.</li>
+<li>Cette résistance dissipe une puissance <span class="mono">P = R × I²</span>. Sur 30 A, quelques milliohms suffisent à faire plusieurs watts <em>dans un point de la taille d'une tête d'épingle</em>.</li>
+<li>Le point chauffe. Le cuivre s'<strong>oxyde</strong>, et l'oxyde de cuivre est bien plus résistant que le cuivre.</li>
+<li>La résistance augmente donc, la puissance dissipée aussi, la température encore. <strong>C'est un emballement.</strong></li>
+<li>Le connecteur noircit, le plastique fond, et l'arc finit par s'amorcer.</li>
+</ol>
+<p><span class="cle">Le disjoncteur ne voit rien de tout cela : le courant est parfaitement normal.</span> Seule la thermographie infrarouge — ou un resserrage périodique — l'attrape avant l'incendie.</p>
+
+<figure class="anim">
+  <canvas id="a-raccord" width="900" height="490" aria-label="Animation : qualité d'un raccordement selon le dénudage, l'embout et le couple de serrage"></canvas>
+  <div class="ctrls">
+    <div class="c"><label>Longueur dénudée <span id="a-raccord-d-l">10 mm</span></label><input type="range" id="a-raccord-d" min="2" max="22" value="10"></div>
+    <div class="c"><label>Couple de serrage <span id="a-raccord-c-l">1,2 N·m</span></label><input type="range" id="a-raccord-c" min="0" max="30" value="12"></div>
+    <div class="c"><label>Courant <span id="a-raccord-i-l">30 A</span></label><input type="range" id="a-raccord-i" min="5" max="80" value="30"></div>
+    <div class="c"><label class="switch"><input type="checkbox" id="a-raccord-e" checked><span>Embout serti</span></label></div>
+    <div class="c readout" id="a-raccord-out"></div>
+  </div>
+  <figcaption>Une borne à vis, en coupe, avec sa vue thermique en dessous. <b>Décochez l'embout</b> : les brins s'écartent, la moitié reste hors de la borne, la résistance de contact grimpe et le point chauffe. <b>Descendez le couple à 0,3 N·m</b> : même sans erreur de dénudage, la borne s'emballe — et le courant, lui, reste rigoureusement normal. <b>Dénudez 20 mm</b> : du cuivre nu dépasse hors de la borne, à portée du conducteur voisin. <b>Dénudez 3 mm</b> : la vis serre sur l'isolant et il n'y a plus de contact du tout. <b>Un seul réglage sur quatre donne un raccordement correct.</b></figcaption>
+  <div class="autableau">
+    <b class="entete">Au tableau <i>· 12 minutes · animation 3 sur 3</i></b>
+    <ol>
+      <li>Réglages corrects. Faire lire la température : elle reste basse. <span class="q">« Combien de watts se dissipent dans la borne ? »</span></li>
+      <li>Décocher <b>l'embout</b>. <span class="q">« Le courant a-t-il changé ? »</span> Non. <span class="q">« Et la température ? »</span> Faire lire la vue thermique.</li>
+      <li>Remettre l'embout et descendre le <b>couple à 0,3</b>. <span class="q">« Le disjoncteur va-t-il déclencher ? »</span> Jamais — le courant est normal.</li>
+      <li><span class="q">« Alors qu'est-ce qui attrapera ce défaut ? »</span> La thermographie, ou le resserrage périodique. Rien d'autre.</li>
+      <li>Monter le couple au maximum : <span class="q">« serrer plus fort, est-ce toujours mieux ? »</span> Montrer les brins écrasés.</li>
+    </ol>
+    <div class="piege">Le piège : « si ça chauffe, c'est qu'il y a trop de courant ». Ici le courant est nominal et le câble est correctement dimensionné. Ce qui chauffe, c'est un contact de quelques millimètres carrés. La thermographie ne cherche pas les câbles surchargés — elle cherche les connexions.</div>
+  </div>
+</figure>
+
+<h3>27.7 — Le repérage</h3>
+<p>Un raccordement parfait mais non repéré coûtera une heure au prochain intervenant, et ce prochain intervenant sera probablement vous.</p>
+<ul>
+<li><strong>Les deux extrémités</strong> de chaque conducteur portent le même repère. Un repère à un seul bout ne sert à rien.</li>
+<li><strong>Le repère est celui du schéma</strong>, pas une invention de chantier.</li>
+<li><strong>Les couleurs sont normalisées</strong> et ne se négocient pas : <span class="mono">bleu clair</span> pour le neutre, <span class="mono">vert-jaune</span> pour le conducteur de protection — et cette dernière couleur est <strong>strictement réservée</strong>, on ne l'utilise jamais pour autre chose. Les phases se repèrent en noir, brun ou gris.</li>
+<li><strong>On photographie avant de démonter.</strong> Trente secondes qui en font gagner soixante.</li>
+</ul>
+
+<div class="exo"><span class="tag">Exercice 27.1</span>
+<p>Un moteur de 15 kW (I = 29 A, cos φ 0,85) est alimenté en 400 V triphasé par une ligne de 120 m en cuivre. Le tableau donne 4 mm² pour 28 A. Cette section convient-elle ? Justifiez par les deux critères.</p>
+<details><summary>Voir la réponse</summary><div class="rep">
+<p><strong>Critère 1 — l'échauffement : ça ne passe déjà pas, de peu.</strong></p>
+<p class="mono">I<sub>emploi</sub> = 29 A  &gt;  I<sub>admissible</sub> = 28 A</p>
+<p>On dépasse de 3,5 %. C'est peu, mais c'est du mauvais côté, et cela suppose en plus des conditions de pose idéales. <strong>Il faut passer à 6 mm²</strong>, donné pour 36 A.</p>
+<p><strong>Critère 2 — la chute de tension : c'est là que tout se joue.</strong></p>
+<p>Vérifions le 6 mm² retenu :</p>
+<p class="mono">ΔU = √3 × ρ × L × I × cos φ / S<br>ΔU = 1,732 × 0,023 × 120 × 29 × 0,85 / 6<br>ΔU = 1,732 × 0,023 = 0,0398<br>0,0398 × 120 = 4,78<br>4,78 × 29 = 138,5<br>138,5 × 0,85 = 117,8<br>117,8 / 6 = <strong>19,6 V</strong></p>
+<p class="mono">ΔU% = 19,6 / 400 × 100 = <strong>4,9 %</strong></p>
+<p>La limite en force motrice est de 5 %. <strong>On est à 4,9 % : ça passe, mais de justesse</strong>, et sans aucune marge pour un allongement futur de la ligne ou un moteur plus gros.</p>
+<p><strong>Ce que ferait un professionnel : monter à 10 mm².</strong></p>
+<p class="mono">ΔU = 117,8 / 10 = 11,8 V → <strong>2,9 %</strong></p>
+<p>On divise la chute par presque deux, on gagne de la marge, et le surcoût sur 120 m de câble est faible comparé à un moteur qui démarre mal pendant quinze ans.</p>
+<p><strong>Et le point à retenir :</strong> <span class="cle">c'est la longueur qui a commandé, pas le courant.</span> Sur 20 m, le 6 mm² aurait donné 0,8 % et tout le monde aurait été content. Sur 120 m, le même câble est à la limite. Vérifiez toujours les deux critères, dans cet ordre : d'abord la sécurité, ensuite le fonctionnement.</p>
+</div></details></div>
+
+<div class="exo"><span class="tag">Exercice 27.2</span>
+<p>Lors d'une ronde thermographique, une borne de disjoncteur apparaît à 82 °C alors que ses voisines sont à 31 °C. Le courant mesuré est de 24 A pour un disjoncteur 32 A. Analysez et proposez une intervention.</p>
+<details><summary>Voir la réponse</summary><div class="rep">
+<p><strong>Ce n'est pas une surcharge. C'est une connexion défectueuse.</strong></p>
+<p><strong>Le raisonnement.</strong> À 24 A sur un départ calibré 32 A, le circuit est chargé à 75 % : parfaitement normal. Si c'était une surcharge, <em>tout le départ</em> chaufferait — le câble sur toute sa longueur, les trois phases également. Ici une seule borne est chaude et ses voisines sont froides : <span class="cle">l'échauffement est localisé, donc la résistance anormale est localisée.</span></p>
+<p><strong>L'ordre de grandeur.</strong> Un écart de 51 °C au-dessus de l'ambiant correspond à une dissipation de quelques watts dans quelques millimètres carrés. Avec P = R·I² :</p>
+<p class="mono">Si P ≈ 3 W et I = 24 A → R = 3 / 24² = <strong>5,2 mΩ</strong></p>
+<p>Une borne correctement serrée présente moins de 0,5 mΩ. On est à dix fois trop.</p>
+<p><strong>La gravité, selon les seuils usuels de thermographie :</strong></p>
+<table>
+<thead><tr><th>Écart avec les phases saines</th><th>Classement</th><th>Délai</th></tr></thead>
+<tbody>
+<tr><td>1 à 10 °C</td><td>À surveiller</td><td>Prochaine ronde</td></tr>
+<tr><td>10 à 30 °C</td><td>Anomalie</td><td>Intervention planifiée</td></tr>
+<tr><td><strong>plus de 30 °C</strong></td><td><strong>Critique</strong></td><td><strong>Intervention immédiate</strong></td></tr>
+</tbody></table>
+<p>Avec 51 °C d'écart, on est <strong>largement en critique</strong>.</p>
+<p><strong>L'intervention, dans l'ordre :</strong></p>
+<ol>
+<li><strong>Consigner</strong> le départ. On ne resserre jamais une borne sous tension : elle est déjà fragilisée, et l'outil peut provoquer l'arc.</li>
+<li><strong>Ouvrir et inspecter.</strong> On cherche : vis desserrée, cuivre noirci ou verdâtre, brins écrasés ou coupés, embout absent, isolant fondu, trace de charbon.</li>
+<li><strong>Si le conducteur est noirci ou fragilisé, le recouper</strong> et refaire l'extrémité : dénudage propre, embout serti neuf. On ne resserre pas sur du cuivre oxydé — l'oxyde reste, et l'emballement reprend.</li>
+<li><strong>Vérifier l'état de la borne elle-même.</strong> Un logement déformé ou une vis fatiguée impose de changer l'appareil.</li>
+<li><strong>Serrer au couple constructeur</strong>, à la clé dynamométrique.</li>
+<li><strong>Recontrôler à la thermographie</strong> après quelques heures de charge, et consigner la mesure dans la GMAO.</li>
+</ol>
+<p><em>Et la question qu'il faut se poser ensuite : pourquoi cette borne s'est-elle desserrée ? Vibrations de la machine, cycles thermiques importants, serrage initial jamais fait au couple, ou conducteur souple sans embout. Si la cause reste, le défaut reviendra.</em></p>
+</div></details></div>
+
+<div class="exo"><span class="tag">Exercice 27.3</span>
+<p>Pourquoi sertit-on un embout sur un conducteur souple avant de l'introduire dans une borne à vis ? Que se passe-t-il si on ne le fait pas ?</p>
+<details><summary>Voir la réponse</summary><div class="rep">
+<p><strong>Trois raisons distinctes, et elles s'additionnent.</strong></p>
+<p><strong>1. Les brins s'écartent au serrage.</strong> Un conducteur souple de 2,5 mm² compte plusieurs dizaines de brins fins. Quand la vis descend, elle repousse les brins sur les côtés : une partie sort du logement de la borne. <span class="cle">La section réellement serrée peut tomber à la moitié de la section nominale</span> — et cette réduction est invisible, puisque le fil a l'air correctement engagé.</p>
+<p><strong>2. Les brins isolés créent des courts-circuits.</strong> Un brin qui dépasse et qui touche le conducteur voisin, c'est un défaut franc. Ce brin est fin : il fond parfois avant de déclencher quoi que ce soit, laissant une trace de carbone qui, elle, amorcera un jour l'arc.</p>
+<p><strong>3. Le cuivre flue sous pression.</strong> Un faisceau de brins soumis à la pression d'une vis se tasse lentement — c'est du fluage, le même phénomène qu'au chapitre 18 du dossier mécanique. Au bout de quelques semaines, la pression de contact a chuté, la résistance a monté, et l'emballement du § 27.6 démarre. L'embout, en sertissant les brins dans un fourreau métallique, forme un bloc rigide qui ne flue pratiquement plus.</p>
+<p><strong>Ce que ça donne concrètement.</strong> Avec 30 A dans une borne dont la section utile est réduite de moitié :</p>
+<ul>
+<li>La résistance de contact est multipliée par deux à trois.</li>
+<li>La puissance dissipée suit : quelques watts dans un volume minuscule.</li>
+<li>La température monte de 40 à 60 °C au-dessus de l'ambiant.</li>
+<li>Le processus s'emballe : oxydation, résistance, chaleur, oxydation.</li>
+</ul>
+<p><strong>Les règles de mise en œuvre :</strong></p>
+<ul>
+<li>Un embout <strong>de la section du conducteur</strong>, pas approchant. Les embouts sont d'ailleurs codés par couleur.</li>
+<li>Une <strong>pince à sertir</strong> à profil carré ou trapézoïdal, calibrée. Une pince coupante ou universelle écrase sans sertir : elle ne réalise pas de liaison mécanique.</li>
+<li>Un embout <strong>par conducteur</strong>. Deux fils dans le même embout est une pratique tolérée uniquement avec des embouts jumelés prévus pour.</li>
+<li>La partie isolante de l'embout doit venir <strong>au contact de l'isolant</strong> du fil, sans cuivre nu visible entre les deux.</li>
+</ul>
+<p><em>Cette exigence est celle que le référentiel désigne par « mettre en œuvre les procédures de connexion », et elle est évaluée en TP. C'est un geste, pas une connaissance : il se juge sur la pièce, pas sur la copie.</em></p>
+</div></details></div>
+
+</div>
+</section>
+
+<script>
+/* ======================= CH 27 · dimensionner une section ======================= */
+(function(){
+  "use strict";
+  /* Courants admissibles indicatifs — cuivre, PVC, 3 conducteurs chargés,
+     pose type B1, 30 °C. Les tables réelles dépendent du mode de pose exact. */
+  var SEC=[1.5,2.5,4,6,10,16,25,35];
+  var IAD=[15.5,21,28,36,50,68,89,110];
+  var POSE=[
+    {n:'favorables',            k:1.00, d:'un circuit, 30 °C, chemin ventilé'},
+    {n:'3 circuits jointifs',   k:0.70, d:'facteur de groupement 0,70'},
+    {n:'6 circuits à 40 °C',    k:0.50, d:'0,87 × 0,57 — un chemin bien rempli'},
+    {n:'conduit encastré, 40 °C',k:0.67,d:'0,87 × 0,77 — rien ne ventile'}
+  ];
+  var S=MSPC.ctrl('a-section-s', function(v){ return SEC[v]+' mm²'; }, 'a-section-s-l');
+  var I=MSPC.ctrl('a-section-i', function(v){ return Math.round(v)+' A'; }, 'a-section-i-l');
+  var L=MSPC.ctrl('a-section-l', function(v){ return Math.round(v)+' m'; }, 'a-section-l-l');
+  var P=MSPC.ctrl('a-section-p', function(v){ return POSE[v].n; }, 'a-section-p-l');
+  var out=document.getElementById('a-section-out');
+  var RHO=0.023, U=400, COSP=0.85, LIM=5;
+
+  MSPC.anim('a-section', function(a){
+    var ctx=a.ctx, W=a.W, H=a.H;
+    var s=SEC[S.val], iv=I.val, lg=L.val, po=POSE[P.val];
+    var iad=IAD[S.val]*po.k;
+    var dU=1.732*RHO*lg*iv*COSP/s;
+    var dUp=dU/U*100;
+    var okI=iv<=iad, okU=dUp<=LIM;
+    var ok=okI&&okU;
+    // la section minimale qui satisfait les deux critères
+    var smin=null;
+    for(var k=0;k<SEC.length;k++){
+      if(iv<=IAD[k]*po.k && 1.732*RHO*lg*iv*COSP/SEC[k]/U*100<=LIM){ smin=SEC[k]; break; }
+    }
+
+    MSPC.fond(ctx,W,H,0);
+    MSPC.mono(ctx,'DIMENSIONNER UN CÂBLE — DEUX CRITÈRES, ET IL FAUT LES DEUX',26,30,11.5,'#8d968b');
+    MSPC.mono(ctx,'400 V triphasé · cos φ 0,85 · cuivre',W-26,30,10,'#6f786e','right');
+
+    /* ---------- la ligne ---------- */
+    var lx=60, ly=104, lw=500;
+    ctx.strokeStyle='#5a6258'; ctx.lineWidth=2;
+    ctx.strokeRect(lx,ly-26,58,52);
+    MSPC.mono(ctx,'ARMOIRE',lx+29,ly+4,9.5,'#8d968b','center');
+    var ep=Math.max(4,Math.min(18,3+s*0.5));
+    ctx.strokeStyle=okI?'#c8d834':'#ff6a5e'; ctx.lineWidth=ep;
+    ctx.lineCap='round';
+    ctx.beginPath(); ctx.moveTo(lx+58,ly); ctx.lineTo(lx+lw,ly); ctx.stroke();
+    ctx.lineCap='butt';
+    ctx.strokeStyle='#c8d834'; ctx.lineWidth=2.4;
+    ctx.beginPath(); ctx.arc(lx+lw+30,ly,26,0,6.2832); ctx.stroke();
+    MSPC.titre(ctx,'M',lx+lw+30,ly+9,24,'#c8d834','center');
+    // la cote
+    ctx.strokeStyle='rgba(255,255,255,.30)'; ctx.lineWidth=1;
+    ctx.beginPath(); ctx.moveTo(lx+58,ly+38); ctx.lineTo(lx+lw,ly+38);
+    ctx.moveTo(lx+58,ly+32); ctx.lineTo(lx+58,ly+44);
+    ctx.moveTo(lx+lw,ly+32); ctx.lineTo(lx+lw,ly+44); ctx.stroke();
+    ctx.fillStyle='#11160f'; ctx.fillRect(lx+lw/2-32,ly+30,72,17);
+    MSPC.mono(ctx,lg+' m',lx+lw/2+4,ly+43,11,'#cfe2ee','center');
+    MSPC.mono(ctx,s+' mm²',lx+lw/2+4,ly-18,11.5,okI?'#c8d834':'#ff6a5e','center');
+    // les tensions aux deux bouts
+    MSPC.mono(ctx,'400 V',lx+29,ly-38,11,'#cfe2ee','center');
+    MSPC.mono(ctx,Math.round(U-dU)+' V',lx+lw+30,ly-38,11.5,okU?'#c8d834':'#ff6a5e','center');
+
+    /* ---------- les deux jauges ---------- */
+    var gy=196;
+    [[okI,'CRITÈRE 1 — ÉCHAUFFEMENT', iv, iad, 'A', 'courant d’emploi', 'courant admissible', po.d],
+     [okU,'CRITÈRE 2 — CHUTE DE TENSION', dUp, LIM, '%', 'chute calculée', 'limite réglementaire', 'force motrice : 5 % · éclairage : 3 %']
+    ].forEach(function(z,i){
+      var y=gy+i*118, coul=z[0]?'#c8d834':'#ff6a5e';
+      ctx.fillStyle=z[0]?'rgba(200,216,52,.06)':'rgba(255,106,94,.08)';
+      ctx.fillRect(40,y,536,102);
+      ctx.strokeStyle=coul; ctx.lineWidth=1.8; ctx.strokeRect(40.5,y+.5,536,102);
+      MSPC.mono(ctx,z[1],56,y+24,10.5,coul);
+      MSPC.mono(ctx,z[7],56,y+40,9.5,'#6f786e');
+      // la jauge
+      var jx=56, jw=380, jy=y+56;
+      ctx.fillStyle='rgba(255,255,255,.09)'; ctx.fillRect(jx,jy,jw,20);
+      var frac=Math.min(1.3, z[2]/z[3]);
+      ctx.fillStyle=coul; ctx.fillRect(jx,jy,jw*frac/1.3,20);
+      ctx.strokeStyle='#cfe2ee'; ctx.lineWidth=2;
+      ctx.beginPath(); ctx.moveTo(jx+jw/1.3,jy-5); ctx.lineTo(jx+jw/1.3,jy+25); ctx.stroke();
+      MSPC.mono(ctx,'limite',jx+jw/1.3,jy-10,9.5,'#cfe2ee','center');
+      MSPC.titre(ctx, (z[4]==='A'?Math.round(z[2]):z[2].toFixed(1).replace('.',','))+' '+z[4], jx, y+96, 22, coul);
+      MSPC.mono(ctx,'/ '+(z[4]==='A'?Math.round(z[3]):z[3])+' '+z[4],jx+92,y+94,11,'#8d968b');
+      MSPC.titre(ctx, z[0]?'OK':'INSUFFISANT', 452, y+96, 22, coul);
+    });
+
+    /* ---------- le verdict ---------- */
+    var qx=596, qw=W-qx-26;
+    var coul=ok?'#c8d834':'#ff6a5e';
+    ctx.fillStyle='rgba(255,255,255,.04)'; ctx.fillRect(qx,88,qw,300);
+    ctx.strokeStyle=coul; ctx.lineWidth=2; ctx.strokeRect(qx+.5,88.5,qw,300);
+    MSPC.mono(ctx,'SECTION CHOISIE',qx+16,114,10,'#8d968b');
+    MSPC.titre(ctx,s+' mm²',qx+16,152,32,coul);
+    MSPC.mono(ctx,'COURANT ADMISSIBLE CORRIGÉ',qx+16,184,10,'#8d968b');
+    MSPC.titre(ctx,Math.round(iad)+' A',qx+16,216,26,'#cfe2ee');
+    MSPC.mono(ctx,'facteur de pose × '+po.k.toFixed(2).replace('.',','),qx+16,236,9.5,'#6f786e');
+    MSPC.mono(ctx,'CHUTE DE TENSION',qx+16,266,10,'#8d968b');
+    MSPC.titre(ctx,dUp.toFixed(2).replace('.',',')+' %',qx+16,298,26,okU?'#c8d834':'#ff6a5e');
+    MSPC.mono(ctx,'soit '+dU.toFixed(1).replace('.',',')+' V perdus dans le câble',qx+16,318,9.5,'#6f786e');
+    MSPC.mono(ctx,'SECTION MINIMALE NÉCESSAIRE',qx+16,348,10,'#8d968b');
+    MSPC.titre(ctx, smin? smin+' mm²' : 'au-delà de 35', qx+16,380,26, smin&&smin<=s?'#c8d834':'#f0a844');
+
+    /* ---------- bandeau ---------- */
+    var msg;
+    if(ok && smin===s) msg='Les deux critères sont satisfaits, et c’est la plus petite section qui convient.';
+    else if(ok) msg='Les deux critères passent, mais cette section est surdimensionnée : ' + smin + ' mm² suffiraient.';
+    else if(!okI && !okU) msg='Les deux critères échouent. Il faut monter à ' + (smin||'plus de 35') + ' mm².';
+    else if(!okI) msg='Le câble chaufferait au-delà de ce que son isolant supporte. C’est un problème de SÉCURITÉ.';
+    else msg='Le câble reste froid, mais le moteur ne reçoit que ' + Math.round(U-dU) + ' V. C’est la LONGUEUR qui commande ici, pas le courant.';
+    ctx.fillStyle='rgba(255,255,255,.05)'; ctx.fillRect(26,436,W-52,34);
+    MSPC.mono(ctx,msg,42,458,12,coul);
+
+    out.innerHTML='<b style="color:'+coul+'">'+(ok?'section correcte':'section insuffisante')+'</b><br>'
+      +Math.round(iv)+' A / '+Math.round(iad)+' A · chute '+dUp.toFixed(2).replace('.',',')+' %';
+  }, {fixed:true});
+})();
+
+/* ======================= CH 27 · décoder une désignation ======================= */
+(function(){
+  "use strict";
+  var CA=[
+    {n:'H07 V-K', u:'450/750 V',
+     c:[['H','harmonisé','Conforme à la norme européenne. Utilisable partout dans l’Union.'],
+        ['07','450/750 V','Tenue de l’isolant : 450 V vers la terre, 750 V entre conducteurs.'],
+        ['V','isolant PVC','Polychlorure de vinyle. Économique, correct jusqu’à 70 °C.'],
+        ['K','âme souple, pose fixe','Nombreux brins fins. Se plie facilement — le fil d’armoire par excellence.']],
+     e:'Câblage intérieur d’armoire, sur rail ou goulotte. Toujours avec un embout serti.'},
+    {n:'H07 V-U', u:'450/750 V',
+     c:[['H','harmonisé','Conforme à la norme européenne.'],
+        ['07','450/750 V','Même tenue que le V-K.'],
+        ['V','isolant PVC','Identique.'],
+        ['U','âme massive rigide','Un seul brin épais. Se tient tout seul, mais ne se plie presque pas.']],
+     e:'Installation fixe sous conduit ou en goulotte. Ne jamais l’utiliser sur une partie qui bouge.'},
+    {n:'H07 RN-F', u:'450/750 V',
+     c:[['H','harmonisé','Conforme à la norme européenne.'],
+        ['07','450/750 V','Tenue de l’isolant.'],
+        ['R','isolant caoutchouc','Souple à froid, résistant à l’abrasion et aux huiles.'],
+        ['N','gaine néoprène','Une seconde enveloppe, très résistante mécaniquement.'],
+        ['F','âme souple, usage mobile','Prévue pour être déplacée sans arrêt.']],
+     e:'Chantier, rallonges, alimentation d’engins mobiles, milieux humides.'},
+    {n:'U-1000 R2V', u:'1000 V',
+     c:[['U','désignation nationale','Norme française UTE, pas la désignation harmonisée.'],
+        ['1000','1000 V','Tenue de l’isolant : 1 000 volts.'],
+        ['R','isolant PR réticulé','Polyéthylène réticulé. Tient 90 °C au lieu de 70.'],
+        ['2','bourrage + gaine','Deux enveloppes : un bourrage puis une gaine extérieure.'],
+        ['V','gaine PVC','La gaine extérieure, résistante et étanche.']],
+     e:'Le câble de distribution industrielle : chemins de câbles, pose enterrée, alimentation de machines.'},
+    {n:'A05 VV-F', u:'300/500 V',
+     c:[['A','NON harmonisé','Reconnu au niveau national seulement. Attention à l’usage.'],
+        ['05','300/500 V','Tenue faible : à proscrire en 400 V triphasé.'],
+        ['V','isolant PVC','Isolant de chaque conducteur.'],
+        ['V','gaine PVC','Gaine extérieure d’ensemble.'],
+        ['F','âme souple, usage mobile','Souple, pour appareils déplaçables.']],
+     e:'Cordons d’appareils domestiques. N’a rien à faire dans une armoire industrielle.'}
+  ];
+  var C=MSPC.ctrl('a-designation-c', function(v){ return CA[v].n; }, 'a-designation-c-l');
+  var out=document.getElementById('a-designation-out');
+
+  MSPC.anim('a-designation', function(a){
+    var ctx=a.ctx, W=a.W, H=a.H;
+    var ca=CA[C.val];
+    var harmo = ca.c[0][0]==='H';
+
+    MSPC.fond(ctx,W,H,0);
+    MSPC.mono(ctx,'DÉCODER UNE DÉSIGNATION DE CÂBLE, CARACTÈRE PAR CARACTÈRE',26,30,11.5,'#8d968b');
+
+    /* ---------- le câble et son marquage ---------- */
+    var cy=104;
+    ctx.fillStyle='rgba(90,98,88,.5)'; ctx.fillRect(40,cy-22,540,44);
+    ctx.strokeStyle='#8f9a86'; ctx.lineWidth=2; ctx.strokeRect(40,cy-22,540,44);
+    ctx.font='700 30px "Saira Condensed",sans-serif'; ctx.textAlign='left';
+    ctx.fillStyle='#e6ebe4'; ctx.fillText(ca.n, 62, cy+11);
+    MSPC.mono(ctx,'imprimé sur la gaine, tous les mètres',330,cy+6,10.5,'#cfe2ee');
+
+    /* ---------- les caractères ---------- */
+    var n=ca.c.length;
+    ca.c.forEach(function(x,i){
+      var y=160+i*58;
+      ctx.fillStyle='rgba(255,255,255,.05)'; ctx.fillRect(40,y,540,50);
+      ctx.fillStyle= i===0 ? (harmo?'#c8d834':'#f0a844') : '#79a6c4';
+      ctx.fillRect(40,y,6,50);
+      MSPC.titre(ctx,x[0],62,y+34,26,'#cfe2ee');
+      MSPC.mono(ctx,x[1],124,y+21,11.5, i===0&&!harmo?'#f0a844':'#e6ebe4');
+      MSPC.mono(ctx,x[2],124,y+40,10,'#8d968b');
+    });
+
+    /* ---------- panneau ---------- */
+    var qx=604, qw=W-qx-26;
+    ctx.fillStyle='rgba(255,255,255,.04)'; ctx.fillRect(qx,82,qw,240);
+    ctx.strokeStyle=harmo?'#c8d834':'#f0a844'; ctx.lineWidth=1.8; ctx.strokeRect(qx+.5,82.5,qw,240);
+    MSPC.mono(ctx,'TENSION ASSIGNÉE',qx+16,108,10,'#8d968b');
+    MSPC.titre(ctx,ca.u,qx+16,142,28,'#cfe2ee');
+    MSPC.mono(ctx,'conducteur/terre — entre conducteurs',qx+16,162,9,'#6f786e');
+    MSPC.mono(ctx,'UTILISABLE EN 400 V TRIPHASÉ',qx+16,192,10,'#8d968b');
+    var ok400 = ca.u!=='300/500 V';
+    MSPC.titre(ctx, ok400?'OUI':'NON', qx+16,224,28, ok400?'#c8d834':'#ff6a5e');
+    MSPC.mono(ctx,'NORME',qx+16,254,10,'#8d968b');
+    MSPC.titre(ctx, harmo?'harmonisée':'nationale', qx+16,284,22, harmo?'#c8d834':'#f0a844');
+    MSPC.mono(ctx, harmo?'reconnue dans toute l’Union':'reconnue en France seulement',qx+16,304,9.5,'#6f786e');
+
+    /* ---------- l'emploi ---------- */
+    ctx.fillStyle='rgba(255,255,255,.05)'; ctx.fillRect(qx,336,qw,90);
+    MSPC.mono(ctx,'OÙ ON L’EMPLOIE',qx+16,360,10,'#8d968b');
+    var e=ca.e, li=[], cur='';
+    e.split(' ').forEach(function(m){ if((cur+' '+m).length<=30) cur=(cur?cur+' ':'')+m; else { li.push(cur); cur=m; } });
+    li.push(cur);
+    li.slice(0,4).forEach(function(t,i){ MSPC.mono(ctx,t,qx+16,380+i*15,10.5,'#cfe2ee'); });
+
+    MSPC.mono(ctx,'La tension de la désignation est une TENUE D’ISOLANT, jamais une tension d’emploi.',40,H-14,10.5,'#6f786e');
+
+    out.innerHTML='<b>'+ca.n+'</b> — '+ca.u+'<br>'+(harmo?'désignation harmonisée':'<span style="color:#f0a844">désignation nationale</span>');
+  }, {fixed:true});
+})();
+
+/* ======================= CH 27 · la qualité d'un raccordement ======================= */
+(function(){
+  "use strict";
+  var D=MSPC.ctrl('a-raccord-d', function(v){ return v+' mm'; }, 'a-raccord-d-l');
+  var C=MSPC.ctrl('a-raccord-c', function(v){ return (v/10).toFixed(1).replace('.',',')+' N·m'; }, 'a-raccord-c-l');
+  var I=MSPC.ctrl('a-raccord-i', function(v){ return Math.round(v)+' A'; }, 'a-raccord-i-l');
+  var E=MSPC.ctrl('a-raccord-e');
+  var out=document.getElementById('a-raccord-out');
+  var DOPT=10, COPT=1.2;
+
+  MSPC.anim('a-raccord', function(a){
+    var ctx=a.ctx, W=a.W, H=a.H;
+    var d=D.val, cpl=C.val/10, iv=I.val, emb=E.val;
+
+    /* la résistance de contact, en milliohms */
+    var rc=0.25;                                        // un raccordement parfait
+    if(cpl<COPT) rc += 14*Math.pow((COPT-cpl)/COPT,2);  // sous-serrage : l'emballement
+    if(cpl>2.4)  rc += (cpl-2.4)*3;                     // sur-serrage : brins écrasés
+    if(!emb)     rc += 3.2;                             // brins écartés, section utile réduite
+    if(d<6)      rc += 22;                              // la vis serre sur l'isolant
+    if(d>16)     rc += 0.6;                             // le contact reste bon, le danger est ailleurs
+    var P=rc/1000*iv*iv;
+    var dT=P*13;                                        // échauffement approché du point de contact
+    var T=25+dT;
+    var nu=Math.max(0,d-12);                            // cuivre nu qui dépasse
+
+    var etat, msg, coul;
+    if(d<6){ etat='AUCUN CONTACT'; coul='#ff6a5e';
+      msg='La vis serre sur l’isolant. Il n’y a pratiquement pas de contact électrique : ce qui passe traverse quelques points, qui fondent.'; }
+    else if(nu>4){ etat='CUIVRE À NU'; coul='#ff6a5e';
+      msg=Math.round(nu)+' mm de cuivre dépassent hors de la borne, à portée du conducteur voisin. Le contact est bon — c’est l’isolement qui ne l’est plus.'; }
+    else if(cpl<0.5){ etat='EMBALLEMENT'; coul='#ff6a5e';
+      msg='Sous-serrage franc. La résistance de contact monte, le point chauffe, le cuivre s’oxyde, la résistance monte encore. Rien ne l’arrêtera.'; }
+    else if(!emb){ etat='BRINS ÉCARTÉS'; coul='#f0a844';
+      msg='Sans embout, une partie des brins reste hors de la borne. La section utile s’effondre et le point chauffe — et rien ne le montre à l’œil.'; }
+    else if(cpl>2.6){ etat='SUR-SERRAGE'; coul='#f0a844';
+      msg='Les brins sont écrasés, certains sectionnés. La section utile diminue au lieu d’augmenter. Serrer plus fort n’est pas serrer mieux.'; }
+    else if(T>60){ etat='ÉCHAUFFEMENT'; coul='#f0a844';
+      msg='Le point de contact dépasse ce qu’une borne saine devrait atteindre. À surveiller à la thermographie.'; }
+    else { etat='CORRECT'; coul='#c8d834';
+      msg='Dénudage juste, embout serti, couple respecté. La résistance de contact reste sous le milliohm et rien ne chauffe.'; }
+
+    MSPC.fond(ctx,W,H,0);
+    MSPC.mono(ctx,'UNE BORNE À VIS, EN COUPE — ET SA VUE THERMIQUE',26,30,11.5,'#8d968b');
+
+    /* ---------- la borne ---------- */
+    var bx=220, by=110, bw=160, bh=92;
+    ctx.fillStyle='rgba(143,154,134,.20)'; ctx.fillRect(bx,by,bw,bh);
+    ctx.strokeStyle='#8f9a86'; ctx.lineWidth=2.4; ctx.strokeRect(bx,by,bw,bh);
+    MSPC.mono(ctx,'BORNE',bx+bw/2,by-12,10,'#8d968b','center');
+    // la vis
+    var desc=Math.min(46, 20+cpl*18);   // la vis descend vraiment sur le conducteur
+    ctx.fillStyle='#5a6258'; ctx.fillRect(bx+bw/2-13,by-30+desc,26,34);
+    ctx.strokeStyle='#cfe2ee'; ctx.lineWidth=1.8; ctx.strokeRect(bx+bw/2-13,by-30+desc,26,34);
+    ctx.beginPath(); ctx.moveTo(bx+bw/2-9,by-24+desc); ctx.lineTo(bx+bw/2+9,by-24+desc); ctx.stroke();
+
+    // le conducteur : isolant, puis cuivre
+    var cy=by+bh/2+8, xIso=30;
+    ctx.strokeStyle='#4f7fb8'; ctx.lineWidth=17; ctx.lineCap='round';
+    ctx.beginPath(); ctx.moveTo(xIso, cy); ctx.lineTo(bx+bw-8-d*5.6, cy); ctx.stroke();
+    ctx.lineCap='butt';
+    MSPC.mono(ctx,'isolant du conducteur',xIso,cy-20,10,'#79a6c4');
+    // le cuivre dénudé
+    var xCu=bx+bw-8-d*5.6;
+    if(emb){
+      ctx.fillStyle='#8d968b'; ctx.fillRect(xCu, cy-7, d*5.6-4, 14);
+      ctx.strokeStyle='#cfe2ee'; ctx.lineWidth=1.4; ctx.strokeRect(xCu, cy-7, d*5.6-4, 14);
+      MSPC.mono(ctx,'embout serti',xCu+10,cy+30,10,'#cfe2ee');
+    } else {
+      for(var b2=0;b2<9;b2++){
+        var ec=(b2-4)*1.9*(1+ (cpl>0.4?2.6:0.6));
+        ctx.strokeStyle='#b06a2c'; ctx.lineWidth=1.6;
+        ctx.beginPath(); ctx.moveTo(xCu, cy+(b2-4)*1.6);
+        ctx.lineTo(xCu+d*5.6-4, cy+ec); ctx.stroke();
+      }
+      MSPC.mono(ctx,'brins écartés',xCu+6,cy+34,10,'#f0a844');
+    }
+    // le cuivre qui dépasse
+    if(nu>0){
+      ctx.strokeStyle='#ff6a5e'; ctx.lineWidth=2;
+      ctx.beginPath(); ctx.moveTo(bx+bw, cy-16); ctx.lineTo(bx+bw+nu*5.6, cy-16); ctx.stroke();
+      MSPC.mono(ctx,Math.round(nu)+' mm à nu',bx+bw+8,cy-24,10,'#ff6a5e');
+    }
+    // la cote de dénudage
+    ctx.strokeStyle='rgba(255,255,255,.30)'; ctx.lineWidth=1;
+    ctx.beginPath(); ctx.moveTo(xCu, cy+50); ctx.lineTo(xCu+d*5.6, cy+50);
+    ctx.moveTo(xCu,cy+44); ctx.lineTo(xCu,cy+56);
+    ctx.moveTo(xCu+d*5.6,cy+44); ctx.lineTo(xCu+d*5.6,cy+56); ctx.stroke();
+    MSPC.mono(ctx,d+' mm dénudés',xCu+d*2.8,cy+70,10.5,'#cfe2ee','center');
+
+    /* ---------- la vue thermique ---------- */
+    var ty=290, tw=470;
+    MSPC.mono(ctx,'VUE THERMOGRAPHIQUE',40,ty-10,10.5,'#8d968b');
+    ctx.fillStyle='#0b0f0d'; ctx.fillRect(40,ty,tw,110);
+    ctx.strokeStyle='rgba(255,255,255,.20)'; ctx.lineWidth=1.4; ctx.strokeRect(40.5,ty+.5,tw,110);
+    // le dégradé de chaleur autour du point de contact
+    var hx=bx+bw-30, hy=ty+55;
+    for(var r=70;r>0;r-=2){
+      var f=1-r/70;
+      var tt=25+dT*f*f;
+      var col = tt<45 ? 'rgba(60,90,140,' : (tt<70 ? 'rgba(200,160,60,' : (tt<110 ? 'rgba(240,110,50,' : 'rgba(255,240,220,'));
+      ctx.fillStyle=col+(0.06+0.1*f)+')';
+      ctx.beginPath(); ctx.arc(hx,hy,r,0,6.2832); ctx.fill();
+    }
+    ctx.strokeStyle='rgba(255,255,255,.25)'; ctx.lineWidth=1.6;
+    ctx.strokeRect(hx-56,hy-24,112,48);
+    MSPC.titre(ctx,Math.round(T)+' °C',hx,hy+8,26, T>90?'#fff':(T>60?'#f0a844':'#79a6c4'),'center');
+    MSPC.mono(ctx,'ailleurs : 25 °C',60,ty+96,10,'#79a6c4');
+    MSPC.mono(ctx, T-25>30?'ÉCART CRITIQUE : plus de 30 °C':(T-25>10?'anomalie : à planifier':'écart normal'),
+      tw-16, ty+96, 10.5, T-25>30?'#ff6a5e':(T-25>10?'#f0a844':'#c8d834'),'right');
+
+    /* ---------- panneau ---------- */
+    var qx=536, qw=W-qx-26;
+    ctx.fillStyle='rgba(255,255,255,.04)'; ctx.fillRect(qx,88,qw,290);
+    ctx.strokeStyle=coul; ctx.lineWidth=2; ctx.strokeRect(qx+.5,88.5,qw,290);
+    MSPC.mono(ctx,'RÉSISTANCE DE CONTACT',qx+16,114,10,'#8d968b');
+    MSPC.titre(ctx,rc.toFixed(2).replace('.',',')+' mΩ',qx+16,150,30,coul);
+    MSPC.mono(ctx,'une borne saine : moins de 0,5 mΩ',qx+16,170,9.5,'#6f786e');
+    MSPC.mono(ctx,'PUISSANCE DISSIPÉE DANS LE POINT',qx+16,200,10,'#8d968b');
+    MSPC.titre(ctx,P.toFixed(2).replace('.',',')+' W',qx+16,232,26,coul);
+    MSPC.mono(ctx,'P = R × I²  avec I = '+iv+' A',qx+16,252,9.5,'#6f786e');
+    MSPC.mono(ctx,'TEMPÉRATURE DU CONTACT',qx+16,282,10,'#8d968b');
+    MSPC.titre(ctx,Math.round(T)+' °C',qx+16,318,32,coul);
+    MSPC.titre(ctx,etat,qx+16,364,24,coul);
+
+    /* ---------- bandeau ---------- */
+    ctx.fillStyle='rgba(255,255,255,.05)'; ctx.fillRect(26,410,W-52,50);
+    var l1=msg, l2='';
+    if(msg.length>92){ var mo=msg.split(' '); l1=''; l2='';
+      for(var w=0;w<mo.length;w++){ if((l1+' '+mo[w]).length<=92 && !l2) l1=(l1?l1+' ':'')+mo[w]; else l2=(l2?l2+' ':'')+mo[w]; } }
+    MSPC.mono(ctx,l1,42,434,11.5,coul);
+    if(l2) MSPC.mono(ctx,l2,42,452,11.5,coul);
+    MSPC.mono(ctx,'Le courant reste rigoureusement normal : aucune protection ne verra ce défaut.',26,H-8,10,'#6f786e');
+
+    out.innerHTML='<b style="color:'+coul+'">'+etat+'</b><br>'+rc.toFixed(2).replace('.',',')+' mΩ · '+Math.round(T)+' °C';
   }, {fixed:true});
 })();
 </script>
