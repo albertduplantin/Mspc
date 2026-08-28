@@ -156,8 +156,12 @@
     return c;
   }
 
+  /* Séparateur de milliers : toLocaleString('fr-FR') insère U+202F, que
+     les polices du canvas ne rendent pas. On met une espace ordinaire. */
+  function nb(x){ return String(Math.round(x)).replace(/\B(?=(\d{3})+(?!\d))/g, ' '); }
+
   global.MSPC = {
-    anim: anim, ctrl: ctrl, reduce: reduce,
+    anim: anim, ctrl: ctrl, reduce: reduce, nb: nb,
     fond: fond, mono: mono, titre: titre, axes: axes, jauge: jauge
   };
 })(window);
