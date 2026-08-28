@@ -48,10 +48,10 @@
 </header>
 
 <div class="meta-bar">
-  <div><b>25</b> chapitres</div>
-  <div><b>40</b> animations pilotables</div>
+  <div><b>26</b> chapitres</div>
+  <div><b>44</b> animations pilotables</div>
   <div><b>15</b> fiches TP d'atelier</div>
-  <div><b>73</b> exercices corrigés</div>
+  <div><b>76</b> exercices corrigés</div>
   <div>Manips en <b>TBTS ≤ 24 V</b> sauf mention</div>
 </div>
 
@@ -86,6 +86,7 @@
     <a class="borne" href="#c23"><span class="num">23</span><span class="lbl">La plaque et le couplage</span></a>
     <a class="borne" href="#c24"><span class="num">24</span><span class="lbl">Démarrer et protéger</span></a>
     <a class="borne" href="#c25"><span class="num">25</span><span class="lbl">Le variateur de vitesse</span></a>
+    <a class="borne" href="#c26"><span class="num">26</span><span class="lbl">Mesurer</span></a>
     <a class="borne" href="#tps" style="border-top-color:var(--accent)"><span class="num">TP</span><span class="lbl">Les 15 fiches d'atelier</span></a>
   </div></nav>
 
@@ -8146,6 +8147,602 @@
 
     out.innerHTML='vanne <b style="color:#ff6a5e">'+Pv.toFixed(1).replace('.',',')+' kW</b> · variateur <b style="color:#c8d834">'+Pd.toFixed(1).replace('.',',')+' kW</b><br>'
       +MSPC.nb(eco)+' € économisés par an';
+  }, {fixed:true});
+})();
+</script>
+
+
+<!-- ================= CH 26 ================= -->
+<section class="ch" id="c26">
+  <div class="ch-head"><div class="ch-num">26</div><div class="ch-title">
+    <span class="kicker">Le bon appareil, au bon endroit</span><h2>Mesurer</h2></div></div>
+  <div class="ch-body">
+
+<div class="savoirs">
+  <span class="savoir n3"><b>S4.4</b> <i>Techniques de mise en œuvre des appareils de mesure</i></span>
+  <span class="savoir n3"><b>S4.4</b> <i>Choix, réglages et mise en œuvre</i></span>
+</div>
+
+<p class="lede">Le référentiel les nomme un par un : <em>« voltmètre, multimètre, pince ampèremétrique, ohmmètre, testeur de rotation de phases, mégohmmètre »</em>. Ce ne sont pas six appareils au hasard : ce sont six grandeurs, six branchements, et six façons de se tromper — dont une qui fait exploser l'appareil dans la main.</p>
+
+<h3>26.1 — Six grandeurs, six méthodes</h3>
+
+<table>
+<thead><tr><th>Grandeur</th><th>Appareil</th><th>Branchement</th><th>Circuit</th></tr></thead>
+<tbody>
+<tr><td><strong>Tension</strong> (V)</td><td>Voltmètre, multimètre</td><td><strong>En parallèle</strong>, aux bornes de ce qu'on mesure</td><td>Sous tension</td></tr>
+<tr><td><strong>Intensité</strong> (A)</td><td>Multimètre en série,<br>ou <strong>pince ampèremétrique</strong></td><td>En série — il faut ouvrir le circuit.<br>Ou autour du conducteur, sans rien ouvrir</td><td>Sous tension</td></tr>
+<tr><td><strong>Résistance</strong> (Ω)</td><td>Ohmmètre</td><td>Aux bornes du composant, <strong>isolé du circuit</strong></td><td><strong>HORS tension</strong></td></tr>
+<tr><td><strong>Continuité</strong></td><td>Testeur de continuité</td><td>Aux deux extrémités du conducteur</td><td><strong>HORS tension</strong></td></tr>
+<tr><td><strong>Isolement</strong> (MΩ)</td><td><strong>Mégohmmètre</strong></td><td>Entre le conducteur et la masse</td><td><strong>HORS tension, et déconnecté</strong></td></tr>
+<tr><td><strong>Ordre des phases</strong></td><td>Testeur de rotation de phases</td><td>Les trois phases, dans l'ordre du bornier</td><td>Sous tension</td></tr>
+</tbody></table>
+
+<p><span class="cle">Trois des six mesures se font hors tension. C'est la première question à se poser, avant même de sortir l'appareil.</span></p>
+
+<h3>26.2 — L'erreur qui détruit l'appareil</h3>
+<p>Un voltmètre a une résistance interne <strong>énorme</strong> — plusieurs mégohms. Il ne laisse presque rien passer, ce qui lui permet de se brancher en parallèle sans perturber le circuit.</p>
+<p>Un ampèremètre, c'est l'inverse : sa résistance interne est <strong>quasi nulle</strong>, quelques milliohms, pour ne pas gêner le courant qui doit le traverser.</p>
+
+<div class="encadre danger"><span class="tag">Le calibre ampèremétrique laissé en place</span>
+<p>Vous mesurez un courant, vous finissez, et vous laissez le cordon rouge dans la borne <span class="mono">A</span>. Cinq minutes plus tard, vous voulez vérifier une tension et vous posez les pointes sur une prise.</p>
+<p><span class="cle">Vous venez de brancher un fil de cuivre de quelques milliohms directement entre phase et neutre.</span> C'est un court-circuit franc. Le courant de défaut atteint plusieurs milliers d'ampères, l'arc est violent, et les fragments de l'appareil partent au visage.</p>
+<p><strong>Ce qui vous sauve, dans l'ordre :</strong></p>
+<ul>
+<li>Le <strong>fusible HPC</strong> interne de l'appareil — s'il est bon, s'il est du bon calibre, et si l'appareil est de qualité. Un multimètre à quinze euros n'en a pas de vrai.</li>
+<li>La <strong>catégorie de mesure</strong> de l'appareil, qui dit s'il est conçu pour l'endroit où vous êtes.</li>
+<li>Le <strong>réflexe</strong> : remettre le cordon dans la borne <span class="mono">V/Ω</span> immédiatement après chaque mesure de courant. Toujours. Sans exception.</li>
+</ul></div>
+
+<figure class="anim">
+  <canvas id="a-mesure" width="900" height="470" aria-label="Animation : où placer les pointes de touche selon la grandeur mesurée"></canvas>
+  <div class="ctrls">
+    <div class="c"><label>Grandeur à mesurer <span id="a-mesure-g-l">tension</span></label><input type="range" id="a-mesure-g" min="0" max="3" value="0"></div>
+    <div class="c"><label>Branchement <span id="a-mesure-b-l">en parallèle</span></label><input type="range" id="a-mesure-b" min="0" max="1" value="0"></div>
+    <div class="c"><label class="switch"><input type="checkbox" id="a-mesure-t" checked><span>Circuit sous tension</span></label></div>
+    <div class="c readout" id="a-mesure-out"></div>
+  </div>
+  <figcaption>Un circuit simple, et un multimètre que vous placez. <b>Croisez les trois réglages</b> : sur douze combinaisons, quatre sont justes, plusieurs ne donnent rien de bon, et <b>une seule est violente</b>. <b>Mettez le multimètre en calibre ampèremétrique, en parallèle, sur un circuit sous tension</b> : l'écran devient rouge et l'arc apparaît. C'est le court-circuit franc du paragraphe précédent. <b>Essayez aussi l'ohmmètre sous tension</b> : pas d'explosion, mais une valeur fausse et un appareil abîmé.</figcaption>
+  <div class="autableau">
+    <b class="entete">Au tableau <i>· 10 minutes · animation 1 sur 3</i></b>
+    <ol>
+      <li>Tension, en parallèle, sous tension : correct. <span class="q">« Pourquoi le voltmètre ne perturbe-t-il pas le circuit ? »</span> Faire lire sa résistance interne.</li>
+      <li>Basculer sur <b>en série</b> sans rien changer d'autre. <span class="q">« Que va lire l'appareil ? »</span> Presque rien — il bloque le courant.</li>
+      <li>Passer sur <b>intensité</b>, en série : correct. Puis, sans prévenir, basculer <b>en parallèle</b>. Laisser la classe réagir à l'arc.</li>
+      <li><span class="q">« Combien de temps ça a pris ? »</span> Moins d'un dixième de seconde. <span class="q">« Qu'est-ce qui vous a sauvé ? »</span> Le fusible, s'il y en avait un.</li>
+      <li>Finir sur <b>résistance</b> avec le circuit encore sous tension : montrer la valeur aberrante.</li>
+    </ol>
+    <div class="piege">Le piège : croire que l'erreur vient d'un mauvais réglage du sélecteur. Non — elle vient du CORDON laissé dans la borne ampèremétrique. Le sélecteur peut être sur volts : si le cordon est encore dans la borne A, il y a un shunt de quelques milliohms entre les deux pointes.</div>
+  </div>
+</figure>
+
+<h3>26.3 — La catégorie de mesure : ce que dit CAT III 600 V</h3>
+<p>Deux chiffres sont marqués sur tout appareil sérieux, et ils ne se lisent pas séparément. Ils disent <strong>où</strong> l'appareil a le droit d'aller.</p>
+
+<table>
+<thead><tr><th>Catégorie</th><th>Où</th><th>Pourquoi c'est différent</th></tr></thead>
+<tbody>
+<tr><td><strong>CAT II</strong></td><td>Prises de courant, appareils domestiques</td><td>Loin de la source : les surtensions transitoires sont amorties par l'impédance de la ligne</td></tr>
+<tr><td><strong>CAT III</strong></td><td>Tableaux de distribution, armoires, départs-moteurs</td><td><strong>C'est là que vous travaillez.</strong> Surtransitoires plus violents, énergie de court-circuit bien plus élevée</td></tr>
+<tr><td><strong>CAT IV</strong></td><td>Origine de l'installation, compteur, arrivée réseau</td><td>Exposé directement à la foudre et aux manœuvres du réseau</td></tr>
+</tbody></table>
+
+<p><span class="cle">Un appareil CAT II 1000 V est MOINS sûr dans une armoire qu'un CAT III 600 V.</span> La catégorie prime sur la tension : elle dit la capacité à encaisser une surtension transitoire de plusieurs kilovolts sans amorcer à l'intérieur du boîtier. C'est le chiffre à regarder en premier — et beaucoup d'appareils bon marché affichent une belle tension et aucune catégorie.</p>
+
+<h3>26.4 — La pince ampèremétrique</h3>
+<p>Elle mesure un courant <strong>sans ouvrir le circuit</strong>, en captant le champ magnétique que ce courant crée autour du conducteur — le chapitre 9, transformé en outil. C'est l'appareil le plus utilisé en maintenance, et il a deux usages que peu de gens connaissent.</p>
+
+<figure class="anim">
+  <canvas id="a-pince" width="900" height="460" aria-label="Animation : pince ampèremétrique, mesure d'une phase, somme des trois phases et détection de fuite"></canvas>
+  <div class="ctrls">
+    <div class="c"><label>Ce que vous enserrez <span id="a-pince-q-l">une seule phase</span></label><input type="range" id="a-pince-q" min="0" max="3" value="0"></div>
+    <div class="c"><label>Courant de fuite à la terre <span id="a-pince-f-l">0 mA</span></label><input type="range" id="a-pince-f" min="0" max="500" value="0"></div>
+    <div class="c"><label>Nombre de spires dans la pince <span id="a-pince-s-l">1</span></label><input type="range" id="a-pince-s" min="1" max="5" value="1"></div>
+    <div class="c readout" id="a-pince-out"></div>
+  </div>
+  <figcaption>Trois usages d'une même pince. <b>Une seule phase</b> : vous lisez le courant de cette phase, c'est l'usage courant. <b>Les trois phases ensemble</b> : la somme instantanée des trois courants vaut zéro dans une installation saine — la pince affiche donc <b>presque rien</b>. <b>Montez maintenant le courant de fuite</b> : la somme cesse d'être nulle, et la pince affiche exactement ce qui part à la terre. <b>C'est ainsi qu'on traque un défaut d'isolement sans rien débrancher.</b> Enfin, <b>passez plusieurs spires dans la pince</b> : la lecture est multipliée d'autant, ce qui permet de mesurer quelques milliampères avec une pince prévue pour des ampères.</figcaption>
+  <div class="autableau">
+    <b class="entete">Au tableau <i>· 10 minutes · animation 2 sur 3</i></b>
+    <ol>
+      <li>Une phase, pas de fuite. <span class="q">« Est-ce que j'ai ouvert le circuit pour mesurer ? »</span> Non — et c'est tout l'intérêt.</li>
+      <li>Passer sur <b>les trois phases</b>. <span class="q">« Que va afficher la pince, à votre avis ? »</span> Recueillir les paris, puis montrer le zéro.</li>
+      <li><span class="q">« Pourquoi zéro ? »</span> Rappel du chapitre 13 : L1 + L2 + L3 = 0 à chaque instant.</li>
+      <li>Monter la <b>fuite à 250 mA</b>. <span class="q">« Et maintenant ? »</span> La pince affiche 250. <span class="q">« D'où vient ce courant ? »</span> Il est parti à la terre au lieu de revenir.</li>
+      <li>Finir sur les <b>spires multiples</b> : 3 tours, lecture ×3. <span class="q">« Pourquoi faire ça ? »</span> Pour mesurer petit avec un gros appareil.</li>
+    </ol>
+    <div class="piege">Le piège : enserrer deux phases en croyant en mesurer une. La pince additionne vectoriellement ce qui la traverse — sur deux phases d'un système équilibré, elle affiche le courant d'une phase, ce qui ressemble à une mesure juste. Vérifiez toujours qu'un seul conducteur est dans la mâchoire.</div>
+  </div>
+</figure>
+
+<h3>26.5 — Le mégohmmètre : mesurer un isolant</h3>
+<p>Un ohmmètre ordinaire mesure des ohms sous quelques volts. Un isolant, lui, se mesure en <strong>mégohms sous 500 volts</strong> — parce qu'un défaut d'isolement ne se révèle que sous contrainte. Une bobine dont le vernis est fissuré donne 50 MΩ à 9 V et 0,2 MΩ à 500 V.</p>
+
+<div class="formule">R<sub>isolement</sub> ≥ 1 MΩ<small>Seuil réglementaire en basse tension. En pratique, on s'inquiète bien avant</small></div>
+
+<figure class="anim">
+  <canvas id="a-megohm" width="900" height="470" aria-label="Animation : mesure d'isolement au mégohmmètre sur un moteur"></canvas>
+  <div class="ctrls">
+    <div class="c"><label>État du bobinage <span id="a-megohm-e-l">neuf</span></label><input type="range" id="a-megohm-e" min="0" max="3" value="0"></div>
+    <div class="c"><label>Durée de la mesure <span id="a-megohm-t-l">60 s</span></label><input type="range" id="a-megohm-t" min="1" max="60" value="60"></div>
+    <div class="c"><label class="switch"><input type="checkbox" id="a-megohm-v"><span>Variateur laissé raccordé</span></label></div>
+    <div class="c readout" id="a-megohm-out"></div>
+  </div>
+  <figcaption>Le mégohmmètre applique 500 V continus entre le bobinage et la carcasse, et mesure ce qui fuit. <b>Faites défiler l'état du bobinage</b> : neuf, vieilli, humide, dégradé — et regardez la valeur s'effondrer de plusieurs centaines de mégohms à quelques dixièmes. <b>Faites varier la durée</b> : la valeur <b>monte</b> pendant la première minute, parce que l'isolant se polarise ; c'est pour cela qu'on lit toujours à 60 secondes, jamais à 5. <b>Cochez « variateur laissé raccordé »</b> : 500 V sur son électronique de sortie, et c'est le variateur qu'on vient de détruire au lieu de diagnostiquer le moteur.</figcaption>
+  <div class="autableau">
+    <b class="entete">Au tableau <i>· 9 minutes · animation 3 sur 3</i></b>
+    <ol>
+      <li>Bobinage <b>neuf</b>, 60 s. Faire lire la valeur. <span class="q">« Des centaines de mégohms. Est-ce beaucoup ? »</span> Comparer au seuil de 1 MΩ.</li>
+      <li>Réduire la durée à <b>5 s</b>. <span class="q">« La valeur a baissé. Le moteur s'est-il dégradé en cinq secondes ? »</span> Non — c'est la polarisation.</li>
+      <li>Passer sur <b>humide</b>. <span class="q">« Faut-il rebobiner ? »</span> Piège : un moteur humide peut souvent être séché et retrouver son isolement.</li>
+      <li>Passer sur <b>dégradé</b> : sous le seuil. <span class="q">« Que fait-on ? »</span> Rebobinage ou remplacement, et surtout on ne remet pas sous tension.</li>
+      <li>Cocher <b>variateur raccordé</b>. Laisser lire le message. <span class="q">« Qu'est-ce qu'on vient de casser ? »</span></li>
+    </ol>
+    <div class="piege">Le piège : appliquer 500 V à une installation sans l'avoir isolée. Tout ce qui contient de l'électronique — variateur, automate, alimentation à découpage, capteur, voyant LED — est détruit par cette tension. Avant un essai d'isolement, on débranche, on repère, et on note ce qu'on a débranché.</div>
+  </div>
+</figure>
+
+<h3>26.6 — Le testeur de rotation de phases</h3>
+<p>Un petit appareil à trois pinces, avec un disque ou deux voyants. Il dit si les phases arrivent dans l'ordre <span class="mono">L1-L2-L3</span> ou dans l'ordre inverse.</p>
+<p>C'est trivial et pourtant indispensable : <span class="cle">inverser deux phases inverse le sens de rotation de tous les moteurs triphasés.</span> Sur une pompe, cela veut dire qu'elle tourne à l'envers et ne débite presque rien — sans faire de bruit anormal, sans déclencher, sans que rien ne signale le problème. Sur une vis d'Archimède ou un compresseur à vis, cela peut détruire la machine en quelques minutes.</p>
+<p>On l'utilise systématiquement après un remplacement d'armoire, un raccordement neuf, ou une intervention du distributeur sur le réseau.</p>
+
+<div class="exo"><span class="tag">Exercice 26.1</span>
+<p>Vous devez vérifier qu'un moteur triphasé n'a pas de défaut avant de le remettre en service. Détaillez les mesures à faire, dans l'ordre, avec l'appareil et l'état du circuit pour chacune.</p>
+<details><summary>Voir la réponse</summary><div class="rep">
+<p><strong>Toutes les mesures se font machine consignée, sauf la dernière.</strong></p>
+<ol>
+<li><strong>Consigner</strong> — les cinq opérations du chapitre 19, VAT comprise. Rien ne commence avant.</li>
+<li><strong>Ouvrir la boîte à bornes et retirer les barrettes.</strong> C'est indispensable : sans cela, on mesure les trois enroulements en parallèle ou en série et les valeurs n'ont aucun sens.</li>
+<li><strong>Continuité des trois enroulements, à l'ohmmètre.</strong> Entre U1-U2, V1-V2, W1-W2. On attend trois valeurs faibles — de quelques ohms sur un gros moteur à quelques dizaines sur un petit — et surtout <strong>égales entre elles à quelques pour cent près</strong>.
+<br><em>Un enroulement coupé donne un circuit ouvert. Un enroulement en court-circuit entre spires donne une valeur nettement plus faible que les deux autres : c'est le déséquilibre qui trahit, pas la valeur absolue.</em></li>
+<li><strong>Isolement au mégohmmètre, 500 V.</strong> Entre <em>chaque</em> enroulement et la carcasse. On attend au minimum 1 MΩ, et en pratique plusieurs dizaines sur un moteur sain. Lecture à 60 secondes.
+<br><em>Vérifier d'abord que rien d'électronique n'est resté raccordé.</em></li>
+<li><strong>Isolement entre enroulements</strong> — U vers V, V vers W, W vers U. Même seuil.</li>
+<li><strong>Remettre les barrettes</strong> dans le couplage correspondant à la plaque et au réseau (chapitre 23), et vérifier leur serrage au couple.</li>
+<li><strong>Déconsigner</strong>, puis <strong>mesurer les trois courants à la pince</strong> au démarrage puis en marche établie. Trois courants égaux à quelques pour cent près, et proches de la valeur de plaque.
+<br><em>Un déséquilibre de courant supérieur à 10 % signale un défaut d'enroulement ou un déséquilibre de tension d'alimentation.</em></li>
+</ol>
+<p><strong>Et une mesure qu'on oublie souvent :</strong> la <strong>continuité du conducteur de protection</strong>, entre la carcasse du moteur et la borne de terre de l'armoire. Un moteur parfaitement sain mais mal relié à la terre est un piège mortel — c'est exactement le scénario du chapitre 18.</p>
+<p><em>Consignez toutes ces valeurs dans la GMAO. Une mesure d'isolement n'a de sens que comparée à la précédente : c'est la pente qui informe, pas le chiffre isolé.</em></p>
+</div></details></div>
+
+<div class="exo"><span class="tag">Exercice 26.2</span>
+<p>Une pince ampèremétrique enserrant les trois phases d'un départ affiche 180 mA au lieu de zéro. Qu'est-ce que cela signifie ? Le différentiel 300 mA a-t-il déclenché ? Que faites-vous ?</p>
+<details><summary>Voir la réponse</summary><div class="rep">
+<p><strong>Cela signifie qu'il y a un courant de fuite à la terre de 180 mA.</strong></p>
+<p><strong>Le raisonnement.</strong> Dans une installation saine, tout le courant qui part par les phases revient par les phases : leur somme instantanée est nulle, et la pince n'affiche rien. Si elle affiche 180 mA, c'est que 180 mA sortent du circuit sans y revenir — ils partent à la terre par un défaut d'isolement.</p>
+<p><strong>Le différentiel 300 mA n'a pas déclenché, et c'est normal.</strong> Il est calibré à 300 mA ; 180 mA restent en dessous de son seuil. <span class="cle">Le défaut est donc invisible pour la protection, et il est pourtant bien là.</span></p>
+<p><strong>Pourquoi c'est grave malgré tout :</strong></p>
+<ul>
+<li><strong>180 mA à travers un corps sont mortels</strong> — six fois le seuil de fibrillation du chapitre 18. Si ce courant passe actuellement par un conducteur de protection, il passerait tout aussi bien par une personne si la terre venait à se couper.</li>
+<li><strong>Un défaut d'isolement s'aggrave.</strong> Il commence à quelques milliampères, progresse avec l'humidité et la chaleur, et finit en court-circuit franc — ou en incendie, si le courant de fuite trouve un chemin résistif dans une gaine ou une poussière conductrice.</li>
+<li><strong>Le différentiel finira par déclencher</strong>, un jour, sans prévenir, et probablement au pire moment.</li>
+</ul>
+<p><strong>La démarche pour localiser :</strong></p>
+<ol>
+<li><strong>Diviser pour trouver.</strong> Mesurer départ par départ, en descendant dans l'arborescence : le départ fautif est celui qui porte les 180 mA.</li>
+<li><strong>Isoler les récepteurs un par un</strong> sur le départ suspect, en surveillant la valeur. Elle tombe quand on débranche le coupable.</li>
+<li><strong>Confirmer au mégohmmètre</strong>, consignation faite, sur le récepteur identifié.</li>
+</ol>
+<p><strong>Les suspects habituels :</strong> un moteur humide ou vieilli, une résistance chauffante dont la gaine est fissurée, un câble blessé par un passage de chemin de câbles, et — très fréquent — les <strong>filtres CEM des variateurs</strong>, qui laissent passer quelques milliampères vers la terre <em>par construction</em>. Sur une installation qui compte dix variateurs, la somme de ces fuites normales peut à elle seule atteindre 150 mA.</p>
+<p><em>C'est d'ailleurs la raison pour laquelle on ne met pas un différentiel 30 mA en tête d'une armoire pleine de variateurs : il déclencherait en permanence sans qu'aucun défaut n'existe. On le place au plus près de chaque récepteur.</em></p>
+</div></details></div>
+
+<div class="exo"><span class="tag">Exercice 26.3</span>
+<p>Votre multimètre porte la mention <span class="mono">CAT II 1000 V</span>. Un collègue vous prête le sien, marqué <span class="mono">CAT III 600 V</span>. Vous devez mesurer 400 V dans une armoire de distribution. Lequel utilisez-vous ?</p>
+<details><summary>Voir la réponse</summary><div class="rep">
+<p><strong>Le CAT III 600 V, celui du collègue. Sans hésitation.</strong></p>
+<p><strong>Pourquoi la catégorie prime sur la tension.</strong> Les deux appareils supportent la tension permanente de 400 V — le CAT II est même donné pour 1 000 V. Mais ce n'est pas la tension permanente qui détruit un multimètre : ce sont les <strong>surtensions transitoires</strong>.</p>
+<p>Une manœuvre de contacteur, un coup de foudre lointain, le démarrage d'un gros moteur : chacun envoie sur le réseau une pointe de plusieurs kilovolts, qui dure quelques microsecondes. Cette pointe est d'autant plus violente qu'on est <em>près de la source</em> — c'est exactement ce que la catégorie mesure.</p>
+<table>
+<thead><tr><th>Catégorie</th><th>Transitoire de tenue</th><th>Où</th></tr></thead>
+<tbody>
+<tr><td>CAT II 1000 V</td><td>environ 6 kV</td><td>Prises, appareils en bout de ligne</td></tr>
+<tr><td><strong>CAT III 600 V</strong></td><td><strong>environ 6 kV, mais avec une énergie bien supérieure</strong></td><td><strong>Armoires, tableaux, départs-moteurs</strong></td></tr>
+</tbody></table>
+<p>Ce n'est pas seulement une question de tenue en tension : la catégorie fixe aussi les <strong>distances d'isolement internes</strong> et la capacité à interrompre le courant de défaut. Une armoire de distribution peut débiter plusieurs dizaines de kiloampères en court-circuit ; un appareil CAT II n'est pas construit pour survivre à ça.</p>
+<p><span class="cle">La règle : la catégorie doit correspondre à l'endroit, et la tension doit couvrir la mesure. Dans cet ordre.</span></p>
+<p><strong>Trois vérifications avant chaque usage</strong>, quelle que soit la catégorie :</p>
+<ul>
+<li>Les <strong>cordons</strong> portent eux aussi une catégorie. Un CAT III avec des cordons CAT II, c'est un ensemble CAT II.</li>
+<li>Les cordons ne doivent présenter <strong>aucune coupure ni craquelure</strong>, et les pointes de touche doivent avoir des protège-doigts.</li>
+<li>Le multimètre se teste sur une <strong>source connue</strong> avant et après la mesure — exactement la procédure du VAT du chapitre 19.</li>
+</ul>
+<p><em>Et le détail qui compte : les appareils sans aucune mention de catégorie n'ont pas oublié de l'écrire. Ils n'en ont pas.</em></p>
+</div></details></div>
+
+</div>
+</section>
+
+<script>
+/* ======================= CH 26 · où placer les pointes ======================= */
+(function(){
+  "use strict";
+  var GR=[
+    {n:'tension',   u:'V',  ri:'10 MΩ',  par:true},
+    {n:'intensité', u:'A',  ri:'0,01 Ω', par:false},
+    {n:'résistance',u:'Ω',  ri:'—',      par:true, hors:true},
+    {n:'continuité',u:'Ω',  ri:'—',      par:true, hors:true}
+  ];
+  var G=MSPC.ctrl('a-mesure-g', function(v){ return GR[v].n; }, 'a-mesure-g-l');
+  var B=MSPC.ctrl('a-mesure-b', function(v){ return v?'en série':'en parallèle'; }, 'a-mesure-b-l');
+  var T=MSPC.ctrl('a-mesure-t');
+  var out=document.getElementById('a-mesure-out');
+
+  MSPC.anim('a-mesure', function(a){
+    var ctx=a.ctx, W=a.W, H=a.H;
+    var gr=GR[G.val], serie=B.val===1, sous=T.val;
+
+    /* le verdict */
+    var etat, msg, coul, lecture;
+    if(G.val===1 && !serie && sous){
+      etat='COURT-CIRCUIT'; coul='#ff6a5e';
+      msg='Un shunt de 0,01 Ω entre phase et neutre. Le courant de défaut atteint des milliers d’ampères et l’arc part au visage.';
+      lecture='—';
+    } else if(gr.hors && sous){
+      etat='MESURE FAUSSE'; coul='#f0a844';
+      msg='Un ohmmètre injecte son propre courant et compare. Sur un circuit sous tension, il mesure n’importe quoi — et il s’abîme.';
+      lecture='OL';
+    } else if(G.val===0 && serie){
+      etat='RIEN NE PASSE'; coul='#f0a844';
+      msg='Un voltmètre a 10 MΩ de résistance interne. En série, il bloque le circuit : la lampe s’éteint et vous lisez presque toute la tension.';
+      lecture='229 V';
+    } else if(G.val===1 && serie && !sous){
+      etat='PAS DE COURANT'; coul='#8d968b';
+      msg='Le branchement est correct, mais le circuit est hors tension : il n’y a rien à mesurer.';
+      lecture='0,00 A';
+    } else if(G.val===1 && !serie && !sous){
+      etat='SANS EFFET'; coul='#8d968b';
+      msg='Hors tension, le calibre ampèremétrique en parallèle ne fait rien. Remettez le cordon dans la borne V/Ω avant de rebrancher.';
+      lecture='0,00 A';
+    } else if(G.val===0 && !sous){
+      etat='RIEN À LIRE'; coul='#8d968b';
+      msg='Branchement correct, mais le circuit est hors tension.';
+      lecture='0,0 V';
+    } else if(gr.hors && serie){
+      etat='BRANCHEMENT FAUX'; coul='#f0a844';
+      msg='Une résistance se mesure aux bornes du composant, isolé du reste du circuit — jamais en série avec lui.';
+      lecture='OL';
+    } else {
+      etat='CORRECT'; coul='#c8d834';
+      msg = G.val===0 ? 'Le voltmètre se place en parallèle : sa très grande résistance interne ne perturbe rien.'
+          : (G.val===1 ? 'L’ampèremètre se place en série : il faut ouvrir le circuit pour l’y insérer.'
+          : 'Circuit hors tension, composant isolé : la mesure est valide.');
+      lecture = G.val===0 ? '229 V' : (G.val===1 ? '0,42 A' : (G.val===2 ? '548 Ω' : '0,3 Ω'));
+    }
+    var boum = (etat==='COURT-CIRCUIT');
+
+    MSPC.fond(ctx,W,H,0);
+    MSPC.mono(ctx,'OÙ PLACER LES POINTES — ET CE QUI ARRIVE QUAND ON SE TROMPE',26,30,11.5,'#8d968b');
+
+    /* ---------- le circuit ---------- */
+    var cx=60, cy=110, cw=420, ch=180;
+    ctx.strokeStyle = sous ? '#ff6a5e' : '#4d5a4d'; ctx.lineWidth=2.8;
+    // source
+    ctx.beginPath(); ctx.moveTo(cx,cy); ctx.lineTo(cx+cw,cy); ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(cx,cy+ch); ctx.lineTo(cx+cw,cy+ch); ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(cx,cy); ctx.lineTo(cx,cy+ch); ctx.stroke();
+    // le côté droit rejoint la lampe, par le haut et par le bas
+    ctx.beginPath(); ctx.moveTo(cx+cw,cy); ctx.lineTo(cx+cw,cy+ch/2-26); ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(cx+cw,cy+ch/2+26); ctx.lineTo(cx+cw,cy+ch); ctx.stroke();
+    MSPC.mono(ctx, sous?'230 V':'hors', cx-8, cy+ch/2-4, 11, sous?'#ff6a5e':'#4d5a4d','right');
+    MSPC.mono(ctx, sous?'source':'tension', cx-8, cy+ch/2+12, 10, '#6f786e','right');
+
+    // la coupure quand l'ampèremètre est en série
+    var coupe = serie && (G.val===1);
+    if(coupe){
+      ctx.fillStyle='#0d120f'; ctx.fillRect(cx+150,cy-6,80,12);
+    }
+
+    // la lampe
+    var allume = sous && !(coupe && G.val!==1) && !(G.val===0 && serie);
+    ctx.strokeStyle = allume?'#c8d834':'#5a6258'; ctx.lineWidth=2.4;
+    ctx.beginPath(); ctx.arc(cx+cw,cy+ch/2,26,0,6.2832); ctx.stroke();
+    if(allume){ ctx.fillStyle='rgba(200,216,52,.22)'; ctx.fill(); }
+    ctx.beginPath(); ctx.moveTo(cx+cw-18,cy+ch/2-18); ctx.lineTo(cx+cw+18,cy+ch/2+18);
+    ctx.moveTo(cx+cw+18,cy+ch/2-18); ctx.lineTo(cx+cw-18,cy+ch/2+18); ctx.stroke();
+    MSPC.mono(ctx,'lampe 548 Ω',cx+cw,cy+ch/2+48,10,'#8d968b','center');
+
+    /* ---------- le multimètre ---------- */
+    var mx = serie ? cx+190 : cx+180, my = serie ? cy-72 : cy+ch/2-40;
+    ctx.fillStyle=boum?'rgba(255,106,94,.18)':'rgba(255,255,255,.06)';
+    ctx.fillRect(mx-52,my,104,86);
+    ctx.strokeStyle=boum?'#ff6a5e':'#cfe2ee'; ctx.lineWidth=2.2; ctx.strokeRect(mx-52,my,104,86);
+    ctx.fillStyle=boum?'#ff6a5e':'#161d18'; ctx.fillRect(mx-40,my+12,80,30);
+    MSPC.titre(ctx, boum?'!!!':lecture, mx, my+35, boum?26:20, boum?'#0d120f':coul,'center');
+    MSPC.mono(ctx,'calibre '+gr.u,mx,my+62,11,'#8d968b','center');
+    MSPC.mono(ctx,'Ri = '+gr.ri,mx,my+77,9.5,'#6f786e','center');
+
+    // les cordons
+    ctx.strokeStyle=boum?'#ff6a5e':'#8d968b'; ctx.lineWidth=2.4;
+    if(serie){
+      ctx.beginPath(); ctx.moveTo(mx-26,my+86); ctx.lineTo(mx-26,cy); ctx.stroke();
+      ctx.beginPath(); ctx.moveTo(mx+26,my+86); ctx.lineTo(mx+26,cy); ctx.stroke();
+    } else {
+      ctx.beginPath(); ctx.moveTo(mx-26,my); ctx.lineTo(mx-26,cy); ctx.stroke();
+      ctx.beginPath(); ctx.moveTo(mx+26,my+86); ctx.lineTo(mx+26,cy+ch); ctx.stroke();
+    }
+
+    /* l'arc */
+    if(boum){
+      for(var e=0;e<9;e++){
+        var an=a.t*13+e*0.7, r1=14+((a.t*180+e*40)%46);
+        ctx.strokeStyle='rgba(255,'+(150+Math.round(Math.random()*100))+',80,'+(1-r1/60)+')';
+        ctx.lineWidth=1+Math.random()*2.4;
+        ctx.beginPath(); ctx.moveTo(mx,my+43);
+        ctx.lineTo(mx+Math.cos(an)*r1, my+43+Math.sin(an)*r1);
+        ctx.lineTo(mx+Math.cos(an+0.3)*r1*1.5, my+43+Math.sin(an+0.3)*r1*1.5);
+        ctx.stroke();
+      }
+    }
+
+    /* ---------- panneau ---------- */
+    var qx=560, qw=W-qx-26;
+    ctx.fillStyle=boum?'rgba(255,106,94,.10)':'rgba(255,255,255,.04)';
+    ctx.fillRect(qx,64,qw,268);
+    ctx.strokeStyle=coul; ctx.lineWidth=2; ctx.strokeRect(qx+.5,64.5,qw,268);
+    MSPC.mono(ctx,'GRANDEUR',qx+16,90,10,'#8d968b');
+    MSPC.titre(ctx,gr.n.toUpperCase(),qx+16,122,26,'#cfe2ee');
+    MSPC.mono(ctx,'BRANCHEMENT',qx+16,154,10,'#8d968b');
+    MSPC.titre(ctx, serie?'EN SÉRIE':'EN PARALLÈLE', qx+16,184,24, (gr.par!==serie)?'#c8d834':'#ff6a5e');
+    MSPC.mono(ctx,'CIRCUIT',qx+16,216,10,'#8d968b');
+    MSPC.titre(ctx, sous?'SOUS TENSION':'HORS TENSION', qx+16,246,24, (gr.hors===!sous||(!gr.hors&&sous))?'#c8d834':'#f0a844');
+    MSPC.titre(ctx,etat,qx+16,300,30,coul);
+
+    /* ---------- bandeau ---------- */
+    ctx.fillStyle='rgba(255,255,255,.05)'; ctx.fillRect(26,352,W-52,64);
+    var l1=msg, l2='';
+    if(msg.length>88){ var mo=msg.split(' '); l1=''; l2='';
+      for(var w=0;w<mo.length;w++){ if((l1+' '+mo[w]).length<=88 && !l2) l1=(l1?l1+' ':'')+mo[w]; else l2=(l2?l2+' ':'')+mo[w]; } }
+    MSPC.mono(ctx,l1,42,378,12,coul);
+    if(l2) MSPC.mono(ctx,l2,42,398,12,coul);
+    MSPC.mono(ctx,'Le sélecteur peut être sur volts : si le CORDON est resté dans la borne A, le shunt est là quand même.',42,440,10.5,'#6f786e');
+
+    out.innerHTML='<b style="color:'+coul+'">'+etat+'</b><br>'+gr.n+' · '+(serie?'en série':'en parallèle')+' · '+(sous?'sous tension':'hors tension');
+  }, {fixed:true});
+})();
+
+/* ======================= CH 26 · la pince ampèremétrique ======================= */
+(function(){
+  "use strict";
+  var QU=[
+    {n:'une seule phase', k:1},
+    {n:'deux phases',     k:2},
+    {n:'les trois phases',k:3},
+    {n:'tout le câble',   k:4}
+  ];
+  var Q=MSPC.ctrl('a-pince-q', function(v){ return QU[v].n; }, 'a-pince-q-l');
+  var F=MSPC.ctrl('a-pince-f', function(v){ return Math.round(v)+' mA'; }, 'a-pince-f-l');
+  var S=MSPC.ctrl('a-pince-s', function(v){ return String(v); }, 'a-pince-s-l');
+  var out=document.getElementById('a-pince-out');
+  var IN=12.4;
+
+  MSPC.anim('a-pince', function(a){
+    var ctx=a.ctx, W=a.W, H=a.H;
+    var qu=QU[Q.val], fuite=F.val/1000, spires=S.val;
+
+    /* ce que voit la pince */
+    var lu, expl, coul;
+    if(qu.k===1){ lu=IN*spires; expl='Le courant de cette phase, multiplié par le nombre de spires.'; coul='#c8d834'; }
+    else if(qu.k===2){ lu=IN*spires; expl='Deux phases d’un système équilibré : leur somme vectorielle vaut le courant d’une seule. La lecture RESSEMBLE à une mesure juste — c’est le piège.'; coul='#f0a844'; }
+    else { lu=fuite*spires; expl = fuite>0.002
+        ? 'La somme des trois n’est plus nulle : ce qui manque est parti à la terre. Vous venez de mesurer le courant de fuite sans rien débrancher.'
+        : 'La somme instantanée des trois courants vaut zéro. Installation saine, rien ne fuit.';
+      coul = fuite>0.3 ? '#ff6a5e' : (fuite>0.002 ? '#f0a844' : '#c8d834'); }
+
+    MSPC.fond(ctx,W,H,0);
+    MSPC.mono(ctx,'LA PINCE AMPÈREMÉTRIQUE — TROIS USAGES POUR UN SEUL OUTIL',26,30,11.5,'#8d968b');
+
+    /* ---------- les conducteurs ---------- */
+    var PH=[{n:'L1',c:'#f0a844'},{n:'L2',c:'#5cc4e0'},{n:'L3',c:'#c8d834'},{n:'N',c:'#cfe2ee'}];
+    var y0=96, dy=44, x0=70, x1=520;
+    for(var i=0;i<4;i++){
+      var y=y0+i*dy;
+      var dedans = (qu.k===4) || (i<qu.k);
+      ctx.strokeStyle=PH[i].c; ctx.lineWidth=dedans?5:3.4;
+      ctx.globalAlpha=dedans?1:0.35;
+      ctx.beginPath(); ctx.moveTo(x0,y); ctx.lineTo(x1,y); ctx.stroke();
+      ctx.globalAlpha=1;
+      MSPC.mono(ctx,PH[i].n,x0-10,y+4,11.5,PH[i].c,'right');
+      // le sens du courant
+      if(i<3 || qu.k===4){
+        for(var d=0;d<5;d++){
+          var px=x0+40+((a.t*60+d*90)%(x1-x0-60));
+          ctx.fillStyle=PH[i].c; ctx.globalAlpha=dedans?0.9:0.25;
+          ctx.beginPath(); ctx.moveTo(px+7,y); ctx.lineTo(px-4,y-4); ctx.lineTo(px-4,y+4); ctx.closePath(); ctx.fill();
+          ctx.globalAlpha=1;
+        }
+      }
+    }
+    // la fuite à la terre
+    if(fuite>0.002){
+      ctx.strokeStyle='#ff6a5e'; ctx.lineWidth=2.6; ctx.setLineDash([5,4]);
+      ctx.beginPath(); ctx.moveTo(440,y0); ctx.lineTo(440,y0+3*dy+52); ctx.stroke(); ctx.setLineDash([]);
+      MSPC.mono(ctx,'fuite '+Math.round(fuite*1000)+' mA',450,y0+3*dy+36,10.5,'#ff6a5e');
+      ctx.strokeStyle='rgba(255,255,255,.25)'; ctx.lineWidth=1.6;
+      for(var t=0;t<3;t++){ ctx.beginPath(); ctx.moveTo(428+t*4,y0+3*dy+54+t*6); ctx.lineTo(452-t*4,y0+3*dy+54+t*6); ctx.stroke(); }
+    }
+
+    /* ---------- la pince ---------- */
+    var nb = qu.k===4 ? 4 : qu.k;
+    var pcy = y0 + (nb-1)*dy/2;
+    var prh = (nb-1)*dy/2 + 30;
+    ctx.strokeStyle='#8f9a86'; ctx.lineWidth=8;
+    ctx.beginPath(); ctx.ellipse(250,pcy,42,prh,0,0,6.2832); ctx.stroke();
+    ctx.strokeStyle='#cfe2ee'; ctx.lineWidth=2;
+    ctx.beginPath(); ctx.ellipse(250,pcy,42,prh,0,0,6.2832); ctx.stroke();
+    ctx.fillStyle='rgba(255,255,255,.06)';
+    ctx.beginPath(); ctx.ellipse(250,pcy,38,prh-4,0,0,6.2832); ctx.fill();
+    // le corps, sous les conducteurs, relié à la mâchoire par un manche
+    var BY=274;
+    ctx.strokeStyle='#8f9a86'; ctx.lineWidth=7;
+    ctx.beginPath(); ctx.moveTo(250,pcy+prh); ctx.lineTo(250,BY); ctx.stroke();
+    ctx.fillStyle='rgba(255,255,255,.07)'; ctx.fillRect(206,BY,88,56);
+    ctx.strokeStyle='#cfe2ee'; ctx.lineWidth=2; ctx.strokeRect(206,BY,88,56);
+    ctx.fillStyle='#161d18'; ctx.fillRect(214,BY+9,72,28);
+    MSPC.titre(ctx, lu<1 ? (lu*1000).toFixed(0)+' mA' : lu.toFixed(1).replace('.',',')+' A',
+      250, BY+30, 17, coul,'center');
+    MSPC.mono(ctx,'pince',250,BY+50,9.5,'#6f786e','center');
+
+    if(spires>1){
+      MSPC.mono(ctx,spires+' spires',250,pcy-prh-14,10.5,'#f0a844','center');
+      for(var s=1;s<spires;s++){
+        ctx.strokeStyle=PH[0].c; ctx.lineWidth=3; ctx.globalAlpha=0.7;
+        ctx.beginPath(); ctx.ellipse(250,y0,42+s*7,10+s*5,0,0,6.2832); ctx.stroke();
+        ctx.globalAlpha=1;
+      }
+    }
+
+    /* ---------- panneau ---------- */
+    var qx=560, qw=W-qx-26;
+    ctx.fillStyle='rgba(255,255,255,.04)'; ctx.fillRect(qx,64,qw,258);
+    ctx.strokeStyle=coul; ctx.lineWidth=1.8; ctx.strokeRect(qx+.5,64.5,qw,258);
+    MSPC.mono(ctx,'CE QUE LA PINCE AFFICHE',qx+16,90,10,'#8d968b');
+    MSPC.titre(ctx, lu<1 ? (lu*1000).toFixed(0)+' mA' : lu.toFixed(1).replace('.',',')+' A', qx+16,134,38,coul);
+    MSPC.mono(ctx,'SOMME DES COURANTS ENSERRÉS',qx+16,168,10,'#8d968b');
+    MSPC.mono(ctx, qu.k===1?'L1 seule' : (qu.k===2?'L1 + L2' : (qu.k===3?'L1 + L2 + L3':'L1 + L2 + L3 + N')),
+      qx+16,188,12,'#cfe2ee');
+    if(spires>1){
+      MSPC.mono(ctx,'MULTIPLIÉE PAR LES SPIRES',qx+16,216,10,'#8d968b');
+      MSPC.titre(ctx,'× '+spires,qx+16,246,26,'#f0a844');
+      MSPC.mono(ctx,'valeur réelle : '+(lu/spires<1?(lu/spires*1000).toFixed(0)+' mA':(lu/spires).toFixed(1).replace('.',',')+' A'),
+        qx+16,268,10.5,'#6f786e');
+    } else {
+      MSPC.mono(ctx,'COURANT NOMINAL DU MOTEUR',qx+16,216,10,'#8d968b');
+      MSPC.titre(ctx,IN.toFixed(1).replace('.',',')+' A',qx+16,246,26,'#cfe2ee');
+      MSPC.mono(ctx,'sans rien débrancher',qx+16,268,10.5,'#6f786e');
+    }
+    MSPC.mono(ctx, fuite>0.3?'AU-DESSUS DU SEUIL DU DIFFÉRENTIEL':(fuite>0.002?'fuite détectable, sous le seuil':'aucune fuite'),
+      qx+16, 302, 11, fuite>0.3?'#ff6a5e':(fuite>0.002?'#f0a844':'#c8d834'));
+
+    /* ---------- bandeau ---------- */
+    ctx.fillStyle='rgba(255,255,255,.05)'; ctx.fillRect(26,344,W-52,68);
+    var l1=expl, l2='';
+    if(expl.length>88){ var mo=expl.split(' '); l1=''; l2='';
+      for(var w=0;w<mo.length;w++){ if((l1+' '+mo[w]).length<=88 && !l2) l1=(l1?l1+' ':'')+mo[w]; else l2=(l2?l2+' ':'')+mo[w]; } }
+    MSPC.mono(ctx,l1,42,372,12,coul);
+    if(l2) MSPC.mono(ctx,l2,42,392,12,coul);
+    MSPC.mono(ctx,'La pince mesure le champ magnétique créé par le courant — c’est le chapitre 9, devenu un outil.',26,H-14,10.5,'#6f786e');
+
+    out.innerHTML='<b style="color:'+coul+'">'+(lu<1?(lu*1000).toFixed(0)+' mA':lu.toFixed(1).replace('.',',')+' A')+'</b><br>'+qu.n+(spires>1?' · '+spires+' spires':'');
+  }, {fixed:true});
+})();
+
+/* ======================= CH 26 · la mesure d'isolement ======================= */
+(function(){
+  "use strict";
+  var ET=[
+    {n:'neuf',    r:420, c:'#c8d834'},
+    {n:'vieilli', r:12,  c:'#c8d834'},
+    {n:'humide',  r:0.6, c:'#f0a844'},
+    {n:'dégradé', r:0.08,c:'#ff6a5e'}
+  ];
+  var E=MSPC.ctrl('a-megohm-e', function(v){ return ET[v].n; }, 'a-megohm-e-l');
+  var T=MSPC.ctrl('a-megohm-t', function(v){ return Math.round(v)+' s'; }, 'a-megohm-t-l');
+  var V=MSPC.ctrl('a-megohm-v');
+  var out=document.getElementById('a-megohm-out');
+
+  MSPC.anim('a-megohm', function(a){
+    var ctx=a.ctx, W=a.W, H=a.H;
+    var et=ET[E.val], t=T.val, vari=V.val;
+    /* la valeur monte pendant la première minute : c'est la polarisation de l'isolant */
+    var pol = 0.45 + 0.55*(1-Math.exp(-t/22));
+    var R = et.r*pol;
+    var ok = R>=1;
+    var coul = vari ? '#ff6a5e' : (ok ? (R>5?'#c8d834':'#f0a844') : '#ff6a5e');
+
+    MSPC.fond(ctx,W,H,0);
+    MSPC.mono(ctx,'MESURE D’ISOLEMENT — 500 V CONTINUS ENTRE LE BOBINAGE ET LA CARCASSE',26,30,11.5,'#8d968b');
+
+    /* ---------- le moteur ---------- */
+    var mx=180, my=196;
+    ctx.fillStyle='rgba(143,154,134,.14)'; ctx.fillRect(mx-90,my-70,180,140);
+    ctx.strokeStyle='#8f9a86'; ctx.lineWidth=2.4; ctx.strokeRect(mx-90,my-70,180,140);
+    for(var f=0;f<9;f++){ ctx.beginPath(); ctx.moveTo(mx-84+f*20,my-70); ctx.lineTo(mx-84+f*20,my+70); ctx.stroke(); }
+    MSPC.mono(ctx,'CARCASSE',mx,my+92,10,'#8d968b','center');
+    // le bobinage
+    ctx.strokeStyle='#b06a2c'; ctx.lineWidth=3;
+    ctx.beginPath();
+    for(var q=0;q<=1.001;q+=0.02){
+      var xx=mx-56+q*112, yy=my+Math.sin(q*Math.PI*2*6)*22;
+      if(q===0) ctx.moveTo(xx,yy); else ctx.lineTo(xx,yy);
+    }
+    ctx.stroke();
+    MSPC.mono(ctx,'bobinage',mx,my-40,10,'#e0a060','center');
+    // le courant de fuite à travers l'isolant
+    var nfuite = Math.round(Math.min(9, 9/Math.max(0.4,Math.log10(R*10+1)*2)));
+    if(R<50){
+      for(var k=0;k<nfuite;k++){
+        var fy=my-20+((a.t*40+k*22)%60);
+        ctx.fillStyle='rgba(255,106,94,'+(0.35+0.5*Math.random())+')';
+        ctx.beginPath(); ctx.arc(mx+30+k*3, fy, 2.4, 0, 6.2832); ctx.fill();
+      }
+      MSPC.mono(ctx,'courant de fuite',mx+62,my+56,9.5,'#ff6a5e','center');
+    }
+    // la terre
+    ctx.strokeStyle='#8d968b'; ctx.lineWidth=2.4;
+    ctx.beginPath(); ctx.moveTo(mx,my+70); ctx.lineTo(mx,my+104); ctx.stroke();
+    for(var g=0;g<3;g++){ ctx.beginPath(); ctx.moveTo(mx-18+g*5,my+104+g*6); ctx.lineTo(mx+18-g*5,my+104+g*6); ctx.stroke(); }
+
+    /* ---------- le mégohmmètre ---------- */
+    var gx=386, gy=110;
+    ctx.fillStyle='rgba(255,255,255,.06)'; ctx.fillRect(gx,gy,168,180);
+    ctx.strokeStyle=coul; ctx.lineWidth=2.2; ctx.strokeRect(gx,gy,168,180);
+    MSPC.mono(ctx,'MÉGOHMMÈTRE',gx+84,gy+24,10,'#8d968b','center');
+    ctx.fillStyle='#161d18'; ctx.fillRect(gx+16,gy+38,136,52);
+    MSPC.titre(ctx, R>=1000 ? '>1000' : (R>=10 ? R.toFixed(0) : R.toFixed(2).replace('.',',')),
+      gx+84, gy+78, 34, coul,'center');
+    MSPC.mono(ctx,'MΩ',gx+84,gy+104,13,coul,'center');
+    MSPC.mono(ctx,'essai sous 500 V —',gx+84,gy+130,10,'#8d968b','center');
+    MSPC.mono(ctx,'lecture à '+t+' s',gx+84,gy+146,10,'#8d968b','center');
+    ctx.strokeStyle=coul; ctx.lineWidth=2.4;
+    ctx.beginPath(); ctx.moveTo(gx,gy+90); ctx.lineTo(mx+56,gy+90); ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(gx+40,gy+180); ctx.lineTo(gx+40,my+104); ctx.lineTo(mx+20,my+104); ctx.stroke();
+
+    /* ---------- la courbe de polarisation ---------- */
+    var c={x:600,y:104,w:270,h:120};
+    ctx.strokeStyle='rgba(255,255,255,.20)'; ctx.lineWidth=1.2;
+    ctx.beginPath(); ctx.moveTo(c.x,c.y); ctx.lineTo(c.x,c.y+c.h); ctx.lineTo(c.x+c.w,c.y+c.h); ctx.stroke();
+    MSPC.mono(ctx,'LA VALEUR MONTE PENDANT 1 min',c.x,c.y-10,10,'#8d968b');
+    ctx.strokeStyle='#79a6c4'; ctx.lineWidth=2.4; ctx.beginPath();
+    for(var s=1;s<=60;s++){
+      var pp=0.45+0.55*(1-Math.exp(-s/22));
+      var xx2=c.x+s/60*c.w, yy2=c.y+c.h-(pp-0.4)/0.65*c.h;
+      if(s===1) ctx.moveTo(xx2,yy2); else ctx.lineTo(xx2,yy2);
+    }
+    ctx.stroke();
+    ctx.fillStyle='#c8d834';
+    ctx.beginPath(); ctx.arc(c.x+t/60*c.w, c.y+c.h-(pol-0.4)/0.65*c.h, 6, 0, 6.2832); ctx.fill();
+    MSPC.mono(ctx,'0 s',c.x,c.y+c.h+16,9.5,'#7f8a7e');
+    MSPC.mono(ctx,'60 s',c.x+c.w,c.y+c.h+16,9.5,'#7f8a7e','right');
+    MSPC.mono(ctx,'c’est pour cela qu’on lit toujours à 60 s',c.x,c.y+c.h+34,10,'#6f786e');
+
+    /* ---------- le verdict ---------- */
+    var qx=600, qw=W-qx-26;
+    ctx.fillStyle='rgba(255,255,255,.04)'; ctx.fillRect(qx,268,qw,120);
+    ctx.strokeStyle=coul; ctx.lineWidth=1.8; ctx.strokeRect(qx+.5,268.5,qw,120);
+    MSPC.mono(ctx,'SEUIL RÉGLEMENTAIRE',qx+16,292,10,'#8d968b');
+    MSPC.titre(ctx,'1 MΩ',qx+16,322,26,'#cfe2ee');
+    MSPC.mono(ctx,'VERDICT',qx+16,352,10,'#8d968b');
+    MSPC.titre(ctx, vari ? 'VARIATEUR DÉTRUIT' : (R>=5?'BON':(R>=1?'À SURVEILLER':'HORS SERVICE')),
+      qx+16, 380, vari?20:26, coul);
+
+    /* ---------- bandeau ---------- */
+    var msg;
+    if(vari) msg='500 V continus viennent d’être appliqués sur l’électronique de sortie du variateur. Ce n’est pas le moteur qu’on a diagnostiqué : c’est le variateur qu’on a tué.';
+    else if(t<15) msg='Lecture trop précoce : l’isolant n’a pas fini de se polariser. La valeur affichée est inférieure à la valeur réelle.';
+    else if(E.val===2) msg='Isolement faible mais pas nécessairement perdu : un moteur humide se sèche — étuve, ou résistances de réchauffage — et retrouve souvent son isolement.';
+    else if(R<1) msg='Sous le seuil : le moteur ne doit pas être remis sous tension. Rebobinage ou remplacement.';
+    else msg='Isolement satisfaisant. Notez la valeur et la date : c’est la PENTE qui informe, pas le chiffre isolé.';
+    ctx.fillStyle='rgba(255,255,255,.05)'; ctx.fillRect(26,404,W-52,54);
+    var l1=msg, l2='';
+    if(msg.length>92){ var mo=msg.split(' '); l1=''; l2='';
+      for(var w=0;w<mo.length;w++){ if((l1+' '+mo[w]).length<=92 && !l2) l1=(l1?l1+' ':'')+mo[w]; else l2=(l2?l2+' ':'')+mo[w]; } }
+    MSPC.mono(ctx,l1,42,428,11.5,coul);
+    if(l2) MSPC.mono(ctx,l2,42,448,11.5,coul);
+
+    out.innerHTML = vari ? '<b style="color:#ff6a5e">Variateur détruit</b><br>il fallait le débrancher avant'
+      : '<b style="color:'+coul+'">'+(R>=10?R.toFixed(0):R.toFixed(2).replace('.',','))+' MΩ</b><br>'+(R>=5?'bon':(R>=1?'à surveiller':'hors service'));
   }, {fixed:true});
 })();
 </script>
