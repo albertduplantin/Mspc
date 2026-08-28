@@ -52,9 +52,9 @@
 </header>
 
 <div class="meta-bar">
-  <div><b>6</b> chapitres sur 18 publiés</div>
-  <div><b>7</b> animations pilotables</div>
-  <div><b>15</b> exercices corrigés</div>
+  <div><b>9</b> chapitres sur 18 publiés</div>
+  <div><b>10</b> animations pilotables</div>
+  <div><b>24</b> exercices corrigés</div>
   <div>Fiches TP <b>en préparation</b></div>
   <div>Calé sur le <b>référentiel MSPC</b></div>
 </div>
@@ -730,15 +730,488 @@
 </div>
 </section>
 
+<!-- ================= CH 7 ================= -->
+<section class="ch" id="c7">
+  <div class="ch-head"><div class="ch-num">07</div><div class="ch-title">
+    <span class="kicker">Trois forces, une règle, un dessin</span><h2>Isoler et résoudre : la statique graphique</h2></div></div>
+  <div class="ch-body">
+
+<div class="savoirs">
+  <span class="savoir n3"><b>S1.4.5</b> <i>Isolement, actions mutuelles, PFS</i></span>
+  <span class="savoir n3"><b>S1.4.5</b> <i>Méthodologie de résolution</i></span>
+  <span class="savoir n2"><b>S1.4.5</b> <i>Principe fondamental de la dynamique</i></span>
+</div>
+
+<p class="lede">Une potence de levage tient au mur par deux points seulement. Combien encaisse chacun ? La question a l'air de demander un calcul compliqué ; elle se résout avec une règle et un crayon, en trois traits. Encore faut-il savoir <em>quoi</em> dessiner — et c'est là qu'est toute la méthode.</p>
+
+<div class="encadre"><span class="tag">Ce que le référentiel attend exactement de vous</span>
+<p>Le référentiel MSPC cadre ce chapitre avec précision : <span class="cle">« Résolution graphique dans les cas de systèmes soumis à 2 ou 3 actions mécaniques »</span>, et « on privilégie une assistance informatique ».</p>
+<p>Autrement dit : pas de torseurs, pas de systèmes à quatre inconnues, pas de systèmes hyperstatiques. Deux ou trois forces, résolues au dessin. C'est peu — et c'est suffisant pour la quasi-totalité des vérifications qu'on fait réellement en maintenance : un élingage, une console, un vérin, un bras de levage.</p>
+<p>Notez aussi que le <strong>principe fondamental de la dynamique</strong> est au <strong>niveau 2</strong> seulement : vous devez savoir l'énoncer et l'interpréter, pas résoudre des problèmes avec.</p></div>
+
+<h3>7.1 — Isoler : le geste qui décide de tout</h3>
+<p>Avant d'écrire quoi que ce soit, il faut choisir <strong>ce qu'on regarde</strong>. Ce choix s'appelle l'<em>isolement</em>, et c'est 90 % du travail.</p>
+<p>Isoler un solide, c'est le sortir mentalement de son environnement et remplacer chaque contact supprimé par la force que ce contact exerçait. Rien de plus, rien de moins.</p>
+<ol>
+<li><strong>Tracez une frontière</strong> autour de ce que vous isolez. Tout ce qui est dedans, vous le gardez ; tout ce qui est dehors disparaît.</li>
+<li><strong>Chaque fois que la frontière coupe un contact</strong>, dessinez la force correspondante.</li>
+<li><strong>N'oubliez pas le poids</strong> : c'est une action à distance, elle traverse la frontière sans qu'aucun contact soit coupé.</li>
+</ol>
+
+<div class="rappel"><span class="tag">Actions de contact et actions à distance</span>
+<p>Une action <strong>de contact</strong> exige que deux surfaces se touchent : appui, liaison, frottement, pression d'un fluide. Elle disparaît si on écarte les pièces.</p>
+<p>Une action <strong>à distance</strong> agit sans contact : le poids, l'attraction d'un aimant, l'effort électromagnétique dans un moteur. Elle traverse le vide.</p>
+<p><span class="cle">L'erreur classique de l'élève est d'oublier le poids, parce qu'aucun trait ne le matérialise sur le dessin.</span> Prenez le réflexe : après avoir listé les contacts, demandez-vous toujours « et la pesanteur ? ».</p></div>
+
+<h3>7.2 — Le principe fondamental de la statique</h3>
+<p>Un solide immobile — ou en mouvement rectiligne uniforme — obéit à deux conditions simultanées. Les deux, pas l'une ou l'autre.</p>
+
+<div class="formule">Σ F⃗ = 0⃗   et   Σ M⃗ = 0⃗<small>La somme des forces est nulle ET la somme des moments est nulle</small></div>
+
+<p>La première condition dit que le solide ne part pas en translation. La seconde qu'il ne se met pas à tourner. <span class="cle">Un objet peut très bien avoir une somme de forces nulle et se mettre à tourner quand même</span> : c'est précisément ce que fait un couple.</p>
+
+<h3>7.3 — Deux forces : le cas facile</h3>
+<p>Si un solide n'est soumis qu'à <strong>deux</strong> forces et reste en équilibre, il n'y a qu'une seule possibilité :</p>
+<ul>
+<li>elles ont la <strong>même droite d'action</strong> — celle qui joint leurs deux points d'application ;</li>
+<li>elles ont la <strong>même intensité</strong> ;</li>
+<li>elles sont de <strong>sens opposés</strong>.</li>
+</ul>
+<p>C'est immédiat, et bien plus utile qu'il n'y paraît. Sur un mécanisme, dès que vous repérez une pièce qui ne touche que <em>deux</em> autres pièces et dont le poids est négligeable — une bielle, une barre d'élingage, un tirant, une tige de vérin —, vous connaissez instantanément la <strong>direction</strong> de l'effort qu'elle transmet : celle de la droite qui joint ses deux articulations.</p>
+<p>Cette astuce s'appelle repérer une <strong>barre à deux forces</strong>, et elle débloque la plupart des problèmes à trois forces du paragraphe suivant.</p>
+
+<h3>7.4 — Trois forces : concourantes, et le triangle se ferme</h3>
+<p>Avec trois forces, deux propriétés remarquables apparaissent. Elles se démontrent, mais surtout elles se <em>dessinent</em>.</p>
+
+<div class="encadre"><span class="tag">Les deux règles des trois forces</span>
+<p><strong>Règle 1 — les trois droites d'action sont concourantes.</strong> Elles se coupent toutes les trois en un même point. (Cas particulier : elles peuvent être toutes trois parallèles, ce qui revient à dire que le point de concours est à l'infini.)</p>
+<p><em>Pourquoi ?</em> Prenez le point où deux des forces se croisent. Ces deux-là n'ont aucun moment par rapport à ce point, puisque leur bras de levier y est nul. Pour que la somme des moments soit nulle, la troisième ne doit pas en avoir non plus — donc elle passe par ce point elle aussi.</p>
+<p><strong>Règle 2 — mises bout à bout, les trois forces forment un triangle fermé.</strong> C'est simplement Σ F⃗ = 0⃗ dessiné : si vous partez d'un point, que vous enchaînez les trois vecteurs tête contre queue, vous devez revenir exactement au point de départ.</p>
+<p>Ce triangle s'appelle le <strong>dynamique</strong>. C'est lui qui donne les intensités.</p></div>
+
+<h3>7.5 — La méthode, pas à pas</h3>
+<p>Voici la marche à suivre, dans l'ordre. Elle ne change jamais.</p>
+<ol>
+<li><strong>Isoler</strong> le solide et tracer sa frontière.</li>
+<li><strong>Inventorier</strong> les actions : une ligne par action, avec ce qu'on connaît déjà (point d'application, direction, sens, intensité) et ce qu'on cherche.</li>
+<li><strong>Repérer la force entièrement connue</strong> — c'est presque toujours le poids ou la charge.</li>
+<li><strong>Trouver la direction d'une deuxième force</strong> — souvent grâce à une barre à deux forces, ou parce qu'un câble ne peut tirer que selon lui-même.</li>
+<li><strong>Croiser ces deux droites</strong> : c'est le point de concours.</li>
+<li><strong>Joindre ce point au point d'application de la troisième force</strong> : vous venez de trouver sa direction, qui était inconnue.</li>
+<li><strong>Construire le dynamique</strong> : tracer la force connue à l'échelle, puis mener par ses extrémités les parallèles aux deux autres directions. Le triangle se ferme, et les longueurs donnent les intensités.</li>
+</ol>
+
+<figure class="anim">
+  <canvas id="a-statique" width="900" height="440" aria-label="Animation : équilibre d'une potence de levage sous trois forces, point de concours et dynamique"></canvas>
+  <div class="ctrls">
+    <div class="c"><label>Masse suspendue <span id="a-statique-m-l">200 kg</span></label><input type="range" id="a-statique-m" min="20" max="600" value="200"></div>
+    <div class="c"><label>Position de la charge <span id="a-statique-d-l">80 %</span></label><input type="range" id="a-statique-d" min="20" max="100" value="80"></div>
+    <div class="c"><label>Hauteur d'ancrage du tirant <span id="a-statique-h-l">1,20 m</span></label><input type="range" id="a-statique-h" min="30" max="150" value="110"></div>
+    <div class="c readout" id="a-statique-out"></div>
+  </div>
+  <figcaption>Une potence de levage murale : un bras horizontal articulé en A, retenu par un tirant en B, chargé en C. Trois forces, donc la méthode du paragraphe 7.5 s'applique. <b>Les trois droites d'action se coupent en un seul point</b> — le point vert : c'est la règle 1, et vous pouvez la vérifier en bougeant n'importe quel curseur. <b>À droite, le dynamique</b> : les trois vecteurs mis bout à bout referment le triangle. <b>Baissez l'ancrage du tirant</b> et regardez sa tension exploser : à 30 cm, il encaisse plusieurs fois le poids de la charge. C'est la raison pour laquelle on ancre toujours un tirant le plus haut possible.</figcaption>
+</figure>
+
+<div class="image-mentale"><span class="tag">Image mentale — la corde à linge</span>
+<p>Tendez une corde à linge entre deux poteaux et suspendez-y un drap mouillé. Plus vous tendez la corde pour qu'elle soit bien horizontale, plus elle force — et un jour elle casse, ou c'est le poteau qui plie.</p>
+<p>C'est exactement le phénomène du tirant de la potence. Quand l'angle devient petit, il faut une tension énorme pour produire une composante verticale modeste. <span class="cle">Ce n'est pas le poids qui casse la corde, c'est l'angle.</span></p>
+<p>Retenez-le pour les élingages : deux élingues qui partent presque à l'horizontale peuvent chacune encaisser plus que la charge elle-même. C'est écrit sur toutes les plaques d'élingues, et c'est cette géométrie qui l'explique.</p></div>
+
+<div class="exo"><span class="tag">Exercice 7.1</span>
+<p>Une charge de 500 kg est élinguée par deux brins symétriques. Calculez la tension dans chaque brin lorsque l'angle entre les deux brins vaut : a) 0° (brins verticaux) ; b) 60° ; c) 120° ; d) 150°.</p>
+<details><summary>Voir la réponse</summary><div class="rep">
+<p><strong>Le poids à reprendre.</strong> P = 500 × 9,81 ≈ <strong>4 900 N</strong>, arrondissons à 5 000 N pour raisonner.</p>
+<p><strong>La relation.</strong> Chaque brin fait un angle α = θ/2 avec la verticale, θ étant l'angle entre les deux brins. Les deux composantes verticales doivent porter le poids à elles deux :</p>
+<p class="mono">2 × T × cos(α) = P   →   T = P / (2 cos(θ/2))</p>
+<p><strong>Les quatre cas :</strong></p>
+<ul>
+<li><strong>a) θ = 0°</strong> → T = 5000 / (2 × 1) = <strong>2 500 N</strong> par brin. Chacun porte exactement la moitié. C'est le cas idéal.</li>
+<li><strong>b) θ = 60°</strong> → T = 5000 / (2 × cos 30°) = 5000 / 1,732 = <strong>2 887 N</strong>. Soit 15 % de plus que la moitié.</li>
+<li><strong>c) θ = 120°</strong> → T = 5000 / (2 × cos 60°) = 5000 / 1 = <strong>5 000 N</strong>. Chaque brin porte maintenant <em>la totalité</em> du poids.</li>
+<li><strong>d) θ = 150°</strong> → T = 5000 / (2 × cos 75°) = 5000 / 0,518 = <strong>9 660 N</strong>. Chaque brin encaisse près de <strong>deux fois</strong> le poids de la charge.</li>
+</ul>
+<p><strong>Ce qu'il faut retenir, et c'est une consigne de sécurité, pas une curiosité :</strong> la charge n'a pas changé d'un gramme entre le cas a) et le cas d). Seul l'angle a changé, et la tension a été multipliée par près de quatre.</p>
+<p><em>C'est pour cette raison que la réglementation limite l'angle d'élingage à 120° au maximum, et que les plaques d'élingues portent un tableau de coefficients par angle. Un élingueur qui « prend au plus court » pour gagner du temps peut, sans s'en rendre compte, faire travailler ses brins bien au-delà de leur charge maximale d'utilisation.</em></p>
+</div></details></div>
+
+<div class="exo"><span class="tag">Exercice 7.2</span>
+<p>Un bras de potence horizontal de 1,50 m est articulé au mur en A. Un tirant relie son extrémité B à un point du mur situé 0,80 m au-dessus de A. Une charge de 300 kg est suspendue en B. Déterminez la tension du tirant et la réaction en A.</p>
+<details><summary>Voir la réponse</summary><div class="rep">
+<p><strong>Étape 1 — isoler le bras.</strong> Trois actions le sollicitent : le poids de la charge en B, la tension du tirant en B, et la réaction du mur en A. Le poids propre du bras est négligé (l'énoncé ne le donne pas).</p>
+<p><strong>Étape 2 — la charge.</strong> P = 300 × 9,81 ≈ <strong>2 940 N</strong>, dirigée vers le bas.</p>
+<p><strong>Étape 3 — l'angle du tirant.</strong> Le tirant va de B (1,50 ; 0) à l'ancrage (0 ; 0,80). Son angle β avec l'horizontale vérifie :</p>
+<p class="mono">tan(β) = 0,80 / 1,50 = 0,533   →   β = 28,1°<br>sin(β) = 0,470   ·   cos(β) = 0,883</p>
+<p><strong>Étape 4 — le moment en A.</strong> On écrit que la somme des moments autour de A est nulle. La réaction en A n'a aucun moment (son bras de levier est nul), il ne reste donc que deux termes :</p>
+<p class="mono">T × sin(β) × 1,50 = P × 1,50</p>
+<p>Les 1,50 se simplifient — parce que la charge et le tirant sont au <em>même</em> point B :</p>
+<p class="mono">T = P / sin(β) = 2940 / 0,470 = <strong>6 260 N</strong></p>
+<p><strong>Étape 5 — la réaction en A.</strong> On projette Σ F⃗ = 0⃗ sur les deux axes.</p>
+<p class="mono">Horizontal : R<sub>x</sub> = T × cos(β) = 6260 × 0,883 = 5 530 N<br>Vertical : R<sub>y</sub> = P − T × sin(β) = 2940 − 2940 = 0 N</p>
+<p class="mono">R = <strong>5 530 N, horizontale</strong>, dirigée vers l'extérieur du mur</p>
+<p><strong>Trois choses à remarquer, et elles sont toutes les trois contre-intuitives.</strong></p>
+<ol>
+<li><strong>Le tirant encaisse plus du double du poids</strong> — 6 260 N pour une charge de 2 940 N. C'est l'angle qui fait tout.</li>
+<li><strong>La réaction en A est purement horizontale.</strong> L'articulation ne porte <em>rien</em> verticalement : c'est le tirant qui porte tout. Elle travaille en revanche à l'arrachement horizontal, ce qui est la sollicitation la plus dangereuse pour une fixation murale.</li>
+<li><strong>Les trois forces sont bien concourantes</strong>, comme l'annonce la règle 1 : le poids et la tension passent tous deux par B, donc la réaction en A doit passer par B elle aussi — ce qui impose qu'elle soit horizontale, puisque A et B sont à la même hauteur. La règle donne la réponse avant même le calcul.</li>
+</ol>
+<p><em>Conséquence de maintenance : sur ce genre de potence, ce sont les chevilles supérieures qui lâchent, pas les inférieures, et le premier point à contrôler est l'ancrage du tirant.</em></p>
+</div></details></div>
+
+<div class="exo"><span class="tag">Exercice 7.3</span>
+<p>Sur une machine, une pièce est en équilibre sous l'action de trois forces. Vous connaissez leurs trois droites d'action, et elles ne se coupent pas en un seul point. Que pouvez-vous en conclure ?</p>
+<details><summary>Voir la réponse</summary><div class="rep">
+<p><strong>Conclusion : l'hypothèse d'équilibre sous trois forces est fausse.</strong> La règle des trois forces concourantes n'est pas une propriété approximative, c'est une conséquence directe de Σ M⃗ = 0⃗. Si les droites ne concourent pas, l'équilibre sous ces trois forces seules est impossible.</p>
+<p><strong>Trois explications possibles, à examiner dans cet ordre :</strong></p>
+<ol>
+<li><strong>Il existe une quatrième action que vous avez oubliée.</strong> C'est de loin le cas le plus fréquent. Candidats habituels : le poids propre de la pièce (négligé à tort si elle est lourde), un frottement dans une liaison qu'on avait supposée parfaite, un ressort de rappel, la pression d'un fluide, ou une seconde surface d'appui qui touche alors qu'on ne l'avait pas vue.</li>
+<li><strong>Une des directions supposées est fausse.</strong> Vous avez peut-être traité comme une barre à deux forces une pièce qui en subit trois — par exemple une bielle dont le poids n'est pas négligeable, ou une tige de vérin qui frotte dans son guidage.</li>
+<li><strong>La pièce n'est pas réellement en équilibre.</strong> Elle accélère, ou elle est en train de bouger lentement sous l'effet d'un défaut.</li>
+</ol>
+<p><strong>Ce qu'il faut retenir de méthode :</strong> <span class="cle">la non-concurrence est un excellent détecteur d'erreur.</span> Quand les trois droites ne se croisent pas en un point sur votre dessin, ne forcez pas le trait : c'est votre inventaire des actions qui est incomplet. Reprenez l'isolement à zéro et cherchez ce que la frontière a coupé sans que vous l'ayez remarqué.</p>
+</div></details></div>
+
+<div class="horsref"><span class="tag">Pour aller plus loin — hors référentiel</span>
+<h4>Et quand il y a plus de trois forces ?</h4>
+<p>La méthode graphique ne s'arrête pas à trois : elle se généralise sous le nom de <strong>funiculaire</strong>, une construction élégante inventée par les ingénieurs du XIX<sup>e</sup> siècle, qui permettait de dimensionner des ponts entiers sans autre outil qu'une règle et un compas. Elle a construit la tour Eiffel.</p>
+<p>Aujourd'hui, au-delà de trois forces, on écrit les équations et on les résout — à la main pour trois inconnues, avec un logiciel au-delà. C'est ce que fait tout module de calcul de structure.</p>
+<p>Mais il existe une limite qu'aucun logiciel ne franchit tout seul. Si le nombre d'inconnues dépasse le nombre d'équations disponibles — trois en plan, six dans l'espace — le système est dit <strong>hyperstatique</strong> et la statique seule ne suffit plus. Il faut alors tenir compte de la <em>déformation</em> des pièces pour savoir comment l'effort se répartit.</p>
+<p>Exemple concret : un arbre sur <strong>deux</strong> paliers, on sait calculer. Sur <strong>trois</strong> paliers alignés, non — la charge du palier du milieu dépend entièrement de son alignement au centième de millimètre près. C'est exactement ce qu'on a vu au chapitre 2 avec la table à quatre pieds, et c'est pourquoi les constructeurs de machines évitent autant que possible les montages à trois appuis.</p></div>
+
+</div>
+</section>
+
+<!-- ================= CH 8 ================= -->
+<section class="ch" id="c8">
+  <div class="ch-head"><div class="ch-num">08</div><div class="ch-title">
+    <span class="kicker">Tourner vite n'est pas aller vite</span><h2>Mouvements et vitesses</h2></div></div>
+  <div class="ch-body">
+
+<div class="savoirs">
+  <span class="savoir n3"><b>S1.4.3</b> <i>Mouvements de translation et de rotation</i></span>
+  <span class="savoir n3"><b>S1.4.4</b> <i>Équiprojectivité, centre instantané de rotation</i></span>
+  <span class="savoir n2"><b>S1.4.3</b> <i>L'accélération</i></span>
+</div>
+
+<p class="lede">Un moteur tourne à 1 500 tr/min. Est-ce que ça va vite ? La question n'a aucun sens tant qu'on n'a pas dit <em>où</em>. Sur son arbre de 30 mm, un point de la surface file à 2,4 m/s. Sur un volant de 800 mm calé sur le même arbre, il file à 63 m/s — 226 km/h. Même rotation, même instant, deux vitesses sans rapport.</p>
+
+<h3>8.1 — Deux mouvements élémentaires, et rien d'autre</h3>
+<p>Le référentiel MSPC limite explicitement l'étude à deux cas, qui couvrent l'immense majorité des machines :</p>
+<table>
+<thead><tr><th>Mouvement</th><th>Ce qui le caractérise</th><th>Exemples</th></tr></thead>
+<tbody>
+<tr><td><strong>Translation</strong></td><td>Tous les points ont la <em>même</em> vitesse, à chaque instant. Les trajectoires sont identiques et parallèles.</td><td>Tige de vérin, chariot sur rail, table de fraiseuse, cabine d'ascenseur</td></tr>
+<tr><td><strong>Rotation autour d'un axe fixe</strong></td><td>Tous les points décrivent des cercles centrés sur l'axe. Ils ont la <em>même vitesse angulaire</em> mais des vitesses linéaires différentes.</td><td>Arbre moteur, poulie, roue dentée, tambour de convoyeur</td></tr>
+</tbody></table>
+<p><span class="cle">La translation n'est pas forcément rectiligne.</span> Une nacelle de grande roue est en translation circulaire : elle reste toujours verticale, et pourtant son centre décrit un cercle. Ce qui définit la translation, ce n'est pas la forme de la trajectoire — c'est que la pièce ne tourne pas sur elle-même.</p>
+
+<h3>8.2 — Deux unités pour la même chose : tr/min et rad/s</h3>
+<p>L'atelier parle en <strong>tours par minute</strong>. Les formules exigent des <strong>radians par seconde</strong>. Il faut savoir passer de l'une à l'autre sans hésiter.</p>
+
+<div class="formule">ω = 2π × N / 60<small>ω : vitesse angulaire en rad/s · N : fréquence de rotation en tr/min</small></div>
+
+<p>Le facteur est <span class="mono">2π/60 ≈ 0,105</span>, soit très près de <strong>un dixième</strong>. D'où une astuce de calcul mental qui vaut de l'or en atelier :</p>
+<p><span class="cle">Pour passer des tr/min aux rad/s, divisez par dix.</span> Vous obtenez une valeur 5 % trop faible, ce qui est amplement suffisant pour vérifier un ordre de grandeur ou repérer une erreur d'un facteur 10.</p>
+<ul>
+<li>1 500 tr/min → environ 150 rad/s (valeur exacte : 157)</li>
+<li>3 000 tr/min → environ 300 rad/s (exact : 314)</li>
+<li>50 tr/min → environ 5 rad/s (exact : 5,24)</li>
+</ul>
+
+<h3>8.3 — La relation qui relie tourner et avancer</h3>
+<p>C'est la formule la plus utilisée de tout le dossier. Elle relie la vitesse angulaire de la pièce à la vitesse réelle d'un point situé à la distance R de l'axe.</p>
+
+<div class="formule">v = R × ω<small>v : vitesse du point en m/s · R : rayon en mètres · ω : vitesse angulaire en rad/s</small></div>
+
+<p>Trois pièges, tous les trois responsables de la majorité des erreurs :</p>
+<ol>
+<li><strong>R est un rayon, pas un diamètre.</strong> Les catalogues donnent des diamètres. Divisez par deux.</li>
+<li><strong>R est en mètres.</strong> Les plans sont en millimètres. Divisez par mille.</li>
+<li><strong>ω est en rad/s, pas en tr/min.</strong> Convertissez d'abord.</li>
+</ol>
+<p>Une erreur sur l'un des trois donne un résultat faux d'un facteur 2, 1 000 ou 9,55. Prenez l'habitude de vérifier l'ordre de grandeur : une bande de convoyeur va à quelques dixièmes de m/s, un outil de coupe à quelques dizaines de m/min, une périphérie de disque à quelques dizaines de m/s.</p>
+
+<figure class="anim">
+  <canvas id="a-vitesse" width="900" height="420" aria-label="Animation : vitesse angulaire et vitesse linéaire des points d'un solide en rotation"></canvas>
+  <div class="ctrls">
+    <div class="c"><label>Fréquence de rotation <span id="a-vitesse-n-l">300 tr/min</span></label><input type="range" id="a-vitesse-n" min="0" max="1500" value="300"></div>
+    <div class="c"><label>Diamètre de la poulie <span id="a-vitesse-d-l">300 mm</span></label><input type="range" id="a-vitesse-d" min="60" max="600" value="300"></div>
+    <div class="c"><label class="switch"><input type="checkbox" id="a-vitesse-t" checked><span>Montrer les trajectoires</span></label></div>
+    <div class="c readout" id="a-vitesse-out"></div>
+  </div>
+  <figcaption>Une poulie en rotation, avec trois points marqués à des rayons différents. <b>Les trois flèches de vitesse sont tangentes</b> à la trajectoire — jamais dirigées vers le centre — et leur longueur croît proportionnellement au rayon. <b>Le point du centre ne bouge pas du tout</b> : sa vitesse est nulle alors qu'il appartient à la même pièce qui tourne. <b>Changez le diamètre</b> sans toucher à la vitesse de rotation : le compteur en tr/min ne bouge pas, mais la vitesse en périphérie change du tout au tout. C'est exactement pourquoi on ne compare jamais deux machines par leur seule vitesse de rotation.</figcaption>
+</figure>
+
+<h3>8.4 — Uniforme, ou uniformément varié</h3>
+<p>Le référentiel limite l'étude à deux régimes :</p>
+<ul>
+<li><strong>Mouvement uniforme</strong> — la vitesse ne change pas. L'accélération est nulle. C'est le régime établi d'un convoyeur, d'un moteur en marche normale.</li>
+<li><strong>Mouvement uniformément varié</strong> — la vitesse change à taux constant. C'est le démarrage, le freinage, la rampe d'accélération programmée dans un variateur.</li>
+</ul>
+<p>L'<strong>accélération</strong> est au <em>niveau 2</em> dans le référentiel : on vous demande de savoir la lire et l'interpréter sur une courbe, pas de mener des calculs cinématiques. C'est cohérent avec le métier — vous lirez des courbes de démarrage sur l'écran d'un variateur bien plus souvent que vous n'en calculerez.</p>
+
+<div class="encadre"><span class="tag">Ce que la rampe d'un variateur change vraiment</span>
+<p>Sur tout variateur de fréquence, deux paramètres s'appellent <span class="mono">rampe d'accélération</span> et <span class="mono">rampe de décélération</span>. Ils fixent le temps mis pour passer de 0 à la vitesse nominale.</p>
+<p>Les régler trop court est une cause de panne extrêmement fréquente, et les symptômes sont toujours les mêmes :</p>
+<ul>
+<li><strong>Déclenchements du variateur en surintensité</strong> au démarrage — accélérer vite exige un couple élevé, donc un courant élevé.</li>
+<li><strong>Chocs mécaniques</strong> dans la transmission : clavettes matées, dents d'engrenage écaillées, courroies qui patinent puis se glacent.</li>
+<li><strong>Charges qui bougent</strong> : les cartons partent en arrière sur un convoyeur, les bouteilles tombent.</li>
+</ul>
+<p><span class="cle">Un convoyeur qui fait tomber ses produits au démarrage n'a pas forcément un problème mécanique : commencez par regarder la rampe.</span> C'est un réglage, pas une réparation — et c'est gratuit.</p></div>
+
+<h3>8.5 — Le centre instantané de rotation</h3>
+<p>Quand une pièce n'est ni en translation pure ni en rotation autour d'un axe fixe — une bielle, par exemple — son mouvement, <em>à cet instant précis</em>, équivaut malgré tout à une rotation autour d'un point particulier : le <strong>centre instantané de rotation</strong>, ou CIR.</p>
+<p>Deux propriétés suffisent à s'en servir :</p>
+<ul>
+<li>Le CIR est le seul point de la pièce dont la <strong>vitesse est nulle</strong> à cet instant.</li>
+<li>La vitesse de tout autre point est <strong>perpendiculaire</strong> à la droite qui le relie au CIR, et proportionnelle à sa distance.</li>
+</ul>
+<p>D'où la construction : la vitesse d'un point étant perpendiculaire à sa liaison au CIR, on trouve le CIR en <strong>traçant les perpendiculaires aux vitesses connues de deux points</strong> — elles se coupent au CIR.</p>
+<p>Le mot <em>instantané</em> est important : ce point se déplace à chaque instant. Il n'a rien d'un axe physique.</p>
+
+<div class="image-mentale"><span class="tag">Image mentale — la roue qui roule sans glisser</span>
+<p>Une roue qui roule sur le sol sans glisser : son CIR est le point de contact avec le sol. C'est-à-dire que <strong>le point du pneu qui touche la route est, à cet instant, parfaitement immobile</strong>.</p>
+<p>Cela semble absurde et c'est pourtant vérifiable : c'est précisément parce que ce point ne glisse pas qu'il y a adhérence, et donc que la voiture avance. Le jour où il se met à bouger par rapport au sol, vous patinez.</p>
+<p>Conséquence directe : le haut du pneu va à <strong>deux fois</strong> la vitesse de la voiture, puisqu'il est deux fois plus loin du CIR que le centre de la roue. C'est vrai, c'est mesurable, et c'est pour ça qu'on ne voit jamais le haut d'une roue nette sur une photo.</p></div>
+
+<div class="exo"><span class="tag">Exercice 8.1</span>
+<p>Un tambour de convoyeur de 250 mm de diamètre est entraîné à 45 tr/min. Quelle est la vitesse de la bande ? Combien de mètres de produit défilent en une heure ?</p>
+<details><summary>Voir la réponse</summary><div class="rep">
+<p><strong>Étape 1 — la vitesse angulaire.</strong></p>
+<p class="mono">ω = 2π × 45 / 60 = 4,71 rad/s</p>
+<p><em>Vérification mentale : 45 divisé par 10 fait 4,5, on est bien dans les clous.</em></p>
+<p><strong>Étape 2 — le rayon, en mètres.</strong> Attention aux deux pièges d'un coup : c'est un diamètre, et c'est en millimètres.</p>
+<p class="mono">R = 250 / 2 = 125 mm = 0,125 m</p>
+<p><strong>Étape 3 — la vitesse de la bande.</strong> La bande ne glisse pas sur le tambour : elle va donc exactement à la vitesse d'un point de sa périphérie.</p>
+<p class="mono">v = R × ω = 0,125 × 4,71 = <strong>0,589 m/s</strong></p>
+<p><strong>Étape 4 — en une heure.</strong></p>
+<p class="mono">d = 0,589 × 3600 = <strong>2 120 m</strong>, soit un peu plus de 2 km</p>
+<p><em>Ordre de grandeur à retenir : une bande de convoyeur industriel tourne typiquement entre 0,2 et 1 m/s. Si votre calcul vous donne 6 m/s, vous avez oublié de diviser le diamètre par deux, ou converti les millimètres à l'envers.</em></p>
+</div></details></div>
+
+<div class="exo"><span class="tag">Exercice 8.2</span>
+<p>Un disque de meuleuse de 125 mm de diamètre porte l'inscription <span class="mono">80 m/s max</span>. La machine tourne à 11 000 tr/min. Le disque est-il utilisé dans ses limites ? Que se passerait-il avec un disque de 230 mm sur la même machine ?</p>
+<details><summary>Voir la réponse</summary><div class="rep">
+<p><strong>Cas du disque de 125 mm.</strong></p>
+<p class="mono">ω = 2π × 11000 / 60 = 1 152 rad/s<br>R = 0,0625 m<br>v = 0,0625 × 1152 = <strong>72 m/s</strong></p>
+<p>72 m/s pour une limite de 80 m/s : <strong>l'ensemble est correct</strong>, avec une marge d'environ 10 %. C'est d'ailleurs exactement ainsi que les fabricants apparient disques et machines.</p>
+<p><strong>Cas du disque de 230 mm sur la même machine.</strong></p>
+<p class="mono">R = 0,115 m<br>v = 0,115 × 1152 = <strong>132 m/s</strong></p>
+<p><strong>132 m/s pour un disque dont la limite est du même ordre que le précédent : c'est 65 % au-dessus.</strong> Le disque éclate.</p>
+<p><strong>Pourquoi, physiquement.</strong> Ce qui déchire un disque de meuleuse, ce n'est pas le contact avec la pièce : c'est la <em>force centrifuge</em> sur sa propre matière, qui croît comme le carré de la vitesse périphérique. Un disque tournant 65 % trop vite subit près de trois fois la contrainte prévue.</p>
+<p><strong>Et voilà pourquoi les meuleuses de 230 mm tournent à 6 500 tr/min et pas à 11 000.</strong> Ce n'est pas une question de puissance : c'est que le grand diamètre impose de baisser la vitesse de rotation pour rester sous la même vitesse périphérique.</p>
+<p><em>Règle absolue d'atelier : on ne monte jamais un disque plus grand que le diamètre prévu par la machine, même en retirant le carter — surtout en retirant le carter. Le diamètre maximal admissible est gravé sur le carter et sur la plaque de la machine, et l'éclatement d'un disque à 130 m/s projette des fragments à la vitesse d'une balle.</em></p>
+</div></details></div>
+
+<div class="exo"><span class="tag">Exercice 8.3</span>
+<p>Sur un convoyeur, le variateur est réglé avec une rampe d'accélération de 0,3 s pour atteindre 0,8 m/s. Les cartons glissent au démarrage. Le coefficient d'adhérence carton/bande vaut 0,25. Expliquez et proposez un réglage.</p>
+<details><summary>Voir la réponse</summary><div class="rep">
+<p><strong>L'accélération imposée.</strong> Le mouvement est uniformément varié :</p>
+<p class="mono">a = Δv / Δt = 0,8 / 0,3 = <strong>2,67 m/s²</strong></p>
+<p><strong>Ce que la bande peut transmettre au carton.</strong> Le seul moyen dont dispose la bande pour accélérer le carton, c'est le frottement sous sa base. Cet effort est plafonné par l'adhérence (chapitre 6) :</p>
+<p class="mono">T<sub>max</sub> = f × N = 0,25 × m × 9,81 = 2,45 × m</p>
+<p>Or cet effort doit produire l'accélération : T = m × a. En égalant, la masse se simplifie :</p>
+<p class="mono">a<sub>max</sub> = f × g = 0,25 × 9,81 = <strong>2,45 m/s²</strong></p>
+<p><strong>Diagnostic : 2,67 demandé pour 2,45 possible.</strong> La bande ne peut pas suivre, elle glisse sous les cartons. Et remarquez encore une fois que <strong>la masse a disparu du raisonnement</strong> : des cartons plus lourds ne changeraient rien, exactement comme au chapitre 6.</p>
+<p><strong>Le réglage.</strong> On cherche le temps de rampe qui reste sous le seuil, avec une marge raisonnable. Visons 60 % de l'adhérence disponible, soit a = 1,5 m/s² :</p>
+<p class="mono">Δt = 0,8 / 1,5 = 0,53 s   →   <strong>réglez la rampe à 0,8 s</strong></p>
+<p>Une rampe de 0,8 s donne a = 1,0 m/s², soit 40 % de l'adhérence disponible. C'est confortable, y compris si la bande s'encrasse un peu.</p>
+<p><strong>Ce que ce réglage coûte réellement :</strong> une demi-seconde de plus au démarrage. Sur un convoyeur qui démarre quelques fois par heure, c'est rigoureusement rien.</p>
+<p><em>Notez bien la leçon de méthode : le symptôme était mécanique (« ça glisse »), la cause était un paramètre, et la solution ne demandait ni pièce ni outil. Avant de changer une bande pour une bande plus adhérente — ce que beaucoup font — regardez toujours la rampe.</em></p>
+</div></details></div>
+
+<div class="horsref"><span class="tag">Pour aller plus loin — hors référentiel</span>
+<h4>L'équiprojectivité, ou comment vérifier un dessin sans calculer</h4>
+<p>Il existe une propriété des solides indéformables qui a l'air d'un tour de magie et qui est en réalité une évidence. Prenez deux points A et B d'un même solide. Projetez leurs vecteurs vitesse sur la droite AB : <strong>les deux projections sont toujours égales</strong>.</p>
+<p>La raison tient en une phrase : si les projections étaient différentes, la distance AB augmenterait ou diminuerait — et le solide se déformerait. Comme il est indéformable, c'est impossible.</p>
+<p>L'usage pratique est immédiat : si vous connaissez entièrement la vitesse d'un point et seulement la <em>direction</em> de la vitesse d'un autre, l'équiprojectivité vous donne son intensité, par une simple projection à l'équerre. C'était la méthode standard avant les logiciels, et elle reste un moyen imparable de vérifier qu'un schéma de vitesses n'est pas absurde.</p>
+<p>Le référentiel MSPC la mentionne au niveau 3 mais précise que « la détermination des lois d'entrée-sortie s'effectue à l'aide d'un logiciel de simulation ». Autrement dit : on vous demande de comprendre ce que le logiciel fait, pas de le remplacer.</p></div>
+
+</div>
+</section>
+
+<!-- ================= CH 9 ================= -->
+<section class="ch" id="c9">
+  <div class="ch-head"><div class="ch-num">09</div><div class="ch-title">
+    <span class="kicker">La grandeur qui traverse toute la machine</span><h2>Énergie, puissance, rendement</h2></div></div>
+  <div class="ch-body">
+
+<div class="savoirs">
+  <span class="savoir n3"><b>S2.1</b> <i>Énergie, puissance et rendement</i></span>
+  <span class="savoir n3"><b>S2.1</b> <i>Analogie entre les puissances</i></span>
+  <span class="savoir n2"><b>S1.4.5</b> <i>Travail, puissance d'une force et d'un couple</i></span>
+</div>
+
+<p class="lede">C'est le chapitre charnière du dossier, et le référentiel le dit sans détour : <em>« les formules caractérisant les grandeurs physiques sont connues, utilisées et correctement interprétées »</em>. Niveau 3, application. Ce sont les seules formules de mécanique que vous devrez savoir manier sans les chercher — parce que ce sont les seules que vous utiliserez toutes les semaines.</p>
+
+<h3>9.1 — Trois mots qu'on confond, trois idées distinctes</h3>
+<table>
+<thead><tr><th>Grandeur</th><th>Unité</th><th>Ce que c'est</th><th>Analogie</th></tr></thead>
+<tbody>
+<tr><td><strong>Travail</strong> W</td><td>joule (J)</td><td>De l'énergie effectivement transférée par une force qui déplace son point d'application</td><td>Les litres versés dans le seau</td></tr>
+<tr><td><strong>Énergie</strong> E</td><td>joule (J)</td><td>La capacité à produire du travail. Elle se stocke, se transforme, ne se perd jamais</td><td>L'eau contenue dans le réservoir</td></tr>
+<tr><td><strong>Puissance</strong> P</td><td>watt (W)</td><td>Le débit d'énergie : de l'énergie <em>par seconde</em></td><td>Le débit du robinet, en litres par seconde</td></tr>
+</tbody></table>
+
+<div class="formule">P = W / t<small>1 watt = 1 joule par seconde</small></div>
+
+<p><span class="cle">Monter un sac de ciment au premier étage demande toujours la même énergie, que vous mettiez dix secondes ou dix minutes. Ce qui change, c'est la puissance.</span> Une machine se dimensionne en puissance : c'est elle qui décide de la taille du moteur, de la section des câbles, du diamètre des arbres.</p>
+
+<div class="rappel"><span class="tag">Le travail d'une force, et le piège du déplacement</span>
+<p>Une force ne travaille que si son point d'application <strong>se déplace</strong>, et seule la partie du déplacement <em>dans la direction de la force</em> compte.</p>
+<p class="mono">W = F × d   (force et déplacement colinéaires)</p>
+<ul>
+<li>Porter une caisse de 20 kg <strong>horizontalement</strong> sur 50 m : la force que vous exercez est verticale, le déplacement horizontal. <strong>Le travail du poids est nul.</strong> Vous vous fatiguez, mais mécaniquement vous n'avez rien produit.</li>
+<li>Monter cette même caisse de 3 m : W = 200 × 3 = <strong>600 J</strong>.</li>
+<li>Pousser en vain contre un mur : déplacement nul, <strong>travail nul</strong>.</li>
+</ul>
+<p>Ce point est au niveau 2 dans le référentiel : il faut savoir l'interpréter, pas mener des calculs élaborés dessus.</p></div>
+
+<h3>9.2 — P = C · ω, la formule maîtresse</h3>
+<p>Pour un mouvement de rotation — c'est-à-dire pour presque tout ce qui tourne dans une usine — la puissance transmise s'écrit :</p>
+
+<div class="formule">P = C × ω<small>P en watts (W) · C : couple en newton-mètres (N·m) · ω : vitesse angulaire en rad/s</small></div>
+
+<p>Deux formes dérivées, qu'il vaut mieux savoir retrouver que retenir :</p>
+<div class="formule">C = P / ω   ·   ω = P / C   ·   P = C × 2πN/60<small>N en tr/min — le passage par ω reste plus sûr</small></div>
+
+<p>Cette formule contient à elle seule tout le principe de la transmission mécanique. Lisez-la ainsi : <span class="cle">à puissance constante, si la vitesse est divisée par vingt, le couple est multiplié par vingt.</span></p>
+<p>C'est exactement le métier d'un réducteur — et c'est aussi l'explication de trois choses que vous constaterez sur le terrain :</p>
+<ul>
+<li>Un arbre de sortie de réducteur est toujours bien plus gros que son arbre d'entrée. Il ne transmet pourtant pas plus de puissance : il transmet vingt fois plus de <em>couple</em>.</li>
+<li>Les clavettes cisaillent côté grande vitesse rarement, côté lente souvent.</li>
+<li>Un petit moteur rapide vaut mieux qu'un gros moteur lent, à puissance égale : il est moins cher, plus léger, plus compact. C'est pour cela qu'on met des réducteurs partout.</li>
+</ul>
+
+<h3>9.3 — L'analogie des quatre puissances</h3>
+<p>Le référentiel exige explicitement cette analogie, et c'est l'une des idées les plus utiles de tout le diplôme. Quelle que soit la technologie, une puissance s'écrit toujours de la même façon : <strong>quelque chose qui pousse, multiplié par quelque chose qui s'écoule.</strong></p>
+
+<table>
+<thead><tr><th>Technologie</th><th>Formule</th><th>Ce qui pousse</th><th>Ce qui s'écoule</th></tr></thead>
+<tbody>
+<tr><td><strong>Électrique</strong></td><td class="mono">P = U × I</td><td>Tension U (V)</td><td>Intensité I (A)</td></tr>
+<tr><td><strong>Mécanique — rotation</strong></td><td class="mono">P = C × ω</td><td>Couple C (N·m)</td><td>Vitesse angulaire ω (rad/s)</td></tr>
+<tr><td><strong>Mécanique — translation</strong></td><td class="mono">P = F × v</td><td>Force F (N)</td><td>Vitesse v (m/s)</td></tr>
+<tr><td><strong>Hydraulique et pneumatique</strong></td><td class="mono">P = p × Q</td><td>Pression p (Pa)</td><td>Débit Q (m³/s)</td></tr>
+</tbody></table>
+
+<p>Toutes donnent des watts. Toutes se comparent directement. Et surtout : <span class="cle">dans chaque paire, l'un des deux termes est ce qui force, l'autre est ce qui passe.</span> La tension est la « pression » électrique ; le débit est l'« intensité » hydraulique.</p>
+
+<div class="image-mentale"><span class="tag">Image mentale — le tuyau d'arrosage</span>
+<p>Pour arroser loin, deux moyens : ouvrir le robinet en grand — beaucoup de <strong>débit</strong> — ou pincer l'embout — beaucoup de <strong>pression</strong>. Dans les deux cas vous augmentez la puissance du jet, mais pas de la même manière.</p>
+<p>Un moteur électrique fonctionne pareil : pour lui donner plus de puissance, on peut monter la tension ou monter le courant. Un vérin hydraulique aussi : plus de pression, ou plus de débit.</p>
+<p>Et l'analogie va jusqu'au bout : <strong>ce qui pousse détermine la force disponible, ce qui s'écoule détermine la vitesse.</strong> Sur un vérin, la pression fixe l'effort qu'il développe, le débit fixe la vitesse à laquelle il sort. Vous retrouverez exactement cette phrase dans les dossiers pneumatique et hydraulique.</p></div>
+
+<h3>9.4 — Le rendement</h3>
+<p>Aucune machine ne restitue tout ce qu'elle reçoit. Le <strong>rendement</strong> mesure la part utile.</p>
+
+<div class="formule">η = P<sub>utile</sub> / P<sub>absorbée</sub><small>Sans unité, toujours entre 0 et 1. Souvent exprimé en pourcentage. La lettre grecque se lit « êta »</small></div>
+
+<p>Ce qui manque n'a pas disparu : <span class="cle">tout ce qui n'est pas transmis est transformé en chaleur.</span> C'est même une méthode de diagnostic à part entière — un organe qui chauffe anormalement est un organe dont le rendement s'est dégradé.</p>
+
+<table>
+<thead><tr><th>Organe</th><th>Rendement courant</th><th>Où part le reste</th></tr></thead>
+<tbody>
+<tr><td>Moteur asynchrone bien chargé</td><td>0,85 à 0,93</td><td>Effet Joule dans les bobinages, pertes fer, ventilation</td></tr>
+<tr><td>Moteur asynchrone à 20 % de charge</td><td>0,50 à 0,65</td><td>Les pertes à vide restent, la puissance utile s'effondre</td></tr>
+<tr><td>Réducteur à engrenages, un étage</td><td>0,96 à 0,98</td><td>Frottement des dentures, barbotage dans l'huile</td></tr>
+<tr><td>Roue et vis sans fin</td><td>0,45 à 0,90</td><td>Glissement important entre filet et denture</td></tr>
+<tr><td>Transmission par courroie trapézoïdale</td><td>0,94 à 0,97</td><td>Glissement, flexion de la courroie sur les poulies</td></tr>
+<tr><td>Transmission par chaîne</td><td>0,96 à 0,98</td><td>Articulation des maillons</td></tr>
+<tr><td>Variateur de fréquence</td><td>0,95 à 0,98</td><td>Commutation des transistors</td></tr>
+<tr><td>Vérin pneumatique</td><td>0,10 à 0,30</td><td>Compression de l'air, fuites, détente à l'échappement</td></tr>
+</tbody></table>
+
+<p>Regardez la dernière ligne. Le pneumatique a un rendement <strong>catastrophique</strong> — et il est pourtant partout, parce qu'il est simple, robuste, rapide et sans danger. <span class="cle">Le rendement n'est pas le seul critère de choix d'une technologie</strong> ; c'est en revanche le premier critère de la facture d'énergie.</span></p>
+
+<h3>9.5 — Le rendement d'une chaîne se multiplie</h3>
+<p>Quand plusieurs organes se succèdent, leurs rendements ne s'additionnent pas et ne se moyennent pas : ils se <strong>multiplient</strong>.</p>
+
+<div class="formule">η<sub>global</sub> = η₁ × η₂ × η₃ × …<small>Chaque étage prélève sa part sur ce qui lui reste</small></div>
+
+<p>Conséquence redoutable : <strong>quatre organes à 0,95 chacun ne donnent pas 0,95, mais 0,81</strong>. Chaque étage semble excellent, l'ensemble ne l'est plus. C'est un argument de conception majeur — on cherche à réduire le nombre d'étages — et un argument de maintenance : dans une chaîne longue, une petite dégradation à chaque étage se cumule très vite.</p>
+
+<figure class="anim">
+  <canvas id="a-puissance" width="900" height="440" aria-label="Animation : P égale C fois oméga, échange couple-vitesse dans un réducteur, et analogie des quatre puissances"></canvas>
+  <div class="ctrls">
+    <div class="c"><label>Puissance du moteur <span id="a-puissance-p-l">3,0 kW</span></label><input type="range" id="a-puissance-p" min="5" max="150" value="30"></div>
+    <div class="c"><label>Rapport de réduction <span id="a-puissance-r-l">1 / 20</span></label><input type="range" id="a-puissance-r" min="1" max="80" value="20"></div>
+    <div class="c"><label class="switch"><input type="checkbox" id="a-puissance-e" checked><span>Tenir compte des pertes</span></label></div>
+    <div class="c readout" id="a-puissance-out"></div>
+  </div>
+  <figcaption>À gauche, un moteur et son réducteur. <b>Faites varier le rapport</b> : la courbe est une hyperbole C = P/ω — le point de fonctionnement glisse dessus, échangeant de la vitesse contre du couple sans que la puissance change. <b>Décochez « tenir compte des pertes »</b> pour voir le cas idéal, puis recochez : l'écart entre les deux courbes est exactement ce qui part en chaleur. À droite, <b>la même puissance écrite dans les quatre technologies</b> : électrique, mécanique en rotation, mécanique en translation, fluidique. Quatre écritures, une seule grandeur — c'est ce qui permet de comparer un vérin et un moteur.</figcaption>
+</figure>
+
+<div class="exo"><span class="tag">Exercice 9.1</span>
+<p>Un motoréducteur porte la plaque suivante : <span class="mono">P = 1,5 kW · N<sub>moteur</sub> = 1 430 tr/min · rapport 1/25</span>. Calculez la vitesse et le couple disponibles en sortie, en négligeant les pertes puis en prenant η = 0,94.</p>
+<details><summary>Voir la réponse</summary><div class="rep">
+<p><strong>Étape 1 — la vitesse de sortie.</strong></p>
+<p class="mono">N<sub>sortie</sub> = 1430 / 25 = <strong>57,2 tr/min</strong><br>ω<sub>sortie</sub> = 2π × 57,2 / 60 = <strong>5,99 rad/s</strong></p>
+<p><em>Vérification mentale : 57 divisé par 10 fait 5,7, on est bien autour de 6 rad/s.</em></p>
+<p><strong>Étape 2 — le couple sans pertes.</strong></p>
+<p class="mono">C = P / ω = 1500 / 5,99 = <strong>250 N·m</strong></p>
+<p><strong>Étape 3 — le couple réel, avec η = 0,94.</strong> Le rendement s'applique à la puissance qui ressort :</p>
+<p class="mono">P<sub>utile</sub> = 1500 × 0,94 = 1 410 W<br>C = 1410 / 5,99 = <strong>235 N·m</strong></p>
+<p><strong>Ce qu'il faut voir dans ces chiffres.</strong> Le couple d'entrée valait :</p>
+<p class="mono">ω<sub>moteur</sub> = 2π × 1430/60 = 149,8 rad/s<br>C<sub>moteur</sub> = 1500 / 149,8 = 10 N·m</p>
+<p><strong>10 N·m entrent, 235 N·m sortent.</strong> Le couple a été multiplié par 23,5 — pas tout à fait par 25, la différence étant précisément le rendement. Et pendant ce temps, la puissance, elle, a <em>diminué</em> de 1 500 à 1 410 W.</p>
+<p><span class="cle">Un réducteur ne crée rien : il échange de la vitesse contre du couple, et prélève sa commission au passage.</span></p>
+<p><em>Conséquence pratique : c'est l'arbre de sortie qui dimensionne toute la mécanique en aval — clavette, moyeu, accouplement. 235 N·m sur un arbre de 40 mm, cela fait près de 12 000 N sur la clavette.</em></p>
+</div></details></div>
+
+<div class="exo"><span class="tag">Exercice 9.2</span>
+<p>Une chaîne comprend : variateur (0,97), moteur (0,88), accouplement (0,99), réducteur à deux étages (0,96), transmission par chaîne (0,97). La bande doit recevoir 2,2 kW. Quelle puissance sera facturée par le fournisseur d'électricité ? Combien coûtent les pertes sur un an, à 8 heures par jour, 220 jours, 0,18 €/kWh ?</p>
+<details><summary>Voir la réponse</summary><div class="rep">
+<p><strong>Étape 1 — le rendement global.</strong> Les rendements se multiplient :</p>
+<p class="mono">η = 0,97 × 0,88 × 0,99 × 0,96 × 0,97<br>η = <strong>0,787</strong>, soit environ 79 %</p>
+<p><em>Notez au passage que le plus mauvais maillon, le moteur à 0,88, entraîne presque tout le résultat. Les autres, très bons, ne le rattrapent pas.</em></p>
+<p><strong>Étape 2 — la puissance absorbée.</strong></p>
+<p class="mono">P<sub>absorbée</sub> = P<sub>utile</sub> / η = 2200 / 0,787 = <strong>2 795 W</strong>, arrondissons à 2,8 kW</p>
+<p><strong>Étape 3 — les pertes.</strong></p>
+<p class="mono">2795 − 2200 = <strong>595 W partis en chaleur</strong>, en permanence</p>
+<p><strong>Étape 4 — le coût annuel des pertes.</strong></p>
+<p class="mono">heures = 8 × 220 = 1 760 h/an<br>énergie perdue = 0,595 × 1760 = 1 047 kWh<br>coût = 1047 × 0,18 = <strong>188 € par an</strong></p>
+<p><strong>Et le coût total de fonctionnement, pour comparer :</strong></p>
+<p class="mono">2,795 × 1760 × 0,18 = <strong>885 € par an</strong></p>
+<p><strong>Ce que ces chiffres disent vraiment.</strong> 188 € par an pour un seul convoyeur, c'est peu. Mais une usine en compte cinquante, et ils tournent souvent en 2×8 ou en continu. <span class="cle">Le rendement d'une machine ne se paie pas à l'achat : il se paie tous les mois, pendant quinze ans.</span></p>
+<p><em>C'est le raisonnement exact qui justifie de remplacer un moteur IE1 par un moteur IE3, ou de supprimer un étage de transmission devenu inutile. Et c'est un raisonnement que le technicien de maintenance est bien placé pour tenir, parce que c'est lui qui sait ce qui chauffe.</em></p>
+</div></details></div>
+
+<div class="exo"><span class="tag">Exercice 9.3</span>
+<p>Comparez, en puissance, ces trois actionneurs : a) un moteur qui délivre 40 N·m à 750 tr/min ; b) un vérin qui pousse 12 000 N à 0,25 m/s ; c) une pompe qui fournit 25 L/min sous 160 bar. Lequel est le plus puissant ?</p>
+<details><summary>Voir la réponse</summary><div class="rep">
+<p><strong>a) Le moteur — puissance mécanique en rotation.</strong></p>
+<p class="mono">ω = 2π × 750 / 60 = 78,5 rad/s<br>P = C × ω = 40 × 78,5 = <strong>3 140 W ≈ 3,1 kW</strong></p>
+<p><strong>b) Le vérin — puissance mécanique en translation.</strong></p>
+<p class="mono">P = F × v = 12000 × 0,25 = <strong>3 000 W = 3,0 kW</strong></p>
+<p><strong>c) La pompe — puissance hydraulique.</strong> Les deux conversions d'unités sont le seul vrai travail :</p>
+<p class="mono">Q = 25 L/min = 25 / 60 000 = 4,167 × 10⁻⁴ m³/s<br>p = 160 bar = 160 × 10⁵ = 1,6 × 10⁷ Pa<br>P = p × Q = 1,6 × 10⁷ × 4,167 × 10⁻⁴ = <strong>6 667 W ≈ 6,7 kW</strong></p>
+<p><strong>Classement : la pompe (6,7 kW), puis le moteur (3,1 kW), puis le vérin (3,0 kW).</strong> La pompe est plus de deux fois plus puissante que les deux autres, qui sont quasiment équivalents.</p>
+<p><strong>Ce que cet exercice démontre.</strong> Trois technologies sans rien de commun en apparence — un arbre qui tourne, une tige qui sort, de l'huile qui coule — deviennent directement comparables dès qu'on les ramène en watts. <span class="cle">C'est là toute la valeur de l'analogie des puissances : elle est le langage commun des quatre technologies du diplôme.</span></p>
+<p><em>Astuce de calcul hydraulique, à retenir pour le dossier hydraulique : avec Q en L/min et p en bar, P(kW) = p × Q / 600. Vérification : 160 × 25 / 600 = 6,67 kW. Exactement le même résultat, sans aucune puissance de dix.</em></p>
+</div></details></div>
+
+<div class="horsref"><span class="tag">Pour aller plus loin — hors référentiel</span>
+<h4>Le cheval-vapeur, et pourquoi il traîne encore</h4>
+<p>Vers 1782, James Watt cherche à vendre ses machines à des exploitants de mines qui n'ont jamais acheté que des chevaux. Comment justifier le prix ? Il lui faut une unité qu'ils comprennent.</p>
+<p>Il mesure donc le travail d'un cheval de brasserie tournant un treuil et arrondit — généreusement, disent ses détracteurs — à <strong>33 000 livres-pieds par minute</strong>, soit environ <strong>746 W</strong>. Sa machine « vaut dix chevaux » : l'argument commercial est imparable, et l'unité lui survit de deux siècles et demi.</p>
+<p>Un vrai cheval développe en réalité environ 500 W en continu, et peut monter à 1 000 W sur quelques secondes. Watt avait pris large — ce qui, pour un vendeur, était plutôt honnête.</p>
+<p>Deux remarques utiles aujourd'hui :</p>
+<ul>
+<li>Le <strong>ch</strong> français (735,5 W) et le <strong>hp</strong> anglo-saxon (745,7 W) ne sont pas la même unité. L'écart est de 1,4 %, ce qui suffit à fausser une comparaison de catalogues.</li>
+<li>Le <strong>watt</strong>, lui, est l'unité légale du système international depuis 1960, et c'est la seule qui figure sur une plaque signalétique de moteur en Europe. Si vous voyez des chevaux sur une plaque, la machine est ancienne ou importée.</li>
+</ul>
+<p>Watt a par ailleurs donné son nom à l'unité et inventé le <em>régulateur à boules</em>, le premier asservissement mécanique de l'histoire — que le référentiel MSPC vous dispense d'étudier, puisque « la théorie de l'asservissement ne sera pas abordée ».</p></div>
+
+</div>
+</section>
+
 <section class="ch" id="suite">
   <div class="ch-head"><div class="ch-num">…</div><div class="ch-title">
-    <span class="kicker">Rédaction en cours</span><h2>Les chapitres 7 à 18</h2></div></div>
+    <span class="kicker">Rédaction en cours</span><h2>Les chapitres 10 à 18</h2></div></div>
   <div class="ch-body">
-<p class="lede">Cette première tranche couvre l'approche système et les actions mécaniques. La suite est en cours d'écriture, dans le même format et avec le même calage sur le référentiel.</p>
+<p class="lede">Cette tranche couvre l'approche système, les actions mécaniques et la chaîne d'énergie. La suite est en cours d'écriture, dans le même format et avec le même calage sur le référentiel.</p>
 <ul>
-<li><strong>07 · Isoler et résoudre : la statique graphique</strong> — S1.4.5, niveau 3, résolution graphique à 2 ou 3 forces</li>
-<li><strong>08 · Mouvements et vitesses</strong> — S1.4.3 et S1.4.4</li>
-<li><strong>09 · Énergie, puissance, rendement</strong> — S2.1, niveau 3, et l'analogie des quatre puissances</li>
 <li><strong>10 · Ajustements, jeux et tolérances</strong> — S1.2.1, niveau 3</li>
 <li><strong>11 · États de surface et usure</strong> — S1.2.1, niveau 3</li>
 <li><strong>12 · La lubrification</strong> — S1.2.1, niveau 3, désignation normalisée et viscosité</li>
@@ -754,7 +1227,7 @@
 </section>
 
 <footer class="fin">
-  <p><strong>Transmettre, guider, tenir</strong> — dossier de mécanique pour le Baccalauréat Professionnel MSPC. Chaque chapitre est calé sur le référentiel officiel du diplôme : savoir associé visé et niveau taxonomique indiqués sous le titre. <em>Dossier en cours de rédaction : 6 chapitres sur 18 sont publiés.</em></p>
+  <p><strong>Transmettre, guider, tenir</strong> — dossier de mécanique pour le Baccalauréat Professionnel MSPC. Chaque chapitre est calé sur le référentiel officiel du diplôme : savoir associé visé et niveau taxonomique indiqués sous le titre. <em>Dossier en cours de rédaction : 9 chapitres sur 18 sont publiés.</em></p>
   <p>Le référentiel retenu est celui du <strong>baccalauréat professionnel Maintenance des Systèmes de Production Connectés</strong>, mise à jour du 3 décembre 2019, savoirs <strong>S1 — L'approche système</strong> et <strong>S2 — La chaîne d'énergie</strong>. Les valeurs numériques, coefficients et ordres de grandeur cités le sont à titre pédagogique : sur une intervention réelle, la documentation constructeur et les référentiels internes de l'entreprise font toujours foi.</p>
   <p><a href="index.html">← Retour au portail Atelier MSPC</a></p>
 </footer>
@@ -1720,6 +2193,369 @@
     out.innerHTML = glisse
       ? '<b style="color:#ff6a5e">Glissement</b><br>tan('+Math.round(A.val)+'°) = '+Math.tan(al).toFixed(2).replace('.',',')+' > f = '+f.toFixed(2).replace('.',',')
       : '<b style="color:#c8d834">Équilibre</b><br>il reste '+Math.round(Tmax-Tn)+' N d’adhérence en réserve';
+  }, {fixed:true});
+})();
+</script>
+<script>
+/* ======================= CH 7 · statique graphique : la potence ======================= */
+(function(){
+  "use strict";
+  var M=MSPC.ctrl('a-statique-m', function(v){ return Math.round(v)+' kg'; }, 'a-statique-m-l');
+  var D=MSPC.ctrl('a-statique-d', function(v){ return Math.round(v)+' %'; }, 'a-statique-d-l');
+  var Hc=MSPC.ctrl('a-statique-h', function(v){ return (v/100).toFixed(2).replace('.',',')+' m'; }, 'a-statique-h-l');
+  var out=document.getElementById('a-statique-out');
+
+  var LB=1.5, ECH=140;                 // longueur du bras (m) et échelle (px/m)
+  var AX=150, AY=262;                  // le pivot A, à l'écran
+
+  function fleche(ctx,x0,y0,x1,y1,col,w){
+    var dx=x1-x0, dy=y1-y0, d=Math.hypot(dx,dy); if(d<8) return;
+    var ux=dx/d, uy=dy/d;
+    ctx.strokeStyle=col; ctx.lineWidth=w;
+    ctx.beginPath(); ctx.moveTo(x0,y0); ctx.lineTo(x1-ux*11,y1-uy*11); ctx.stroke();
+    ctx.fillStyle=col;
+    ctx.beginPath(); ctx.moveTo(x1,y1);
+    ctx.lineTo(x1-ux*11+uy*5.5, y1-uy*11-ux*5.5);
+    ctx.lineTo(x1-ux*11-uy*5.5, y1-uy*11+ux*5.5);
+    ctx.closePath(); ctx.fill();
+  }
+
+  MSPC.anim('a-statique', function(a){
+    var ctx=a.ctx, W=a.W, H=a.H;
+    var m=M.val, d=D.val/100*LB, hm=Hc.val/100;
+    var P=m*9.81;
+
+    var hyp=Math.hypot(LB,hm), sb=hm/hyp, cb=LB/hyp;
+    var T=P*d/(LB*sb);
+    var Rx=T*cb, Ry=P*(1-d/LB);
+    var R=Math.hypot(Rx,Ry);
+
+    MSPC.fond(ctx,W,H,0);
+    MSPC.mono(ctx,'POTENCE MURALE — LE BRAS ISOLÉ, SOUS TROIS ACTIONS',26,30,11.5,'#8d968b');
+
+    var BX=AX+LB*ECH, BY=AY;
+    var CX=AX, CY=AY-hm*ECH;
+    var LX=AX+d*ECH, LY=AY;
+    var JX=LX, JY=AY-(hm*(LB-d)/LB)*ECH;
+
+    /* le mur */
+    ctx.fillStyle='rgba(255,255,255,.05)'; ctx.fillRect(AX-32,44,32,258);
+    ctx.strokeStyle='#5a6258'; ctx.lineWidth=2;
+    ctx.beginPath(); ctx.moveTo(AX,44); ctx.lineTo(AX,302); ctx.stroke();
+    ctx.lineWidth=1;
+    for(var i=48;i<298;i+=11){ ctx.beginPath(); ctx.moveTo(AX,i); ctx.lineTo(AX-9,i+9); ctx.stroke(); }
+
+    /* les trois droites d'action */
+    ctx.strokeStyle='rgba(255,255,255,.22)'; ctx.lineWidth=1.2; ctx.setLineDash([4,4]);
+    ctx.beginPath(); ctx.moveTo(LX,LY+96); ctx.lineTo(LX,JY-26); ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(BX,BY); ctx.lineTo(CX,CY); ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(AX,AY); ctx.lineTo(JX+(JX-AX)*0.22, JY+(JY-AY)*0.22); ctx.stroke();
+    ctx.setLineDash([]);
+
+    /* le bras et le tirant */
+    ctx.strokeStyle='#79a6c4'; ctx.lineWidth=10; ctx.lineCap='round';
+    ctx.beginPath(); ctx.moveTo(AX,AY); ctx.lineTo(BX,BY); ctx.stroke();
+    ctx.lineCap='butt';
+    ctx.strokeStyle='#f0a844'; ctx.lineWidth=4;
+    ctx.beginPath(); ctx.moveTo(BX,BY); ctx.lineTo(CX,CY); ctx.stroke();
+
+    /* la charge */
+    ctx.fillStyle='rgba(207,226,238,.18)'; ctx.fillRect(LX-23,LY+76,46,26);
+    ctx.strokeStyle='#cfe2ee'; ctx.lineWidth=2; ctx.strokeRect(LX-23,LY+76,46,26);
+    MSPC.mono(ctx,m+' kg',LX,LY+93,10,'#cfe2ee','center');
+
+    /* le point de concours */
+    ctx.fillStyle='rgba(200,216,52,.22)'; ctx.beginPath(); ctx.arc(JX,JY,13,0,6.2832); ctx.fill();
+    ctx.fillStyle='#c8d834'; ctx.beginPath(); ctx.arc(JX,JY,5,0,6.2832); ctx.fill();
+    MSPC.mono(ctx,'point de concours',JX+18,JY-8,10,'#c8d834');
+    MSPC.mono(ctx,'les 3 droites s’y croisent',JX+18,JY+7,9.5,'#7f8a7e');
+
+    /* les points remarquables */
+    [[AX,AY,'A','#79a6c4',-16],[BX,BY,'B','#f0a844',18],[LX,LY,'C','#cfe2ee',-16]].forEach(function(p){
+      ctx.fillStyle='#11160f'; ctx.beginPath(); ctx.arc(p[0],p[1],7,0,6.2832); ctx.fill();
+      ctx.strokeStyle=p[3]; ctx.lineWidth=2.2; ctx.beginPath(); ctx.arc(p[0],p[1],7,0,6.2832); ctx.stroke();
+      MSPC.mono(ctx,p[2],p[0]+p[4],p[1]+4,12,p[3],'center');
+    });
+
+    /* les trois vecteurs */
+    var e=72/Math.max(P,T,R);
+    fleche(ctx,LX,LY,LX,LY+P*e,'#cfe2ee',3.2);
+    MSPC.mono(ctx,'P = '+Math.round(P)+' N',LX-12,LY+P*e*0.6,10.5,'#cfe2ee','right');
+    var tl=Math.hypot(CX-BX,CY-BY), tux=(CX-BX)/tl, tuy=(CY-BY)/tl;
+    fleche(ctx,BX,BY,BX+tux*T*e,BY+tuy*T*e,'#f0a844',3.2);
+    MSPC.mono(ctx,'T = '+Math.round(T)+' N',BX+tux*T*e*0.5+16,BY+tuy*T*e*0.5+16,10.5,'#f0a844');
+    var rux=Rx/R, ruy=-Ry/R;
+    fleche(ctx,AX,AY,AX+rux*R*e,AY+ruy*R*e,'#c8d834',3.2);
+    MSPC.mono(ctx,'R = '+Math.round(R)+' N',AX+rux*R*e*0.5,AY+ruy*R*e*0.5+22,10.5,'#c8d834','center');
+
+    /* ---------- le dynamique ---------- */
+    var dx0=596, dw=W-dx0-26;
+    ctx.fillStyle='rgba(255,255,255,.04)'; ctx.fillRect(dx0,68,dw,238);
+    ctx.strokeStyle='rgba(255,255,255,.20)'; ctx.lineWidth=1.4; ctx.strokeRect(dx0+.5,68.5,dw,238);
+    MSPC.mono(ctx,'LE DYNAMIQUE — LE TRIANGLE SE FERME',dx0+14,92,10.5,'#8d968b');
+
+    var ed=142/Math.max(P,T,R);
+    var ox=dx0+dw-58, oy=112;
+    var p1=[ox, oy+P*ed];
+    var p2=[p1[0]+tux*T*ed, p1[1]+tuy*T*ed];
+    fleche(ctx,ox,oy,p1[0],p1[1],'#cfe2ee',3);
+    fleche(ctx,p1[0],p1[1],p2[0],p2[1],'#f0a844',3);
+    fleche(ctx,p2[0],p2[1],ox,oy,'#c8d834',3);
+    MSPC.mono(ctx,'P',ox+9,oy+P*ed/2,11.5,'#cfe2ee');
+    MSPC.mono(ctx,'T',(p1[0]+p2[0])/2,(p1[1]+p2[1])/2+18,11.5,'#f0a844','center');
+    MSPC.mono(ctx,'R',(p2[0]+ox)/2,(p2[1]+oy)/2-8,11.5,'#c8d834','center');
+    ctx.fillStyle='#c8d834'; ctx.beginPath(); ctx.arc(ox,oy,4.5,0,6.2832); ctx.fill();
+    MSPC.mono(ctx,'on revient exactement au point de départ',dx0+14,286,9.5,'#7f8a7e');
+
+    /* ---------- les chiffres ---------- */
+    var by=378;
+    ctx.fillStyle='rgba(255,255,255,.05)'; ctx.fillRect(26,by-16,W-52,62);
+    MSPC.titre(ctx,Math.round(P)+' N',42,by+14,25,'#cfe2ee');
+    MSPC.mono(ctx,'POIDS DE LA CHARGE',42,by+30,9.5,'#8d968b');
+    MSPC.titre(ctx,Math.round(T)+' N',198,by+14,25,T>2.5*P?'#ff6a5e':'#f0a844');
+    MSPC.mono(ctx,'TENSION DU TIRANT',198,by+30,9.5,'#8d968b');
+    MSPC.titre(ctx,Math.round(R)+' N',354,by+14,25,'#c8d834');
+    MSPC.mono(ctx,'RÉACTION EN A',354,by+30,9.5,'#8d968b');
+    MSPC.titre(ctx,'× '+(T/P).toFixed(2).replace('.',','),498,by+14,25,T>2.5*P?'#ff6a5e':'#e6ebe4');
+    MSPC.mono(ctx,'CE QUE LE TIRANT MULTIPLIE',498,by+30,9.5,'#8d968b');
+    MSPC.mono(ctx, T>3*P ? 'Ancrage trop bas : le tirant souffre.'
+                         : (T>1.5*P ? 'Le tirant dépasse la charge.'
+                                    : 'Ancrage haut : bonnes conditions.'),
+      W-42, by+8, 10.5, T>3*P?'#ff6a5e':(T>1.5*P?'#f0a844':'#c8d834'), 'right');
+    MSPC.mono(ctx,'ancrez-le le plus haut possible',W-42,by+28,10,'#6f786e','right');
+
+    out.innerHTML='T = <b style="color:#f0a844">'+Math.round(T)+' N</b> · R = <b style="color:#c8d834">'+Math.round(R)+' N</b><br>'
+      +'le tirant encaisse <b>'+(T/P).toFixed(2).replace('.',',')+' fois</b> la charge';
+  }, {fixed:true});
+})();
+
+/* ======================= CH 8 · vitesse angulaire et vitesse linéaire ======================= */
+(function(){
+  "use strict";
+  var N=MSPC.ctrl('a-vitesse-n', function(v){ return Math.round(v)+' tr/min'; }, 'a-vitesse-n-l');
+  var D=MSPC.ctrl('a-vitesse-d', function(v){ return Math.round(v)+' mm'; }, 'a-vitesse-d-l');
+  var T=MSPC.ctrl('a-vitesse-t');
+  var out=document.getElementById('a-vitesse-out');
+  var th=0;
+
+  function fleche(ctx,x0,y0,x1,y1,col,w){
+    var dx=x1-x0, dy=y1-y0, d=Math.hypot(dx,dy); if(d<5) return;
+    var ux=dx/d, uy=dy/d;
+    ctx.strokeStyle=col; ctx.lineWidth=w;
+    ctx.beginPath(); ctx.moveTo(x0,y0); ctx.lineTo(x1-ux*9,y1-uy*9); ctx.stroke();
+    ctx.fillStyle=col;
+    ctx.beginPath(); ctx.moveTo(x1,y1);
+    ctx.lineTo(x1-ux*9+uy*4.5, y1-uy*9-ux*4.5);
+    ctx.lineTo(x1-ux*9-uy*4.5, y1-uy*9+ux*4.5);
+    ctx.closePath(); ctx.fill();
+  }
+
+  MSPC.anim('a-vitesse', function(a){
+    var ctx=a.ctx, W=a.W, H=a.H;
+    var Nv=N.val, Dm=D.val;
+    var w=6.2832*Nv/60, Rm=Dm/2000;
+    th += a.dt*w*(Nv>420?420/Nv:1);
+
+    MSPC.fond(ctx,W,H,0);
+    MSPC.mono(ctx,'UNE POULIE EN ROTATION — MÊME VITESSE ANGULAIRE, TROIS VITESSES DIFFÉRENTES',26,30,11.5,'#8d968b');
+
+    var cx=236, cy=190, Rpx=Math.min(122, Dm*0.26);
+    var pts=[{k:1/3,c:'#79a6c4'},{k:2/3,c:'#f0a844'},{k:1,c:'#c8d834'}];
+
+    if(T.val){
+      ctx.strokeStyle='rgba(255,255,255,.12)'; ctx.lineWidth=1; ctx.setLineDash([3,4]);
+      pts.forEach(function(p){ ctx.beginPath(); ctx.arc(cx,cy,Rpx*p.k,0,6.2832); ctx.stroke(); });
+      ctx.setLineDash([]);
+    }
+
+    ctx.fillStyle='rgba(121,166,196,.14)'; ctx.beginPath(); ctx.arc(cx,cy,Rpx,0,6.2832); ctx.fill();
+    ctx.strokeStyle='#79a6c4'; ctx.lineWidth=2.6; ctx.beginPath(); ctx.arc(cx,cy,Rpx,0,6.2832); ctx.stroke();
+    ctx.strokeStyle='rgba(207,226,238,.28)'; ctx.lineWidth=2;
+    for(var b=0;b<6;b++){
+      var an=th+b*1.0472;
+      ctx.beginPath(); ctx.moveTo(cx+Math.cos(an)*15,cy+Math.sin(an)*15);
+      ctx.lineTo(cx+Math.cos(an)*Rpx,cy+Math.sin(an)*Rpx); ctx.stroke();
+    }
+    ctx.fillStyle='#3f6b8a'; ctx.beginPath(); ctx.arc(cx,cy,14,0,6.2832); ctx.fill();
+    ctx.strokeStyle='#79a6c4'; ctx.lineWidth=2; ctx.beginPath(); ctx.arc(cx,cy,14,0,6.2832); ctx.stroke();
+    ctx.fillStyle='#ff6a5e'; ctx.beginPath(); ctx.arc(cx,cy,4.5,0,6.2832); ctx.fill();
+
+    var vmax=Rm*w;
+    pts.forEach(function(p){
+      var r=Rpx*p.k, px=cx+Math.cos(th)*r, py=cy+Math.sin(th)*r;
+      var v=Rm*p.k*w;
+      ctx.fillStyle=p.c; ctx.beginPath(); ctx.arc(px,py,6,0,6.2832); ctx.fill();
+      var tuxx=-Math.sin(th), tuyy=Math.cos(th);
+      var lg=vmax>0 ? 92*v/vmax : 0;
+      fleche(ctx,px,py,px+tuxx*lg,py+tuyy*lg,p.c,2.8);
+    });
+    MSPC.mono(ctx,'v = 0 au centre',cx,cy+Rpx+26,10,'#ff6a5e','center');
+    MSPC.mono(ctx,'les flèches sont TANGENTES, jamais dirigées vers le centre',cx,cy+Rpx+44,9.5,'#7f8a7e','center');
+
+    /* ---------- panneau de droite ---------- */
+    var px0=502, pw=W-px0-26;
+    ctx.fillStyle='rgba(255,255,255,.04)'; ctx.fillRect(px0,56,pw,244);
+    ctx.strokeStyle='rgba(255,255,255,.20)'; ctx.lineWidth=1.4; ctx.strokeRect(px0+.5,56.5,pw,244);
+
+    MSPC.mono(ctx,'LA CONVERSION',px0+16,80,10,'#8d968b');
+    MSPC.titre(ctx,'ω = 2π N / 60',px0+16,108,22,'#e6ebe4');
+    MSPC.mono(ctx,Nv+' tr/min   →   '+w.toFixed(1).replace('.',',')+' rad/s',px0+16,130,12,'#cfe2ee');
+    MSPC.mono(ctx,'astuce : diviser par 10 donne '+(Nv/10).toFixed(0)+' — à 5 % près',px0+16,148,9.5,'#6f786e');
+
+    MSPC.mono(ctx,'LA VITESSE DE CHAQUE POINT   v = R × ω',px0+16,180,10,'#8d968b');
+    MSPC.mono(ctx,'R en mètres, ω en rad/s — jamais autrement',px0+16,194,9,'#6f786e');
+    pts.forEach(function(p,i){
+      var r=Rm*p.k, v=r*w, y=222+i*26;
+      ctx.fillStyle=p.c; ctx.fillRect(px0+16,y-9,10,10);
+      MSPC.mono(ctx,'R = '+(r*1000).toFixed(0)+' mm',px0+34,y,11,'#8d968b');
+      MSPC.titre(ctx,v.toFixed(2).replace('.',',')+' m/s',px0+152,y+3,19,p.c);
+    });
+
+    /* ---------- bandeau du bas ---------- */
+    var by=330;
+    ctx.fillStyle='rgba(255,255,255,.05)'; ctx.fillRect(26,by,W-52,74);
+    MSPC.titre(ctx,(Rm*w).toFixed(2).replace('.',',')+' m/s',44,by+36,27,'#c8d834');
+    MSPC.mono(ctx,'EN PÉRIPHÉRIE',44,by+54,9.5,'#8d968b');
+    MSPC.titre(ctx,(Rm*w*60).toFixed(0)+' m/min',204,by+36,27,'#c8d834');
+    MSPC.mono(ctx,'EN MÈTRES PAR MINUTE',204,by+54,9.5,'#8d968b');
+    MSPC.titre(ctx,(Rm*w*3.6).toFixed(1).replace('.',',')+' km/h',380,by+36,27,'#cfe2ee');
+    MSPC.mono(ctx,'POUR SE REPRÉSENTER',380,by+54,9.5,'#8d968b');
+    MSPC.mono(ctx,'Doublez le diamètre : la vitesse double,',W-44,by+30,10.5,'#8d968b','right');
+    MSPC.mono(ctx,'le compteur en tr/min, lui, ne bouge pas.',W-44,by+50,10.5,'#8d968b','right');
+
+    out.innerHTML='ω = <b>'+w.toFixed(1).replace('.',',')+' rad/s</b><br>en périphérie : <b style="color:#c8d834">'+(Rm*w).toFixed(2).replace('.',',')+' m/s</b>';
+  }, {fixed:true});
+})();
+
+/* ======================= CH 9 · P = C·ω et l'analogie des puissances ======================= */
+(function(){
+  "use strict";
+  var P=MSPC.ctrl('a-puissance-p', function(v){ return (v/10).toFixed(1).replace('.',',')+' kW'; }, 'a-puissance-p-l');
+  var R=MSPC.ctrl('a-puissance-r', function(v){ return '1 / '+Math.round(v); }, 'a-puissance-r-l');
+  var E=MSPC.ctrl('a-puissance-e');
+  var out=document.getElementById('a-puissance-out');
+  var ph=0;
+
+  MSPC.anim('a-puissance', function(a){
+    var ctx=a.ctx, W=a.W, H=a.H;
+    var Pw=P.val*100, r=R.val, pertes=E.val;
+
+    var Nm=1450, wm=6.2832*Nm/60;
+    var ws=wm/r;
+    var nE=r<=6?1:(r<=30?2:3);
+    var eta=pertes ? Math.pow(0.975,nE) : 1;
+    var Ps=Pw*eta;
+    var Cs=Ps/ws, Cm=Pw/wm;
+    ph += a.dt*ws*0.6;
+
+    MSPC.fond(ctx,W,H,0);
+    MSPC.mono(ctx,'À PUISSANCE CONSTANTE, LE RÉDUCTEUR ÉCHANGE DE LA VITESSE CONTRE DU COUPLE',26,30,11.5,'#8d968b');
+
+    var g={x:74,y:64,w:404,h:206};
+    var wmax=170, cmax=Math.max(Cs*1.18, 40);
+    var X=function(v){ return g.x+Math.min(1,v/wmax)*g.w; };
+    var Y=function(v){ return g.y+g.h-Math.min(1,v/cmax)*g.h; };
+
+    /* les deux rectangles de puissance : leur aire est la puissance */
+    [[ws,Cs,'rgba(200,216,52,.13)'],[wm,Cm,'rgba(240,168,68,.15)']].forEach(function(p){
+      if(p[0]>wmax||p[1]>cmax) return;
+      ctx.fillStyle=p[2];
+      ctx.fillRect(g.x, Y(p[1]), X(p[0])-g.x, g.y+g.h-Y(p[1]));
+    });
+
+    ctx.strokeStyle='rgba(255,255,255,.20)'; ctx.lineWidth=1.3;
+    ctx.beginPath(); ctx.moveTo(g.x,g.y); ctx.lineTo(g.x,g.y+g.h); ctx.lineTo(g.x+g.w,g.y+g.h); ctx.stroke();
+    MSPC.mono(ctx,'ω (rad/s)',g.x+g.w,g.y+g.h+20,10,'#7f8a7e','right');
+    MSPC.mono(ctx,'C (N·m)',g.x-4,g.y-10,10,'#7f8a7e');
+    for(var t=0;t<=3;t++){
+      var cv2=cmax*t/3;
+      ctx.strokeStyle='rgba(255,255,255,.10)'; ctx.lineWidth=1;
+      ctx.beginPath(); ctx.moveTo(g.x,Y(cv2)); ctx.lineTo(g.x+g.w,Y(cv2)); ctx.stroke();
+      if(t>0) MSPC.mono(ctx,cv2.toFixed(0),g.x-6,Y(cv2)+4,9,'#6f786e','right');
+    }
+
+    if(pertes){
+      ctx.strokeStyle='rgba(255,255,255,.30)'; ctx.lineWidth=1.5; ctx.setLineDash([4,4]);
+      ctx.beginPath();
+      var f1=true;
+      for(var w1=2;w1<=wmax;w1+=1){ var c1=Pw/w1; if(c1>cmax) continue;
+        if(f1){ ctx.moveTo(X(w1),Y(c1)); f1=false; } else ctx.lineTo(X(w1),Y(c1)); }
+      ctx.stroke(); ctx.setLineDash([]);
+      MSPC.mono(ctx,'sans pertes',X(46)+8,Y(Pw/46)-8,9.5,'#8d968b');
+    }
+    ctx.strokeStyle='#79a6c4'; ctx.lineWidth=2.6;
+    ctx.beginPath();
+    var f2=true;
+    for(var w2=2;w2<=wmax;w2+=1){ var c2=Ps/w2; if(c2>cmax) continue;
+      if(f2){ ctx.moveTo(X(w2),Y(c2)); f2=false; } else ctx.lineTo(X(w2),Y(c2)); }
+    ctx.stroke();
+
+    [[ws,Cs,'#c8d834','SORTIE'],[wm,Cm,'#f0a844','MOTEUR']].forEach(function(pt){
+      if(pt[0]>wmax || pt[1]>cmax) return;
+      ctx.fillStyle=pt[2]; ctx.beginPath(); ctx.arc(X(pt[0]),Y(pt[1]),6,0,6.2832); ctx.fill();
+      MSPC.mono(ctx,pt[3],X(pt[0])+11,Y(pt[1])-9,9.5,pt[2]);
+    });
+    MSPC.mono(ctx,'les deux rectangles colorés ont la même aire : c’est la puissance',g.x,g.y+g.h+38,10,'#6f786e');
+
+    /* ---------- le motoréducteur ---------- */
+    var mx=74, my=326;
+    ctx.fillStyle='#4a5a68'; ctx.fillRect(mx,my,92,56);
+    ctx.strokeStyle='#79a6c4'; ctx.lineWidth=2; ctx.strokeRect(mx,my,92,56);
+    MSPC.titre(ctx,'M',mx+46,my+39,26,'#cfe2ee','center');
+    ctx.fillStyle='#3f4a54'; ctx.fillRect(mx+114,my+5,84,46);
+    ctx.strokeStyle='#79a6c4'; ctx.lineWidth=2; ctx.strokeRect(mx+114,my+5,84,46);
+    ctx.strokeStyle='#a9d0e6'; ctx.lineWidth=2;
+    ctx.beginPath(); ctx.arc(mx+138,my+28,12,0,6.2832); ctx.stroke();
+    ctx.beginPath(); ctx.arc(mx+174,my+28,18,0,6.2832); ctx.stroke();
+    for(var q=0;q<6;q++){
+      var an=ph*3+q*1.0472;
+      ctx.beginPath(); ctx.moveTo(mx+138+Math.cos(an)*7,my+28+Math.sin(an)*7);
+      ctx.lineTo(mx+138+Math.cos(an)*12,my+28+Math.sin(an)*12); ctx.stroke();
+      var an2=-ph+q*1.0472;
+      ctx.beginPath(); ctx.moveTo(mx+174+Math.cos(an2)*12,my+28+Math.sin(an2)*12);
+      ctx.lineTo(mx+174+Math.cos(an2)*18,my+28+Math.sin(an2)*18); ctx.stroke();
+    }
+    ctx.strokeStyle='#8f9a86'; ctx.lineWidth=6;
+    ctx.beginPath(); ctx.moveTo(mx+92,my+28); ctx.lineTo(mx+114,my+28); ctx.stroke();
+    ctx.lineWidth=12;
+    ctx.beginPath(); ctx.moveTo(mx+198,my+28); ctx.lineTo(mx+228,my+28); ctx.stroke();
+    MSPC.mono(ctx,Nm+' tr/min · '+Cm.toFixed(1).replace('.',',')+' N·m',mx,my+72,10,'#f0a844');
+    MSPC.mono(ctx,(ws*60/6.2832).toFixed(0)+' tr/min',mx+238,my+24,10.5,'#c8d834');
+    MSPC.mono(ctx,Cs.toFixed(0)+' N·m',mx+238,my+40,10.5,'#c8d834');
+
+    /* ---------- l'analogie des quatre puissances ---------- */
+    var ax=522, aw=W-ax-26;
+    ctx.fillStyle='rgba(255,255,255,.04)'; ctx.fillRect(ax,56,aw,352);
+    ctx.strokeStyle='rgba(255,255,255,.20)'; ctx.lineWidth=1.4; ctx.strokeRect(ax+.5,56.5,aw,352);
+    MSPC.mono(ctx,'LA MÊME PUISSANCE, QUATRE ÉCRITURES',ax+16,80,10.5,'#8d968b');
+    MSPC.titre(ctx,(Pw/1000).toFixed(2).replace('.',',')+' kW',ax+16,114,28,'#e6ebe4');
+    MSPC.mono(ctx,'ce que le moteur absorbe',ax+16,132,9.5,'#6f786e');
+
+    var U=400, I=Pw/(1.732*U*0.85);
+    var Fv=6000, vv=Pw/Fv;
+    var pb=160, Ql=Pw*60000/(pb*1e5);
+    var lignes=[
+      ['ÉLECTRIQUE',  'P = U × I',  U+' V × '+I.toFixed(1).replace('.',',')+' A', '#c8d834'],
+      ['ROTATION',    'P = C × ω',  Cm.toFixed(1).replace('.',',')+' N·m × '+wm.toFixed(0)+' rad/s', '#f0a844'],
+      ['TRANSLATION', 'P = F × v',  Fv+' N × '+vv.toFixed(2).replace('.',',')+' m/s', '#79a6c4'],
+      ['FLUIDIQUE',   'P = p × Q',  pb+' bar × '+Ql.toFixed(1).replace('.',',')+' L/min', '#cfe2ee']
+    ];
+    lignes.forEach(function(L,i){
+      var y=166+i*58;
+      ctx.fillStyle=L[3]; ctx.fillRect(ax+16,y-11,4,42);
+      MSPC.mono(ctx,L[0],ax+28,y,10,L[3]);
+      MSPC.titre(ctx,L[1],ax+28,y+22,19,'#e6ebe4');
+      MSPC.mono(ctx,L[2],ax+136,y+20,10,'#8d968b');
+    });
+    MSPC.mono(ctx,'un terme POUSSE, l’autre S’ÉCOULE — dans les quatre cas',ax+16,396,9.5,'#6f786e');
+
+    MSPC.mono(ctx, pertes
+      ? nE+' étage'+(nE>1?'s':'')+' d’engrenages : le réducteur restitue '+(eta*100).toFixed(1).replace('.',',')+' %, le reste chauffe l’huile.'
+      : 'Réducteur supposé parfait. Cochez « tenir compte des pertes » pour voir la réalité.',
+      74, 424, 11, pertes?'#f0a844':'#7f8a7e');
+
+    out.innerHTML='Sortie : <b style="color:#c8d834">'+Cs.toFixed(0)+' N·m</b> à <b>'+(ws*60/6.2832).toFixed(0)+' tr/min</b><br>'
+      +'couple multiplié par <b>'+(Cs/Cm).toFixed(1).replace('.',',')+'</b>';
   }, {fixed:true});
 })();
 </script>
