@@ -48,10 +48,10 @@
 </header>
 
 <div class="meta-bar">
-  <div><b>19</b> chapitres</div>
-  <div><b>25</b> animations pilotables</div>
+  <div><b>21</b> chapitres</div>
+  <div><b>29</b> animations pilotables</div>
   <div><b>15</b> fiches TP d'atelier</div>
-  <div><b>56</b> exercices corrigés</div>
+  <div><b>61</b> exercices corrigés</div>
   <div>Manips en <b>TBTS ≤ 24 V</b> sauf mention</div>
 </div>
 
@@ -80,6 +80,8 @@
     <a class="borne" href="#c17"><span class="num">17</span><span class="lbl">Le disjoncteur magnéto-thermique</span></a>
     <a class="borne" href="#c18"><span class="num">18</span><span class="lbl">Le risque électrique</span></a>
     <a class="borne" href="#c19"><span class="num">19</span><span class="lbl">Consigner</span></a>
+    <a class="borne" href="#c20"><span class="num">20</span><span class="lbl">L’habilitation électrique</span></a>
+    <a class="borne" href="#c21"><span class="num">21</span><span class="lbl">Lire un schéma électrique</span></a>
     <a class="borne" href="#tps" style="border-top-color:var(--accent)"><span class="num">TP</span><span class="lbl">Les 15 fiches d'atelier</span></a>
   </div></nav>
 
@@ -5207,6 +5209,900 @@
     out.innerHTML = reste
       ? '<b style="color:#ff6a5e">'+reste+' énergie'+(reste>1?'s':'')+' active'+(reste>1?'s':'')+'</b><br>bus continu : '+Math.round(Ubus)+' V'
       : '<b style="color:#c8d834">Tout est dissipé</b><br>la machine est consignée';
+  }, {fixed:true});
+})();
+</script>
+
+
+<!-- ================= CH 20 ================= -->
+<section class="ch" id="c20">
+  <div class="ch-head"><div class="ch-num">20</div><div class="ch-title">
+    <span class="kicker">Ce que votre titre vous autorise</span><h2>L'habilitation électrique</h2></div></div>
+  <div class="ch-body">
+
+<div class="savoirs">
+  <span class="savoir n3"><b>S6.2.4</b> <i>Les habilitations</i></span>
+</div>
+
+<p class="lede">Le référentiel MSPC est explicite sur ce point : <em>« niveau d'habilitation demandé : B1V-BR »</em>. Deux symboles de trois caractères, qui décident très précisément de ce que vous avez le droit de faire — et surtout de ce que vous n'avez pas le droit de faire, même si vous savez le faire.</p>
+
+<h3>20.1 — L'habilitation n'est pas un diplôme</h3>
+<p>Point de vocabulaire qu'il faut poser tout de suite, parce que tout le monde le confond.</p>
+<ul>
+<li><strong>Le titre d'habilitation est délivré par votre employeur</strong>, pas par un organisme de formation. C'est lui qui engage sa responsabilité en vous déclarant apte.</li>
+<li><strong>La formation prépare à l'habilitation, elle ne la donne pas.</strong> Vous sortez d'un stage avec un <em>avis</em> favorable ; c'est l'employeur qui signe le titre.</li>
+<li><strong>Elle est nominative, datée, et limitée</strong> à un domaine de tension, à des opérations précises, souvent à des ouvrages précis. Elle se révise périodiquement — trois ans en pratique.</li>
+<li><strong>Changer d'entreprise annule le titre.</strong> Le nouvel employeur doit en délivrer un nouveau.</li>
+</ul>
+<p><span class="cle">Une habilitation ne dit pas « il sait faire ». Elle dit « je l'autorise à faire, et j'en réponds ».</span></p>
+
+<h3>20.2 — Décoder le symbole</h3>
+<p>Un symbole d'habilitation se lit caractère par caractère, dans l'ordre. Chacun répond à une question différente.</p>
+
+<table>
+<thead><tr><th>Rang</th><th>Question</th><th>Valeurs</th></tr></thead>
+<tbody>
+<tr><td><strong>1<sup>er</sup></strong></td><td>Quel domaine de tension ?</td><td><strong>B</strong> = basse tension (≤ 1 000 V alternatif) · <strong>H</strong> = haute tension</td></tr>
+<tr><td><strong>2<sup>e</sup></strong></td><td>Quel rôle ?</td><td><strong>0</strong> = opérations d'ordre <em>non</em> électrique · <strong>1</strong> = exécutant d'opérations électriques · <strong>2</strong> = chargé de travaux · <strong>C</strong> = chargé de consignation · <strong>R</strong> = chargé d'intervention générale BT · <strong>S</strong> = intervention élémentaire · <strong>E</strong> = opérations spécifiques</td></tr>
+<tr><td><strong>3<sup>e</sup></strong></td><td>Quels attributs ?</td><td><strong>V</strong> = au voisinage renforcé · <strong>T</strong> = sous tension · <strong>N</strong> = nettoyage sous tension</td></tr>
+</tbody></table>
+
+<figure class="anim">
+  <canvas id="a-habil" width="900" height="440" aria-label="Animation : composer un symbole d'habilitation électrique et lire ce qu'il autorise"></canvas>
+  <div class="ctrls">
+    <div class="c"><label>Domaine de tension <span id="a-habil-d-l">B — basse tension</span></label><input type="range" id="a-habil-d" min="0" max="1" value="0"></div>
+    <div class="c"><label>Rôle <span id="a-habil-r-l">1 — exécutant</span></label><input type="range" id="a-habil-r" min="0" max="6" value="1"></div>
+    <div class="c"><label>Attribut <span id="a-habil-a-l">V — voisinage renforcé</span></label><input type="range" id="a-habil-a" min="0" max="2" value="1"></div>
+    <div class="c readout" id="a-habil-out"></div>
+  </div>
+  <figcaption>Composez le symbole caractère par caractère et lisez ce qu'il ouvre — et ce qu'il ferme. <b>Commencez par B1V</b>, celui que le référentiel vous demande : vous exécutez des travaux électriques, y compris au voisinage renforcé, mais <b>sous les ordres d'un chargé de travaux</b>. <b>Passez sur R</b> : vous devenez chargé d'intervention, autonome, et vous pouvez consigner pour votre propre compte — c'est un tout autre niveau de responsabilité. <b>Retirez le V</b> et regardez la ligne rouge apparaître : sans attribut V, approcher à moins de 30 cm d'une pièce nue sous tension vous est interdit.</figcaption>
+  <div class="autableau">
+    <b class="entete">Au tableau <i>· 10 minutes · animation 1 sur 2</i></b>
+    <ol>
+      <li>Composer <b>B0</b>. <span class="q">« Un peintre qui repeint une armoire, il lui faut quoi ? »</span> Montrer que B0 n'autorise aucune opération électrique.</li>
+      <li>Passer à <b>B1</b>, puis ajouter le <b>V</b>. <span class="q">« Qu'est-ce que le V ajoute exactement ? »</span> Faire lire la distance de 30 cm.</li>
+      <li>Passer à <b>B2</b> : <span class="q">« quelle est la différence entre 1 et 2 ? »</span> L'un exécute, l'autre dirige et répond de l'équipe.</li>
+      <li>Passer à <b>BR</b>. Insister : c'est celui qui dépanne seul, et il consigne pour lui-même. <span class="q">« Est-ce qu'un BR peut consigner pour quelqu'un d'autre ? »</span></li>
+      <li>Finir sur <b>BC</b> : le chargé de consignation, qui ne travaille pas — il met en sécurité et délivre l'attestation.</li>
+    </ol>
+    <div class="piege">Le piège : beaucoup croient que BR « contient » B2 parce qu'il paraît plus élevé. Faux — ce sont deux métiers différents. Le BR dépanne seul sur une installation ; le B2 dirige une équipe en travaux. Un BR n'est pas chargé de travaux.</div>
+  </div>
+</figure>
+
+<h3>20.3 — B1V et BR, précisément</h3>
+<table>
+<thead><tr><th></th><th><strong>B1V</strong></th><th><strong>BR</strong></th></tr></thead>
+<tbody>
+<tr><td><strong>Rôle</strong></td><td>Exécutant d'opérations d'ordre électrique</td><td>Chargé d'intervention générale basse tension</td></tr>
+<tr><td><strong>Autonomie</strong></td><td>Travaille <em>sous les ordres</em> d'un chargé de travaux (B2)</td><td>Travaille <strong>seul</strong>, sur sa propre analyse du risque</td></tr>
+<tr><td><strong>Peut consigner</strong></td><td>Non</td><td>Oui, <strong>pour son propre compte</strong> uniquement</td></tr>
+<tr><td><strong>Opérations</strong></td><td>Ce que son chargé de travaux lui confie, hors tension</td><td>Dépannage, mesurage, raccordement, remplacement</td></tr>
+<tr><td><strong>Voisinage renforcé</strong></td><td>Oui, grâce à l'attribut V</td><td>Oui, inclus dans le BR</td></tr>
+<tr><td><strong>Limite de courant</strong></td><td>—</td><td>63 A en alternatif</td></tr>
+</tbody></table>
+
+<p><span class="cle">Le couple B1V-BR que demande le référentiel couvre les deux situations réelles du technicien de maintenance : intervenir dans une équipe sur un chantier, et dépanner seul une machine.</span></p>
+
+<h3>20.4 — Les zones autour d'une pièce nue sous tension</h3>
+<p>Tant qu'une pièce nue est sous tension, l'espace autour d'elle est découpé en zones, et chaque zone exige un titre différent. En basse tension, une seule distance compte vraiment.</p>
+
+<div class="formule">30 cm<small>La distance limite de voisinage renforcé en basse tension. En deçà, l'attribut V est exigé</small></div>
+
+<figure class="anim">
+  <canvas id="a-zones" width="900" height="430" aria-label="Animation : zones d'environnement autour d'une pièce nue sous tension en basse tension"></canvas>
+  <div class="ctrls">
+    <div class="c"><label>Distance à la pièce nue <span id="a-zones-d-l">80 cm</span></label><input type="range" id="a-zones-d" min="2" max="400" value="80"></div>
+    <div class="c"><label>Opération à réaliser <span id="a-zones-o-l">travaux électriques</span></label><input type="range" id="a-zones-o" min="0" max="2" value="1"></div>
+    <div class="c"><label>Votre habilitation <span id="a-zones-h-l">B1</span></label><input type="range" id="a-zones-h" min="0" max="4" value="1"></div>
+    <div class="c readout" id="a-zones-out"></div>
+  </div>
+  <figcaption>Une barre nue sous 400 V, et vous qui vous en approchez. <b>La zone rouge est le voisinage renforcé</b> — les 30 derniers centimètres. <b>Approchez-vous avec un titre B1 sans V</b> : le verdict passe au rouge dès le franchissement, et il ne s'agit pas d'une recommandation. <b>Ajoutez le V</b> : la même approche devient autorisée. <b>Changez d'opération</b> : un peintre qui travaille à 1 m n'a besoin que d'un B0, alors que le même homme à 20 cm devrait être B0V — et un B0 ne devient jamais B1, quelle que soit la distance.</figcaption>
+  <div class="autableau">
+    <b class="entete">Au tableau <i>· 8 minutes · animation 2 sur 2</i></b>
+    <ol>
+      <li>Habilitation <b>B1</b>, opération <b>travaux électriques</b>, distance 80 cm : autorisé. Faire glisser lentement vers la barre. <span class="q">« Dites-moi quand ça bascule. »</span></li>
+      <li>À 30 cm exactement, le verdict change. <span class="q">« Qu'est-ce qui a changé sur l'installation ? »</span> Rien. C'est moi qui ai bougé.</li>
+      <li>Passer à <b>B1V</b> sans bouger : autorisé. <span class="q">« Est-ce que je suis devenu plus compétent ? »</span> Non — mais j'ai été formé au risque du voisinage et l'employeur l'a écrit.</li>
+      <li>Repasser en <b>B0</b> avec l'opération <b>non électrique</b> à 1 m : autorisé. Puis approcher à 20 cm : refusé, il faudrait B0V.</li>
+    </ol>
+    <div class="piege">Le piège : « je ne touche pas, donc je ne risque rien ». Le voisinage renforcé n'existe pas pour interdire le contact — il existe parce qu'un geste involontaire, un outil qui ripe ou un arc suffisent à franchir 30 cm. C'est la distance, pas le contact, qui déclenche l'obligation.</div>
+  </div>
+</figure>
+
+<div class="encadre"><span class="tag">Les acteurs d'une opération</span>
+<p>Sur un chantier, chacun a un rôle nommé, et ces rôles ne se cumulent pas au hasard.</p>
+<ul>
+<li><strong>Le chargé d'exploitation électrique</strong> — il est responsable de l'installation. C'est lui qui autorise l'accès et qui donne l'ordre de consigner. Il ne descend pas forcément sur le terrain.</li>
+<li><strong>Le chargé de consignation (BC)</strong> — il exécute les opérations de consignation et délivre l'<strong>attestation de consignation</strong> au chargé de travaux. Il ne travaille pas sur l'ouvrage.</li>
+<li><strong>Le chargé de travaux (B2)</strong> — il reçoit l'attestation, dirige l'équipe, veille à la sécurité de ses exécutants, et restitue l'ouvrage à la fin.</li>
+<li><strong>L'exécutant (B1)</strong> — il travaille sous les ordres du chargé de travaux, sur la tâche qui lui est confiée, et pas au-delà.</li>
+<li><strong>Le chargé d'intervention (BR)</strong> — il est seul, il analyse, il consigne pour lui-même, il dépanne. C'est le cas le plus fréquent en maintenance.</li>
+</ul>
+<p><span class="cle">L'attestation de consignation est un document écrit qui se remet en main propre et se restitue de même.</span> Ce n'est pas une formalité : c'est le transfert tracé d'une responsabilité.</p></div>
+
+<div class="exo"><span class="tag">Exercice 20.1</span>
+<p>Vous êtes habilité B1V. Un chef d'atelier vous demande de dépanner seul un pupitre défaillant, hors tension, pendant que le chargé de travaux est en réunion. Que faites-vous ?</p>
+<details><summary>Voir la réponse</summary><div class="rep">
+<p><strong>Vous refusez, et vous le dites calmement.</strong></p>
+<p><strong>Pourquoi.</strong> Le titre B1V fait de vous un <em>exécutant</em>. Par définition, un exécutant travaille <strong>sous les ordres d'un chargé de travaux</strong> qui a reçu l'attestation de consignation et qui répond de la sécurité de l'opération. Intervenir seul, sans chargé de travaux, c'est exactement l'opération que votre titre n'autorise pas.</p>
+<p><strong>Ce que le titre manquant recouvre — et ce n'est pas de la paperasse.</strong> Ce qui vous manque n'est pas une compétence technique : vous savez peut-être parfaitement dépanner ce pupitre. Ce qui vous manque, c'est l'autorisation d'<strong>analyser vous-même le risque</strong> et de <strong>consigner pour votre propre compte</strong>. C'est précisément ce que le BR ajoute.</p>
+<p><strong>Ce que vous proposez, plutôt que de dire simplement non :</strong></p>
+<ol>
+<li>Attendre le chargé de travaux, et intervenir sous ses ordres — c'est la solution normale.</li>
+<li>Ou faire appel à une personne habilitée <strong>BR</strong>, qui peut intervenir seule.</li>
+<li>Ou, si l'urgence le justifie et que la situation le permet, demander à l'employeur de vous délivrer un titre BR — mais cela suppose une formation, pas une signature dans l'urgence.</li>
+</ol>
+<p><strong>Sur la pression hiérarchique.</strong> Un chef d'atelier n'est pas habilité à modifier votre titre, et le fait qu'il vous le demande ne vous couvre en rien. En cas d'accident, l'enquête relèvera que vous avez opéré hors du champ de votre habilitation, et cela engage votre responsabilité comme celle de l'employeur.</p>
+<p><em>La formule qui marche, et qui n'est ni de la mauvaise volonté ni de la peur : « je suis B1V, il me faut un chargé de travaux ou quelqu'un de BR. Je peux préparer l'intervention en attendant. »</em></p>
+</div></details></div>
+
+<div class="exo"><span class="tag">Exercice 20.2</span>
+<p>Un opérateur de production, non habilité, doit changer une ampoule de signalisation sur la face avant d'une armoire fermée. Faut-il une habilitation ? Et si l'ampoule est à l'intérieur de l'armoire ?</p>
+<details><summary>Voir la réponse</summary><div class="rep">
+<p><strong>Face avant, armoire fermée : non, aucune habilitation n'est nécessaire.</strong></p>
+<p>Le remplacement d'une lampe ou d'un fusible accessible sans ouvrir, sur un matériel conçu pour cela — un voyant à baïonnette accessible de l'extérieur, un porte-fusible à tiroir — relève des <strong>opérations d'ordre non électrique en dehors de tout voisinage</strong>. L'enveloppe assure la protection ; l'opérateur n'accède à aucune pièce nue.</p>
+<p><strong>Ampoule à l'intérieur de l'armoire : oui, et cela change tout.</strong></p>
+<p>Ouvrir l'armoire, c'est supprimer l'enveloppe de protection et se retrouver <em>de fait</em> au voisinage de pièces nues sous tension — borniers, jeux de barres, bornes de disjoncteurs. Dès l'ouverture de la porte :</p>
+<ul>
+<li>Si les pièces nues sont à moins de 30 cm, on est en <strong>voisinage renforcé</strong> : il faut un titre avec l'attribut <strong>V</strong>.</li>
+<li>Si l'opération est réellement non électrique — changer une lampe qui se dévisse sans toucher au câblage — un <strong>B0V</strong> suffit.</li>
+<li>Dès qu'il faut débrancher, mesurer ou raccorder quoi que ce soit, on passe en opération d'ordre électrique : <strong>B1V</strong> sous les ordres d'un B2, ou <strong>BR</strong> en autonomie.</li>
+</ul>
+<p><strong>La bonne pratique, celle qu'on applique vraiment :</strong> on ne fait pas ça sous tension. On consigne, on vérifie, on change la lampe. Le jeu n'en vaut pas la chandelle pour un voyant.</p>
+<p><em>Ce qu'il faut retenir de cet exercice : <span class="cle">ce n'est pas la difficulté de la tâche qui décide de l'habilitation, c'est l'environnement dans lequel on la réalise.</span> Changer une ampoule est trivial ; le faire à 15 cm d'un jeu de barres sous 400 V ne l'est pas.</em></p>
+</div></details></div>
+
+</div>
+</section>
+
+<script>
+/* ======================= CH 20 · composer un symbole d'habilitation ======================= */
+(function(){
+  "use strict";
+  var DOM=[{c:'B',n:'basse tension',d:'jusqu’à 1 000 V en alternatif'},
+           {c:'H',n:'haute tension',d:'au-delà de 1 000 V'}];
+  var ROLE=[
+    {c:'0',n:'opérations d’ordre NON électrique',
+     ok:['Travaux non électriques dans un local réservé aux électriciens','Peindre, nettoyer, maçonner, accompagner'],
+     no:['Toute opération sur un circuit électrique','Ouvrir un appareil, mesurer, raccorder']},
+    {c:'1',n:'exécutant d’opérations électriques',
+     ok:['Exécuter des travaux électriques hors tension','Sur les ordres d’un chargé de travaux'],
+     no:['Travailler seul, sans chargé de travaux','Consigner','Diriger une équipe']},
+    {c:'2',n:'chargé de travaux',
+     ok:['Diriger des travaux d’ordre électrique','Recevoir l’attestation de consignation','Encadrer des exécutants B1'],
+     no:['Consigner lui-même, sauf titre BC en plus','Sortir du périmètre reçu']},
+    {c:'C',n:'chargé de consignation',
+     ok:['Réaliser les opérations de consignation','Délivrer l’attestation de consignation'],
+     no:['Travailler sur l’ouvrage qu’il vient de consigner']},
+    {c:'R',n:'chargé d’intervention générale BT',
+     ok:['Dépanner, mesurer, raccorder, remplacer','Travailler SEUL, sur sa propre analyse','Consigner pour son PROPRE compte'],
+     no:['Consigner pour quelqu’un d’autre','Diriger une équipe de travaux','Au-delà de 63 A en alternatif']},
+    {c:'S',n:'chargé d’intervention élémentaire',
+     ok:['Remplacer un fusible, une lampe, un socle','Réarmer un dispositif de protection'],
+     no:['Toute autre intervention','Ouvrir au-delà de ce qui est prévu']},
+    {c:'E',n:'opérations spécifiques',
+     ok:['Essais, vérifications, mesurages, manœuvres','Selon l’attribut porté sur le titre'],
+     no:['Travaux d’ordre électrique']}
+  ];
+  var ATTR=[{c:'',n:'aucun attribut'},{c:'V',n:'voisinage renforcé'},{c:'T',n:'sous tension'}];
+
+  var D=MSPC.ctrl('a-habil-d', function(v){ return DOM[v].c+' — '+DOM[v].n; }, 'a-habil-d-l');
+  var R=MSPC.ctrl('a-habil-r', function(v){ return ROLE[v].c+' — '+ROLE[v].n.split(' ')[0]; }, 'a-habil-r-l');
+  var A=MSPC.ctrl('a-habil-a', function(v){ return v===0?'aucun':(ATTR[v].c+' — '+ATTR[v].n); }, 'a-habil-a-l');
+  var out=document.getElementById('a-habil-out');
+
+  MSPC.anim('a-habil', function(a){
+    var ctx=a.ctx, W=a.W, H=a.H;
+    var dm=DOM[D.val], ro=ROLE[R.val], at=ATTR[A.val];
+    var vInclus = (ro.c==='R'||ro.c==='S');
+    var aV = at.c==='V' || vInclus;
+    var sym = dm.c + ro.c + (vInclus ? '' : at.c);
+
+    MSPC.fond(ctx,W,H,0);
+    MSPC.mono(ctx,'COMPOSER UN TITRE D’HABILITATION — NF C 18-510',26,30,11.5,'#8d968b');
+
+    /* ---------- le symbole, en grand ---------- */
+    var sx=40, sy=58;
+    ctx.fillStyle='rgba(200,216,52,.08)'; ctx.fillRect(sx,sy,268,132);
+    ctx.strokeStyle='#c8d834'; ctx.lineWidth=2; ctx.strokeRect(sx+.5,sy+.5,268,132);
+    ctx.font='700 84px "Saira Condensed",sans-serif'; ctx.textAlign='center';
+    ctx.fillStyle='#c8d834'; ctx.fillText(sym, sx+134, sy+98);
+    MSPC.mono(ctx,'VOTRE TITRE',sx+134,sy+122,10,'#8d968b','center');
+
+    /* ---------- le décodage caractère par caractère ---------- */
+    var dy=214;
+    [[dm.c,'DOMAINE DE TENSION',dm.n,dm.d],
+     [ro.c,'RÔLE',ro.n,''],
+     [vInclus?'—':(at.c||'—'),'ATTRIBUT', vInclus?'le V est inclus dans le titre '+dm.c+ro.c : at.n, '']
+    ].forEach(function(x,i){
+      var y=dy+i*54;
+      ctx.fillStyle='rgba(255,255,255,.05)'; ctx.fillRect(40,y,268,46);
+      ctx.fillStyle='#c8d834'; ctx.fillRect(40,y,6,46);
+      MSPC.titre(ctx,x[0],66,y+33,26,'#cfe2ee');
+      MSPC.mono(ctx,x[1],100,y+18,9.5,'#8d968b');
+      var t=x[2], t1=t, t2='';
+      if(t.length>26){ var m=t.split(' '); t1=''; t2='';
+        for(var w=0;w<m.length;w++){ if((t1+' '+m[w]).length<=26 && !t2) t1=(t1?t1+' ':'')+m[w]; else t2=(t2?t2+' ':'')+m[w]; } }
+      MSPC.mono(ctx,t1,100,y+32,10.5,'#e6ebe4');
+      if(t2) MSPC.mono(ctx,t2,100,y+43,10.5,'#e6ebe4');
+    });
+
+    /* ---------- ce que ça autorise ---------- */
+    var ax=336, aw=272;
+    ctx.fillStyle='rgba(200,216,52,.07)'; ctx.fillRect(ax,58,aw,166);
+    ctx.strokeStyle='#c8d834'; ctx.lineWidth=1.6; ctx.strokeRect(ax+.5,58.5,aw,166);
+    MSPC.mono(ctx,'CE QUE VOUS POUVEZ FAIRE',ax+14,82,10,'#c8d834');
+    ro.ok.forEach(function(t,i){
+      var y=104+i*34;
+      ctx.fillStyle='#c8d834'; ctx.beginPath(); ctx.arc(ax+20,y-4,4,0,6.2832); ctx.fill();
+      var t1=t,t2='';
+      if(t.length>30){ var m=t.split(' '); t1=''; t2='';
+        for(var w=0;w<m.length;w++){ if((t1+' '+m[w]).length<=30 && !t2) t1=(t1?t1+' ':'')+m[w]; else t2=(t2?t2+' ':'')+m[w]; } }
+      MSPC.mono(ctx,t1,ax+32,y,10.5,'#e6ebe4');
+      if(t2) MSPC.mono(ctx,t2,ax+32,y+13,10.5,'#e6ebe4');
+    });
+
+    /* ---------- ce que ça interdit ---------- */
+    ctx.fillStyle='rgba(255,106,94,.07)'; ctx.fillRect(ax,240,aw,180);
+    ctx.strokeStyle='#ff6a5e'; ctx.lineWidth=1.6; ctx.strokeRect(ax+.5,240.5,aw,180);
+    MSPC.mono(ctx,'CE QUE VOUS NE POUVEZ PAS FAIRE',ax+14,264,10,'#ff6a5e');
+    var no=ro.no.slice();
+    if(!aV && ro.c!=='0') no.push('Approcher à moins de 30 cm d’une pièce nue sous tension');
+    if(!aV && ro.c==='0') no.push('Entrer dans les 30 cm d’une pièce nue');
+    no.slice(0,4).forEach(function(t,i){
+      var y=286+i*34;
+      ctx.strokeStyle='#ff6a5e'; ctx.lineWidth=2;
+      ctx.beginPath(); ctx.moveTo(ax+17,y-7); ctx.lineTo(ax+24,y);
+      ctx.moveTo(ax+24,y-7); ctx.lineTo(ax+17,y); ctx.stroke();
+      var t1=t,t2='';
+      if(t.length>30){ var m=t.split(' '); t1=''; t2='';
+        for(var w=0;w<m.length;w++){ if((t1+' '+m[w]).length<=30 && !t2) t1=(t1?t1+' ':'')+m[w]; else t2=(t2?t2+' ':'')+m[w]; } }
+      MSPC.mono(ctx,t1,ax+32,y,10.5,'#e6ebe4');
+      if(t2) MSPC.mono(ctx,t2,ax+32,y+13,10.5,'#e6ebe4');
+    });
+
+    /* ---------- le panneau de rappel ---------- */
+    var px=636, pw=W-px-26;
+    ctx.fillStyle='rgba(255,255,255,.04)'; ctx.fillRect(px,58,pw,362);
+    ctx.strokeStyle='rgba(255,255,255,.20)'; ctx.lineWidth=1.4; ctx.strokeRect(px+.5,58.5,pw,362);
+    MSPC.mono(ctx,'LES SEPT RÔLES',px+16,82,10,'#8d968b');
+    ROLE.forEach(function(r,i){
+      var y=106+i*30, actif=(i===R.val);
+      if(actif){ ctx.fillStyle='rgba(200,216,52,.14)'; ctx.fillRect(px+8,y-16,pw-16,26); }
+      MSPC.titre(ctx,dm.c+r.c,px+18,y+2,19,actif?'#c8d834':'#6f786e');
+      var n=r.n.length>24?r.n.slice(0,23)+'…':r.n;
+      MSPC.mono(ctx,n,px+62,y-1,10,actif?'#e6ebe4':'#5d665e');
+    });
+    MSPC.mono(ctx,'Le référentiel MSPC demande',px+16,336,10,'#8d968b');
+    MSPC.titre(ctx,'B1V  et  BR',px+16,366,26,'#c8d834');
+    MSPC.mono(ctx,'l’un pour travailler en équipe,',px+16,388,10,'#6f786e');
+    MSPC.mono(ctx,'l’autre pour dépanner seul.',px+16,402,10,'#6f786e');
+
+    out.innerHTML='<b style="color:#c8d834">'+sym+'</b> — '+ro.n+'<br>'+(aV?'voisinage renforcé autorisé':'<span style="color:#ff6a5e">pas de voisinage renforcé</span>');
+  }, {fixed:true});
+})();
+
+/* ======================= CH 20 · les zones autour d'une pièce nue ======================= */
+(function(){
+  "use strict";
+  var OPS=[
+    {n:'travaux non électriques', role:0},
+    {n:'travaux électriques',     role:1},
+    {n:'intervention de dépannage', role:9}
+  ];
+  var HAB=[
+    {n:'B0',  role:0, v:false},
+    {n:'B1',  role:1, v:false},
+    {n:'B1V', role:1, v:true},
+    {n:'BR',  role:9, v:true},
+    {n:'B2V', role:2, v:true}
+  ];
+  var D=MSPC.ctrl('a-zones-d', function(v){ return Math.round(v)+' cm'; }, 'a-zones-d-l');
+  var O=MSPC.ctrl('a-zones-o', function(v){ return OPS[v].n; }, 'a-zones-o-l');
+  var Hb=MSPC.ctrl('a-zones-h', function(v){ return HAB[v].n; }, 'a-zones-h-l');
+  var out=document.getElementById('a-zones-out');
+
+  MSPC.anim('a-zones', function(a){
+    var ctx=a.ctx, W=a.W, H=a.H;
+    var d=D.val, op=OPS[O.val], hb=HAB[Hb.val];
+    var renforce = d<30;
+
+    /* le rôle suffit-il, et l'attribut V ? */
+    var roleOk;
+    if(op.role===0) roleOk = true;                       // non électrique : tout titre convient
+    else if(op.role===1) roleOk = (hb.role===1||hb.role===2);
+    else roleOk = (hb.role===9);
+    var vOk = !renforce || hb.v;
+    var ok = roleOk && vOk;
+
+    var exige = (op.role===0 ? 'B0' : (op.role===1 ? 'B1' : 'BR'));
+    if(renforce && op.role!==9) exige += 'V';
+
+    MSPC.fond(ctx,W,H,0);
+    MSPC.mono(ctx,'ZONES AUTOUR D’UNE PIÈCE NUE SOUS TENSION — BASSE TENSION',26,30,11.5,'#8d968b');
+    MSPC.mono(ctx,'une seule distance compte en BT : 30 cm',W-26,30,10,'#6f786e','right');
+
+    /* ---------- la scène ---------- */
+    /* Échelle dilatée près de la barre : les 30 premiers centimètres occupent
+       120 px, le reste est comprimé. Sans cela la zone qui compte serait
+       trop étroite pour porter son propre nom. */
+    var bx=90, sol=330;
+    function X(d){ return bx + (d<=30 ? d*4 : 120 + (d-30)*0.9); }
+    var x30=X(30), xmax=X(400);
+    ctx.fillStyle='rgba(255,106,94,.13)';
+    ctx.fillRect(bx, 70, x30-bx, sol-70);
+    ctx.fillStyle='rgba(240,168,68,.07)';
+    ctx.fillRect(x30, 70, xmax-x30, sol-70);
+    ctx.strokeStyle='#ff6a5e'; ctx.lineWidth=1.6; ctx.setLineDash([5,4]);
+    ctx.beginPath(); ctx.moveTo(x30,70); ctx.lineTo(x30,sol); ctx.stroke(); ctx.setLineDash([]);
+    MSPC.mono(ctx,'30 cm',x30,62,10.5,'#ff6a5e','center');
+    MSPC.mono(ctx,'VOISINAGE RENFORCÉ',(bx+x30)/2,96,10,'#ff6a5e','center');
+    MSPC.mono(ctx,'l’attribut V y est exigé',(bx+x30)/2,110,9.5,'#ff6a5e','center');
+    MSPC.mono(ctx,'voisinage simple, puis zone d’investigation jusqu’à 50 m',x30+16,96,10.5,'#f0a844');
+    MSPC.mono(ctx,'échelle dilatée près de la barre, pour rendre les 30 cm lisibles',x30+16,110,9.5,'#6f786e');
+
+    // la barre nue sous tension
+    ctx.fillStyle='#b06a2c'; ctx.fillRect(bx-16,96,14,206);
+    ctx.strokeStyle='#e0a060'; ctx.lineWidth=1.6; ctx.strokeRect(bx-16.5,96.5,14,206);
+    MSPC.mono(ctx,'barre nue',bx-24,88,10,'#e0a060','right');
+    MSPC.titre(ctx,'400 V',bx-24,74,20,'#ff6a5e','right');
+    // les étincelles
+    for(var e=0;e<3;e++){
+      var ey=120+((a.t*90+e*70)%170);
+      ctx.strokeStyle='rgba(255,106,94,'+(0.5+0.5*Math.sin(a.t*9+e))+')'; ctx.lineWidth=1.4;
+      ctx.beginPath(); ctx.moveTo(bx-2,ey); ctx.lineTo(bx+7,ey-4); ctx.lineTo(bx+3,ey+3); ctx.lineTo(bx+12,ey-1); ctx.stroke();
+    }
+
+    // le sol
+    ctx.strokeStyle='rgba(255,255,255,.18)'; ctx.lineWidth=1.4;
+    ctx.beginPath(); ctx.moveTo(bx-30,sol); ctx.lineTo(xmax,sol); ctx.stroke();
+
+    // l'opérateur
+    var ox=X(d)+16;
+    var c=ok?'#c8d834':'#ff6a5e';
+    ctx.strokeStyle=c; ctx.lineWidth=2.6; ctx.lineCap='round';
+    ctx.beginPath(); ctx.arc(ox,196,13,0,6.2832); ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(ox,209); ctx.lineTo(ox,262); ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(ox,222); ctx.lineTo(ox-22,238); ctx.moveTo(ox,222); ctx.lineTo(ox-26,214); ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(ox,262); ctx.lineTo(ox-14,sol); ctx.moveTo(ox,262); ctx.lineTo(ox+14,sol); ctx.stroke();
+    ctx.lineCap='butt';
+    MSPC.mono(ctx,hb.n,ox,178,12,c,'center');
+
+    // la cote
+    ctx.strokeStyle='rgba(255,255,255,.35)'; ctx.lineWidth=1;
+    ctx.beginPath(); ctx.moveTo(bx,312); ctx.lineTo(ox-26,312); ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(bx,306); ctx.lineTo(bx,318); ctx.moveTo(ox-26,306); ctx.lineTo(ox-26,318); ctx.stroke();
+    ctx.fillStyle='#11160f'; ctx.fillRect((bx+ox-26)/2-26,304,52,17);
+    MSPC.mono(ctx,Math.round(d)+' cm',(bx+ox-26)/2,317,10.5,'#cfe2ee','center');
+
+    /* ---------- le verdict ---------- */
+    var px=612, pw=W-px-26;
+    ctx.fillStyle=ok?'rgba(200,216,52,.07)':'rgba(255,106,94,.08)';
+    ctx.fillRect(px,58,pw,278);
+    ctx.strokeStyle=c; ctx.lineWidth=1.8; ctx.strokeRect(px+.5,58.5,pw,278);
+    MSPC.mono(ctx,'OPÉRATION',px+16,82,10,'#8d968b');
+    MSPC.mono(ctx,op.n,px+16,100,12,'#e6ebe4');
+    MSPC.mono(ctx,'ZONE',px+16,130,10,'#8d968b');
+    MSPC.mono(ctx, renforce?'voisinage renforcé':'hors voisinage renforcé', px+16,148,12, renforce?'#ff6a5e':'#c8d834');
+    MSPC.mono(ctx,'TITRE EXIGÉ',px+16,180,10,'#8d968b');
+    MSPC.titre(ctx,exige,px+16,212,30,'#cfe2ee');
+    MSPC.mono(ctx,'VOTRE TITRE',px+16,242,10,'#8d968b');
+    MSPC.titre(ctx,hb.n,px+16,274,30,c);
+    MSPC.titre(ctx, ok?'AUTORISÉ':'INTERDIT', px+16,318,28,c);
+
+    /* ---------- explication ---------- */
+    var msg;
+    if(ok && renforce) msg='Vous êtes dans les 30 cm, et votre titre porte l’attribut qui l’autorise.';
+    else if(ok) msg='Hors du voisinage renforcé, et votre rôle couvre cette opération.';
+    else if(!roleOk && op.role===9) msg='Une intervention de dépannage en autonomie exige un titre BR. Aucun autre ne le remplace.';
+    else if(!roleOk && op.role===1) msg='Les travaux d’ordre électrique exigent un rôle 1 ou 2. Un B0 ne le devient jamais, et un BR n’est pas un chargé de travaux.';
+    else msg='Vous franchissez les 30 cm sans l’attribut V. Ce n’est pas une recommandation : c’est une interdiction.';
+    ctx.fillStyle='rgba(255,255,255,.05)'; ctx.fillRect(26,352,W-52,52);
+    MSPC.mono(ctx,msg,42,376,12,c);
+    MSPC.mono(ctx,'En pratique, un technicien de maintenance reçoit souvent B1V ET BR : les deux situations existent dans son métier.',42,394,10,'#6f786e');
+
+    out.innerHTML='exigé : <b>'+exige+'</b> · vous avez <b>'+hb.n+'</b><br><b style="color:'+c+'">'+(ok?'autorisé':'interdit')+'</b>';
+  }, {fixed:true});
+})();
+</script>
+
+
+<!-- ================= CH 21 ================= -->
+<section class="ch" id="c21">
+  <div class="ch-head"><div class="ch-num">21</div><div class="ch-title">
+    <span class="kicker">Deux dessins pour une machine</span><h2>Lire un schéma électrique</h2></div></div>
+  <div class="ch-body">
+
+<div class="savoirs">
+  <span class="savoir n2"><b>S1.1.3</b> <i>Les outils de schématisation</i></span>
+  <span class="savoir n3"><b>S2.4</b> <i>Distribuer et convertir : le départ-moteur</i></span>
+</div>
+
+<p class="lede">Le référentiel est mesuré sur ce point : <em>« décoder ou compléter un schéma en se limitant à quelques symboles »</em>. On ne vous demandera pas de dessiner une armoire. On vous demandera de suivre un fil sur un plan pour comprendre pourquoi un moteur ne démarre pas — et c'est exactement ce que fait un dépanneur toute la journée.</p>
+
+<h3>21.1 — Puissance et commande : deux mondes séparés</h3>
+<p>Toute armoire industrielle se lit sur deux schémas distincts, et les confondre rend le dépannage impossible.</p>
+
+<table>
+<thead><tr><th></th><th>Schéma de <strong>puissance</strong></th><th>Schéma de <strong>commande</strong></th></tr></thead>
+<tbody>
+<tr><td>Ce qui y circule</td><td>Les dizaines d'ampères qui font tourner le moteur</td><td>Quelques centaines de milliampères, juste de quoi alimenter une bobine</td></tr>
+<tr><td>Tension</td><td>400 V triphasé</td><td>230 V, ou 24 V en TBTS</td></tr>
+<tr><td>Section des fils</td><td>2,5 à 50 mm²</td><td>0,75 à 1,5 mm²</td></tr>
+<tr><td>On y trouve</td><td>Sectionneur, contacteur, relais thermique, moteur</td><td>Boutons, contacts auxiliaires, bobines, voyants</td></tr>
+<tr><td>Tracé</td><td>Trois traits verticaux, de haut en bas</td><td>Un seul circuit, phase en haut, neutre en bas</td></tr>
+</tbody></table>
+
+<p><span class="cle">Le contacteur est la charnière : sa bobine est dans la commande, ses contacts de puissance sont dans la puissance.</span> C'est le seul composant qui figure sur les deux schémas, et c'est pour cela qu'on lui donne le même repère aux deux endroits — KM1.</p>
+
+<h3>21.2 — Le repérage des composants</h3>
+<p>Chaque composant porte une lettre qui dit sa fonction, puis un numéro d'ordre. Six lettres couvrent 90 % d'une armoire.</p>
+
+<table>
+<thead><tr><th>Repère</th><th>Famille</th><th>Exemples</th></tr></thead>
+<tbody>
+<tr><td><span class="mono"><strong>Q</strong></span></td><td>Appareil de puissance qui coupe ou sectionne</td><td>Q1 sectionneur, QF disjoncteur</td></tr>
+<tr><td><span class="mono"><strong>KM</strong></span></td><td>Contacteur de puissance</td><td>KM1, KM2 pour les deux sens de marche</td></tr>
+<tr><td><span class="mono"><strong>F</strong></span></td><td>Protection</td><td>F1 relais thermique, FU fusible</td></tr>
+<tr><td><span class="mono"><strong>S</strong></span></td><td>Appareil de commande manuelle</td><td>S1 bouton marche, S2 bouton arrêt, S3 arrêt d'urgence</td></tr>
+<tr><td><span class="mono"><strong>H</strong></span></td><td>Signalisation</td><td>H1 voyant marche, H2 voyant défaut</td></tr>
+<tr><td><span class="mono"><strong>M</strong></span></td><td>Moteur</td><td>M1</td></tr>
+</tbody></table>
+
+<h3>21.3 — Le repérage des bornes, et sa logique</h3>
+<p>C'est le point qui déverrouille la lecture d'un schéma, et il tient en une règle.</p>
+
+<div class="encadre"><span class="tag">La règle des deux chiffres</span>
+<p>Sur un contact de commande, le repère de borne comporte deux chiffres :</p>
+<ul>
+<li><strong>Le chiffre des unités dit la nature du contact.</strong><br>
+<span class="mono">1-2</span> → contact <strong>fermé au repos</strong> (NF, normalement fermé)<br>
+<span class="mono">3-4</span> → contact <strong>ouvert au repos</strong> (NO, normalement ouvert)</li>
+<li><strong>Le chiffre des dizaines est le numéro d'ordre</strong> du contact sur l'appareil : le premier, le deuxième, le troisième…</li>
+</ul>
+<p>Ainsi <span class="mono">13-14</span> est le <em>premier</em> contact, <em>ouvert</em> au repos. <span class="mono">21-22</span> est le <em>deuxième</em>, <em>fermé</em> au repos. <span class="mono">33-34</span> le troisième, ouvert.</p>
+<p>Deux repères échappent à la règle et se retiennent tels quels :</p>
+<ul>
+<li><span class="mono"><strong>A1-A2</strong></span> — les bornes de la <strong>bobine</strong> d'un contacteur ou d'un relais.</li>
+<li><span class="mono"><strong>95-96</strong></span> et <span class="mono"><strong>97-98</strong></span> — les contacts de <strong>défaut</strong> d'un relais thermique : 95-96 fermé au repos (c'est lui qui coupe la commande en cas de surcharge), 97-98 ouvert au repos (pour allumer un voyant de défaut).</li>
+</ul>
+<p>Les contacts de <em>puissance</em>, eux, sont numérotés <span class="mono">1-2</span>, <span class="mono">3-4</span>, <span class="mono">5-6</span> — un chiffre par phase, sans logique NO/NF puisqu'ils sont toujours ouverts au repos.</p></div>
+
+<figure class="anim">
+  <canvas id="a-bornes" width="900" height="410" aria-label="Animation : repérage normalisé des bornes des composants d'une armoire"></canvas>
+  <div class="ctrls">
+    <div class="c"><label>Composant <span id="a-bornes-c-l">contact NO 13-14</span></label><input type="range" id="a-bornes-c" min="0" max="5" value="1"></div>
+    <div class="c"><label class="switch"><input type="checkbox" id="a-bornes-a"><span>Appareil actionné</span></label></div>
+    <div class="c readout" id="a-bornes-out"></div>
+  </div>
+  <figcaption>Le symbole, ses bornes, et la règle qui les explique. <b>Faites défiler les composants</b> et lisez le chiffre des unités : 1-2 fermé, 3-4 ouvert, toujours. <b>Cochez « appareil actionné »</b> : les contacts basculent, et vous voyez pourquoi on dit « au repos » — le repère décrit l'état <b>hors action</b>, jamais l'état courant. <b>Arrêtez-vous sur le relais thermique</b> : son 95-96 est fermé au repos, et c'est lui qui, en s'ouvrant, coupe toute la commande.</figcaption>
+  <div class="autableau">
+    <b class="entete">Au tableau <i>· 7 minutes · animation 1 sur 2</i></b>
+    <ol>
+      <li>Afficher le contact <b>11-12</b>, puis <b>13-14</b>. <span class="q">« Qu'est-ce qui change entre les deux repères ? »</span> Un seul chiffre.</li>
+      <li>Cocher <b>appareil actionné</b> sur chacun. <span class="q">« Le 11-12 est-il encore fermé ? »</span> Non. <span class="q">« Alors pourquoi l'appelle-t-on fermé ? »</span></li>
+      <li>Montrer <b>23-24</b> : <span class="q">« qu'est-ce que le 2 raconte ? »</span> Le rang du contact, pas sa nature.</li>
+      <li>Finir sur le <b>relais thermique</b> et son 95-96. Faire prévoir ce qui se passe dans la commande quand il s'ouvre — enchaîne directement sur l'animation suivante.</li>
+    </ol>
+    <div class="piege">Le piège : un élève lit « normalement fermé » et comprend « habituellement fermé ». Le mot « normalement » veut dire « dans son état de repos, appareil non actionné » — c'est une définition, pas une fréquence.</div>
+  </div>
+</figure>
+
+<h3>21.4 — L'auto-maintien, ou pourquoi le moteur reste en marche</h3>
+<p>Voici la question qui tombe à chaque examen et qui déroute systématiquement : <strong>vous appuyez une seconde sur le bouton marche, et le moteur tourne pendant huit heures. Comment ?</strong></p>
+<p>La réponse tient dans un seul fil. Le contacteur KM1 possède, en plus de ses trois contacts de puissance, un petit <strong>contact auxiliaire 13-14</strong> — ouvert au repos. On le câble <em>en parallèle</em> du bouton marche.</p>
+<ol>
+<li>Vous appuyez sur S1 : le courant atteint la bobine A1-A2 par le bouton.</li>
+<li>La bobine attire l'armature. Tous les contacts basculent, y compris le 13-14, qui se ferme.</li>
+<li>Le 13-14 fermé offre <strong>un second chemin</strong> au courant, en dérivation du bouton.</li>
+<li>Vous relâchez S1. Le courant continue de passer par le 13-14. <strong>La bobine s'alimente elle-même.</strong></li>
+</ol>
+<p><span class="cle">C'est un système qui se tient par sa propre main.</span> Pour l'arrêter, il faut couper le circuit ailleurs — et c'est le rôle du bouton d'arrêt S2, câblé en série et <em>fermé au repos</em>.</p>
+
+<figure class="anim">
+  <canvas id="a-departmoteur" width="900" height="480" aria-label="Animation : départ-moteur, schéma de puissance et de commande, auto-maintien et déclenchement thermique"></canvas>
+  <div class="ctrls">
+    <div class="c"><button class="btn" id="a-dep-on">Appuyer sur MARCHE</button></div>
+    <div class="c"><button class="btn rouge" id="a-dep-off">Appuyer sur ARRÊT</button></div>
+    <div class="c"><label class="switch"><input type="checkbox" id="a-dep-f"><span>Surcharge du moteur</span></label></div>
+    <div class="c readout" id="a-dep-out"></div>
+  </div>
+  <figcaption>À gauche la puissance, à droite la commande. <b>Appuyez sur MARCHE</b> : le bouton n'est fermé qu'une seconde — regardez le courant emprunter d'abord S1, puis basculer sur le contact <b>13-14</b> quand la bobine colle. Le bouton se relâche, le moteur reste en marche. <b>Appuyez sur ARRÊT</b> : S2 s'ouvre, le chemin est coupé en amont des deux branches, tout retombe. <b>Cochez « surcharge »</b> : le bilame de F1 chauffe, son contact <b>95-96</b> s'ouvre — et il coupe la commande, pas la puissance. C'est la bobine qui lâche, et le moteur avec.</figcaption>
+  <div class="autableau">
+    <b class="entete">Au tableau <i>· 12 minutes · animation 2 sur 2</i></b>
+    <ol>
+      <li>Avant tout clic : <span class="q">« par où faut-il que le courant passe pour que la bobine soit alimentée ? »</span> Faire suivre le chemin au doigt sur l'écran, de la phase au neutre.</li>
+      <li>Cliquer <b>MARCHE</b> et laisser tourner. <span class="q">« Le bouton est relâché depuis longtemps. Qu'est-ce qui tient le circuit ? »</span></li>
+      <li>Faire nommer le contact 13-14 et son rôle. Le montrer basculer en même temps que les trois contacts de puissance : <span class="q">« combien de contacts bougent en même temps ? »</span> Quatre.</li>
+      <li>Cliquer <b>ARRÊT</b>. <span class="q">« Pourquoi le bouton d'arrêt est-il fermé au repos ? »</span> Question décisive — laisser chercher, puis parler du fil qui casse.</li>
+      <li>Redémarrer, puis cocher <b>surcharge</b>. <span class="q">« Le relais thermique est dans la puissance. Qu'est-ce qu'il coupe ? »</span> La commande.</li>
+    </ol>
+    <div class="piege">Le piège, et il est fondamental : si le bouton d'arrêt était ouvert au repos, un fil coupé dans le circuit d'arrêt passerait totalement inaperçu — et le jour où l'on appuierait sur ARRÊT, rien ne se passerait. Câblé fermé au repos, un fil coupé arrête la machine immédiatement. On appelle cela la <b>sécurité positive</b> : la panne doit conduire à l'état sûr.</div>
+  </div>
+</figure>
+
+<div class="exo"><span class="tag">Exercice 21.1</span>
+<p>Un moteur ne démarre pas. En appuyant sur S1, on n'entend aucun claquement de contacteur. Le disjoncteur est enclenché, le sectionneur fermé. Établissez la démarche de diagnostic à partir du schéma de commande.</p>
+<details><summary>Voir la réponse</summary><div class="rep">
+<p><strong>Ce que l'absence de claquement vous apprend immédiatement.</strong> Le contacteur ne colle pas, donc <strong>sa bobine n'est pas alimentée</strong>. Le défaut est dans le circuit de commande, pas dans la puissance. Vous venez d'éliminer la moitié de l'armoire sans rien démonter.</p>
+<p><strong>La démarche : remonter le circuit de commande de la phase vers le neutre, en mesurant.</strong> Consignation faite si vous ouvrez, ou mesures sous tension avec un titre BR et les EPI.</p>
+<ol>
+<li><strong>Y a-t-il de la tension à l'entrée du circuit de commande ?</strong> Si non : fusible de commande fondu, transformateur de commande HS, ou départ non alimenté. C'est la panne la plus fréquente et la plus vite trouvée.</li>
+<li><strong>Le contact 95-96 du relais thermique F1 est-il fermé ?</strong> Vérifier aussi le bouton de réarmement : un thermique déclenché reste ouvert tant qu'on ne l'a pas réarmé, et personne ne pense à regarder.</li>
+<li><strong>Le bouton d'arrêt S2 est-il fermé ?</strong> Il est fermé au repos : s'il est ouvert, soit il est resté enfoncé ou verrouillé (arrêt d'urgence à déverrouiller par rotation), soit son fil est coupé.</li>
+<li><strong>Le bouton marche S1 ferme-t-il quand on appuie ?</strong> Contact oxydé, tige cassée, ou fil débranché.</li>
+<li><strong>La bobine A1-A2 est-elle bonne ?</strong> Mesure de résistance hors tension : quelques centaines d'ohms. Une bobine coupée donne un circuit ouvert, une bobine grillée sent le brûlé.</li>
+</ol>
+<p><strong>La méthode qui va le plus vite sur le terrain</strong> — et c'est celle qu'on vous demandera : mettre le voltmètre entre le <strong>neutre</strong> et un point du circuit, puis remonter point par point vers la phase. Tant que vous lisez 230 V, vous êtes en amont de la coupure ; dès que vous lisez 0 V, vous venez de la franchir. <span class="cle">La coupure est entre le dernier point à 230 V et le premier point à 0 V.</span></p>
+<p><em>Cette technique s'appelle la recherche par dichotomie si on procède par moitiés, ou le point à point si on remonte pas à pas. Sur un circuit de commande de six points, le point à point suffit largement.</em></p>
+</div></details></div>
+
+<div class="exo"><span class="tag">Exercice 21.2</span>
+<p>Sur un schéma, vous relevez les repères suivants sur un même appareil : <span class="mono">1-2, 3-4, 5-6, 13-14, 21-22, A1-A2</span>. De quel appareil s'agit-il, et à quoi sert chaque groupe ?</p>
+<details><summary>Voir la réponse</summary><div class="rep">
+<p><strong>C'est un contacteur</strong> — et le repérage seul suffit à l'identifier, sans voir le symbole.</p>
+<table>
+<thead><tr><th>Repères</th><th>Ce que c'est</th><th>Où on le trouve</th></tr></thead>
+<tbody>
+<tr><td class="mono">1-2 · 3-4 · 5-6</td><td>Les trois <strong>contacts de puissance</strong>, un par phase. Un seul chiffre par borne, ouverts au repos.</td><td>Schéma de puissance</td></tr>
+<tr><td class="mono">13-14</td><td>Premier contact auxiliaire, <strong>ouvert au repos</strong> (unités 3-4). C'est l'<strong>auto-maintien</strong>.</td><td>Schéma de commande</td></tr>
+<tr><td class="mono">21-22</td><td>Deuxième contact auxiliaire, <strong>fermé au repos</strong> (unités 1-2). Sert au verrouillage d'un second contacteur, ou à un voyant « à l'arrêt ».</td><td>Schéma de commande</td></tr>
+<tr><td class="mono">A1-A2</td><td>Les bornes de la <strong>bobine</strong>. C'est par là qu'on le commande.</td><td>Schéma de commande</td></tr>
+</tbody></table>
+<p><strong>Ce que le 21-22 raconte en plus.</strong> Un contact fermé au repos sur un contacteur sert presque toujours au <strong>verrouillage</strong> : dans un montage à deux sens de marche, le 21-22 de KM1 est câblé en série avec la bobine de KM2, et réciproquement. Si KM1 est collé, son 21-22 est ouvert, donc KM2 <em>ne peut pas</em> coller.</p>
+<p><span class="cle">Sans ce verrouillage, une double commande simultanée mettrait les deux contacteurs en marche et provoquerait un court-circuit franc entre deux phases</span> — puisque l'inversion de sens se fait en croisant deux phases. L'arc serait spectaculaire et l'armoire détruite.</p>
+<p><em>Notez que le verrouillage est doublé en pratique : électrique par les contacts 21-22, et mécanique par une pièce qui empêche physiquement les deux armatures de coller ensemble. Deux barrières indépendantes pour un défaut qui ne pardonne pas.</em></p>
+</div></details></div>
+
+<div class="exo"><span class="tag">Exercice 21.3</span>
+<p>Pourquoi le bouton d'arrêt S2 est-il un contact fermé au repos, alors que le bouton marche S1 est ouvert au repos ? Que se passerait-il si on les câblait dans l'autre sens ?</p>
+<details><summary>Voir la réponse</summary><div class="rep">
+<p><strong>Le principe s'appelle la sécurité positive : la panne doit conduire à l'état sûr.</strong></p>
+<p><strong>Avec le câblage correct — S2 fermé au repos, en série.</strong></p>
+<ul>
+<li>Fonctionnement normal : on appuie sur S2, le contact s'ouvre, la bobine perd son alimentation, le moteur s'arrête.</li>
+<li><strong>Si un fil du circuit d'arrêt se coupe</strong>, ou si un bornier se desserre : le circuit est ouvert exactement comme si on avait appuyé. <strong>Le moteur s'arrête tout seul.</strong> Le défaut se signale de lui-même, immédiatement, et personne n'est en danger.</li>
+</ul>
+<p><strong>Avec le câblage inversé — S2 ouvert au repos.</strong> Il faudrait alors que l'appui <em>ferme</em> un circuit pour déclencher l'arrêt, par exemple en alimentant un relais de coupure.</p>
+<ul>
+<li>Fonctionnement normal : identique en apparence. Tout marche.</li>
+<li><strong>Si un fil du circuit d'arrêt se coupe</strong> : <span class="cle">absolument rien ne se passe.</span> Le moteur continue de tourner, personne ne remarque quoi que ce soit, et le défaut reste invisible pendant des semaines.</li>
+<li><strong>Puis un jour, quelqu'un appuie sur ARRÊT</strong> — peut-être en urgence, parce qu'un opérateur a la main prise dans la machine. Le bouton ne fait rien. C'est là qu'on découvre le fil coupé.</li>
+</ul>
+<p><strong>C'est pour cette raison exacte que la réglementation impose l'ouverture au repos pour toutes les fonctions de sécurité :</strong> arrêt d'urgence, contacts de porte, capteurs de position de protecteur. Un capteur de sécurité débranché doit empêcher la machine de démarrer, jamais l'autoriser.</p>
+<p><em>Vous retrouverez le même raisonnement au chapitre 10 avec le <strong>frein à manque de courant</strong> : la bobine <em>desserre</em> le frein, si bien qu'une coupure d'alimentation freine automatiquement la charge au lieu de la lâcher. Même principe, autre technologie.</em></p>
+</div></details></div>
+
+</div>
+</section>
+
+<script>
+/* ======================= CH 21 · le repérage des bornes ======================= */
+(function(){
+  "use strict";
+  var CO=[
+    {n:'contact NF 11-12', b:['11','12'], nf:true, aux:true,
+     r:'Chiffre des unités 1-2 → contact FERMÉ au repos. Dizaine 1 → premier contact de l’appareil.',
+     u:'Bouton d’arrêt, verrouillage, contact de sécurité.'},
+    {n:'contact NO 13-14', b:['13','14'], nf:false, aux:true,
+     r:'Chiffre des unités 3-4 → contact OUVERT au repos. Dizaine 1 → premier contact.',
+     u:'Bouton marche, et surtout l’auto-maintien d’un contacteur.'},
+    {n:'contact NO 23-24', b:['23','24'], nf:false, aux:true,
+     r:'Mêmes unités 3-4, donc même nature. La dizaine 2 dit seulement que c’est le DEUXIÈME contact.',
+     u:'Second contact auxiliaire : voyant de marche, report d’état.'},
+    {n:'bobine A1-A2', b:['A1','A2'], bobine:true,
+     r:'Exception à la règle : les bornes de bobine se repèrent toujours A1 et A2.',
+     u:'C’est par là qu’on commande le contacteur. 230 V ou 24 V selon l’armoire.'},
+    {n:'contacts de puissance', b:['1','3','5','2','4','6'], puiss:true,
+     r:'Un seul chiffre par borne, une paire par phase : 1-2, 3-4, 5-6. Toujours ouverts au repos.',
+     u:'Ce sont eux qui portent les ampères du moteur.'},
+    {n:'relais thermique 95-96', b:['95','96','97','98'], thermique:true,
+     r:'Repères réservés aux contacts de DÉFAUT : 95-96 fermé au repos, 97-98 ouvert au repos.',
+     u:'Le 95-96 coupe le circuit de commande en cas de surcharge. Le 97-98 allume le voyant de défaut.'}
+  ];
+  var C=MSPC.ctrl('a-bornes-c', function(v){ return CO[v].n; }, 'a-bornes-c-l');
+  var A=MSPC.ctrl('a-bornes-a');
+  var out=document.getElementById('a-bornes-out');
+
+  function borne(ctx,x,y,txt,col){
+    ctx.fillStyle='#11160f'; ctx.beginPath(); ctx.arc(x,y,10,0,6.2832); ctx.fill();
+    ctx.strokeStyle=col; ctx.lineWidth=2; ctx.beginPath(); ctx.arc(x,y,10,0,6.2832); ctx.stroke();
+    MSPC.mono(ctx,txt,x,y+38,12.5,col,'center');
+  }
+
+  MSPC.anim('a-bornes', function(a){
+    var ctx=a.ctx, W=a.W, H=a.H;
+    var co=CO[C.val], act=A.val;
+
+    MSPC.fond(ctx,W,H,0);
+    MSPC.mono(ctx,'LE REPÉRAGE DES BORNES — LA RÈGLE DES DEUX CHIFFRES',26,30,11.5,'#8d968b');
+    MSPC.mono(ctx, act?'appareil ACTIONNÉ':'appareil au REPOS', W-26,30,10.5, act?'#c8d834':'#6f786e','right');
+
+    var cx=250, cy=170, col=act?'#c8d834':'#cfe2ee';
+
+    if(co.aux){
+      var ferme = co.nf ? !act : act;
+      borne(ctx,cx,cy-56,co.b[0],col);
+      borne(ctx,cx,cy+56,co.b[1],col);
+      ctx.strokeStyle=col; ctx.lineWidth=2.6;
+      ctx.beginPath(); ctx.moveTo(cx,cy-46); ctx.lineTo(cx,cy-24); ctx.stroke();
+      ctx.beginPath(); ctx.moveTo(cx,cy+46); ctx.lineTo(cx,cy+24); ctx.stroke();
+      ctx.beginPath(); ctx.moveTo(cx,cy-24);
+      if(ferme) ctx.lineTo(cx,cy+24); else ctx.lineTo(cx+26,cy+22);
+      ctx.stroke();
+      if(co.nf){ // la barre du contact fermé au repos
+        ctx.strokeStyle=col; ctx.lineWidth=2;
+        ctx.beginPath(); ctx.moveTo(cx-14,cy-2); ctx.lineTo(cx+14,cy-2); ctx.stroke();
+      }
+      ctx.fillStyle=col;
+      ctx.beginPath(); ctx.arc(cx,cy-24,3.6,0,6.2832); ctx.fill();
+      ctx.beginPath(); ctx.arc(cx,cy+24,3.6,0,6.2832); ctx.fill();
+      MSPC.titre(ctx, ferme?'FERMÉ':'OUVERT', cx, cy+108, 24, ferme?'#c8d834':'#ff6a5e','center');
+      MSPC.mono(ctx, act?'appareil actionné':'au repos', cx, cy+126, 10,'#6f786e','center');
+    }
+    else if(co.bobine){
+      borne(ctx,cx,cy-56,'A1',col);
+      borne(ctx,cx,cy+56,'A2',col);
+      ctx.strokeStyle=col; ctx.lineWidth=2.6;
+      ctx.beginPath(); ctx.moveTo(cx,cy-46); ctx.lineTo(cx,cy-26); ctx.stroke();
+      ctx.beginPath(); ctx.moveTo(cx,cy+46); ctx.lineTo(cx,cy+26); ctx.stroke();
+      ctx.fillStyle=act?'rgba(200,216,52,.22)':'rgba(255,255,255,.06)';
+      ctx.fillRect(cx-26,cy-26,52,52);
+      ctx.strokeStyle=col; ctx.lineWidth=2.4; ctx.strokeRect(cx-26,cy-26,52,52);
+      if(act){
+        ctx.strokeStyle='#c8d834'; ctx.lineWidth=1.6; ctx.globalAlpha=0.4+0.6*Math.abs(Math.sin(a.t*5));
+        ctx.beginPath(); ctx.arc(cx,cy,38,0,6.2832); ctx.stroke(); ctx.globalAlpha=1;
+      }
+      MSPC.titre(ctx, act?'BOBINE ALIMENTÉE':'BOBINE AU REPOS', cx, cy+108, 21, act?'#c8d834':'#8d968b','center');
+      MSPC.mono(ctx,'quand elle colle, TOUS ses contacts basculent ensemble',cx,cy+126,10,'#6f786e','center');
+    }
+    else if(co.puiss){
+      for(var p=0;p<3;p++){
+        var x=cx-70+p*70;
+        borne(ctx,x,cy-56,co.b[p],col);
+        borne(ctx,x,cy+56,co.b[p+3],col);
+        ctx.strokeStyle=col; ctx.lineWidth=3.2;
+        ctx.beginPath(); ctx.moveTo(x,cy-46); ctx.lineTo(x,cy-24); ctx.stroke();
+        ctx.beginPath(); ctx.moveTo(x,cy+46); ctx.lineTo(x,cy+24); ctx.stroke();
+        ctx.beginPath(); ctx.moveTo(x,cy-24);
+        if(act) ctx.lineTo(x,cy+24); else ctx.lineTo(x+24,cy+20);
+        ctx.stroke();
+        ctx.fillStyle=col;
+        ctx.beginPath(); ctx.arc(x,cy-24,4,0,6.2832); ctx.fill();
+        ctx.beginPath(); ctx.arc(x,cy+24,4,0,6.2832); ctx.fill();
+        MSPC.mono(ctx,'L'+(p+1),x,cy-78,10,'#8d968b','center');
+      }
+      MSPC.titre(ctx, act?'FERMÉS — le moteur tourne':'OUVERTS — moteur à l’arrêt', cx, cy+108, 21, act?'#c8d834':'#8d968b','center');
+    }
+    else if(co.thermique){
+      // le bilame
+      ctx.strokeStyle=act?'#f0a844':'#8d968b'; ctx.lineWidth=3;
+      ctx.beginPath();
+      for(var q=0;q<=1;q+=0.05){
+        var yy=cy-70+q*44, xx=cx-96+(act?Math.sin(q*3.14)*9:0);
+        if(q===0) ctx.moveTo(xx,yy); else ctx.lineTo(xx,yy);
+      }
+      ctx.stroke();
+      MSPC.mono(ctx,'bilame',cx-96,cy-82,10,act?'#f0a844':'#8d968b','center');
+      MSPC.mono(ctx, act?'chauffé par la surcharge':'froid',cx-96,cy-6,9.5,'#6f786e','center');
+      // les deux contacts
+      [[cx-10,'95','96',true],[cx+80,'97','98',false]].forEach(function(z){
+        var ferme = z[3] ? !act : act;
+        borne(ctx,z[0],cy-56,z[1],col);
+        borne(ctx,z[0],cy+56,z[2],col);
+        ctx.strokeStyle=col; ctx.lineWidth=2.6;
+        ctx.beginPath(); ctx.moveTo(z[0],cy-46); ctx.lineTo(z[0],cy-24); ctx.stroke();
+        ctx.beginPath(); ctx.moveTo(z[0],cy+46); ctx.lineTo(z[0],cy+24); ctx.stroke();
+        ctx.beginPath(); ctx.moveTo(z[0],cy-24);
+        if(ferme) ctx.lineTo(z[0],cy+24); else ctx.lineTo(z[0]+24,cy+22);
+        ctx.stroke();
+        if(z[3]){ ctx.beginPath(); ctx.moveTo(z[0]-13,cy-2); ctx.lineTo(z[0]+13,cy-2); ctx.stroke(); }
+        MSPC.mono(ctx, ferme?'fermé':'ouvert', z[0], cy+96, 11, ferme?'#c8d834':'#ff6a5e','center');
+        MSPC.mono(ctx, z[3]?'coupe la commande':'allume le voyant', z[0], cy+112, 9.5,'#6f786e','center');
+      });
+      MSPC.titre(ctx, act?'SURCHARGE — le thermique a déclenché':'PAS DE SURCHARGE', cx-10, cy+142, 19, act?'#ff6a5e':'#8d968b','center');
+    }
+
+    /* ---------- la règle ---------- */
+    var px=520, pw=W-px-26;
+    ctx.fillStyle='rgba(255,255,255,.04)'; ctx.fillRect(px,58,pw,196);
+    ctx.strokeStyle='rgba(255,255,255,.20)'; ctx.lineWidth=1.4; ctx.strokeRect(px+.5,58.5,pw,196);
+    MSPC.mono(ctx,'LA RÈGLE',px+16,82,10,'#8d968b');
+    var r=co.r, li=[], mots=r.split(' '), cur='';
+    mots.forEach(function(m){ if((cur+' '+m).length<=40) cur=(cur?cur+' ':'')+m; else { li.push(cur); cur=m; } });
+    li.push(cur);
+    li.forEach(function(t,i){ MSPC.mono(ctx,t,px+16,104+i*17,11,'#e6ebe4'); });
+    MSPC.mono(ctx,'OÙ ON LE TROUVE',px+16,178,10,'#8d968b');
+    var u=co.u, lu=[], cu=''; co.u.split(' ').forEach(function(m){ if((cu+' '+m).length<=40) cu=(cu?cu+' ':'')+m; else { lu.push(cu); cu=m; } });
+    lu.push(cu);
+    lu.forEach(function(t,i){ MSPC.mono(ctx,t,px+16,198+i*17,11,'#cfe2ee'); });
+
+    /* ---------- le rappel des unités ---------- */
+    ctx.fillStyle='rgba(255,255,255,.05)'; ctx.fillRect(px,270,pw,110);
+    MSPC.mono(ctx,'LE CHIFFRE DES UNITÉS DIT TOUT',px+16,294,10,'#8d968b');
+    MSPC.titre(ctx,'1-2',px+16,326,26,'#79a6c4');
+    MSPC.mono(ctx,'FERMÉ au repos (NF)',px+72,322,12,'#e6ebe4');
+    MSPC.titre(ctx,'3-4',px+16,362,26,'#f0a844');
+    MSPC.mono(ctx,'OUVERT au repos (NO)',px+72,358,12,'#e6ebe4');
+
+    MSPC.mono(ctx,'« au repos » ne veut pas dire « habituellement » : c’est l’état de l’appareil NON ACTIONNÉ.',26,H-14,11,'#6f786e');
+
+    out.innerHTML='<b>'+co.n+'</b><br>'+(act?'appareil actionné':'au repos');
+  }, {fixed:true});
+})();
+
+/* ======================= CH 21 · le départ-moteur ======================= */
+(function(){
+  "use strict";
+  var F=MSPC.ctrl('a-dep-f');
+  var out=document.getElementById('a-dep-out');
+  var bOn=document.getElementById('a-dep-on'), bOff=document.getElementById('a-dep-off');
+  var appui=0, arret=0, marche=false, rot=0, chauffe=0;
+  if(bOn) bOn.addEventListener('click', function(){ appui=1.1; });
+  if(bOff) bOff.addEventListener('click', function(){ arret=0.8; });
+
+  MSPC.anim('a-departmoteur', function(a){
+    var ctx=a.ctx, W=a.W, H=a.H, dt=Math.min(a.dt,0.05);
+    var def=F.val;
+    if(appui>0) appui-=dt;
+    if(arret>0) arret-=dt;
+    chauffe += ((def?1:0)-chauffe)*Math.min(1,dt*1.6);
+    var f1 = !def;                                   // 95-96 fermé tant qu'il n'y a pas de surcharge
+    var s2 = !(arret>0);                             // bouton d'arrêt fermé au repos
+    var s1 = appui>0;
+    var bobine = f1 && s2 && (s1 || marche);
+    marche = bobine;
+    if(bobine) rot += dt*13;
+
+    MSPC.fond(ctx,W,H,0);
+    MSPC.mono(ctx,'DÉPART-MOTEUR — PUISSANCE À GAUCHE, COMMANDE À DROITE',26,30,11.5,'#8d968b');
+    ctx.strokeStyle='rgba(255,255,255,.10)'; ctx.lineWidth=1;
+    ctx.beginPath(); ctx.moveTo(430,44); ctx.lineTo(430,H-52); ctx.stroke();
+
+    var VIF='#c8d834', MORT='#4d5a4d';
+
+    /* ================= PUISSANCE ================= */
+    MSPC.mono(ctx,'PUISSANCE  ·  400 V triphasé',40,56,10,'#8d968b');
+    var ph=[110,180,250];
+    for(var i=0;i<3;i++){
+      var x=ph[i];
+      MSPC.mono(ctx,'L'+(i+1),x,80,10.5,'#8d968b','center');
+      // amont du sectionneur : toujours vivant
+      ctx.strokeStyle='#ff6a5e'; ctx.lineWidth=2.6;
+      ctx.beginPath(); ctx.moveTo(x,88); ctx.lineTo(x,118); ctx.stroke();
+      // sectionneur Q1 : fermé
+      ctx.beginPath(); ctx.moveTo(x,118); ctx.lineTo(x,150); ctx.stroke();
+      // contacts KM1
+      var c1=marche?VIF:MORT;
+      ctx.strokeStyle=marche?'#ff6a5e':'#4d5a4d'; ctx.lineWidth=2.6;
+      ctx.beginPath(); ctx.moveTo(x,150); ctx.lineTo(x,186); ctx.stroke();
+      ctx.strokeStyle=marche?'#ff6a5e':'#8d968b'; ctx.lineWidth=2.6;
+      ctx.beginPath(); ctx.moveTo(x,186);
+      if(marche) ctx.lineTo(x,214); else ctx.lineTo(x+20,210);
+      ctx.stroke();
+      ctx.fillStyle=marche?'#ff6a5e':'#8d968b';
+      ctx.beginPath(); ctx.arc(x,186,3.4,0,6.2832); ctx.fill();
+      ctx.beginPath(); ctx.arc(x,214,3.4,0,6.2832); ctx.fill();
+      // relais thermique F1
+      ctx.strokeStyle=marche?'#ff6a5e':'#4d5a4d'; ctx.lineWidth=2.6;
+      ctx.beginPath(); ctx.moveTo(x,214); ctx.lineTo(x,246); ctx.stroke();
+      // le symbole du relais thermique : un cadre, et le bilame qui s'incurve
+      ctx.strokeStyle=chauffe>0.4?'#f0a844':'#8d968b'; ctx.lineWidth=1.6;
+      ctx.strokeRect(x-10,244,20,34);
+      ctx.strokeStyle=chauffe>0.4?'#f0a844':(marche?'#ff6a5e':'#8d968b'); ctx.lineWidth=2.4;
+      ctx.beginPath();
+      for(var q=0;q<=1.001;q+=0.08) ctx.lineTo(x+Math.sin(q*3.14)*6*chauffe, 246+q*30);
+      ctx.stroke();
+      ctx.strokeStyle=marche?'#ff6a5e':'#4d5a4d'; ctx.lineWidth=2.6;
+      ctx.beginPath(); ctx.moveTo(x,278); ctx.lineTo(x,306); ctx.stroke();
+    }
+    // les trois phases rejoignent le moteur
+    ctx.strokeStyle=marche?'#ff6a5e':'#4d5a4d'; ctx.lineWidth=2.6;
+    ctx.beginPath();
+    ctx.moveTo(110,306); ctx.lineTo(110,314); ctx.lineTo(153,320);
+    ctx.moveTo(180,306); ctx.lineTo(180,310);
+    ctx.moveTo(250,306); ctx.lineTo(250,314); ctx.lineTo(207,320);
+    ctx.stroke();
+    MSPC.mono(ctx,'Q1',86,140,11,'#8d968b','right');
+    MSPC.mono(ctx,'KM1',86,204,11,marche?'#c8d834':'#8d968b','right');
+    MSPC.mono(ctx,'1 3 5',292,192,9.5,'#6f786e');
+    MSPC.mono(ctx,'2 4 6',292,220,9.5,'#6f786e');
+    MSPC.mono(ctx,'F1',86,266,11,chauffe>0.4?'#f0a844':'#8d968b','right');
+    MSPC.mono(ctx,'thermique',292,266,9.5,'#6f786e');
+    // le moteur
+    ctx.strokeStyle=marche?'#c8d834':'#5a6258'; ctx.lineWidth=2.4;
+    ctx.beginPath(); ctx.arc(180,352,42,0,6.2832); ctx.stroke();
+    ctx.fillStyle=marche?'rgba(200,216,52,.12)':'rgba(255,255,255,.04)';
+    ctx.fill();
+    MSPC.titre(ctx,'M',180,362,32,marche?'#c8d834':'#5a6258','center');
+    MSPC.mono(ctx,'3 ~',180,378,10,marche?'#c8d834':'#5a6258','center');
+    if(marche){
+      ctx.strokeStyle='#c8d834'; ctx.lineWidth=2.4;
+      for(var b=0;b<3;b++){
+        var an=rot+b*2.094;
+        ctx.beginPath(); ctx.arc(180,352,52,an,an+0.7); ctx.stroke();
+      }
+    }
+    MSPC.mono(ctx, marche?'le moteur tourne':'moteur à l’arrêt',180,418,11,marche?'#c8d834':'#6f786e','center');
+
+    /* ================= COMMANDE ================= */
+    MSPC.mono(ctx,'COMMANDE  ·  230 V',470,56,10,'#8d968b');
+    var cx=560, dx=700, hy=76, by=430;
+    function fil(x0,y0,x1,y1,vif){
+      ctx.strokeStyle=vif?VIF:MORT; ctx.lineWidth=vif?3:2.2;
+      ctx.beginPath(); ctx.moveTo(x0,y0); ctx.lineTo(x1,y1); ctx.stroke();
+    }
+    function contact(x,y,ferme,vif,nf,b1,b2,nom){
+      ctx.strokeStyle=vif?VIF:'#8d968b'; ctx.lineWidth=2.6;
+      ctx.beginPath(); ctx.moveTo(x,y); ctx.lineTo(x,y+10); ctx.stroke();
+      ctx.beginPath(); ctx.moveTo(x,y+46); ctx.lineTo(x,y+36); ctx.stroke();
+      ctx.beginPath(); ctx.moveTo(x,y+10);
+      if(ferme) ctx.lineTo(x,y+36); else ctx.lineTo(x+22,y+34);
+      ctx.stroke();
+      if(nf){ ctx.beginPath(); ctx.moveTo(x-12,y+23); ctx.lineTo(x+12,y+23); ctx.stroke(); }
+      ctx.fillStyle=vif?VIF:'#8d968b';
+      ctx.beginPath(); ctx.arc(x,y+10,3.4,0,6.2832); ctx.fill();
+      ctx.beginPath(); ctx.arc(x,y+36,3.4,0,6.2832); ctx.fill();
+      MSPC.mono(ctx,b1,x-16,y+14,9.5,'#6f786e','right');
+      MSPC.mono(ctx,b2,x-16,y+40,9.5,'#6f786e','right');
+      MSPC.mono(ctx,nom,x+28,y+28,11, vif?VIF:'#8d968b');
+    }
+    // la phase
+    MSPC.mono(ctx,'L1',470,hy+4,10.5,'#ff6a5e');
+    ctx.strokeStyle='#ff6a5e'; ctx.lineWidth=3;
+    ctx.beginPath(); ctx.moveTo(490,hy); ctx.lineTo(cx,hy); ctx.stroke();
+    fil(cx,hy,cx,hy+18,true);
+    // F1 95-96
+    contact(cx,hy+18,f1,f1,true,'95','96','F1');
+    // S2 arrêt
+    var apresF1=f1;
+    contact(cx,hy+84,s2,apresF1&&s2,true,'1','2','S2 arrêt');
+    // la dérivation : S1 et 13-14
+    var apresS2=apresF1&&s2;
+    fil(cx,hy+130,cx,hy+150,apresS2);
+    fil(cx,hy+150,dx,hy+150,apresS2);
+    contact(cx,hy+150,s1,apresS2&&s1,false,'3','4','S1 marche');
+    contact(dx,hy+150,marche,apresS2&&marche,false,'13','14','KM1');
+    var passe=apresS2&&(s1||marche);
+    fil(cx,hy+196,cx,hy+216,apresS2&&s1);
+    fil(dx,hy+196,dx,hy+216,apresS2&&marche);
+    fil(cx,hy+216,dx,hy+216,passe);
+    // la bobine
+    fil(cx,hy+216,cx,hy+238,passe);
+    ctx.fillStyle=bobine?'rgba(200,216,52,.22)':'rgba(255,255,255,.05)';
+    ctx.fillRect(cx-28,hy+238,56,44);
+    ctx.strokeStyle=bobine?VIF:'#8d968b'; ctx.lineWidth=2.4;
+    ctx.strokeRect(cx-28,hy+238,56,44);
+    MSPC.mono(ctx,'A1',cx-34,hy+242,9.5,'#6f786e','right');
+    MSPC.mono(ctx,'A2',cx-34,hy+286,9.5,'#6f786e','right');
+    MSPC.mono(ctx,'KM1',cx+38,hy+264,11,bobine?VIF:'#8d968b');
+    fil(cx,hy+282,cx,hy+310,bobine);
+    // le neutre
+    ctx.strokeStyle='#79a6c4'; ctx.lineWidth=3;
+    ctx.beginPath(); ctx.moveTo(490,hy+310); ctx.lineTo(cx,hy+310); ctx.stroke();
+    MSPC.mono(ctx,'N',470,hy+314,10.5,'#79a6c4');
+
+    // la flèche de l'auto-maintien
+    if(marche && !s1){
+      ctx.strokeStyle='rgba(200,216,52,.5)'; ctx.lineWidth=1.4; ctx.setLineDash([4,4]);
+      ctx.beginPath(); ctx.arc(dx,hy+173,34,-1.2,1.2); ctx.stroke(); ctx.setLineDash([]);
+      MSPC.mono(ctx,'auto-maintien',dx+42,hy+177,10.5,'#c8d834');
+    }
+
+    /* ================= verdict ================= */
+    var msg,coul;
+    if(def){ msg='SURCHARGE : le bilame de F1 s’est déformé, son contact 95-96 s’est ouvert. Il coupe la COMMANDE, pas la puissance — et la bobine lâche.'; coul='#f0a844'; }
+    else if(arret>0){ msg='ARRÊT : S2 s’ouvre en amont des deux branches. Ni le bouton, ni l’auto-maintien ne peuvent alimenter la bobine.'; coul='#ff6a5e'; }
+    else if(s1 && marche){ msg='Le courant passe par S1 ET par le 13-14 : le contact d’auto-maintien vient de se fermer avec la bobine.'; coul='#c8d834'; }
+    else if(marche){ msg='Le bouton est relâché depuis longtemps. C’est le contact 13-14 de KM1 qui tient la bobine — l’auto-maintien.'; coul='#c8d834'; }
+    else { msg='Au repos : S1 est ouvert, le 13-14 aussi. Aucun chemin ne mène à la bobine. Appuyez sur MARCHE.'; coul='#8d968b'; }
+    ctx.fillStyle='rgba(255,255,255,.05)'; ctx.fillRect(26,H-44,W-52,32);
+    MSPC.mono(ctx,msg,42,H-23,11.5,coul);
+
+    out.innerHTML = marche
+      ? '<b style="color:#c8d834">Moteur en marche</b><br>'+(s1?'via S1 et l’auto-maintien':'tenu par le contact 13-14')
+      : (def?'<b style="color:#f0a844">Thermique déclenché</b><br>95-96 ouvert, la commande est coupée'
+            :'<b>À l’arrêt</b><br>la bobine n’est pas alimentée');
   }, {fixed:true});
 })();
 </script>
