@@ -52,9 +52,9 @@
 </header>
 
 <div class="meta-bar">
-  <div><b>9</b> chapitres sur 18 publiés</div>
-  <div><b>10</b> animations pilotables</div>
-  <div><b>24</b> exercices corrigés</div>
+  <div><b>11</b> chapitres sur 18 publiés</div>
+  <div><b>12</b> animations pilotables</div>
+  <div><b>29</b> exercices corrigés</div>
   <div>Fiches TP <b>en préparation</b></div>
   <div>Calé sur le <b>référentiel MSPC</b></div>
 </div>
@@ -1206,14 +1206,319 @@
 </div>
 </section>
 
+<!-- ================= CH 10 ================= -->
+<section class="ch" id="c10">
+  <div class="ch-head"><div class="ch-num">10</div><div class="ch-title">
+    <span class="kicker">Le micromètre décide de tout</span><h2>Ajustements, jeux et tolérances</h2></div></div>
+  <div class="ch-body">
+
+<div class="savoirs">
+  <span class="savoir n3"><b>S1.2.1</b> <i>Usure, jeux, ajustements, tolérances</i></span>
+  <span class="savoir n3"><b>S1.2.1</b> <i>Conditions fonctionnelles du guidage</i></span>
+</div>
+
+<p class="lede">Un arbre de 50 mm dans un alésage de 50 mm : est-ce que ça rentre ? La question est mal posée, et c'est tout le sujet du chapitre. Aucune pièce ne fait jamais exactement 50 mm. Ce qui décide si ça tourne librement, si ça coulisse, ou s'il faut une presse de dix tonnes, ce sont quelques <strong>micromètres</strong> — des millièmes de millimètre, invisibles, et pourtant écrits noir sur blanc sur le plan.</p>
+
+<h3>10.1 — Une cote seule ne veut rien dire</h3>
+<p>Aucun procédé de fabrication ne produit deux pièces identiques. Un tour, même excellent, sort des arbres qui varient de quelques microns d'une pièce à l'autre. Le bureau d'études ne demande donc jamais « 50 mm » : il demande <strong>une plage à l'intérieur de laquelle la pièce est acceptable</strong>.</p>
+
+<table>
+<thead><tr><th>Terme</th><th>Ce que c'est</th><th>Exemple sur Ø50 H7</th></tr></thead>
+<tbody>
+<tr><td><strong>Cote nominale</strong></td><td>La valeur de référence, celle qu'on annonce</td><td>50 mm</td></tr>
+<tr><td><strong>Écart supérieur</strong> (ES, es)</td><td>Ce qu'on tolère au-dessus du nominal</td><td>+25 µm</td></tr>
+<tr><td><strong>Écart inférieur</strong> (EI, ei)</td><td>Ce qu'on tolère au-dessous</td><td>0 µm</td></tr>
+<tr><td><strong>Intervalle de tolérance</strong> (IT)</td><td>La largeur de la plage : ES − EI</td><td>25 µm</td></tr>
+<tr><td><strong>Cote maxi / mini</strong></td><td>Les deux bornes réelles</td><td>50,025 / 50,000 mm</td></tr>
+</tbody></table>
+
+<p><span class="cle">Convention à ne jamais oublier : les majuscules désignent l'alésage (le trou), les minuscules désignent l'arbre.</span> C'est la clé de lecture de tout ce chapitre, et de tout plan mécanique.</p>
+
+<div class="rappel"><span class="tag">Les ordres de grandeur du micron</span>
+<p>Un micromètre — un micron — vaut un millième de millimètre. Pour se le représenter :</p>
+<ul>
+<li><strong>Un cheveu</strong> : 60 à 100 µm.</li>
+<li><strong>Une feuille de papier</strong> : environ 100 µm.</li>
+<li><strong>Un IT7 sur Ø50</strong> : 25 µm, soit un quart de cheveu.</li>
+<li><strong>La dilatation d'un arbre acier de Ø50 chauffé de 40 °C</strong> : 24 µm — c'est-à-dire l'IT tout entier.</li>
+</ul>
+<p>Retenez cette dernière ligne. <span class="cle">Un simple échauffement consomme la totalité de la tolérance.</span> C'est pour cette raison qu'on mesure une pièce de précision à température stabilisée, et qu'on ne contrôle jamais une cote juste après usinage.</p></div>
+
+<h3>10.2 — Le code ISO : une lettre et un chiffre</h3>
+<p>Sur un plan, la tolérance ne s'écrit pas en microns mais sous forme codée : <span class="mono">Ø50 H7</span>, <span class="mono">Ø50 g6</span>. Deux informations s'y cachent.</p>
+
+<div class="formule">Ø50 <b>H</b><b>7</b><small>La LETTRE donne la POSITION de la zone · le CHIFFRE donne sa LARGEUR</small></div>
+
+<ul>
+<li><strong>Le chiffre est la qualité</strong> — il fixe la largeur IT. Plus il est petit, plus la pièce est précise et chère. IT6 et IT7 couvrent la quasi-totalité de la mécanique industrielle ; IT8 à IT11 pour les pièces courantes, IT5 et en dessous pour les broches et la métrologie.</li>
+<li><strong>La lettre est la position</strong> — elle place la plage par rapport à la cote nominale. <span class="mono">H</span> est un alésage dont l'écart inférieur vaut exactement zéro. <span class="mono">h</span> est un arbre dont l'écart supérieur vaut exactement zéro. Les lettres avant <span class="mono">h</span> (a…g) donnent des arbres plus petits ; celles après (j…z) des arbres plus gros.</li>
+</ul>
+
+<p>Pour la même cote nominale Ø50, la qualité seule change tout :</p>
+<table>
+<thead><tr><th>Qualité</th><th>IT sur Ø50</th><th>Obtenue par</th><th>Coût relatif</th></tr></thead>
+<tbody>
+<tr><td>IT6</td><td>16 µm</td><td>Rectification</td><td>×4</td></tr>
+<tr><td>IT7</td><td>25 µm</td><td>Alésage fin, rectification</td><td>×2,5</td></tr>
+<tr><td>IT8</td><td>39 µm</td><td>Tournage soigné, alésage</td><td>×1,5</td></tr>
+<tr><td>IT11</td><td>160 µm</td><td>Tournage courant, perçage</td><td>×1</td></tr>
+</tbody></table>
+
+<h3>10.3 — Le système de l'alésage normal</h3>
+<p>Un alésage est bien plus difficile et plus cher à ajuster qu'un arbre : on travaille à l'intérieur, l'outil est peu accessible, la mesure est délicate, et les outils de coupe existent en diamètres normalisés. On a donc pris une convention universelle :</p>
+<p><span class="cle">On fixe l'alésage à H, et on choisit l'ajustement en changeant seulement la lettre de l'arbre.</span> C'est le <strong>système de l'alésage normal</strong>, et c'est ce que vous verrez dans 95 % des cas : <span class="mono">H7/g6</span>, <span class="mono">H7/k6</span>, <span class="mono">H7/p6</span>.</p>
+<p>Le mécanicien fabrique tous ses alésages pareil, et joue sur l'arbre — qu'il peut retoucher au dixième de micron sur une rectifieuse.</p>
+
+<h3>10.4 — Trois familles d'ajustement</h3>
+<p>En superposant les deux plages, trois situations apparaissent. Elles se lisent d'un coup d'œil sur un schéma, et c'est tout l'objet de l'animation ci-dessous.</p>
+
+<table>
+<thead><tr><th>Famille</th><th>Condition</th><th>Ce qui se passe</th><th>Montage</th></tr></thead>
+<tbody>
+<tr><td><strong>Avec jeu</strong></td><td>L'arbre est toujours plus petit que l'alésage</td><td>Il y a toujours du jeu, quelles que soient les pièces prises au hasard</td><td>À la main</td></tr>
+<tr><td><strong>Incertain</strong></td><td>Les deux plages se chevauchent</td><td>Selon les pièces réelles, on obtient du jeu <em>ou</em> du serrage. On ne sait pas avant de mesurer</td><td>Maillet, presse légère</td></tr>
+<tr><td><strong>Avec serrage</strong></td><td>L'arbre est toujours plus gros que l'alésage</td><td>Il faut forcer. La matière se déforme élastiquement et l'adhérence assure la liaison</td><td>Presse, ou dilatation thermique</td></tr>
+</tbody></table>
+
+<figure class="anim">
+  <canvas id="a-ajust" width="900" height="440" aria-label="Animation : zones de tolérance d'un arbre et d'un alésage, jeu, serrage et ajustement incertain"></canvas>
+  <div class="ctrls">
+    <div class="c"><label>Diamètre nominal <span id="a-ajust-d-l">Ø 50</span></label><input type="range" id="a-ajust-d" min="0" max="5" value="3"></div>
+    <div class="c"><label>Tolérance de l'arbre <span id="a-ajust-a-l">g6</span></label><input type="range" id="a-ajust-a" min="0" max="7" value="2"></div>
+    <div class="c"><label>Qualité de l'alésage <span id="a-ajust-q-l">H7</span></label><input type="range" id="a-ajust-q" min="6" max="8" value="7"></div>
+    <div class="c readout" id="a-ajust-out"></div>
+  </div>
+  <figcaption>Les deux zones de tolérance, agrandies des milliers de fois — sans quoi on ne verrait rien. La <b>ligne zéro</b> est la cote nominale. La zone bleue est l'alésage, la zone orange l'arbre. <b>Faites défiler la tolérance de l'arbre</b> de <span class="mono">e8</span> à <span class="mono">s6</span> : la zone orange remonte, traverse la bleue, et la famille change sous vos yeux — <b>jeu</b>, puis <b>incertain</b>, puis <b>serrage</b>. <b>Changez la qualité de l'alésage</b> : la zone bleue s'épaissit, et un ajustement qui était sûr devient incertain. C'est exactement ce qui arrive quand un alésage s'use.</figcaption>
+</figure>
+
+<h3>10.5 — Les ajustements que vous rencontrerez</h3>
+<p>Une dizaine de combinaisons couvrent l'essentiel du parc industriel. Apprenez au moins les quatre en gras.</p>
+
+<table>
+<thead><tr><th>Ajustement</th><th>Famille</th><th>Emploi typique</th></tr></thead>
+<tbody>
+<tr><td><span class="mono">H7/e8</span></td><td>Jeu large</td><td>Paliers lisses très chargés, arbres longs, pièces qui chauffent</td></tr>
+<tr><td><strong><span class="mono">H7/f7</span></strong></td><td>Jeu moyen</td><td><strong>Coussinets, paliers lisses lubrifiés, guidage tournant</strong></td></tr>
+<tr><td><strong><span class="mono">H7/g6</span></strong></td><td>Jeu faible</td><td><strong>Guidage précis, pièces qui coulissent sans battre : tiroir, colonne</strong></td></tr>
+<tr><td><span class="mono">H7/h6</span></td><td>Jeu nul à faible</td><td>Montage et démontage fréquents à la main, centrage</td></tr>
+<tr><td><strong><span class="mono">H7/k6</span></strong></td><td>Incertain</td><td><strong>Bague intérieure de roulement sur arbre, moyeu clavetté</strong></td></tr>
+<tr><td><span class="mono">H7/m6</span></td><td>Incertain</td><td>Moyeux, pignons, montage au maillet</td></tr>
+<tr><td><strong><span class="mono">H7/p6</span></strong></td><td>Serrage léger</td><td><strong>Bagues, canons, montage à la presse</strong></td></tr>
+<tr><td><span class="mono">H7/s6</span></td><td>Serrage fort</td><td>Frettage, liaison sans clavette, montage par dilatation</td></tr>
+</tbody></table>
+
+<div class="encadre"><span class="tag">Le cas des roulements — la règle qui sauve un montage</span>
+<p>C'est le cas d'ajustement que vous appliquerez le plus souvent, et il obéit à une règle simple qu'il faut comprendre plutôt que retenir.</p>
+<p><span class="cle">La bague qui tourne par rapport à la direction de la charge doit être SERRÉE. L'autre peut être libre.</span></p>
+<p>Sur une machine ordinaire — arbre tournant, charge fixe en direction, comme le poids d'une poulie —, c'est la <strong>bague intérieure</strong> qui tourne sous la charge :</p>
+<ul>
+<li><strong>Bague intérieure sur l'arbre : serrée</strong>, typiquement <span class="mono">k5</span>, <span class="mono">k6</span> ou <span class="mono">m6</span>.</li>
+<li><strong>Bague extérieure dans le logement : libre</strong>, typiquement <span class="mono">H7</span> ou <span class="mono">J7</span> — elle doit pouvoir coulisser pour laisser l'arbre se dilater (rappelez-vous l'exercice 3.1).</li>
+</ul>
+<p><strong>Ce qui arrive si on se trompe.</strong> Une bague intérieure montée trop libre se met à tourner sur l'arbre : c'est le <em>laminage</em>. Elle use l'arbre en quelques heures, la portée devient conique, et on ne répare plus qu'en rechargeant et rectifiant. À l'inverse, une bague extérieure montée trop serrée bloque la dilatation et le roulement grille.</p>
+<p><strong>Le symptôme du laminage</strong> est reconnaissable : un arbre brillant, poli comme un miroir sous la portée, souvent avec un léger épaulement. Si vous voyez ça, ne remontez pas un roulement neuf dessus — il fera la même chose en pire.</p></div>
+
+<h3>10.6 — Le jeu vu par la maintenance</h3>
+<p>Le bureau d'études raisonne en tolérances de fabrication. Vous, vous raisonnez en <strong>jeu mesuré, et en son évolution</strong>. Trois idées suffisent.</p>
+<ol>
+<li><strong>Un jeu neuf n'est pas un défaut, c'est une condition fonctionnelle.</strong> Un palier lisse a besoin de son jeu pour loger le film d'huile (chapitre 12). Supprimer le jeu, c'est supprimer la lubrification.</li>
+<li><strong>Ce qui compte, c'est la dérive.</strong> Un jeu qui passe de 0,05 à 0,10 mm en trois ans n'inquiète personne. Le même jeu atteint en trois mois annonce une casse. <span class="cle">Notez la valeur ET la date : un jeu sans historique ne vaut rien.</span></li>
+<li><strong>Le jeu s'accélère tout seul.</strong> Plus il augmente, plus la pièce prend de l'élan avant de taper, plus les chocs sont violents, plus l'usure va vite. C'est un emballement, pas une pente régulière — d'où l'intérêt de mesurer avant que la courbe ne parte.</li>
+</ol>
+
+<div class="exo"><span class="tag">Exercice 10.1</span>
+<p>Un plan porte <span class="mono">Ø50 H7</span> pour l'alésage et <span class="mono">Ø50 g6</span> pour l'arbre. On donne IT7 = 25 µm, IT6 = 16 µm, et l'écart supérieur de g6 vaut −9 µm. Donnez les cotes limites des deux pièces, le jeu mini et le jeu maxi.</p>
+<details><summary>Voir la réponse</summary><div class="rep">
+<p><strong>L'alésage Ø50 H7.</strong> La lettre H signifie écart inférieur nul :</p>
+<p class="mono">EI = 0 → Ø mini = 50,000 mm<br>ES = EI + IT7 = 0 + 25 = +25 µm → Ø maxi = 50,025 mm</p>
+<p><strong>L'arbre Ø50 g6.</strong> Pour les lettres a à h, c'est l'écart <em>supérieur</em> qui est donné :</p>
+<p class="mono">es = −9 µm → Ø maxi = 49,991 mm<br>ei = es − IT6 = −9 − 16 = −25 µm → Ø mini = 49,975 mm</p>
+<p><strong>Le jeu maximal</strong> — le plus grand alésage avec le plus petit arbre :</p>
+<p class="mono">J<sub>max</sub> = 50,025 − 49,975 = 0,050 mm = <strong>50 µm</strong></p>
+<p><strong>Le jeu minimal</strong> — le plus petit alésage avec le plus gros arbre :</p>
+<p class="mono">J<sub>min</sub> = 50,000 − 49,991 = 0,009 mm = <strong>9 µm</strong></p>
+<p><strong>Vérification et lecture.</strong> Les deux jeux sont positifs : c'est bien un <strong>ajustement avec jeu</strong>. Quelles que soient les deux pièces que vous prenez au hasard dans le stock, ça rentrera toujours, et il y aura toujours entre 9 et 50 microns de jeu.</p>
+<p><em>Astuce de contrôle : J<sub>max</sub> − J<sub>min</sub> doit toujours valoir IT<sub>alésage</sub> + IT<sub>arbre</sub>. Ici 50 − 9 = 41, et 25 + 16 = 41. Si ça ne tombe pas, vous avez fait une erreur de signe — l'erreur numéro un sur ce type de calcul.</em></p>
+</div></details></div>
+
+<div class="exo"><span class="tag">Exercice 10.2</span>
+<p>Sur une réparation, vous mesurez un arbre à 49,962 mm alors que le plan demande <span class="mono">Ø50 g6</span> (49,975 / 49,991). L'alésage, lui, est conforme. Que concluez-vous ? Le remontage est-il acceptable ?</p>
+<details><summary>Voir la réponse</summary><div class="rep">
+<p><strong>L'arbre est hors tolérance</strong>, de 13 µm sous la limite basse : 49,975 − 49,962 = 0,013 mm.</p>
+<p><strong>Ce que devient le jeu.</strong> Avec l'alésage au plus grand (50,025) :</p>
+<p class="mono">J = 50,025 − 49,962 = 0,063 mm = <strong>63 µm</strong>, au lieu de 50 µm maximum prévus</p>
+<p>Soit <strong>26 % de jeu en plus</strong> que le maximum admis par le bureau d'études.</p>
+<p><strong>D'où vient ce sous-diamètre ?</strong> Un arbre ne rétrécit pas tout seul. Trois causes possibles, dans l'ordre :</p>
+<ol>
+<li><strong>Usure de la portée</strong> — la plus probable. Vérifiez alors si l'usure est régulière ou ovalisée : mesurez à 0°, 60° et 120°. Une portée ovalisée signe un jeu qui travaillait déjà depuis longtemps.</li>
+<li><strong>Une réparation antérieure</strong> : quelqu'un a repris l'arbre à la toile émeri pour « faire rentrer » une pièce qui coinçait. C'est courant, et c'est ce qui ruine définitivement un ajustement.</li>
+<li><strong>Erreur de mesure</strong> : arbre chaud, micromètre non étalonné, mesure sur une arête. Toujours vérifier avant de conclure.</li>
+</ol>
+<p><strong>Le remontage est-il acceptable ?</strong> <span class="cle">Cela dépend entièrement de la fonction, et c'est vous qui devez trancher.</span></p>
+<ul>
+<li><strong>Si c'est un guidage de précision</strong> — un tiroir, une colonne, une broche — <strong>non</strong>. Les 13 µm supplémentaires se traduiront par du battement, un défaut de position, et un mauvais fonctionnement immédiat.</li>
+<li><strong>Si c'est un palier lisse peu chargé et lent</strong>, le montage fonctionnera, mais moins bien : plus de vibration, film d'huile moins stable, usure accélérée. C'est un dépannage, pas une réparation.</li>
+</ul>
+<p><strong>La bonne pratique :</strong> remonter en dépannage si la production l'exige, <strong>consigner la cote mesurée dans la GMAO</strong>, et planifier le remplacement ou le rechargement de l'arbre. Ce qui est inacceptable, ce n'est pas de remonter une pièce dégradée — c'est de le faire sans le dire à personne.</p>
+</div></details></div>
+
+<div class="exo"><span class="tag">Exercice 10.3</span>
+<p>Un roulement doit être monté sur un arbre en <span class="mono">Ø60 k6</span> (+2/+21 µm). La bague intérieure a un alésage de Ø60 avec une tolérance de 0/−15 µm. Calculez le serrage mini et maxi. Comment monteriez-vous ce roulement ?</p>
+<details><summary>Voir la réponse</summary><div class="rep">
+<p><strong>Les cotes.</strong></p>
+<p class="mono">Arbre k6 : 60,002 à 60,021 mm<br>Bague : 59,985 à 60,000 mm</p>
+<p><strong>Le serrage maximal</strong> — le plus gros arbre dans la plus petite bague :</p>
+<p class="mono">S<sub>max</sub> = 60,021 − 59,985 = 0,036 mm = <strong>36 µm</strong></p>
+<p><strong>Le serrage minimal</strong> — le plus petit arbre dans la plus grande bague :</p>
+<p class="mono">S<sub>min</sub> = 60,002 − 60,000 = 0,002 mm = <strong>2 µm</strong></p>
+<p><strong>Il y a donc toujours serrage</strong>, mais il varie d'un facteur 18 selon les pièces. C'est normal et voulu : le constructeur du roulement a décalé volontairement la tolérance de la bague vers le bas pour garantir le serrage même avec un arbre k6 au minimum.</p>
+<p><strong>Comment monter.</strong> Trois méthodes, de la meilleure à la pire :</p>
+<ol>
+<li><strong>Au chauffage — la méthode de référence.</strong> On chauffe le roulement à 80-100 °C sur un appareil à induction ou dans un bain d'huile. La bague se dilate d'environ 60 à 70 µm sur Ø60, ce qui est largement plus que les 36 µm de serrage : elle glisse alors <em>toute seule</em> sur l'arbre. On la maintient en butée le temps qu'elle refroidisse.<br><span class="cle">Ne dépassez jamais 120 °C : au-delà, on détruit le traitement thermique de l'acier et le roulement est bon à jeter.</span></li>
+<li><strong>À la presse</strong>, avec un outil qui appuie <strong>exclusivement sur la bague intérieure</strong>. Un montage à la presse est acceptable, à condition absolue que l'effort ne traverse jamais les billes.</li>
+<li><strong>Au maillet et à la douille</strong> — tolérable sur les petits roulements, avec une douille qui porte sur la seule bague intérieure. C'est la méthode qui pardonne le moins.</li>
+</ol>
+<p><strong>Et ce qu'il ne faut jamais faire :</strong> frapper directement sur la bague extérieure, ou sur le roulement avec un jet et un marteau. L'effort passe alors par les billes, qui marquent leurs pistes — c'est le <em>faux effet Brinell</em>. Le roulement tourne parfaitement en sortant de l'atelier, et il devient bruyant trois semaines plus tard. C'est l'une des causes de défaillance prématurée les plus fréquentes, et elle est entièrement due au montage.</p>
+</div></details></div>
+
+<div class="horsref"><span class="tag">Pour aller plus loin — hors référentiel</span>
+<h4>Pourquoi le frettage tient-il, exactement ?</h4>
+<p>Quand vous emmanchez un arbre de 60,021 dans un alésage de 59,985, les 36 µm d'écart ne disparaissent pas : ils sont absorbés par la <strong>déformation élastique</strong> des deux pièces. L'arbre se comprime légèrement, l'alésage se dilate légèrement, et chacun pousse sur l'autre — c'est une pression de contact, qui peut atteindre plusieurs dizaines de mégapascals.</p>
+<p>Cette pression, multipliée par la surface de contact et par le coefficient d'adhérence acier-acier (0,15 environ, chapitre 6), donne l'effort tangentiel maximal que la liaison peut transmettre <em>sans aucune clavette</em>. Sur une portée de Ø60 sur 40 mm de long, cela représente couramment plusieurs centaines de N·m.</p>
+<p>Deux conséquences très pratiques :</p>
+<ul>
+<li><strong>Un frettage bien fait n'a pas besoin de clavette</strong> — et c'est même mieux, car une rainure de clavette affaiblit l'arbre et concentre les contraintes. Les grandes transmissions modernes utilisent des <em>frettes coniques</em> plutôt que des clavettes.</li>
+<li><strong>Un frettage démonté est un frettage abîmé.</strong> L'extraction arrache toujours un peu de matière sur les sommets d'aspérités. Au remontage, le serrage réel est plus faible. C'est pourquoi on ne réutilise pas indéfiniment une bague frettée.</li>
+</ul>
+<p>Le calcul complet de la pression de frettage relève de la mécanique des milieux continus et n'est pas au programme du Bac Pro MSPC — mais le principe, lui, explique tout ce que vous ferez à la presse ou à l'appareil de chauffe.</p></div>
+
+</div>
+</section>
+
+<!-- ================= CH 11 ================= -->
+<section class="ch" id="c11">
+  <div class="ch-head"><div class="ch-num">11</div><div class="ch-title">
+    <span class="kicker">Aucune surface n'est lisse</span><h2>États de surface et usure</h2></div></div>
+  <div class="ch-body">
+
+<div class="savoirs">
+  <span class="savoir n3"><b>S1.2.1</b> <i>États de surface, spécifications géométriques</i></span>
+  <span class="savoir n3"><b>S1.2.1</b> <i>L'usure</i></span>
+</div>
+
+<p class="lede">Passez le doigt sur un arbre rectifié : il est lisse, froid, parfait. Regardez-le au microscope : c'est une chaîne de montagnes. Cette rugosité invisible décide de la tenue d'un joint, de la durée d'un roulement, de la solidité d'un frettage — et c'est elle qui explique pourquoi une pièce neuve s'use vite pendant quelques heures, puis presque plus pendant des années.</p>
+
+<h3>11.1 — Ce que mesure le Ra</h3>
+<p>Le paramètre universel de rugosité s'appelle <strong>Ra</strong>, l'écart moyen arithmétique. Concrètement : on relève le profil réel de la surface, on trace la ligne moyenne, et on fait la moyenne des écarts — en valeur absolue, creux et bosses comptant pareil.</p>
+
+<div class="formule">Ra = moyenne des écarts au profil moyen<small>Exprimé en micromètres (µm)</small></div>
+
+<table>
+<thead><tr><th>Procédé</th><th>Ra typique</th><th>Aspect</th><th>Usage</th></tr></thead>
+<tbody>
+<tr><td>Brut de fonderie, oxycoupage</td><td>25 à 50 µm</td><td>Rugueux au toucher</td><td>Surfaces libres</td></tr>
+<tr><td>Tournage, fraisage ébauche</td><td>6,3 à 12,5 µm</td><td>Stries bien visibles</td><td>Surfaces non fonctionnelles</td></tr>
+<tr><td>Tournage, fraisage finition</td><td>1,6 à 3,2 µm</td><td>Stries fines, brillant</td><td>Appuis, portées peu chargées</td></tr>
+<tr><td><strong>Rectification</strong></td><td><strong>0,4 à 0,8 µm</strong></td><td>Mat satiné, doux</td><td><strong>Portées de roulement, glissières</strong></td></tr>
+<tr><td><strong>Rodage, superfinition</strong></td><td><strong>0,1 à 0,4 µm</strong></td><td>Miroir</td><td><strong>Portées de joint à lèvre, chemises</strong></td></tr>
+<tr><td>Polissage</td><td>0,025 à 0,1 µm</td><td>Miroir parfait</td><td>Optique, métrologie</td></tr>
+</tbody></table>
+
+<p>Retenez les deux lignes en gras : ce sont celles que vous lirez sur les plans des pièces que vous remplacez. <span class="cle">Une portée de joint à lèvre exige un Ra entre 0,2 et 0,8 µm — et un procédé bien précis.</span> Nous y revenons au chapitre 13.</p>
+
+<figure class="anim">
+  <canvas id="a-usure" width="900" height="440" aria-label="Animation : profil de rugosité, rodage des aspérités et courbe d'usure en trois phases"></canvas>
+  <div class="ctrls">
+    <div class="c"><label>Procédé d'obtention <span id="a-usure-p-l">rectifié</span></label><input type="range" id="a-usure-p" min="0" max="4" value="3"></div>
+    <div class="c"><label>Sévérité du contact <span id="a-usure-s-l">normale</span></label><input type="range" id="a-usure-s" min="0" max="100" value="40"></div>
+    <div class="c"><button class="btn" id="a-usure-go">Relancer le rodage</button></div>
+    <div class="c readout" id="a-usure-out"></div>
+  </div>
+  <figcaption>En haut, le <b>profil réel</b> de deux surfaces en contact, agrandi mille fois en hauteur. Le Ra est la moyenne des écarts à la ligne moyenne. <b>Changez le procédé</b> : les montagnes s'aplatissent, mais elles ne disparaissent jamais. <b>Regardez les sommets s'écraser</b> pendant les premières heures : c'est le <b>rodage</b>, et c'est lui qui produit la chute d'usure initiale visible sur la courbe du bas. <b>Montez la sévérité</b> : au-delà d'un certain seuil, les aspérités ne se rodent plus, elles s'arrachent — le régime bascule de l'usure douce à l'usure catastrophique, et la courbe ne se stabilise plus jamais.</figcaption>
+</figure>
+
+<h3>11.2 — Le rodage, ou pourquoi une pièce neuve s'use vite</h3>
+<p>Au premier contact, deux surfaces ne se touchent que par les sommets de leurs aspérités — rappelez-vous le chapitre 6 : moins de 1 % de la surface apparente. La pression y est donc énorme, et ces sommets s'écrasent ou se cassent.</p>
+<p>Cette phase courte s'appelle le <strong>rodage</strong>. Elle a trois conséquences que vous constaterez toutes :</p>
+<ul>
+<li><strong>L'usure initiale est rapide</strong>, puis ralentit brutalement. C'est le premier tronçon de la fameuse courbe en baignoire.</li>
+<li><strong>La surface de contact réelle augmente</strong>, donc la pression baisse, donc l'usure ralentit. Le système se stabilise tout seul.</li>
+<li><strong>Les débris arrachés se retrouvent dans l'huile.</strong> C'est pour cette raison qu'on fait une <strong>vidange précoce</strong> après le rodage d'une machine neuve ou d'un réducteur reconstruit — souvent après 100 à 500 heures, bien avant la périodicité normale.</li>
+</ul>
+
+<div class="image-mentale"><span class="tag">Image mentale — la semelle de chaussure neuve</span>
+<p>Une paire de chaussures neuves glisse sur le carrelage, et ses crampons s'usent nettement les premières semaines. Puis plus rien ne bouge pendant deux ans. Enfin, un jour, la semelle est lisse et tout s'accélère jusqu'au trou.</p>
+<p>Rodage, vie utile, usure finale. C'est exactement la courbe en baignoire de la maintenance préventive, et vous venez d'en voir la cause physique : <span class="cle">l'usure n'est pas régulière parce que la surface de contact ne l'est pas.</span></p></div>
+
+<h3>11.3 — Les quatre mécanismes d'usure</h3>
+<p>Quatre phénomènes distincts se cachent derrière le mot « usure ». Les distinguer change complètement le remède.</p>
+
+<table>
+<thead><tr><th>Mécanisme</th><th>Ce qui se passe</th><th>Ce qu'on voit</th><th>Le remède</th></tr></thead>
+<tbody>
+<tr><td><strong>Adhésive</strong><br>(grippage)</td><td>Sous forte pression sans lubrifiant, les aspérités se soudent et s'arrachent</td><td>Matière transférée d'une pièce sur l'autre, surfaces déchirées, points brillants et rugueux</td><td>Lubrifier, baisser la pression, changer le couple de matériaux</td></tr>
+<tr><td><strong>Abrasive</strong></td><td>Une particule dure laboure la surface molle</td><td>Rayures parallèles au mouvement, toujours dans le même sens</td><td>Filtrer, étanchéifier, nettoyer avant montage</td></tr>
+<tr><td><strong>Fatigue de contact</strong><br>(écaillage)</td><td>Le contact répété fait naître des fissures sous la surface, qui remontent et détachent des écailles</td><td>Petits cratères à bords nets, sur les pistes de roulements et les flancs de dents</td><td>Réduire la charge, améliorer le film d'huile, changer avant propagation</td></tr>
+<tr><td><strong>Corrosive</strong><br>et fretting</td><td>Réaction chimique, ou micro-mouvements répétés qui oxydent le contact</td><td>Rouille rouge-brun en poudre fine, souvent sous une pièce serrée</td><td>Étanchéité, lubrifiant adapté, resserrage, revêtement</td></tr>
+</tbody></table>
+
+<p><span class="cle">Le diagnostic se fait à l'œil, sur la pièce démontée, avant de la jeter.</span> Des rayures parallèles ne racontent pas la même histoire que des cratères : les premières disent « il y a des particules dans mon huile », les seconds disent « je suis trop chargé ». Prenez l'habitude de <strong>regarder</strong> une pièce déposée, et de la photographier.</p>
+
+<div class="encadre"><span class="tag">Le fretting, l'usure qui trompe tout le monde</span>
+<p>Vous trouverez un jour, en démontant un moyeu ou une bride, une poudre rouge-brun très fine, comme de la rouille — alors que la pièce était sèche, serrée et à l'abri.</p>
+<p>Ce n'est pas de la rouille ordinaire : c'est du <strong>fretting</strong>, ou usure par petits débattements. Deux pièces censées être immobiles l'une par rapport à l'autre subissent des micro-mouvements de quelques microns, sous l'effet des vibrations. À chaque aller-retour, un peu de métal s'oxyde, la poudre d'oxyde est abrasive, et le phénomène s'entretient.</p>
+<p><strong>Ce que ça vous dit :</strong> une liaison qui devait être un encastrement n'en est plus tout à fait un. Le remède n'est presque jamais « changer la pièce » — c'est <strong>rétablir le serrage</strong> : resserrer au couple, remplacer une vis fatiguée, revoir un ajustement devenu trop lâche, ou traiter la source de vibration.</p>
+<p>Le fretting est aussi le premier symptôme d'un roulement dont la bague extérieure commence à tourner dans son logement. Si vous en trouvez à cet endroit, mesurez l'alésage.</p></div>
+
+<div class="exo"><span class="tag">Exercice 11.1</span>
+<p>Vous démontez trois pièces. a) Un axe de galet couvert de rayures fines toutes parallèles à son axe de rotation. b) Une piste de roulement présentant des cratères à bords nets, sur une portion de circonférence. c) Une portée d'arbre où la matière semble arrachée par plaques, avec des dépôts brillants. Identifiez le mécanisme et proposez une action.</p>
+<details><summary>Voir la réponse</summary><div class="rep">
+<p><strong>a) Rayures fines et parallèles → usure ABRASIVE.</strong> Des particules dures circulent dans le contact et labourent la surface. Le fait qu'elles soient parallèles au mouvement est la signature.</p>
+<p><em>Action :</em> chercher <strong>d'où viennent les particules</strong>, jamais se contenter de changer l'axe. Trois sources habituelles : un joint d'étanchéité rompu qui laisse entrer la poussière ; un filtre saturé ou en by-pass ; ou des débris internes provenant d'une autre pièce en train de se dégrader. Analysez l'huile ou, à défaut, essuyez-la sur un chiffon blanc et regardez.</p>
+<p><strong>b) Cratères à bords nets, sur une portion seulement → FATIGUE DE CONTACT (écaillage).</strong> Le fait qu'ils soient localisés sur une portion de circonférence est très informatif : la charge n'est pas répartie, elle porte toujours au même endroit.</p>
+<p><em>Action :</em> remplacer le roulement, évidemment — mais surtout chercher pourquoi la charge se concentre là. Candidats : balourd (chapitre 14), défaut d'alignement, charge radiale excessive due à une courroie trop tendue, ou logement déformé. <span class="cle">Un écaillage localisé qu'on se contente de remplacer revient toujours.</span></p>
+<p><strong>c) Matière arrachée par plaques, dépôts brillants → usure ADHÉSIVE, c'est-à-dire un grippage.</strong> Les aspérités se sont soudées puis déchirées, transférant du métal d'une pièce sur l'autre.</p>
+<p><em>Action :</em> le grippage signifie qu'il n'y avait <strong>plus de film lubrifiant</strong> à cet endroit. Vérifiez dans l'ordre : le niveau et l'arrivée d'huile, l'obstruction éventuelle d'un canal de graissage, la viscosité de l'huile utilisée (trop fluide, ou dégradée par la chaleur), la charge réelle, et le jeu de montage — un jeu insuffisant empêche le film de se former (chapitre 12).</p>
+<p><em>Notez que dans les trois cas, la pièce abîmée n'est que le témoin. Le vrai travail est de remonter à ce qui l'a abîmée.</em></p>
+</div></details></div>
+
+<div class="exo"><span class="tag">Exercice 11.2</span>
+<p>Le plan d'une portée de joint à lèvre spécifie <span class="mono">Ra 0,4</span>. Après réparation, l'arbre a été repris à la toile émeri et présente un bel aspect poli. Est-ce conforme ? Justifiez.</p>
+<details><summary>Voir la réponse</summary><div class="rep">
+<p><strong>Non, ce n'est pas conforme — et le piège est que la surface a l'air parfaite.</strong></p>
+<p><strong>Deux raisons, indépendantes l'une de l'autre.</strong></p>
+<p><strong>1. La valeur du Ra n'est pas garantie.</strong> Un polissage à la toile peut descendre bien en dessous de 0,4 µm. Or une portée de joint à lèvre <strong>trop lisse</strong> est aussi mauvaise que trop rugueuse : la lèvre a besoin d'une micro-rugosité pour retenir le film d'huile qui la lubrifie. Sur une surface miroir, la lèvre travaille à sec, chauffe, durcit, et le joint fuit en quelques semaines.</p>
+<p><strong>2. Et surtout : la DIRECTION des stries est fausse.</strong> C'est le point décisif, et celui que presque personne ne connaît. Une portée de joint à lèvre doit être obtenue par <strong>rectification en plongée</strong>, qui laisse des stries strictement <em>circonférentielles</em>, sans aucune hélice.</p>
+<p>Une reprise à la toile émeri, faite en tournant l'arbre à la main ou au tour, laisse inévitablement des stries <strong>hélicoïdales</strong>. Or une strie hélicoïdale sous une lèvre de joint se comporte exactement comme une <strong>vis d'Archimède</strong> : elle pompe l'huile et la fait sortir. Le joint est neuf, la lèvre est parfaite, et il fuit quand même — parce que l'arbre lui-même fait office de pompe.</p>
+<p><strong>Ce qu'il faut faire.</strong></p>
+<ul>
+<li>Faire <strong>rectifier</strong> la portée en plongée, au Ra spécifié.</li>
+<li>Ou monter une <strong>bague de réparation</strong> (type Speedi-Sleeve) : une chemise mince emmanchée sur la portée usée, dont la surface extérieure est déjà à l'état requis. C'est la solution de terrain, rapide et fiable.</li>
+<li>Ou, si la portée est simplement marquée par l'ancien joint, <strong>décaler le joint neuf</strong> de quelques millimètres avec une entretoise, pour qu'il travaille sur une zone vierge.</li>
+</ul>
+<p><em>Cet exercice est l'un des plus utiles du dossier : la réparation « de bon sens » — un coup de toile pour faire propre — est exactement celle qui provoque la fuite. Le bon sens ne suffit pas contre une vis d'Archimède de trois microns de haut.</em></p>
+</div></details></div>
+
+<div class="horsref"><span class="tag">Pour aller plus loin — hors référentiel</span>
+<h4>Ce que le Ra ne dit pas</h4>
+<p>Le Ra est une moyenne, et comme toute moyenne, il gomme l'essentiel. Deux surfaces de même Ra peuvent se comporter de façon opposée.</p>
+<ul>
+<li><strong>Une surface avec de nombreux petits creux</strong> — c'est un excellent réservoir de lubrifiant.</li>
+<li><strong>Une surface avec quelques pics agressifs</strong> — même Ra, mais ces pics vont labourer la pièce en face.</li>
+</ul>
+<p>D'autres paramètres, mesurés par le même rugosimètre, décrivent cette différence : <strong>Rz</strong> (hauteur moyenne des plus grandes irrégularités, environ 4 à 6 fois le Ra sur une surface usinée normale), <strong>Rt</strong> (l'écart total entre le pic le plus haut et le creux le plus profond), et surtout la <strong>courbe d'Abbott</strong>, qui décrit comment la surface portante évolue à mesure qu'on rabote les sommets.</p>
+<p>L'application industrielle la plus connue est la <strong>chemise de moteur thermique</strong>, dont le rodage croisé produit volontairement une surface à deux niveaux : des plateaux lisses qui portent le segment, et des rainures profondes qui retiennent l'huile. Le Ra seul est incapable de décrire cette structure, et c'est bien pour cela que les motoristes spécifient la courbe d'Abbott.</p>
+<p>Le référentiel MSPC s'en tient au Ra, qui suffit à tout ce que vous aurez à contrôler. Mais si vous voyez un jour <span class="mono">Rz</span> ou <span class="mono">Rk</span> sur un plan, vous saurez que le concepteur avait une raison précise de ne pas se contenter du Ra.</p></div>
+
+</div>
+</section>
+
 <section class="ch" id="suite">
   <div class="ch-head"><div class="ch-num">…</div><div class="ch-title">
-    <span class="kicker">Rédaction en cours</span><h2>Les chapitres 10 à 18</h2></div></div>
+    <span class="kicker">Rédaction en cours</span><h2>Les chapitres 12 à 18</h2></div></div>
   <div class="ch-body">
 <p class="lede">Cette tranche couvre l'approche système, les actions mécaniques et la chaîne d'énergie. La suite est en cours d'écriture, dans le même format et avec le même calage sur le référentiel.</p>
 <ul>
-<li><strong>10 · Ajustements, jeux et tolérances</strong> — S1.2.1, niveau 3</li>
-<li><strong>11 · États de surface et usure</strong> — S1.2.1, niveau 3</li>
 <li><strong>12 · La lubrification</strong> — S1.2.1, niveau 3, désignation normalisée et viscosité</li>
 <li><strong>13 · L'étanchéité</strong> — S1.2.1, statique et dynamique</li>
 <li><strong>14 · Le guidage en rotation</strong> — paliers, roulements, montages, balourd</li>
@@ -1227,7 +1532,7 @@
 </section>
 
 <footer class="fin">
-  <p><strong>Transmettre, guider, tenir</strong> — dossier de mécanique pour le Baccalauréat Professionnel MSPC. Chaque chapitre est calé sur le référentiel officiel du diplôme : savoir associé visé et niveau taxonomique indiqués sous le titre. <em>Dossier en cours de rédaction : 9 chapitres sur 18 sont publiés.</em></p>
+  <p><strong>Transmettre, guider, tenir</strong> — dossier de mécanique pour le Baccalauréat Professionnel MSPC. Chaque chapitre est calé sur le référentiel officiel du diplôme : savoir associé visé et niveau taxonomique indiqués sous le titre. <em>Dossier en cours de rédaction : 11 chapitres sur 18 sont publiés.</em></p>
   <p>Le référentiel retenu est celui du <strong>baccalauréat professionnel Maintenance des Systèmes de Production Connectés</strong>, mise à jour du 3 décembre 2019, savoirs <strong>S1 — L'approche système</strong> et <strong>S2 — La chaîne d'énergie</strong>. Les valeurs numériques, coefficients et ordres de grandeur cités le sont à titre pédagogique : sur une intervention réelle, la documentation constructeur et les référentiels internes de l'entreprise font toujours foi.</p>
   <p><a href="index.html">← Retour au portail Atelier MSPC</a></p>
 </footer>
@@ -2556,6 +2861,316 @@
 
     out.innerHTML='Sortie : <b style="color:#c8d834">'+Cs.toFixed(0)+' N·m</b> à <b>'+(ws*60/6.2832).toFixed(0)+' tr/min</b><br>'
       +'couple multiplié par <b>'+(Cs/Cm).toFixed(1).replace('.',',')+'</b>';
+  }, {fixed:true});
+})();
+</script>
+<script>
+/* ======================= CH 10 · zones de tolérance et ajustements ======================= */
+(function(){
+  "use strict";
+  /* Valeurs ISO 286, pour les six tranches de diamètre courantes en maintenance.
+     Tranches : 6-10 · 10-18 · 18-30 · 30-50 · 50-80 · 80-120 mm */
+  var NOM =[8,12,25,50,65,100];
+  var IT  ={6:[9,11,13,16,19,22], 7:[15,18,21,25,30,35], 8:[22,27,33,39,46,54]};
+  var ARB =[
+    {n:'e8', q:8, sup:true,  d:[-25,-32,-40,-50,-60,-72]},
+    {n:'f7', q:7, sup:true,  d:[-13,-16,-20,-25,-30,-36]},
+    {n:'g6', q:6, sup:true,  d:[ -5, -6, -7, -9,-10,-12]},
+    {n:'h6', q:6, sup:true,  d:[  0,  0,  0,  0,  0,  0]},
+    {n:'k6', q:6, sup:false, d:[  1,  1,  2,  2,  2,  3]},
+    {n:'m6', q:6, sup:false, d:[  6,  7,  8,  9, 11, 13]},
+    {n:'p6', q:6, sup:false, d:[ 15, 18, 22, 26, 32, 37]},
+    {n:'s6', q:6, sup:false, d:[ 23, 28, 35, 43, 53, 71]}
+  ];
+  var EMPLOI={
+    'e8':'Palier lisse très chargé, arbre long',
+    'f7':'Coussinet, palier lisse lubrifié',
+    'g6':'Guidage précis, pièce qui coulisse',
+    'h6':'Montage à la main, centrage',
+    'k6':'Bague de roulement sur arbre',
+    'm6':'Moyeu, pignon, montage au maillet',
+    'p6':'Bague, canon, montage à la presse',
+    's6':'Frettage, liaison sans clavette'
+  };
+
+  var D=MSPC.ctrl('a-ajust-d', function(v){ return 'Ø '+NOM[v]; }, 'a-ajust-d-l');
+  var A=MSPC.ctrl('a-ajust-a', function(v){ return ARB[v].n; }, 'a-ajust-a-l');
+  var Q=MSPC.ctrl('a-ajust-q', function(v){ return 'H'+v; }, 'a-ajust-q-l');
+  var out=document.getElementById('a-ajust-out');
+
+  function zone(ctx,x,w,y1,y2,col,al){
+    ctx.fillStyle=col; ctx.globalAlpha=al;
+    ctx.fillRect(x, Math.min(y1,y2), w, Math.abs(y2-y1));
+    ctx.globalAlpha=1;
+    ctx.strokeStyle=col; ctx.lineWidth=2;
+    ctx.strokeRect(x+.5, Math.min(y1,y2)+.5, w, Math.abs(y2-y1));
+  }
+
+  MSPC.anim('a-ajust', function(a){
+    var ctx=a.ctx, W=a.W, H=a.H;
+    var ir=D.val, arb=ARB[A.val], q=Q.val;
+
+    var itA=IT[q][ir];                       // alésage H
+    var ES=itA, EI=0;
+    var itB=IT[arb.q][ir];
+    var es,ei;
+    if(arb.sup){ es=arb.d[ir]; ei=es-itB; } else { ei=arb.d[ir]; es=ei+itB; }
+
+    var jMax=ES-ei, jMin=EI-es;
+    var famille = jMin>0 ? 'AVEC JEU' : (jMax<0 ? 'AVEC SERRAGE' : 'INCERTAIN');
+    var couleur = jMin>0 ? '#c8d834' : (jMax<0 ? '#ff6a5e' : '#f0a844');
+
+    MSPC.fond(ctx,W,H,0);
+    MSPC.mono(ctx,'Ø'+NOM[ir]+' H'+q+' / '+arb.n+'  —  LES DEUX ZONES DE TOLÉRANCE, AGRANDIES',26,30,11.5,'#8d968b');
+
+    /* ---------- le diagramme ---------- */
+    var mid=228, maxAbs=Math.max(Math.abs(ei),Math.abs(es),ES,20);
+    var ech=Math.min(2.6, 116/maxAbs);
+    var Y=function(v){ return mid - v*ech; };
+
+    // la graduation en microns
+    var pas = maxAbs>90?50:(maxAbs>45?25:10);
+    for(var g=-Math.ceil(maxAbs/pas)*pas; g<=Math.ceil(maxAbs/pas)*pas; g+=pas){
+      if(Math.abs(Y(g)-mid)>124) continue;
+      ctx.strokeStyle=g===0?'rgba(255,255,255,.40)':'rgba(255,255,255,.10)';
+      ctx.lineWidth=g===0?1.6:1;
+      ctx.beginPath(); ctx.moveTo(64,Y(g)); ctx.lineTo(600,Y(g)); ctx.stroke();
+      MSPC.mono(ctx,(g>0?'+':'')+g,58,Y(g)+4,9.5,g===0?'#cfe2ee':'#6f786e','right');
+    }
+    MSPC.mono(ctx,'µm',58,Y(0)-Math.ceil(maxAbs/pas)*pas*ech-14,9.5,'#6f786e','right');
+    MSPC.mono(ctx,'la ligne zéro est la cote nominale : Ø'+NOM[ir]+',000 mm',64,74,10.5,'#cfe2ee');
+    MSPC.mono(ctx,'tout se joue de part et d’autre, en micromètres',64,90,10,'#6f786e');
+
+    zone(ctx,120,190,Y(EI),Y(ES),'#79a6c4',0.30);
+    MSPC.mono(ctx,'ALÉSAGE  H'+q,215,348,11,'#79a6c4','center');
+    MSPC.mono(ctx,'+'+ES+' / '+EI+' µm',215,364,10.5,'#8d968b','center');
+    MSPC.mono(ctx,'IT = '+itA+' µm',215,380,10,'#6f786e','center');
+    MSPC.mono(ctx,(NOM[ir]+ES/1000).toFixed(3).replace('.',','),120,Y(ES)-8,9.5,'#79a6c4');
+    MSPC.mono(ctx,(NOM[ir]+EI/1000).toFixed(3).replace('.',','),120,Y(EI)+14,9.5,'#79a6c4');
+
+    zone(ctx,350,190,Y(ei),Y(es),'#f0a844',0.30);
+    MSPC.mono(ctx,'ARBRE  '+arb.n,445,348,11,'#f0a844','center');
+    MSPC.mono(ctx,(es>0?'+':'')+es+' / '+(ei>0?'+':'')+ei+' µm',445,364,10.5,'#8d968b','center');
+    MSPC.mono(ctx,'IT = '+itB+' µm',445,380,10,'#6f786e','center');
+    MSPC.mono(ctx,(NOM[ir]+es/1000).toFixed(3).replace('.',','),350,Y(es)-8,9.5,'#f0a844');
+    MSPC.mono(ctx,(NOM[ir]+ei/1000).toFixed(3).replace('.',','),350,Y(ei)+14,9.5,'#f0a844');
+
+    // le recouvrement éventuel des deux zones
+    var ov1=Math.max(EI,ei), ov2=Math.min(ES,es);
+    if(ov2>ov1){
+      ctx.fillStyle='rgba(240,168,68,.18)';
+      ctx.fillRect(310,Y(ov2),40,Y(ov1)-Y(ov2));
+      ctx.strokeStyle='#f0a844'; ctx.lineWidth=1.4; ctx.setLineDash([3,3]);
+      ctx.strokeRect(310.5,Y(ov2)+.5,40,Y(ov1)-Y(ov2)); ctx.setLineDash([]);
+      MSPC.mono(ctx,'les zones',330,348,9.5,'#f0a844','center');
+      MSPC.mono(ctx,'se croisent',330,362,9.5,'#f0a844','center');
+    }
+
+    /* ---------- panneau de droite ---------- */
+    var px=636, pw=W-px-26;
+    ctx.fillStyle='rgba(255,255,255,.04)'; ctx.fillRect(px,58,pw,300);
+    ctx.strokeStyle=couleur; ctx.lineWidth=1.8; ctx.strokeRect(px+.5,58.5,pw,300);
+    MSPC.mono(ctx,'AJUSTEMENT',px+16,82,10,'#8d968b');
+    MSPC.titre(ctx,famille,px+16,112,25,couleur);
+
+    if(jMin>0){
+      MSPC.mono(ctx,'JEU MINIMAL',px+16,144,10,'#8d968b');
+      MSPC.titre(ctx,jMin+' µm',px+16,170,26,'#c8d834');
+      MSPC.mono(ctx,'JEU MAXIMAL',px+16,198,10,'#8d968b');
+      MSPC.titre(ctx,jMax+' µm',px+16,224,26,'#c8d834');
+      MSPC.mono(ctx,'Ça rentre toujours, quelles que',px+16,252,10,'#8d968b');
+      MSPC.mono(ctx,'soient les pièces prises au hasard.',px+16,266,10,'#8d968b');
+      MSPC.mono(ctx,'Montage à la main.',px+16,284,10.5,'#c8d834');
+    } else if(jMax<0){
+      MSPC.mono(ctx,'SERRAGE MINIMAL',px+16,144,10,'#8d968b');
+      MSPC.titre(ctx,(-jMax)+' µm',px+16,170,26,'#ff6a5e');
+      MSPC.mono(ctx,'SERRAGE MAXIMAL',px+16,198,10,'#8d968b');
+      MSPC.titre(ctx,(-jMin)+' µm',px+16,224,26,'#ff6a5e');
+      MSPC.mono(ctx,'Il faut forcer dans tous les cas.',px+16,252,10,'#8d968b');
+      MSPC.mono(ctx,'Presse, ou chauffage de la pièce',px+16,266,10,'#8d968b');
+      MSPC.mono(ctx,'femelle. Jamais au marteau.',px+16,284,10.5,'#ff6a5e');
+    } else {
+      MSPC.mono(ctx,'AU PIRE, UN JEU DE',px+16,144,10,'#8d968b');
+      MSPC.titre(ctx,jMax+' µm',px+16,170,26,'#f0a844');
+      MSPC.mono(ctx,'AU PIRE, UN SERRAGE DE',px+16,198,10,'#8d968b');
+      MSPC.titre(ctx,(-jMin)+' µm',px+16,224,26,'#f0a844');
+      MSPC.mono(ctx,'On ne sait pas avant de mesurer :',px+16,252,10,'#8d968b');
+      MSPC.mono(ctx,'selon les pièces réelles, ce sera',px+16,266,10,'#8d968b');
+      MSPC.mono(ctx,'du jeu OU du serrage.',px+16,284,10.5,'#f0a844');
+    }
+    MSPC.mono(ctx,'EMPLOI TYPIQUE',px+16,312,10,'#8d968b');
+    var em=EMPLOI[arb.n], m1=em, m2='';
+    if(em.length>28){
+      var mots=em.split(' '); m1=''; m2='';
+      for(var w=0;w<mots.length;w++){ if((m1+' '+mots[w]).length<=28 && !m2) m1=(m1?m1+' ':'')+mots[w]; else m2=(m2?m2+' ':'')+mots[w]; }
+    }
+    MSPC.mono(ctx,m1,px+16,328,10,'#cfe2ee');
+    if(m2) MSPC.mono(ctx,m2,px+16,344,10,'#cfe2ee');
+
+    /* ---------- bandeau du bas ---------- */
+    MSPC.mono(ctx,'J max − J min = IT alésage + IT arbre  →  '+jMax+' − ('+jMin+') = '+itA+' + '+itB+' = '+(itA+itB)+' µm',
+      26, 410, 10.5, '#6f786e');
+    MSPC.mono(ctx,'contrôle imparable de vos calculs : si l’égalité ne tombe pas, il y a une erreur de signe',26,428,10,'#6f786e');
+
+    out.innerHTML='<b style="color:'+couleur+'">'+famille+'</b><br>'
+      + (jMin>0 ? 'jeu de '+jMin+' à '+jMax+' µm'
+                : (jMax<0 ? 'serrage de '+(-jMax)+' à '+(-jMin)+' µm'
+                          : 'de '+jMax+' µm de jeu à '+(-jMin)+' µm de serrage'));
+  }, {fixed:true});
+})();
+
+/* ======================= CH 11 · rugosité, rodage et usure ======================= */
+(function(){
+  "use strict";
+  var PROC=[
+    {n:'brut de fonderie', ra:28},
+    {n:'tourné ébauche',   ra:8},
+    {n:'tourné finition',  ra:2.4},
+    {n:'rectifié',         ra:0.6},
+    {n:'rodé',             ra:0.2}
+  ];
+  var P=MSPC.ctrl('a-usure-p', function(v){ return PROC[v].n; }, 'a-usure-p-l');
+  var S=MSPC.ctrl('a-usure-s', function(v){ return v<25?'douce':(v<60?'normale':(v<85?'sévère':'critique')); }, 'a-usure-s-l');
+  var out=document.getElementById('a-usure-out');
+  var btn=document.getElementById('a-usure-go');
+
+  var N=180, prof=[], Lc=0, use=0, hist=[], t=0, sig=-1, span0=1;
+
+  function bati(){
+    var ra=PROC[P.val].ra;
+    prof=[];
+    for(var i=0;i<N;i++){
+      var v=0;
+      v += Math.sin(i*0.31+1.1)*1.0;
+      v += Math.sin(i*0.77+2.7)*0.62;
+      v += Math.sin(i*1.63+0.4)*0.38;
+      v += Math.sin(i*3.10+5.2)*0.22;
+      v += (Math.random()-0.5)*0.5;
+      prof.push(v*ra);
+    }
+    Lc=Math.max.apply(null,prof);
+    span0=Math.max(0.001, Lc-Math.min.apply(null,prof));
+    use=0; hist=[]; t=0;
+  }
+  bati();
+  if(btn) btn.addEventListener('click', bati);
+
+  MSPC.anim('a-usure', function(a){
+    var ctx=a.ctx, W=a.W, H=a.H, dt=Math.min(a.dt,0.05);
+    if(sig!==P.val){ sig=P.val; bati(); }
+    var sev=S.val/100;
+
+    /* ---------- l'usure ----------
+       Deux termes, et ils n'ont pas la même nature :
+       • le rodage s'auto-limite — plus la surface portante grandit, plus la
+         pression baisse, plus l'usure ralentit ;
+       • l'abrasion par les débris, elle, ne s'auto-limite pas : au-delà d'une
+         certaine sévérité, elle prend le dessus et la courbe ne se stabilise
+         plus jamais. */
+    var nc=0;
+    for(var i=0;i<N;i++) if(prof[i]>=Lc-0.001) nc++;
+    var portance=Math.max(0.01, nc/N);
+    var vRodage = 0.55*sev/portance;
+    var vAbrasif = 46*Math.pow(Math.max(0,sev-0.55),2.1);
+    var v = vRodage + vAbrasif;
+
+    if(t<26){
+      Lc -= v*dt*PROC[P.val].ra*0.06;
+      for(var j=0;j<N;j++) if(prof[j]>Lc) prof[j]=Lc;
+      use += v*dt*PROC[P.val].ra*0.06;
+      t += dt;
+      if(hist.length===0 || t-hist[hist.length-1][0]>0.09) hist.push([t,use]);
+    }
+
+    // Ra courant
+    var moy=0; for(var k=0;k<N;k++) moy+=prof[k]; moy/=N;
+    var ra=0; for(var k2=0;k2<N;k2++) ra+=Math.abs(prof[k2]-moy); ra/=N;
+
+    MSPC.fond(ctx,W,H,0);
+    MSPC.mono(ctx,'LE PROFIL RÉEL DE LA SURFACE — AGRANDI ENVIRON MILLE FOIS EN HAUTEUR',26,30,11.5,'#8d968b');
+
+    /* ---------- le profil ---------- */
+    /* L'échelle verticale est figée sur le profil de DÉPART : c'est ce qui
+       permet de voir les sommets s'écraser au lieu de re-zoomer sans cesse. */
+    var gx=26, gw=W-52, yBas=222, vy=102/span0;
+    var pmin=Math.min.apply(null,prof);
+    var base=yBas+pmin*vy;
+
+    // la contre-pièce
+    ctx.fillStyle='rgba(121,166,196,.16)';
+    ctx.fillRect(gx, 54, gw, Math.max(6, base-Lc*vy-54));
+    ctx.strokeStyle='#79a6c4'; ctx.lineWidth=2;
+    ctx.beginPath(); ctx.moveTo(gx,base-Lc*vy); ctx.lineTo(gx+gw,base-Lc*vy); ctx.stroke();
+    ctx.strokeStyle='rgba(121,166,196,.45)'; ctx.lineWidth=1;
+    for(var hx=gx;hx<gx+gw;hx+=12){ ctx.beginPath(); ctx.moveTo(hx,58); ctx.lineTo(hx-8,68); ctx.stroke(); }
+    MSPC.mono(ctx,'la pièce en face — elle descend à mesure que les sommets s’écrasent',gx+8,80,10,'#79a6c4');
+
+    // le profil de la pièce
+    ctx.fillStyle='rgba(240,168,68,.22)';
+    ctx.beginPath(); ctx.moveTo(gx,258);
+    for(var p2=0;p2<N;p2++) ctx.lineTo(gx+p2*(gw/(N-1)), base-prof[p2]*vy);
+    ctx.lineTo(gx+gw,258); ctx.closePath(); ctx.fill();
+    ctx.strokeStyle='#f0a844'; ctx.lineWidth=1.8;
+    ctx.beginPath();
+    for(var p3=0;p3<N;p3++){
+      var xx=gx+p3*(gw/(N-1)), yy=base-prof[p3]*vy;
+      if(p3===0) ctx.moveTo(xx,yy); else ctx.lineTo(xx,yy);
+    }
+    ctx.stroke();
+
+    // la ligne moyenne et le Ra
+    ctx.strokeStyle='rgba(255,255,255,.45)'; ctx.lineWidth=1.2; ctx.setLineDash([6,4]);
+    ctx.beginPath(); ctx.moveTo(gx,base-moy*vy); ctx.lineTo(gx+gw,base-moy*vy); ctx.stroke(); ctx.setLineDash([]);
+    ctx.fillStyle='#11160f'; ctx.fillRect(gx+gw-92,base-moy*vy-18,86,15);
+    MSPC.mono(ctx,'ligne moyenne',gx+gw-8,base-moy*vy-7,9.5,'#8d968b','right');
+
+    // les points réellement en contact
+    ctx.fillStyle='#ff6a5e';
+    for(var c=0;c<N;c++) if(prof[c]>=Lc-0.001){
+      ctx.fillRect(gx+c*(gw/(N-1))-1.5, base-Lc*vy-3, 3, 6);
+    }
+    MSPC.mono(ctx,'en rouge : les seuls points qui se touchent réellement — '+(portance*100).toFixed(1).replace('.',',')+' % de la surface',
+      gx+8, 274, 10.5, '#ff6a5e');
+
+    /* ---------- la courbe d'usure ---------- */
+    var c={x:26,y:300,w:512,h:96};
+    ctx.strokeStyle='rgba(255,255,255,.20)'; ctx.lineWidth=1.3;
+    ctx.beginPath(); ctx.moveTo(c.x,c.y); ctx.lineTo(c.x,c.y+c.h); ctx.lineTo(c.x+c.w,c.y+c.h); ctx.stroke();
+    MSPC.mono(ctx,'USURE CUMULÉE',c.x,c.y-10,10.5,'#8d968b');
+    MSPC.mono(ctx,'temps',c.x+c.w,c.y+c.h+18,9.5,'#7f8a7e','right');
+    var umax=Math.max(0.001, use*1.15);
+    ctx.strokeStyle='#c8d834'; ctx.lineWidth=2.4; ctx.beginPath();
+    for(var q2=0;q2<hist.length;q2++){
+      var xx2=c.x+hist[q2][0]/26*c.w, yy2=c.y+c.h-hist[q2][1]/umax*c.h;
+      if(q2===0) ctx.moveTo(xx2,yy2); else ctx.lineTo(xx2,yy2);
+    }
+    ctx.stroke();
+    // la zone de rodage
+    ctx.fillStyle='rgba(121,166,196,.10)';
+    ctx.fillRect(c.x,c.y,c.w*0.16,c.h);
+    MSPC.mono(ctx,'rodage',c.x+6,c.y+14,9.5,'#79a6c4');
+    if(vAbrasif>0.05) MSPC.mono(ctx,'la courbe ne se stabilise plus',c.x+c.w*0.30,c.y+18,10,'#ff6a5e');
+    else MSPC.mono(ctx,'la pente s’écrase : le contact s’est établi',c.x+c.w*0.22,c.y+18,10,'#7f8a7e');
+
+    /* ---------- panneau de droite ---------- */
+    var px=560, pw=W-px-26;
+    ctx.fillStyle='rgba(255,255,255,.04)'; ctx.fillRect(px,268,pw,144);
+    ctx.strokeStyle='rgba(255,255,255,.20)'; ctx.lineWidth=1.4; ctx.strokeRect(px+.5,268.5,pw,144);
+    MSPC.mono(ctx,'Ra DE DÉPART',px+16,292,10,'#8d968b');
+    MSPC.titre(ctx,PROC[P.val].ra.toFixed(2).replace('.',',')+' µm',px+16,320,25,'#8d968b');
+    MSPC.mono(ctx,'Ra APRÈS RODAGE',px+150,292,10,'#8d968b');
+    MSPC.titre(ctx,ra.toFixed(2).replace('.',',')+' µm',px+150,320,25,'#f0a844');
+    MSPC.mono(ctx,'SURFACE PORTANTE',px+16,352,10,'#8d968b');
+    MSPC.titre(ctx,(portance*100).toFixed(1).replace('.',',')+' %',px+16,378,25,portance>0.25?'#c8d834':'#ff6a5e');
+    MSPC.mono(ctx, vAbrasif>0.05 ? 'RÉGIME ABRASIF' : 'RÉGIME STABLE',
+      px+150, 360, 12, vAbrasif>0.05?'#ff6a5e':'#c8d834');
+    MSPC.mono(ctx, vAbrasif>0.05 ? 'les aspérités ne se rodent' : 'les sommets se sont écrasés,',
+      px+150, 378, 9.5, '#8d968b');
+    MSPC.mono(ctx, vAbrasif>0.05 ? 'plus, elles s’arrachent' : 'la pression a chuté',
+      px+150, 392, 9.5, '#8d968b');
+
+    out.innerHTML='Ra <b>'+ra.toFixed(2).replace('.',',')+' µm</b> · portance <b>'+(portance*100).toFixed(1).replace('.',',')+' %</b><br>'
+      + (vAbrasif>0.05 ? '<b style="color:#ff6a5e">régime abrasif : ça ne se stabilisera pas</b>' : 'régime stable après rodage');
   }, {fixed:true});
 })();
 </script>
