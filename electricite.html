@@ -48,10 +48,10 @@
 </header>
 
 <div class="meta-bar">
-  <div><b>17</b> chapitres</div>
-  <div><b>20</b> animations pilotables</div>
+  <div><b>18</b> chapitres</div>
+  <div><b>22</b> animations pilotables</div>
   <div><b>15</b> fiches TP d'atelier</div>
-  <div><b>50+</b> exercices corrigés</div>
+  <div><b>53</b> exercices corrigés</div>
   <div>Manips en <b>TBTS ≤ 24 V</b> sauf mention</div>
 </div>
 
@@ -78,6 +78,7 @@
     <a class="borne" href="#c15"><span class="num">15</span><span class="lbl">Pourquoi la haute tension</span></a>
     <a class="borne" href="#c16"><span class="num">16</span><span class="lbl">Court-circuit et surcharge</span></a>
     <a class="borne" href="#c17"><span class="num">17</span><span class="lbl">Le disjoncteur magnéto-thermique</span></a>
+    <a class="borne" href="#c18"><span class="num">18</span><span class="lbl">Le risque électrique</span></a>
     <a class="borne" href="#tps" style="border-top-color:var(--accent)"><span class="num">TP</span><span class="lbl">Les 15 fiches d'atelier</span></a>
   </div></nav>
 
@@ -4148,6 +4149,526 @@
 
   </div>
 </section>
+
+
+<!-- ================= CH 18 ================= -->
+<section class="ch" id="c18">
+  <div class="ch-head"><div class="ch-num">18</div><div class="ch-title">
+    <span class="kicker">Ce que 230 volts font à un corps</span><h2>Le risque électrique</h2></div></div>
+  <div class="ch-body">
+
+<div class="savoirs">
+  <span class="savoir n3"><b>S6.2.2</b> <i>La maîtrise des risques</i></span>
+  <span class="savoir n3"><b>S6.2.3</b> <i>Interventions sur les circuits électriques</i></span>
+</div>
+
+<p class="lede">Tous les chapitres précédents expliquaient comment l'électricité fait tourner des machines. Celui-ci explique comment elle arrête des cœurs. C'est le seul chapitre du dossier dont l'enjeu dépasse l'examen — et le seul dont une phrase mal comprise peut tuer quelqu'un que vous connaissez.</p>
+
+<h3>18.1 — Ce n'est pas la tension qui tue</h3>
+<p>La phrase circule dans tous les ateliers et elle est vraie, à condition de la finir. <span class="cle">Ce qui tue, c'est l'intensité qui traverse le corps, pendant une certaine durée, sur un certain trajet.</span> La tension n'intervient que parce qu'elle décide de cette intensité — et elle en décide avec la loi d'Ohm du chapitre 6, appliquée à un conducteur un peu particulier : vous.</p>
+
+<div class="formule">I<sub>corps</sub> = U<sub>contact</sub> / R<sub>corps</sub><small>La même loi qu'au chapitre 6 — le corps n'y échappe pas</small></div>
+
+<p>Un générateur de 100 000 V qui ne peut débiter qu'un microampère est inoffensif : c'est l'étincelle que vous prenez sur une poignée de porte. Une batterie de voiture de 12 V qui débite 600 A ne vous fera rien du tout à travers la peau — mais elle fondra une bague en or sur votre doigt en une seconde. <strong>Ce sont deux risques différents, et il faut les distinguer.</strong></p>
+
+<h3>18.2 — La résistance du corps n'est pas une constante</h3>
+<p>C'est le point que presque tout le monde ignore, et il change tout : <span class="cle">la résistance du corps s'effondre quand la tension monte et quand la peau est humide.</span></p>
+<p>La peau sèche est un isolant correct — quelques milliers d'ohms. Mais c'est une couche de quelques dixièmes de millimètre, et elle se comporte comme un diélectrique : au-delà de 150 à 200 V, elle claque littéralement. Il ne reste alors que la résistance interne du corps, autour de 500 à 750 Ω, sur laquelle vous n'avez aucune prise.</p>
+
+<table>
+<thead><tr><th>Situation</th><th>R sous 24 V</th><th>R sous 230 V</th><th>I sous 230 V</th></tr></thead>
+<tbody>
+<tr><td>Peau sèche, contact bref</td><td>≈ 4 500 Ω</td><td>≈ 1 500 Ω</td><td><strong>150 mA</strong></td></tr>
+<tr><td>Peau moite (transpiration, effort)</td><td>≈ 2 000 Ω</td><td>≈ 900 Ω</td><td><strong>255 mA</strong></td></tr>
+<tr><td>Mains mouillées, pieds au sol humide</td><td>≈ 1 000 Ω</td><td>≈ 500 Ω</td><td><strong>460 mA</strong></td></tr>
+</tbody></table>
+
+<p>Retenez la dernière ligne. Sous 230 V, mains mouillées, un corps humain laisse passer près d'un demi-ampère — <strong>quinze fois le seuil de fibrillation cardiaque</strong>. C'est la raison pour laquelle les locaux humides ont une tension limite abaissée à 25 V au lieu de 50 V.</p>
+
+<div class="rappel"><span class="tag">La tension limite conventionnelle U<sub>L</sub></span>
+<p>C'est la tension de contact qu'on accepte de laisser subsister indéfiniment sans danger. Elle dépend du milieu :</p>
+<ul>
+<li><strong>50 V</strong> en alternatif, local sec — au-delà, il faut couper.</li>
+<li><strong>25 V</strong> en alternatif, local humide.</li>
+<li><strong>12 V</strong> en alternatif, milieu immergé.</li>
+</ul>
+<p>C'est de là que viennent les baladeuses en 24 V et les éclairages de fosse en très basse tension. <span class="cle">Ce n'est pas une précaution excessive : c'est la seule tension à laquelle un corps mouillé reste sous le seuil dangereux.</span></p></div>
+
+<h3>18.3 — Les quatre zones de la CEI 60479</h3>
+<p>La norme internationale <strong>CEI 60479-1</strong> classe les effets du courant alternatif en quatre zones, selon l'intensité <em>et</em> la durée. Les seuils qui suivent sont ceux que vous devez connaître par cœur.</p>
+
+<table>
+<thead><tr><th>Intensité</th><th>Nom du seuil</th><th>Ce qui se passe</th></tr></thead>
+<tbody>
+<tr><td><strong>0,5 mA</strong></td><td>Perception</td><td>On sent un picotement. Aucun danger, mais le réflexe de sursaut peut provoquer une chute — c'est déjà un risque en hauteur.</td></tr>
+<tr><td><strong>10 mA</strong></td><td>Non-lâcher</td><td>Les muscles fléchisseurs se contractent plus fort que les extenseurs. <strong>La main se referme sur le conducteur et ne peut plus s'ouvrir.</strong> La victime ne peut pas se dégager seule.</td></tr>
+<tr><td><strong>30 mA</strong></td><td>Fibrillation ventriculaire</td><td>Au-delà de quelques centaines de millisecondes, le cœur peut se mettre à battre de façon anarchique. Il ne pompe plus. Sans défibrillateur, la mort survient en quelques minutes.</td></tr>
+<tr><td><strong>1 A et plus</strong></td><td>Arrêt cardiaque, brûlures</td><td>Le cœur se bloque en contraction. Brûlures internes profondes le long du trajet, souvent invisibles de l'extérieur.</td></tr>
+</tbody></table>
+
+<p><span class="cle">Le chiffre 30 mA n'est pas choisi au hasard : c'est le calibre du dispositif différentiel qui protège les personnes.</span> Toute la logique de la protection tient dans cette coïncidence, et l'animation ci-dessous la rend visible.</p>
+
+<figure class="anim">
+  <canvas id="a-corps" width="900" height="470" aria-label="Animation : courbe de sécurité CEI 60479, effet du courant selon l'intensité et la durée, et rôle du différentiel"></canvas>
+  <div class="ctrls">
+    <div class="c"><label>Tension de contact <span id="a-corps-u-l">230 V</span></label><input type="range" id="a-corps-u" min="12" max="400" value="230"></div>
+    <div class="c"><label>État de la peau <span id="a-corps-p-l">sèche</span></label><input type="range" id="a-corps-p" min="0" max="2" value="0"></div>
+    <div class="c"><label>Protection en place <span id="a-corps-d-l">disjoncteur 16 A</span></label><input type="range" id="a-corps-d" min="0" max="3" value="1"></div>
+    <div class="c readout" id="a-corps-out"></div>
+  </div>
+  <figcaption>La courbe de sécurité de la <b>CEI 60479-1</b>, en échelles logarithmiques : l'intensité en abscisse, la durée du contact en ordonnée. Le point rouge est votre situation. <b>Commencez avec le disjoncteur 16 A</b> et mouillez la peau : le point plonge dans la zone <b>AC-4</b>, celle de la fibrillation — et le disjoncteur ne bronche pas, parce que 460 mA sont mille fois trop peu pour le faire déclencher. <b>Passez au différentiel 30 mA</b> sans rien changer d'autre : le courant est identique, mais la durée tombe à 30 ms et le point remonte hors de la zone mortelle. <b>C'est toute la différence entre protéger une installation et protéger une personne.</b></figcaption>
+  <div class="autableau">
+    <b class="entete">Au tableau <i>· 10 minutes · animation 1 sur 2</i></b>
+    <ol>
+      <li>Laisser les réglages par défaut — 230 V, peau sèche, disjoncteur 16 A. Demander : <span class="q">« combien de milliampères me traversent ? »</span> Personne ne devine 150 mA. Faire lire le chiffre.</li>
+      <li>Passer la peau sur <b>mouillée</b>. <span class="q">« Qu'est-ce qui a changé ? Ma tension ? Mon disjoncteur ? »</span> Rien, sauf mes mains. Et le courant a triplé.</li>
+      <li>Montrer le point dans la zone AC-4 et demander : <span class="q">« pourquoi le disjoncteur ne coupe-t-il pas ? »</span> Réponse à faire trouver : il attend 16 <b>ampères</b>, il en voit 0,46. Il ne se passera rien.</li>
+      <li>Basculer sur <b>différentiel 30 mA</b>. Le courant ne bouge pas, la durée passe de 5 s à 30 ms, le point sort de la zone. <span class="q">« Qu'est-ce qui m'a sauvé ? »</span></li>
+    </ol>
+    <div class="piege">Le piège à faire tomber : presque tous les élèves croient que le disjoncteur du tableau les protège. Il protège les câbles contre l'incendie. Ce qui les protège, eux, c'est le différentiel — et lui seul.</div>
+  </div>
+</figure>
+
+<h3>18.4 — Le trajet compte autant que l'intensité</h3>
+<p>Le même courant ne fait pas les mêmes dégâts selon l'endroit par où il entre et par où il sort. Ce qui compte, c'est <strong>la fraction qui traverse le cœur</strong>. La norme la chiffre par un <em>facteur de courant de cœur</em> F.</p>
+
+<table>
+<thead><tr><th>Trajet</th><th>F</th><th>Lecture</th></tr></thead>
+<tbody>
+<tr><td>Main gauche → les deux pieds</td><td><strong>1,0</strong></td><td>Le trajet de référence, et le pire de tous les courants</td></tr>
+<tr><td>Les deux mains → les pieds</td><td><strong>1,0</strong></td><td>Aussi grave : c'est le cas de l'électricien qui tient un boîtier à deux mains</td></tr>
+<tr><td>Main droite → les pieds</td><td>0,8</td><td>Le cœur est légèrement hors du trajet direct</td></tr>
+<tr><td>Main gauche → main droite</td><td>0,4</td><td>Le courant traverse le thorax mais évite en partie le cœur</td></tr>
+<tr><td>Dos → main droite</td><td>0,3</td><td>Le trajet le moins défavorable</td></tr>
+<tr><td>Pied → pied</td><td>0,04</td><td>Presque rien ne remonte. Danger de chute, pas de fibrillation</td></tr>
+</tbody></table>
+
+<p>D'où une règle de terrain qui a l'air d'une superstition et qui est de la physique : <span class="cle">travaillez d'une seule main, l'autre dans le dos ou dans la poche.</span> Vous passez d'un F de 1,0 à un F de 0,04 si le courant doit ressortir par les pieds au lieu de passer par l'autre bras.</p>
+
+<figure class="anim">
+  <canvas id="a-trajet" width="900" height="440" aria-label="Animation : trajet du courant dans le corps et facteur de courant de cœur"></canvas>
+  <div class="ctrls">
+    <div class="c"><label>Trajet du courant <span id="a-trajet-t-l">main gauche → pieds</span></label><input type="range" id="a-trajet-t" min="0" max="5" value="0"></div>
+    <div class="c"><label>Courant total <span id="a-trajet-i-l">150 mA</span></label><input type="range" id="a-trajet-i" min="5" max="500" value="150"></div>
+    <div class="c readout" id="a-trajet-out"></div>
+  </div>
+  <figcaption>Le même courant, six trajets différents. Les filaments rouges montrent par où il passe ; <b>l'épaisseur du faisceau qui traverse le cœur</b> est proportionnelle au facteur F. <b>Comparez « main gauche → pieds » et « main gauche → main droite »</b> à courant identique : le cœur reçoit deux fois et demie moins dans le second cas. <b>Puis essayez « pied → pied »</b> : le cœur ne reçoit pratiquement rien — mais la victime tombe, et c'est la chute qui blesse. <b>Le courant équivalent</b> affiché en bas est celui qu'il faudrait reporter sur la courbe du paragraphe précédent.</figcaption>
+  <div class="autableau">
+    <b class="entete">Au tableau <i>· 6 minutes · animation 2 sur 2</i></b>
+    <ol>
+      <li>Régler 150 mA, trajet <b>main gauche → pieds</b>. Faire lire F = 1,0 : tout le courant compte.</li>
+      <li>Passer à <b>main gauche → main droite</b>. <span class="q">« Le courant a-t-il changé ? »</span> Non. <span class="q">« Le danger ? »</span> Divisé par 2,5.</li>
+      <li>Passer à <b>pied → pied</b>, F = 0,04. Demander : <span class="q">« alors ce trajet est sans danger ? »</span> — piège volontaire.</li>
+      <li>Conclure par le geste : une main dans le dos. Le faire faire à toute la classe, debout, devant une armoire imaginaire.</li>
+    </ol>
+    <div class="piege">Le piège : « pied → pied » n'est pas sans danger. Le cœur est épargné, mais la victime tombe — d'un escabeau, d'une nacelle, contre une machine en marche. La chute tue davantage d'électriciens que la fibrillation.</div>
+  </div>
+</figure>
+
+<h3>18.5 — Les trois autres risques, qu'on oublie</h3>
+<p>L'électrisation n'est que le premier des dangers électriques. Trois autres blessent au moins autant, et vous les rencontrerez plus souvent.</p>
+
+<div class="encadre danger"><span class="tag">L'arc électrique — le risque le plus sous-estimé</span>
+<p>Un court-circuit dans une armoire produit un arc dont le cœur atteint <strong>plus de 10 000 °C</strong> — deux fois la surface du Soleil. En quelques millisecondes :</p>
+<ul>
+<li>Le <strong>rayonnement</strong> provoque des brûlures au troisième degré sur la peau nue à un mètre, et une cécité temporaire ou définitive par éblouissement.</li>
+<li>Le <strong>métal vaporisé</strong> — cuivre, argent — est projeté en gouttelettes incandescentes qui traversent les vêtements ordinaires et se collent à la peau.</li>
+<li>L'<strong>onde de pression</strong> due à l'expansion brutale de l'air projette l'opérateur en arrière et fait exploser la porte d'armoire.</li>
+</ul>
+<p>Le déclencheur le plus fréquent est banal : un outil métallique qui tombe, un tournevis non isolé qui ripe, une clé posée sur un jeu de barres. <span class="cle">C'est pour cela qu'on ne pose jamais un outil dans une armoire sous tension, et qu'on utilise de l'outillage isolé 1000 V.</span></p></div>
+
+<ul>
+<li><strong>La brûlure par contact.</strong> Le courant qui traverse échauffe les tissus par effet Joule — le chapitre 7, appliqué à de la chair. Les brûlures électriques sont profondes, suivent le trajet interne, et sont bien plus graves que ce que laissent voir les deux points d'entrée et de sortie. <strong>Toute victime d'électrisation doit être vue par un médecin, même si elle va bien.</strong></li>
+<li><strong>La chute.</strong> Le réflexe de sursaut à 1 mA suffit à faire lâcher une échelle. C'est la cause de blessure la plus fréquente en électricité, très loin devant l'électrocution.</li>
+<li><strong>L'incendie.</strong> Un contact desserré chauffe, carbonise son support, et met le feu. C'est le chapitre 7 encore, et la raison d'être du serrage au couple des bornes.</li>
+</ul>
+
+<div class="encadre"><span class="tag">Devant une victime — l'ordre compte</span>
+<p>Trois gestes, dans cet ordre, et jamais dans un autre.</p>
+<ol>
+<li><strong>PROTÉGER.</strong> Couper l'alimentation. Si vous ne pouvez pas couper, <em>ne touchez pas la victime</em> : elle est sous tension, vous seriez le deuxième. Écartez-la avec un objet isolant sec — manche à balai, planche — jamais avec la main.</li>
+<li><strong>ALERTER.</strong> 18 (pompiers), 15 (SAMU) ou 112. Dites « accident électrique » : les secours n'apportent pas le même matériel.</li>
+<li><strong>SECOURIR.</strong> Si la victime ne respire pas : massage cardiaque immédiat, et défibrillateur dès qu'il arrive. La fibrillation ventriculaire ne se corrige que par un choc électrique.</li>
+</ol>
+<p><span class="cle">Le premier réflexe naturel — se précipiter et tirer la victime par le bras — a tué un nombre considérable de sauveteurs.</span> Le courant qui la tient vous tiendra aussi.</p></div>
+
+<div class="exo"><span class="tag">Exercice 18.1</span>
+<p>Un opérateur touche une carcasse métallique mise accidentellement sous 230 V. Il porte des chaussures de sécurité sèches et se tient sur un sol béton sec ; sa résistance totale, chaussures comprises, vaut 6 000 Ω. Calculez le courant. Que se passe-t-il ? Reprenez le calcul si le sol est mouillé et la résistance totale tombe à 1 200 Ω.</p>
+<details><summary>Voir la réponse</summary><div class="rep">
+<p><strong>Cas sec.</strong></p>
+<p class="mono">I = U / R = 230 / 6000 = 0,038 A = <strong>38 mA</strong></p>
+<p><strong>Ce qui se passe :</strong> on est au-dessus du seuil de non-lâcher (10 mA) et au-dessus du seuil de fibrillation (30 mA). L'opérateur <strong>ne peut plus lâcher</strong>, et si le contact dure plus de quelques centaines de millisecondes, la fibrillation devient possible. Ce n'est pas une situation confortable : c'est déjà une situation mortelle.</p>
+<p><strong>Cas mouillé.</strong></p>
+<p class="mono">I = 230 / 1200 = 0,192 A = <strong>192 mA</strong></p>
+<p><strong>Six fois le courant précédent</strong>, et plus de six fois le seuil de fibrillation. À cette intensité, la fibrillation survient en quelques dizaines de millisecondes.</p>
+<p><strong>Ce que l'exercice démontre.</strong> La tension n'a pas bougé, l'installation n'a pas bougé, le défaut n'a pas bougé. Seul le sol a changé. <span class="cle">C'est la raison pour laquelle un même défaut est bénin dans un bureau et mortel dans un atelier de lavage.</span></p>
+<p><em>Et dans les deux cas, un disjoncteur 16 A ou 32 A ne se déclenchera jamais : il faudrait cinquante à cent fois plus de courant. Seul un différentiel 30 mA coupe.</em></p>
+</div></details></div>
+
+<div class="exo"><span class="tag">Exercice 18.2</span>
+<p>Deux électriciens subissent le même courant de 120 mA. Le premier tient un boîtier des deux mains, pieds au sol. Le second travaille d'une seule main, l'autre dans le dos, et le courant ressort par les pieds. Comparez le danger réel.</p>
+<details><summary>Voir la réponse</summary><div class="rep">
+<p><strong>Premier électricien — deux mains vers les pieds.</strong> Facteur de courant de cœur F = <strong>1,0</strong>.</p>
+<p class="mono">I<sub>équivalent</sub> = 120 × 1,0 = <strong>120 mA</strong> vus par le cœur</p>
+<p>C'est quatre fois le seuil de fibrillation. Situation critique.</p>
+<p><strong>Second électricien — une main vers les pieds.</strong> Si c'est la main droite, F = <strong>0,8</strong> ; si c'est la gauche, F = 1,0.</p>
+<p class="mono">I<sub>équivalent</sub> = 120 × 0,8 = <strong>96 mA</strong> (main droite)</p>
+<p><strong>Le gain est réel mais modeste : 20 %.</strong> Et c'est la conclusion honnête de cet exercice — <span class="cle">la main dans le dos ne protège pas contre un courant qui ressort par les pieds.</span></p>
+<p><strong>Alors pourquoi cette règle ?</strong> Parce qu'elle protège contre un <em>autre</em> scénario, bien plus fréquent : celui où la seconde main touche accidentellement une masse métallique voisine — le châssis de l'armoire, un chemin de câbles, une machine. Dans ce cas le trajet devient main-main à travers le thorax, ou pire, la seconde main crée un chemin franc vers la terre à travers le corps.</p>
+<p><strong>La règle complète, telle qu'on doit l'enseigner :</strong></p>
+<ul>
+<li>Une seule main dans l'armoire — l'autre <em>ne touche rien</em>.</li>
+<li>Sol isolant : tapis, plancher sec, chaussures isolantes en bon état.</li>
+<li>Et surtout : <strong>l'armoire consignée</strong>, ce qui est le sujet du chapitre suivant. Aucun facteur de trajet ne remplace une absence de tension.</li>
+</ul>
+<p><em>Notez la leçon de méthode : une règle de sécurité qui « marche » n'est pas forcément efficace pour la raison qu'on croit. Comprendre pourquoi elle existe évite de l'appliquer de travers.</em></p>
+</div></details></div>
+
+<div class="exo"><span class="tag">Exercice 18.3</span>
+<p>Sur un chantier, un intervenant utilise une baladeuse 230 V dans une cuve métallique. Analysez le risque et proposez la solution réglementaire.</p>
+<details><summary>Voir la réponse</summary><div class="rep">
+<p><strong>Le risque, terme par terme.</strong></p>
+<ul>
+<li><strong>Milieu conducteur exigu</strong> : l'intervenant est entouré de métal relié à la terre. N'importe quel point de son corps peut servir de sortie au courant.</li>
+<li><strong>Humidité</strong> quasi certaine — condensation, résidus, transpiration en espace confiné. Résistance du corps autour de 500 à 1 000 Ω.</li>
+<li><strong>Tension limite applicable : 12 V</strong>, pas 50. On est en milieu immergé ou assimilé.</li>
+<li><strong>Impossibilité de se dégager</strong> : au-delà de 10 mA la main ne s'ouvre plus, et en cuve personne ne peut le tirer de là rapidement.</li>
+</ul>
+<p><strong>Le calcul.</strong> Sous 230 V avec R = 700 Ω :</p>
+<p class="mono">I = 230 / 700 = <strong>330 mA</strong> — dix fois le seuil de fibrillation</p>
+<p><strong>La solution réglementaire.</strong> On ne corrige pas ce risque par une précaution : on supprime la tension dangereuse.</p>
+<ol>
+<li><strong>Éclairage en très basse tension de sécurité (TBTS), 12 V</strong>, alimenté par un <strong>transformateur de sécurité</strong> à double isolement — celui du chapitre 14, dont les enroulements sont séparés. Le transformateur reste <strong>à l'extérieur</strong> de la cuve.</li>
+<li><strong>Outillage portatif</strong> : soit en TBTS, soit à air comprimé, soit sur batterie. Pas de 230 V dans la cuve.</li>
+<li><strong>Surveillance extérieure permanente</strong> : un second intervenant reste dehors, en contact visuel et vocal, capable de couper et d'alerter.</li>
+<li><strong>Permis de pénétrer</strong> et procédure d'espace confiné — le risque électrique n'est pas le seul : atmosphère, chute, noyade.</li>
+</ol>
+<p><em>Remarquez que la solution ne consiste jamais à « faire attention ». En milieu conducteur exigu, la réglementation ne fait pas confiance à la vigilance : elle abaisse la tension jusqu'à un niveau où l'erreur devient sans conséquence. C'est le principe de la prévention intrinsèque du savoir S6.2.2 — supprimer le danger plutôt que s'en protéger.</em></p>
+</div></details></div>
+
+<div class="horsref"><span class="tag">Pour aller plus loin — hors référentiel</span>
+<h4>Pourquoi 50 Hz est-il la pire fréquence possible ?</h4>
+<p>C'est une coïncidence malheureuse de l'histoire industrielle : la fréquence choisie pour le réseau se trouve être, à peu de chose près, celle qui présente le maximum de danger pour le cœur humain.</p>
+<p>Le muscle cardiaque possède une période pendant laquelle il est vulnérable à une stimulation extérieure — la phase de repolarisation, environ 200 ms par battement. À 50 Hz, le courant traverse 50 fois par seconde ; il est donc <em>certain</em> de tomber dans cette fenêtre à chaque cycle cardiaque. Il n'y a aucune chance d'y échapper.</p>
+<p>Aux fréquences plus élevées, le danger diminue nettement : à partir de quelques kilohertz, les cellules nerveuses et musculaires ne suivent plus, et le courant produit surtout de la chaleur — c'est le principe du bistouri électrique, qui travaille vers 500 kHz et coupe la chair sans provoquer la moindre contraction.</p>
+<p>Le <strong>courant continu</strong>, lui, est environ quatre fois moins dangereux à intensité égale : il faut de l'ordre de 120 mA au lieu de 30 mA pour risquer la fibrillation. En revanche il produit des effets d'électrolyse dans les tissus, et il tétanise autrement — la main est projetée au lieu de se refermer, ce qui explique qu'on soit souvent éjecté d'un contact en continu alors qu'on reste collé à un contact en alternatif.</p>
+<p>Aucune de ces subtilités ne change quoi que ce soit à votre pratique : les seuils du paragraphe 18.3 sont ceux du 50 Hz, et c'est ce que vous rencontrerez partout.</p></div>
+
+</div>
+</section>
+
+<script>
+/* ======================= CH 18 · la courbe de sécurité CEI 60479 =======================
+   Tracé schématique d'après la CEI 60479-1 (courant alternatif 15-100 Hz,
+   trajet main gauche - pieds). Les frontières sont interpolées entre points
+   d'ancrage en échelles logarithmiques : l'objet est de faire lire les zones
+   et les seuils, pas de servir de document normatif. */
+(function(){
+  "use strict";
+  var PEAU=[
+    {n:'sèche',    a:1000, b:4200},
+    {n:'moite',    a:700,  b:2000},
+    {n:'mouillée', a:400,  b:800}
+  ];
+  var PROT=[
+    {n:'aucune',              t:5000, seuil:1e9,   c:'#ff6a5e'},
+    {n:'disjoncteur 16 A',    t:10,   seuil:16000, c:'#f0a844'},
+    {n:'différentiel 300 mA', t:200,  seuil:300,   c:'#c8d834'},
+    {n:'différentiel 30 mA',  t:30,   seuil:30,    c:'#c8d834'}
+  ];
+  /* frontières : [durée ms, courant mA] */
+  var B =[[10,200],[100,160],[300,60],[1000,20],[3000,10],[10000,10]];
+  var C1=[[10,500],[100,400],[300,150],[1000,60],[3000,42],[10000,40]];
+
+  var U=MSPC.ctrl('a-corps-u', function(v){ return Math.round(v)+' V'; }, 'a-corps-u-l');
+  var P=MSPC.ctrl('a-corps-p', function(v){ return PEAU[v].n; }, 'a-corps-p-l');
+  var D=MSPC.ctrl('a-corps-d', function(v){ return PROT[v].n; }, 'a-corps-d-l');
+  var out=document.getElementById('a-corps-out');
+
+  var IMIN=0.1, IMAX=10000, TMIN=10, TMAX=10000;
+  var g={x:96,y:62,w:498,h:286};
+  function X(i){ return g.x + (Math.log10(Math.max(IMIN,i))-Math.log10(IMIN))/(Math.log10(IMAX)-Math.log10(IMIN))*g.w; }
+  function Y(t){ return g.y + g.h - (Math.log10(Math.max(TMIN,t))-Math.log10(TMIN))/(Math.log10(TMAX)-Math.log10(TMIN))*g.h; }
+
+  function interp(tab, t, k){
+    k = k || 1;
+    if(t<=tab[0][0]) return tab[0][1]*k;
+    if(t>=tab[tab.length-1][0]) return tab[tab.length-1][1]*k;
+    for(var i=0;i<tab.length-1;i++){
+      if(t>=tab[i][0] && t<=tab[i+1][0]){
+        var f=(Math.log10(t)-Math.log10(tab[i][0]))/(Math.log10(tab[i+1][0])-Math.log10(tab[i][0]));
+        return Math.pow(10, Math.log10(tab[i][1])+f*(Math.log10(tab[i+1][1])-Math.log10(tab[i][1])))*k;
+      }
+    }
+    return tab[tab.length-1][1]*k;
+  }
+
+  function courbe(ctx, tab, k, col, larg, tirets){
+    ctx.strokeStyle=col; ctx.lineWidth=larg;
+    if(tirets) ctx.setLineDash(tirets);
+    ctx.beginPath();
+    for(var t=TMIN;t<=TMAX;t*=1.06){
+      var i=interp(tab,t,k), xx=X(i), yy=Y(t);
+      if(t===TMIN) ctx.moveTo(xx,yy); else ctx.lineTo(xx,yy);
+    }
+    ctx.stroke(); ctx.setLineDash([]);
+  }
+  function bande(ctx, tabA, kA, tabB, kB, col){
+    ctx.fillStyle=col; ctx.beginPath();
+    var t;
+    for(t=TMIN;t<=TMAX;t*=1.06) ctx.lineTo(X(interp(tabA,t,kA)), Y(t));
+    for(t=TMAX;t>=TMIN;t/=1.06) ctx.lineTo(X(interp(tabB,t,kB)), Y(t));
+    ctx.closePath(); ctx.fill();
+  }
+
+  MSPC.anim('a-corps', function(a){
+    var ctx=a.ctx, W=a.W, H=a.H;
+    var Uv=U.val, pe=PEAU[P.val], pr=PROT[D.val];
+    var R=pe.a + pe.b*Math.exp(-Uv/110);
+    var I=Uv/R*1000;                                   // mA
+    var t=(I>=pr.seuil)?pr.t:5000;
+    var declenche=(I>=pr.seuil);
+
+    var ib=interp(B,t), ic1=interp(C1,t), ic2=interp(C1,t,2.5), ic3=interp(C1,t,5);
+    var zone, effet, coul;
+    if(I<0.5){ zone='AC-1'; effet='Aucune réaction perceptible'; coul='#c8d834'; }
+    else if(I<ib){ zone='AC-2'; effet='On sent le courant, aucun effet physiologique dangereux'; coul='#c8d834'; }
+    else if(I<ic1){ zone='AC-3'; effet='Contraction musculaire, non-lâcher — mais pas de lésion organique'; coul='#f0a844'; }
+    else if(I<ic2){ zone='AC-4.1'; effet='Fibrillation ventriculaire possible — probabilité jusqu’à 5 %'; coul='#ff6a5e'; }
+    else if(I<ic3){ zone='AC-4.2'; effet='Fibrillation ventriculaire probable — jusqu’à 50 %'; coul='#ff6a5e'; }
+    else { zone='AC-4.3'; effet='Fibrillation ventriculaire au-delà de 50 % — arrêt cardiaque'; coul='#ff6a5e'; }
+
+    MSPC.fond(ctx,W,H,0);
+    MSPC.mono(ctx,'COURBE DE SÉCURITÉ — CEI 60479-1, COURANT ALTERNATIF 50 Hz',26,30,11.5,'#8d968b');
+    MSPC.mono(ctx,'tracé schématique · trajet main gauche → pieds',W-26,30,9.5,'#6f786e','right');
+
+    /* ---------- les zones ---------- */
+    ctx.save(); ctx.beginPath(); ctx.rect(g.x,g.y,g.w,g.h); ctx.clip();
+    ctx.fillStyle='rgba(200,216,52,.07)'; ctx.fillRect(g.x,g.y,X(0.5)-g.x,g.h);
+    bande(ctx,[[10,0.5],[10000,0.5]],1,B,1,'rgba(200,216,52,.13)');
+    bande(ctx,B,1,C1,1,'rgba(240,168,68,.15)');
+    bande(ctx,C1,1,C1,2.5,'rgba(255,106,94,.13)');
+    bande(ctx,C1,2.5,C1,5,'rgba(255,106,94,.20)');
+    bande(ctx,C1,5,[[10,20000],[10000,20000]],1,'rgba(255,106,94,.30)');
+    ctx.restore();
+
+    /* ---------- graduations ---------- */
+    ctx.strokeStyle='rgba(255,255,255,.09)'; ctx.lineWidth=1;
+    [0.1,1,10,100,1000,10000].forEach(function(i){
+      ctx.beginPath(); ctx.moveTo(X(i),g.y); ctx.lineTo(X(i),g.y+g.h); ctx.stroke();
+      MSPC.mono(ctx, i<1?'0,1':(i<1000?String(i):(i/1000)+' A'), X(i), g.y+g.h+18, 9.5, '#7f8a7e','center');
+    });
+    [10,100,1000,10000].forEach(function(tt){
+      ctx.beginPath(); ctx.moveTo(g.x,Y(tt)); ctx.lineTo(g.x+g.w,Y(tt)); ctx.stroke();
+      MSPC.mono(ctx, tt<1000?tt+' ms':(tt/1000)+' s', g.x-8, Y(tt)+4, 9.5, '#7f8a7e','right');
+    });
+    ctx.strokeStyle='rgba(255,255,255,.25)'; ctx.lineWidth=1.3;
+    ctx.strokeRect(g.x+.5,g.y+.5,g.w,g.h);
+    MSPC.mono(ctx,'COURANT DANS LE CORPS (mA)',g.x+g.w,g.y+g.h+36,10,'#8d968b','right');
+    MSPC.mono(ctx,'DURÉE DU CONTACT',g.x-8,g.y-12,10,'#8d968b','right');
+
+    /* ---------- frontières ---------- */
+    ctx.strokeStyle='rgba(255,255,255,.45)'; ctx.lineWidth=1.6;
+    ctx.beginPath(); ctx.moveTo(X(0.5),g.y); ctx.lineTo(X(0.5),g.y+g.h); ctx.stroke();
+    courbe(ctx,B,1,'rgba(255,255,255,.45)',1.6);
+    courbe(ctx,C1,1,'#ff6a5e',2.2);
+    courbe(ctx,C1,2.5,'rgba(255,106,94,.5)',1.4,[5,4]);
+    courbe(ctx,C1,5,'rgba(255,106,94,.5)',1.4,[5,4]);
+
+    MSPC.mono(ctx,'AC-1',X(0.2),g.y+16,10,'#8d968b','center');
+    MSPC.mono(ctx,'AC-2',X(3),g.y+16,11,'#c8d834','center');
+    MSPC.mono(ctx,'AC-3',X(35),g.y+16,11,'#f0a844','center');
+    MSPC.mono(ctx,'AC-4',X(1200),g.y+16,11,'#ff6a5e','center');
+    MSPC.mono(ctx,'fibrillation',X(1200),g.y+30,9.5,'#ff6a5e','center');
+
+    /* le seuil des 30 mA, celui du différentiel */
+    ctx.strokeStyle='rgba(200,216,52,.55)'; ctx.lineWidth=1.4; ctx.setLineDash([3,4]);
+    ctx.beginPath(); ctx.moveTo(X(30),g.y); ctx.lineTo(X(30),g.y+g.h); ctx.stroke(); ctx.setLineDash([]);
+    MSPC.mono(ctx,'30 mA',X(30),g.y+g.h+34,9.5,'#c8d834','center');
+
+    /* ---------- le point de fonctionnement ---------- */
+    var px=X(I), py=Y(t);
+    ctx.strokeStyle='rgba(255,255,255,.30)'; ctx.lineWidth=1; ctx.setLineDash([2,3]);
+    ctx.beginPath(); ctx.moveTo(px,g.y+g.h); ctx.lineTo(px,py); ctx.lineTo(g.x,py); ctx.stroke(); ctx.setLineDash([]);
+    ctx.fillStyle=coul;
+    ctx.beginPath(); ctx.arc(px,py,8,0,6.2832); ctx.fill();
+    ctx.strokeStyle='#0d120f'; ctx.lineWidth=2; ctx.beginPath(); ctx.arc(px,py,8,0,6.2832); ctx.stroke();
+    ctx.strokeStyle=coul; ctx.lineWidth=1.6; ctx.globalAlpha=0.5+0.5*Math.sin(a.t*4);
+    ctx.beginPath(); ctx.arc(px,py,15,0,6.2832); ctx.stroke(); ctx.globalAlpha=1;
+
+    /* ---------- panneau de droite ---------- */
+    var qx=628, qw=W-qx-26;
+    ctx.fillStyle='rgba(255,255,255,.04)'; ctx.fillRect(qx,62,qw,286);
+    ctx.strokeStyle=coul; ctx.lineWidth=1.8; ctx.strokeRect(qx+.5,62.5,qw,286);
+    MSPC.mono(ctx,'RÉSISTANCE DU CORPS',qx+16,86,10,'#8d968b');
+    MSPC.titre(ctx,Math.round(R)+' Ω',qx+16,114,26,'#cfe2ee');
+    MSPC.mono(ctx,'peau '+pe.n+' sous '+Uv+' V',qx+16,132,9.5,'#6f786e');
+    MSPC.mono(ctx,'COURANT QUI VOUS TRAVERSE',qx+16,160,10,'#8d968b');
+    MSPC.titre(ctx, I>=1000 ? (I/1000).toFixed(2).replace('.',',')+' A' : Math.round(I)+' mA', qx+16,192,32,coul);
+    MSPC.mono(ctx,'DURÉE DU CONTACT',qx+16,220,10,'#8d968b');
+    MSPC.titre(ctx, t>=1000 ? (t/1000)+' s' : t+' ms', qx+16,248,26, declenche?'#c8d834':'#ff6a5e');
+    MSPC.mono(ctx, declenche ? 'la protection a coupé' : 'la protection ne coupe pas', qx+16,266,9.5, declenche?'#c8d834':'#ff6a5e');
+    MSPC.mono(ctx,'ZONE',qx+16,296,10,'#8d968b');
+    MSPC.titre(ctx,zone,qx+16,326,30,coul);
+
+    /* ---------- bandeau du bas ---------- */
+    var by=376;
+    ctx.fillStyle='rgba(255,255,255,.05)'; ctx.fillRect(26,by,W-52,72);
+    MSPC.mono(ctx,effet,42,by+26,13,coul);
+    var msg;
+    if(D.val===1 && !declenche) msg='Le disjoncteur attend 16 000 mA pour déclencher. Il en voit '+Math.round(I)+'. Il ne se passera rien.';
+    else if(D.val===0) msg='Aucune protection : le contact dure tant que quelqu’un ne coupe pas. Personne ne se dégage seul au-delà de 10 mA.';
+    else if(declenche) msg='Le courant n’a pas changé — c’est la DURÉE qui a changé, et c’est elle qui décide.';
+    else msg='Ce différentiel se déclenche à '+pr.seuil+' mA. Le courant reste en dessous : il ne coupe pas.';
+    MSPC.mono(ctx,msg,42,by+50,11.5,'#8d968b');
+
+    out.innerHTML='<b style="color:'+coul+'">'+Math.round(I)+' mA pendant '+(t>=1000?(t/1000)+' s':t+' ms')+'</b><br>zone '+zone+' — '+(I<ib?'sans danger':(I<ic1?'non-lâcher':'fibrillation possible'));
+  }, {fixed:true});
+})();
+
+/* ======================= CH 18 · le trajet du courant ======================= */
+(function(){
+  "use strict";
+  /* Silhouette : tête 78, épaules 118, hanches 216, pieds 330, sol 340.
+     Le cœur est légèrement à gauche de l'axe — donc à NOTRE droite,
+     puisque la personne nous fait face. */
+  var HG=[340,140], HD=[160,140];            // main gauche / main droite de la personne
+  var CO=[262,152];                          // le cœur
+  var TR=[
+    {n:'main gauche → pieds', f:1.00,
+     pts:[HG,[308,158],[282,126],CO,[252,206],[240,330]], bis:[[252,206],[268,330]]},
+    {n:'deux mains → pieds', f:1.00,
+     pts:[HG,[308,158],[282,126],CO,[252,206],[240,330]],
+     bis:[HD,[192,158],[218,126],[248,150],[252,206],[268,330]]},
+    {n:'main droite → pieds', f:0.80,
+     pts:[HD,[192,158],[218,126],[246,150],[252,206],[240,330]], bis:[[252,206],[268,330]]},
+    {n:'main gauche → main droite', f:0.40,
+     pts:[HG,[308,158],[282,126],CO,[238,148],[218,126],[192,158],HD]},
+    {n:'dos → main droite', f:0.30,
+     pts:[[250,198],[240,172],[228,146],[218,126],[192,158],HD]},
+    {n:'pied → pied', f:0.04,
+     pts:[[240,330],[230,268],[250,232],[270,268],[274,330]]}
+  ];
+  var T=MSPC.ctrl('a-trajet-t', function(v){ return TR[v].n; }, 'a-trajet-t-l');
+  var I=MSPC.ctrl('a-trajet-i', function(v){ return Math.round(v)+' mA'; }, 'a-trajet-i-l');
+  var out=document.getElementById('a-trajet-out');
+
+  function silhouette(ctx){
+    var trait='#5a6258', chair='rgba(255,255,255,.055)';
+    ctx.lineJoin='round'; ctx.lineCap='round';
+    // tête et cou
+    ctx.fillStyle=chair; ctx.strokeStyle=trait; ctx.lineWidth=2.2;
+    ctx.beginPath(); ctx.arc(250,78,22,0,6.2832); ctx.fill(); ctx.stroke();
+    ctx.lineWidth=13; ctx.strokeStyle=chair;
+    ctx.beginPath(); ctx.moveTo(250,98); ctx.lineTo(250,116); ctx.stroke();
+    // tronc
+    ctx.fillStyle=chair; ctx.strokeStyle=trait; ctx.lineWidth=2.2;
+    ctx.beginPath();
+    ctx.moveTo(216,116); ctx.lineTo(284,116); ctx.lineTo(280,216); ctx.lineTo(220,216);
+    ctx.closePath(); ctx.fill(); ctx.stroke();
+    // membres : d'abord la chair épaisse, puis le trait
+    function membre(pts){
+      ctx.lineWidth=15; ctx.strokeStyle=chair;
+      ctx.beginPath(); pts.forEach(function(q,i){ i?ctx.lineTo(q[0],q[1]):ctx.moveTo(q[0],q[1]); }); ctx.stroke();
+      ctx.lineWidth=2.2; ctx.strokeStyle=trait;
+      ctx.beginPath(); pts.forEach(function(q,i){ i?ctx.lineTo(q[0],q[1]):ctx.moveTo(q[0],q[1]); }); ctx.stroke();
+    }
+    membre([[220,126],[192,158],HD]);
+    membre([[280,126],[308,158],HG]);
+    membre([[234,216],[230,272],[240,330]]);
+    membre([[266,216],[272,272],[268,330]]);
+    // pieds et sol
+    ctx.lineWidth=2.2; ctx.strokeStyle=trait;
+    ctx.beginPath(); ctx.moveTo(228,332); ctx.lineTo(252,332); ctx.moveTo(256,332); ctx.lineTo(280,332); ctx.stroke();
+    ctx.strokeStyle='rgba(255,255,255,.16)'; ctx.lineWidth=1.4;
+    ctx.beginPath(); ctx.moveTo(126,340); ctx.lineTo(374,340); ctx.stroke();
+    for(var q2=130;q2<374;q2+=11){ ctx.beginPath(); ctx.moveTo(q2,340); ctx.lineTo(q2-6,348); ctx.stroke(); }
+    ctx.lineCap='butt';
+    MSPC.mono(ctx,'main droite',HD[0]-6,HD[1]-14,9.5,'#7f8a7e','right');
+    MSPC.mono(ctx,'main gauche',HG[0]+6,HG[1]-14,9.5,'#7f8a7e');
+  }
+
+  MSPC.anim('a-trajet', function(a){
+    var ctx=a.ctx, W=a.W, H=a.H;
+    var tr=TR[T.val], Iv=I.val, Ieq=Iv*tr.f;
+
+    var effet, coul;
+    if(Ieq<0.5){ effet='Rien de perceptible'; coul='#c8d834'; }
+    else if(Ieq<10){ effet='Perception, sursaut'; coul='#c8d834'; }
+    else if(Ieq<30){ effet='Non-lâcher : la main ne s’ouvre plus'; coul='#f0a844'; }
+    else if(Ieq<200){ effet='Fibrillation ventriculaire possible'; coul='#ff6a5e'; }
+    else { effet='Fibrillation probable, brûlures internes'; coul='#ff6a5e'; }
+
+    MSPC.fond(ctx,W,H,0);
+    MSPC.mono(ctx,'LE MÊME COURANT, SIX TRAJETS — SEULE COMPTE LA PART QUI TRAVERSE LE CŒUR',26,30,11.5,'#8d968b');
+
+    silhouette(ctx);
+
+    function trace(pts){
+      ctx.lineCap='round'; ctx.lineJoin='round';
+      ctx.strokeStyle='rgba(255,106,94,.28)'; ctx.lineWidth=12;
+      ctx.beginPath(); pts.forEach(function(q,i){ i?ctx.lineTo(q[0],q[1]):ctx.moveTo(q[0],q[1]); }); ctx.stroke();
+      ctx.strokeStyle='#ff6a5e'; ctx.lineWidth=3;
+      ctx.setLineDash([9,11]); ctx.lineDashOffset=-(a.t*46)%20;
+      ctx.stroke(); ctx.setLineDash([]); ctx.lineDashOffset=0; ctx.lineCap='butt';
+    }
+    trace(tr.pts);
+    if(tr.bis) trace(tr.bis);
+
+    // le cœur
+    var pulse=0.5+0.5*Math.sin(a.t*(Ieq>30?11:4));
+    ctx.fillStyle='rgba(255,106,94,'+(0.08+0.5*tr.f)+')';
+    ctx.beginPath(); ctx.arc(CO[0],CO[1],17+9*tr.f*pulse,0,6.2832); ctx.fill();
+    ctx.fillStyle=tr.f>0.6?'#ff6a5e':(tr.f>0.25?'#f0a844':'#8d968b');
+    ctx.beginPath(); ctx.arc(CO[0],CO[1],9,0,6.2832); ctx.fill();
+    ctx.strokeStyle='#0d120f'; ctx.lineWidth=1.6; ctx.stroke();
+    ctx.fillStyle='#11160f'; ctx.fillRect(CO[0]+26,CO[1]-7,38,16);
+    MSPC.mono(ctx,'cœur',CO[0]+31,CO[1]+5,10,'#cfe2ee');
+
+    /* ---------- la jauge du facteur F ---------- */
+    var jx=430, jy=96, jh=200;
+    MSPC.mono(ctx,'PART QUI TRAVERSE',jx,jy-24,10,'#8d968b');
+    MSPC.mono(ctx,'LE CŒUR',jx,jy-10,10,'#8d968b');
+    ctx.fillStyle='rgba(255,255,255,.07)'; ctx.fillRect(jx,jy,50,jh);
+    var cj=tr.f>0.6?'#ff6a5e':(tr.f>0.25?'#f0a844':'#c8d834');
+    ctx.fillStyle=cj; ctx.fillRect(jx,jy+jh*(1-tr.f),50,jh*tr.f);
+    ctx.strokeStyle='rgba(255,255,255,.22)'; ctx.lineWidth=1.4; ctx.strokeRect(jx+.5,jy+.5,50,jh);
+    TR.forEach(function(x,i){
+      var yy=jy+jh*(1-x.f);
+      ctx.strokeStyle=i===T.val?'rgba(255,255,255,.6)':'rgba(255,255,255,.16)';
+      ctx.lineWidth=i===T.val?1.8:1;
+      ctx.beginPath(); ctx.moveTo(jx-8,yy); ctx.lineTo(jx,yy); ctx.stroke();
+    });
+    MSPC.titre(ctx,'F = '+tr.f.toFixed(2).replace('.',','),jx+62,jy+jh*(1-tr.f)+9,23,cj);
+    MSPC.mono(ctx,'facteur de',jx+62,jy+jh*(1-tr.f)+25,9.5,'#6f786e');
+    MSPC.mono(ctx,'courant de cœur',jx+62,jy+jh*(1-tr.f)+38,9.5,'#6f786e');
+
+    /* ---------- panneau de droite ---------- */
+    var qx=634, qw=W-qx-26;
+    ctx.fillStyle='rgba(255,255,255,.04)'; ctx.fillRect(qx,88,qw,212);
+    ctx.strokeStyle=coul; ctx.lineWidth=1.8; ctx.strokeRect(qx+.5,88.5,qw,212);
+    MSPC.mono(ctx,'COURANT TOTAL',qx+16,112,10,'#8d968b');
+    MSPC.titre(ctx,Iv+' mA',qx+16,140,26,'#cfe2ee');
+    MSPC.mono(ctx,'× FACTEUR DE TRAJET',qx+16,168,10,'#8d968b');
+    MSPC.titre(ctx,'× '+tr.f.toFixed(2).replace('.',','),qx+16,194,26,cj);
+    MSPC.mono(ctx,'COURANT VU PAR LE CŒUR',qx+16,224,10,'#8d968b');
+    MSPC.titre(ctx,Ieq.toFixed(Ieq<10?1:0).replace('.',',')+' mA',qx+16,262,34,coul);
+    MSPC.mono(ctx,'à reporter sur la courbe précédente',qx+16,286,9.5,'#6f786e');
+
+    /* ---------- bandeau du bas ---------- */
+    var by=364;
+    ctx.fillStyle='rgba(255,255,255,.05)'; ctx.fillRect(26,by,W-52,64);
+    MSPC.mono(ctx,effet,42,by+26,13,coul);
+    MSPC.mono(ctx, T.val===5
+        ? 'Le cœur est épargné — mais la victime tombe. La chute blesse plus d’électriciens que la fibrillation.'
+        : (tr.f>=1 ? 'Le trajet le plus défavorable : tout le courant compte. C’est celui de l’électricien pieds au sol.'
+                   : 'Un trajet moins défavorable ne veut pas dire un trajet sûr : seule l’absence de tension l’est.'),
+      42, by+48, 11.5, '#8d968b');
+
+    out.innerHTML='F = <b>'+tr.f.toFixed(2).replace('.',',')+'</b> · cœur : <b style="color:'+coul+'">'+Ieq.toFixed(Ieq<10?1:0).replace('.',',')+' mA</b><br>'+effet;
+  }, {fixed:true});
+})();
+</script>
 
 <section class="ch" id="tps">
   <div class="ch-head"><div class="ch-num">TP</div><div class="ch-title">
