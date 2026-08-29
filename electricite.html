@@ -48,10 +48,10 @@
 </header>
 
 <div class="meta-bar">
-  <div><b>28</b> chapitres</div>
-  <div><b>50</b> animations pilotables</div>
+  <div><b>29</b> chapitres</div>
+  <div><b>53</b> animations pilotables</div>
   <div><b>15</b> fiches TP d'atelier</div>
-  <div><b>82</b> exercices corrigés</div>
+  <div><b>85</b> exercices corrigés</div>
   <div>Manips en <b>TBTS ≤ 24 V</b> sauf mention</div>
 </div>
 
@@ -89,6 +89,7 @@
     <a class="borne" href="#c26"><span class="num">26</span><span class="lbl">Mesurer</span></a>
     <a class="borne" href="#c27"><span class="num">27</span><span class="lbl">Câbles et connexions</span></a>
     <a class="borne" href="#c28"><span class="num">28</span><span class="lbl">Les capteurs</span></a>
+    <a class="borne" href="#c29"><span class="num">29</span><span class="lbl">Automate et réseaux</span></a>
     <a class="borne" href="#tps" style="border-top-color:var(--accent)"><span class="num">TP</span><span class="lbl">Les 15 fiches d'atelier</span></a>
   </div></nav>
 
@@ -9900,6 +9901,688 @@
   }, {fixed:true});
 })();
 </script>
+
+
+<!-- ================= CH 29 ================= -->
+<section class="ch" id="c29">
+  <div class="ch-head"><div class="ch-num">29</div><div class="ch-title">
+    <span class="kicker">Le mot qui est dans le nom du diplôme</span><h2>Automate, réseaux et maintenance connectée</h2></div></div>
+  <div class="ch-body">
+
+<div class="savoirs">
+  <span class="savoir n3"><b>S4.6.2</b> <i>API et programme : transfert, sauvegarde, paramètres</i></span>
+  <span class="savoir n2"><b>S3.2</b> <i>Traitement des informations</i></span>
+  <span class="savoir n2"><b>S3.3</b> <i>Communication et transmission</i></span>
+  <span class="savoir n2"><b>S4.7</b> <i>Réseaux, cybersécurité, maintenance connectée</i></span>
+</div>
+
+<p class="lede">Votre diplôme s'appelle <em>Maintenance des Systèmes de Production <strong>Connectés</strong></em>, et ce chapitre est celui qui justifie le dernier mot. On n'y programme pas — le référentiel ne le demande pas. On y apprend à <strong>lire, sauvegarder, régler et diagnostiquer</strong> ce que d'autres ont programmé.</p>
+
+<h3>29.1 — Le cycle automate, et le piège qu'il contient</h3>
+<p>Un automate ne réagit pas en continu. Il tourne en boucle, indéfiniment, et chaque tour comporte trois temps <strong>strictement séparés</strong> :</p>
+<ol>
+<li><strong>Lire les entrées.</strong> Il photographie l'état de toutes ses entrées d'un seul coup et range cette photo en mémoire. On appelle cela l'<em>image mémoire</em>.</li>
+<li><strong>Traiter le programme.</strong> Il exécute les instructions, de la première à la dernière. Pendant tout ce temps, <strong>il travaille sur la photo</strong>, jamais sur les entrées réelles.</li>
+<li><strong>Écrire les sorties.</strong> Il applique d'un seul coup tous les résultats sur les sorties physiques.</li>
+</ol>
+
+<div class="encadre danger"><span class="tag">La conséquence que personne n'anticipe</span>
+<p>Si une entrée change pendant la phase de traitement, <span class="cle">le programme ne le voit pas.</span> Il continue de travailler sur une photo devenue fausse, et il faudra attendre le tour suivant.</p>
+<p>Et surtout : <strong>une impulsion plus courte que le temps de cycle peut passer totalement inaperçue.</strong> Si votre automate tourne en 12 ms et qu'une pièce coupe un détecteur pendant 6 ms, il y a une chance sur deux qu'aucun cycle ne la voie. La machine ne comptera pas cette pièce, et personne ne comprendra pourquoi le compteur dérive.</p>
+<p><strong>La parade :</strong> soit ralentir la machine, soit utiliser un détecteur avec <em>allongement d'impulsion</em>, soit — la vraie solution — câbler ce signal sur une <strong>entrée rapide</strong> ou une entrée à interruption, qui court-circuite le cycle.</p></div>
+
+<figure class="anim">
+  <canvas id="a-cycle" width="900" height="490" aria-label="Animation : le cycle automate en trois temps et l'image mémoire des entrées"></canvas>
+  <div class="ctrls">
+    <div class="c"><label>Temps de cycle <span id="a-cycle-t-l">20 ms</span></label><input type="range" id="a-cycle-t" min="6" max="80" value="20"></div>
+    <div class="c"><label>Durée de l'impulsion <span id="a-cycle-i-l">30 ms</span></label><input type="range" id="a-cycle-i" min="2" max="90" value="30"></div>
+    <div class="c"><button class="btn" id="a-cycle-go">Envoyer une impulsion</button></div>
+    <div class="c readout" id="a-cycle-out"></div>
+  </div>
+  <figcaption>Le cycle tourne en permanence : <b>LIRE</b>, <b>TRAITER</b>, <b>ÉCRIRE</b>. La ligne du haut est l'entrée <b>réelle</b> ; celle du dessous est l'<b>image mémoire</b>, qui ne se met à jour qu'au moment de la lecture. <b>Envoyez une impulsion longue</b> : elle est vue, la sortie suit un cycle plus tard. <b>Raccourcissez l'impulsion sous le temps de cycle et renvoyez-la</b> : selon le moment où elle tombe, elle est vue — ou <b>totalement ignorée</b>. Le compteur en bas indique combien d'impulsions ont été perdues.</figcaption>
+  <div class="autableau">
+    <b class="entete">Au tableau <i>· 12 minutes · animation 1 sur 3</i></b>
+    <ol>
+      <li>Cycle 20 ms, impulsion 30 ms. Envoyer. <span class="q">« Combien de temps entre l'entrée réelle et la sortie ? »</span> Faire remarquer le retard d'un cycle.</li>
+      <li><span class="q">« Pourquoi ce retard ? »</span> Faire nommer les trois phases et l'image mémoire.</li>
+      <li>Passer l'impulsion à <b>8 ms</b> et envoyer plusieurs fois de suite. <span class="q">« Elles sont toutes identiques. Pourquoi certaines passent et d'autres non ? »</span></li>
+      <li>Faire lire le <b>compteur de perdues</b>. <span class="q">« Sur une chaîne qui compte des pièces, qu'est-ce que ça donne en fin de journée ? »</span></li>
+      <li>Allonger le <b>temps de cycle à 60 ms</b> et refaire. <span class="q">« Un automate plus lent, est-ce plus sûr ou moins sûr ? »</span></li>
+    </ol>
+    <div class="piege">Le piège : « l'automate est en panne, il rate des pièces ». Il fonctionne parfaitement — il fait exactement ce pour quoi il est construit. C'est le capteur ou la vitesse de la machine qui sont incompatibles avec son temps de cycle. Avant d'accuser l'automate, mesurez la durée réelle de l'impulsion.</div>
+  </div>
+</figure>
+
+<h3>29.2 — Lire un programme sans savoir programmer</h3>
+<p>Le référentiel n'attend pas de vous que vous écriviez du code. Il attend que vous puissiez <strong>ouvrir la console, trouver le réseau qui vous intéresse, et voir pourquoi une sortie ne s'active pas</strong>. C'est beaucoup plus simple qu'il n'y paraît, parce que le langage à contacts se lit exactement comme le schéma de commande du chapitre 21.</p>
+
+<table>
+<thead><tr><th>Sur le schéma de commande</th><th>Dans le programme</th><th>Ce que ça veut dire</th></tr></thead>
+<tbody>
+<tr><td>Contact NO d'un bouton</td><td><span class="mono">— | | —</span></td><td>Passant quand la variable vaut 1</td></tr>
+<tr><td>Contact NF</td><td><span class="mono">— |/| —</span></td><td>Passant quand la variable vaut 0</td></tr>
+<tr><td>Bobine de contacteur</td><td><span class="mono">—( )—</span></td><td>La sortie qu'on active</td></tr>
+<tr><td>Contacts en série</td><td>sur la même ligne</td><td>Il faut l'un <strong>ET</strong> l'autre</td></tr>
+<tr><td>Contacts en parallèle</td><td>branches superposées</td><td>Il suffit de l'un <strong>OU</strong> l'autre</td></tr>
+</tbody></table>
+
+<p><span class="cle">Le mode « visualisation en ligne » colore en vert ce qui est passant.</span> Vous voyez alors le courant s'arrêter, exactement à l'endroit où la condition n'est pas remplie. C'est le dépannage le plus rapide qui existe : trente secondes pour savoir quelle entrée manque.</p>
+
+<h3>29.3 — Les paramètres qu'on règle vraiment</h3>
+<p>Le référentiel cite deux exemples au niveau 3 : <em>« temporisation, compteur »</em>. Ce sont effectivement les deux que vous toucherez.</p>
+<ul>
+<li><strong>Une temporisation</strong> retarde une action. On l'allonge quand un vérin n'a pas fini sa course avant la suite du cycle, on la raccourcit quand la machine perd du temps. Attention : allonger une temporisation pour compenser un vérin qui ralentit, <em>c'est masquer une fuite pneumatique</em>.</li>
+<li><strong>Un compteur</strong> compte des pièces, des cycles, des passages. On le remet à zéro, on change sa consigne. Un compteur qui dérive n'est presque jamais un défaut de programme : c'est un capteur qui rate des pièces — voir l'animation précédente.</li>
+</ul>
+
+<div class="encadre"><span class="tag">Avant de modifier quoi que ce soit — S4.6.2</span>
+<p>Le référentiel place explicitement au niveau 3 : <em>« transfert, sauvegarde et lecture d'un programme »</em>. C'est une compétence, pas une formalité.</p>
+<ol>
+<li><strong>Sauvegarder le programme actuel</strong> avant toute intervention, avec la date et votre nom dans le nom du fichier.</li>
+<li><strong>Noter la valeur d'origine</strong> de chaque paramètre modifié, et la valeur nouvelle.</li>
+<li><strong>Modifier une seule chose à la fois</strong>, et essayer entre chaque.</li>
+<li><strong>Resauvegarder</strong> après validation, et ranger la sauvegarde là où le prochain la trouvera — pas sur votre clé USB personnelle.</li>
+</ol>
+<p><span class="cle">Un automate remplacé sans sa sauvegarde, c'est une machine à l'arrêt pendant des jours.</span> Et il n'y a jamais de documentation à jour au moment précis où on en a besoin.</p></div>
+
+<h3>29.4 — Les réseaux industriels</h3>
+<p>Une machine moderne ne câble plus chaque capteur jusqu'à l'automate : elle les relie par un <strong>bus</strong>, et un seul câble transporte l'information de dizaines d'appareils. Cela change tout — y compris la façon dont les pannes se propagent.</p>
+
+<figure class="anim">
+  <canvas id="a-reseau" width="900" height="490" aria-label="Animation : topologies de réseau industriel et effet d'une rupture de câble"></canvas>
+  <div class="ctrls">
+    <div class="c"><label>Topologie <span id="a-reseau-t-l">en étoile</span></label><input type="range" id="a-reseau-t" min="0" max="2" value="0"></div>
+    <div class="c"><label>Liaison coupée <span id="a-reseau-c-l">aucune</span></label><input type="range" id="a-reseau-c" min="0" max="5" value="0"></div>
+    <div class="c"><label class="switch"><input type="checkbox" id="a-reseau-m"><span>Masque de sous-réseau erroné sur le poste 3</span></label></div>
+    <div class="c readout" id="a-reseau-out"></div>
+  </div>
+  <figcaption>Trois topologies, quatre équipements, et une liaison que vous coupez. <b>En étoile</b>, couper un brin ne fait tomber qu'un seul appareil — mais couper le lien du commutateur fait tout tomber. <b>En ligne</b>, couper au milieu fait tomber <b>tout ce qui est en aval</b> : c'est la topologie la plus économique et la plus fragile. <b>En anneau</b>, l'information peut faire le tour dans l'autre sens : une coupure ne fait rien tomber du tout — mais <b>deux coupures, oui</b>. <b>Cochez le masque erroné</b> : le câble est bon, la LED est verte, et l'appareil ne répond quand même pas. C'est le défaut applicatif, à distinguer du défaut physique.</figcaption>
+  <div class="autableau">
+    <b class="entete">Au tableau <i>· 12 minutes · animation 2 sur 3</i></b>
+    <ol>
+      <li>Topologie <b>en ligne</b>, couper la liaison 2. <span class="q">« Combien d'équipements sont perdus ? »</span> Faire compter.</li>
+      <li>Même coupure en <b>étoile</b>. <span class="q">« Et maintenant ? »</span> Un seul. <span class="q">« Pourquoi installe-t-on encore des lignes, alors ? »</span> Le coût du câble.</li>
+      <li>Passer en <b>anneau</b> et couper : rien ne tombe. <span class="q">« Où est passée l'information ? »</span> Elle a fait le tour dans l'autre sens.</li>
+      <li>Cocher le <b>masque erroné</b>. <span class="q">« Le câble est bon, la LED est verte. Pourquoi ça ne répond pas ? »</span></li>
+      <li>Conclure sur la question qui structure tout diagnostic réseau : <span class="q">« mon problème est-il PHYSIQUE ou APPLICATIF ? »</span></li>
+    </ol>
+    <div class="piege">Le piège : passer une heure à changer des câbles alors que la LED de liaison est verte. Une LED verte prouve que la couche physique fonctionne. Si ça ne communique pas malgré tout, le problème est dans l'adressage, le masque, la vitesse ou le protocole — et aucun câble neuf n'y changera rien.</div>
+  </div>
+</figure>
+
+<h3>29.5 — L'adressage, en trois idées</h3>
+<ul>
+<li><strong>Chaque équipement a une adresse IP unique</strong> sur le réseau. Deux adresses identiques et les deux appareils tombent, souvent de façon intermittente — ce qui rend le défaut très pénible à trouver.</li>
+<li><strong>Le masque de sous-réseau</strong> dit quelle partie de l'adresse désigne le réseau et quelle partie désigne l'appareil. Avec un masque <span class="mono">255.255.255.0</span>, tous les appareils doivent partager les trois premiers nombres. <span class="mono">192.168.1.10</span> et <span class="mono">192.168.2.10</span> ne se parleront jamais.</li>
+<li><strong>Le protocole</strong> doit être le même des deux côtés. Deux appareils correctement adressés qui ne parlent pas la même langue ne communiquent pas davantage.</li>
+</ul>
+
+<h3>29.6 — IO-Link : le capteur qui dit comment il va</h3>
+<p>C'est la nouveauté que le référentiel désigne par « capteur intelligent », et c'est ce qui transforme le métier.</p>
+<p>Un détecteur ordinaire envoie <strong>un bit</strong> : présent, ou absent. Un détecteur IO-Link envoie, sur le même fil, <strong>tout ce qu'il sait de lui-même</strong> : sa mesure exacte, ses réglages, sa température interne, son nombre d'heures, sa marge de fonctionnement, et son identité complète.</p>
+
+<figure class="anim">
+  <canvas id="a-iolink" width="900" height="480" aria-label="Animation : capteur classique et capteur IO-Link face à un encrassement progressif"></canvas>
+  <div class="ctrls">
+    <div class="c"><label>Encrassement de l'optique <span id="a-iolink-e-l">0 %</span></label><input type="range" id="a-iolink-e" min="0" max="100" value="0"></div>
+    <div class="c"><label class="switch"><input type="checkbox" id="a-iolink-r"><span>Remplacer le capteur</span></label></div>
+    <div class="c readout" id="a-iolink-out"></div>
+  </div>
+  <figcaption>Le même détecteur optique, câblé de deux façons. <b>Montez l'encrassement progressivement</b> : le capteur classique répond « détecté » sans broncher jusqu'à ce qu'il lâche d'un coup, à 80 %. Le capteur IO-Link, lui, <b>annonce sa marge qui fond depuis le début</b> — et déclenche une alerte de maintenance bien avant l'arrêt. <b>C'est de la maintenance prévisionnelle intégrée au capteur.</b> <b>Cochez « remplacer le capteur »</b> : le classique demande de refaire tous les réglages à la main, l'IO-Link récupère les siens tout seul auprès du maître.</figcaption>
+  <div class="autableau">
+    <b class="entete">Au tableau <i>· 10 minutes · animation 3 sur 3</i></b>
+    <ol>
+      <li>Encrassement à 0 %. <span class="q">« Que dit chacun des deux ? »</span> La même chose : détecté.</li>
+      <li>Monter à <b>50 %</b>. <span class="q">« Et maintenant ? »</span> Le classique dit toujours la même chose. L'IO-Link a perdu la moitié de sa marge.</li>
+      <li>Monter à <b>85 %</b> : le classique tombe d'un coup. <span class="q">« Quand la production s'est-elle arrêtée ? »</span> À l'instant, sans prévenir.</li>
+      <li><span class="q">« Depuis combien de temps l'IO-Link prévenait-il ? »</span> Faire redescendre le curseur pour montrer le seuil d'alerte à 60 %.</li>
+      <li>Cocher <b>remplacer</b>. <span class="q">« Combien de temps pour remettre en service dans chaque cas ? »</span></li>
+    </ol>
+    <div class="piege">Le piège : croire que l'IO-Link sert à faire du chiffre. Il sert à transformer une panne subie en intervention planifiée — et c'est exactement l'objet de votre diplôme. Un capteur qui annonce trois semaines à l'avance qu'il va lâcher, c'est trois semaines pour l'intégrer dans un arrêt programmé.</div>
+  </div>
+</figure>
+
+<h3>29.7 — Cybersécurité : les gestes élémentaires</h3>
+<p>Le référentiel est modeste sur ce point — il parle de <em>« sensibiliser aux bonnes pratiques élémentaires »</em> — mais ces gestes sont devenus une partie du métier.</p>
+<ul>
+<li><strong>Les mots de passe par défaut se changent.</strong> Un automate livré avec son mot de passe d'usine est accessible à quiconque a lu la notice, et les notices sont sur internet.</li>
+<li><strong>Une clé USB ne circule pas.</strong> Celle qui a servi à mettre à jour un poste bureautique n'entre pas dans une armoire. La contamination d'un réseau industriel se fait presque toujours par ce chemin.</li>
+<li><strong>Le réseau machine est séparé du réseau bureautique.</strong> Un automate n'a rien à faire sur le même réseau que la messagerie.</li>
+<li><strong>Les accès à distance se ferment quand on ne s'en sert pas.</strong> Une télémaintenance ouverte en permanence est une porte ouverte en permanence.</li>
+<li><strong>Les sauvegardes se conservent hors ligne.</strong> Une sauvegarde chiffrée par un rançongiciel n'est plus une sauvegarde.</li>
+</ul>
+
+<div class="exo"><span class="tag">Exercice 29.1</span>
+<p>Un compteur de pièces dérive : il affiche 4 780 alors que 4 900 pièces sont réellement passées. La machine tourne à 3 pièces par seconde, le détecteur voit chaque pièce pendant 9 ms, et le temps de cycle de l'automate est de 15 ms. Expliquez et proposez trois solutions.</p>
+<details><summary>Voir la réponse</summary><div class="rep">
+<p><strong>Le programme est juste, le capteur est bon, et pourtant le compteur est faux.</strong></p>
+<p><strong>Le mécanisme.</strong> L'automate ne regarde ses entrées qu'une fois par cycle, soit toutes les <strong>15 ms</strong>. L'impulsion du détecteur ne dure que <strong>9 ms</strong>. Elle est donc plus courte que l'intervalle entre deux lectures : selon le moment où elle tombe dans le cycle, elle est vue ou elle ne l'est pas.</p>
+<p><strong>L'ordre de grandeur.</strong> La probabilité qu'une impulsion de 9 ms tombe sur une lecture espacée de 15 ms vaut environ 9/15 = 0,60. On perdrait donc 40 % des pièces — bien plus que les 2,4 % observés.</p>
+<p>L'écart réel étant plus faible, l'impulsion est probablement un peu plus longue que 9 ms sur la plupart des pièces, ou le temps de cycle varie. <span class="cle">Peu importe le chiffre exact : le mécanisme est identifié, et il est structurel.</span></p>
+<p><strong>Trois solutions, de la plus élégante à la plus lourde :</strong></p>
+<ol>
+<li><strong>Utiliser une entrée rapide ou à interruption.</strong> La plupart des automates disposent de quelques entrées qui déclenchent immédiatement, sans attendre la lecture cyclique. C'est la solution propre, et elle ne coûte rien si l'entrée est disponible.</li>
+<li><strong>Allonger l'impulsion au niveau du capteur.</strong> Beaucoup de détecteurs proposent un paramètre d'<em>allongement d'impulsion</em> — réglé à 30 ms, le signal devient impossible à manquer. C'est un réglage, pas un câblage.</li>
+<li><strong>Réduire le temps de cycle.</strong> Le programme comporte peut-être des traitements lourds qu'on peut exécuter moins souvent. Descendre à 5 ms résoudrait le problème — mais c'est la solution la plus fragile, car le temps de cycle rallongera dès qu'on ajoutera du programme.</li>
+</ol>
+<p><strong>Ce qu'il ne faut pas faire :</strong> ajouter 120 au compteur dans le programme pour « corriger » l'écart. C'est du maquillage : la dérive n'est pas constante, elle dépend de la cadence, et la prochaine personne ne comprendra rien.</p>
+<p><em>Notez la démarche : le symptôme est logiciel, la cause est temporelle, et la solution est matérielle ou paramétrique. C'est très caractéristique des défauts de chaîne d'information.</em></p>
+</div></details></div>
+
+<div class="exo"><span class="tag">Exercice 29.2</span>
+<p>Un îlot d'entrées-sorties déporté ne répond plus. La LED de liaison du commutateur est verte, le câble a été remplacé, rien n'y fait. Quelle est votre démarche ?</p>
+<details><summary>Voir la réponse</summary><div class="rep">
+<p><strong>La LED verte a déjà répondu à la moitié de la question : la couche physique fonctionne.</strong></p>
+<p>Une LED de liaison allumée signifie que les deux extrémités se voient électriquement, que le câble est continu et que les niveaux électriques sont corrects. <span class="cle">Continuer à changer des câbles est une perte de temps garantie.</span> Le problème est <strong>applicatif</strong>.</p>
+<p><strong>La démarche, du plus probable au moins probable :</strong></p>
+<ol>
+<li><strong>L'adresse IP.</strong> A-t-elle été perdue ? Beaucoup d'îlots reçoivent leur adresse de l'automate au démarrage ; si l'îlot a été remplacé, il est peut-être revenu à son adresse d'usine. Vérifier sur son afficheur ou ses roues codeuses.</li>
+<li><strong>Un conflit d'adresse.</strong> Deux appareils à la même adresse se coupent mutuellement, souvent par intermittence. Un simple <span class="mono">ping</span> depuis un poste répond alors de façon erratique.</li>
+<li><strong>Le masque de sous-réseau.</strong> Un îlot en <span class="mono">192.168.1.20</span> avec un masque <span class="mono">255.255.255.0</span> ne verra jamais un automate en <span class="mono">192.168.2.10</span>. Le câble est parfait, les LED sont vertes, et rien ne passe.</li>
+<li><strong>Le nom d'appareil.</strong> Sur certains protocoles industriels, l'automate cherche ses esclaves par leur <em>nom</em>, pas par leur adresse. Un îlot neuf sans nom attribué reste invisible.</li>
+<li><strong>La configuration matérielle du projet.</strong> Si l'îlot de remplacement n'a pas exactement les mêmes modules, dans le même ordre, l'automate le refuse.</li>
+<li><strong>Le firmware.</strong> Une version différente de l'îlot d'origine peut suffire à empêcher l'échange.</li>
+</ol>
+<p><strong>Les outils, dans l'ordre :</strong> la <strong>console de diagnostic</strong> de l'automate, qui donne presque toujours le motif exact du refus ; puis un <strong>ping</strong> pour trancher entre « joignable » et « configuré » ; puis l'<strong>outil de recherche du constructeur</strong>, qui liste tous les équipements présents sur le réseau avec leur adresse et leur nom, y compris ceux qui sont mal configurés.</p>
+<p><em>La question qui structure tout diagnostic réseau tient en une phrase : <span class="cle">est-ce que ça arrive, et est-ce que c'est compris ?</span> La LED répond à la première. La console répond à la seconde.</em></p>
+</div></details></div>
+
+<div class="exo"><span class="tag">Exercice 29.3</span>
+<p>Vous devez remplacer un automate défaillant. Le programme n'a jamais été sauvegardé. Quelles sont vos options, et quelle leçon en tirez-vous pour l'avenir ?</p>
+<details><summary>Voir la réponse</summary><div class="rep">
+<p><strong>Les options, de la meilleure à la pire — et aucune n'est bonne.</strong></p>
+<ol>
+<li><strong>Tenter de lire l'automate défaillant.</strong> S'il démarre encore, même partiellement, on peut parfois téléverser le programme avant de le remplacer. <span class="cle">C'est la première chose à essayer, avant même de le débrancher.</span> Beaucoup d'automates « morts » répondent encore à la console.</li>
+<li><strong>Chercher une sauvegarde qui existerait ailleurs.</strong> L'intégrateur qui a monté la machine, le constructeur, le service méthodes, l'ancien technicien parti à la retraite, un vieux PC portable au fond d'une armoire. Cela vaut toujours quelques coups de téléphone.</li>
+<li><strong>Reconstituer le programme à partir des schémas et du fonctionnement observé.</strong> C'est possible sur une machine simple, cela prend des jours sur une machine complexe, et le résultat n'est jamais tout à fait l'original.</li>
+<li><strong>Faire refaire le programme par un intégrateur.</strong> C'est la solution qui marche, et elle se compte en milliers d'euros et en semaines d'arrêt.</li>
+</ol>
+<p><strong>La leçon, et le référentiel la formule au niveau 3 :</strong> <em>« transfert, sauvegarde et lecture d'un programme »</em> n'est pas une tâche administrative. C'est une opération de maintenance préventive à part entière, au même titre qu'un graissage.</p>
+<p><strong>La règle à instaurer, si elle n'existe pas :</strong></p>
+<ul>
+<li>Une <strong>sauvegarde de chaque automate du parc</strong>, datée, avec le nom de la machine et la version.</li>
+<li>Stockée en <strong>deux endroits</strong>, dont un hors ligne — un rançongiciel chiffre aussi les sauvegardes accessibles depuis le réseau.</li>
+<li><strong>Refaite après chaque modification</strong>, si petite soit-elle. Une temporisation changée il y a six mois et jamais sauvegardée sera perdue.</li>
+<li>Accompagnée de la <strong>configuration matérielle</strong> et de la <strong>liste des paramètres</strong> des variateurs et capteurs intelligents de la machine.</li>
+</ul>
+<p><em>Une machine dont le programme n'existe nulle part est une machine à durée de vie limitée par son automate — et les automates ont une durée de vie de quinze à vingt ans. C'est un risque que la GMAO devrait tracer au même titre qu'une pièce de rechange critique.</em></p>
+</div></details></div>
+
+</div>
+</section>
+
+<script>
+/* ======================= CH 29 · le cycle automate ======================= */
+(function(){
+  "use strict";
+  var TC=MSPC.ctrl('a-cycle-t', function(v){ return v+' ms'; }, 'a-cycle-t-l');
+  var TI=MSPC.ctrl('a-cycle-i', function(v){ return v+' ms'; }, 'a-cycle-i-l');
+  var out=document.getElementById('a-cycle-out');
+  var btn=document.getElementById('a-cycle-go');
+
+  var SPEED=90;   // millisecondes simulées par seconde réelle
+  var WIN=520;    // largeur de la fenêtre du chronogramme, en ms simulées
+  var tms=0, tEch=0;
+  var ent=0, img=0, sortie=0;
+  var pAct=false, pStart=0, pDur=0, pVue=false, tNext=120;
+  var vues=0, perdues=0;
+  var ech=[], lect=[];
+  var flashL=0, flashE=0;
+
+  if(btn) btn.addEventListener('click', function(){ if(!pAct) tNext=tms+6; });
+  /* Changer un réglage remet les compteurs à zéro : sinon on additionnerait
+     les impulsions perdues d'un réglage avec celles du suivant. */
+  function raz(){ vues=0; perdues=0; }
+  if(TC.el) TC.el.addEventListener('input', raz);
+  if(TI.el) TI.el.addEventListener('input', raz);
+
+  function pas(h){
+    var t0=tms; tms+=h;
+    var Tc=TC.val;
+    if(!pAct && tms>=tNext){ pAct=true; pStart=tms; pDur=TI.val; pVue=false; }
+    ent = (pAct && tms>=pStart && tms<pStart+pDur) ? 1 : 0;
+    /* frontière de LECTURE : on photographie les entrées */
+    if(Math.floor(t0/Tc)!==Math.floor(tms/Tc)){
+      img=ent; if(ent) pVue=true;
+      lect.push(tms); flashL=1;
+    }
+    /* frontière d'ÉCRITURE, à 85 % du cycle */
+    var d=0.85*Tc;
+    if(Math.floor((t0-d)/Tc)!==Math.floor((tms-d)/Tc)){ sortie=img; flashE=1; }
+    /* fin de l'impulsion : on fait les comptes */
+    if(pAct && tms>=pStart+pDur){
+      pAct=false; ent=0;
+      if(pVue) vues++; else perdues++;
+      tNext=tms+150+Math.random()*140;
+    }
+  }
+
+  MSPC.anim('a-cycle', function(a){
+    var ctx=a.ctx, W=a.W, H=a.H, Tc=TC.val;
+
+    var dt=Math.min(a.dt||0, 0.05);
+    var reste=dt*SPEED;
+    while(reste>0){
+      var h=Math.min(0.4,reste); pas(h); reste-=h;
+      if(tms-tEch>=1.1){ tEch=tms; ech.push({t:tms,e:ent,i:img,s:sortie}); }
+    }
+    while(ech.length && ech[0].t < tms-WIN) ech.shift();
+    while(lect.length && lect[0] < tms-WIN) lect.shift();
+    flashL=Math.max(0,flashL-dt*5); flashE=Math.max(0,flashE-dt*5);
+
+    var ph=(tms%Tc)/Tc;                       // 0 → 1 dans le cycle
+    var nomPh = ph<0.15 ? 'LIRE LES ENTRÉES' : (ph<0.85 ? 'TRAITER LE PROGRAMME' : 'ÉCRIRE LES SORTIES');
+
+    MSPC.fond(ctx,W,H,0);
+    MSPC.mono(ctx,'LE CYCLE AUTOMATE — TROIS TEMPS, ET UNE PHOTOGRAPHIE DES ENTRÉES',26,30,11.5,'#8d968b');
+
+    /* ---------------- l'anneau des trois phases ---------------- */
+    var cx=152, cy=166, R=70;
+    var seg=[{a0:0,a1:0.15,n:'LIRE',c:'#c8d834'},
+             {a0:0.15,a1:0.85,n:'TRAITER',c:'#7fa7d8'},
+             {a0:0.85,a1:1,n:'ÉCRIRE',c:'#f0a844'}];
+    ctx.lineCap='butt';
+    for(var s=0;s<3;s++){
+      var g=seg[s], actif = ph>=g.a0 && ph<g.a1;
+      ctx.beginPath();
+      ctx.arc(cx,cy,R, -Math.PI/2 + g.a0*6.2832 + 0.035, -Math.PI/2 + g.a1*6.2832 - 0.035);
+      ctx.strokeStyle = actif ? g.c : 'rgba(255,255,255,.13)';
+      ctx.lineWidth = actif ? 21 : 15;
+      ctx.stroke();
+    }
+    /* l'aiguille */
+    var av=-Math.PI/2 + ph*6.2832;
+    ctx.strokeStyle='#e8ece6'; ctx.lineWidth=2.4;
+    ctx.beginPath(); ctx.moveTo(cx,cy); ctx.lineTo(cx+Math.cos(av)*(R-13), cy+Math.sin(av)*(R-13)); ctx.stroke();
+    ctx.fillStyle='#e8ece6'; ctx.beginPath(); ctx.arc(cx,cy,4,0,6.2832); ctx.fill();
+    /* étiquettes des phases */
+    MSPC.mono(ctx,'LIRE',cx+R+16,cy-R+16,10, ph<0.15?'#c8d834':'#5d665e');
+    MSPC.mono(ctx,'TRAITER',cx+R+16,cy+34,10, (ph>=0.15&&ph<0.85)?'#7fa7d8':'#5d665e');
+    MSPC.mono(ctx,'ÉCRIRE',cx-R-16,cy-R+16,10, ph>=0.85?'#f0a844':'#5d665e','right');
+    MSPC.mono(ctx,'temps de cycle',cx,cy+R+28,10,'#6f786e','center');
+    MSPC.titre(ctx,Tc+' ms',cx,cy+R+54,26,'#e8ece6','center');
+
+    /* ---------------- les trois cases ---------------- */
+    var bw=130, bh=76, by=104;
+    var bx=[318,508,698];
+    var val=[ent,img,sortie];
+    var nomB=['ENTRÉE PHYSIQUE','IMAGE MÉMOIRE','SORTIE PHYSIQUE'];
+    for(var k=0;k<3;k++){
+      MSPC.mono(ctx,nomB[k],bx[k]+bw/2,by-10,9.5,'#8d968b','center');
+      ctx.fillStyle='rgba(255,255,255,.05)'; ctx.fillRect(bx[k],by,bw,bh);
+      ctx.strokeStyle='rgba(255,255,255,.22)'; ctx.lineWidth=1.4; ctx.strokeRect(bx[k],by,bw,bh);
+      ctx.fillStyle = val[k] ? '#c8d834' : '#2b332a';
+      ctx.beginPath(); ctx.arc(bx[k]+34,by+bh/2,15,0,6.2832); ctx.fill();
+      ctx.strokeStyle='#8f9a86'; ctx.lineWidth=1.3; ctx.stroke();
+      MSPC.titre(ctx, val[k]?'1':'0', bx[k]+92, by+bh/2+10, 26, val[k]?'#c8d834':'#5d665e','center');
+    }
+    /* les deux flèches de recopie */
+    function fleche(x0,x1,y,actif,coul,txt){
+      ctx.strokeStyle = actif ? coul : 'rgba(255,255,255,.16)';
+      ctx.lineWidth = actif ? 3.2 : 1.6;
+      ctx.beginPath(); ctx.moveTo(x0,y); ctx.lineTo(x1-8,y); ctx.stroke();
+      ctx.fillStyle = actif ? coul : 'rgba(255,255,255,.16)';
+      ctx.beginPath(); ctx.moveTo(x1,y); ctx.lineTo(x1-10,y-6); ctx.lineTo(x1-10,y+6); ctx.closePath(); ctx.fill();
+      MSPC.mono(ctx,txt,(x0+x1)/2,y-13,9, actif?coul:'#5d665e','center');
+    }
+    fleche(452,504,by+bh/2, flashL>0.02,'#c8d834','LIRE');
+    fleche(642,694,by+bh/2, flashE>0.02,'#f0a844','ÉCRIRE');
+
+    /* phase en cours + compteurs */
+    var coulPh = ph<0.15 ? '#c8d834' : (ph<0.85 ? '#7fa7d8' : '#f0a844');
+    MSPC.mono(ctx,'PHASE EN COURS',573,216,9.5,'#6f786e','center');
+    MSPC.titre(ctx,nomPh,573,242,22,coulPh,'center');
+    MSPC.mono(ctx,'impulsions vues : '+vues,470,272,11,'#c8d834','center');
+    MSPC.mono(ctx,'perdues : '+perdues,690,272,11, perdues?'#ff6a5e':'#5d665e','center');
+
+    /* ---------------- le chronogramme ---------------- */
+    var gx=144, gw=W-gx-28, t0=tms-WIN;
+    function X(t){ return gx + (t-t0)/WIN*gw; }
+    MSPC.mono(ctx,'CHRONOGRAMME — chaque trait vertical est un instant de LECTURE',26,308,10,'#6f786e');
+    var bases=[356,402,448], amp=26;
+    var noms=['ENTRÉE RÉELLE','IMAGE MÉMOIRE','SORTIE'];
+    var coulT=['#e8ece6','#c8d834','#f0a844'];
+
+    /* les instants de lecture */
+    ctx.strokeStyle='rgba(200,216,52,.22)'; ctx.lineWidth=1;
+    ctx.beginPath();
+    for(var l=0;l<lect.length;l++){ var xl=X(lect[l]); ctx.moveTo(xl,bases[0]-amp-8); ctx.lineTo(xl,bases[2]+6); }
+    ctx.stroke();
+
+    for(var tr=0;tr<3;tr++){
+      MSPC.mono(ctx,noms[tr],gx-10,bases[tr]-8,9.5,'#8d968b','right');
+      ctx.strokeStyle='rgba(255,255,255,.10)'; ctx.lineWidth=1;
+      ctx.beginPath(); ctx.moveTo(gx,bases[tr]+.5); ctx.lineTo(gx+gw,bases[tr]+.5); ctx.stroke();
+      if(ech.length<2) continue;
+      ctx.strokeStyle=coulT[tr]; ctx.lineWidth=2;
+      ctx.beginPath();
+      var prev=null;
+      for(var i=0;i<ech.length;i++){
+        var v = tr===0?ech[i].e : (tr===1?ech[i].i : ech[i].s);
+        var x=X(ech[i].t), y=bases[tr]-v*amp;
+        if(prev===null){ ctx.moveTo(x,y); }
+        else { if(v!==prev){ ctx.lineTo(x,bases[tr]-prev*amp); } ctx.lineTo(x,y); }
+        prev=v;
+      }
+      ctx.stroke();
+    }
+
+    /* le verdict */
+    var msg, coul;
+    if(TI.val < Tc){ msg='Impulsion de '+TI.val+' ms plus COURTE que le cycle de '+Tc+' ms : selon le moment où elle tombe, elle est vue — ou perdue.'; coul='#ff6a5e'; }
+    else if(TI.val < Tc*1.5){ msg='Impulsion de '+TI.val+' ms à peine plus longue que le cycle : c’est la limite, et la moindre variation la fera rater.'; coul='#f0a844'; }
+    else { msg='Impulsion de '+TI.val+' ms, cycle de '+Tc+' ms : aucune impulsion ne peut échapper à la lecture. La sortie suit, avec un cycle de retard.'; coul='#c8d834'; }
+    MSPC.mono(ctx,msg,26,H-9,11,coul);
+
+    var tot=vues+perdues;
+    out.innerHTML = '<b>'+vues+'</b> vue(s) · <b style="color:'+(perdues?'#ff6a5e':'#9fb08c')+'">'+perdues+'</b> perdue(s)<br>'
+      + (tot ? 'soit <b>'+Math.round(100*perdues/tot)+' %</b> de pièces non comptées' : 'en attente de la première impulsion');
+  }, {fixed:true});
+})();
+</script>
+
+<script>
+/* ======================= CH 29 · topologies de réseau ======================= */
+(function(){
+  "use strict";
+  var TOPO=['en étoile','en ligne','en anneau'];
+  var T=MSPC.ctrl('a-reseau-t', function(v){ return TOPO[v]; }, 'a-reseau-t-l');
+  var C=MSPC.ctrl('a-reseau-c');
+  var M=MSPC.ctrl('a-reseau-m');
+  var lblC=document.getElementById('a-reseau-c-l');
+  var out=document.getElementById('a-reseau-out');
+
+  var NOMS=['AUTOMATE','ÎLOT 1','ÎLOT 2','VARIATEUR','PUPITRE'];
+  var IP=[10,21,22,23,24];
+
+  /* Positions et liaisons pour chaque topologie. */
+  function scene(t){
+    if(t===0){
+      return {p:[[140,166],[730,62],[730,130],[730,198],[730,266]],
+              sw:[440,166],
+              li:[[0,-1],[-1,1],[-1,2],[-1,3],[-1,4]],
+              nl:['la liaison automate ↔ commutateur','le brin vers l’îlot 1','le brin vers l’îlot 2','le brin vers le variateur','le brin vers le pupitre']};
+    }
+    if(t===1){
+      return {p:[[108,196],[276,196],[444,196],[612,196],[780,196]], sw:null,
+              li:[[0,1],[1,2],[2,3],[3,4]],
+              nl:['automate ↔ îlot 1','îlot 1 ↔ îlot 2','îlot 2 ↔ variateur','variateur ↔ pupitre']};
+    }
+    var p=[], cx=450, cy=172, R=104;
+    for(var k=0;k<5;k++){ var an=-Math.PI/2 + k*1.25664; p.push([cx+Math.cos(an)*R*1.55, cy+Math.sin(an)*R]); }
+    return {p:p, sw:null, li:[[0,1],[1,2],[2,3],[3,4],[4,0]],
+            nl:['automate ↔ îlot 1','îlot 1 ↔ îlot 2','îlot 2 ↔ variateur','variateur ↔ pupitre','pupitre ↔ automate']};
+  }
+
+  MSPC.anim('a-reseau', function(a){
+    var ctx=a.ctx, W=a.W, H=a.H;
+    var t=T.val, S=scene(t);
+    var cut=Math.min(C.val, S.li.length);   // 0 = aucune coupure
+    lblC.textContent = cut===0 ? 'aucune' : S.nl[cut-1];
+
+    /* accessibilité : parcours depuis l'automate, le commutateur porte l'indice -1 */
+    var vus={0:true}, chg=true;
+    while(chg){ chg=false;
+      for(var i=0;i<S.li.length;i++){
+        if(i===cut-1) continue;
+        var A=S.li[i][0], B=S.li[i][1];
+        if(vus[A]&&!vus[B]){ vus[B]=true; chg=true; }
+        if(vus[B]&&!vus[A]){ vus[A]=true; chg=true; }
+      }
+    }
+    /* en anneau, une seule coupure ne prive personne : le tour se fait dans l'autre sens */
+    var joignable=[]; for(var n=0;n<5;n++) joignable.push(!!vus[n]);
+    var perdus=0; for(n=1;n<5;n++) if(!joignable[n]) perdus++;
+    /* le masque erroné : joignable physiquement, mais aucun dialogue */
+    var masq=M.val;
+    var muet=[false,false,false,masq,false];
+
+    MSPC.fond(ctx,W,H,0);
+    MSPC.mono(ctx,'TROIS TOPOLOGIES, UNE COUPURE — ET LA DIFFÉRENCE ENTRE PANNE PHYSIQUE ET PANNE APPLICATIVE',26,28,11,'#8d968b');
+
+    /* ---- les liaisons ---- */
+    for(i=0;i<S.li.length;i++){
+      var A2=S.li[i][0], B2=S.li[i][1];
+      var pa = A2===-1 ? S.sw : S.p[A2];
+      var pb = B2===-1 ? S.sw : S.p[B2];
+      var coupe = (i===cut-1);
+      ctx.strokeStyle = coupe ? 'rgba(255,106,94,.30)' : 'rgba(200,216,52,.55)';
+      ctx.lineWidth = coupe ? 1.6 : 2.6;
+      if(coupe){ ctx.setLineDash([5,5]); } else { ctx.setLineDash([]); }
+      ctx.beginPath(); ctx.moveTo(pa[0],pa[1]); ctx.lineTo(pb[0],pb[1]); ctx.stroke();
+      ctx.setLineDash([]);
+      if(coupe){
+        var mx=(pa[0]+pb[0])/2, my=(pa[1]+pb[1])/2;
+        ctx.strokeStyle='#ff6a5e'; ctx.lineWidth=3;
+        ctx.beginPath(); ctx.moveTo(mx-9,my-9); ctx.lineTo(mx+9,my+9); ctx.moveTo(mx+9,my-9); ctx.lineTo(mx-9,my+9); ctx.stroke();
+      }
+    }
+    /* ---- le commutateur ---- */
+    if(S.sw){
+      ctx.fillStyle='rgba(255,255,255,.07)'; ctx.fillRect(S.sw[0]-46,S.sw[1]-22,92,44);
+      ctx.strokeStyle='#8f9a86'; ctx.lineWidth=1.6; ctx.strokeRect(S.sw[0]-46,S.sw[1]-22,92,44);
+      MSPC.mono(ctx,'COMMUTATEUR',S.sw[0],S.sw[1]+4,9.5,'#c8d834','center');
+    }
+    /* ---- les équipements ---- */
+    for(n=0;n<5;n++){
+      var x=S.p[n][0], y=S.p[n][1];
+      var etat = !joignable[n] ? 2 : (muet[n] ? 1 : 0);   // 0 ok, 1 muet, 2 injoignable
+      var cE=['#c8d834','#f0a844','#ff6a5e'][etat];
+      var w2 = n===0 ? 62 : 50, h2 = n===0 ? 44 : 40;
+      ctx.fillStyle = etat===0 ? 'rgba(200,216,52,.13)' : (etat===1?'rgba(240,168,68,.13)':'rgba(255,106,94,.10)');
+      ctx.fillRect(x-w2/2,y-h2/2,w2,h2);
+      ctx.strokeStyle=cE; ctx.lineWidth= n===0?2.2:1.6; ctx.strokeRect(x-w2/2,y-h2/2,w2,h2);
+      ctx.fillStyle=cE; ctx.beginPath(); ctx.arc(x,y-4,6,0,6.2832); ctx.fill();
+      MSPC.mono(ctx,NOMS[n],x,y+h2/2+15,9.5,cE,'center');
+      if(etat===2) MSPC.mono(ctx,'HORS LIGNE',x,y+h2/2+27,8.5,'#ff6a5e','center');
+      if(etat===1) MSPC.mono(ctx,'PAS DE DIALOGUE',x,y+h2/2+27,8.5,'#f0a844','center');
+    }
+
+    /* ---- le tableau d'adressage ---- */
+    var ty=326;
+    MSPC.mono(ctx,'ÉQUIPEMENT',44,ty,9.5,'#6f786e');
+    MSPC.mono(ctx,'ADRESSE IP',196,ty,9.5,'#6f786e');
+    MSPC.mono(ctx,'MASQUE',356,ty,9.5,'#6f786e');
+    MSPC.mono(ctx,'RÉSEAU OBTENU',536,ty,9.5,'#6f786e');
+    MSPC.mono(ctx,'ÉTAT',736,ty,9.5,'#6f786e');
+    ctx.strokeStyle='rgba(255,255,255,.14)'; ctx.lineWidth=1;
+    ctx.beginPath(); ctx.moveTo(40,ty+7); ctx.lineTo(W-40,ty+7); ctx.stroke();
+    for(n=0;n<5;n++){
+      var ry=ty+26+n*18;
+      var faux = (n===3 && masq);
+      var mk = faux ? '255.255.255.240' : '255.255.255.0';
+      var res = faux ? '192.168.1.16' : '192.168.1.0';
+      var e2 = !joignable[n] ? 2 : (muet[n] ? 1 : 0);
+      var cR = e2===0 ? '#9aa494' : (e2===1?'#f0a844':'#ff6a5e');
+      MSPC.mono(ctx,NOMS[n],44,ry,10,cR);
+      MSPC.mono(ctx,'192.168.1.'+IP[n],196,ry,10,cR);
+      MSPC.mono(ctx,mk,356,ry,10, faux?'#ff6a5e':cR);
+      MSPC.mono(ctx,res,536,ry,10, faux?'#ff6a5e':cR);
+      MSPC.mono(ctx, e2===0?'dialogue OK':(e2===1?'muet':'hors ligne'),736,ry,10,cR);
+    }
+
+    /* ---- le bandeau ---- */
+    var m1,m2,coul;
+    if(masq && joignable[3]){
+      m1='Le variateur a un masque /28 : il se croit sur le réseau 192.168.1.16, quand l’automate est sur 192.168.1.0.';
+      m2='Le câble est bon, la LED est verte, et rien ne passe : panne APPLICATIVE. Aucun câble neuf n’y changera quoi que ce soit.';
+      coul='#f0a844';
+    } else if(cut===0){
+      m1='Aucune coupure : les cinq équipements dialoguent. Coupez une liaison et observez ce que chaque topologie encaisse.';
+      m2='Coût du câble : la ligne est la moins chère, l’anneau la plus chère. La robustesse se paie exactement dans cet ordre.';
+      coul='#c8d834';
+    } else if(t===2){
+      m1='ANNEAU : une coupure ne prive personne. L’information fait le tour dans l’autre sens, et le réseau se reconfigure seul.';
+      m2='Mais l’anneau n’a plus de réserve : une SECONDE coupure fera tomber tout ce qui se trouve entre les deux.';
+      coul='#c8d834';
+    } else if(perdus===0){
+      m1='Cette coupure ne prive aucun équipement.';
+      m2='Essayez une autre liaison — toutes n’ont pas la même importance.';
+      coul='#c8d834';
+    } else {
+      m1 = (t===0?'ÉTOILE : ':'LIGNE : ') + perdus + ' équipement' + (perdus>1?'s hors ligne':' hors ligne') + '.';
+      m2 = t===0
+        ? (perdus>1 ? 'Vous avez coupé le tronc : tout ce qui est derrière le commutateur tombe d’un coup.' : 'Un seul brin coupé, un seul équipement perdu : c’est tout l’intérêt de l’étoile.')
+        : 'En ligne, tout ce qui est EN AVAL de la coupure tombe — même les appareils en parfait état.';
+      coul='#ff6a5e';
+    }
+    ctx.fillStyle='rgba(255,255,255,.05)'; ctx.fillRect(26,438,W-52,44);
+    MSPC.mono(ctx,m1,42,458,11,coul);
+    MSPC.mono(ctx,m2,42,475,10,'#8d968b');
+
+    out.innerHTML = masq&&joignable[3]
+      ? '<b style="color:#f0a844">panne applicative</b><br>LED verte, aucun dialogue'
+      : (perdus? '<b style="color:#ff6a5e">'+perdus+' hors ligne</b><br>panne physique'
+               : '<b style="color:#c8d834">réseau complet</b><br>5 équipements en ligne');
+  }, {fixed:true});
+})();
+</script>
+
+<script>
+/* ======================= CH 29 · capteur classique / IO-Link ======================= */
+(function(){
+  "use strict";
+  var E=MSPC.ctrl('a-iolink-e', function(v){ return v+' %'; }, 'a-iolink-e-l');
+  var R=MSPC.ctrl('a-iolink-r');
+  var out=document.getElementById('a-iolink-out');
+
+  MSPC.anim('a-iolink', function(a){
+    var ctx=a.ctx, W=a.W, H=a.H;
+    var enc=E.val, rempl=R.val;
+    var marge=Math.max(0,100-enc);               // marge de fonctionnement, en %
+    var detecte = enc<80;                        // le TOR bascule d'un coup
+    var alerte = marge<40;                       // le seuil que le capteur remonte de lui-même
+
+    MSPC.fond(ctx,W,H,0);
+    MSPC.mono(ctx,'LE MÊME DÉTECTEUR, CÂBLÉ DE DEUX FAÇONS — ET CE QUE CHACUN SAIT DIRE DE LUI-MÊME',26,28,11,'#8d968b');
+
+    var pan=[{x:26,w:412,n:'DÉTECTEUR CLASSIQUE (TOR)',s:'un fil, un bit'},
+             {x:462,w:412,n:'LE MÊME EN IO-LINK',s:'le même fil, tout ce qu’il sait'}];
+
+    for(var p=0;p<2;p++){
+      var P=pan[p], x0=P.x, w=P.w;
+      ctx.fillStyle='rgba(255,255,255,.04)'; ctx.fillRect(x0,48,w,340);
+      ctx.strokeStyle= p? 'rgba(200,216,52,.40)':'rgba(255,255,255,.16)';
+      ctx.lineWidth=1.4; ctx.strokeRect(x0,48,w,340);
+      MSPC.titre(ctx,P.n,x0+18,76,17, p?'#c8d834':'#e8ece6');
+      MSPC.mono(ctx,P.s,x0+18,94,10,'#6f786e');
+
+      /* --- le capteur, l'optique encrassée, la cible --- */
+      var sy=140;
+      ctx.fillStyle='rgba(143,154,134,.22)'; ctx.fillRect(x0+24,sy-20,52,40);
+      ctx.strokeStyle='#8f9a86'; ctx.lineWidth=1.6; ctx.strokeRect(x0+24,sy-20,52,40);
+      /* la lentille */
+      ctx.fillStyle='rgba(200,216,52,'+(0.55*(1-enc/100)+0.05)+')';
+      ctx.fillRect(x0+76,sy-11,8,22);
+      ctx.strokeStyle='#8f9a86'; ctx.lineWidth=1; ctx.strokeRect(x0+76,sy-11,8,22);
+      /* la crasse */
+      for(var d=0;d<Math.round(enc/4);d++){
+        var ang=(d*2.399)+p*0.7;
+        ctx.fillStyle='rgba(120,104,74,.85)';
+        ctx.beginPath();
+        ctx.arc(x0+80+Math.cos(ang)*3.2, sy+Math.sin(ang)*9, 1.5+((d*7)%3)*0.5, 0, 6.2832);
+        ctx.fill();
+      }
+      /* le faisceau */
+      var cible=x0+300;
+      ctx.strokeStyle='rgba(200,216,52,'+(0.10+0.60*(1-enc/100))+')';
+      ctx.lineWidth=2+6*(1-enc/100);
+      ctx.beginPath(); ctx.moveTo(x0+86,sy); ctx.lineTo(cible-14,sy); ctx.stroke();
+      /* la pièce */
+      ctx.fillStyle='rgba(255,255,255,.10)'; ctx.fillRect(cible-14,sy-34,42,68);
+      ctx.strokeStyle='#8f9a86'; ctx.lineWidth=1.4; ctx.strokeRect(cible-14,sy-34,42,68);
+      MSPC.mono(ctx,'pièce',cible+7,sy+50,9.5,'#6f786e','center');
+      MSPC.mono(ctx,'optique encrassée à '+enc+' %',x0+24,sy+66,9.5, enc>60?'#f0a844':'#6f786e');
+    }
+
+    /* ================= panneau gauche : ce que reçoit l'automate ================= */
+    var gx=44, gy=232;
+    if(!rempl){
+      MSPC.mono(ctx,'CE QUE REÇOIT L’AUTOMATE',gx,gy,10,'#6f786e');
+      ctx.fillStyle = detecte ? '#c8d834' : '#2b332a';
+      ctx.beginPath(); ctx.arc(gx+22,gy+42,20,0,6.2832); ctx.fill();
+      ctx.strokeStyle='#8f9a86'; ctx.lineWidth=1.4; ctx.stroke();
+      MSPC.titre(ctx, detecte?'1':'0', gx+70, gy+52, 30, detecte?'#c8d834':'#5d665e');
+      MSPC.titre(ctx, detecte?'DÉTECTÉ':'PLUS RIEN', gx+108, gy+52, 22, detecte?'#c8d834':'#ff6a5e');
+      MSPC.mono(ctx,'C’est tout. Un bit, et rien d’autre.',gx,gy+84,10.5,'#8d968b');
+      var LG = detecte
+        ? ['Il dit « détecté » exactement comme au premier jour,',
+           'et il le dira jusqu’à la seconde où il ne le dira plus.',
+           'Rien de sa santé n’a jamais circulé sur ce fil.']
+        : ['Il s’est tu à l’instant, sans avoir rien annoncé.',
+           'La production est arrêtée et le diagnostic reste',
+           'entièrement à faire. Personne ne l’a vu venir.'];
+      for(var g2=0;g2<3;g2++)
+        MSPC.mono(ctx,LG[g2],gx,gy+106+g2*18,9.8, (!detecte&&g2===0)?'#ff6a5e':'#6f786e');
+    } else {
+      MSPC.mono(ctx,'REMPLACER CE CAPTEUR',gx,gy,10,'#6f786e');
+      var L1=['1 · débrancher, reposer, rebrancher','2 · retrouver la notice et les réglages','3 · régler seuil et sensibilité à la main',
+              '4 · régler la temporisation à la main','5 · essayer, corriger, ré-essayer'];
+      for(var q=0;q<5;q++) MSPC.mono(ctx,L1[q],gx,gy+24+q*19,10.5,'#9aa494');
+      MSPC.titre(ctx,'≈ 25 minutes',gx,gy+146,22,'#f0a844');
+      MSPC.mono(ctx,'jamais tout à fait l’ancien réglage',gx+152,gy+146,10,'#6f786e');
+    }
+
+    /* ================= panneau droit : la trame IO-Link ================= */
+    var dx=482, dy=232;
+    if(!rempl){
+      MSPC.mono(ctx,'CE QUE REÇOIT L’AUTOMATE',dx,dy,10,'#6f786e');
+      var lignes=[
+        ['état', detecte?'détecté':'plus rien', detecte?'#c8d834':'#ff6a5e'],
+        ['marge de fonctionnement', Math.round(marge)+' %', marge<20?'#ff6a5e':(alerte?'#f0a844':'#c8d834')],
+        ['température interne', (34+enc*0.08).toFixed(0)+' °C','#9aa494'],
+        ['heures de service', MSPC.nb(11840+enc*26)+' h','#9aa494'],
+        ['référence', 'OGH-500-IOL / v2.4','#9aa494']
+      ];
+      for(var r=0;r<lignes.length;r++){
+        var ry=dy+22+r*20;
+        MSPC.mono(ctx,lignes[r][0],dx,ry,10,'#6f786e');
+        MSPC.mono(ctx,lignes[r][1],dx+390,ry,10.5,lignes[r][2],'right');
+      }
+      /* la jauge de marge */
+      var jy=dy+128;
+      MSPC.mono(ctx,'marge',dx,jy-6,9.5,'#6f786e');
+      ctx.fillStyle='rgba(255,255,255,.10)'; ctx.fillRect(dx+52,jy-14,286,12);
+      ctx.fillStyle = marge<20?'#ff6a5e':(alerte?'#f0a844':'#c8d834');
+      ctx.fillRect(dx+52,jy-14,286*marge/100,12);
+      ctx.strokeStyle='rgba(255,255,255,.45)'; ctx.lineWidth=1.4;
+      ctx.beginPath(); ctx.moveTo(dx+52+286*0.4,jy-18); ctx.lineTo(dx+52+286*0.4,jy+2); ctx.stroke();
+      MSPC.mono(ctx,'seuil d’alerte 40 %',dx+52+286*0.4,jy+16,9,'#8d968b','center');
+      if(alerte) MSPC.mono(ctx, marge<20?'INTERVENTION IMMÉDIATE':'MAINTENANCE À PRÉVOIR', dx+390, jy+16, 10.5, marge<20?'#ff6a5e':'#f0a844','right');
+    } else {
+      MSPC.mono(ctx,'REMPLACER CE CAPTEUR',dx,dy,10,'#6f786e');
+      var L2=['1 · débrancher, reposer, rebrancher','2 · le maître reconnaît la référence','3 · il réinjecte les paramètres sauvegardés','4 · le capteur repart avec SES réglages','5 · rien à régler, rien à retrouver'];
+      for(q=0;q<5;q++) MSPC.mono(ctx,L2[q],dx,dy+24+q*19,10.5,'#9aa494');
+      MSPC.titre(ctx,'≈ 2 minutes',dx,dy+146,22,'#c8d834');
+      MSPC.mono(ctx,'réglage rigoureusement identique',dx+152,dy+146,10,'#6f786e');
+    }
+
+    /* ---- bandeau ---- */
+    var m1,m2,coul;
+    if(rempl){
+      m1='Le paramétrage d’un capteur IO-Link n’habite pas dans le capteur : il est sauvegardé dans le maître.';
+      m2='Un remplacement redevient une opération de deux minutes, reproductible, que n’importe qui peut faire.'; coul='#c8d834';
+    } else if(enc>=80){
+      m1='Le classique vient de s’arrêter net, sans avoir rien annoncé. La ligne est à l’arrêt, et le diagnostic reste à faire.';
+      m2='L’IO-Link, lui, alertait dès 60 % d’encrassement : il y avait '+(enc-60)+' points de marge pour programmer l’arrêt.'; coul='#ff6a5e';
+    } else if(alerte){
+      m1='Le classique dit toujours « détecté » — exactement comme au premier jour. Rien n’indique que quoi que ce soit se dégrade.';
+      m2='L’IO-Link a franchi son seuil : il reste '+Math.round(marge)+' % de marge, et le nettoyage peut être planifié tranquillement.'; coul='#f0a844';
+    } else {
+      m1='À ce niveau d’encrassement, les deux capteurs disent exactement la même chose. Montez le curseur : c’est là que tout se sépare.';
+      m2='Toute la maintenance prévisionnelle tient dans cette différence — savoir AVANT, plutôt que constater APRÈS.'; coul='#c8d834';
+    }
+    ctx.fillStyle='rgba(255,255,255,.05)'; ctx.fillRect(26,400,W-52,46);
+    MSPC.mono(ctx,m1,42,421,11,coul);
+    MSPC.mono(ctx,m2,42,439,10,'#8d968b');
+
+    out.innerHTML = rempl
+      ? '<b style="color:#c8d834">2 min</b> en IO-Link<br>contre <b style="color:#f0a844">25 min</b> en classique'
+      : '<b style="color:'+(detecte?'#c8d834':'#ff6a5e')+'">'+(detecte?'détecté':'plus rien')+'</b> pour le classique<br>marge <b>'+Math.round(marge)+' %</b> pour l’IO-Link';
+  }, {fixed:true});
+})();
+</script>
+
 
 <section class="ch" id="tps">
   <div class="ch-head"><div class="ch-num">TP</div><div class="ch-title">
