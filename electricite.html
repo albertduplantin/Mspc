@@ -6149,24 +6149,29 @@
 
 <p><span class="cle">Une plaque qui annonce 1 440 tr/min désigne un moteur à 4 pôles : sa vitesse de synchronisme est 1 500, et les 60 tr/min manquants sont le glissement.</span> Vous saurez lire cela dans deux paragraphes.</p>
 
+<p>Voici cette machine en volume. Les deux sections qui suivent en démontent chaque pièce — mais tout y est déjà : le stator immobile, le champ qui tourne, et le rotor qui court après lui sans jamais le rattraper.</p>
+
 <figure class="anim">
-  <canvas id="a-champ" width="900" height="450" aria-label="Animation : le champ tournant créé par trois bobines, et l'effet du nombre de paires de pôles"></canvas>
+  <canvas id="a-moteur3d" width="900" height="580" aria-label="Animation en volume : trois bobines à 120°, l'aimant du champ tournant en périphérie, la spire du rotor et son aimant induit décalé par le glissement"></canvas>
   <div class="ctrls">
-    <div class="c"><label>Fréquence <span id="a-champ-f-l">50 Hz</span></label><input type="range" id="a-champ-f" min="5" max="60" value="50"></div>
-    <div class="c"><label>Paires de pôles <span id="a-champ-p-l">2 — moteur 4 pôles</span></label><input type="range" id="a-champ-p" min="1" max="3" value="2"></div>
-    <div class="c"><label class="switch"><input type="checkbox" id="a-champ-c" checked><span>Montrer les trois courants</span></label></div>
-    <div class="c readout" id="a-champ-out"></div>
+    <div class="c"><label>Glissement <span id="a-moteur3d-g-l">5 %</span></label><input type="range" id="a-moteur3d-g" min="0" max="100" value="5"></div>
+    <div class="c"><label>Rotor <span id="a-moteur3d-s-l">1 seule spire</span></label><input type="range" id="a-moteur3d-s" min="1" max="12" value="1"></div>
+    <div class="c"><label class="switch"><input type="checkbox" id="a-moteur3d-c" checked><span>Montrer les trois courants</span></label></div>
+    <div class="c readout" id="a-moteur3d-out"></div>
   </div>
-  <figcaption>L'entrefer du moteur, déroulé en couleurs : le <b>rouge est un pôle nord</b>, le <b>bleu un pôle sud</b>. Aucune pièce ne bouge — ce sont les trois courants qui, en se décalant dans le temps, font glisser les pôles autour du stator. <b>Passez de 1 à 3 paires de pôles</b> : les pôles se multiplient, et la vitesse de rotation du champ est divisée d'autant. <b>Baissez la fréquence</b> : le champ ralentit proportionnellement — c'est exactement le levier qu'utilise un variateur de vitesse.</figcaption>
+  <figcaption>Le moteur vu en volume. Les <b>trois bobines à 120°</b> s'allument en rouge quand leur courant est positif, en bleu quand il est négatif — et leur somme fabrique l'<b>aimant rouge et bleu qui tourne en périphérie, pointé vers le centre</b>. Au milieu, la <b>spire</b> du rotor, et l'<b>aimant induit</b> qu'elle fabrique : il est toujours <b>en retard sur le champ</b>, et c'est ce retard qui produit le couple. <b>Amenez le glissement à 0</b> : la spire tourne exactement avec le champ, plus rien ne défile devant elle, l'aimant induit disparaît et le couple tombe à zéro. <b>Amenez-le à 100 %</b> : la spire est à l'arrêt, le champ la balaie à pleine vitesse — courant maximal, mais aimant tellement décalé que le couple n'est pas au maximum. <b>Ajoutez des spires</b> : l'aimant induit grossit, et il cesse de pulser. C'est exactement pourquoi un vrai rotor est une cage et non une spire.</figcaption>
   <div class="autableau">
-    <b class="entete">Au tableau <i>· 9 minutes · animation 1 sur 3</i></b>
+    <b class="entete">Au tableau <i>· 15 minutes · animation 1 sur 3</i></b>
     <ol>
-      <li>Laisser 50 Hz, p = 2. <span class="q">« Qu'est-ce qui tourne, dans ce dessin ? »</span> Réponse à faire trouver : rien. Aucune matière ne bouge.</li>
-      <li>Passer p de 2 à 1, puis à 3, sans toucher à la fréquence. <span class="q">« La fréquence n'a pas bougé. Pourquoi la vitesse change-t-elle ? »</span></li>
-      <li>Faire lire n<sub>s</sub> à chaque fois et vérifier au tableau : 3 000, 1 500, 1 000.</li>
-      <li>Revenir à p = 2 et baisser la fréquence à 25 Hz. <span class="q">« Combien de tours par minute ? »</span> 750. <span class="q">« Comment fait-on varier la fréquence sur une machine ? »</span> — ouvre le chapitre 25.</li>
+      <li>Glissement 5 %, 1 spire. Laisser tourner en silence dix secondes. <span class="q">« Qu'est-ce qui bouge, dans le stator ? »</span> Réponse à faire trouver : rien du tout. Aucune matière ne tourne — seul le courant change dans les bobines.</li>
+      <li>Faire suivre du doigt l'<b>aimant qui tourne en périphérie</b>. <span class="q">« D'où sort-il ? »</span> Faire regarder les trois bobines s'allumer tour à tour, et le graphe des trois courants.</li>
+      <li><span class="q">« Est-ce que la spire tourne aussi vite que l'aimant ? »</span> Faire lire les deux vitesses, puis le compteur de <b>tours d'avance</b> : le champ double la spire, encore et encore.</li>
+      <li>Amener le glissement à <b>0</b>. L'aimant induit disparaît. <span class="q">« Pourquoi ? »</span> Attendre la réponse : plus rien ne défile devant la spire, donc plus d'induction, donc plus de courant, donc plus d'aimant.</li>
+      <li><span class="q">« Un moteur asynchrone peut-il tourner à sa vitesse de synchronisme ? »</span> Non — et l'animation vient de le démontrer.</li>
+      <li>Glissement à <b>100 %</b> : c'est le démarrage, rotor à l'arrêt. Faire lire le courant induit (maximal) et le couple (pas maximal). <span class="q">« Pourquoi le couple n'est-il pas au maximum si le courant l'est ? »</span> Le décalage est trop grand.</li>
+      <li>Revenir à 5 %, puis passer de <b>1 spire à 12</b>. Faire observer que l'aimant induit grossit <em>et</em> cesse de pulser. <span class="q">« À quoi ressemble le rotor, avec douze spires ? »</span> À une cage d'écureuil.</li>
     </ol>
-    <div class="piege">Le piège : « c'est le rotor qui crée le champ tournant ». Non — le rotor n'est pas encore là. Le champ tourne dans un stator vide, avant même qu'on ait mis quoi que ce soit dedans.</div>
+    <div class="piege">Le piège : croire que le rotor « suit » l'aimant comme une boussole suivrait un aimant qu'on promène. Une boussole finit par se coller à l'aimant ; le rotor, lui, ne le peut pas — s'il y arrivait, il n'y aurait plus rien à induire et il perdrait aussitôt tout son couple. Le retard n'est pas un défaut de fabrication, c'est le mécanisme lui-même.</div>
   </div>
 </figure>
 
@@ -6321,109 +6326,318 @@
 </section>
 
 <script>
-/* ======================= CH 22 · le champ tournant du stator ======================= */
+/* ======================= CH 22 · le moteur asynchrone en volume =======================
+   Scène en volume rendue au canvas 2D : projection orthographique après une
+   rotation d'inclinaison autour de X, puis tri des primitives par profondeur.
+
+   Physique :
+   • Trois bobines d'axe radial à 120°, parcourues par i_j = cos(ωt − j·120°).
+     Leur somme vaut (3/2)·û(ωt + 90°) : un champ d'amplitude constante qui
+     tourne. L'aimant en périphérie matérialise ce vecteur.
+   • Chaque spire du rotor, de normale φ_k, voit le flux B·A·cos(θs − φ_k).
+     La f.é.m. vaut (ωs − ωr)·sin(θs − φ_k), et le courant est en retard de
+     δ = atan(g·X/R) sur cette f.é.m. — d'où un moment magnétique
+     m_k ∝ sin(θs − φ_k − δ)·û(φ_k).
+   • La somme sur n spires réparties sur 180° vaut exactement
+     (n/2)·û(θs − 90° − δ) : un aimant d'amplitude constante, en retard de
+     90° + δ sur le champ. Pour n = 1 la somme se réduit à un seul terme :
+     l'aimant reste accroché à la spire, pulse et s'inverse à la fréquence de
+     glissement. C'est toute la raison d'être de la cage.
+   • Le couple vaut |m ∧ B| = |m|·B·cos δ, ce qui redonne la loi de Kloss avec
+     X/R = 5, soit un glissement de couple maximal de 20 %. */
 (function(){
   "use strict";
-  var PH=[{n:'L1',c:'#f0a844'},{n:'L2',c:'#5cc4e0'},{n:'L3',c:'#c8d834'}];
-  var F=MSPC.ctrl('a-champ-f', function(v){ return Math.round(v)+' Hz'; }, 'a-champ-f-l');
-  var P=MSPC.ctrl('a-champ-p', function(v){ return v+' — moteur '+(2*v)+' pôles'; }, 'a-champ-p-l');
-  var C=MSPC.ctrl('a-champ-c');
-  var out=document.getElementById('a-champ-out');
-  var th=0;
+  var G  = MSPC.ctrl('a-moteur3d-g', function(v){ return v+' %'; }, 'a-moteur3d-g-l');
+  var SP = MSPC.ctrl('a-moteur3d-s', function(v){ return v===1 ? '1 seule spire' : v+' spires'; }, 'a-moteur3d-s-l');
+  var CU = MSPC.ctrl('a-moteur3d-c');
+  var out= document.getElementById('a-moteur3d-out');
 
-  MSPC.anim('a-champ', function(a){
-    var ctx=a.ctx, W=a.W, H=a.H;
-    var f=F.val, p=P.val;
-    var ns=60*f/p;
-    th += a.dt*6.2832*f;                       // phase électrique
+  var TI=58*Math.PI/180, ST=Math.sin(TI), CT=Math.cos(TI);
+  var CX=286, CY=244, SC=99;
+  var RB=1.00, RS=1.90, RR=0.44, LZ=0.60, LR=0.66;
+  var NSYN=3000;            // p = 1 à 50 Hz
+  var VIT=2.856;            // un tour de champ en 2,2 s à l'écran
+  var XR=5;                 // rapport X/R du rotor : couple maximal à 20 % de glissement
+  var MREF=0.62;            // référence des jauges : rotor de 12 spires au couple maximal
+  var CPH=['#f0a844','#c8d834','#5cc4e0'];   // identité des phases, distincte du rouge/bleu N-S
+  var thS=Math.PI/2, thR=Math.PI/2, avance=0;
+
+  if(G.el)  G.el.addEventListener('input', function(){ avance=0; });
+  if(SP.el) SP.el.addEventListener('input', function(){ avance=0; });
+
+  /* ---------- projection et primitives ---------- */
+  function P(x,y,z){
+    return { x: CX + x*SC, y: CY - (y*CT + z*ST)*SC, d: -y*ST + z*CT };
+  }
+  var SEG=[];
+  function line(p,q,c,w){ SEG.push({t:0,a:p,b:q,c:c,w:w,d:(p.d+q.d)*0.5}); }
+  function poly(pts,c,w){ for(var i=0;i<pts.length-1;i++) line(pts[i],pts[i+1],c,w); }
+  function face(v,f,c,w){
+    var d=0; for(var i=0;i<v.length;i++) d+=v[i].d;
+    SEG.push({t:1,p:v,f:f,c:c,w:w||1,d:d/v.length});
+  }
+  function bille(p,r,f){ SEG.push({t:2,a:p,r:r,f:f,d:p.d+0.02}); }
+  function boite(c,u,v,w,f,s){
+    var V=[],i;
+    for(i=0;i<8;i++){
+      var a=(i&1)?1:-1, b=(i&2)?1:-1, e=(i&4)?1:-1;
+      V.push(P(c[0]+u[0]*a+v[0]*b+w[0]*e, c[1]+u[1]*a+v[1]*b+w[1]*e, c[2]+u[2]*a+v[2]*b+w[2]*e));
+    }
+    var F=[[0,1,3,2],[4,6,7,5],[0,4,5,1],[2,3,7,6],[0,2,6,4],[1,5,7,3]];
+    for(i=0;i<6;i++) face([V[F[i][0]],V[F[i][1]],V[F[i][2]],V[F[i][3]]],f,s,1.1);
+  }
+  function cercle(r,z,c,w,n){
+    n=n||60; var pts=[],i;
+    for(i=0;i<=n;i++){ var an=i/n*6.2832; pts.push(P(Math.cos(an)*r, Math.sin(an)*r, z)); }
+    poly(pts,c,w);
+  }
+  function arc(r,z,a0,a1,c,w){
+    var pts=[],nn=Math.max(4,Math.round(Math.abs(a1-a0)*20)),i;
+    for(i=0;i<=nn;i++){ var an=a0+(a1-a0)*i/nn; pts.push(P(Math.cos(an)*r, Math.sin(an)*r, z)); }
+    poly(pts,c,w);
+  }
+
+  MSPC.anim('a-moteur3d', function(a){
+    var ctx=a.ctx, W=a.W, H=a.H, i, j, k;
+    var dt=Math.min(a.dt||0, 0.05);
+    var g=G.val/100, n=SP.val;
+
+    thS += VIT*dt;
+    thR += VIT*(1-g)*dt;
+    avance += VIT*g*dt/6.2832;
+    if(thS>1e6){ thS-=1e6; thR-=1e6; }
+
+    /* ---------- électrotechnique ---------- */
+    var we = thS - Math.PI/2;                       // angle électrique
+    var iph=[Math.cos(we), Math.cos(we-2.0944), Math.cos(we-4.1888)];
+    var dL = Math.atan(XR*g);                       // retard inductif du rotor
+    var I0 = g/Math.sqrt(1+XR*XR*g*g);              // amplitude du courant induit
+    var mx=0, my=0, imax=0, icur=[];
+    for(k=0;k<n;k++){
+      var ph = thR + k*Math.PI/n;                   // normale de la spire k
+      var ik = I0*Math.sin(thS - ph - dL);
+      icur.push(ik);
+      if(Math.abs(ik)>imax) imax=Math.abs(ik);
+      mx += ik*Math.cos(ph); my += ik*Math.sin(ph);
+    }
+    var M = Math.sqrt(mx*mx+my*my), angM = Math.atan2(my,mx);
+    var COUPLE = M*Math.sin(thS - angM);            // m ∧ B, signé
+    var CMAX = (n/2)*0.1;
+    var tRel = CMAX>0 ? Math.max(0,COUPLE/CMAX) : 0;
+    var nrot = NSYN*(1-g), fr = 50*g;
+    var decal = ((thS-angM)*180/Math.PI) % 360; if(decal<0) decal+=360;
 
     MSPC.fond(ctx,W,H,0);
-    MSPC.mono(ctx,'LE CHAMP TOURNANT DU STATOR — AUCUNE PIÈCE NE BOUGE',26,30,11.5,'#8d968b');
+    MSPC.mono(ctx,'LE MOTEUR ASYNCHRONE EN VOLUME — RIEN NE TOURNE DANS LE STATOR, ET POURTANT LE CHAMP TOURNE',26,28,11,'#8d968b');
 
-    var cx=232, cy=246, R1=96, R2=132;
+    SEG.length=0;
 
-    /* ---------- l'entrefer, coloré par l'induction ---------- */
-    for(var k=0;k<180;k++){
-      var an=k/180*6.2832, an2=(k+1)/180*6.2832;
-      var B=Math.cos(p*an - th);
-      var i=Math.abs(B);
-      ctx.fillStyle = B>0 ? 'rgba(179,32,23,'+(0.15+0.75*i)+')' : 'rgba(79,127,184,'+(0.15+0.75*i)+')';
-      ctx.beginPath();
-      ctx.arc(cx,cy,R2,an,an2); ctx.arc(cx,cy,R1,an2,an,true);
-      ctx.closePath(); ctx.fill();
+    /* ---------- carcasse et entrefer ---------- */
+    cercle(RS,  LZ, 'rgba(200,208,196,.18)', 1.2);
+    cercle(RS, -LZ, 'rgba(200,208,196,.10)', 1.2);
+    cercle(RB,  LZ, 'rgba(200,208,196,.32)', 1.4);
+    cercle(RB, -LZ, 'rgba(200,208,196,.16)', 1.4);
+    for(i=0;i<16;i++){
+      var av=i/16*6.2832;
+      line(P(Math.cos(av)*RS, Math.sin(av)*RS, LZ), P(Math.cos(av)*RS, Math.sin(av)*RS, -LZ), 'rgba(200,208,196,.07)', 1);
     }
-    ctx.strokeStyle='rgba(255,255,255,.22)'; ctx.lineWidth=1.4;
-    ctx.beginPath(); ctx.arc(cx,cy,R1,0,6.2832); ctx.stroke();
-    ctx.beginPath(); ctx.arc(cx,cy,R2,0,6.2832); ctx.stroke();
 
-    /* le rotor, encore absent */
-    ctx.fillStyle='rgba(255,255,255,.04)';
-    ctx.beginPath(); ctx.arc(cx,cy,R1-6,0,6.2832); ctx.fill();
-    MSPC.mono(ctx,'l’intérieur est vide :',cx,cy-8,10.5,'#6f786e','center');
-    MSPC.mono(ctx,'le rotor n’est pas encore là',cx,cy+8,10.5,'#6f786e','center');
-
-    /* ---------- les bobines, 3 par paire de pôles ---------- */
-    var nb=3*p;
-    for(var b=0;b<nb;b++){
-      var ab=b/nb*6.2832, ph=PH[b%3];
-      var bx=cx+Math.cos(ab)*(R2+22), by=cy+Math.sin(ab)*(R2+22);
-      var ib=Math.sin(th - (b%3)*2.0944);
-      ctx.save(); ctx.translate(bx,by); ctx.rotate(ab);
-      ctx.globalAlpha=0.25+0.75*Math.abs(ib);
-      ctx.strokeStyle=ph.c; ctx.lineWidth=2.6;
-      ctx.beginPath();
-      for(var q=0;q<=1.001;q+=0.05){
-        var yy=-13+q*26, xx=Math.sin(q*Math.PI*2*3)*5;
-        if(q===0) ctx.moveTo(xx,yy); else ctx.lineTo(xx,yy);
+    /* ---------- les trois bobines ---------- */
+    for(j=0;j<3;j++){
+      var be = Math.PI/2 + j*2.0944;
+      var ux=Math.cos(be), uy=Math.sin(be);
+      var ii=iph[j], mag=Math.abs(ii);
+      var col = ii>=0 ? 'rgba(255,106,94,' : 'rgba(127,167,216,';
+      line(P(ux*1.86, uy*1.86, 0), P(ux*1.04, uy*1.04, 0), 'rgba(200,208,196,.30)', 3);
+      var NT=7, pas=[], rho=0.245;
+      for(i=0;i<=NT*14;i++){
+        var s=i/(NT*14), r=1.84-0.74*s, an=6.2832*NT*s;
+        pas.push(P(ux*r - uy*rho*Math.sin(an), uy*r + ux*rho*Math.sin(an), rho*Math.cos(an)));
       }
-      ctx.stroke(); ctx.globalAlpha=1; ctx.restore();
-      if(nb<=6) MSPC.mono(ctx,ph.n,cx+Math.cos(ab)*(R2+44),cy+Math.sin(ab)*(R2+44)+4,9.5,ph.c,'center');
+      poly(pas, col+(0.16+0.72*mag).toFixed(2)+')', 1.9);
+      /* la face polaire : un simple ruban posé sur l'entrefer */
+      var dw=0.15;
+      face([P(Math.cos(be-dw)*1.015, Math.sin(be-dw)*1.015,  0.26),
+            P(Math.cos(be+dw)*1.015, Math.sin(be+dw)*1.015,  0.26),
+            P(Math.cos(be+dw)*1.015, Math.sin(be+dw)*1.015, -0.26),
+            P(Math.cos(be-dw)*1.015, Math.sin(be-dw)*1.015, -0.26)],
+           col+(0.06+0.34*mag).toFixed(2)+')', null, 0);
     }
 
-    /* la position des pôles */
-    for(var q2=0;q2<p;q2++){
-      var aN=(th+q2*6.2832)/p, aS=(th+Math.PI+q2*6.2832)/p;
-      MSPC.titre(ctx,'N',cx+Math.cos(aN)*114,cy+Math.sin(aN)*114+8,22,'#fff','center');
-      MSPC.titre(ctx,'S',cx+Math.cos(aS)*114,cy+Math.sin(aS)*114+8,22,'#cfe2ee','center');
+    /* ---------- l'aimant du champ tournant, en périphérie, pointé vers le centre ---------- */
+    var cs=Math.cos(thS), sn=Math.sin(thS);
+    var tw=[-sn*0.150, cs*0.150, 0], tz=[0,0,0.132];
+    boite([cs*0.890, sn*0.890, 0], [cs*0.090, sn*0.090, 0], tw, tz, 'rgba(74,127,192,.94)', '#8fb6e0');
+    boite([cs*0.710, sn*0.710, 0], [cs*0.090, sn*0.090, 0], tw, tz, 'rgba(224,72,60,.94)', '#ff9d94');
+    bille(P(cs*1.09, sn*1.09, 0), 3.4, '#e8ece6');
+
+    /* ---------- le rotor ---------- */
+    line(P(0,0,-1.06), P(0,0,1.06), 'rgba(200,208,196,.26)', 3.2);
+    cercle(RR,  LR, 'rgba(200,208,196,.20)', 1.2);
+    cercle(RR, -LR, 'rgba(200,208,196,.12)', 1.2);
+    for(k=0;k<n;k++){
+      var phk = thR + k*Math.PI/n;
+      var e1 = phk+Math.PI/2, e2 = phk-Math.PI/2;
+      var ik2 = icur[k];
+      var rel = Math.min(1, Math.abs(ik2)/Math.max(I0,1e-3));
+      /* Sans courant induit, une barre n'est ni nord ni sud : elle reste grise. */
+      var cbar = rel<0.03 ? 'rgba(200,208,196,.28)'
+               : (ik2>=0 ? 'rgba(255,106,94,' : 'rgba(127,167,216,') + (0.38+0.58*rel).toFixed(2)+')';
+      var A=P(Math.cos(e1)*RR, Math.sin(e1)*RR, -LR), B=P(Math.cos(e1)*RR, Math.sin(e1)*RR, LR);
+      var C=P(Math.cos(e2)*RR, Math.sin(e2)*RR,  LR), D=P(Math.cos(e2)*RR, Math.sin(e2)*RR,-LR);
+      line(A,B,cbar,5.0); line(C,D,cbar,5.0);
+      line(B,C,cbar,2.2); line(D,A,cbar,2.2);
+      if(k===0) bille(B, 3.4, '#c8d834');
     }
 
-    /* ---------- les trois courants ---------- */
-    if(C.val){
-      var g={x:472,y:64,w:398,h:118};
-      ctx.strokeStyle='rgba(255,255,255,.18)'; ctx.lineWidth=1; ctx.strokeRect(g.x+.5,g.y+.5,g.w,g.h);
-      var mid=g.y+g.h/2;
-      ctx.strokeStyle='rgba(255,255,255,.14)';
-      ctx.beginPath(); ctx.moveTo(g.x,mid); ctx.lineTo(g.x+g.w,mid); ctx.stroke();
-      for(var j=0;j<3;j++){
-        ctx.strokeStyle=PH[j].c; ctx.lineWidth=2.2; ctx.beginPath();
-        for(var px=0;px<=g.w;px++){
-          var an3=th+px/g.w*4*Math.PI;
-          var yy2=mid-Math.sin(an3-j*2.0944)*(g.h/2-10);
-          if(px===0) ctx.moveTo(g.x+px,yy2); else ctx.lineTo(g.x+px,yy2);
+    /* ---------- l'aimant induit, au cœur du rotor ---------- */
+    if(M>1e-4){
+      var rM=Math.min(1, Math.sqrt(M/1.18));
+      var LM = 0.10 + 0.26*rM, ep = 0.042 + 0.042*rM;
+      var mc=Math.cos(angM), ms=Math.sin(angM);
+      var mw=[-ms*ep, mc*ep, 0], mz=[0,0,ep*0.84];
+      boite([-mc*LM/2, -ms*LM/2, 0], [-mc*LM/2, -ms*LM/2, 0], mw, mz, 'rgba(74,127,192,.90)', '#c8d834');
+      boite([ mc*LM/2,  ms*LM/2, 0], [ mc*LM/2,  ms*LM/2, 0], mw, mz, 'rgba(224,72,60,.90)', '#c8d834');
+    }
+
+    /* ---------- les deux rayons et l'arc de décalage ---------- */
+    line(P(-cs*0.97, -sn*0.97, 0), P(cs*0.62, sn*0.62, 0), 'rgba(255,255,255,.16)', 1);
+    if(M>1e-4 && n>1){
+      line(P(0,0,0), P(Math.cos(angM)*0.62, Math.sin(angM)*0.62, 0), 'rgba(200,216,52,.28)', 1);
+      arc(0.62, 0, angM, thS, 'rgba(200,216,52,.42)', 1.4);
+    }
+
+    /* ---------- rendu, du plus lointain au plus proche ---------- */
+    SEG.sort(function(u,v){ return u.d-v.d; });
+    for(i=0;i<SEG.length;i++){
+      var sg=SEG[i];
+      if(sg.t===0){
+        ctx.strokeStyle=sg.c; ctx.lineWidth=sg.w;
+        ctx.beginPath(); ctx.moveTo(sg.a.x,sg.a.y); ctx.lineTo(sg.b.x,sg.b.y); ctx.stroke();
+      } else if(sg.t===1){
+        ctx.beginPath(); ctx.moveTo(sg.p[0].x,sg.p[0].y);
+        for(k=1;k<sg.p.length;k++) ctx.lineTo(sg.p[k].x,sg.p[k].y);
+        ctx.closePath();
+        if(sg.f){ ctx.fillStyle=sg.f; ctx.fill(); }
+        if(sg.c){ ctx.strokeStyle=sg.c; ctx.lineWidth=sg.w; ctx.stroke(); }
+      } else {
+        ctx.fillStyle=sg.f; ctx.beginPath(); ctx.arc(sg.a.x,sg.a.y,sg.r,0,6.2832); ctx.fill();
+      }
+    }
+
+    /* ---------- étiquettes, écartées de l'hélice ---------- */
+    var NOM=['A','B','C'];
+    for(j=0;j<3;j++){
+      var b2=Math.PI/2+j*2.0944, q=P(Math.cos(b2)*2.06, Math.sin(b2)*2.06, 0);
+      MSPC.mono(ctx,'bobine '+NOM[j], q.x, q.y + (Math.sin(b2)>0 ? -22 : 26), 10, CPH[j], 'center');
+    }
+    var qa=P(0,0,-1.30);
+    MSPC.mono(ctx,'arbre', qa.x, qa.y+22, 9.5, '#6f786e','center');
+
+    /* ---------- légende fixe, sous la scène ---------- */
+    var lx=34, ly=424;
+    function ent(y, c1, c2, txt, cad){
+      ctx.fillStyle=c1; ctx.fillRect(lx,y-8,13,10);
+      ctx.fillStyle=c2; ctx.fillRect(lx+13,y-8,13,10);
+      if(cad){ ctx.strokeStyle=cad; ctx.lineWidth=1.2; ctx.strokeRect(lx,y-8,26,10); }
+      MSPC.mono(ctx,txt,lx+34,y,9.5,'#8d968b');
+    }
+    ent(ly,    'rgba(224,72,60,.92)','rgba(74,127,192,.92)','aimant du champ tournant, en périphérie, pointé vers le centre');
+    ent(ly+20, 'rgba(224,72,60,.90)','rgba(74,127,192,.90)','aimant induit au cœur du rotor — toujours en retard','#c8d834');
+    ctx.strokeStyle='rgba(255,106,94,.85)'; ctx.lineWidth=3.4;
+    ctx.beginPath(); ctx.moveTo(lx,ly+36); ctx.lineTo(lx+26,ly+36); ctx.stroke();
+    MSPC.mono(ctx, n===1 ? 'la spire du rotor, rouge ou bleue selon le sens du courant'
+                         : 'les '+n+' spires du rotor, rouges ou bleues selon le sens du courant',
+              lx+34, ly+40, 9.5, '#8d968b');
+    ctx.fillStyle='#e8ece6'; ctx.beginPath(); ctx.arc(lx+7,ly+52,3.4,0,6.2832); ctx.fill();
+    ctx.fillStyle='#c8d834'; ctx.beginPath(); ctx.arc(lx+20,ly+52,3.4,0,6.2832); ctx.fill();
+    MSPC.mono(ctx,'repère du champ et repère du rotor : le blanc double le vert',lx+34,ly+56,9.5,'#8d968b');
+
+    /* ================= panneau de droite ================= */
+    var px=596;
+    ctx.strokeStyle='rgba(255,255,255,.10)'; ctx.lineWidth=1;
+    ctx.beginPath(); ctx.moveTo(px-18,62); ctx.lineTo(px-18,456); ctx.stroke();
+
+    var ry=84;
+    if(CU.val){
+      var kx=px+16, ky=76, kw=238, kh=92;
+      MSPC.mono(ctx,'COURANT DANS CHACUNE DES TROIS BOBINES',px,66,9.5,'#6f786e');
+      ctx.strokeStyle='rgba(255,255,255,.12)'; ctx.lineWidth=1;
+      ctx.beginPath(); ctx.moveTo(kx,ky+kh/2); ctx.lineTo(kx+kw,ky+kh/2); ctx.stroke();
+      for(j=0;j<3;j++){
+        ctx.strokeStyle=CPH[j]; ctx.lineWidth=1.8; ctx.beginPath();
+        for(i=0;i<=140;i++){
+          var tau=i/140*12.566;
+          var xx=kx+i/140*kw, yy=ky+kh/2 - Math.cos(tau - j*2.0944)*kh*0.42;
+          if(i===0) ctx.moveTo(xx,yy); else ctx.lineTo(xx,yy);
         }
         ctx.stroke();
-        ctx.fillStyle=PH[j].c;
-        ctx.beginPath(); ctx.arc(g.x, mid-Math.sin(th-j*2.0944)*(g.h/2-10), 5, 0, 6.2832); ctx.fill();
       }
-      MSPC.mono(ctx,'LES TROIS COURANTS DU STATOR',g.x,g.y-10,10.5,'#8d968b');
-      MSPC.mono(ctx,'décalés d’un tiers de période — c’est tout le secret',g.x,g.y+g.h+18,10,'#6f786e');
+      var cu=((we%12.566)+12.566)%12.566, cxp=kx+cu/12.566*kw;
+      ctx.strokeStyle='rgba(255,255,255,.40)'; ctx.lineWidth=1.2;
+      ctx.beginPath(); ctx.moveTo(cxp,ky); ctx.lineTo(cxp,ky+kh); ctx.stroke();
+      for(j=0;j<3;j++){
+        ctx.fillStyle=CPH[j];
+        ctx.beginPath(); ctx.arc(cxp, ky+kh/2-Math.cos(cu-j*2.0944)*kh*0.42, 4.2, 0, 6.2832); ctx.fill();
+        MSPC.mono(ctx,'ABC'[j], kx-11, ky+12+j*30, 9.5, CPH[j]);
+      }
+      ry=200;
     }
 
-    /* ---------- les chiffres ---------- */
-    var qx=472, qy=232;
-    ctx.fillStyle='rgba(255,255,255,.04)'; ctx.fillRect(qx,qy,398,158);
-    ctx.strokeStyle='rgba(255,255,255,.20)'; ctx.lineWidth=1.4; ctx.strokeRect(qx+.5,qy+.5,398,158);
-    MSPC.titre(ctx,'n',qx+20,qy+42,30,'#e6ebe4');
-    MSPC.mono(ctx,'s',qx+36,qy+48,13,'#e6ebe4');
-    MSPC.titre(ctx,'= 60 × f / p',qx+50,qy+42,30,'#e6ebe4');
-    MSPC.mono(ctx,'= 60 × '+f+' / '+p,qx+20,qy+70,13,'#8d968b');
-    MSPC.titre(ctx,MSPC.nb(ns)+' tr/min',qx+20,qy+118,42,'#c8d834');
-    MSPC.mono(ctx,'VITESSE DE SYNCHRONISME — CELLE DU CHAMP, PAS DU ROTOR',qx+20,qy+140,10,'#8d968b');
+    function ligne(lab,val,coul){
+      MSPC.mono(ctx,lab,px,ry,9.5,'#6f786e');
+      MSPC.mono(ctx,val,px+264,ry,11,coul||'#e8ece6','right');
+      ry+=23;
+    }
+    ligne('vitesse du champ', MSPC.nb(NSYN)+' tr/min','#e8ece6');
+    ligne('vitesse du rotor', MSPC.nb(nrot)+' tr/min','#c8d834');
+    ligne('glissement', G.val+' %  ('+MSPC.nb(NSYN-nrot)+' tr/min)', g>0?'#f0a844':'#5d665e');
+    ligne('fréquence dans le rotor', fr.toFixed(1).replace('.',',')+' Hz', g>0?'#f0a844':'#5d665e');
+    /* Avec une seule spire l'aimant reste accroché à la spire : son angle balaie
+       tout le tour à la fréquence de glissement et ne veut rien dire. */
+    ligne('retard de l’aimant induit', g<0.004 ? '—' : (n===1 ? 'variable' : Math.round(decal)+'°'), n===1?'#f0a844':'#c8d834');
+    ry+=6;
+    MSPC.mono(ctx,'FORCE DE L’AIMANT INDUIT',px,ry,9.5,'#6f786e'); ry+=15;
+    MSPC.jauge(ctx,px,ry-10,264,11, M/MREF, 2, 3); ry+=27;
+    MSPC.mono(ctx,'COUPLE — en % du couple maximal de ce rotor',px,ry,9.5,'#6f786e'); ry+=15;
+    MSPC.jauge(ctx,px,ry-10,264,11, tRel, 2, 3); ry+=24;
+    MSPC.mono(ctx, g>0.004 ? Math.round(tRel*100)+' %' : 'aucun couple', px+264, ry, 12, tRel>0.05?'#c8d834':'#ff6a5e','right');
+    ry+=32;
+    MSPC.mono(ctx,'AVANCE PRISE PAR LE CHAMP SUR LE ROTOR',px,ry,9.5,'#6f786e');
+    MSPC.titre(ctx, avance.toFixed(1).replace('.',',')+' tours', px+264, ry+26, 22, g>0?'#f0a844':'#5d665e','right');
 
-    MSPC.mono(ctx,p+' paire'+(p>1?'s':'')+' de pôles → '+(2*p)+' pôles → '+(3*p)+' bobines réparties autour du stator',26,H-34,11,'#8d968b');
-    MSPC.mono(ctx,'À fréquence égale, doubler les paires de pôles divise par deux la vitesse du champ.',26,H-14,11,'#6f786e');
+    /* ---------- bandeau ---------- */
+    var msg, m2, coul;
+    if(g<0.005){
+      msg='Glissement nul : la spire tourne exactement à la vitesse du champ. Plus rien ne défile devant elle.';
+      m2='Pas de variation de flux, donc pas de courant, donc pas d’aimant, donc AUCUN COUPLE. Un moteur ne peut pas fonctionner ici.';
+      coul='#ff6a5e';
+    } else if(g>0.85){
+      msg='Rotor à l’arrêt : c’est l’instant du démarrage. Le champ balaie la spire à pleine vitesse, le courant induit est maximal.';
+      m2='Et pourtant le couple n’est pas au maximum : l’aimant induit est bien trop décalé pour tirer efficacement.';
+      coul='#f0a844';
+    } else if(n===1){
+      msg='Une seule spire : son aimant grossit, s’efface, se retourne, au rythme du glissement. Le couple pulse au lieu d’être régulier.';
+      m2='Ajoutez des spires : dès la deuxième, l’aimant induit cesse de pulser. C’est très exactement pourquoi un rotor est une cage.';
+      coul='#f0a844';
+    } else if(g<0.12){
+      msg='Fonctionnement normal : le champ prend '+MSPC.nb(NSYN-nrot)+' tr/min d’avance, ce qui suffit à induire le courant qui fabrique l’aimant.';
+      m2='L’aimant induit reste en retard de '+Math.round(decal)+'° sur le champ — et c’est ce retard, jamais rattrapé, qui produit le couple.';
+      coul='#c8d834';
+    } else {
+      msg='Glissement élevé : le rotor peine, le courant induit grimpe et le moteur chauffe.';
+      m2='Le couple passe par un maximum vers 20 % de glissement, puis redescend malgré un courant qui continue d’augmenter.';
+      coul='#f0a844';
+    }
+    ctx.strokeStyle='rgba(255,255,255,.14)'; ctx.lineWidth=1;
+    ctx.beginPath(); ctx.moveTo(26,492); ctx.lineTo(W-26,492); ctx.stroke();
+    MSPC.mono(ctx,msg,26,516,11,coul);
+    MSPC.mono(ctx,m2,26,536,10.5,'#8d968b');
+    MSPC.mono(ctx,'p = 1 paire de pôles : le champ fait 3 000 tr/min à 50 Hz. Un moteur à 4 pôles fait la même chose, deux fois plus lentement.',26,564,10,'#6f786e');
 
-    out.innerHTML='n<sub>s</sub> = <b style="color:#c8d834">'+MSPC.nb(ns)+' tr/min</b><br>'+f+' Hz · '+(2*p)+' pôles';
+    out.innerHTML = g>0.004
+      ? 'rotor <b style="color:#c8d834">'+MSPC.nb(nrot)+' tr/min</b><br>'+(n===1 ? 'aimant pulsant — une seule spire' : 'aimant induit en retard de <b>'+Math.round(decal)+'°</b><br>couple '+Math.round(tRel*100)+' % du maximum')
+      : '<b style="color:#ff6a5e">aucun aimant induit</b><br>le rotor tourne avec le champ<br>couple nul';
   }, {fixed:true});
 })();
 
