@@ -52,9 +52,9 @@
 </header>
 
 <div class="meta-bar">
-  <div><b>11</b> chapitres sur 18 publiés</div>
-  <div><b>12</b> animations pilotables</div>
-  <div><b>29</b> exercices corrigés</div>
+  <div><b>12</b> chapitres sur 18 publiés</div>
+  <div><b>15</b> animations pilotables</div>
+  <div><b>32</b> exercices corrigés</div>
   <div>Fiches TP <b>en préparation</b></div>
   <div>Calé sur le <b>référentiel MSPC</b></div>
 </div>
@@ -1531,8 +1531,257 @@
 </div>
 </section>
 
+
+<!-- ================= CH 12 ================= -->
+<section class="ch" id="c12">
+  <div class="ch-head"><div class="ch-num">12</div><div class="ch-title">
+    <span class="kicker">Quelques micromètres d'huile qui portent une tonne</span><h2>La lubrification</h2></div></div>
+  <div class="ch-body">
+
+<div class="savoirs">
+  <span class="savoir n3"><b>S1.2.1</b> <i>Lubrification : désignation normalisée, viscosité, techniques, limites</i></span>
+  <span class="savoir n3"><b>S1.2.1</b> <i>Guidage en rotation et en translation, du point de vue maintenance</i></span>
+</div>
+
+<p class="lede">Un arbre de trois cents kilos tourne dans un palier sans jamais toucher le bronze qui l'entoure. Ce qui le porte n'est pas le métal : c'est un film d'huile de <strong>quelques micromètres</strong>, plus mince qu'un cheveu fendu en dix, que l'arbre fabrique lui-même en tournant. Comprendre comment ce film naît, quand il disparaît, et ce qui le détruit — c'est comprendre l'essentiel de la maintenance mécanique.</p>
+
+<h3>12.1 — Les trois régimes, et la courbe qui les sépare</h3>
+<p>Au chapitre 11, on a vu qu'aucune surface n'est lisse : deux pièces en contact se touchent par les sommets de leurs aspérités. Le rôle du lubrifiant est de <strong>séparer ces sommets</strong>. Il y parvient plus ou moins bien selon trois régimes, et un mécanicien de maintenance doit savoir dans lequel travaille sa machine.</p>
+
+<table>
+<thead><tr><th>Régime</th><th>Ce qui se passe</th><th>Frottement</th><th>Usure</th></tr></thead>
+<tbody>
+<tr><td><strong>Onctueux</strong><br>(dit aussi <em>limite</em>)</td><td>Le film est plus mince que les aspérités. Les sommets se touchent. Seule une couche moléculaire de lubrifiant, accrochée au métal, empêche le grippage.</td><td><strong>Élevé</strong><br>f ≈ 0,05 à 0,15</td><td><strong>Forte</strong></td></tr>
+<tr><td><strong>Mixte</strong></td><td>Le film porte une partie de la charge, les aspérités les plus hautes portent le reste. Régime de transition.</td><td>Moyen<br>f ≈ 0,01 à 0,05</td><td>Modérée</td></tr>
+<tr><td><strong>Hydrodynamique</strong></td><td>Le film est plus épais que les aspérités. <span class="cle">Plus aucun contact métal sur métal.</span> L'arbre flotte.</td><td><strong>Très faible</strong><br>f ≈ 0,005 à 0,015</td><td><strong>Nulle</strong></td></tr>
+</tbody></table>
+
+<p>Le paramètre qui décide du régime combine trois grandeurs — la <strong>viscosité</strong> η du lubrifiant, la <strong>vitesse</strong> N de rotation et la <strong>pression</strong> P sur le palier :</p>
+
+<div class="formule">S = η · N / P<small>Le nombre de Stribeck. Plus il est grand, plus le film est épais.</small></div>
+
+<p>Ce que dit cette formule est brutalement simple : <span class="cle">un palier qui tourne vite, peu chargé, avec une huile épaisse, flotte. Un palier qui tourne lentement, très chargé, avec une huile fluide, frotte.</span> Et comme toute machine démarre à vitesse nulle, <strong>tout palier passe par le régime onctueux à chaque démarrage</strong>. C'est là qu'il s'use.</p>
+
+<figure class="anim">
+  <canvas id="m-stribeck" width="900" height="560" aria-label="Animation : la courbe de Stribeck et le film d'huile dans un palier lisse"></canvas>
+  <div class="ctrls">
+    <div class="c"><label>Vitesse <span id="m-stribeck-n-l">1500 tr/min</span></label><input type="range" id="m-stribeck-n" min="0" max="3000" step="10" value="1500"></div>
+    <div class="c"><label>Charge <span id="m-stribeck-p-l">20 bar</span></label><input type="range" id="m-stribeck-p" min="2" max="60" value="20"></div>
+    <div class="c"><label>Viscosité <span id="m-stribeck-v-l">46 mPa·s</span></label><input type="range" id="m-stribeck-v" min="5" max="320" value="46"></div>
+    <div class="c readout" id="m-stribeck-out"></div>
+  </div>
+  <figcaption>À gauche, le palier vu en coupe : l'arbre, le coussinet, et le <b>coin d'huile</b> que la rotation fabrique. À droite, la courbe de Stribeck et le point de fonctionnement. <b>Descendez la vitesse à zéro</b> : l'arbre tombe sur le coussinet, le film disparaît, le frottement est multiplié par vingt — c'est ce qui se passe à chaque démarrage. <b>Montez la charge à 60 bar</b> : le film s'écrase, le régime redevient mixte et la puissance dissipée grimpe à 2 300 W. <b>Une huile plus épaisse le rétablit</b> — et fait <em>baisser</em> la puissance, parce que ce qui coûtait cher était le frottement des aspérités. <b>Revenez ensuite à 20 bar en gardant l'huile épaisse</b> : le film atteint 14 µm, soit vingt fois la rugosité, dont personne n'a besoin — et la puissance dissipée est multipliée par cinq. Une huile plus épaisse que nécessaire, c'est un radiateur.</figcaption>
+  <div class="autableau">
+    <b class="entete">Au tableau <i>· 14 minutes · animation 1 sur 3</i></b>
+    <ol>
+      <li>Réglages de départ. <span class="q">« L'arbre touche-t-il le coussinet ? »</span> Faire lire l'épaisseur du film et la comparer à la rugosité.</li>
+      <li>Descendre la vitesse <b>lentement</b> jusqu'à zéro. <span class="q">« À quel moment le contact revient-il ? »</span> Faire nommer les trois régimes traversés.</li>
+      <li><span class="q">« Une machine qui démarre vingt fois par jour s'use-t-elle plus qu'une machine qui tourne en continu ? »</span> Laisser débattre, puis remonter la vitesse.</li>
+      <li>Charge à <b>60 bar</b>. Le film s'écrase, le régime redevient mixte, la puissance dissipée grimpe. <span class="q">« Que faire ? »</span> Attendre « une huile plus épaisse », puis passer à 320.</li>
+      <li>Le film est rétabli <b>et</b> la puissance a baissé. <span class="q">« Pourquoi une huile plus épaisse fait-elle moins chauffer ? »</span> Parce que c'était le frottement des aspérités qui coûtait, pas le cisaillement de l'huile.</li>
+      <li>Revenir à <b>20 bar</b> en gardant l'huile épaisse. <span class="q">« Et maintenant ? »</span> 14 µm de film inutiles, et cinq fois la puissance dissipée.</li>
+    </ol>
+    <div class="piege">Le piège : « si ça grince, mets de l'huile plus épaisse ». Une huile trop épaisse dissipe une puissance considérable en cisaillement, chauffe le palier, et l'échauffement fait rechuter sa viscosité. On tourne en rond, et on finit avec un palier plus chaud qu'avant. La viscosité correcte est celle du constructeur, à la température de fonctionnement.</div>
+  </div>
+</figure>
+
+<div class="encadre"><span class="tag">Pourquoi l'arbre monte-t-il sur son film ?</span>
+<p>Un arbre parfaitement centré dans son coussinet ne fabriquerait aucune portance. C'est parce qu'il est <strong>décentré</strong> que l'espace entre les deux se referme progressivement dans le sens de la rotation : l'huile, entraînée par l'arbre, est forcée dans un passage qui se rétrécit. Elle ne peut pas s'échapper assez vite, la pression monte, et cette pression soulève l'arbre.</p>
+<p><span class="cle">C'est l'arbre lui-même qui fabrique le coussin qui le porte.</span> Il n'y a pas de pompe. Coupez la rotation, la pression tombe en une fraction de seconde, et l'arbre redescend sur le bronze. C'est pour cela qu'un palier lisse n'aime ni les démarrages fréquents, ni les rotations très lentes.</p></div>
+
+<h3>12.2 — La viscosité, et sa dérive avec la température</h3>
+<p>La viscosité est la <strong>résistance d'un fluide à l'écoulement</strong>. Le miel est visqueux, l'eau ne l'est pas. Pour un lubrifiant, c'est <em>la</em> caractéristique : elle décide de l'épaisseur du film, donc du régime, donc de l'usure.</p>
+<p>Deux unités coexistent sur les fiches techniques, et il faut savoir les distinguer :</p>
+<ul>
+<li>La <strong>viscosité dynamique</strong> η, en <span class="mono">Pa·s</span> ou <span class="mono">mPa·s</span> (millipascal-seconde). C'est celle qui entre dans les calculs de portance.</li>
+<li>La <strong>viscosité cinématique</strong> ν, en <span class="mono">mm²/s</span>, aussi appelée <strong>centistokes (cSt)</strong>. C'est celle qu'on mesure au laboratoire, et celle qui figure dans les désignations normalisées. On passe de l'une à l'autre par la masse volumique : η = ν × ρ.</li>
+</ul>
+
+<div class="encadre danger"><span class="tag">Ce que personne ne réalise avant de le voir</span>
+<p>La viscosité d'une huile n'est pas une constante : <span class="cle">elle s'effondre quand la température monte.</span> Une ISO VG 46 fait 46 cSt à 40 °C — mais 260 cSt à 0 °C, et seulement 7 cSt à 100 °C. <strong>Un rapport de 1 à 37 entre le démarrage à froid et le régime établi.</strong></p>
+<p>C'est pourquoi une huile ne se choisit jamais « à froid » : elle se choisit <strong>à la température de fonctionnement du palier</strong>, qui n'est ni celle de l'atelier, ni celle indiquée sur le bidon.</p></div>
+
+<figure class="anim">
+  <canvas id="m-visco" width="900" height="500" aria-label="Animation : viscosité des huiles ISO VG en fonction de la température"></canvas>
+  <div class="ctrls">
+    <div class="c"><label>Température du palier <span id="m-visco-t-l">40 °C</span></label><input type="range" id="m-visco-t" min="-20" max="140" value="40"></div>
+    <div class="c"><label>Huile en place <span id="m-visco-h-l">ISO VG 46</span></label><input type="range" id="m-visco-h" min="0" max="3" value="1"></div>
+    <div class="c readout" id="m-visco-out"></div>
+  </div>
+  <figcaption>Quatre huiles industrielles, en échelle logarithmique. La bande du bas est le <b>plancher</b> : sous 13 cSt, le film ne se forme plus. La bande du haut est le <b>plafond</b> : au-delà de 1000 cSt, l'huile ne circule plus, la pompe cavite et le palier est mal alimenté. Entre les deux se trouve la <b>fenêtre de fonctionnement</b>. <b>Poussez la température à 100 °C</b> avec l'ISO VG 46 : la courbe traverse le plancher. <b>Descendez à −10 °C</b> : elle traverse le plafond. Une seule huile ne peut pas couvrir toute la plage — c'est exactement la raison d'être des huiles multigrades.</figcaption>
+  <div class="autableau">
+    <b class="entete">Au tableau <i>· 10 minutes · animation 2 sur 3</i></b>
+    <ol>
+      <li>ISO VG 46 à 40 °C. Faire lire la viscosité : 46 cSt. <span class="q">« D'où vient ce nombre 46 dans le nom de l'huile ? »</span></li>
+      <li>Monter à <b>100 °C</b>. <span class="q">« Combien reste-t-il ? »</span> Environ 7 cSt. <span class="q">« Divisée par combien ? »</span></li>
+      <li><span class="q">« Que se passe-t-il pour le film d'huile ? »</span> Revenir mentalement à la courbe de Stribeck : η chute, donc S chute, donc on descend vers le régime onctueux.</li>
+      <li>Descendre à <b>−10 °C</b> avec la VG 220. <span class="q">« Pourquoi un démarrage d'hiver casse-t-il des réducteurs ? »</span></li>
+      <li>Faire chercher, pour une machine tournant à 90 °C, <b>quelle huile reste dans la fenêtre</b>.</li>
+    </ol>
+    <div class="piege">Le piège : lire « ISO VG 46 » et croire que l'huile fait 46 cSt en service. Ce 46 est mesuré à 40 °C dans un laboratoire. Un réducteur en charge tourne à 70 ou 90 °C — la viscosité réelle y est deux à quatre fois plus faible. C'est pour cela que les constructeurs préconisent des huiles qui paraissent « trop épaisses » à froid.</div>
+  </div>
+</figure>
+
+<h3>12.3 — Lire une désignation normalisée</h3>
+<p>Le référentiel demande explicitement de savoir décoder une désignation. Il y en a trois à connaître, et elles ne parlent pas de la même chose.</p>
+
+<div class="formule">ISO VG 46<small>Le 46 est la viscosité cinématique en mm²/s (cSt) mesurée à <strong>40 °C</strong>, à ±10 % près</small></div>
+
+<p>C'est la désignation des <strong>huiles industrielles</strong> : réducteurs, paliers, circuits hydrauliques, compresseurs. Les grades suivent une progression géométrique de raison 1,5 environ — chaque grade est une fois et demie plus épais que le précédent.</p>
+
+<table>
+<thead><tr><th>Grade</th><th>ν à 40 °C</th><th>Emploi le plus courant</th></tr></thead>
+<tbody>
+<tr><td><span class="mono">ISO VG 10</span></td><td>10 cSt</td><td>Broches rapides, mécanismes fins</td></tr>
+<tr><td><span class="mono">ISO VG 32</span></td><td>32 cSt</td><td><strong>Hydraulique</strong>, systèmes à circulation</td></tr>
+<tr><td><span class="mono">ISO VG 46</span></td><td>46 cSt</td><td><strong>Hydraulique</strong> chaude, paliers, compresseurs</td></tr>
+<tr><td><span class="mono">ISO VG 68</span></td><td>68 cSt</td><td>Paliers chargés, glissières</td></tr>
+<tr><td><span class="mono">ISO VG 150 à 320</span></td><td>150 à 320 cSt</td><td><strong>Réducteurs à engrenages</strong></td></tr>
+<tr><td><span class="mono">ISO VG 460 à 1000</span></td><td>460 à 1000 cSt</td><td>Roues et vis sans fin, très fortes charges</td></tr>
+</tbody></table>
+
+<div class="formule">SAE 15W-40<small>Deux <strong>classes</strong>, pas deux viscosités. 15W = tenue à froid (W pour <em>winter</em>). 40 = classe de viscosité à 100 °C</small></div>
+
+<p>C'est la désignation des <strong>huiles moteur et de transmission automobile</strong>. Une huile qui porte deux nombres est dite <strong>multigrade</strong> : elle se comporte comme une huile fluide au démarrage à froid, et comme une huile épaisse à chaud. Ce n'est pas magie — ce sont des additifs polymères qui se déploient en chauffant.</p>
+<p><span class="cle">L'indice de viscosité (VI) chiffre cette qualité :</span> plus il est élevé, moins la viscosité varie avec la température. Une huile minérale ordinaire tourne autour de VI 95 ; une huile de synthèse dépasse VI 140.</p>
+
+<div class="formule">Graisse NLGI 2<small>Un indice de <strong>consistance</strong>, de 000 (presque liquide) à 6 (dur comme du savon de Marseille)</small></div>
+
+<table>
+<thead><tr><th>NLGI</th><th>Consistance comparable</th><th>Emploi</th></tr></thead>
+<tbody>
+<tr><td><span class="mono">00</span> et <span class="mono">0</span></td><td>Miel liquide</td><td>Réducteurs à graisse, graissage centralisé long</td></tr>
+<tr><td><span class="mono">1</span></td><td>Sauce tomate épaisse</td><td>Graissage centralisé, basses températures</td></tr>
+<tr><td><strong><span class="mono">2</span></strong></td><td><strong>Margarine</strong></td><td><strong>Le standard des roulements. 80 % des cas.</strong></td></tr>
+<tr><td><span class="mono">3</span></td><td>Saindoux ferme</td><td>Roulements verticaux, hautes températures</td></tr>
+</tbody></table>
+
+<p>Une graisse n'est rien d'autre qu'une <strong>huile emprisonnée dans une éponge</strong> : environ 85 % d'huile, 10 % d'un épaississant savonneux, 5 % d'additifs. L'éponge tient l'huile en place et la relâche lentement sous l'effet de la chaleur et du travail mécanique. <span class="cle">C'est l'huile qui lubrifie ; le savon ne fait que la porter.</span></p>
+
+<div class="encadre danger"><span class="tag">L'erreur qui détruit des roulements en atelier</span>
+<p>Les savons ne sont pas tous compatibles entre eux. Mélanger une graisse au <strong>lithium</strong> avec une graisse à la <strong>polyurée</strong>, ou avec une graisse au <strong>calcium sulfoné</strong>, produit un mélange qui se <em>liquéfie</em> et fuit, ou au contraire qui <em>durcit</em> et ne lubrifie plus rien.</p>
+<p>La règle est simple et sans exception : <span class="cle">on ne mélange pas deux graisses de savons différents.</span> Si l'on doit changer de graisse, on nettoie entièrement le logement. Et sur une machine, on met une <strong>étiquette</strong> indiquant la graisse en place — c'est une opération de maintenance de premier niveau qui ne coûte rien et évite des casses.</p></div>
+
+<h3>12.4 — Les techniques, et le domaine de chacune</h3>
+<p>Le référentiel demande de connaître les <em>techniques</em> et leurs <em>limites</em>. En voici les six qu'on rencontre en atelier.</p>
+
+<table>
+<thead><tr><th>Technique</th><th>Principe</th><th>Domaine</th><th>Sa limite</th></tr></thead>
+<tbody>
+<tr><td><strong>Graisse à vie</strong></td><td>Roulement étanche, garni en usine, jamais rouvert</td><td>Petits moteurs, ventilateurs, pompes de faible puissance</td><td><strong>Non regarnissable.</strong> Quand la graisse est morte, on change le roulement — pas la graisse</td></tr>
+<tr><td><strong>Graissage périodique</strong></td><td>Graisseur, pompe, quantité et période calculées</td><td>La majorité des roulements industriels</td><td>Le <strong>sur-graissage</strong> est plus fréquent et plus destructeur que l'oubli</td></tr>
+<tr><td><strong>Bain d'huile / barbotage</strong></td><td>Les pièces plongent et entraînent l'huile sur tout le mécanisme</td><td>Réducteurs, carters fermés, vitesses modérées</td><td><strong>Le niveau est critique.</strong> Trop d'huile : barattage, chauffe, mousse. Trop peu : zones non alimentées</td></tr>
+<tr><td><strong>Circulation forcée</strong></td><td>Pompe, filtre, échangeur, retour au réservoir</td><td>Fortes puissances, hautes vitesses, tout ce qui doit être refroidi</td><td>Dépend d'une pompe. <strong>Une pompe arrêtée, c'est une casse en quelques minutes</strong> — d'où le pressostat de sécurité</td></tr>
+<tr><td><strong>Brouillard d'huile</strong></td><td>Huile pulvérisée et transportée par l'air comprimé</td><td>Broches très rapides, machines-outils</td><td>Rejet dans l'atmosphère de l'atelier : <strong>réglementé</strong>, et nécessite une aspiration</td></tr>
+<tr><td><strong>Huile perdue</strong></td><td>Goutte à goutte ou pulvérisation dosée, non récupérée</td><td>Chaînes, glissières, convoyeurs</td><td>Consommation continue, pollution du produit et du sol</td></tr>
+</tbody></table>
+
+<h3>12.5 — La graisse : le piège du sur-graissage</h3>
+<p>Voici le défaut de maintenance le plus répandu, et le plus contre-intuitif : <strong>un roulement trop graissé meurt plus vite qu'un roulement pas assez graissé.</strong></p>
+<p>La raison est mécanique. Un roulement a besoin d'espace libre pour que ses billes puissent <em>déplacer</em> la graisse au lieu de la <em>brasser</em>. Rempli à 30 %, il chasse la graisse sur les côtés en quelques tours et travaille ensuite dans un logement pratiquement vide, alimenté en continu par les réserves latérales. Rempli à 100 %, il n'a nulle part où la pousser : il la <strong>baratte</strong> à chaque tour, ce brassage dissipe une puissance considérable, la température monte, et la chaleur détruit la graisse qui a causé la chaleur.</p>
+
+<figure class="anim">
+  <canvas id="m-graisse" width="900" height="500" aria-label="Animation : effet du taux de remplissage de graisse sur la température et la durée de vie d'un roulement"></canvas>
+  <div class="ctrls">
+    <div class="c"><label>Remplissage du logement <span id="m-graisse-r-l">30 %</span></label><input type="range" id="m-graisse-r" min="0" max="100" value="30"></div>
+    <div class="c"><label>Vitesse <span id="m-graisse-n-l">1500 tr/min</span></label><input type="range" id="m-graisse-n" min="200" max="3600" step="50" value="1500"></div>
+    <div class="c readout" id="m-graisse-out"></div>
+  </div>
+  <figcaption>Le roulement en coupe, avec la graisse dans son logement, et la courbe de température en fonction du remplissage. <b>Partez de 30 %</b> : la température est basse, la durée de vie maximale. <b>Montez à 100 %</b> « pour bien faire » : la graisse est barattée, la température s'envole, et la durée de vie est divisée par un facteur qui va de cinq à cent selon la vitesse. <b>Descendez à 5 %</b> : la température remonte aussi, mais pour la raison inverse — il n'y a plus assez de lubrifiant. <b>La courbe a un fond plat entre 25 et 40 %</b>, et c'est exactement ce que préconisent les constructeurs.</figcaption>
+  <div class="autableau">
+    <b class="entete">Au tableau <i>· 12 minutes · animation 3 sur 3</i></b>
+    <ol>
+      <li>Remplissage à 30 %, 1500 tr/min. Faire lire la température et la durée de vie.</li>
+      <li><span class="q">« Si je mets deux fois plus de graisse, est-ce que ça dure deux fois plus longtemps ? »</span> Laisser répondre AVANT de monter le curseur.</li>
+      <li>Monter à <b>100 %</b>. Faire lire la nouvelle durée de vie. <span class="q">« Divisée par combien ? »</span></li>
+      <li>Descendre à <b>5 %</b>. <span class="q">« Pourquoi ça chauffe aussi de ce côté-là ? »</span> Faire distinguer les deux causes.</li>
+      <li>Passer la vitesse à <b>3600 tr/min</b> et refaire le balayage. <span class="q">« La zone correcte est-elle plus large ou plus étroite ? »</span></li>
+    </ol>
+    <div class="piege">Le piège : graisser au pistolet « jusqu'à ce que ça ressorte ». Cette pratique remplit le logement à 100 %, et souvent fait sauter le joint côté opposé, ce qui ouvre une entrée pour la poussière. La bonne pratique est une quantité calculée — quelques grammes, pesés ou comptés en coups de pompe — à une période elle aussi calculée. Le constructeur donne les deux.</div>
+  </div>
+</figure>
+
+<h3>12.6 — Ce qu'un lubrifiant ne peut pas faire</h3>
+<p>C'est le point que le référentiel appelle les <em>limites</em>, et c'est celui qu'un technicien de maintenance doit avoir en tête avant de saisir un pistolet à graisse.</p>
+<ul>
+<li><strong>Un lubrifiant ne rattrape pas un défaut d'alignement.</strong> Ni un balourd, ni un serrage excessif, ni une surcharge. Un palier qui chauffe malgré une lubrification correcte a un problème mécanique, pas un problème d'huile — et ajouter du lubrifiant ne fera que masquer le symptôme quelques jours.</li>
+<li><strong>La chaleur tue le lubrifiant.</strong> Au-delà de 70 °C, chaque tranche de 10 °C supplémentaire <span class="cle">divise par deux la durée de vie de l'huile</span> par oxydation. Une huile prévue pour 8 000 heures à 70 °C n'en tiendra que 1 000 à 100 °C.</li>
+<li><strong>L'eau est un poison.</strong> 0,1 % d'eau dans une huile — soit un millilitre par litre, indétectable à l'œil — suffit à diviser par deux ou trois la durée de vie d'un roulement. Une huile trouble ou laiteuse se change, elle ne se filtre pas.</li>
+<li><strong>La propreté prime sur la quantité.</strong> La contamination par particules solides est la première cause de mort des roulements et des composants hydrauliques. Passer d'une filtration à 25 µm à une filtration à 5 µm multiplie la durée de vie par trois à cinq — sans changer une goutte d'huile.</li>
+<li><strong>Plus n'est jamais mieux.</strong> Ni pour la graisse, ni pour le niveau d'huile d'un réducteur, ni pour la viscosité choisie.</li>
+</ul>
+
+<div class="exo"><span class="tag">Exercice 12.1</span>
+<p>Une pompe centrifuge tourne en continu 24 h sur 24 depuis quatre ans, sans usure mesurable sur ses paliers lisses. Une pompe identique, sur la même installation, démarre et s'arrête 40 fois par jour : ses coussinets sont à changer tous les huit mois. Expliquez, et proposez trois actions.</p>
+<details><summary>Voir la réponse</summary><div class="rep">
+<p><strong>Les deux pompes sont identiques, l'huile est la même, et pourtant l'une ne s'use pas et l'autre se détruit. Toute la différence tient dans la courbe de Stribeck.</strong></p>
+<p><strong>La pompe qui tourne en continu</strong> reste en permanence en régime <strong>hydrodynamique</strong>. L'arbre flotte sur son film, il n'y a aucun contact métal sur métal, et l'usure est <em>rigoureusement nulle</em>. Elle pourrait tourner vingt ans.</p>
+<p><strong>La pompe qui démarre 40 fois par jour</strong> traverse à chaque démarrage <em>et</em> à chaque arrêt la totalité de la courbe : régime onctueux, puis mixte, puis hydrodynamique — et l'inverse à l'arrêt. Pendant ces quelques secondes, le film n'existe pas et les aspérités frottent directement, avec un coefficient de frottement <strong>vingt fois plus élevé</strong>.</p>
+<p><strong>L'ordre de grandeur.</strong> 40 démarrages et 40 arrêts par jour, soit 80 traversées, à raison de deux à trois secondes chacune : environ <strong>200 secondes d'usure réelle par jour</strong>. Sur huit mois, cela fait à peu près <strong>13 heures</strong> de frottement onctueux. C'est peu en heures — et c'est énorme en usure, parce que ces 13 heures se font sans aucun film.</p>
+<p><span class="cle">La règle à retenir : pour un palier lisse, ce ne sont pas les heures de marche qui usent, ce sont les démarrages.</span></p>
+<p><strong>Trois actions, de la plus efficace à la plus coûteuse :</strong></p>
+<ol>
+<li><strong>Réduire le nombre de démarrages.</strong> C'est l'action la plus rentable et souvent la plus simple : élargir l'hystérésis de régulation, agrandir le ballon tampon, ou faire tourner la pompe en continu avec une vanne de recirculation. Passer de 40 à 8 démarrages par jour multiplie la durée de vie par cinq.</li>
+<li><strong>Installer une pré-lubrification.</strong> Une petite pompe auxiliaire qui met le palier en pression <em>avant</em> le démarrage du moteur crée le film à l'avance : le régime onctueux est purement supprimé. C'est la solution retenue sur les grosses machines, et un temporisateur suffit à la piloter.</li>
+<li><strong>Changer de technologie de palier.</strong> Un roulement à billes ne connaît pas ce problème : sa charge passe par des contacts roulants, pas par un film hydrodynamique. Si l'encombrement et la charge le permettent, c'est la solution définitive.</li>
+</ol>
+<p><em>Et une action à ne pas faire : mettre une huile plus épaisse. Elle épaissira le film en régime établi, où il n'y a déjà aucun problème, et ne changera rien au démarrage — puisque à vitesse nulle, le nombre de Stribeck vaut zéro quelle que soit la viscosité.</em></p>
+</div></details></div>
+
+<div class="exo"><span class="tag">Exercice 12.2</span>
+<p>Un réducteur préconisé en <span class="mono">ISO VG 220</span> chauffe à 95 °C. Un technicien décide de passer en <span class="mono">ISO VG 100</span> « pour qu'il chauffe moins ». Analysez la démarche.</p>
+<details><summary>Voir la réponse</summary><div class="rep">
+<p><strong>Le raisonnement n'est pas absurde — et il est pourtant dangereux.</strong></p>
+<p><strong>Ce qui est juste dans son raisonnement.</strong> Une huile plus fluide se cisaille avec moins de résistance : les pertes par barattage et par cisaillement du film diminuent réellement. Le réducteur va effectivement chauffer un peu moins, et le technicien va constater une amélioration. <em>Sur le thermomètre, il aura raison.</em></p>
+<p><strong>Ce qui est faux.</strong> Il traite le symptôme et supprime la protection.</p>
+<ul>
+<li><strong>La viscosité en service.</strong> Une ISO VG 220 à 95 °C ne fait plus que 18 à 20 cSt environ. Une ISO VG 100 dans les mêmes conditions tombe autour de <strong>10 cSt</strong> — c'est-à-dire <span class="cle">sous le plancher de 13 cSt en dessous duquel le film ne se forme plus</span>. Le contact devient mixte, puis onctueux sous les pics de charge.</li>
+<li><strong>Les engrenages travaillent en régime élasto-hydrodynamique</strong>, avec des pressions de contact de plusieurs milliers de bars sur une ligne de contact minuscule. Le film y fait <em>quelques dixièmes</em> de micromètre. Diviser la viscosité par deux, c'est le réduire d'un tiers environ — et passer sous la rugosité des dentures.</li>
+<li><strong>Le résultat visible arrivera dans quelques mois :</strong> micro-piqûres sur les flancs de dents, puis écaillage, puis rupture. Le réducteur chauffera moins jusqu'au jour où il cassera.</li>
+</ul>
+<p><strong>La bonne démarche : chercher pourquoi il chauffe.</strong> Un réducteur correctement dimensionné et correctement lubrifié ne monte pas à 95 °C. Les causes, dans l'ordre de probabilité :</p>
+<ol>
+<li><strong>Le niveau d'huile est trop haut</strong> — c'est la première chose à vérifier, et la plus fréquente. Trop d'huile, c'est du barattage, et le barattage chauffe.</li>
+<li><strong>Le réducteur est en surcharge</strong> : la machine entraînée force, ou le réducteur a été sous-dimensionné.</li>
+<li><strong>Un défaut d'alignement</strong> entre le moteur et le réducteur charge les roulements et dissipe de la puissance.</li>
+<li><strong>Le refroidissement est empêché</strong> : carter empoussiéré, ventilateur bouché, local sans renouvellement d'air. On voit régulièrement des réducteurs perdre 20 °C après un simple nettoyage du carter.</li>
+<li><strong>L'huile est en fin de vie</strong> et a perdu ses additifs. Un prélèvement et une analyse tranchent en quelques jours.</li>
+</ol>
+<p><em>Si, après tout cela, la température reste élevée, la solution n'est pas de changer de grade : c'est de passer à une <strong>huile de synthèse de même grade</strong>, qui tient mieux la température et a un indice de viscosité plus élevé — ou d'ajouter un refroidissement.</em></p>
+</div></details></div>
+
+<div class="exo"><span class="tag">Exercice 12.3</span>
+<p>Un ventilateur d'extraction tourne à 2 900 tr/min. Son roulement est regraissé « soigneusement » chaque semaine, au pistolet, jusqu'à ce que la graisse ressorte. Il tombe malgré tout en panne tous les six mois. Diagnostiquez, et rédigez la consigne de graissage à afficher sur la machine.</p>
+<details><summary>Voir la réponse</summary><div class="rep">
+<p><strong>Le roulement ne tombe pas en panne malgré le graissage : il tombe en panne à cause du graissage.</strong></p>
+<p><strong>Ce qui se passe réellement.</strong></p>
+<ol>
+<li>Graisser « jusqu'à ce que ça ressorte » remplit le logement à <strong>100 %</strong>.</li>
+<li>À 2 900 tr/min, les billes ne peuvent plus déplacer la graisse : elles la <strong>barattent</strong>. Le brassage dissipe une puissance importante et le roulement monte à 100 ou 120 °C au lieu de 45.</li>
+<li>À cette température, la graisse s'oxyde, son huile se sépare du savon (<em>ressuage</em>), et il ne reste qu'un épaississant sec qui ne lubrifie plus rien.</li>
+<li><strong>Une deuxième conséquence, souvent ignorée :</strong> la pression du pistolet fait sauter le joint d'étanchéité côté opposé. Le logement devient une entrée ouverte pour la poussière — et la contamination solide achève le roulement.</li>
+<li>Six mois plus tard, il casse. Et comme il est « bien graissé », personne ne soupçonne le graissage.</li>
+</ol>
+<p><strong>La quantité correcte.</strong> Les constructeurs utilisent une règle simple pour un regraissage :</p>
+<div class="formule">Q = 0,005 × D × B<small>Q en grammes, D le diamètre extérieur du roulement en mm, B sa largeur en mm</small></div>
+<p>Pour un roulement 6308 (D = 90 mm, B = 23 mm) : Q = 0,005 × 90 × 23 ≈ <strong>10 grammes</strong>. Soit environ <strong>cinq coups</strong> d'un pistolet manuel standard, qui délivre à peu près 2 g par coup. À comparer aux 60 ou 80 grammes qu'on injecte en graissant « jusqu'à ce que ça ressorte ».</p>
+<p><strong>La périodicité</strong> se lit dans l'abaque du constructeur en fonction de la vitesse, du diamètre, de la charge et de la température. Pour ce cas — 2 900 tr/min, roulement moyen, ambiance chaude — elle se situe autour de <strong>1 500 à 2 000 heures</strong>, soit environ <strong>tous les trois mois</strong> en marche continue. Pas toutes les semaines : <span class="cle">on regraissait ce roulement douze fois trop souvent, et six fois trop en quantité.</span></p>
+<p><strong>La consigne à afficher sur la machine :</strong></p>
+<ul>
+<li><strong>Graisse :</strong> lithium complexe NLGI 2 — <em>ne pas mélanger avec une autre graisse</em></li>
+<li><strong>Quantité :</strong> 10 g, soit 5 coups de pompe</li>
+<li><strong>Période :</strong> tous les 3 mois</li>
+<li><strong>Méthode :</strong> nettoyer le graisseur avant de brancher ; pomper lentement, moteur en marche si possible ; ouvrir la purge de trop-plein si le palier en possède une</li>
+<li><strong>Ne jamais graisser jusqu'à ce que la graisse ressorte</strong></li>
+</ul>
+<p><em>Notez que cette consigne, affichée et respectée, coûte moins cher en graisse et supprime une panne semestrielle. C'est le type d'action qui fait toute la valeur d'un service de maintenance — et elle ne demande aucun investissement.</em></p>
+</div></details></div>
+
+</div>
+</section>
+
 <footer class="fin">
-  <p><strong>Transmettre, guider, tenir</strong> — dossier de mécanique pour le Baccalauréat Professionnel MSPC. Chaque chapitre est calé sur le référentiel officiel du diplôme : savoir associé visé et niveau taxonomique indiqués sous le titre. <em>Dossier en cours de rédaction : 11 chapitres sur 18 sont publiés.</em></p>
+  <p><strong>Transmettre, guider, tenir</strong> — dossier de mécanique pour le Baccalauréat Professionnel MSPC. Chaque chapitre est calé sur le référentiel officiel du diplôme : savoir associé visé et niveau taxonomique indiqués sous le titre. <em>Dossier en cours de rédaction : 12 chapitres sur 18 sont publiés.</em></p>
   <p>Le référentiel retenu est celui du <strong>baccalauréat professionnel Maintenance des Systèmes de Production Connectés</strong>, mise à jour du 3 décembre 2019, savoirs <strong>S1 — L'approche système</strong> et <strong>S2 — La chaîne d'énergie</strong>. Les valeurs numériques, coefficients et ordres de grandeur cités le sont à titre pédagogique : sur une intervention réelle, la documentation constructeur et les référentiels internes de l'entreprise font toujours foi.</p>
   <p><a href="index.html">← Retour au portail Atelier MSPC</a></p>
 </footer>
@@ -3171,6 +3420,460 @@
 
     out.innerHTML='Ra <b>'+ra.toFixed(2).replace('.',',')+' µm</b> · portance <b>'+(portance*100).toFixed(1).replace('.',',')+' %</b><br>'
       + (vAbrasif>0.05 ? '<b style="color:#ff6a5e">régime abrasif : ça ne se stabilisera pas</b>' : 'régime stable après rodage');
+  }, {fixed:true});
+})();
+</script>
+
+<script>
+/* ======================= CH 12 · la courbe de Stribeck =======================
+   Modèle : nombre de Stribeck S = η·N/P, avec η en mPa·s, N en tr/min et P en
+   bar ramené en Pa. Le coefficient de frottement suit la forme classique
+   « chute exponentielle du régime onctueux + remontée visqueuse linéaire »,
+   calée pour que le minimum tombe sur la frontière film mixte / film complet.
+   L'épaisseur du film varie en racine de S, calée pour valoir trois fois la
+   rugosité composée au moment où le régime devient hydrodynamique. */
+(function(){
+  "use strict";
+  var N=MSPC.ctrl('m-stribeck-n', function(v){ return MSPC.nb(v)+' tr/min'; }, 'm-stribeck-n-l');
+  var P=MSPC.ctrl('m-stribeck-p', function(v){ return v+' bar'; }, 'm-stribeck-p-l');
+  var V=MSPC.ctrl('m-stribeck-v', function(v){ return v+' mPa·s'; }, 'm-stribeck-v-l');
+  var out=document.getElementById('m-stribeck-out');
+
+  var SIG=0.6;            // rugosité composée des deux surfaces, en µm
+  var JEU=30;             // jeu radial du palier, en µm — valeur courante pour un Ø 60
+  var D=0.060, L=0.060;   // palier de 60 mm de diamètre et 60 mm de portée
+  var ang=0;
+
+  function stribeck(eta,n,p){ return eta*n/(p*100000); }
+  function frot(S){ return 0.13*Math.exp(-S/0.006) + 0.0018 + 0.16*S; }
+  /* L'arbre se recentre à mesure que le film porte : l'épaisseur minimale du
+     film vaut simplement le jeu radial multiplié par (1 − excentration). */
+  function excen(S){ return Math.max(0.02, Math.min(0.995, 1/(1+3.5*S))); }
+  function film(S){ return JEU*(1-excen(S)); }          // en µm
+
+  /* Profil de rugosité déterministe : trois harmoniques incommensurables. */
+  function rug(x){ return Math.sin(x*0.41)*0.34 + Math.sin(x*0.97+1.3)*0.21 + Math.sin(x*2.13+0.4)*0.11; }
+
+  MSPC.anim('m-stribeck', function(a){
+    var ctx=a.ctx, W=a.W, H=a.H;
+    var n=N.val, p=P.val, eta=V.val;
+    var S=stribeck(eta,n,p);
+    var eps=excen(S);
+    var f=frot(S), h=film(S), lam=h/SIG;
+    var reg = lam<1 ? 0 : (lam<3 ? 1 : 2);
+    var nomR=['ONCTUEUX','MIXTE','HYDRODYNAMIQUE'][reg];
+    var cR=['#ff6a5e','#f0a844','#c8d834'][reg];
+    var F=p*100000*D*L, v=Math.PI*D*n/60, Pd=f*F*v;
+    ang += (a.dt||0)*n*0.045;
+
+    MSPC.fond(ctx,W,H,0);
+    MSPC.mono(ctx,'LE PALIER LISSE — CE QUI PORTE L’ARBRE EST UN FILM DE QUELQUES MICROMÈTRES',26,28,11,'#8d968b');
+
+    /* ---------------- le palier en coupe ---------------- */
+    var cx=185, cy=200, Rc=92, Ra=81;
+    /* l'angle d'attitude : l'arbre se décale d'autant plus latéralement que le
+       film est épais. Charge verticale, vers le bas. */
+    var phi=Math.atan2(Math.PI*Math.sqrt(Math.max(0,1-eps*eps)), 4*eps);
+    /* La ligne des centres est décalée de l'angle d'attitude PAR RAPPORT à la
+       charge, dans le sens de la rotation : le jeu minimal se trouve donc en
+       aval du bas du palier, et la zone de pression se centre sur le bas. */
+    var e=(Rc-Ra)*eps;
+    var thMin=Math.PI/2 + phi;                // direction du jeu minimal
+    var ax=cx+e*Math.cos(thMin), ay=cy+e*Math.sin(thMin);
+
+    // le coussinet
+    ctx.fillStyle='rgba(176,138,86,.22)';
+    ctx.beginPath(); ctx.arc(cx,cy,Rc+14,0,6.2832); ctx.arc(cx,cy,Rc,0,6.2832,true); ctx.fill('evenodd');
+    ctx.strokeStyle='#b08a56'; ctx.lineWidth=1.6;
+    ctx.beginPath(); ctx.arc(cx,cy,Rc+14,0,6.2832); ctx.stroke();
+    ctx.beginPath(); ctx.arc(cx,cy,Rc,0,6.2832); ctx.stroke();
+    // le film d'huile
+    ctx.save();
+    ctx.beginPath(); ctx.arc(cx,cy,Rc,0,6.2832); ctx.clip();
+    ctx.fillStyle='rgba(240,168,68,.30)'; ctx.fillRect(cx-Rc,cy-Rc,Rc*2,Rc*2);
+    ctx.restore();
+    // la répartition de pression, dans le convergent
+    var amp=12+30*(p/60), R0=Rc+14;
+    for(var k=0;k<=44;k++){
+      var u=k/44, th=thMin-2.5+u*2.5;
+      /* Le pic de pression ne se situe pas au milieu du convergent mais tout
+         près du jeu minimal : d'où l'exposant qui écrase l'échelle en u. */
+      var pr=Math.pow(Math.sin(Math.pow(u,2.2)*Math.PI),1.4)*amp*eps;
+      if(pr<0.6) continue;
+      ctx.strokeStyle='rgba(200,216,52,.40)'; ctx.lineWidth=1.6;
+      ctx.beginPath();
+      ctx.moveTo(cx+Math.cos(th)*R0, cy+Math.sin(th)*R0);
+      ctx.lineTo(cx+Math.cos(th)*(R0+pr), cy+Math.sin(th)*(R0+pr));
+      ctx.stroke();
+    }
+    ctx.strokeStyle='#c8d834'; ctx.lineWidth=1.6; ctx.beginPath();
+    for(k=0;k<=44;k++){
+      var u2=k/44, th2=thMin-2.5+u2*2.5;
+      var rr=R0+Math.pow(Math.sin(Math.pow(u2,2.2)*Math.PI),1.4)*amp*eps;
+      var px=cx+Math.cos(th2)*rr, py=cy+Math.sin(th2)*rr;
+      if(k===0) ctx.moveTo(px,py); else ctx.lineTo(px,py);
+    }
+    ctx.stroke();
+    MSPC.mono(ctx,'pression du film d’huile',cx,cy+Rc+52,9.5,'#c8d834','center');
+    // l'arbre
+    ctx.fillStyle='#333c36';
+    ctx.beginPath(); ctx.arc(ax,ay,Ra,0,6.2832); ctx.fill();
+    ctx.strokeStyle= lam<1 ? '#ff6a5e' : '#c9d2c2'; ctx.lineWidth=2;
+    ctx.beginPath(); ctx.arc(ax,ay,Ra,0,6.2832); ctx.stroke();
+    // le repère de rotation
+    ctx.strokeStyle='rgba(255,255,255,.45)'; ctx.lineWidth=2;
+    ctx.beginPath(); ctx.moveTo(ax,ay); ctx.lineTo(ax+Math.cos(ang)*(Ra-10), ay+Math.sin(ang)*(Ra-10)); ctx.stroke();
+    MSPC.mono(ctx,'ARBRE',ax,ay+5,11,'#8d968b','center');
+    // la charge
+    ctx.strokeStyle='#7fa7d8'; ctx.lineWidth=2.4;
+    ctx.beginPath(); ctx.moveTo(cx,cy-Rc-58); ctx.lineTo(cx,cy-Rc-32); ctx.stroke();
+    ctx.fillStyle='#7fa7d8'; ctx.beginPath();
+    ctx.moveTo(cx,cy-Rc-24); ctx.lineTo(cx-6,cy-Rc-36); ctx.lineTo(cx+6,cy-Rc-36); ctx.closePath(); ctx.fill();
+    MSPC.mono(ctx,'charge '+p+' bar',cx+12,cy-Rc-46,9.5,'#7fa7d8');
+    // le point de jeu minimal
+    ctx.fillStyle=cR;
+    ctx.beginPath(); ctx.arc(cx+Math.cos(thMin)*Rc, cy+Math.sin(thMin)*Rc, 4, 0, 6.2832); ctx.fill();
+
+    /* ---------------- le zoom sur le contact ---------------- */
+    var zx=48, zy=376, zw=300, zh=86;
+    ctx.fillStyle='rgba(255,255,255,.04)'; ctx.fillRect(zx,zy,zw,zh);
+    ctx.strokeStyle='rgba(255,255,255,.18)'; ctx.lineWidth=1.2; ctx.strokeRect(zx,zy,zw,zh);
+    /* La fenêtre du zoom s'ouvre avec le film : à 20 µm d'huile, la rugosité
+       n'est plus qu'un trait — et c'est précisément le message. */
+    var FEN=Math.max(3.2, h*1.8);
+    MSPC.mono(ctx,'ZOOM SUR LE JEU MINIMAL',zx,zy-8,9.5,'#6f786e');
+    var ECH=zh/FEN;
+    var yMil=zy+zh/2, demi=h/2*ECH;
+    var contacts=0;
+    ctx.beginPath();               // la surface du coussinet, en bas
+    for(var i=0;i<=zw;i+=3){
+      var yb=yMil+demi+rug(i)*SIG*ECH;
+      if(i===0) ctx.moveTo(zx+i,yb); else ctx.lineTo(zx+i,yb);
+    }
+    ctx.strokeStyle='#b08a56'; ctx.lineWidth=1.8; ctx.stroke();
+    ctx.beginPath();               // la surface de l'arbre, en haut
+    for(i=0;i<=zw;i+=3){
+      var yt=yMil-demi-rug(i+37)*SIG*ECH;
+      if(i===0) ctx.moveTo(zx+i,yt); else ctx.lineTo(zx+i,yt);
+    }
+    ctx.strokeStyle='#c9d2c2'; ctx.lineWidth=1.8; ctx.stroke();
+    for(i=0;i<=zw;i+=3){           // les points où les aspérités se touchent
+      var b2=yMil+demi+rug(i)*SIG*ECH, t2=yMil-demi-rug(i+37)*SIG*ECH;
+      if(t2>=b2){ contacts++;
+        ctx.fillStyle='#ff6a5e'; ctx.beginPath(); ctx.arc(zx+i,(b2+t2)/2,2.6,0,6.2832); ctx.fill(); }
+    }
+    MSPC.mono(ctx, contacts? contacts+' contacts métal sur métal' : 'aucun contact',
+      zx+zw, zy-8, 9.5, contacts?'#ff6a5e':'#c8d834','right');
+    MSPC.mono(ctx,'hauteur de la fenêtre : '+FEN.toFixed(1).replace('.',',')+' µm',zx+zw-8,zy+zh-8,9,'#5d665e','right');
+
+    /* ---------------- la courbe de Stribeck ---------------- */
+    var bx=430, by=72, bw=442, bh=330;
+    var LS0=-4, LS1=0.7, FM=0.16;
+    function GX(s){ return bx + (Math.log(Math.max(s,1e-5))/Math.LN10 - LS0)/(LS1-LS0)*bw; }
+    function GY(fv){ return by+bh - Math.min(fv,FM)/FM*bh; }
+    // les trois domaines
+    /* λ = 1 pour ε = 0,98 ; λ = 3 pour ε = 0,94 — soit S = 0,0058 et S = 0,018. */
+    var zon=[[1e-5,0.0058,'rgba(255,106,94,.10)'],[0.0058,0.0182,'rgba(240,168,68,.10)'],[0.0182,5,'rgba(200,216,52,.10)']];
+    for(k=0;k<3;k++){ ctx.fillStyle=zon[k][2]; ctx.fillRect(GX(zon[k][0]),by,GX(zon[k][1])-GX(zon[k][0]),bh); }
+    ctx.strokeStyle='rgba(255,255,255,.28)'; ctx.lineWidth=1.3;
+    ctx.beginPath(); ctx.moveTo(bx,by); ctx.lineTo(bx,by+bh); ctx.lineTo(bx+bw,by+bh); ctx.stroke();
+    MSPC.mono(ctx,'onctueux',(GX(1e-5)+GX(0.0058))/2,by+14,9,'#ff6a5e','center');
+    MSPC.mono(ctx,'mixte',(GX(0.0058)+GX(0.0182))/2,by+26,9,'#f0a844','center');
+    MSPC.mono(ctx,'hydrodynamique',(GX(0.0182)+GX(3))/2,by+14,9,'#c8d834','center');
+    MSPC.mono(ctx,'coefficient de frottement f',bx-4,by-10,9.5,'#7f8a7e');
+    MSPC.mono(ctx,'S = η·N / P',bx+bw,by+bh+30,9.5,'#7f8a7e','right');
+    for(k=0;k<=4;k++){ var fv=k*0.04;
+      MSPC.mono(ctx,fv.toFixed(2).replace('.',','),bx-8,GY(fv)+4,9,'#6f786e','right');
+      ctx.strokeStyle='rgba(255,255,255,.07)'; ctx.beginPath(); ctx.moveTo(bx,GY(fv)); ctx.lineTo(bx+bw,GY(fv)); ctx.stroke(); }
+    for(k=-4;k<=0;k++){ MSPC.mono(ctx,'10'+['⁻⁴','⁻³','⁻²','⁻¹','⁰'][k+4],GX(Math.pow(10,k)),by+bh+16,9,'#6f786e','center'); }
+    // la courbe
+    ctx.strokeStyle='#e8ece6'; ctx.lineWidth=2.2; ctx.beginPath();
+    var dep=true;
+    for(k=0;k<=240;k++){
+      var ls=LS0+(LS1-LS0)*k/240, sv=Math.pow(10,ls), fc=frot(sv);
+      if(fc>FM){ dep=true; continue; }
+      var gx2=GX(sv), gy2=GY(fc);
+      if(dep){ ctx.moveTo(gx2,gy2); dep=false; } else ctx.lineTo(gx2,gy2);
+    }
+    ctx.stroke();
+    // le point de fonctionnement
+    var px2=GX(Math.max(S,1e-5)), py2=GY(f);
+    ctx.strokeStyle='rgba(255,255,255,.30)'; ctx.setLineDash([3,4]); ctx.lineWidth=1;
+    ctx.beginPath(); ctx.moveTo(px2,by); ctx.lineTo(px2,by+bh); ctx.stroke(); ctx.setLineDash([]);
+    ctx.fillStyle=cR; ctx.beginPath(); ctx.arc(px2,py2,6,0,6.2832); ctx.fill();
+    ctx.strokeStyle='#0d120f'; ctx.lineWidth=1.6; ctx.stroke();
+    if(f>FM) MSPC.mono(ctx,'f = '+f.toFixed(2).replace('.',',')+' — hors échelle',px2+10,by+30,10,'#ff6a5e');
+
+    /* ---------------- le bandeau de résultats ---------------- */
+    ctx.strokeStyle='rgba(255,255,255,.14)'; ctx.lineWidth=1;
+    ctx.beginPath(); ctx.moveTo(26,482); ctx.lineTo(W-26,482); ctx.stroke();
+    MSPC.mono(ctx,'RÉGIME',26,504,9.5,'#6f786e');
+    MSPC.titre(ctx,nomR,26,532,24,cR);
+    var col=[[320,'ÉPAISSEUR DU FILM', h.toFixed(2).replace('.',',')+' µm'],
+             [450,'RAPPORT h / RUGOSITÉ', 'λ = '+lam.toFixed(1).replace('.',',')],
+             [610,'FROTTEMENT', 'f = '+f.toFixed(3).replace('.',',')],
+             [730,'PUISSANCE DISSIPÉE', MSPC.nb(Pd)+' W']];
+    for(k=0;k<4;k++){
+      MSPC.mono(ctx,col[k][1],col[k][0],504,9.5,'#6f786e');
+      MSPC.mono(ctx,col[k][2],col[k][0],530,15,'#e8ece6');
+    }
+    var msg;
+    if(n<40) msg='À l’arrêt et au démarrage, le nombre de Stribeck vaut zéro : aucune viscosité au monde ne peut créer un film. Le contact est direct.';
+    else if(reg===0) msg='Le film est plus mince que les aspérités : les sommets se touchent et la matière s’arrache. C’est le régime qui use un palier.';
+    else if(reg===1) msg='Régime mixte : le film porte une partie de la charge, les aspérités les plus hautes portent le reste. Toléré, jamais souhaitable.';
+    else if(Pd>3000) msg='Film complet, aucune usure — mais regardez la puissance dissipée : elle chauffe le palier, et cette chaleur va faire chuter la viscosité.';
+    else msg='Film complet : l’arbre flotte, il n’y a plus aucun contact métal sur métal, et l’usure est rigoureusement nulle.';
+    MSPC.mono(ctx,msg,26,H-12,11,cR);
+
+    out.innerHTML='<b style="color:'+cR+'">'+nomR.toLowerCase()+'</b><br>film '+h.toFixed(2).replace('.',',')+' µm · λ = '+lam.toFixed(1).replace('.',',')+'<br>'+MSPC.nb(Pd)+' W dissipés';
+  }, {fixed:true});
+})();
+</script>
+
+<script>
+/* ======================= CH 12 · viscosité et température =======================
+   ν(T) = ν40 · exp[ B · (1/T − 1/313,15) ], forme d'Arrhenius. B est calé pour
+   chaque grade sur son couple de viscosités normalisées à 40 °C et 100 °C,
+   ce qui reproduit correctement l'indice de viscosité des huiles minérales. */
+(function(){
+  "use strict";
+  var HU=[{n:'ISO VG 32', v40:32, v100:5.4, c:'#7fa7d8'},
+          {n:'ISO VG 46', v40:46, v100:6.8, c:'#c8d834'},
+          {n:'ISO VG 100',v40:100,v100:11.4,c:'#f0a844'},
+          {n:'ISO VG 220',v40:220,v100:19.0,c:'#e07a5f'}];
+  for(var q=0;q<HU.length;q++)
+    HU[q].B = Math.log(HU[q].v100/HU[q].v40)/(1/373.15 - 1/313.15);
+
+  var T=MSPC.ctrl('m-visco-t', function(v){ return v+' °C'; }, 'm-visco-t-l');
+  var Hs=MSPC.ctrl('m-visco-h', function(v){ return HU[v].n; }, 'm-visco-h-l');
+  var out=document.getElementById('m-visco-out');
+
+  var PLANCHER=13, PLAFOND=1000;
+  function nu(o,t){ return o.v40*Math.exp(o.B*(1/(t+273.15) - 1/313.15)); }
+  /* Température à laquelle un grade traverse une viscosité donnée. */
+  function tCroise(o,cible){ return 1/(1/313.15 + Math.log(cible/o.v40)/o.B) - 273.15; }
+
+  MSPC.anim('m-visco', function(a){
+    var ctx=a.ctx, W=a.W, H=a.H;
+    var t=T.val, o=HU[Hs.val], v=nu(o,t);
+
+    MSPC.fond(ctx,W,H,0);
+    MSPC.mono(ctx,'LA VISCOSITÉ N’EST PAS UNE CONSTANTE — ELLE S’EFFONDRE QUAND LA TEMPÉRATURE MONTE',26,28,11,'#8d968b');
+
+    var bx=92, by=64, bw=780, bh=300;
+    var T0=-20, T1=140, L0=0, L1=4;      // ν de 1 à 10 000 cSt
+    function X(tt){ return bx + (tt-T0)/(T1-T0)*bw; }
+    function Y(vv){ return by+bh - (Math.log(Math.max(vv,1))/Math.LN10 - L0)/(L1-L0)*bh; }
+
+    // les deux bandes interdites
+    ctx.fillStyle='rgba(255,106,94,.11)'; ctx.fillRect(bx,Y(PLANCHER),bw,by+bh-Y(PLANCHER));
+    ctx.fillStyle='rgba(127,167,216,.11)'; ctx.fillRect(bx,by,bw,Y(PLAFOND)-by);
+    ctx.strokeStyle='rgba(255,106,94,.55)'; ctx.setLineDash([6,4]); ctx.lineWidth=1.4;
+    ctx.beginPath(); ctx.moveTo(bx,Y(PLANCHER)); ctx.lineTo(bx+bw,Y(PLANCHER)); ctx.stroke();
+    ctx.strokeStyle='rgba(127,167,216,.55)';
+    ctx.beginPath(); ctx.moveTo(bx,Y(PLAFOND)); ctx.lineTo(bx+bw,Y(PLAFOND)); ctx.stroke();
+    ctx.setLineDash([]);
+    MSPC.mono(ctx,'PLANCHER 13 cSt — sous cette ligne le film ne se forme plus',bx+8,Y(PLANCHER)+16,9.5,'#ff6a5e');
+    MSPC.mono(ctx,'PLAFOND 1000 cSt — au-dessus l’huile ne circule plus',bx+8,Y(PLAFOND)-8,9.5,'#7fa7d8');
+
+    // les axes
+    ctx.strokeStyle='rgba(255,255,255,.28)'; ctx.lineWidth=1.3;
+    ctx.beginPath(); ctx.moveTo(bx,by); ctx.lineTo(bx,by+bh); ctx.lineTo(bx+bw,by+bh); ctx.stroke();
+    var dec=['1','10','100','1000','10000'];
+    for(var k=0;k<=4;k++){
+      MSPC.mono(ctx,dec[k],bx-8,Y(Math.pow(10,k))+4,9,'#6f786e','right');
+      ctx.strokeStyle='rgba(255,255,255,.07)';
+      ctx.beginPath(); ctx.moveTo(bx,Y(Math.pow(10,k))); ctx.lineTo(bx+bw,Y(Math.pow(10,k))); ctx.stroke();
+    }
+    MSPC.mono(ctx,'ν  (cSt)',bx-8,by-10,9.5,'#7f8a7e','right');
+    for(k=-20;k<=140;k+=20){
+      MSPC.mono(ctx,k+'',X(k),by+bh+16,9,'#6f786e','center');
+      ctx.strokeStyle='rgba(255,255,255,.05)';
+      ctx.beginPath(); ctx.moveTo(X(k),by); ctx.lineTo(X(k),by+bh); ctx.stroke();
+    }
+    MSPC.mono(ctx,'température du palier (°C)',bx+bw,by+bh+32,9.5,'#7f8a7e','right');
+
+    // les quatre courbes
+    for(var i=0;i<HU.length;i++){
+      var oi=HU[i], sel=(i===Hs.val);
+      ctx.strokeStyle = sel ? oi.c : 'rgba(255,255,255,.20)';
+      ctx.lineWidth = sel ? 2.6 : 1.4;
+      ctx.beginPath();
+      var dep=true;
+      for(k=0;k<=200;k++){
+        var tt=T0+(T1-T0)*k/200, vv=nu(oi,tt);
+        if(vv>10000){ dep=true; continue; }
+        if(dep){ ctx.moveTo(X(tt),Y(vv)); dep=false; } else ctx.lineTo(X(tt),Y(vv));
+      }
+      ctx.stroke();
+    }
+    /* Une légende, plutôt que quatre étiquettes qui se marchent dessus au bout
+       des courbes : à 130 °C les quatre grades ne sont plus séparés que de
+       quelques pixels sur une échelle logarithmique. */
+    var lx=bx+bw-168, ly=by+14;
+    ctx.fillStyle='rgba(13,18,15,.72)'; ctx.fillRect(lx-10,ly-14,178,4+HU.length*17);
+    for(i=0;i<HU.length;i++){
+      var selL=(i===Hs.val);
+      ctx.strokeStyle=selL?HU[i].c:'rgba(255,255,255,.25)'; ctx.lineWidth=selL?2.6:1.4;
+      ctx.beginPath(); ctx.moveTo(lx,ly+i*17-4); ctx.lineTo(lx+22,ly+i*17-4); ctx.stroke();
+      MSPC.mono(ctx,HU[i].n,lx+30,ly+i*17,9.5, selL?HU[i].c:'#6f786e');
+    }
+
+    // le point de fonctionnement
+    ctx.strokeStyle='rgba(255,255,255,.45)'; ctx.lineWidth=1.4;
+    ctx.beginPath(); ctx.moveTo(X(t),by); ctx.lineTo(X(t),by+bh); ctx.stroke();
+    if(v>=1 && v<=10000){
+      ctx.fillStyle=o.c; ctx.beginPath(); ctx.arc(X(t),Y(v),6.5,0,6.2832); ctx.fill();
+      ctx.strokeStyle='#0d120f'; ctx.lineWidth=1.8; ctx.stroke();
+    }
+
+    // le bandeau
+    var tPl=tCroise(o,PLANCHER), tPf=tCroise(o,PLAFOND);
+    var etat = v<PLANCHER ? 2 : (v>PLAFOND ? 1 : 0);
+    var cE=['#c8d834','#7fa7d8','#ff6a5e'][etat];
+    ctx.strokeStyle='rgba(255,255,255,.14)'; ctx.lineWidth=1;
+    ctx.beginPath(); ctx.moveTo(26,408); ctx.lineTo(W-26,408); ctx.stroke();
+    MSPC.mono(ctx,'VISCOSITÉ À '+t+' °C',26,430,9.5,'#6f786e');
+    MSPC.titre(ctx, (v>=100?MSPC.nb(v):v.toFixed(1).replace('.',','))+' cSt',26,458,26,cE);
+    MSPC.mono(ctx,'FENÊTRE DE FONCTIONNEMENT DE CETTE HUILE',300,430,9.5,'#6f786e');
+    MSPC.mono(ctx,'de '+Math.round(tPf)+' °C à '+Math.round(tPl)+' °C',300,454,15,'#e8ece6');
+    MSPC.mono(ctx,'RAPPORT FROID / CHAUD',620,430,9.5,'#6f786e');
+    MSPC.mono(ctx,'1 à '+Math.round(nu(o,0)/nu(o,100))+'  entre 0 et 100 °C',620,454,15,'#e8ece6');
+    var msg;
+    if(etat===2) msg=o.n+' à '+t+' °C : plus que '+v.toFixed(1).replace('.',',')+' cSt, sous le plancher. Le film ne tient plus, le palier repasse en régime mixte.';
+    else if(etat===1) msg=o.n+' à '+t+' °C : '+MSPC.nb(v)+' cSt, trop épaisse pour circuler. La pompe peine et le palier est mal alimenté — démarrage d’hiver.';
+    else msg=o.n+' à '+t+' °C : '+(v>=100?MSPC.nb(v):v.toFixed(1).replace('.',','))+' cSt, dans la fenêtre. Le film se forme et l’huile circule.';
+    MSPC.mono(ctx,msg,26,H-12,10.5,cE);
+
+    out.innerHTML='<b style="color:'+cE+'">'+(v>=100?MSPC.nb(v):v.toFixed(1).replace('.',','))+' cSt</b> à '+t+' °C<br>'
+      + (etat===0?'dans la fenêtre':(etat===1?'trop épaisse pour circuler':'sous le plancher'))
+      + '<br>utilisable de '+Math.round(tPf)+' à '+Math.round(tPl)+' °C';
+  }, {fixed:true});
+})();
+</script>
+
+<script>
+/* ======================= CH 12 · le sur-graissage d'un roulement =======================
+   Bilan thermique simplifié : un échauffement de base croissant avec la vitesse,
+   un terme de manque de lubrifiant sous 20 % de remplissage, et un terme de
+   BARATTAGE au-delà de 40 %, qui croît beaucoup plus vite que la vitesse.
+   La durée de vie de la graisse suit la règle industrielle des 15 °C : elle est
+   divisée par deux à chaque tranche de 15 °C au-dessus de 70 °C. */
+(function(){
+  "use strict";
+  var R=MSPC.ctrl('m-graisse-r', function(v){ return v+' %'; }, 'm-graisse-r-l');
+  var N=MSPC.ctrl('m-graisse-n', function(v){ return MSPC.nb(v)+' tr/min'; }, 'm-graisse-n-l');
+  var out=document.getElementById('m-graisse-out');
+  var ang=0;
+
+  function temp(r,n){
+    var base=18*Math.pow(n/1500,0.8);
+    var manque = r<20 ? (20-r)*2.2 : 0;
+    var baratt = r>40 ? Math.pow((r-40)/12,1.9)*Math.pow(n/1500,1.1)*2.5 : 0;
+    return Math.min(165, 25+base+manque+baratt);
+  }
+  function duree(r,t){
+    var d=20000*Math.pow(2,(70-t)/15);
+    if(r<15) d=Math.min(d, 300+60*r);
+    /* La durée de vie d'une graisse sature : au-delà, c'est son propre
+       vieillissement qui décide, plus la température. */
+    return Math.max(60, Math.min(30000, d));
+  }
+
+  MSPC.anim('m-graisse', function(a){
+    var ctx=a.ctx, W=a.W, H=a.H;
+    var r=R.val, n=N.val, t=temp(r,n), d=duree(r,t);
+    var etat = r<15 ? 2 : (r>55 ? 1 : 0);        // 0 correct, 1 barattage, 2 manque
+    var cE = (r>=22 && r<=45) ? '#c8d834' : (t>95 ? '#ff6a5e' : '#f0a844');
+    ang += (a.dt||0)*n*0.0022;
+
+    MSPC.fond(ctx,W,H,0);
+    MSPC.mono(ctx,'UN ROULEMENT TROP GRAISSÉ MEURT PLUS VITE QU’UN ROULEMENT PAS ASSEZ GRAISSÉ',26,28,11,'#8d968b');
+
+    /* ---------------- le roulement en coupe ---------------- */
+    var cx=196, cy=214, Rx=126, Ro=106, Rb=88, rb=17, Ri=70, Rt=44;
+    // la graisse, en niveau dans le volume libre
+    var niv = cy+Ro - 2*Ro*(r/100);
+    ctx.save();
+    ctx.beginPath(); ctx.arc(cx,cy,Ro,0,6.2832); ctx.arc(cx,cy,Ri,0,6.2832,true);
+    ctx.clip('evenodd');
+    ctx.fillStyle= t>95 ? 'rgba(140,105,60,.85)' : 'rgba(214,180,120,.80)';
+    ctx.fillRect(cx-Ro, niv, Ro*2, cy+Ro-niv);
+    if(r>55){                              // le barattage : des traînées dans la graisse
+      ctx.strokeStyle='rgba(255,255,255,.18)'; ctx.lineWidth=1.4;
+      for(var s=0;s<14;s++){
+        var th=ang*1.7+s*0.4488;
+        ctx.beginPath();
+        ctx.arc(cx,cy,Ri+8+((s*13)%30), th, th+0.5); ctx.stroke();
+      }
+    }
+    ctx.restore();
+    // les bagues
+    ctx.strokeStyle='#8f9a86'; ctx.lineWidth=2;
+    ctx.fillStyle='rgba(200,208,196,.14)';
+    ctx.beginPath(); ctx.arc(cx,cy,Rx,0,6.2832); ctx.arc(cx,cy,Ro,0,6.2832,true); ctx.fill('evenodd');
+    ctx.beginPath(); ctx.arc(cx,cy,Rx,0,6.2832); ctx.stroke();
+    ctx.beginPath(); ctx.arc(cx,cy,Ro,0,6.2832); ctx.stroke();
+    ctx.beginPath(); ctx.arc(cx,cy,Ri,0,6.2832); ctx.arc(cx,cy,Rt,0,6.2832,true); ctx.fill('evenodd');
+    ctx.beginPath(); ctx.arc(cx,cy,Ri,0,6.2832); ctx.stroke();
+    ctx.beginPath(); ctx.arc(cx,cy,Rt,0,6.2832); ctx.stroke();
+    // les billes
+    for(var b=0;b<9;b++){
+      var tb=ang+b*0.6981;
+      var bxp=cx+Math.cos(tb)*Rb, byp=cy+Math.sin(tb)*Rb;
+      ctx.fillStyle = t>110 ? 'rgba(255,106,94,.45)' : 'rgba(232,236,230,.30)';
+      ctx.beginPath(); ctx.arc(bxp,byp,rb,0,6.2832); ctx.fill();
+      ctx.strokeStyle = t>110 ? '#ff6a5e' : '#c9d2c2'; ctx.lineWidth=1.6; ctx.stroke();
+    }
+    MSPC.mono(ctx,'remplissage '+r+' %',cx,cy+Rx+26,11,cE,'center');
+
+    /* ---------------- la courbe T = f(remplissage) ---------------- */
+    var bx=420, by=64, bw=452, bh=214;
+    var TA=20, TB=170;
+    function X(rr){ return bx + rr/100*bw; }
+    function Y(tt){ return by+bh - (Math.min(tt,TB)-TA)/(TB-TA)*bh; }
+    // la plage préconisée
+    ctx.fillStyle='rgba(200,216,52,.12)'; ctx.fillRect(X(25),by,X(40)-X(25),bh);
+    MSPC.mono(ctx,'plage',(X(25)+X(40))/2,by+14,9,'#c8d834','center');
+    ctx.strokeStyle='rgba(255,255,255,.28)'; ctx.lineWidth=1.3;
+    ctx.beginPath(); ctx.moveTo(bx,by); ctx.lineTo(bx,by+bh); ctx.lineTo(bx+bw,by+bh); ctx.stroke();
+    for(var k=20;k<=160;k+=35){
+      MSPC.mono(ctx,k+' °C',bx-8,Y(k)+4,9,'#6f786e','right');
+      ctx.strokeStyle='rgba(255,255,255,.07)'; ctx.beginPath(); ctx.moveTo(bx,Y(k)); ctx.lineTo(bx+bw,Y(k)); ctx.stroke();
+    }
+    for(k=0;k<=100;k+=25) MSPC.mono(ctx,k+' %',X(k),by+bh+16,9,'#6f786e','center');
+    MSPC.mono(ctx,'température du roulement',bx-4,by-10,9.5,'#7f8a7e');
+    MSPC.mono(ctx,'taux de remplissage du logement',bx+bw,by+bh+32,9.5,'#7f8a7e','right');
+    ctx.strokeStyle='#e8ece6'; ctx.lineWidth=2.2; ctx.beginPath();
+    for(k=0;k<=100;k++){ var tc=temp(k,n); if(k===0) ctx.moveTo(X(k),Y(tc)); else ctx.lineTo(X(k),Y(tc)); }
+    ctx.stroke();
+    ctx.fillStyle=cE; ctx.beginPath(); ctx.arc(X(r),Y(t),6.5,0,6.2832); ctx.fill();
+    ctx.strokeStyle='#0d120f'; ctx.lineWidth=1.8; ctx.stroke();
+
+    /* ---------------- le bandeau ---------------- */
+    ctx.strokeStyle='rgba(255,255,255,.14)'; ctx.lineWidth=1;
+    ctx.beginPath(); ctx.moveTo(26,388); ctx.lineTo(W-26,388); ctx.stroke();
+    MSPC.mono(ctx,'TEMPÉRATURE',26,410,9.5,'#6f786e');
+    MSPC.titre(ctx,Math.round(t)+' °C',26,440,26,cE);
+    MSPC.mono(ctx,'DURÉE DE VIE DE LA GRAISSE',250,410,9.5,'#6f786e');
+    MSPC.titre(ctx,MSPC.nb(d)+' h',250,440,26,cE);
+    var dur = d>13000 ? (d/8760).toFixed(1).replace('.',',')+' ans'
+            : (d>1500 ? (d/730).toFixed(1).replace('.',',')+' mois'
+                      : Math.round(d/24)+' jours');
+    MSPC.mono(ctx,'soit '+dur+' en marche continue',250,460,10,'#6f786e');
+    MSPC.mono(ctx,'PAR RAPPORT À UN REMPLISSAGE CORRECT',560,410,9.5,'#6f786e');
+    var ref=duree(32,temp(32,n));
+    MSPC.titre(ctx, d>=ref*0.95 ? 'optimal' : '÷ '+(ref/d).toFixed(1).replace('.',','), 560,440,26, d>=ref*0.95?'#c8d834':cE);
+
+    var msg;
+    if(r<15) msg='Trop peu de graisse : les pistes ne sont plus alimentées, les billes frottent et la piste s’écaille.';
+    else if(r<=45) msg='Remplissage correct : les billes chassent la graisse sur les côtés, puis travaillent dans un logement libre.';
+    else if(r<=70) msg='Le logement devient trop plein : les billes brassent la graisse au lieu de la déplacer, et ce brassage chauffe.';
+    else msg='Barattage franc : la graisse ne peut aller nulle part. La chaleur la cuit et son huile se sépare du savon.';
+    MSPC.mono(ctx,msg,26,H-12,11,cE);
+
+    out.innerHTML='<b style="color:'+cE+'">'+Math.round(t)+' °C</b><br>'+MSPC.nb(d)+' h de durée de vie<br>'
+      + (d>=ref*0.95 ? 'remplissage optimal' : 'divisée par '+(ref/d).toFixed(1).replace('.',','));
   }, {fixed:true});
 })();
 </script>
