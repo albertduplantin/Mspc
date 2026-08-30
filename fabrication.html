@@ -1,0 +1,1087 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Refaire la pièce qui n'existe plus — Fabrication et assemblage, Bac Pro MSPC</title>
+<meta name="description" content="Cours de fabrication et d'assemblage pour le Bac Pro MSPC, calé sur le savoir S4.9 du référentiel : traçage, sciage, limage et ajustage, cisaillage et pliage, perçage et taraudage, éléments filetés, rivetage, collage, soudage à l'électrode enrobée et MAG, brasage au chalumeau, impression 3D et procédés d'obtention des pièces.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Saira+Condensed:wght@500;600;700&family=Public+Sans:ital,wght@0,400;0,600;0,800;1,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/site.css">
+<script src="assets/site.js"></script>
+<style>
+/* Accent de la matière : le violet de l'arc électrique de soudage */
+:root{--accent:#7b5ea7; --accent-clair:#b79ae0; --accent-sombre:#402f5e}
+.hero-canvas-wrap>canvas{position:absolute; inset:0; width:100%; height:100%; display:block}
+.switch{display:flex; align-items:center; gap:9px; cursor:pointer; margin:0 0 12px}
+.switch input{width:auto; margin:0}
+.switch span{font-family:"IBM Plex Mono",monospace; font-size:10.5px; letter-spacing:.11em; text-transform:uppercase; color:#fff}
+</style>
+</head>
+<body>
+
+<nav class="sitenav" aria-label="Navigation entre les cours">
+  <a class="marque" href="index.html"><span class="sig">Atelier <b>MSPC</b></span></a>
+  <div class="liens">
+    <a href="index.html">Accueil</a>
+    <a class="m-elec" href="electricite.html"><i class="pastille"></i>Électricité</a>
+    <a class="m-maint" href="maintenance-preventive.html"><i class="pastille"></i>Maintenance préventive</a>
+    <a class="m-meca" href="mecanique.html"><i class="pastille"></i>Mécanique</a>
+    <a class="m-fab" href="fabrication.html" aria-current="page"><i class="pastille"></i>Fabrication</a>
+    <a class="m-pneu" href="pneumatique.html"><i class="pastille"></i>Pneumatique</a>
+    <a class="m-hydro" href="hydraulique.html"><i class="pastille"></i>Hydraulique</a>
+  </div>
+  <a class="soutenir" href="https://ko-fi.com/topinambourrutabaga" target="_blank" rel="noopener">☕ Soutenir le site</a>
+</nav>
+
+<header class="hero">
+  <div class="hero-canvas-wrap">
+    <canvas id="hfab" aria-label="Animation : une plaque brute devient une pièce montée en passant par le traçage, le sciage, le perçage et l'assemblage"></canvas>
+    <div class="hero-ctrl">
+      <label>Avancement du travail <span id="hep">tracé</span></label>
+      <input type="range" id="hetape" min="0" max="100" value="26" aria-label="Avancement du travail">
+      <label>Soin apporté au traçage <span id="hso">70 %</span></label>
+      <input type="range" id="hsoin" min="0" max="100" value="70" aria-label="Soin apporté au traçage">
+      <div class="verdict" id="hverdict">Faites avancer la pièce jusqu'au montage. Puis baissez le soin du traçage.</div>
+    </div>
+    <div class="hero-text">
+      <span class="eyebrow">Bac Pro MSPC · Fabrication et assemblage · Savoir S4.9</span>
+      <h1>Refaire la pièce<br>qui n'<em>existe</em> plus</h1>
+      <p>Le fournisseur annonce six semaines. La machine est à l'arrêt et elle est en tête de ligne. Personne ne va attendre six semaines — donc quelqu'un va tracer, scier, percer, souder ou imprimer. Ce dossier apprend à le faire proprement, et surtout à savoir quand il ne faut <em>pas</em> le faire.</p>
+    </div>
+  </div>
+</header>
+
+<div class="meta-bar">
+  <div><b>3</b> chapitres sur 13 publiés</div>
+  <div><b>5</b> animations pilotables</div>
+  <div><b>8</b> exercices corrigés</div>
+  <div>Fiches TP <b>en préparation</b></div>
+  <div>Calé sur le savoir <b>S4.9</b></div>
+</div>
+
+<div class="wrap">
+
+<div class="encadre"><span class="tag">Comment lire ce dossier</span>
+<p>Chaque chapitre porte, sous son titre, la <strong>pastille du savoir associé</strong> qu'il traite et son <strong>niveau taxonomique</strong>, tels qu'ils figurent au référentiel du Bac Pro MSPC. Trois niveaux seulement sont utilisés dans ce diplôme :</p>
+<ul>
+<li><strong>Niveau 1 — information</strong> : décrire, identifier, sélectionner.</li>
+<li><strong>Niveau 2 — compréhension</strong> : expliquer, interpréter, lire, reconnaître, utiliser.</li>
+<li><strong>Niveau 3 — application</strong> : appliquer, calculer, déterminer.</li>
+</ul>
+<p>Ce dossier traite le savoir <strong>S4.9 — Procédés d'assemblage et opérations simples de fabrication mécanique</strong>. Il faut lire attentivement les niveaux, parce qu'ils ne sont pas tous les mêmes et que la différence change tout :</p>
+<table>
+<thead><tr><th>Savoir</th><th>Ce que dit le référentiel</th><th>Niv.</th></tr></thead>
+<tbody>
+<tr><td><strong>S4.9.1</strong><br>Procédés d'assemblage</td><td>« Règle, méthode et réalisation d'opérations simples » — éléments filetés, collage, rivetage, déformation, soudage</td><td><strong>3</strong></td></tr>
+<tr><td><strong>S4.9.2</strong><br>Procédés d'obtention des pièces</td><td>« Différents types de procédé » — usinage, moulage, injection, déformation</td><td><strong>2</strong></td></tr>
+<tr><td><strong>S4.9.2</strong><br>Fabrication additive</td><td>« Modes opératoires et procédures de fabrication additive (impression 3D)… <em>fabrication d'une pièce en vue de son remplacement lors d'un dépannage</em> »</td><td><strong>3</strong></td></tr>
+<tr><td><strong>S4.9.3</strong><br>Façonnage des pièces</td><td>« Au travers <u>d'opérations simples</u> : traçage, sciage, pliage, perçage, taraudage, soudage, ajustage »</td><td><strong>3</strong></td></tr>
+</tbody></table>
+<p><span class="cle">L'usinage proprement dit — tourner, fraiser — est au niveau 2, pas au niveau 3.</span> Le référentiel ne demande pas de savoir usiner : il demande de savoir <em>reconnaître</em> comment une pièce a été obtenue, parce que c'est ce qui permet de choisir un remplacement compatible. C'est l'objet du chapitre 12. Tout le travail de main — tracer, scier, limer, percer, tarauder, souder, assembler — est en revanche bien au niveau 3, c'est-à-dire à faire réellement.</p>
+<p>Ce qui déborde du référentiel n'a pas été supprimé pour autant : c'est souvent ce qui rend une notion mémorable. Mais c'est placé dans des <strong>encadrés gris hachurés</strong>, étiquetés « pour aller plus loin ». <span class="cle">Vous pouvez les sauter intégralement sans perdre le fil du cours.</span></p></div>
+
+<nav class="sommaire" aria-label="Sommaire">
+  <h2>Le fil du cours</h2>
+  <p>On commence par la seule question qui compte vraiment — <em>faut-il fabriquer cette pièce ?</em> — parce qu'un mainteneur qui fabrique tout ce qu'il pourrait fabriquer coûte cher et met parfois des gens en danger. Vient ensuite le traçage, dont dépend tout le reste, puis les opérations de main : scier, limer, cisailler, plier, percer, tarauder. On assemble alors, à froid puis à chaud — visserie, rivets, colle, arc, MAG, brasage. On termine par l'impression 3D, par la lecture des procédés d'obtention, et par la décision de rechange.</p>
+  <div class="rail">
+    <a class="borne" href="#c1"><span class="num">01</span><span class="lbl">Refaire la pièce qui n'existe plus</span></a>
+    <a class="borne" href="#c2"><span class="num">02</span><span class="lbl">Le traçage</span></a>
+    <a class="borne" href="#c3"><span class="num">03</span><span class="lbl">Sciage et limage : l'ajustage</span></a>
+    <a class="borne" href="#suite"><span class="num">04</span><span class="lbl">Cisaillage et pliage</span></a>
+    <a class="borne" href="#suite"><span class="num">05</span><span class="lbl">La perceuse à colonne</span></a>
+    <a class="borne" href="#suite"><span class="num">06</span><span class="lbl">Taraudage et filetages</span></a>
+    <a class="borne" href="#suite"><span class="num">07</span><span class="lbl">Assembler sans fondre</span></a>
+    <a class="borne" href="#suite"><span class="num">08</span><span class="lbl">Soudure à l'électrode enrobée</span></a>
+    <a class="borne" href="#suite"><span class="num">09</span><span class="lbl">Le semi-automatique MAG</span></a>
+    <a class="borne" href="#suite"><span class="num">10</span><span class="lbl">Le brasage au chalumeau</span></a>
+    <a class="borne" href="#suite"><span class="num">11</span><span class="lbl">L'impression 3D</span></a>
+    <a class="borne" href="#suite"><span class="num">12</span><span class="lbl">Comment la pièce a été obtenue</span></a>
+    <a class="borne" href="#suite"><span class="num">13</span><span class="lbl">L'arbre de décision de la rechange</span></a>
+    <a class="borne" href="#suite" style="border-top-color:var(--accent)"><span class="num">TP</span><span class="lbl">Les 15 fiches d'atelier</span></a>
+  </div>
+</nav>
+
+<!-- ================= CH 1 ================= -->
+<section class="ch" id="c1">
+  <div class="ch-head"><div class="ch-num">01</div><div class="ch-title">
+    <span class="kicker">La bonne question n'est pas « comment »</span><h2>Refaire la pièce qui n'existe plus</h2></div></div>
+  <div class="ch-body">
+
+<div class="savoirs">
+  <span class="savoir n3"><b>S4.9.1</b> <i>Procédés d'assemblage : règle, méthode et réalisation d'opérations simples</i></span>
+  <span class="savoir n2"><b>S4.9.2</b> <i>Procédés d'obtention des pièces</i></span>
+</div>
+
+<p class="lede">Un chapeau de guidage en plastique, gros comme une boîte d'allumettes, casse sur un vérin de bridage. Le fournisseur annonce six semaines : la machine est chez lui, la référence est obsolète, il faut la refaire. Six semaines d'arrêt sur un poste qui alimente toute la ligne, c'est impensable. Alors quelqu'un, dans l'heure qui suit, va décider de fabriquer quelque chose. <strong>Ce chapitre porte sur cette décision-là</strong>, et pas encore sur la lime ou sur le poste à souder.</p>
+
+<h3>1.1 — Pourquoi un mainteneur fabrique</h3>
+<p>Un technicien de maintenance n'est pas un fabricant. Il ne produit rien, il remet en marche. Pourtant il fabrique, et pour quatre raisons seulement — les reconnaître évite déjà la moitié des erreurs.</p>
+
+<table>
+<thead><tr><th>Situation</th><th>Ce qu'on fabrique</th><th>Durée de vie visée</th></tr></thead>
+<tbody>
+<tr><td><strong>La pièce n'existe plus</strong><br>machine ancienne, fournisseur disparu, référence abandonnée</td><td>La pièce elle-même, à l'identique ou en équivalent</td><td>Définitive</td></tr>
+<tr><td><strong>La pièce existe mais le délai est intenable</strong></td><td>Un dépannage qui tient jusqu'à la livraison</td><td><strong>Provisoire — et tracée comme telle</strong></td></tr>
+<tr><td><strong>Il faut adapter</strong><br>changement de format, capot de protection, support de capteur neuf</td><td>Une pièce qui n'a jamais existé</td><td>Définitive</td></tr>
+<tr><td><strong>Il faut un outil</strong><br>extracteur, gabarit de perçage, cale de réglage, protection d'atelier</td><td>Un outillage, pas une pièce de machine</td><td>Définitive, et souvent la plus utile</td></tr>
+</tbody></table>
+
+<p>Cette quatrième ligne est celle qu'on oublie toujours et c'est pourtant la plus rentable. <span class="cle">Un gabarit de perçage fabriqué une fois fait gagner du temps et supprime des erreurs sur toutes les interventions suivantes.</span> Nous en fabriquerons un au chapitre 5.</p>
+
+<h3>1.2 — Ce que le référentiel appelle « opérations simples »</h3>
+<p>Le référentiel est prudent, et il a raison de l'être. Il n'écrit pas « fabrication mécanique » mais <strong>« opérations simples de fabrication mécanique »</strong>, et il précise à chaque ligne que tout cela doit être abordé <em>« d'un point de vue de la maintenance »</em>. Autrement dit : on ne forme pas des usineurs, on forme des gens capables de remettre une machine en marche sans faire de bêtise.</p>
+<p>Concrètement, sont au programme le <strong>traçage, le sciage, le pliage, le perçage, le taraudage, le soudage et l'ajustage</strong> — et, du côté de l'assemblage, les <strong>éléments filetés, le collage, le rivetage, la déformation</strong>. L'<strong>impression 3D</strong> y figure explicitement, avec une formule qui vaut d'être citée mot pour mot, parce qu'elle décrit exactement le métier : <em>« fabrication d'une pièce en vue de son remplacement lors d'un dépannage »</em>.</p>
+<p>Ne sont <em>pas</em> au programme, au niveau où l'on croit souvent : le tournage et le fraisage. Ils relèvent de la ligne « différents types de procédé », <strong>niveau 2</strong>, qui demande de savoir reconnaître un procédé d'obtention, pas de le pratiquer.</p>
+
+<div class="image-mentale"><span class="tag">Image mentale — le garagiste et le carrossier</span>
+<p>Un garagiste sait souder une ligne d'échappement, refaire un support qui a cassé, percer un trou pour passer un câble. Il ne construit pas de carrosserie, il n'usine pas de vilebrequin — et quand il en faut un, il l'achète.</p>
+<p>C'est exactement le périmètre demandé ici. <span class="cle">Savoir faire les opérations qui remettent la machine en marche, et savoir reconnaître celles qu'il faut confier à quelqu'un d'autre.</span></p></div>
+
+<h3>1.3 — Les quatre voies, et ce qui les départage</h3>
+<p>Devant une pièce cassée, il n'existe que quatre issues. Acheter la pièce d'origine. La refaire à l'atelier avec les moyens du bord. L'imprimer en trois dimensions. La faire faire dehors, par un atelier d'usinage. Réparer l'ancienne est une cinquième voie, mais elle ne se pose que si la pièce est réparable — soudure d'une fissure, rechargement, remise à la cote — et nous la traiterons au chapitre 13.</p>
+<p>Quatre critères suffisent à trancher, et ils ne pèsent pas du tout le même poids.</p>
+<ul>
+<li><strong>Le délai fournisseur</strong>, croisé avec <strong>la criticité de la machine</strong>. Ces deux-là ne se lisent jamais séparément : trois jours d'attente sur une machine d'appoint ne coûtent rien, trois jours sur un goulot d'étranglement coûtent une fortune.</li>
+<li><strong>La sollicitation mécanique</strong> que subit la pièce. C'est le critère qui interdit — pas celui qui conseille.</li>
+<li><strong>La température de service</strong>. Elle élimine des matériaux entiers, en particulier tous les plastiques d'impression.</li>
+</ul>
+
+<figure class="anim">
+  <canvas id="a-dec" width="900" height="460" aria-label="Animation : l'arbre de décision entre acheter, refaire à l'atelier, imprimer en 3D et sous-traiter une pièce de rechange"></canvas>
+  <div class="ctrls">
+    <div class="c"><label>Délai fournisseur <span id="a-dec-d-l">35 j</span></label><input type="range" id="a-dec-d" min="0" max="60" value="35"></div>
+    <div class="c"><label>Criticité machine <span id="a-dec-c-l">goulot</span></label><input type="range" id="a-dec-c" min="0" max="4" value="3"></div>
+    <div class="c"><label>Sollicitation de la pièce <span id="a-dec-f-l">faible</span></label><input type="range" id="a-dec-f" min="0" max="4" value="1"></div>
+    <div class="c"><label>Température de service <span id="a-dec-t-l">45 °C</span></label><input type="range" id="a-dec-t" min="20" max="200" value="45"></div>
+    <div class="c readout" id="a-dec-out"></div>
+  </div>
+  <figcaption>Les quatre critères en haut, les quatre voies en bas, avec leur score. <b>Partez du réglage initial</b> — six semaines d'attente sur un goulot, pièce peu sollicitée, tiède : l'impression 3D l'emporte, et c'est le cas d'école du référentiel. <b>Ramenez le délai à deux jours</b> : tout s'effondre au profit de l'achat, parce que fabriquer une pièce que le fournisseur livre après-demain est du temps perdu. <b>Remontez le délai puis montez la sollicitation à « fort »</b> : le plastique disparaît, l'atelier reprend la main — acier, scie, perceuse, soudure. <b>Montez maintenant la température à 120 °C</b> avec une sollicitation faible : l'impression retombe seule, sans qu'on ait touché aux efforts. <b>Enfin, mettez la sollicitation sur « sécurité »</b> : les trois voies de fabrication chutent ensemble et l'achat remonte. <span class="cle">Une pièce dont dépend la sécurité d'une personne ne se bricole pas, quel que soit le délai.</span></figcaption>
+  <div class="autableau">
+    <b class="entete">Au tableau <i>· 12 minutes · animation 1 sur 1</i></b>
+    <ol>
+      <li>Réglage initial. <span class="q">« Six semaines d'attente sur la machine qui alimente toute la ligne. Qu'est-ce qu'on fait ? »</span> Laisser proposer, puis montrer que l'animation dit la même chose.</li>
+      <li>Délai à <b>2 jours</b>. <span class="q">« Et maintenant ? »</span> Faire formuler la règle : on ne fabrique jamais ce qui arrive demain.</li>
+      <li>Retour à 35 jours, sollicitation sur <b>fort</b>. <span class="q">« Pourquoi le plastique disparaît-il ? »</span> Attendre « il n'est pas assez résistant », puis préciser : ce n'est pas seulement la résistance, c'est l'anisotropie — voir chapitre 11.</li>
+      <li>Température à <b>120 °C</b>, sollicitation revenue à faible. <span class="q">« La pièce ne force pas. Pourquoi ne pas l'imprimer ? »</span> Le PLA flue vers 60 °C, le PETG vers 80. La pièce ne casse pas : elle se déforme lentement.</li>
+      <li>Sollicitation sur <b>sécurité</b>. <span class="q">« Qui signe ? »</span> Discussion sur la responsabilité — c'est le vrai sujet du chapitre.</li>
+    </ol>
+    <div class="piege">Le piège : croire que l'animation décide. Elle ne fait qu'ordonner quatre critères. Elle ignore la géométrie de la pièce, l'outillage réellement disponible dans l'atelier, la compétence présente ce jour-là, et le fait qu'un chef d'équipe puisse tout simplement refuser. Faire dire aux élèves ce que l'animation <em>ne sait pas</em> vaut mieux que de leur faire lire le résultat.</div>
+  </div>
+</figure>
+
+<h3>1.4 — Le provisoire, et la trace qu'il doit laisser</h3>
+<p>La fabrication de dépannage a une caractéristique dangereuse : <strong>elle marche</strong>. La machine repart, la production reprend, tout le monde passe à autre chose — et la pièce provisoire reste en place trois ans. Elle finit par casser un jour où personne ne se souvient qu'elle était provisoire, et le diagnostic prend le double du temps parce que la pièce montée ne correspond à aucun plan.</p>
+<p>Une réparation provisoire n'existe correctement que si elle laisse trois traces :</p>
+<ul>
+<li><strong>Sur la machine</strong> : un marquage visible sur la pièce elle-même, ou une étiquette. Un coup de peinture d'une couleur convenue suffit.</li>
+<li><strong>Dans la GMAO</strong> : un compte rendu qui dit ce qui a été fabriqué, en quelle matière, et <em>ce qu'il faut monter à la place</em>. C'est le savoir S4.1, et c'est là que la maintenance se distingue du bricolage.</li>
+<li><strong>Dans le magasin</strong> : la commande de la vraie pièce, passée le jour même. Si elle n'est pas passée tout de suite, elle ne le sera jamais.</li>
+</ul>
+
+<div class="encadre danger"><span class="tag">Ce qu'on ne fabrique pas</span>
+<p>Certaines pièces ne se refont pas à l'atelier, quel que soit le délai, quelle que soit la pression, et quel que soit le talent de celui qui les referait. Elles ont un point commun : <strong>leur rupture blesse quelqu'un</strong>.</p>
+<ul>
+<li>Tout <strong>organe de levage et d'élingage</strong> : crochet, manille, anneau, chaîne, sangle. Ces pièces sont marquées, tracées et éprouvées individuellement. Une pièce refaite n'a ni marquage ni épreuve.</li>
+<li>Tout <strong>élément d'une chaîne de sécurité</strong> : came d'interrupteur de position, gâche d'un capot verrouillé, tringlerie d'arrêt d'urgence, doigt de détrompage. On refait la pièce, la sécurité fonctionne encore — mais plus de la même façon, et personne ne le sait.</li>
+<li>Tout <strong>appareil sous pression</strong> et ses accessoires soudés.</li>
+<li>Toute pièce d'un ensemble faisant l'objet d'un <strong>marquage CE</strong>, quand la modifier revient à en changer les caractéristiques.</li>
+</ul>
+<p><span class="cle">Devant l'une de ces pièces, la seule réponse est : la machine reste arrêtée jusqu'à ce que la pièce d'origine arrive.</span> C'est une décision qui appartient au responsable de maintenance, pas à celui qui tient la lime — mais c'est à celui qui tient la lime de la signaler.</p></div>
+
+<h3>1.5 — Ce que l'on met sur soi avant de commencer</h3>
+<p>Le référentiel consacre un savoir entier à la sécurité (S4.2). Il ne sera pas répété à chaque chapitre : il est appliqué dans chacun, parce que les risques du sciage ne sont pas ceux du soudage. Trois règles valent partout dans l'atelier de fabrication.</p>
+<ul>
+<li><strong>Les lunettes se mettent avant d'entrer, pas avant de percer.</strong> Le copeau qui blesse est presque toujours celui du voisin.</li>
+<li><strong>Les gants sont interdits sur toute machine tournante</strong> — perceuse, touret, tour. Un gant qui s'enroule emmène la main entière, alors qu'une peau nue glisse. Les gants se portent pour manipuler la tôle brute et pour souder, jamais devant une broche.</li>
+<li><strong>Ce qui n'est pas bridé est un projectile.</strong> Une pièce tenue à la main sur une perceuse à colonne devient une hélice à 900 tours par minute. Nous y reviendrons longuement au chapitre 5, parce que c'est l'accident le plus fréquent de l'atelier scolaire.</li>
+</ul>
+
+<div class="exo"><span class="tag">Exercice 1.1</span>
+<p>Le chapeau de guidage d'un vérin de bridage a cassé. C'est une bague plastique de 40 mm de diamètre qui guide la tige et empêche la poussière d'entrer ; elle ne transmet aucun effort. Température près du vérin : 45 °C. Le fournisseur annonce six semaines et la machine est en tête de ligne. Que faites-vous, et qu'écrivez-vous ?</p>
+<details><summary>Voir la réponse</summary><div class="rep">
+<p><strong>On imprime la pièce, en PETG, et on commande la pièce d'origine le jour même.</strong></p>
+<p><strong>Pourquoi l'impression est ici la bonne voie.</strong> Les quatre critères sont tous favorables et aucun n'est bloquant : la pièce ne transmet aucun effort, elle travaille à 45 °C — loin des 80 °C où le PETG commence à fluer —, le délai est intenable et la machine est critique. C'est très exactement le cas que le référentiel décrit : <em>« fabrication d'une pièce en vue de son remplacement lors d'un dépannage »</em>.</p>
+<p><strong>Pourquoi le PETG plutôt que le PLA.</strong> Le PLA serait plus facile à imprimer, mais il ramollit vers 60 °C et devient cassant en vieillissant. À 45 °C en continu, à côté d'un vérin qui chauffe un peu plus certains jours, on est trop près de la limite. Le PETG tient environ 80 °C et supporte mieux les chocs. <span class="cle">Sur une pièce de dépannage, on ne choisit pas le matériau le plus facile mais celui qui laisse une marge.</span></p>
+<p><strong>Ce qu'il faut écrire — c'est la moitié de la réponse.</strong></p>
+<ul>
+<li>Dans la <strong>GMAO</strong> : « Chapeau de guidage vérin de bridage poste 30 — pièce d'origine réf. XXX indisponible, délai 6 semaines. <strong>Pièce provisoire imprimée en PETG</strong> le [date], fichier archivé sous [chemin]. À remplacer par la pièce d'origine à réception. »</li>
+<li><strong>Sur la pièce</strong> : un repère de couleur convenu dans l'atelier, pour que le prochain qui ouvre le carter voie immédiatement qu'il ne regarde pas une pièce d'origine.</li>
+<li><strong>Au magasin</strong> : la commande passée le jour même, pas « quand on aura le temps ».</li>
+</ul>
+<p><em>Notez qu'on a aussi fabriqué autre chose sans s'en rendre compte : le fichier. La prochaine casse, dans deux ans, prendra vingt minutes au lieu de six semaines. Archiver le fichier vaut souvent plus que la pièce elle-même.</em></p>
+</div></details></div>
+
+<div class="exo"><span class="tag">Exercice 1.2</span>
+<p>Sur un tablier élévateur, la chape d'attelage qui reprend l'effort de levage présente une fissure. Le tablier porte 800 kg et travaille au-dessus d'un poste occupé. Le fournisseur livre en quatre jours. Un collègue propose de meuler la fissure et de la recharger au poste à souder : « en une heure c'est reparti ». Que répondez-vous ?</p>
+<details><summary>Voir la réponse</summary><div class="rep">
+<p><strong>On ne soude pas. La machine est consignée et reste à l'arrêt quatre jours.</strong> C'est la seule réponse acceptable, et elle ne dépend même pas du délai.</p>
+<p><strong>Le premier argument est celui du délai, et il suffit presque.</strong> Quatre jours d'attente contre une heure de travail : le calcul n'a pas lieu d'être, puisque la pièce d'origine existe et arrive. On ne fabrique jamais ce que le fournisseur livre cette semaine.</p>
+<p><strong>Le second argument est le vrai.</strong> Cette chape est un <strong>organe de levage</strong>, et elle travaille au-dessus de quelqu'un. Trois raisons de ne pas y toucher :</p>
+<ul>
+<li><strong>Une fissure ne se recharge pas, elle se propage.</strong> Meuler enlève la partie visible ; l'amorce continue sous le cordon. La soudure va exactement masquer ce qu'il fallait surveiller.</li>
+<li><strong>La soudure change le métal autour d'elle.</strong> La zone affectée thermiquement est plus dure et plus fragile que le métal de base. Sur une pièce soumise à des cycles de charge, on vient de créer le prochain point d'amorçage — voir la fatigue, chapitre 18 du dossier de mécanique.</li>
+<li><strong>Une pièce de levage est tracée et éprouvée.</strong> La pièce d'origine a un marquage et une charge maximale d'utilisation qui l'accompagnent. Une pièce rechargée à l'atelier n'a plus rien de tout cela, et plus personne ne peut affirmer ce qu'elle tient.</li>
+</ul>
+<p><strong>Ce qu'il faut faire.</strong> Consigner, baliser, interdire le passage sous le tablier, déclarer l'anomalie par écrit, commander la pièce — et se demander <em>pourquoi</em> la chape a fissuré. Une fissure de fatigue sur un organe de levage annonce presque toujours une surcharge répétée ou un choc, et la pièce neuve fissurera à son tour si la cause reste en place.</p>
+<p><em>Le collègue n'a pas tort techniquement : il sait souder, et son cordon tiendrait probablement. Le problème n'est pas la qualité de son cordon, c'est que personne ne pourra jamais le prouver.</em></p>
+</div></details></div>
+
+<div class="horsref"><span class="tag">Pour aller plus loin — hors référentiel</span>
+<h4>Le coût réel d'une heure d'arrêt</h4>
+<p>La décision « fabriquer ou attendre » se joue presque toujours sur un chiffre que personne n'a sous la main : ce que coûte une heure d'arrêt de la machine. Il se calcule pourtant simplement.</p>
+<p>Pour un poste qui n'est pas un goulot, le coût est celui de la main-d'œuvre immobilisée, éventuellement nul si l'on peut redéployer les opérateurs. Pour un <strong>goulot d'étranglement</strong>, en revanche, une heure perdue est une heure de production perdue pour l'usine entière, et jamais rattrapée : le coût est la <em>marge</em> sur tout ce qui ne sera pas produit, à quoi s'ajoutent parfois des pénalités de retard.</p>
+<p>L'ordre de grandeur surprend toujours : sur une ligne d'agroalimentaire ou d'automobile, l'heure d'arrêt d'un goulot se chiffre couramment en milliers d'euros. C'est ce qui explique qu'un service de maintenance accepte de mobiliser deux techniciens pendant une journée pour fabriquer une pièce à vingt euros — et c'est aussi ce qui justifie un stock de pièces de sécurité qui, sur le papier, « dort ».</p>
+<p>Le référentiel MSPC aborde ces notions en S5.3, sous l'angle des indicateurs et des coûts de maintenance. Retenez simplement ici que <strong>la valeur de la pièce n'a presque aucun rapport avec l'enjeu de sa disponibilité</strong>.</p></div>
+
+</div>
+</section>
+
+<!-- ================= CH 2 ================= -->
+<section class="ch" id="c2">
+  <div class="ch-head"><div class="ch-num">02</div><div class="ch-title">
+    <span class="kicker">Tout ce qui suit en dépend</span><h2>Le traçage</h2></div></div>
+  <div class="ch-body">
+
+<div class="savoirs">
+  <span class="savoir n3"><b>S4.9.3</b> <i>Façonnage des pièces : traçage</i></span>
+</div>
+
+<p class="lede">Le traçage est la seule opération de ce dossier qui n'enlève pas de matière, ne déforme rien et ne chauffe rien. C'est aussi celle dont dépendent toutes les autres : <strong>une scie ne rattrape pas un trait faux, une perceuse encore moins</strong>. Un atelier reconnaît un bon ouvrier à la propreté de son traçage bien avant de voir la pièce finie.</p>
+
+<h3>2.1 — Relever une pièce cassée</h3>
+<p>Le cas ordinaire n'est pas de tracer d'après un plan : c'est de tracer d'après une pièce en deux morceaux, souvent déformée, parfois incomplète. La méthode tient en quatre gestes, et l'ordre compte.</p>
+<ol>
+<li><strong>Photographier la pièce en place avant de la démonter.</strong> Cinq secondes, et cela sauve l'orientation, le sens de montage, la position des trous par rapport au reste. On croit toujours qu'on s'en souviendra.</li>
+<li><strong>Rassembler les morceaux et les remettre en position</strong>, au besoin en les collant provisoirement. Une pièce reconstituée se mesure ; deux morceaux séparés se mesurent deux fois, avec deux erreurs.</li>
+<li><strong>Repérer ce qui est fonctionnel et ce qui ne l'est pas.</strong> C'est l'étape que tout le monde saute et c'est la plus importante — voir 2.4.</li>
+<li><strong>Mesurer, en partant toujours de la même face.</strong> C'est l'objet du paragraphe suivant, et cela vaut un long développement.</li>
+</ol>
+
+<div class="image-mentale"><span class="tag">Image mentale — la pièce cassée en deux</span>
+<p>Un support en équerre a cassé net au niveau du congé. Vous avez les deux morceaux. La tentation est de mesurer chaque morceau puis d'additionner — c'est là qu'on se trompe : l'épaisseur du trait de rupture, quelques dixièmes de matière partis en poussière, et les deux morceaux qui ne se rejoignent pas parfaitement font que la somme est toujours un peu fausse.</p>
+<p><span class="cle">Mesurez la pièce reconstituée d'un bout à l'autre, jamais morceau par morceau.</span> Et quand la pièce est symétrique, mesurez la moitié saine et doublez : c'est plus juste que de mesurer la moitié cassée.</p></div>
+
+<h3>2.2 — Les outils, et ce que chacun garantit</h3>
+<table>
+<thead><tr><th>Outil</th><th>À quoi il sert</th><th>Ce qu'il garantit</th></tr></thead>
+<tbody>
+<tr><td><strong>Le marbre</strong></td><td>Surface de référence sur laquelle la pièce et les instruments reposent</td><td>Un plan de départ. Sans lui, rien n'est mesurable de façon répétable</td></tr>
+<tr><td><strong>Le trusquin</strong></td><td>Tracer une ligne à hauteur constante depuis le marbre</td><td>Le parallélisme au plan de référence</td></tr>
+<tr><td><strong>L'équerre à chapeau</strong></td><td>Contrôler et tracer à 90° d'une face</td><td>La perpendicularité — à vérifier, elle se fausse en tombant</td></tr>
+<tr><td><strong>La pointe à tracer</strong></td><td>Rayer le métal d'un trait fin et permanent</td><td>Un trait de deux dixièmes, qui ne s'efface pas comme un feutre</td></tr>
+<tr><td><strong>Le bleu de traçage</strong></td><td>Couche colorée qui fait ressortir le trait</td><td>La lisibilité, surtout sur acier brut ou aluminium</td></tr>
+<tr><td><strong>Le pointeau</strong></td><td>Marquer d'un coup de pointe le centre d'un futur perçage</td><td>Que le foret parte au bon endroit — voir 2.5</td></tr>
+<tr><td><strong>Le compas à pointes sèches</strong></td><td>Reporter une distance, tracer un arc, trouver un centre</td><td>Le report exact d'une cote sans la relire</td></tr>
+<tr><td><strong>Le pied à coulisse</strong></td><td>Mesurer extérieurs, intérieurs, profondeurs</td><td>Le vingtième ou le centième — selon le modèle et selon la main</td></tr>
+</tbody></table>
+
+<p>Un mot sur le <strong>feutre indélébile</strong>, qu'on voit partout et qui n'est pas un outil de traçage : son trait fait un millimètre de large. Sur une cote fonctionnelle, un millimètre d'incertitude est déjà une pièce ratée. Le feutre sert à écrire un repère de montage, pas à tracer une ligne de coupe.</p>
+
+<h3>2.3 — La règle qui décide de tout : partir d'une référence unique</h3>
+<p>Voici la seule chose à retenir de ce chapitre si l'on ne devait en retenir qu'une. Pour tracer six trous alignés au pas de 40 mm, deux méthodes existent, et elles n'ont pas du tout le même résultat.</p>
+<ul>
+<li><strong>La cotation en chaîne</strong> : je mesure 40 mm depuis le premier trou pour placer le deuxième, puis 40 mm depuis le deuxième pour placer le troisième, et ainsi de suite. <strong>Chaque erreur s'ajoute à toutes les précédentes.</strong></li>
+<li><strong>La cotation à partir d'une référence</strong> : je mesure 40, 80, 120, 160, 200 mm depuis la <em>même</em> face, à chaque fois. <strong>Chaque erreur reste seule.</strong></li>
+</ul>
+
+<div class="formule">en chaîne : écart total = somme des écarts &nbsp;&nbsp;→&nbsp;&nbsp; il grandit avec le nombre de reports<small>depuis une référence : écart total = un seul écart, quel que soit le nombre de trous</small></div>
+
+<figure class="anim">
+  <canvas id="a-tra" width="900" height="450" aria-label="Animation : comparaison entre cotation en chaîne et cotation à partir d'une référence unique, et conséquence sur le montage des vis"></canvas>
+  <div class="ctrls">
+    <div class="c"><label>Nombre de perçages <span id="a-tra-n-l">6</span></label><input type="range" id="a-tra-n" min="2" max="8" value="6"></div>
+    <div class="c"><label>Erreur par report <span id="a-tra-e-l">± 0,15 mm</span></label><input type="range" id="a-tra-e" min="2" max="40" value="15"></div>
+    <div class="c"><label class="switch"><input type="checkbox" id="a-tra-m" checked><span>Cotation en chaîne</span></label></div>
+    <div class="c"><button class="btn" id="a-tra-go">Retracer</button></div>
+    <div class="c readout" id="a-tra-out"></div>
+  </div>
+  <figcaption>En haut, la pièce tracée puis percée ; en bas, la contre-pièce dont les trous sont, eux, à la bonne place. Les vis sont des <b>M8 dans des trous de Ø 8,5</b> : elles tolèrent <b>0,25 mm</b> de décalage de chaque côté, pas davantage. <b>Laissez « cotation en chaîne » cochée et regardez le dernier trou</b> : l'écart n'est pas le même partout, il grandit de gauche à droite parce que chaque report ajoute son erreur à celles d'avant. <b>Décochez la case</b> : les mêmes erreurs de mesure, exactement les mêmes, ne s'additionnent plus — et le montage passe. <b>Remontez le nombre de perçages</b> en cotation en chaîne : chaque trou supplémentaire aggrave le dernier, alors qu'en cotation depuis une référence le nombre de trous n'a aucune importance. <span class="cle">Ce n'est pas la précision de l'ouvrier qui change : c'est sa méthode.</span></figcaption>
+  <div class="autableau">
+    <b class="entete">Au tableau <i>· 10 minutes · animation 1 sur 1</i></b>
+    <ol>
+      <li>Réglage initial, cotation en chaîne. <span class="q">« Combien de trous passent ? »</span> Faire compter les rouges.</li>
+      <li><span class="q">« Notre ouvrier est-il mauvais ? »</span> Faire lire l'erreur par report : 15 centièmes, c'est un bon traçage.</li>
+      <li>Décocher la case, sans rien changer d'autre. <span class="q">« Qu'est-ce qui a changé dans sa précision ? »</span> Rien. Seule la méthode a changé.</li>
+      <li>Recocher, puis monter à <b>8 perçages</b>. <span class="q">« Et si la pièce en avait vingt ? »</span> Laisser extrapoler.</li>
+      <li>Cliquer plusieurs fois sur <b>Retracer</b> : les erreurs changent de valeur, la conclusion ne change jamais.</li>
+    </ol>
+    <div class="piege">Le piège : croire que la solution est « mesurer plus soigneusement ». Descendre l'erreur à 2 centièmes fait passer le montage — et masque complètement la leçon. Faire l'expérience, puis remonter le nombre de trous à 8 : même à 2 centièmes, la chaîne finit par échouer. La cotation en chaîne ne se rattrape pas par le soin, seulement par la méthode.</div>
+  </div>
+</figure>
+
+<p>La conséquence pratique est simple et vous la retrouverez sur tous les plans que vous lirez : <span class="cle">les cotes d'un plan partent presque toujours d'une même face, appelée face de référence.</span> Ce n'est pas une convention de dessinateur, c'est la traduction de ce que vous venez de voir. Quand vous relevez une pièce cassée, faites de même : choisissez une face — la plus grande, la plus plane, celle qui portera contre le bâti — et mesurez tout depuis elle.</p>
+
+<h3>2.4 — Ce qu'il ne faut pas tracer au centième</h3>
+<p>Une pièce n'a jamais toutes ses cotes importantes. Sur un support en tôle percé de quatre trous, la position des trous est fonctionnelle — elle doit correspondre à la contre-pièce — mais la largeur du support, elle, ne l'est pas : deux millimètres de plus ou de moins ne changent rien.</p>
+<p>Distinguer les deux fait gagner un temps considérable et, surtout, concentre le soin là où il sert.</p>
+<table>
+<thead><tr><th></th><th>Cotes fonctionnelles</th><th>Cotes libres</th></tr></thead>
+<tbody>
+<tr><td><strong>Comment les reconnaître</strong></td><td>Elles touchent une autre pièce : entraxes, diamètres de passage, épaisseur d'appui, longueur de portée</td><td>Elles ne touchent rien : contours extérieurs, chanfreins de confort, largeur d'une patte</td></tr>
+<tr><td><strong>Tolérance usuelle</strong></td><td>Quelques centièmes à quelques dixièmes</td><td>Le millimètre, souvent davantage</td></tr>
+<tr><td><strong>Traçage</strong></td><td>Pointe à tracer sur bleu, depuis la face de référence, contrôle après traçage</td><td>Le feutre suffit</td></tr>
+</tbody></table>
+<p>Le chapitre 10 du dossier de mécanique traite en détail des ajustements et des tolérances : c'est là qu'il faut aller chercher <em>quelle</em> tolérance viser sur une cote fonctionnelle. Ici, retenez seulement qu'il faut savoir les repérer avant de commencer à tracer.</p>
+
+<h3>2.5 — Pointer, et pourquoi le foret n'en fait qu'à sa tête</h3>
+<p>Un foret hélicoïdal ordinaire ne perce pas par sa pointe : il perce par ses deux lèvres de coupe. Au centre se trouve <strong>l'âme</strong>, une petite arête qui ne coupe pas et qui ne fait qu'écraser le métal. Résultat : posé sur une surface plane, un foret cherche à fuir. Il balade sa pointe sur quelques millimètres avant de mordre, et le trou finit à côté du trait.</p>
+<p>Le coup de pointeau crée un petit cratère conique dans lequel la pointe du foret se centre et ne peut plus glisser. Trois précisions qui font la différence :</p>
+<ul>
+<li><strong>Le coup se donne à l'intersection de deux traits</strong>, jamais « à peu près au milieu ». D'où l'intérêt de tracer deux lignes croisées et non un point.</li>
+<li><strong>Un coup franc vaut mieux que trois petits</strong>, qui décalent le cratère à chaque fois.</li>
+<li><strong>Sur un perçage précis, on pointe puis on perce un avant-trou</strong> de petit diamètre avant de passer au diamètre final. Nous détaillerons cela au chapitre 5.</li>
+</ul>
+
+<div class="exo"><span class="tag">Exercice 2.1</span>
+<p>Vous devez percer six trous alignés au pas de 40 mm sur une platine, pour la boulonner en M8 dans des trous de passage de Ø 8,5 mm. Votre traçage a une incertitude de ± 0,15 mm par report. a) En cotation en chaîne, quel est l'écart maximal possible sur le sixième trou ? b) Le montage passe-t-il ? c) Et en cotation depuis une face de référence ?</p>
+<details><summary>Voir la réponse</summary><div class="rep">
+<p><strong>a) En cotation en chaîne : cinq reports, donc jusqu'à 0,75 mm d'écart.</strong></p>
+<p>Attention au piège du décompte : pour placer six trous, on ne fait pas six reports mais <strong>cinq</strong> — le premier trou est posé, les cinq suivants sont reportés depuis le précédent. L'écart maximal cumulé vaut donc 5 × 0,15 = <strong>0,75 mm</strong>.</p>
+<p><em>Remarque honnête : ce cas est le pire, celui où les cinq erreurs vont toutes dans le même sens. En pratique elles se compensent partiellement, et l'écart typique est plutôt de l'ordre de 0,15 × √5 ≈ 0,34 mm. Mais on ne dimensionne pas un montage sur le cas typique : on le dimensionne sur le pire.</em></p>
+<p><strong>b) Non, le montage ne passe pas.</strong></p>
+<p>Une vis M8 — diamètre réel 8 mm — dans un trou de Ø 8,5 mm dispose de 0,5 mm de jeu total, donc <strong>0,25 mm de décalage possible de chaque côté</strong>. Avec 0,75 mm d'écart au sixième trou, la vis ne rentre pas : il manque un demi-millimètre.</p>
+<p>Et c'est là que se produit la faute classique : on prend une lime queue-de-rat, on ovalise le trou pour « rattraper », et l'assemblage perd son serrage sur ce point. Le montage tient encore, mais une vis ne travaille plus. <span class="cle">Un trou ovalisé pour rattraper un traçage est un défaut qu'on ne voit plus jamais une fois la pièce montée.</span></p>
+<p><strong>c) En cotation depuis une face de référence : 0,15 mm, et le montage passe.</strong></p>
+<p>Chaque trou est mesuré depuis la même face — 40, 80, 120, 160, 200 mm — donc chaque trou porte une seule erreur de report, jamais celles des autres. L'écart maximal reste de 0,15 mm, très en dessous des 0,25 mm admissibles, et cela <strong>quel que soit le nombre de trous</strong>.</p>
+<p><em>Le point remarquable est que l'ouvrier est exactement le même dans les trois cas, avec le même pied à coulisse et le même soin. Seule la méthode a changé.</em></p>
+</div></details></div>
+
+<div class="exo"><span class="tag">Exercice 2.2</span>
+<p>Un collègue trace un perçage au feutre indélébile, sans pointeau, puis perce directement au Ø 10 mm. Le trou se retrouve à 1,5 mm du trait. Il conclut que la perceuse a du jeu dans sa broche. Qu'en pensez-vous ?</p>
+<details><summary>Voir la réponse</summary><div class="rep">
+<p><strong>La broche n'est probablement pour rien dans cette affaire. Deux causes suffisent à expliquer les 1,5 mm, et elles sont toutes les deux dans la méthode.</strong></p>
+<p><strong>1. Le trait de feutre fait à lui seul environ 1 mm de large.</strong> Viser « le milieu du trait » à l'œil, c'est déjà accepter un demi-millimètre d'incertitude avant même d'avoir touché la perceuse. Un trait de pointe à tracer fait deux dixièmes, et il est gravé : on le retrouve même après avoir manipulé la pièce.</p>
+<p><strong>2. Surtout : sans coup de pointeau, le foret a dérivé.</strong> C'est la cause principale. L'âme d'un foret hélicoïdal ne coupe pas, elle écrase — donc au contact d'une surface plane, la pointe glisse et cherche un point bas. Sur un Ø 10 attaqué directement, la dérive de un à deux millimètres est parfaitement normale, et elle est aggravée par le diamètre : plus le foret est gros, plus son âme est large, plus il fuit.</p>
+<p><strong>Comment le prouver sans discuter.</strong> Faire l'essai deux fois côte à côte sur une chute : un trou pointé, un trou non pointé, même machine, même foret. L'écart se voit à l'œil nu. <span class="cle">Si la broche avait vraiment du jeu, le trou pointé dériverait aussi.</span></p>
+<p><strong>La bonne méthode pour ce perçage.</strong></p>
+<ul>
+<li>Tracer deux traits croisés à la pointe, sur bleu si la surface est brute.</li>
+<li>Pointer franchement à l'intersection.</li>
+<li>Percer un <strong>avant-trou de Ø 3 à 4 mm</strong>, qui guidera le gros foret.</li>
+<li>Passer au Ø 10 mm.</li>
+</ul>
+<p><em>Cela dit, le collègue n'a pas tort de se poser la question : un jeu de broche existe, il se contrôle au comparateur, et il produit un trou surdimensionné et de mauvaise qualité — pas un trou décalé de 1,5 mm et bien rond. Les symptômes ne sont pas les mêmes, et c'est cette distinction qui vaut d'être retenue.</em></p>
+</div></details></div>
+
+<div class="exo"><span class="tag">Exercice 2.3</span>
+<p>Vous relevez un support en tôle de 3 mm, symétrique, percé de quatre trous. Un coin est arraché et manque. Comment procédez-vous, et quelle face choisissez-vous comme référence ?</p>
+<details><summary>Voir la réponse</summary><div class="rep">
+<p><strong>On exploite la symétrie, et on prend comme référence la face qui porte contre le bâti.</strong></p>
+<p><strong>Le choix de la face de référence.</strong> Elle doit remplir trois conditions, dans cet ordre : être <em>fonctionnelle</em> (c'est elle qui positionne la pièce dans la machine), être <em>plane et saine</em> (pas déformée, pas dans la zone arrachée), et être <em>accessible</em> à l'instrument. Sur un support en tôle, c'est presque toujours la face d'appui contre le bâti, et l'un de ses deux bords usinés. <span class="cle">La face de référence de votre traçage doit être celle qui sert de référence à la pièce dans la machine — sinon vous reportez vos erreurs à l'endroit qui compte.</span></p>
+<p><strong>Le coin manquant : on ne le mesure pas, on le déduit.</strong> C'est tout l'intérêt d'avoir repéré que la pièce est symétrique. La zone arrachée a un homologue intact de l'autre côté de l'axe : on mesure celui-là et on le reporte en miroir. Mesurer un bord arraché, c'est mesurer de la déformation.</p>
+<p><strong>L'ordre des opérations.</strong></p>
+<ul>
+<li>Photographier la pièce en place <em>avant</em> démontage, pour figer le sens de montage — un support symétrique se remonte à l'envers une fois sur deux.</li>
+<li>Dresser la pièce sur le marbre, sur sa face d'appui.</li>
+<li>Identifier l'axe de symétrie et le matérialiser au trusquin.</li>
+<li>Mesurer les <strong>entraxes des quatre trous</strong> depuis la face de référence — ce sont les seules cotes vraiment fonctionnelles.</li>
+<li>Reporter en miroir la géométrie du côté sain vers le côté arraché.</li>
+<li>Tracer le contour au feutre : il est libre, il n'a pas besoin de mieux.</li>
+</ul>
+<p><strong>Le contrôle qui évite la mauvaise surprise.</strong> Avant de percer quoi que ce soit, présenter le traçage sur la contre-pièce, ou mieux, mesurer directement les entraxes de la contre-pièce et les comparer aux vôtres. C'est elle qui a raison, pas la pièce cassée : elle a peut-être été déformée par le choc qui l'a brisée.</p>
+</div></details></div>
+
+</div>
+</section>
+
+<!-- ================= CH 3 ================= -->
+<section class="ch" id="c3">
+  <div class="ch-head"><div class="ch-num">03</div><div class="ch-title">
+    <span class="kicker">Enlever la matière à la main</span><h2>Sciage et limage : l'ajustage</h2></div></div>
+  <div class="ch-body">
+
+<div class="savoirs">
+  <span class="savoir n3"><b>S4.9.3</b> <i>Façonnage des pièces : sciage</i></span>
+  <span class="savoir n3"><b>S4.9.3</b> <i>Façonnage des pièces : ajustage</i></span>
+</div>
+
+<p class="lede">Scier et limer sont les deux gestes les plus anciens de l'atelier et les deux plus mal enseignés, parce qu'ils ont l'air d'aller de soi. Ils ne vont pas de soi du tout : une lame mal choisie perd ses dents en trois allers-retours, et une lime tenue comme une brosse produit une surface <em>bombée</em> qu'aucun contrôle à l'œil ne révèle. Les deux erreurs sont invisibles tant qu'on ne sait pas ce qu'il faut regarder.</p>
+
+<h3>3.1 — La règle des trois dents</h3>
+<p>Une lame de scie à métaux se choisit par sa <strong>denture</strong>, exprimée en dents par pouce — 14, 18, 24 ou 32 TPI. Le pas, c'est-à-dire la distance entre deux dents, s'en déduit immédiatement :</p>
+
+<div class="formule">pas = 25,4 / TPI &nbsp;&nbsp;&nbsp;→&nbsp;&nbsp;&nbsp; nombre de dents en prise = épaisseur / pas<small>Il en faut au moins trois. Toujours.</small></div>
+
+<p>Pourquoi trois ? Parce qu'une dent isolée qui attaque une arête vive ne coupe pas : elle <strong>accroche</strong>. La lame se bloque, l'effort passe entièrement dans cette dent, et la dent casse — puis la suivante, sur la dent cassée. Une lame neuve se ruine ainsi en quelques secondes sur un tube mince. Avec trois dents ou plus en prise, l'effort se répartit et chacune ne prend que sa part.</p>
+<p>L'erreur symétrique existe aussi, moins spectaculaire mais coûteuse en temps : une denture trop fine sur une pièce épaisse ne laisse pas assez de place aux copeaux entre les dents. Les creux se remplissent, la lame cesse de couper et se met à frotter, elle chauffe, et le sciage n'avance plus.</p>
+
+<figure class="anim">
+  <canvas id="a-sci" width="900" height="420" aria-label="Animation : choix de la denture d'une lame de scie selon l'épaisseur de la pièce, règle des trois dents en prise"></canvas>
+  <div class="ctrls">
+    <div class="c"><label>Épaisseur sciée <span id="a-sci-e-l">3,0 mm</span></label><input type="range" id="a-sci-e" min="5" max="250" value="30"></div>
+    <div class="c"><label>Denture de la lame <span id="a-sci-p-l">18 dents/pouce</span></label><input type="range" id="a-sci-p" min="0" max="3" value="1"></div>
+    <div class="c readout" id="a-sci-out"></div>
+  </div>
+  <figcaption>À gauche, un gros plan de la lame sur la tranche de la pièce : les dents <b>réellement en prise</b> sont colorées. À droite, le verdict et la denture conseillée. <b>Descendez l'épaisseur à 1 mm avec une lame de 14 dents</b> : il ne reste plus qu'une demi-dent en prise — elle va accrocher et casser, c'est exactement ce qui arrive quand on scie un tube mince avec la lame qui traînait sur la machine. <b>Passez à 32 dents</b> sans rien changer d'autre : quatre dents en prise, la coupe redevient saine. <b>Faites maintenant l'inverse</b> : 20 mm d'épaisseur avec la lame de 32 dents. Rien ne casse, mais plus de trente dents mordent en même temps, les copeaux n'ont plus où aller et la lame bourre. <span class="cle">Plus la pièce est mince, plus la denture doit être fine.</span></figcaption>
+  <div class="autableau">
+    <b class="entete">Au tableau <i>· 8 minutes · animation 1 sur 2</i></b>
+    <ol>
+      <li>Montrer une vraie lame et faire lire l'inscription TPI dessus. Peu d'élèves l'ont déjà remarquée.</li>
+      <li>Régler <b>1 mm / 14 dents</b>. <span class="q">« Combien de dents travaillent ? »</span> Faire lire le chiffre, puis prédire ce qui va se passer.</li>
+      <li>Passer à <b>32 dents</b>. <span class="q">« Qu'est-ce qui a changé pour la dent ? »</span> Elle ne prend plus qu'un quart de l'effort.</li>
+      <li><b>20 mm / 32 dents</b>. <span class="q">« Pourquoi ça ne coupe plus alors que rien ne casse ? »</span> Amener la notion d'évacuation du copeau.</li>
+      <li>Faire énoncer la règle par un élève, sans le mot « TPI » : <em>mince → fine, épais → grosse, et jamais moins de trois dents.</em></li>
+    </ol>
+    <div class="piege">Le piège : l'atelier n'a souvent qu'une seule lame montée, et personne ne la change pour scier un tube. C'est le vrai motif de casse des lames en établissement scolaire. Faire compter le prix d'une lame contre les trente secondes que prend le changement règle la question mieux qu'un discours.</div>
+  </div>
+</figure>
+
+<h3>3.2 — Scier : les gestes qui changent le résultat</h3>
+<ul>
+<li><strong>Le sens des dents.</strong> Elles doivent être inclinées vers l'avant : une scie à main coupe <em>en poussant</em>. Une lame montée à l'envers frotte à l'aller, coupe un peu au retour, et l'élève conclut que la lame est morte.</li>
+<li><strong>La tension.</strong> Une lame détendue serpente et sort du trait ; elle casse aussi plus facilement, parce qu'elle flambe sous l'effort. On tend jusqu'à ce que la lame sonne clair quand on la pince.</li>
+<li><strong>La course.</strong> On utilise <em>toute</em> la longueur de la lame. Scier sur dix centimètres au milieu use dix centimètres de denture et laisse le reste neuf.</li>
+<li><strong>La pression.</strong> On appuie à l'aller, on relâche au retour. Appuyer au retour ne coupe rien et arrache les dents par l'arrière.</li>
+<li><strong>Le départ.</strong> On amorce avec l'ongle du pouce comme guide, en tirant d'abord vers soi une ou deux fois pour créer une amorce — puis on pousse.</li>
+<li><strong>La surépaisseur.</strong> On ne scie jamais sur le trait : on scie <strong>1 à 2 mm à côté</strong>, du côté de la chute. Ce qui reste, c'est le travail de la lime.</li>
+</ul>
+
+<div class="encadre"><span class="tag">Pourquoi les dents sont-elles « voyées » ?</span>
+<p>Regardez une lame de scie par la tranche, à contre-jour : les dents ne sont pas alignées. Elles sont couchées alternativement à gauche et à droite, ou ondulées. Cette disposition s'appelle la <strong>voie</strong>.</p>
+<p>Son rôle est simple et vital : elle fait que <strong>le trait de scie est plus large que la lame</strong>. Sans voie, la lame se coincerait dans son propre trait dès les premiers millimètres, chaufferait et se briserait. C'est aussi la voie qui permet de rectifier légèrement une trajectoire.</p>
+<p>Conséquence pratique : <span class="cle">une lame dont la voie est usée coince, même si ses dents coupent encore.</span> Si votre scie se bloque dans un trait profond alors qu'elle mordait bien au début, ne forcez pas — la lame est en fin de vie, ou vous sciez un matériau qui referme son trait, comme certains inox et certains plastiques.</p></div>
+
+<h3>3.3 — La lime : tailles, formes, et ce qu'on en attend</h3>
+<p>La lime est l'outil du travail final. On ne l'utilise pas pour enlever beaucoup de matière — c'est le rôle de la scie — mais pour <strong>arriver à la cote et à la forme</strong> après avoir scié à côté du trait.</p>
+<table>
+<thead><tr><th>Taille</th><th>Nom courant</th><th>Ce qu'elle enlève</th><th>Quand</th></tr></thead>
+<tbody>
+<tr><td><strong>Grosse</strong></td><td>Bâtarde</td><td>Beaucoup, vite, et laisse rugueux</td><td>Dégrossir, approcher la cote</td></tr>
+<tr><td><strong>Moyenne</strong></td><td>Demi-douce</td><td>Modérément, surface correcte</td><td>Le gros du travail, l'approche fine</td></tr>
+<tr><td><strong>Fine</strong></td><td>Douce</td><td>Très peu, surface lisse</td><td>Finition, ajustage au centième</td></tr>
+</tbody></table>
+<p>Les <strong>formes</strong> se choisissent sur la géométrie à obtenir : <em>plate</em> pour les surfaces et les chants, <em>demi-ronde</em> pour les congés et les grands alésages, <em>ronde</em> — dite queue-de-rat — pour agrandir un trou, <em>carrée</em> et <em>triangulaire</em> pour les angles vifs et les rainures.</p>
+<p>Deux règles d'entretien valent tout le reste. <strong>Une lime ne se range pas en vrac dans un tiroir</strong> : les tailles se cognent et s'émoussent, une lime abîmée par ses voisines glisse au lieu de couper. Et <strong>une lime s'encrasse</strong> — les copeaux se logent entre les dents, surtout sur l'aluminium et le plastique, et la lime se met alors à rayer profondément la pièce. On la nettoie à la carde, une brosse à poils d'acier, dans le sens de la taille.</p>
+
+<h3>3.4 — Limer plat : le berçage et la surface bombée</h3>
+<p>Voici l'erreur de débutant la plus tenace, et la plus difficile à voir. Limer plat exige que la lime reste <strong>horizontale pendant toute la course</strong>. Or le geste naturel est un mouvement de balancier : on part la main basse et on finit la main haute, la lime bascule imperceptiblement autour de la pièce. Cela s'appelle le <strong>berçage</strong>.</p>
+<p>Le résultat n'est pas une surface irrégulière — ce serait facile à voir. C'est une surface <strong>régulièrement bombée</strong>, propre, brillante, qui a l'air parfaite, et dont le milieu est plus haut que les bords de quelques centièmes. Une pièce bombée ne porte que sur un point, un joint posé dessus fuit, et une portée bombée dans un assemblage se met à osciller.</p>
+<p>La parade tient en deux gestes, et il faut les faire dans cet ordre :</p>
+<ul>
+<li><strong>Le limage en travers</strong> : la lime attaque en biais, presque perpendiculairement à l'arête, et l'on avance latéralement. Il enlève la matière et met la surface à la cote. Les stries sont visibles et croisées.</li>
+<li><strong>Le limage en long</strong> : la lime, tenue à deux mains dans le sens de sa longueur, est promenée à plat sur toute la surface. Il n'enlève presque rien — <em>il aplanit</em>, en rabotant ce que le limage en travers a laissé haut, et il uniformise les stries.</li>
+</ul>
+<p>Le contrôle se fait <strong>à la règle, contre la lumière</strong>. On pose une règle d'ajusteur sur la surface, on regarde vers une fenêtre, et l'on cherche le filet de lumière qui passe dessous. C'est un contrôle d'une sensibilité remarquable : <span class="cle">l'œil détecte un jour de deux centièmes de millimètre, bien avant qu'aucun instrument d'atelier ne le mesure.</span> On tourne ensuite la règle dans plusieurs directions — une surface peut être plate dans un sens et bombée dans l'autre.</p>
+
+<figure class="anim">
+  <canvas id="a-lim" width="900" height="450" aria-label="Animation : effet du berçage de la lime sur la planéité, profil de la surface et contrôle du jeu de lumière sous la règle"></canvas>
+  <div class="ctrls">
+    <div class="c"><label>Berçage de la lime <span id="a-lim-b-l">40 %</span></label><input type="range" id="a-lim-b" min="0" max="100" value="40"></div>
+    <div class="c"><label>Nombre de passes <span id="a-lim-n-l">18</span></label><input type="range" id="a-lim-n" min="0" max="40" value="18"></div>
+    <div class="c"><label class="switch"><input type="checkbox" id="a-lim-l"><span>Finir en limage en long</span></label></div>
+    <div class="c"><button class="btn" id="a-lim-go">Nouvelle pièce sciée</button></div>
+    <div class="c readout" id="a-lim-out"></div>
+  </div>
+  <figcaption>En haut, le <b>profil réel</b> de la surface, dont les hauteurs sont agrandies deux cents fois ; en dessous, la <b>règle d'ajusteur</b> posée dessus et le filet de lumière qui passe. <b>Laissez le berçage à 40 % et montez les passes</b> : la surface devient lisse et régulière — et pourtant le jour sous la règle grandit, parce qu'elle devient bombée. C'est tout le piège : <b>plus on lime mal, plus c'est beau et plus c'est faux.</b> <b>Ramenez le berçage à zéro</b> : la surface s'aplanit vraiment et la lumière disparaît. <b>Remettez du berçage puis cochez « limage en long »</b> : la finition rattrape l'essentiel du bombé sans presque enlever de matière. <span class="cle">L'aspect ne prouve rien : seule la règle contre la lumière dit la vérité.</span></figcaption>
+  <div class="autableau">
+    <b class="entete">Au tableau <i>· 12 minutes · animation 2 sur 2</i></b>
+    <ol>
+      <li>Berçage à <b>0</b>, monter les passes. <span class="q">« Que devient la surface ? »</span> Elle s'aplanit, la lumière s'éteint.</li>
+      <li>Berçage à <b>70 %</b>, mêmes passes. <span class="q">« La surface est-elle plus belle ou moins belle ? »</span> Plus belle — c'est le cœur de la leçon.</li>
+      <li><span class="q">« Alors pourquoi est-elle mauvaise ? »</span> Faire regarder la règle et non le profil.</li>
+      <li>Cocher <b>limage en long</b>. <span class="q">« Combien de matière vient-on d'enlever ? »</span> Presque rien, et pourtant le défaut a disparu.</li>
+      <li>Enchaîner immédiatement sur l'établi : faire limer 3 minutes, puis contrôler à la règle. Le résultat est en général spectaculaire.</li>
+    </ol>
+    <div class="piege">Le piège : l'élève qui a une belle surface est persuadé d'avoir bien travaillé, et le professeur qui contrôle à l'œil le confirme. Ne jamais valider un ajustage à l'œil — toujours la règle, et toujours dans deux directions au moins.</div>
+  </div>
+</figure>
+
+<div class="image-mentale"><span class="tag">Image mentale — la tartine de beurre</span>
+<p>Étalez du beurre sur une tartine en balançant le couteau : vous obtenez une couche épaisse au milieu et fine sur les bords, régulière et parfaitement lisse. Personne ne dirait que c'est mal fait — sauf si l'on pose une règle dessus.</p>
+<p>La lime bercée fait rigoureusement l'inverse en creux : elle enlève plus aux bords qu'au milieu, et laisse un bombé. <span class="cle">Dans les deux cas, c'est le mouvement de balancier qui fabrique la forme, pas la matière.</span></p></div>
+
+<div class="exo"><span class="tag">Exercice 3.1</span>
+<p>Vous devez recouper un tube d'acier de 2 mm d'épaisseur de paroi. La scie de l'atelier est équipée d'une lame de 14 dents par pouce. a) Combien de dents seront en prise ? b) Que va-t-il se passer ? c) Que faites-vous ?</p>
+<details><summary>Voir la réponse</summary><div class="rep">
+<p><strong>a) Environ une dent en prise — très en dessous du minimum.</strong></p>
+<p>Le pas vaut 25,4 / 14 = <strong>1,81 mm</strong>. Sur une paroi de 2 mm, le nombre de dents en prise est 2 / 1,81 ≈ <strong>1,1 dent</strong>. La règle des trois dents n'est pas approchée, elle est violée d'un facteur trois.</p>
+<p><strong>b) La lame va accrocher, et les dents vont casser.</strong></p>
+<p>Avec une seule dent engagée, tout l'effort de coupe passe par elle. Elle mord dans l'arête vive du tube, se bloque, et casse net. La dent suivante attaque alors la dent cassée et subit le même sort. Sur un tube, l'effet est aggravé : la paroi est courbe, l'attaque se fait sur une arête très inclinée, et la lame a tendance à sauter hors du trait. Le résultat habituel est une lame ruinée sur trois centimètres et un trait de scie parti de travers.</p>
+<p><strong>c) On change la lame pour du 32 dents par pouce.</strong></p>
+<p>Le pas devient 25,4 / 32 = 0,79 mm, soit 2 / 0,79 ≈ <strong>2,5 dents en prise</strong> — encore un peu juste, mais acceptable en attaquant le tube <em>en biais</em> plutôt que perpendiculairement, ce qui augmente la longueur de coupe engagée et fait monter le nombre de dents en prise au-delà de trois.</p>
+<p><strong>Les trois gestes qui complètent le choix de la lame, sur un tube :</strong></p>
+<ul>
+<li><strong>Attaquer en biais</strong>, jamais à plat sur la génératrice : plus de dents en prise, et pas d'arête vive frappée de face.</li>
+<li><strong>Tourner le tube dans l'étau</strong> au fur et à mesure, pour scier toujours dans la matière et jamais dans le vide.</li>
+<li><strong>Serrer le tube sur un mandrin ou entre deux cales en V</strong> : un tube écrasé dans un étau ordinaire s'ovalise, et le trait ne sera plus perpendiculaire.</li>
+</ul>
+<p><em>Retenez la règle de terrain, qui évite tout calcul : pour de la tôle et du tube mince, 24 ou 32 dents. Pour du plein et du profilé épais, 14 ou 18. Quand on hésite, c'est qu'il faut la denture la plus fine.</em></p>
+</div></details></div>
+
+<div class="exo"><span class="tag">Exercice 3.2</span>
+<p>Un élève présente une pièce limée d'aspect impeccable, régulière et brillante. Au contrôle, la règle d'ajusteur <em>bascule</em> quand on appuie alternativement sur ses deux extrémités, et la lumière passe tantôt à gauche, tantôt à droite. Quel est le défaut, quelle en est la cause, et comment le rattraper ?</p>
+<details><summary>Voir la réponse</summary><div class="rep">
+<p><strong>La surface est bombée — convexe — et la cause est le berçage de la lime.</strong></p>
+<p><strong>Lire le symptôme.</strong> Le fait que la règle <em>bascule</em> est la signature du bombé : elle repose sur le point haut central, et l'on peut la faire pivoter dessus comme sur un axe. La lumière apparaît alternativement d'un côté puis de l'autre, jamais des deux à la fois.</p>
+<p><em>Le symptôme inverse mérite d'être connu tout de suite : sur une surface creuse (concave), la règle ne bascule pas — elle porte sur ses deux extrémités et la lumière passe au milieu, en permanence. Basculer = bombé ; lumière centrale stable = creux.</em></p>
+<p><strong>La cause.</strong> La lime n'est pas restée horizontale pendant la course. Le geste naturel part main basse et finit main haute : la lime pivote autour de la pièce et enlève davantage de matière au début et à la fin de la course, c'est-à-dire <strong>aux deux bords</strong>. Le milieu reste haut.</p>
+<p><strong>Pourquoi l'aspect est trompeur.</strong> Le berçage est un mouvement <em>régulier</em>. Il ne produit donc pas un défaut d'aspect mais une forme géométrique douce et brillante. <span class="cle">Un défaut de planéité de trois centièmes ne se voit pas : il se mesure.</span> C'est exactement pour cette raison que le contrôle à la règle n'est pas facultatif.</p>
+<p><strong>Le rattrapage.</strong></p>
+<ul>
+<li>Repérer le point haut au <strong>bleu de traçage</strong> : on encre la règle ou le marbre, on frotte la pièce dessus, et les zones qui portent se marquent en bleu. C'est plus sûr que d'estimer à l'œil où limer.</li>
+<li>Reprendre en <strong>limage en travers</strong> sur la seule zone marquée, avec une lime douce et une pression modérée.</li>
+<li>Finir en <strong>limage en long</strong>, à deux mains, sur toute la surface : c'est lui qui donne la planéité finale.</li>
+<li>Recontrôler à la règle dans <strong>au moins trois directions</strong> — longitudinale, transversale et en diagonale. Une surface peut être plate dans un sens et bombée dans l'autre.</li>
+</ul>
+<p><strong>Et la prévention, qui vaut mieux que le rattrapage :</strong> tenir la lime à deux mains, une à la poignée et une à la pointe, en surveillant l'horizontalité plutôt que la vitesse. Un ajusteur expérimenté lime lentement.</p>
+</div></details></div>
+
+<div class="exo"><span class="tag">Exercice 3.3</span>
+<p>On vous demande de recouper une plaque d'acier de 8 mm à la cote 120 mm, avec une tolérance de ± 0,2 mm sur cette cote. Décrivez la suite complète des opérations, du traçage au contrôle final, en indiquant où vous placez le trait de scie.</p>
+<details><summary>Voir la réponse</summary><div class="rep">
+<p><strong>Le point clé : on ne scie pas sur le trait, on scie à 1,5 mm à côté, du côté de la chute.</strong> Le reste est l'application ordonnée des chapitres 2 et 3.</p>
+<p><strong>1. Traçage.</strong> Dresser la plaque sur le marbre. Choisir la face de référence — celle qui portera, ou le chant le plus sain. Bleuir la zone. Tracer la cote 120 mm à la pointe à tracer, <strong>depuis la face de référence</strong>. Tracer un second trait à 1,5 mm au-delà, du côté de la chute : c'est celui-là que la scie suivra.</p>
+<p><strong>2. Choix de la lame.</strong> 8 mm d'épaisseur : pas de 25,4/18 = 1,41 mm, soit 5,7 dents en prise avec une lame de <strong>18 dents par pouce</strong>. C'est dans la bonne plage. Une lame de 24 conviendrait aussi ; une lame de 14 donnerait 4,4 dents, correct également. Sur du 8 mm, le choix est confortable — ce n'est pas le cas sur du tube mince.</p>
+<p><strong>3. Sciage.</strong> Serrer la plaque dans l'étau <em>au plus près du trait</em>, avec des mordaches douces pour ne pas marquer la pièce : une plaque qui dépasse trop vibre, et une plaque qui vibre donne un trait ondulé et casse les dents. Amorcer en tirant, puis scier sur toute la longueur de lame, pression à l'aller uniquement, en suivant le trait de chute.</p>
+<p><strong>4. Ébavurage.</strong> Casser l'arête à la lime douce, des deux côtés. Une bavure fausse toute mesure au pied à coulisse — c'est la cause d'erreur la plus fréquente à cette étape.</p>
+<p><strong>5. Limage de dégrossissage.</strong> Lime bâtarde ou demi-douce, en travers, pour ramener la surépaisseur de 1,5 mm à environ 0,2 mm. Mesurer au pied à coulisse toutes les quelques passes : la matière part plus vite qu'on ne croit et ce qui est enlevé ne revient pas.</p>
+<p><strong>6. Approche et finition.</strong> Lime douce, en travers d'abord pour arriver à la cote, puis <strong>en long</strong> pour la planéité et l'aspect. Viser 120,0 mm en visant plutôt le haut de la fourchette au début : il vaut mieux devoir enlever encore un centième que d'être passé sous 119,8.</p>
+<p><strong>7. Contrôle final, en trois points.</strong></p>
+<ul>
+<li>La <strong>cote</strong> au pied à coulisse, mesurée <em>en trois endroits</em> le long du chant — un seul point ne dit rien du parallélisme.</li>
+<li>La <strong>planéité</strong> du chant à la règle contre la lumière, dans deux directions.</li>
+<li>La <strong>perpendicularité</strong> du chant par rapport à la face de référence, à l'équerre.</li>
+</ul>
+<p><em>Le contrôle en trois points de la cote est ce qui distingue une pièce à 120 ± 0,2 d'une pièce « qui fait 120 quelque part ». Une plaque peut mesurer 120,0 d'un côté et 120,6 de l'autre : elle est hors tolérance, et le pied à coulisse posé au milieu ne l'aurait jamais dit.</em></p>
+</div></details></div>
+
+<div class="horsref"><span class="tag">Pour aller plus loin — hors référentiel</span>
+<h4>Pourquoi la lime ne coupe que dans un sens</h4>
+<p>Les dents d'une lime sont taillées en biais, penchées vers l'avant : elles coupent en poussant et ne font que frotter au retour. D'où la règle : <strong>on relâche la pression au retour</strong>. Tirer en appuyant n'enlève rien et émousse le sommet des dents en les faisant travailler à l'envers.</p>
+<p>Il existe une exception, connue des ajusteurs : sur certaines matières très tendres et collantes — plomb, étain, aluminium pur — on <em>peut</em> laisser la lime au contact au retour, parce que le frottement décolle une partie du copeau logé dans la taille. C'est un remède empirique contre l'encrassement, à ne pas généraliser.</p>
+<p>Autre subtilité rarement enseignée : la <strong>craie</strong>. Frotter un bâton de craie sur une lime neuve avant de limer de l'aluminium remplit partiellement le fond des tailles et empêche le copeau de s'y souder. La lime s'encrasse beaucoup moins et coupe plus longtemps. Le référentiel MSPC ne demande rien de tout cela, mais c'est le genre de détail qui fait gagner une demi-heure sur un TP.</p></div>
+
+</div>
+</section>
+
+<!-- ================= SUITE ================= -->
+<section class="ch" id="suite">
+  <div class="ch-head"><div class="ch-num">…</div><div class="ch-title">
+    <span class="kicker">Rédaction en cours</span><h2>Les chapitres 4 à 13</h2></div></div>
+  <div class="ch-body">
+<p class="lede">Cette première tranche pose la décision de fabriquer, le traçage dont tout dépend, et les deux gestes de base de l'enlèvement de matière. La suite est en cours d'écriture, dans le même format et avec le même calage sur le référentiel.</p>
+<ul>
+<li><strong>04 · Cisaillage et pliage</strong> — jeu de lame, bavure, effort de cisaillage (S1.4.6, niveau 3) ; fibre neutre, calcul du développé, retour élastique</li>
+<li><strong>05 · La perceuse à colonne</strong> — S4.9.3 perçage ; vitesse de coupe et fréquence de rotation N = 1000·V<sub>c</sub>/(π·D), choix et affûtage du foret, lubrification, <strong>bridage</strong></li>
+<li><strong>06 · Taraudage et filetages</strong> — S4.9.3 taraudage ; diamètre d'avant-trou, jeu de tarauds, réparation d'un filetage foiré</li>
+<li><strong>07 · Assembler sans fondre</strong> — S4.9.1 ; éléments filetés et couple de serrage, rivetage, collage structural</li>
+<li><strong>08 · Soudure à l'arc avec électrode enrobée</strong> — S4.9.1 ; rôle de l'enrobage, réglage de l'intensité, défauts de cordon, sécurité</li>
+<li><strong>09 · Le semi-automatique MAG</strong> — S4.9.1 ; tension, vitesse de fil, gaz, modes de transfert</li>
+<li><strong>10 · Le brasage au chalumeau</strong> — capillarité et jeu de brasage, brasage tendre et fort, flamme et sécurité des bouteilles</li>
+<li><strong>11 · L'impression 3D</strong> — S4.9.2 fabrication additive, niveau 3 ; la Raise3D E2, matériaux, paramètres, <strong>orientation et anisotropie</strong>, chaîne numérique</li>
+<li><strong>12 · Comment la pièce a été obtenue</strong> — S4.9.2, niveau 2 ; reconnaître usinage, moulage, injection, déformation</li>
+<li><strong>13 · L'arbre de décision de la rechange</strong> — synthèse ; provisoire, traçabilité, responsabilité</li>
+<li><strong>TP</strong> — les 15 fiches d'atelier</li>
+</ul>
+</div>
+</section>
+
+<footer class="fin">
+  <p><strong>Refaire la pièce qui n'existe plus</strong> — dossier de fabrication et d'assemblage pour le Baccalauréat Professionnel MSPC. Chaque chapitre est calé sur le référentiel officiel du diplôme : savoir associé visé et niveau taxonomique indiqués sous le titre. <em>Dossier en cours de rédaction : 3 chapitres sur 13 sont publiés.</em></p>
+  <p>Le référentiel retenu est celui du <strong>baccalauréat professionnel Maintenance des Systèmes de Production Connectés</strong>, arrêté du 9 décembre 2020, savoir <strong>S4.9 — Procédés d'assemblage et opérations simples de fabrication mécanique</strong>. Les valeurs numériques, coefficients et ordres de grandeur cités le sont à titre pédagogique : sur une intervention réelle, la documentation constructeur, les consignes de sécurité de l'établissement et les référentiels internes de l'entreprise font toujours foi.</p>
+  <p><a href="index.html">← Retour au portail Atelier MSPC</a></p>
+</footer>
+
+</div>
+
+<a class="top-link" href="#c1">↑ Sommaire</a>
+<script>
+/* ======================= HÉROS : du brut à la pièce montée =======================
+   Cinq stations traversées par la pièce. Le curseur « soin du traçage » ne joue
+   qu'à la station 2, mais son effet ne devient visible qu'à la station 5 : c'est
+   toute la leçon du chapitre 2, mise en scène avant même de l'avoir lu. */
+(function(){
+  "use strict";
+  var STA = ['BRUT','TRACÉ','SCIÉ','PERCÉ','MONTÉ'];
+  var EP  = MSPC.ctrl('hetape', function(v){ return STA[Math.min(4,Math.floor(v/100*4.999))].toLowerCase(); }, 'hep');
+  var SO  = MSPC.ctrl('hsoin',  function(v){ return Math.round(v)+' %'; }, 'hso');
+  var verdict = document.getElementById('hverdict');
+
+  /* Écarts de traçage : tirage fixe, pour que l'image soit stable d'une frame
+     à l'autre. Le soin ne change que leur amplitude, pas leur répartition. */
+  var TIR = [0.62,-0.85,0.34,-0.51];
+
+  MSPC.anim('hfab', function(a){
+    var ctx=a.ctx, W=a.W, H=a.H;
+    var p = EP.val/100*4, st = Math.min(4,Math.floor(p+0.0001));
+    var soin = SO.val/100;
+    var err = (1-soin)*1.15;              /* mm, écart maxi de traçage */
+    var jeu = 0.25;                        /* mm admissibles, M8 dans Ø8,5 */
+
+    MSPC.fond(ctx,W,H,46);
+
+    /* La scène tient dans la bande haute laissée libre : le titre occupe le
+       bas-gauche et les curseurs le haut-droite. Espace de dessin 1000 × 290. */
+    var s = Math.min(W*0.75/1000, H*0.34/240);
+    ctx.save();
+    ctx.translate(24, H*0.075);
+    ctx.scale(s,s);
+
+    /* ---------- le rail des stations, en tête ---------- */
+    var ry=18;
+    ctx.strokeStyle='rgba(255,255,255,.16)'; ctx.lineWidth=2;
+    ctx.beginPath(); ctx.moveTo(90,ry); ctx.lineTo(910,ry); ctx.stroke();
+    STA.forEach(function(n,k){
+      var x = 90 + 820*k/4, on = k<=st;
+      ctx.fillStyle = on ? '#b79ae0' : '#39423b';
+      ctx.beginPath(); ctx.arc(x,ry,on?9:6,0,6.2832); ctx.fill();
+      MSPC.mono(ctx,n,x,ry-18,10.5,on?'#e6ebe4':'#5d665e','center');
+    });
+
+    /* ---------- la plaque ---------- */
+    var px=130, py=48, pw=740, ph=92;
+    ctx.fillStyle='#2b3330'; ctx.fillRect(px,py,pw,ph);
+    ctx.strokeStyle='#59645d'; ctx.lineWidth=2; ctx.strokeRect(px,py,pw,ph);
+
+    /* station 2 : le tracé */
+    if(st>=1){
+      ctx.strokeStyle='rgba(183,154,224,.85)'; ctx.lineWidth=1.4; ctx.setLineDash([7,5]);
+      ctx.beginPath();
+      ctx.moveTo(px+45,py); ctx.lineTo(px+45,py+ph);
+      ctx.moveTo(px+pw-45,py); ctx.lineTo(px+pw-45,py+ph);
+      ctx.stroke(); ctx.setLineDash([]);
+      ctx.strokeStyle='#b79ae0'; ctx.lineWidth=4;
+      ctx.beginPath(); ctx.moveTo(px,py-8); ctx.lineTo(px,py+ph+8); ctx.stroke();
+      MSPC.mono(ctx,'FACE DE RÉFÉRENCE',px-8,py-16,9.5,'#b79ae0');
+    }
+
+    /* station 3 : sciage — la plaque est réduite au contour tracé */
+    var cx0=px, cw=pw;
+    if(st>=2){
+      cx0=px+45; cw=pw-90;
+      ctx.fillStyle='#11160f'; ctx.fillRect(px,py,45,ph); ctx.fillRect(px+pw-45,py,45,ph);
+      ctx.fillStyle='#333c37'; ctx.fillRect(cx0,py,cw,ph);
+      ctx.strokeStyle='#7f8a7e'; ctx.lineWidth=2; ctx.strokeRect(cx0,py,cw,ph);
+    }
+
+    /* station 4 : perçage, avec l'écart de traçage */
+    var trous=[], i, cy=py+ph/2;
+    if(st>=3){
+      for(i=0;i<4;i++){
+        var nom = cx0 + cw*(0.13+0.246*i);
+        var dx = TIR[i]*err*13;            /* 13 unités = 1 mm à cette échelle */
+        trous.push({x:nom+dx, nom:nom, e:TIR[i]*err});
+        ctx.fillStyle='#11160f'; ctx.beginPath(); ctx.arc(nom+dx,cy,13,0,6.2832); ctx.fill();
+        ctx.strokeStyle='#8d968b'; ctx.lineWidth=2; ctx.beginPath(); ctx.arc(nom+dx,cy,13,0,6.2832); ctx.stroke();
+      }
+    }
+
+    /* station 5 : la contre-pièce et les vis */
+    var rates=0, cpy=176;
+    if(st>=4){
+      ctx.fillStyle='rgba(123,94,167,.20)'; ctx.fillRect(cx0,cpy,cw,40);
+      ctx.strokeStyle='#7b5ea7'; ctx.lineWidth=2; ctx.strokeRect(cx0,cpy,cw,40);
+      MSPC.mono(ctx,'CONTRE-PIÈCE — TROUS À LA BONNE PLACE',cx0+10,cpy+56,9.5,'#b79ae0');
+      trous.forEach(function(t){
+        var ok = Math.abs(t.e)<=jeu;
+        if(!ok) rates++;
+        var col = ok ? '#8fd05f' : '#ff6a5e';
+        ctx.strokeStyle=col; ctx.lineWidth=3;
+        ctx.beginPath(); ctx.moveTo(t.x,cy+13); ctx.lineTo(t.nom,cpy+20);
+        if(ok) ctx.stroke(); else { ctx.setLineDash([4,4]); ctx.stroke(); ctx.setLineDash([]); }
+        ctx.fillStyle=col; ctx.beginPath(); ctx.arc(t.nom,cpy+20,7,0,6.2832); ctx.fill();
+        if(!ok) MSPC.mono(ctx,(t.e>0?'+':'')+t.e.toFixed(2).replace('.',',')+' mm',t.nom,cpy-8,10,'#ff6a5e','center');
+      });
+    }
+
+    ctx.restore();
+
+    var msg;
+    if(st<3){
+      msg = 'Station <b>'+STA[st]+'</b>. Continuez d’avancer jusqu’au montage.';
+    } else if(st===3){
+      msg = 'Quatre trous percés. <b>Rien ne se voit encore</b> — le défaut de traçage est déjà là.';
+    } else if(rates===0){
+      msg = 'Les quatre vis passent. Écart maxi <b>'+(err*0.85).toFixed(2).replace('.',',')+' mm</b> pour <b>0,25 mm</b> admissibles.';
+    } else {
+      msg = '<span style="color:#ff6a5e">'+rates+' vis sur 4 ne passent pas.</span> Le traçage a été fait il y a trois opérations — et c’est maintenant qu’on l’apprend.';
+    }
+    verdict.innerHTML = msg;
+  }, {fill:true});
+})();
+
+/* ======================= CH 1 · l'arbre de décision de la rechange ======================= */
+(function(){
+  "use strict";
+  var CRIT=['non critique','secondaire','importante','goulot','arrêt de ligne'];
+  var SOLL=['aucun effort','faible','moyen','fort','sécurité'];
+  var D=MSPC.ctrl('a-dec-d', function(v){ return Math.round(v)+' j'; }, 'a-dec-d-l');
+  var C=MSPC.ctrl('a-dec-c', function(v){ return CRIT[Math.round(v)]; }, 'a-dec-c-l');
+  var F=MSPC.ctrl('a-dec-f', function(v){ return SOLL[Math.round(v)]; }, 'a-dec-f-l');
+  var T=MSPC.ctrl('a-dec-t', function(v){ return Math.round(v)+' °C'; }, 'a-dec-t-l');
+  var out=document.getElementById('a-dec-out');
+
+  function clamp(v){ return Math.max(0,Math.min(100,v)); }
+
+  MSPC.anim('a-dec', function(a){
+    var ctx=a.ctx, W=a.W, H=a.H;
+    var d=D.val, c=C.val, f=F.val, t=T.val;
+
+    /* Le coût de l'attente n'est pas le délai : c'est le délai pondéré par la
+       criticité. Trois jours sur une machine d'appoint ne coûtent rien. */
+    var attente = d*(0.6+c*0.85);
+
+    var R=[
+      {n:'ACHETER LA PIÈCE', c:'#8d968b',
+       s: clamp(95 - attente*0.42 + (f===4?22:0)),
+       r: d<=5 ? 'Le fournisseur livre vite : rien ne justifie de fabriquer.'
+               : (f===4 ? 'Pièce de sécurité : c’est la seule voie défendable.'
+                        : 'L’attente commence à coûter cher.')},
+      {n:'REFAIRE À L’ATELIER', c:'#b79ae0',
+       s: clamp(78 - Math.abs(f-2)*4 - (t>150?18:0) - (f===4?45:0) - (d<=4?26:0)),
+       r: f===4 ? 'Une pièce de sécurité ne se refait pas à l’établi.'
+                : (d<=4 ? 'Inutile : la pièce arrive avant qu’elle soit finie.'
+                        : 'Acier, scie, perceuse, soudure : la voie robuste.')},
+      {n:'IMPRIMER EN 3D', c:'#5cc4e0',
+       s: clamp(88 - (f>=3?58:f*13) - (t>70?(t-70)*0.55:0) - (d<=2?30:0)),
+       r: f>=3 ? 'Trop sollicitée : le plastique casse entre les couches.'
+               : (t>70 ? 'Trop chaud : le plastique flue avant de casser.'
+                       : 'Peu sollicitée et tiède : le cas d’école du référentiel.')},
+      {n:'SOUS-TRAITER', c:'#f0a844',
+       s: clamp(58 + (f>=3?20:0) - attente*0.30),
+       r: f>=3 ? 'Un atelier d’usinage sait faire ce que l’établi ne sait pas.'
+               : 'Coûteux et lent pour une pièce simple.'}
+    ];
+
+    var best=0; for(var k=1;k<4;k++) if(R[k].s>R[best].s) best=k;
+
+    MSPC.fond(ctx,W,H,0);
+    MSPC.mono(ctx,'QUATRE CRITÈRES, QUATRE VOIES — LA PIÈCE EST CASSÉE, QUE FAIT-ON ?',26,28,11.5,'#8d968b');
+
+    /* ---------- les quatre critères ---------- */
+    var CR=[
+      {l:'DÉLAI FOURNISSEUR', v:d/60,   t:Math.round(d)+' jours'},
+      {l:'CRITICITÉ MACHINE', v:c/4,    t:CRIT[Math.round(c)]},
+      {l:'SOLLICITATION',     v:f/4,    t:SOLL[Math.round(f)]},
+      {l:'TEMPÉRATURE',       v:(t-20)/180, t:Math.round(t)+' °C'}
+    ];
+    var cw=(W-52)/4;
+    CR.forEach(function(o,i){
+      var x=26+i*cw;
+      MSPC.mono(ctx,o.l,x,58,9.5,'#8d968b');
+      MSPC.jauge(ctx,x,66,cw-22,9,o.v,0.55,0.8);
+      MSPC.mono(ctx,o.t,x,92,12,'#e6ebe4');
+    });
+
+    ctx.strokeStyle='rgba(255,255,255,.14)'; ctx.lineWidth=1;
+    ctx.beginPath(); ctx.moveTo(26,110); ctx.lineTo(W-26,110); ctx.stroke();
+
+    /* ---------- les quatre voies ---------- */
+    R.forEach(function(o,i){
+      var y=132+i*74, h=60;
+      var on=(i===best);
+      ctx.fillStyle = on ? 'rgba(183,154,224,.13)' : 'rgba(255,255,255,.035)';
+      ctx.fillRect(26,y,W-52,h);
+      ctx.strokeStyle = on ? '#b79ae0' : 'rgba(255,255,255,.13)';
+      ctx.lineWidth = on ? 2 : 1;
+      ctx.strokeRect(26.5,y+.5,W-53,h);
+
+      MSPC.titre(ctx,o.n,44,y+26,19,on?'#fff':'#9aa494');
+      MSPC.mono(ctx,o.r,44,y+46,10.5,on?'#cfd4ca':'#6f786e');
+
+      var bx=W-296, bw=210;
+      ctx.fillStyle='rgba(255,255,255,.09)'; ctx.fillRect(bx,y+22,bw,14);
+      ctx.fillStyle=o.c; ctx.fillRect(bx,y+22,bw*o.s/100,14);
+      MSPC.titre(ctx,Math.round(o.s),bx+bw+16,y+36,23,on?o.c:'#6f786e');
+
+      if(on) MSPC.mono(ctx,'▶',34,y+26,15,'#b79ae0');
+    });
+
+    out.innerHTML='Recommandation : <b style="color:#b79ae0">'+R[best].n+'</b><br>score '+Math.round(R[best].s)+' / 100';
+  }, {fixed:true});
+})();
+
+/* ======================= CH 2 · cotation en chaîne contre référence unique ======================= */
+(function(){
+  "use strict";
+  var N=MSPC.ctrl('a-tra-n', function(v){ return Math.round(v); }, 'a-tra-n-l');
+  var E=MSPC.ctrl('a-tra-e', function(v){ return '± '+(v/100).toFixed(2).replace('.',',')+' mm'; }, 'a-tra-e-l');
+  var M=MSPC.ctrl('a-tra-m');
+  var out=document.getElementById('a-tra-out');
+  var PAS=40, JEU=0.25;                      /* M8 dans Ø8,5 : 0,25 mm de chaque côté */
+  var tir=[];
+  function retirer(){ tir=[]; for(var i=0;i<8;i++) tir.push(Math.random()*2-1); }
+  retirer();
+  var b=document.getElementById('a-tra-go');
+  if(b) b.addEventListener('click', retirer);
+
+  MSPC.anim('a-tra', function(a){
+    var ctx=a.ctx, W=a.W, H=a.H;
+    var n=Math.round(N.val), e=E.val/100, chaine=M.val;
+
+    /* Positions réelles : en chaîne l'erreur s'accumule, depuis une référence
+       chaque trou ne porte que la sienne. Même tirage dans les deux cas. */
+    var pos=[], cum=0, i;
+    for(i=0;i<n;i++){
+      if(chaine){ if(i>0) cum += tir[i]*e; pos.push(i*PAS+cum); }
+      else { pos.push(i*PAS + tir[i]*e); }
+    }
+
+    MSPC.fond(ctx,W,H,0);
+    MSPC.mono(ctx, chaine ? 'COTATION EN CHAÎNE — CHAQUE COTE PART DU TROU PRÉCÉDENT'
+                          : 'COTATION DEPUIS UNE RÉFÉRENCE — CHAQUE COTE PART DE LA MÊME FACE',
+              26,28,11.5,'#b79ae0');
+
+    var x0=90, span=W-190, ech=span/((n-1)*PAS||1);
+    var yA=118, yB=250;
+
+    /* ---------- la face de référence ---------- */
+    ctx.strokeStyle='#b79ae0'; ctx.lineWidth=4;
+    ctx.beginPath(); ctx.moveTo(x0,72); ctx.lineTo(x0,yB+52); ctx.stroke();
+    MSPC.mono(ctx,'FACE DE RÉFÉRENCE',x0-6,52,9.5,'#b79ae0');
+
+    /* ---------- pièce tracée et percée ---------- */
+    ctx.fillStyle='#2b3330'; ctx.fillRect(x0,yA-34,span+60,68);
+    ctx.strokeStyle='#59645d'; ctx.lineWidth=1.6; ctx.strokeRect(x0,yA-34,span+60,68);
+    MSPC.mono(ctx,'LA PIÈCE QUE VOUS PERCEZ',W-44,52,9.5,'#8d968b','right');
+
+    /* ---------- contre-pièce ---------- */
+    ctx.fillStyle='rgba(123,94,167,.16)'; ctx.fillRect(x0,yB-30,span+60,60);
+    ctx.strokeStyle='#7b5ea7'; ctx.lineWidth=1.6; ctx.strokeRect(x0,yB-30,span+60,60);
+    MSPC.mono(ctx,'LA CONTRE-PIÈCE — TROUS EXACTS',x0+10,yB+48,9.5,'#8d968b');
+
+    var pire=0, rates=0;
+    for(i=0;i<n;i++){
+      var xn=x0+i*PAS*ech, xr=x0+pos[i]*ech;
+      var ec=pos[i]-i*PAS, ok=Math.abs(ec)<=JEU;
+      if(Math.abs(ec)>Math.abs(pire)) pire=ec;
+      if(!ok) rates++;
+      var col= ok ? '#8fd05f' : '#ff6a5e';
+
+      /* nominal, en pointillé */
+      ctx.strokeStyle='rgba(255,255,255,.22)'; ctx.lineWidth=1; ctx.setLineDash([4,4]);
+      ctx.beginPath(); ctx.moveTo(xn,yA-40); ctx.lineTo(xn,yB+34); ctx.stroke(); ctx.setLineDash([]);
+
+      /* trou percé */
+      ctx.fillStyle='#11160f'; ctx.beginPath(); ctx.arc(xr,yA,11,0,6.2832); ctx.fill();
+      ctx.strokeStyle=col; ctx.lineWidth=2.2; ctx.beginPath(); ctx.arc(xr,yA,11,0,6.2832); ctx.stroke();
+
+      /* trou de la contre-pièce, à sa place exacte */
+      ctx.fillStyle='#11160f'; ctx.beginPath(); ctx.arc(xn,yB,11,0,6.2832); ctx.fill();
+      ctx.strokeStyle='#7b5ea7'; ctx.lineWidth=2; ctx.beginPath(); ctx.arc(xn,yB,11,0,6.2832); ctx.stroke();
+
+      /* la vis */
+      ctx.strokeStyle=col; ctx.lineWidth=ok?2.4:1.6;
+      ctx.beginPath(); ctx.moveTo(xr,yA+13); ctx.lineTo(xn,yB-13);
+      if(ok) ctx.stroke(); else { ctx.setLineDash([3,4]); ctx.stroke(); ctx.setLineDash([]); }
+
+      MSPC.mono(ctx,(ec>=0?'+':'')+ec.toFixed(2).replace('.',','),xr,yA-44,10,col,'center');
+    }
+
+    /* ---------- bandeau de synthèse ---------- */
+    var by=330;
+    ctx.fillStyle='rgba(255,255,255,.05)'; ctx.fillRect(26,by,W-52,84);
+    MSPC.mono(ctx,'ÉCART MAXIMAL RELEVÉ',44,by+24,9.5,'#8d968b');
+    MSPC.titre(ctx,(pire>=0?'+':'')+pire.toFixed(2).replace('.',',')+' mm',44,by+56,27, Math.abs(pire)>JEU?'#ff6a5e':'#8fd05f');
+
+    MSPC.mono(ctx,'ADMISSIBLE (M8 DANS Ø 8,5)',300,by+24,9.5,'#8d968b');
+    MSPC.titre(ctx,'± 0,25 mm',300,by+56,27,'#e6ebe4');
+
+    MSPC.mono(ctx,'VIS QUI NE PASSENT PAS',540,by+24,9.5,'#8d968b');
+    MSPC.titre(ctx,rates+' / '+n,540,by+56,27, rates?'#ff6a5e':'#8fd05f');
+
+    MSPC.mono(ctx, chaine ? 'L’erreur du dernier trou porte' : 'Chaque trou ne porte',W-44,by+34,10.5,'#8d968b','right');
+    MSPC.mono(ctx, chaine ? 'celles de tous les précédents.' : 'que sa propre erreur.',W-44,by+54,10.5,'#8d968b','right');
+
+    out.innerHTML='écart maxi <b style="color:'+(Math.abs(pire)>JEU?'#ff6a5e':'#8fd05f')+'">'
+      +(pire>=0?'+':'')+pire.toFixed(2).replace('.',',')+' mm</b><br>'+rates+' vis sur '+n+' ne passent pas';
+  }, {fixed:true});
+})();
+
+/* ======================= CH 3 · la règle des trois dents ======================= */
+(function(){
+  "use strict";
+  var TPI=[14,18,24,32];
+  var E=MSPC.ctrl('a-sci-e', function(v){ return (v/10).toFixed(1).replace('.',',')+' mm'; }, 'a-sci-e-l');
+  var P=MSPC.ctrl('a-sci-p', function(v){ return TPI[Math.round(v)]+' dents/pouce'; }, 'a-sci-p-l');
+  var out=document.getElementById('a-sci-out');
+
+  MSPC.anim('a-sci', function(a){
+    var ctx=a.ctx, W=a.W, H=a.H;
+    var ep=E.val/10, tpi=TPI[Math.round(P.val)], pas=25.4/tpi;
+    var n=ep/pas;
+
+    /* Conseil : au moins 3 dents en prise, au plus une douzaine pour que le
+       copeau s'évacue. On remonte à la denture la plus fine en cas de doute. */
+    var conseil=32; if(ep>12) conseil=14; else if(ep>6) conseil=18; else if(ep>3) conseil=24;
+
+    MSPC.fond(ctx,W,H,0);
+    MSPC.mono(ctx,'LA RÈGLE DES TROIS DENTS — PAS = 25,4 / TPI',26,28,11.5,'#8d968b');
+
+    /* ---------- gros plan : la lame sur la tranche de la pièce ----------
+       L'échelle s'adapte pour que la pièce garde toujours la même largeur à
+       l'écran. C'est donc le PAS de la denture qui grandit ou rétrécit, et le
+       nombre de dents en prise se lit directement sur le dessin. */
+    var LARG=250, ech=LARG/ep, pasPx=pas*ech;
+    var bx=180, by=212, x;
+    var bl0=28, bl1=578, ly=by-10;
+
+    /* corps de lame et denture */
+    ctx.fillStyle='#39423b'; ctx.fillRect(bl0,ly-54,bl1-bl0,30);
+    ctx.strokeStyle='#59645d'; ctx.lineWidth=1.6; ctx.strokeRect(bl0,ly-54,bl1-bl0,30);
+    for(x=bl0; x<bl1; x+=pasPx){
+      var xf=Math.min(x+pasPx,bl1), xm=(x+xf)/2;
+      var enPrise=(xm>=bx && xm<=bx+LARG);
+      ctx.fillStyle = enPrise ? '#b79ae0' : '#4a544c';
+      ctx.beginPath();
+      ctx.moveTo(x,ly-24); ctx.lineTo(xf,ly-24); ctx.lineTo(xf,ly-4);
+      ctx.closePath(); ctx.fill();
+    }
+    MSPC.mono(ctx,'LAME '+tpi+' DENTS/POUCE — PAS '+pas.toFixed(2).replace('.',',')+' MM',bl0,ly-64,9.5,'#8d968b');
+
+    /* la pièce, et les deux traits qui délimitent la zone en prise */
+    ctx.fillStyle='#333c37'; ctx.fillRect(bx,by,LARG,120);
+    ctx.strokeStyle='#7f8a7e'; ctx.lineWidth=2; ctx.strokeRect(bx,by,LARG,120);
+    ctx.strokeStyle='rgba(183,154,224,.45)'; ctx.lineWidth=1; ctx.setLineDash([4,4]);
+    ctx.beginPath();
+    ctx.moveTo(bx,by); ctx.lineTo(bx,ly-54);
+    ctx.moveTo(bx+LARG,by); ctx.lineTo(bx+LARG,ly-54);
+    ctx.stroke(); ctx.setLineDash([]);
+    MSPC.mono(ctx,'LA PIÈCE, VUE EN TRANCHE',bx,by+142,9.5,'#8d968b');
+    MSPC.mono(ctx,ep.toFixed(1).replace('.',',')+' mm d’épaisseur',bx+LARG/2,by+166,12,'#e6ebe4','center');
+
+    /* ---------- panneau de droite ---------- */
+    var px0=W-286, pw=260;
+    ctx.fillStyle='rgba(255,255,255,.04)'; ctx.fillRect(px0,56,pw,300);
+    ctx.strokeStyle='rgba(255,255,255,.20)'; ctx.lineWidth=1.4; ctx.strokeRect(px0+.5,56.5,pw,300);
+
+    MSPC.mono(ctx,'DENTS EN PRISE',px0+16,84,10,'#8d968b');
+    var col = n<3 ? '#ff6a5e' : (n>12 ? '#f0a844' : '#8fd05f');
+    MSPC.titre(ctx,n.toFixed(1).replace('.',','),px0+16,124,38,col);
+    MSPC.mono(ctx,'épaisseur / pas',px0+120,124,10,'#6f786e');
+
+    var verdict, expl;
+    if(n<3){ verdict='DENTS ARRACHÉES'; expl='Une dent isolée accroche au lieu de couper : elle prend tout l’effort et casse.'; }
+    else if(n>12){ verdict='LA LAME BOURRE'; expl='Trop de dents, plus de place pour le copeau. La lame frotte, chauffe, n’avance plus.'; }
+    else { verdict='COUPE SAINE'; expl='L’effort se répartit sur assez de dents et le copeau s’évacue.'; }
+
+    ctx.fillStyle=col; ctx.fillRect(px0+16,146,pw-32,4);
+    MSPC.titre(ctx,verdict,px0+16,180,21,col);
+    var mots=expl.split(' '), ligne='', yy=204;
+    mots.forEach(function(m){
+      if((ligne+m).length>32){ MSPC.mono(ctx,ligne,px0+16,yy,10.5,'#9aa494'); ligne=m+' '; yy+=17; }
+      else ligne+=m+' ';
+    });
+    MSPC.mono(ctx,ligne,px0+16,yy,10.5,'#9aa494');
+
+    MSPC.mono(ctx,'DENTURE CONSEILLÉE ICI',px0+16,286,10,'#8d968b');
+    MSPC.titre(ctx,conseil+' dents/pouce',px0+16,318,22, conseil===tpi?'#8fd05f':'#b79ae0');
+    if(conseil!==tpi) MSPC.mono(ctx,'≠ celle montée',px0+16,340,10,'#f0a844');
+
+    out.innerHTML='<b style="color:'+col+'">'+n.toFixed(1).replace('.',',')+' dents</b> en prise · '+verdict.toLowerCase()
+      +'<br>conseillé : <b>'+conseil+' TPI</b>';
+  }, {fixed:true});
+})();
+
+/* ======================= CH 3 · le berçage et la surface bombée ======================= */
+(function(){
+  "use strict";
+  var B=MSPC.ctrl('a-lim-b', function(v){ return Math.round(v)+' %'; }, 'a-lim-b-l');
+  var N=MSPC.ctrl('a-lim-n', function(v){ return Math.round(v); }, 'a-lim-n-l');
+  var L=MSPC.ctrl('a-lim-l');
+  var out=document.getElementById('a-lim-out');
+
+  var NP=72, brut=[];
+  function nouvelle(){ brut=[]; for(var i=0;i<NP;i++) brut.push(0.62+Math.random()*0.43); }
+  nouvelle();
+  var b=document.getElementById('a-lim-go');
+  if(b) b.addEventListener('click', nouvelle);
+
+  MSPC.anim('a-lim', function(a){
+    var ctx=a.ctx, W=a.W, H=a.H;
+    var berc=B.val/100, np=N.val, enLong=L.val;
+
+    /* La lime ne « gomme » pas la rugosité : elle rabote tout ce qui dépasse
+       d'une enveloppe qui descend passe après passe. Si la lime berce, cette
+       enveloppe n'est plus plane — elle descend plus vite sur les bords, et
+       c'est exactement cela qui fabrique la surface bombée. */
+    var h=[], i, x;
+    for(i=0;i<NP;i++){
+      x=i/(NP-1);
+      var bord=Math.abs(x-0.5)*2;
+      var env = 1.10 - np*0.013*(1+berc*bord*2.1);
+      h.push(Math.min(brut[i], Math.max(0,env)));
+    }
+    if(enLong){
+      /* tenue en long, la lime ne rabote plus que les points hauts : elle
+         corrige la forme sans presque enlever de matière */
+      var a0=h[0], a1=h[NP-1];
+      for(i=0;i<NP;i++){
+        var lin=a0+(a1-a0)*(i/(NP-1));
+        h[i]=lin+(h[i]-lin)*0.08;
+      }
+    }
+
+    var hmin=Math.min.apply(null,h), hmax=Math.max.apply(null,h);
+    var defaut=(hmax-hmin);
+    /* cambrure : hauteur du milieu au-dessus de la corde joignant les bords */
+    var bomb = h[Math.floor(NP/2)] - (h[0]+h[NP-1])/2;
+
+    MSPC.fond(ctx,W,H,0);
+    MSPC.mono(ctx,'PROFIL RÉEL DE LA SURFACE — HAUTEURS AGRANDIES 200 FOIS',26,28,11.5,'#8d968b');
+
+    var gx=40, gw=W-330, gy=190, amp=150;
+    function X(i){ return gx+gw*i/(NP-1); }
+    function Y(v){ return gy - (v-hmin)*amp; }
+
+    /* la matière */
+    ctx.beginPath(); ctx.moveTo(X(0),gy+70);
+    for(i=0;i<NP;i++) ctx.lineTo(X(i),Y(h[i]));
+    ctx.lineTo(X(NP-1),gy+70); ctx.closePath();
+    ctx.fillStyle='rgba(123,94,167,.20)'; ctx.fill();
+    ctx.strokeStyle='#b79ae0'; ctx.lineWidth=2;
+    ctx.beginPath();
+    for(i=0;i<NP;i++){ if(i===0) ctx.moveTo(X(i),Y(h[i])); else ctx.lineTo(X(i),Y(h[i])); }
+    ctx.stroke();
+
+    /* la règle d'ajusteur : elle repose sur les deux points les plus hauts */
+    var iMax=0; for(i=0;i<NP;i++) if(h[i]>h[iMax]) iMax=i;
+    var yR=Y(h[iMax])-6;
+    ctx.fillStyle='#6f786e'; ctx.fillRect(gx,yR-12,gw,12);
+    MSPC.mono(ctx,'RÈGLE D’AJUSTEUR',gx+8,yR-20,9.5,'#8d968b');
+
+    /* le jour de lumière sous la règle */
+    ctx.beginPath(); ctx.moveTo(X(0),yR);
+    for(i=0;i<NP;i++) ctx.lineTo(X(i),Y(h[i]));
+    ctx.lineTo(X(NP-1),yR); ctx.closePath();
+    ctx.fillStyle= defaut>0.05 ? 'rgba(255,214,102,.55)' : 'rgba(255,214,102,.12)';
+    ctx.fill();
+
+    /* ---------- panneau ---------- */
+    var px0=W-268, pw=242;
+    ctx.fillStyle='rgba(255,255,255,.04)'; ctx.fillRect(px0,56,pw,318);
+    ctx.strokeStyle='rgba(255,255,255,.20)'; ctx.lineWidth=1.4; ctx.strokeRect(px0+.5,56.5,pw,318);
+
+    MSPC.mono(ctx,'JOUR SOUS LA RÈGLE',px0+16,84,10,'#8d968b');
+    var cm=defaut*35;                       /* centièmes de millimètre */
+    var col = cm<2 ? '#8fd05f' : (cm<5 ? '#f0a844' : '#ff6a5e');
+    MSPC.titre(ctx,cm.toFixed(0)+' centièmes',px0+16,122,26,col);
+
+    MSPC.mono(ctx,'FORME OBTENUE',px0+16,164,10,'#8d968b');
+    /* la cambrure se juge sur la même échelle que le jour sous la règle,
+       sans quoi le verdict contredirait la mesure affichée au-dessus */
+    var bombCm = bomb*35;
+    var forme = bombCm>2 ? 'BOMBÉE' : (cm<2.5 ? 'PLANE' : 'IRRÉGULIÈRE');
+    MSPC.titre(ctx,forme,px0+16,194,24, forme==='PLANE'?'#8fd05f':'#ff6a5e');
+
+    MSPC.mono(ctx,'ASPECT DE SURFACE',px0+16,232,10,'#8d968b');
+    var aspect = np<6 ? 'brut de sciage' : (np<16 ? 'strié' : 'lisse et brillant');
+    MSPC.titre(ctx,aspect,px0+16,258,17,'#cfd4ca');
+
+    if(enLong && forme!=='BOMBÉE'){
+      MSPC.mono(ctx,'Le limage en long a',px0+16,296,11,'#8fd05f');
+      MSPC.mono(ctx,'rattrapé la forme.',px0+16,313,11,'#8fd05f');
+    } else if(np>=16 && forme==='BOMBÉE'){
+      MSPC.mono(ctx,'La surface est belle',px0+16,296,11,'#f0a844');
+      MSPC.mono(ctx,'ET fausse. C’est le piège.',px0+16,313,11,'#f0a844');
+    }
+    MSPC.mono(ctx,'contrôle : viser la lumière',px0+16,352,10,'#6f786e');
+
+    out.innerHTML='jour sous la règle <b style="color:'+col+'">'+cm.toFixed(0)+' centièmes</b><br>surface '+forme.toLowerCase();
+  }, {fixed:true});
+})();
+</script>
+</body>
+</html>

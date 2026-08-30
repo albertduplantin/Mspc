@@ -78,6 +78,7 @@ a{color:var(--lien)}
 .m-elec{--m-accent:#93a415; --m-accent-clair:#c8d834}
 .m-maint{--m-accent:#c9791a; --m-accent-clair:#f0a844}
 .m-meca{--m-accent:#3f6b8a; --m-accent-clair:#79a6c4}
+.m-fab{--m-accent:#7b5ea7; --m-accent-clair:#b79ae0}
 .m-pneu{--m-accent:#1f8fb0; --m-accent-clair:#5cc4e0}
 .m-hydro{--m-accent:#b5451f; --m-accent-clair:#e07a4e}
 
