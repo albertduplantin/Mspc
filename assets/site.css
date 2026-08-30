@@ -54,7 +54,7 @@ a{color:var(--lien)}
 :focus-visible{outline:3px solid var(--lien); outline-offset:2px}
 
 /* ---------- BARRE DE NAVIGATION INTER-COURS ---------- */
-.sitenav{position:relative; z-index:5; background:#0f1512; border-bottom:1px solid #2a322b;
+.sitenav{position:sticky; top:0; z-index:45; background:#0f1512; border-bottom:1px solid #2a322b;
   display:flex; align-items:stretch; flex-wrap:wrap; gap:0}
 .sitenav .marque{display:flex; align-items:center; gap:9px; padding:9px 18px 9px 20px; text-decoration:none;
   border-right:1px solid #2a322b; flex:0 0 auto}
@@ -68,6 +68,11 @@ a{color:var(--lien)}
 .sitenav .liens a:hover{color:#e6ebe4; border-bottom-color:var(--m-accent,var(--accent))}
 .sitenav .liens a[aria-current="page"]{color:#fff; border-bottom-color:var(--m-accent,var(--accent)); background:#161d18}
 .sitenav .liens a .pastille{width:8px; height:8px; margin-right:8px; background:var(--m-accent,var(--accent)); flex:0 0 auto}
+.sitenav .soutenir{display:flex; align-items:center; gap:6px; padding:0 18px; text-decoration:none;
+  font-family:"IBM Plex Mono",monospace; font-size:10.5px; letter-spacing:.13em; text-transform:uppercase;
+  color:#fff; background:#c9484a; flex:0 0 auto; white-space:nowrap; transition:background .12s}
+.sitenav .soutenir:hover{background:#e05a5c}
+@media (max-width:640px){.sitenav .soutenir{padding:0 13px; font-size:9.5px}}
 
 /* Couleurs propres à chaque matière, utilisables partout via une classe */
 .m-elec{--m-accent:#93a415; --m-accent-clair:#c8d834}
@@ -314,7 +319,7 @@ footer.fin{margin-top:70px; border-top:6px solid var(--encre); padding-top:22px;
 body.nav-on .top-link{display:none}
 
 /* ---------- barre collante ---------- */
-.lecture{position:sticky; top:0; z-index:40; background:#0f1512; border-bottom:1px solid #2a322b;
+.lecture{position:sticky; top:var(--nav-h,41px); z-index:40; background:#0f1512; border-bottom:1px solid #2a322b;
   display:flex; align-items:center; gap:10px; padding:0 12px 0 0; height:46px;
   font-family:"IBM Plex Mono",monospace; transform:translateY(-100%); transition:transform .22s ease}
 body.nav-on .lecture.visible{transform:translateY(0)}

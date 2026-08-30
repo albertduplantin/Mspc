@@ -190,6 +190,27 @@
     }catch(e){ return null; }
   }
 
+  /* La barre .sitenav est collante (position:sticky) sur toutes les pages :
+     elle ne doit plus disparaître au défilement. On mesure sa hauteur réelle
+     (elle varie selon la largeur d'écran, la barre pouvant passer sur deux
+     lignes) pour que la barre de lecture .lecture, elle aussi collante,
+     vienne s'empiler juste en dessous plutôt que sous elle. */
+  function majNavH(){
+    var el = document.querySelector('.sitenav');
+    if(!el) return;
+    document.documentElement.style.setProperty('--nav-h', el.offsetHeight + 'px');
+  }
+  function initNavH(){
+    majNavH();
+    global.addEventListener('resize', majNavH);
+    if('ResizeObserver' in global){
+      var el = document.querySelector('.sitenav');
+      if(el) new ResizeObserver(majNavH).observe(el);
+    }
+  }
+  if(document.readyState === 'loading') document.addEventListener('DOMContentLoaded', initNavH);
+  else initNavH();
+
   function nav(){
     var chs = [].slice.call(document.querySelectorAll('section.ch'));
     if(chs.length < 3) return null;
