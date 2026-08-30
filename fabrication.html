@@ -54,9 +54,9 @@
 </header>
 
 <div class="meta-bar">
-  <div><b>3</b> chapitres sur 13 publiés</div>
-  <div><b>5</b> animations pilotables</div>
-  <div><b>8</b> exercices corrigés</div>
+  <div><b>6</b> chapitres sur 13 publiés</div>
+  <div><b>11</b> animations pilotables</div>
+  <div><b>17</b> exercices corrigés</div>
   <div>Fiches TP <b>en préparation</b></div>
   <div>Calé sur le savoir <b>S4.9</b></div>
 </div>
@@ -89,9 +89,9 @@
     <a class="borne" href="#c1"><span class="num">01</span><span class="lbl">Refaire la pièce qui n'existe plus</span></a>
     <a class="borne" href="#c2"><span class="num">02</span><span class="lbl">Le traçage</span></a>
     <a class="borne" href="#c3"><span class="num">03</span><span class="lbl">Sciage et limage : l'ajustage</span></a>
-    <a class="borne" href="#suite"><span class="num">04</span><span class="lbl">Cisaillage et pliage</span></a>
-    <a class="borne" href="#suite"><span class="num">05</span><span class="lbl">La perceuse à colonne</span></a>
-    <a class="borne" href="#suite"><span class="num">06</span><span class="lbl">Taraudage et filetages</span></a>
+    <a class="borne" href="#c4"><span class="num">04</span><span class="lbl">Cisaillage et pliage</span></a>
+    <a class="borne" href="#c5"><span class="num">05</span><span class="lbl">La perceuse à colonne</span></a>
+    <a class="borne" href="#c6"><span class="num">06</span><span class="lbl">Taraudage et filetages</span></a>
     <a class="borne" href="#suite"><span class="num">07</span><span class="lbl">Assembler sans fondre</span></a>
     <a class="borne" href="#suite"><span class="num">08</span><span class="lbl">Soudure à l'électrode enrobée</span></a>
     <a class="borne" href="#suite"><span class="num">09</span><span class="lbl">Le semi-automatique MAG</span></a>
@@ -334,6 +334,62 @@
 <li><strong>Sur un perçage précis, on pointe puis on perce un avant-trou</strong> de petit diamètre avant de passer au diamètre final. Nous détaillerons cela au chapitre 5.</li>
 </ul>
 
+<h3>2.6 — Lire un pied à coulisse au cinquantième</h3>
+<p>Un pied à coulisse ne se lit pas d'un coup d'œil : il se <strong>déchiffre en deux temps</strong>. La règle porte les millimètres entiers, le coulisseau porte les fractions. Tant qu'on n'a pas compris <em>pourquoi</em> le second fonctionne, on lit au hasard.</p>
+
+<p>Le principe du vernier est une petite ruse géométrique, vieille de quatre siècles et toujours imbattable. Sur un pied à coulisse <strong>au 1/50</strong>, les 50 divisions du coulisseau ne s'étalent pas sur 50 mm de la règle, mais sur <strong>49 mm</strong>. Chaque division du vernier vaut donc 0,98 mm : il lui manque <strong>deux centièmes</strong> par rapport à un millimètre de la règle.</p>
+
+<div class="formule">1 division de vernier = 49 / 50 = 0,98 mm<small>Il manque 0,02 mm à chaque division — c'est la résolution de l'instrument</small></div>
+
+<p>Ce manque, répété, est ce qui permet la lecture. Si le coulisseau avance de deux centièmes, c'est la division n° 1 qui vient tomber en face d'un trait de la règle. S'il avance de quatre centièmes, c'est la n° 2. <span class="cle">La division du vernier qui s'aligne avec un trait de la règle donne directement le nombre de fois deux centièmes.</span></p>
+
+<p>D'où la méthode, en trois gestes et toujours dans cet ordre :</p>
+<ol>
+<li><strong>Les millimètres entiers</strong> : on lit le dernier trait de la règle que le <em>zéro du vernier</em> a dépassé. Le zéro, pas le bord du coulisseau.</li>
+<li><strong>La fraction</strong> : on cherche, sur tout le vernier, <em>la</em> seule graduation qui tombe exactement en face d'une graduation de la règle.</li>
+<li><strong>On multiplie son rang par 0,02</strong> et on ajoute aux millimètres.</li>
+</ol>
+
+<figure class="anim">
+  <canvas id="a-pac" width="900" height="440" aria-label="Animation : lecture d'un pied à coulisse au cinquantième, règle, vernier et division alignée"></canvas>
+  <div class="ctrls">
+    <div class="c"><label>Ouverture du pied à coulisse <span id="a-pac-v-l">24,36 mm</span></label><input type="range" id="a-pac-v" min="0" max="3000" value="1218"></div>
+    <div class="c"><label class="switch"><input type="checkbox" id="a-pac-c"><span>Cacher la réponse</span></label></div>
+    <div class="c"><button class="btn" id="a-pac-go">Nouvelle mesure</button></div>
+    <div class="c readout" id="a-pac-out"></div>
+  </div>
+  <figcaption>En haut, les becs et la pièce mesurée. Au milieu, la <b>règle</b> et ses millimètres ; en dessous, le <b>vernier</b> et ses 50 divisions étalées sur 49 mm. La graduation alignée est marquée d'un trait vertical. <b>Avancez le curseur très lentement</b> : à chaque cran de deux centièmes, c'est la division suivante du vernier qui vient s'aligner — vous voyez la ruse fonctionner. <b>Cochez « cacher la réponse » puis cliquez sur « nouvelle mesure »</b> : à vous de lire, et vous vérifiez ensuite en décochant. <span class="cle">Contrôle imparable : au 1/50, le nombre de centièmes est toujours pair. Si vous lisez 24,35, vous vous êtes trompé.</span></figcaption>
+  <div class="autableau">
+    <b class="entete">Au tableau <i>· 15 minutes · animation 1 sur 1</i></b>
+    <ol>
+      <li>Montrer un vrai pied à coulisse et faire compter les divisions du vernier. <span class="q">« Combien y en a-t-il ? »</span> Cinquante — et faire constater qu'elles tiennent sur 49 mm de la règle.</li>
+      <li>Curseur à zéro, puis avancer <b>d'un seul cran</b>. <span class="q">« Quelle division s'est alignée ? »</span> La première. Encore un cran : la deuxième.</li>
+      <li>Se placer sur une valeur ronde, <b>25,00 mm</b>. <span class="q">« Quelle division est alignée ? »</span> Le zéro — c'est la seule fois où le vernier ne sert à rien.</li>
+      <li>Cocher <b>cacher la réponse</b> et faire tourner cinq mesures au hasard, lecture à voix haute par cinq élèves différents.</li>
+      <li>Annoncer une fausse lecture au tableau : <b>18,37 mm</b>. <span class="q">« Pourquoi est-ce forcément faux ? »</span> C'est le contrôle du nombre pair de centièmes.</li>
+    </ol>
+    <div class="piege">Le piège : les ateliers ont souvent un mélange de pieds à coulisse au 1/20 et au 1/50, et les élèves lisent le second comme le premier. Faire lire l'inscription gravée sur le coulisseau avant toute mesure — <span class="mono">0,02</span> ou <span class="mono">1/50</span> — devient vite un réflexe. Le pied à coulisse à affichage numérique ne dispense pas de savoir lire le vernier : c'est lui qu'on trouve dans la caisse quand la pile est morte.</div>
+  </div>
+</figure>
+
+<p>Trois résolutions coexistent dans les ateliers, et elles ne se lisent pas de la même façon :</p>
+<table>
+<thead><tr><th>Vernier</th><th>Divisions</th><th>Étalées sur</th><th>Résolution</th><th>Centièmes lisibles</th></tr></thead>
+<tbody>
+<tr><td>Au 1/10</td><td>10</td><td>9 mm</td><td>0,1 mm</td><td>0 — que des dixièmes</td></tr>
+<tr><td>Au 1/20</td><td>20</td><td>19 mm</td><td>0,05 mm</td><td>00, 05 uniquement</td></tr>
+<tr><td><strong>Au 1/50</strong></td><td><strong>50</strong></td><td><strong>49 mm</strong></td><td><strong>0,02 mm</strong></td><td><strong>toujours pairs</strong></td></tr>
+</tbody></table>
+
+<div class="encadre"><span class="tag">Les trois erreurs qui faussent une mesure juste</span>
+<p><strong>1. La parallaxe.</strong> Regarder le vernier de biais décale l'alignement apparent d'une division entière, soit deux centièmes. On lit toujours <em>perpendiculairement</em> à l'instrument, l'œil au-dessus de la zone d'alignement — pas au-dessus du zéro.</p>
+<p><strong>2. Le serrage.</strong> Un pied à coulisse se pose, il ne se serre pas. Les becs sont longs et fléchissent : appuyer fort fait perdre plusieurs centièmes, et sur une pièce en aluminium ou en plastique, on mesure l'écrasement de la pièce. La molette sert à <em>approcher</em>, le contact doit être juste sensible.</p>
+<p><strong>3. Le zéro.</strong> Avant toute mesure qui compte, on ferme les becs et on vérifie que le zéro du vernier tombe pile sur le zéro de la règle. Un pied à coulisse tombé, ou dont les becs sont usés en pointe, garde un décalage permanent que rien ne signale. <span class="cle">Un instrument qui ne fait pas zéro à zéro ment sur toutes ses mesures, du même écart.</span></p></div>
+
+<div class="image-mentale"><span class="tag">Image mentale — les deux coureurs</span>
+<p>Deux coureurs partent ensemble, l'un fait des pas d'un mètre, l'autre des pas de 98 centimètres. Au premier pas, l'écart est de 2 cm ; au deuxième, 4 cm ; au dixième, 20 cm.</p>
+<p>Si l'on vous dit qu'ils sont retombés pied contre pied au dix-huitième pas, vous savez sans rien mesurer que le décalage de départ était de 18 × 2 = 36 cm. <span class="cle">C'est exactement le calcul que fait votre œil quand il cherche la graduation alignée.</span></p></div>
+
 <div class="exo"><span class="tag">Exercice 2.1</span>
 <p>Vous devez percer six trous alignés au pas de 40 mm sur une platine, pour la boulonner en M8 dans des trous de passage de Ø 8,5 mm. Votre traçage a une incertitude de ± 0,15 mm par report. a) En cotation en chaîne, quel est l'écart maximal possible sur le sixième trou ? b) Le montage passe-t-il ? c) Et en cotation depuis une face de référence ?</p>
 <details><summary>Voir la réponse</summary><div class="rep">
@@ -381,6 +437,21 @@
 <li>Tracer le contour au feutre : il est libre, il n'a pas besoin de mieux.</li>
 </ul>
 <p><strong>Le contrôle qui évite la mauvaise surprise.</strong> Avant de percer quoi que ce soit, présenter le traçage sur la contre-pièce, ou mieux, mesurer directement les entraxes de la contre-pièce et les comparer aux vôtres. C'est elle qui a raison, pas la pièce cassée : elle a peut-être été déformée par le choc qui l'a brisée.</p>
+</div></details></div>
+
+<div class="exo"><span class="tag">Exercice 2.4</span>
+<p>Sur un pied à coulisse au 1/50, le zéro du vernier se trouve entre les traits <strong>32</strong> et <strong>33</strong> de la règle, et c'est la <strong>vingt-troisième</strong> division du vernier qui s'aligne avec un trait de la règle. a) Quelle est la mesure ? b) Un camarade annonce sur le même instrument une lecture de 47,13 mm. Que lui répondez-vous ? c) Vous fermez les becs à fond : le zéro du vernier tombe deux divisions <em>avant</em> le zéro de la règle. Que valent réellement vos mesures ?</p>
+<details><summary>Voir la réponse</summary><div class="rep">
+<p><strong>a) 32,46 mm.</strong></p>
+<p>Les millimètres entiers sont donnés par le dernier trait dépassé par le zéro du vernier, soit <strong>32</strong>. La fraction est donnée par le rang de la division alignée multiplié par la résolution : 23 × 0,02 = <strong>0,46 mm</strong>. Total : 32 + 0,46 = <strong>32,46 mm</strong>.</p>
+<p><em>Le piège classique est de lire « 23 » comme des centièmes et d'annoncer 32,23. Le rang de la division n'est pas la valeur : il faut le multiplier par 0,02.</em></p>
+<p><strong>b) C'est impossible, et on peut le dire sans avoir vu l'instrument.</strong></p>
+<p>Un vernier au 1/50 avance par pas de deux centièmes. Les seules valeurs qu'il peut afficher sont donc <strong>0,00 · 0,02 · 0,04 … 0,98</strong> — <span class="cle">le nombre de centièmes est toujours pair.</span> Or 47,13 se termine par 13, qui est impair : cette lecture ne peut pas sortir d'un 1/50.</p>
+<p>Trois explications possibles, à vérifier dans cet ordre : il a lu un pied à coulisse <strong>au 1/20</strong> (résolution 0,05, donc valeurs en 00 ou 05 — 47,13 est impossible là aussi) ; il a lu <strong>de biais</strong> et a désigné la mauvaise division ; ou il a lu une division voisine sans vérifier laquelle s'aligne vraiment. Dans tous les cas, on refait la mesure.</p>
+<p><strong>c) Toutes vos mesures sont trop grandes de 0,04 mm.</strong></p>
+<p>Deux divisions valent 2 × 0,02 = 0,04 mm. Si becs fermés l'instrument affiche −0,04 au lieu de 0,00, c'est qu'il annonce systématiquement 0,04 mm de trop sur tout ce qu'il mesure. La correction est simple — <strong>retrancher 0,04 mm à chaque lecture</strong> — mais elle est fragile : personne d'autre que vous ne la connaît.</p>
+<p><strong>Ce qu'il faut faire.</strong> Signaler l'instrument et le sortir du service pour les mesures fonctionnelles. Un décalage de zéro vient presque toujours d'un choc ou de becs usés en pointe à force de mesurer des alésages ; dans le second cas, il n'est pas constant sur toute la plage et aucune correction ne le rattrape.</p>
+<p><em>Retenez le geste : <strong>on fait le zéro avant la mesure, pas après la pièce ratée.</strong> Il prend deux secondes.</em></p>
 </div></details></div>
 
 </div>
@@ -556,16 +627,523 @@
 </div>
 </section>
 
+<!-- ================= CH 4 ================= -->
+<section class="ch" id="c4">
+  <div class="ch-head"><div class="ch-num">04</div><div class="ch-title">
+    <span class="kicker">Déplacer la matière au lieu de l'enlever</span><h2>Cisaillage et pliage</h2></div></div>
+  <div class="ch-body">
+
+<div class="savoirs">
+  <span class="savoir n3"><b>S4.9.3</b> <i>Façonnage des pièces : pliage</i></span>
+  <span class="savoir n3"><b>S4.9.1</b> <i>Procédés d'assemblage : déformation</i></span>
+  <span class="savoir n3"><b>S1.4.6</b> <i>RDM : le cisaillement</i></span>
+</div>
+
+<p class="lede">Scier et limer enlèvent de la matière ; cisailler et plier n'en enlèvent aucune, ils la <strong>déplacent</strong>. C'est plus rapide, plus propre et sans copeau — mais cela ne pardonne pas : une tôle pliée au mauvais endroit ne se déplie jamais tout à fait, et une tôle cisaillée trop court ne se rallonge pas.</p>
+
+<h3>4.1 — Cisailler, c'est fissurer proprement</h3>
+<p>Une lame de cisaille ne tranche pas comme un couteau : elle <strong>amorce une fissure et la laisse se propager</strong>. La coupe se déroule toujours en trois temps, et vous en trouvez la trace sur la tranche de n'importe quelle tôle cisaillée.</p>
+<ol>
+<li><strong>Déformation élastique puis plastique</strong> : la lame appuie, la tôle s'incurve légèrement. C'est la petite <em>tombée d'arête</em> arrondie qu'on sent au doigt sur le dessus.</li>
+<li><strong>Pénétration</strong> : la lame entre dans la matière et la cisaille vraiment. Cette zone donne une bande <strong>lisse et brillante</strong>, environ un tiers de l'épaisseur.</li>
+<li><strong>Rupture</strong> : les fissures parties du haut et du bas se rejoignent, et le reste casse d'un coup. Cette zone est <strong>mate et grenue</strong>, et se termine par la <strong>bavure</strong>.</li>
+</ol>
+<p><span class="cle">La tranche d'une tôle cisaillée porte donc toujours la signature du sens de coupe : arrondi et zone brillante du côté de la lame, bavure du côté opposé.</span> C'est utile pour un mainteneur : sur une pièce inconnue, cela dit de quel côté elle a été découpée, donc comment elle était orientée dans l'outil.</p>
+
+<h3>4.2 — Le jeu de lame décide de tout</h3>
+<p>Entre la lame mobile et la lame fixe, il existe un espace : le <strong>jeu de lame</strong>. Il n'est pas un défaut de réglage, c'est un paramètre, et il vaut couramment <strong>5 à 10 % de l'épaisseur</strong> pour l'acier doux.</p>
+<table>
+<thead><tr><th>Jeu</th><th>Ce qui se passe</th><th>Ce qu'on voit sur la tranche</th></tr></thead>
+<tbody>
+<tr><td><strong>Trop faible</strong><br>(&lt; 3 %)</td><td>Les deux fissures ne se rencontrent pas : elles se croisent. La matière est cisaillée deux fois</td><td>Double zone brillante, bavure fine et dure, effort de coupe nettement plus élevé</td></tr>
+<tr><td><strong>Correct</strong><br>(5 à 10 %)</td><td>Les fissures partent l'une vers l'autre et se rejoignent</td><td>Un tiers brillant, deux tiers mats, bavure faible et régulière</td></tr>
+<tr><td><strong>Trop grand</strong><br>(&gt; 15 %)</td><td>La tôle est entraînée et se plie avant de rompre : elle est arrachée plus que coupée</td><td>Grosse bavure retroussée, arête très arrondie, tôle déformée près de la coupe</td></tr>
+</tbody></table>
+<p>Le jeu se règle en fonction de l'épaisseur, et c'est pour cela qu'une cisaille de qualité possède une butée réglable. Sur les cisailles d'atelier scolaire, il est souvent figé : ce qui explique qu'on cisaille très bien du 2 mm et très mal du 0,5 mm sur la même machine.</p>
+
+<h3>4.3 — L'effort de cisaillage</h3>
+<p>C'est ici que le cisaillage rejoint la résistance des matériaux — et c'est l'un des rares calculs que le référentiel demande au <strong>niveau 3</strong>, sous l'intitulé « RDM : la traction, le cisaillement ». La surface cisaillée est un simple rectangle : l'épaisseur multipliée par la longueur de coupe.</p>
+
+<div class="formule">F = τ × e × L<small>τ résistance au cisaillement en N/mm² · e épaisseur en mm · L longueur coupée en mm · F en newtons</small></div>
+
+<p>La résistance au cisaillement τ vaut approximativement <strong>80 % de la résistance à la traction R<sub>m</sub></strong> du matériau. On la lit dans un tableau, on ne la calcule pas.</p>
+<table>
+<thead><tr><th>Matériau</th><th>R<sub>m</sub> indicatif</th><th>τ ≈ 0,8 R<sub>m</sub></th></tr></thead>
+<tbody>
+<tr><td>Aluminium recuit</td><td>110 N/mm²</td><td><strong>90 N/mm²</strong></td></tr>
+<tr><td>Acier doux S235</td><td>400 N/mm²</td><td><strong>320 N/mm²</strong></td></tr>
+<tr><td>Acier mi-dur C45</td><td>620 N/mm²</td><td><strong>500 N/mm²</strong></td></tr>
+<tr><td>Inox 304</td><td>600 N/mm²</td><td><strong>480 N/mm²</strong></td></tr>
+</tbody></table>
+
+<figure class="anim">
+  <canvas id="a-cis" width="900" height="450" aria-label="Animation : effort de cisaillage, jeu de lame et aspect de la tranche coupée"></canvas>
+  <div class="ctrls">
+    <div class="c"><label>Épaisseur <span id="a-cis-e-l">2,0 mm</span></label><input type="range" id="a-cis-e" min="5" max="60" value="20"></div>
+    <div class="c"><label>Longueur coupée <span id="a-cis-l-l">200 mm</span></label><input type="range" id="a-cis-l" min="20" max="600" value="200"></div>
+    <div class="c"><label>Matériau <span id="a-cis-m-l">acier doux S235</span></label><input type="range" id="a-cis-m" min="0" max="3" value="1"></div>
+    <div class="c"><label>Jeu de lame <span id="a-cis-j-l">7 % de e</span></label><input type="range" id="a-cis-j" min="0" max="25" value="7"></div>
+    <div class="c readout" id="a-cis-out"></div>
+  </div>
+  <figcaption>À gauche, les deux lames et la tranche obtenue, avec ses trois zones — arrondi, brillant, mat — et sa bavure. À droite, le calcul de l'effort et la comparaison avec une cisaille d'atelier de <b>100 kN</b>. <b>Montez l'épaisseur à 4 mm</b> sur 200 mm d'acier doux : l'effort dépasse la capacité de la machine, il faut couper en deux fois ou changer de machine. <b>Passez sur l'aluminium</b> : le même travail redevient possible, parce que τ est presque quatre fois plus faible. <b>Ramenez le jeu à 1 %</b> : la tranche montre deux zones brillantes et l'effort grimpe encore. <b>Poussez-le à 20 %</b> : la bavure devient énorme et la tôle se plie au lieu d'être coupée. <span class="cle">L'effort dépend du matériau et de l'épaisseur ; la qualité de la coupe, elle, dépend du jeu.</span></figcaption>
+  <div class="autableau">
+    <b class="entete">Au tableau <i>· 12 minutes · animation 1 sur 2</i></b>
+    <ol>
+      <li>Faire circuler une chute cisaillée et faire <em>trouver</em> les trois zones au doigt avant de les nommer.</li>
+      <li>Réglage initial. <span class="q">« Combien de tonnes pour couper 20 cm de tôle de 2 ? »</span> Faire convertir : 128 kN, soit 13 tonnes.</li>
+      <li>Épaisseur à <b>4 mm</b>. <span class="q">« L'effort double-t-il ? »</span> Oui, il est proportionnel à e — et la machine est dépassée.</li>
+      <li>Matériau sur <b>aluminium</b>. <span class="q">« Pourquoi ça repasse ? »</span> Amener τ, et le fait que la géométrie n'a pas changé.</li>
+      <li>Jouer sur le <b>jeu</b> seul, effort constant. <span class="q">« Qu'est-ce qui change ? »</span> La tranche, pas la force. Deux paramètres indépendants.</li>
+    </ol>
+    <div class="piege">Le piège : croire qu'une cisaille « de 100 kN » coupe 100 kN de n'importe quoi. La capacité annoncée par un constructeur vaut pour une épaisseur et un matériau donnés — presque toujours de l'acier doux. Sur de l'inox, il faut diviser l'épaisseur admissible par environ 1,5.</div>
+  </div>
+</figure>
+
+<p>Une remarque qui explique la forme des guillotines. Si la lame était parfaitement horizontale, elle attaquerait toute la longueur d'un coup et l'effort serait celui que nous venons de calculer. C'est pourquoi <strong>la lame d'une guillotine est inclinée</strong> de quelques degrés : la coupe progresse comme une fermeture éclair, une petite portion à la fois, et l'effort nécessaire s'effondre. En contrepartie, la tôle a tendance à vriller — d'où les serre-flans qui la maintiennent.</p>
+
+<h3>4.4 — Plier : la fibre neutre et le développé</h3>
+<p>Quand une tôle plie, sa face extérieure s'allonge et sa face intérieure se comprime. Entre les deux existe forcément une couche qui ne fait ni l'un ni l'autre : la <strong>fibre neutre</strong>. C'est la seule dont la longueur ne change pas, et c'est donc la seule qui permette de calculer la longueur de tôle à découper avant de plier — le <strong>développé</strong>.</p>
+<p>Le point contre-intuitif : <span class="cle">la fibre neutre n'est pas au milieu de l'épaisseur.</span> Elle se déplace vers l'intérieur du pli, d'autant plus que le rayon est serré. On la situe à une distance k × e de la face intérieure, avec k compris entre 0,33 et 0,5.</p>
+
+<div class="formule">L<sub>dev</sub> = A + B − 2t + θ × (r + k·e)<small>t = (r + e) × tan(θ/2) · θ en radians · A et B cotes extérieures · r rayon intérieur</small></div>
+
+<figure class="anim">
+  <canvas id="a-pli" width="900" height="450" aria-label="Animation : pliage d'une tôle, fibre neutre, calcul du développé et retour élastique"></canvas>
+  <div class="ctrls">
+    <div class="c"><label>Épaisseur <span id="a-pli-e-l">2,0 mm</span></label><input type="range" id="a-pli-e" min="5" max="60" value="20"></div>
+    <div class="c"><label>Rayon intérieur <span id="a-pli-r-l">2,0 mm</span></label><input type="range" id="a-pli-r" min="5" max="120" value="20"></div>
+    <div class="c"><label>Angle de pliage <span id="a-pli-a-l">90°</span></label><input type="range" id="a-pli-a" min="15" max="150" value="90"></div>
+    <div class="c"><label>Matériau <span id="a-pli-m-l">acier doux S235</span></label><input type="range" id="a-pli-m" min="0" max="3" value="1"></div>
+    <div class="c readout" id="a-pli-out"></div>
+  </div>
+  <figcaption>En haut, la pièce pliée avec ses deux ailes de <b>60</b> et <b>40 mm</b> ; en dessous, la bande plate qu'il faut découper pour l'obtenir, et la position de la fibre neutre dans l'épaisseur. <b>Comparez le développé à A + B = 100 mm</b> : il est toujours <em>plus court</em>, parce que la matière du coin est comptée deux fois quand on additionne les cotes extérieures. <b>Serrez le rayon intérieur</b> : la fibre neutre migre vers l'intérieur et le développé raccourcit encore. <b>Passez sur l'inox</b> : le développé ne bouge pas — c'est de la géométrie — mais le <b>retour élastique</b> triple, et il faut plier bien au-delà de l'angle voulu pour l'obtenir. <span class="cle">Le développé est un calcul ; le retour élastique est un essai.</span></figcaption>
+  <div class="autableau">
+    <b class="entete">Au tableau <i>· 14 minutes · animation 2 sur 2</i></b>
+    <ol>
+      <li><span class="q">« Une équerre à ailes de 60 et 40 : quelle longueur de tôle faut-il ? »</span> Recueillir « 100 mm » et l'écrire au tableau.</li>
+      <li>Montrer le développé réel. <span class="q">« Pourquoi est-ce plus court ? »</span> Faire dessiner le coin au tableau : la matière y est comptée deux fois.</li>
+      <li>Rayon intérieur au minimum. <span class="q">« Où passe la fibre neutre ? »</span> Faire lire k et constater qu'elle n'est pas au milieu.</li>
+      <li>Angle à <b>45°</b> puis <b>120°</b>. Faire constater que la formule marche partout, pas seulement à 90°.</li>
+      <li>Matériau sur <b>inox</b>. <span class="q">« Le développé change-t-il ? »</span> Non. <span class="q">« Alors qu'est-ce qui change ? »</span> L'angle à viser sur la plieuse.</li>
+    </ol>
+    <div class="piege">Le piège : additionner les cotes extérieures. C'est l'erreur numéro un du pliage, elle donne toujours une pièce trop longue, et comme elle est constante on la retrouve sur toute la série. Faire faire l'essai en atelier sur une chute avant de découper la vraie pièce reste la méthode la plus sûre — même les tôliers professionnels tiennent une table d'essais par matière et par outil.</div>
+  </div>
+</figure>
+
+<h3>4.5 — Le retour élastique</h3>
+<p>Une tôle pliée à 90° ne reste jamais à 90°. Une partie de la déformation était élastique : dès que la presse remonte, la tôle se <strong>rouvre</strong> de quelques degrés. C'est le <strong>retour élastique</strong>, et il faut le compenser en pliant trop.</p>
+<p>Son ampleur dépend du rapport entre la limite élastique et le module d'élasticité du matériau, et du rayon de pliage. Deux conséquences pratiques :</p>
+<ul>
+<li><strong>Plus le matériau est résistant, plus il revient.</strong> L'acier doux revient de 1 à 2°, l'inox de 3 à 6°, l'aluminium mi-dur de 2 à 4°, et un acier à ressort peut revenir de plus de 15°.</li>
+<li><strong>Plus le rayon est grand, plus il revient.</strong> Un pli serré déforme plastiquement toute l'épaisseur ; un pli à grand rayon en laisse une bonne part dans le domaine élastique.</li>
+</ul>
+<p>Il n'existe pas de formule fiable à notre niveau : <span class="cle">on plie une chute de la même tôle, on mesure, on corrige.</span> C'est aussi ce que fait un tôlier professionnel.</p>
+
+<div class="encadre"><span class="tag">Le sens de laminage, qu'on oublie toujours</span>
+<p>Une tôle n'est pas un matériau isotrope : elle a été laminée, donc étirée dans une direction. Ses grains sont allongés dans ce sens, exactement comme les fibres d'une planche.</p>
+<p>Conséquence : <strong>un pli perpendiculaire au sens de laminage passe sans problème ; un pli parallèle fissure</strong>, surtout à rayon serré et sur les alliages d'aluminium ou les aciers durs. Si vous devez plier une bande à rayon serré, orientez-la pour que la ligne de pli croise le sens de laminage.</p>
+<p>Comment le repérer : les fines stries de surface, la direction dans laquelle une tôle rouillée marque en lignes, ou tout simplement le grand côté de la tôle du commerce, qui est presque toujours le sens de laminage.</p></div>
+
+<div class="encadre danger"><span class="tag">La cisaille et les doigts</span>
+<p>La cisaille de tôlerie est la machine d'atelier qui blesse le plus, parce qu'elle est silencieuse, qu'elle paraît lente, et qu'on y met les mains pour tenir la pièce.</p>
+<ul>
+<li><strong>Le protège-lame ne se démonte pas</strong>, même « juste pour cette pièce-là ». C'est exactement pendant cette pièce-là que ça arrive.</li>
+<li><strong>On ne tient jamais la chute.</strong> Elle tombe, on la ramasse. Une chute retenue à la main est une main sous la lame.</li>
+<li><strong>Les deux mains restent en arrière de la butée.</strong> Une pièce trop petite pour être tenue en arrière de la butée est une pièce qu'il faut couper autrement, ou tenir avec une pince.</li>
+<li><strong>Une cisaille à levier reste armée</strong> tant que le levier est en l'air. On le redescend systématiquement après usage — un levier laissé haut retombe seul.</li>
+</ul>
+<p><span class="cle">La tôle coupée est aussi coupante que la lame.</span> Gants de manutention obligatoires pour manipuler les chutes — mais retirés avant toute machine tournante, comme au chapitre 5.</p></div>
+
+<div class="exo"><span class="tag">Exercice 4.1</span>
+<p>Vous devez cisailler une bande de <strong>250 mm</strong> de long dans une tôle d'<strong>acier doux de 3 mm</strong>. La cisaille de l'atelier annonce une capacité de <strong>100 kN</strong>. a) Calculez l'effort nécessaire. b) La coupe est-elle possible ? c) La même pièce en inox de 3 mm : que devient la réponse ?</p>
+<details><summary>Voir la réponse</summary><div class="rep">
+<p><strong>a) F = 240 000 N, soit 240 kN.</strong></p>
+<p>On applique F = τ × e × L. Pour l'acier doux S235, τ ≈ 320 N/mm². La surface cisaillée vaut e × L = 3 × 250 = <strong>750 mm²</strong>.</p>
+<p>F = 320 × 750 = <strong>240 000 N = 240 kN</strong>, c'est-à-dire environ <strong>24 tonnes</strong>. L'ordre de grandeur surprend toujours : couper une bande de tôle de 3 mm demande l'équivalent du poids de deux camions.</p>
+<p><strong>b) Non. Il manque un facteur 2,4.</strong></p>
+<p>La machine donne 100 kN, il en faudrait 240. Trois solutions, dans l'ordre de préférence :</p>
+<ul>
+<li><strong>Couper en plusieurs passes plus courtes.</strong> L'effort étant proportionnel à L, une coupe de 100 mm ne demande que 96 kN — c'est à la limite, mais ça passe. On perd la rectitude de la coupe au raccord, il faudra reprendre à la lime.</li>
+<li><strong>Changer de procédé</strong> : scie à ruban, meuleuse avec disque à tronçonner, ou découpe plasma si l'atelier en dispose.</li>
+<li><strong>Faire couper la bande par le fournisseur de tôle</strong>, qui possède une guillotine de plusieurs centaines de kilonewtons. C'est souvent le plus rapide et le moins cher.</li>
+</ul>
+<p><em>Ce qu'il ne faut surtout pas faire : forcer sur une machine à sa limite. On tord les lames, on déforme le bâti, et le réglage du jeu est perdu pour toutes les coupes suivantes.</em></p>
+<p><strong>c) En inox, c'est encore pire : 360 kN.</strong></p>
+<p>Pour l'inox 304, τ ≈ 480 N/mm². F = 480 × 750 = <strong>360 000 N = 360 kN</strong>, soit 3,6 fois la capacité de la machine.</p>
+<p>Et l'inox ajoute deux difficultés que le calcul ne montre pas : il <strong>s'écrouit</strong> — il durcit là où il est déformé, donc la zone coupée devient plus dure que le métal d'origine — et il <strong>colle</strong> aux lames. <span class="cle">C'est pour cette raison qu'un constructeur annonce toujours sa capacité en acier doux, et qu'il faut diviser l'épaisseur admissible par environ 1,5 pour l'inox.</span> Une cisaille donnée pour 3 mm d'acier doux ne fera pas plus de 2 mm d'inox.</p>
+</div></details></div>
+
+<div class="exo"><span class="tag">Exercice 4.2</span>
+<p>Vous devez fabriquer une équerre de fixation en tôle d'acier de <strong>2 mm</strong>, à ailes de <strong>50</strong> et <strong>35 mm</strong> mesurées à l'extérieur, pliée à <strong>90°</strong> sur un rayon intérieur de <strong>2 mm</strong>. On prendra k = 0,4. Quelle longueur de bande faut-il découper ?</p>
+<details><summary>Voir la réponse</summary><div class="rep">
+<p><strong>81,8 mm — et surtout pas 85.</strong></p>
+<p><strong>Étape 1 : la longueur de tangente.</strong> C'est la distance entre le coin extérieur théorique et le début de l'arrondi, le long de chaque aile.</p>
+<p>t = (r + e) × tan(θ/2) = (2 + 2) × tan(45°) = 4 × 1 = <strong>4 mm</strong>.</p>
+<p><em>À 90°, tan(45°) = 1, donc t vaut simplement r + e. C'est le seul angle où le calcul est aussi simple, et c'est pour cela qu'on retient souvent la formule du 90° toute faite — mais elle ne marche qu'à 90°.</em></p>
+<p><strong>Étape 2 : les parties droites.</strong> Chaque aile perd sa tangente : (50 − 4) + (35 − 4) = 46 + 31 = <strong>77 mm</strong>.</p>
+<p><strong>Étape 3 : l'arc de fibre neutre.</strong> Son rayon vaut r + k·e = 2 + 0,4 × 2 = <strong>2,8 mm</strong>. L'angle de 90° vaut π/2 = 1,571 rad.</p>
+<p>Longueur de l'arc = 1,571 × 2,8 = <strong>4,4 mm</strong>.</p>
+<p><strong>Étape 4 : le développé.</strong> L<sub>dev</sub> = 77 + 4,4 = <strong>81,4 mm</strong>, arrondi à <strong>81,5 mm</strong> pour le traçage.</p>
+<p><strong>Ce qu'il faut retenir du résultat.</strong> Additionner les cotes extérieures aurait donné 85 mm, soit <strong>3,5 mm de trop</strong> : sur une équerre de 50, c'est énorme et parfaitement visible. L'erreur vient de ce que la matière du coin est comptée deux fois quand on additionne 50 et 35.</p>
+<p><span class="cle">Le développé est toujours plus court que la somme des cotes extérieures.</span> Si vous trouvez plus long, vous vous êtes trompé de signe quelque part.</p>
+<p><em>Dernier point pratique : ces 81,5 mm supposent k = 0,4, qui est une valeur moyenne. Sur une série de pièces, on découpe la première à 81,5, on plie, on mesure les ailes obtenues, et on corrige le développé pour les suivantes. Personne ne fait confiance à k du premier coup.</em></p>
+</div></details></div>
+
+<div class="exo"><span class="tag">Exercice 4.3</span>
+<p>On vous apporte deux chutes cisaillées dans la même tôle. Sur la première, la tranche montre une large zone brillante sur presque toute l'épaisseur et une bavure fine et dure. Sur la seconde, l'arête est très arrondie, la bavure est grosse et retroussée, et la tôle est légèrement gondolée près de la coupe. Que s'est-il passé dans chaque cas ?</p>
+<details><summary>Voir la réponse</summary><div class="rep">
+<p><strong>Première chute : jeu de lame trop faible. Seconde chute : jeu de lame trop grand.</strong> Dans les deux cas, la tôle n'est pas en cause — c'est le réglage.</p>
+<p><strong>La première.</strong> Quand le jeu est insuffisant, les deux fissures — celle qui part de la lame supérieure et celle qui part de la lame inférieure — ne se dirigent pas l'une vers l'autre : elles se croisent. La matière située entre les deux est alors cisaillée une seconde fois, ce qui produit une <strong>zone brillante anormalement grande</strong>, parfois double. La bavure est fine mais très dure, parce que le métal y a été fortement écroui.</p>
+<p><em>Signe indirect à vérifier : l'effort de coupe est nettement plus élevé, et la machine « peine » sur une épaisseur qu'elle passait bien avant. Si quelqu'un s'en est plaint, c'est cohérent.</em></p>
+<p><strong>La seconde.</strong> Quand le jeu est trop grand, la lame ne cisaille plus : elle <strong>entraîne</strong> la tôle et la plie. La matière est arrachée plutôt que coupée, d'où l'arête très arrondie, la bavure retroussée en lèvre, et surtout le <strong>gondolement</strong> — qui est la signature la plus fiable des trois, parce qu'il ne peut pas venir d'autre chose.</p>
+<p><strong>Ce qu'il faut faire.</strong></p>
+<ul>
+<li>Vérifier le <strong>réglage du jeu</strong> et le ramener à 5–10 % de l'épaisseur.</li>
+<li>Vérifier que le jeu est <strong>constant sur toute la longueur</strong> des lames : un jeu correct d'un côté et double de l'autre donne une tranche qui change d'aspect en cours de coupe, et c'est le signe d'un bâti déformé ou d'une lame mal remontée.</li>
+<li>Contrôler l'<strong>état des lames</strong> : une lame émoussée produit les mêmes symptômes qu'un jeu excessif, parce que son arête n'amorce plus la fissure. Si le jeu est bon et que le défaut persiste, c'est l'affûtage.</li>
+</ul>
+<p><em>Retenez que ces deux pièces ne se distinguent pas par la force employée mais par la géométrie de l'outil. C'est la différence entre « ça ne coupe pas assez fort » — qui est presque toujours faux — et « ça ne coupe pas juste », qui est presque toujours vrai.</em></p>
+</div></details></div>
+
+</div>
+</section>
+
+<!-- ================= CH 5 ================= -->
+<section class="ch" id="c5">
+  <div class="ch-head"><div class="ch-num">05</div><div class="ch-title">
+    <span class="kicker">La machine la plus banale, et la plus dangereuse</span><h2>La perceuse à colonne</h2></div></div>
+  <div class="ch-body">
+
+<div class="savoirs">
+  <span class="savoir n3"><b>S4.9.3</b> <i>Façonnage des pièces : perçage</i></span>
+  <span class="savoir n3"><b>S4.2</b> <i>Respect des conditions de sécurité</i></span>
+</div>
+
+<p class="lede">Il n'y a pas de machine plus ordinaire dans un atelier, ni plus mal utilisée. On la fait tourner à la vitesse où on l'a trouvée, on tient la pièce à la main, et ça marche — jusqu'au jour où le foret bleuit, où la pièce se met à tourner, ou les deux. Tout se joue sur un calcul de trente secondes et sur un serre-joint.</p>
+
+<h3>5.1 — La machine, organe par organe</h3>
+<table>
+<thead><tr><th>Organe</th><th>Rôle</th><th>Ce qu'un mainteneur surveille</th></tr></thead>
+<tbody>
+<tr><td><strong>La broche</strong></td><td>Entraîne le mandrin en rotation</td><td>Son jeu radial : un jeu excessif donne des trous surdimensionnés et ovales</td></tr>
+<tr><td><strong>Le fourreau</strong></td><td>Coulisse verticalement et porte la broche</td><td>Son jeu de guidage, et le retour du ressort de rappel</td></tr>
+<tr><td><strong>Les poulies étagées</strong></td><td>Donnent les vitesses discrètes par déplacement de la courroie</td><td>La tension de courroie et l'usure des gorges</td></tr>
+<tr><td><strong>Le cône morse</strong></td><td>Tient le mandrin ou le foret <em>par coincement</em>, sans vis</td><td>Sa propreté — voir l'encadré ci-dessous</td></tr>
+<tr><td><strong>La table</strong></td><td>Porte la pièce, réglable en hauteur et orientable</td><td>Sa perpendicularité à la broche, et son état</td></tr>
+<tr><td><strong>La butée de profondeur</strong></td><td>Limite la descente pour les trous borgnes</td><td>Qu'elle soit réglée avant de percer, pas après</td></tr>
+</tbody></table>
+
+<div class="encadre"><span class="tag">Le cône morse ne tient que par la propreté</span>
+<p>Un mandrin de perceuse n'est vissé à rien. Il tient dans la broche par un <strong>cône morse</strong>, une pente très faible — de l'ordre de 3 % — qui se coince par adhérence sous l'effort de perçage. C'est une liaison remarquable : elle se monte d'un coup sec et se démonte au chasse-cône.</p>
+<p>Elle a une exigence absolue : <span class="cle">un cône morse se monte propre et sec.</span> Un copeau resté dans le cône, une goutte de graisse ou un film d'huile suffisent à empêcher le coincement. Le mandrin se met alors à patiner sous charge, il chauffe, il marque le cône — et un cône marqué ne tient plus jamais correctement.</p>
+<p>Le geste : essuyer le cône du mandrin <em>et</em> l'intérieur de la broche avec un chiffon propre avant chaque montage. Jamais de graisse « pour que ça glisse mieux » : c'est exactement l'inverse du but recherché.</p></div>
+
+<h3>5.2 — La vitesse de coupe, et le seul calcul à connaître</h3>
+<p>La <strong>vitesse de coupe V<sub>c</sub></strong> est la vitesse à laquelle l'arête tranchante du foret défile contre la matière, exprimée en mètres par minute. Elle n'est pas une propriété de la machine : c'est une propriété du <strong>couple outil-matière</strong>. Un foret en acier rapide dans de l'acier doux veut 25 m/min, dans de l'inox 10 m/min, dans de l'aluminium 60 m/min — quelle que soit la perceuse.</p>
+<p>Ce que règle la machine, c'est la <strong>fréquence de rotation N</strong>, en tours par minute. Le lien entre les deux est la circonférence du foret :</p>
+
+<div class="formule">N = 1000 × V<sub>c</sub> / (π × D)<small>N en tr/min · V<sub>c</sub> en m/min · D diamètre du foret en mm</small></div>
+
+<p>Le 1000 convertit les mètres en millimètres, π × D est la circonférence du foret. Rien de plus. La conséquence pratique tient en une phrase : <span class="cle">plus le foret est gros, plus il faut tourner lentement.</span> Un foret de 20 mm doit tourner deux fois moins vite qu'un foret de 10 dans la même matière.</p>
+
+<table>
+<thead><tr><th>Matière percée</th><th>V<sub>c</sub> avec un foret HSS</th><th>Lubrification</th></tr></thead>
+<tbody>
+<tr><td>Aluminium</td><td><strong>60 m/min</strong></td><td>Pétrole, alcool à brûler, ou lubrifiant spécifique</td></tr>
+<tr><td>Laiton, bronze</td><td>50 m/min</td><td>À sec ou très peu</td></tr>
+<tr><td>Acier doux S235</td><td><strong>25 m/min</strong></td><td>Huile de coupe, généreusement</td></tr>
+<tr><td>Fonte</td><td>20 m/min</td><td><strong>À sec</strong> — le graphite lubrifie tout seul</td></tr>
+<tr><td>Acier mi-dur C45</td><td>18 m/min</td><td>Huile de coupe</td></tr>
+<tr><td>Inox 304</td><td><strong>10 m/min</strong></td><td>Beaucoup, et sans jamais s'arrêter de descendre</td></tr>
+</tbody></table>
+
+<figure class="anim">
+  <canvas id="a-per" width="900" height="470" aria-label="Animation : choix de la vitesse de rotation d'une perceuse à colonne, poulies étagées, vitesse de coupe et état du foret"></canvas>
+  <div class="ctrls">
+    <div class="c"><label>Diamètre du foret <span id="a-per-d-l">10 mm</span></label><input type="range" id="a-per-d" min="2" max="25" value="10"></div>
+    <div class="c"><label>Matière <span id="a-per-m-l">acier doux S235</span></label><input type="range" id="a-per-m" min="0" max="5" value="2"></div>
+    <div class="c"><label>Étage de poulie <span id="a-per-n-l">1000 tr/min</span></label><input type="range" id="a-per-n" min="0" max="5" value="3"></div>
+    <div class="c"><label class="switch"><input type="checkbox" id="a-per-lub" checked><span>Lubrification</span></label></div>
+    <div class="c readout" id="a-per-out"></div>
+  </div>
+  <figcaption>À gauche, la tête de perceuse avec ses deux poulies étagées et la courroie sur l'étage choisi ; au centre, le foret, le copeau et son aspect. À droite, le calcul. <b>Réglage initial</b> : foret de 10 dans l'acier doux, il faudrait 796 tr/min et l'étage à 1000 tourne un peu vite — acceptable. <b>Montez le foret à 20 mm</b> sans toucher à la poulie : la vitesse de coupe double, le copeau bleuit, la pointe perd sa trempe. <b>Descendez d'un étage, puis deux</b> : regardez le copeau redevenir une belle hélice. <b>Passez sur l'inox à 10 mm</b> : il faut descendre tout en bas, et même là c'est encore trop rapide sur beaucoup de machines. <b>Décochez la lubrification</b> sur de l'acier : la température grimpe sans que rien d'autre ait changé. <span class="cle">Le foret brûlé n'est presque jamais un problème de foret : c'est un problème d'étage de poulie.</span></figcaption>
+  <div class="autableau">
+    <b class="entete">Au tableau <i>· 16 minutes · animation 1 sur 2</i></b>
+    <ol>
+      <li>Ouvrir le capot d'une vraie perceuse et faire voir les poulies. <span class="q">« Combien de vitesses possibles ? »</span> Les compter ensemble.</li>
+      <li>Réglage initial. Faire poser le calcul au tableau par un élève : N = 1000 × 25 / (π × 10).</li>
+      <li>Foret à <b>20 mm</b>, poulie inchangée. <span class="q">« Qu'est-ce qui a doublé ? »</span> La vitesse de coupe — le foret n'a pourtant pas changé de vitesse de rotation.</li>
+      <li>Faire descendre les étages un par un et faire <em>décrire le copeau</em> à chaque fois. C'est le vrai indicateur d'atelier.</li>
+      <li><b>Inox à 10 mm</b>. <span class="q">« Que faire quand la machine ne descend pas assez bas ? »</span> Amener : accepter, lubrifier beaucoup, et ne jamais s'arrêter de descendre — sinon l'inox s'écrouit et devient inperçable.</li>
+      <li>Décocher <b>lubrification</b>. <span class="q">« Le calcul a-t-il changé ? »</span> Non. La température, si.</li>
+    </ol>
+    <div class="piege">Le piège : les élèves retiennent « gros foret = doucement » mais changent rarement la courroie, parce que c'est fastidieux et qu'ils ont peur de mal la remonter. Faire changer l'étage à chaque élève au moins une fois lève ce blocage. Sur une machine à variateur, le problème se déplace : la molette est facile à tourner, donc personne ne calcule et tout le monde met « au milieu ».</div>
+  </div>
+</figure>
+
+<h3>5.3 — Le foret, et pourquoi il perce trop grand</h3>
+<p>Un foret hélicoïdal a deux <strong>lèvres de coupe</strong> symétriques et, entre elles, une <strong>âme</strong> qui ne coupe pas — elle écrase. Trois conséquences que vous constaterez toutes :</p>
+<ul>
+<li><strong>Il faut pointer</strong>, sinon l'âme fait dériver le foret. C'est le chapitre 2.</li>
+<li><strong>Au-delà de 10 mm environ, on perce un avant-trou</strong> du diamètre de l'âme — 3 à 4 mm suffisent. L'effort de poussée s'effondre, et le gros foret se centre tout seul dans l'avant-trou.</li>
+<li><strong>Un affûtage dissymétrique perce trop grand.</strong> Si une lèvre est plus longue que l'autre, elle coupe seule et le foret décrit un cercle plus large que son propre diamètre. Un foret de 10 mal affûté fait un trou de 10,4.</li>
+</ul>
+<p>L'angle de pointe standard est de <strong>118°</strong>. On le porte à <strong>135°</strong> pour l'inox et les aciers durs — la pointe est plus plate, elle attaque mieux et résiste davantage. Sur les plastiques et le laiton, on utilise au contraire un angle plus aigu, ou l'on <em>rectifie la coupe</em> à la pierre pour rendre l'arête neutre, faute de quoi le foret « visse » dans la matière et l'arrache.</p>
+
+<div class="image-mentale"><span class="tag">Image mentale — le copeau qui parle</span>
+<p>Le copeau est le seul compte rendu que le foret vous adresse pendant qu'il travaille, et il est très bavard :</p>
+<ul>
+<li><strong>Deux longues hélices régulières</strong>, une par lèvre, de la couleur du métal : tout va bien.</li>
+<li><strong>Une seule hélice</strong> : une seule lèvre coupe. Le foret est mal affûté, il perce trop grand et il va chauffer.</li>
+<li><strong>De la poussière ou des petits éclats</strong> : soit le foret est émoussé, soit vous n'appuyez pas assez — un foret qui frotte sans mordre s'use bien plus vite qu'un foret qui coupe.</li>
+<li><strong>Un copeau bleu ou paille</strong> : trop chaud. La couleur est celle du <em>revenu</em> de l'acier, et si le copeau bleuit, la pointe du foret aussi. À ce moment-là, il est déjà trop tard : le foret a perdu sa trempe.</li>
+</ul>
+<p><span class="cle">Un mainteneur regarde le copeau, pas le trou.</span> Le trou, on le voit à la fin ; le copeau, on le voit pendant.</p></div>
+
+<h3>5.4 — Percer, geste par geste</h3>
+<ol>
+<li><strong>Tracer et pointer</strong> — chapitre 2.</li>
+<li><strong>Calculer N</strong> et régler l'étage de poulie. Trente secondes.</li>
+<li><strong>Brider</strong> — paragraphe suivant, et ce n'est pas négociable.</li>
+<li><strong>Régler la butée de profondeur</strong> pour un trou borgne, et placer une <strong>cale martyr</strong> sous la pièce pour un trou débouchant. Sans cale, on perce la table de la machine et on arrache la sortie du trou.</li>
+<li><strong>Attaquer doucement</strong>, puis descendre régulièrement. Une avance trop faible fait frotter, une avance trop forte casse le foret.</li>
+<li><strong>Lubrifier</strong> selon la matière, et sortir le foret régulièrement sur les trous profonds — au-delà de trois fois le diamètre — pour évacuer le copeau.</li>
+<li><strong>Alléger juste avant la sortie</strong> : c'est l'instant où le foret accroche.</li>
+<li><strong>Ébavurer</strong> les deux faces, au foret à chanfreiner ou à la lime.</li>
+</ol>
+
+<figure class="anim">
+  <canvas id="a-bri" width="900" height="450" aria-label="Animation : couple d'arrachement au perçage et capacité de retenue selon le mode de bridage de la pièce"></canvas>
+  <div class="ctrls">
+    <div class="c"><label>Diamètre du foret <span id="a-bri-d-l">10 mm</span></label><input type="range" id="a-bri-d" min="3" max="25" value="10"></div>
+    <div class="c"><label>Épaisseur de la pièce <span id="a-bri-e-l">2 mm</span></label><input type="range" id="a-bri-e" min="1" max="25" value="2"></div>
+    <div class="c"><label>Maintien de la pièce <span id="a-bri-t-l">à la main</span></label><input type="range" id="a-bri-t" min="0" max="3" value="0"></div>
+    <div class="c readout" id="a-bri-out"></div>
+  </div>
+  <figcaption>À gauche, la pièce sur la table et le foret qui débouche. À droite, le <b>couple d'arrachement</b> au moment où le foret sort, comparé à ce que chaque mode de maintien peut réellement retenir. <b>Réglage initial</b> : un foret de 10 dans une tôle de 2 mm tenue à la main — la barre rouge dépasse largement, la pièce part en hélice. <b>Passez le maintien sur « étau bridé »</b> : la même opération devient sûre. <b>Remettez la main et descendez le foret à 4 mm</b> : ça passe, et c'est exactement ce qui entretient l'illusion — on tient de petits forets à la main pendant des années sans incident. <b>Remontez à 16 mm</b> : le couple est multiplié par seize, parce qu'il croît comme le <em>carré</em> du diamètre. <span class="cle">Le danger n'augmente pas proportionnellement au diamètre : il explose.</span> Et remarquez que la tôle mince est <em>pire</em> que la pièce épaisse, parce que le foret y accroche brutalement au lieu de couper.</figcaption>
+  <div class="autableau">
+    <b class="entete">Au tableau <i>· 10 minutes · animation 2 sur 2</i></b>
+    <ol>
+      <li>Réglage initial, maintien à la main. <span class="q">« Qui a déjà tenu une tôle à la main sous la perceuse ? »</span> Toutes les mains se lèvent. C'est le bon point de départ.</li>
+      <li>Faire lire les deux valeurs : couple d'arrachement et capacité d'une main. <span class="q">« Le rapport ? »</span></li>
+      <li>Foret à <b>4 mm</b>. <span class="q">« Pourquoi ça marchait, alors ? »</span> Parce que le couple varie comme D². C'est l'expérience qui trompe, pas la physique.</li>
+      <li>Foret à <b>16 mm</b>, toujours à la main. Laisser le silence s'installer devant le chiffre.</li>
+      <li>Comparer <b>tôle de 2 mm</b> et <b>pièce de 20 mm</b>. <span class="q">« Laquelle est la plus dangereuse ? »</span> La mince — contre-intuitif, et c'est la plus fréquente en maintenance.</li>
+    </ol>
+    <div class="piege">Le piège : l'élève qui répond « je tiens fort ». Faire chiffrer : une main serre au mieux quelques centaines de newtons, sur un bras de levier de dix centimètres. Au-delà d'une vingtaine de newtons-mètres, aucune main ne retient quoi que ce soit — et la pièce, en tournant, devient une lame. Les blessures typiques ne sont pas au doigt mais à l'avant-bras.</div>
+  </div>
+</figure>
+
+<div class="encadre danger"><span class="tag">Les quatre règles de la perceuse</span>
+<p><strong>1. Jamais de gants.</strong> Aucune exception, sur aucune machine tournante. Un gant happé par le foret ou le mandrin enroule la main entière en une fraction de seconde ; une peau nue, elle, glisse et l'on s'en tire avec une brûlure. C'est l'un des rares cas où l'équipement de protection <em>crée</em> le danger. Les manches longues se boutonnent, les cheveux s'attachent, les bijoux et les cordons de badge s'enlèvent.</p>
+<p><strong>2. Tout se bride.</strong> Étau boulonné à la table, ou pièce serrée par brides — la pièce, mais aussi l'étau lui-même. Un étau simplement posé pivote avec la pièce et devient une masse de plusieurs kilos en rotation.</p>
+<p><strong>3. La tôle mince est le pire cas.</strong> À la sortie, le foret ne coupe plus : il accroche et arrache. Sur une tôle fine, on utilise un <strong>foret à tôle</strong> ou un foret étagé, on met une cale de bois dessous, et l'on brime l'avance à la sortie.</p>
+<p><strong>4. On ne freine jamais un mandrin à la main</strong>, et on retire la clé de mandrin <em>avant</em> de démarrer. Une clé laissée en place est un projectile.</p>
+<p><span class="cle">Ce qui n'est pas bridé est un projectile, et ce qui est tenu par un gant est une main perdue.</span></p></div>
+
+<div class="exo"><span class="tag">Exercice 5.1</span>
+<p>Vous devez percer un trou de <strong>Ø 12 mm</strong> dans une pièce en <strong>acier doux</strong>, avec un foret HSS. La perceuse offre les vitesses 250, 400, 650, 1000, 1600 et 2500 tr/min. a) Calculez la fréquence de rotation idéale. b) Quel étage choisissez-vous ? c) Comment procédez-vous concrètement pour ce diamètre ?</p>
+<details><summary>Voir la réponse</summary><div class="rep">
+<p><strong>a) N = 663 tr/min.</strong></p>
+<p>Pour l'acier doux avec un foret HSS, on prend V<sub>c</sub> = 25 m/min.</p>
+<p>N = 1000 × V<sub>c</sub> / (π × D) = 1000 × 25 / (π × 12) = 25 000 / 37,70 = <strong>663 tr/min</strong>.</p>
+<p><strong>b) L'étage à 650 tr/min — et le choix est confortable.</strong></p>
+<p>650 tr/min est à 2 % de la valeur idéale : on ne peut pas mieux tomber. Si cet étage n'existait pas, il faudrait choisir entre 400 et 1000, et <span class="cle">devant un choix, on prend toujours la vitesse inférieure.</span></p>
+<p>La raison est asymétrique : trop lent, on perd du temps et le trou est un peu moins beau — c'est réversible. Trop vite, la pointe dépasse la température de revenu, perd sa trempe, et le foret est mort — c'est définitif. Un foret ne se « repose » pas.</p>
+<p><strong>c) La procédure complète pour ce diamètre.</strong></p>
+<ul>
+<li><strong>Tracer deux traits croisés et pointer</strong> franchement à l'intersection.</li>
+<li><strong>Percer un avant-trou de Ø 4 mm.</strong> À 12 mm, l'âme du foret est large et l'effort de poussée devient important ; l'avant-trou le supprime et guide le gros foret. Attention : l'avant-trou a sa propre vitesse — N = 25 000 / (π × 4) = 1990 tr/min, donc l'étage à 1600.</li>
+<li><strong>Brider la pièce dans l'étau, et brider l'étau sur la table.</strong> À 12 mm, le couple d'arrachement est hors de portée d'une main.</li>
+<li><strong>Cale martyr</strong> sous la pièce si le trou débouche.</li>
+<li><strong>Percer au Ø 12 à 650 tr/min</strong>, avec de l'huile de coupe, avance régulière, allégée à la sortie.</li>
+<li><strong>Ébavurer les deux faces.</strong></li>
+</ul>
+<p><em>Notez qu'on a changé deux fois d'étage de poulie pour un seul trou. C'est normal, et c'est ce que personne ne fait — d'où les avant-trous percés à 650 tr/min, qui prennent trois fois plus de temps que nécessaire.</em></p>
+</div></details></div>
+
+<div class="exo"><span class="tag">Exercice 5.2</span>
+<p>Un élève perce de l'acier. Le foret ne produit qu'<strong>une seule hélice de copeau</strong>, le trou obtenu mesure <strong>10,4 mm</strong> alors que le foret est marqué 10, et la pointe est <strong>bleue</strong>. Établissez le diagnostic et l'ordre des causes.</p>
+<details><summary>Voir la réponse</summary><div class="rep">
+<p><strong>Le foret est affûté de travers. Tout le reste en découle — y compris le bleuissement.</strong></p>
+<p><strong>1. Une seule hélice de copeau = une seule lèvre coupe.</strong> C'est le symptôme initial et il ne peut avoir qu'une cause : les deux lèvres ne sont pas à la même hauteur ou pas au même angle. L'affûtage est dissymétrique.</p>
+<p><strong>2. Le trou à 10,4 mm confirme et s'explique.</strong> Quand une seule lèvre coupe, la pointe du foret n'est plus sur l'axe de rotation : elle décrit un petit cercle. Le foret balaie donc un diamètre supérieur au sien. <span class="cle">Un trou surdimensionné et une seule hélice, c'est la signature de l'affûtage dissymétrique — les deux symptômes ont la même cause unique.</span></p>
+<p><strong>3. La pointe bleue est la conséquence, pas une troisième cause.</strong> Toute la coupe est faite par une seule arête, qui encaisse donc le double de travail et le double de chaleur. Elle dépasse la température de revenu de l'acier rapide — le bleu apparaît vers 300 °C — et perd sa dureté.</p>
+<p><strong>L'ordre des causes est donc : affûtage dissymétrique → une seule lèvre coupe → trou trop grand ET surchauffe.</strong></p>
+<p><strong>Ce qu'il faut faire.</strong></p>
+<ul>
+<li><strong>Le foret est perdu</strong> : un acier rapide qui a bleui a perdu sa trempe, et la réaffûter ne la rend pas. Il faut le réaffûter <em>en enlevant toute la zone bleuie</em>, ce qui est possible mais raccourcit sensiblement le foret.</li>
+<li><strong>Contrôler l'affûtage</strong> avec un gabarit d'angle ou, à défaut, en présentant les deux lèvres devant un trait : elles doivent être de <em>même longueur</em> et de <em>même angle</em>. C'est la symétrie qui compte, plus encore que la valeur exacte de 118°.</li>
+<li><strong>Vérifier aussi la vitesse</strong> avant de recommencer : si l'étage de poulie était trop haut, le foret neuf finira comme l'autre.</li>
+</ul>
+<p><em>Le réflexe à prendre : devant un foret qui ne marche pas, on le <strong>regarde de face</strong>, pointe vers soi, avant de l'accuser d'être « usé ». La dissymétrie se voit à l'œil nu en trois secondes, et c'est de très loin la cause la plus fréquente.</em></p>
+</div></details></div>
+
+<div class="exo"><span class="tag">Exercice 5.3</span>
+<p>Un collègue s'apprête à percer un trou de Ø 14 mm dans une plaque d'acier de 3 mm qu'il tient à la main, gants aux mains, sur la table de la perceuse. Il vous dit : « c'est juste un trou, j'en ai pour dix secondes ». Énumérez ce qui ne va pas et ce que vous proposez.</p>
+<details><summary>Voir la réponse</summary><div class="rep">
+<p><strong>Trois fautes, dont deux peuvent coûter une main. Aucune ne prend plus d'une minute à corriger.</strong></p>
+<p><strong>1. Les gants — c'est la plus grave.</strong> Sur une machine tournante, un gant happé par le mandrin ou par l'hélice du foret entraîne la main entière avant que le réflexe de retrait n'ait le temps d'agir. Une peau nue glisse ; un gant, non. <span class="cle">Les gants se portent pour manipuler la tôle, jamais pour la percer.</span></p>
+<p><strong>2. La pièce n'est pas bridée, et c'est le pire cas de figure.</strong> Un foret de 14 mm développe déjà un couple important, mais surtout la plaque ne fait que <strong>3 mm</strong> : à la sortie, le foret n'a plus assez de matière devant lui pour couper, il accroche et arrache. La plaque se met à tourner instantanément, et une plaque d'acier en rotation est une lame. Les blessures typiques sont à l'avant-bras, pas au doigt.</p>
+<p><strong>3. Pas d'avant-trou.</strong> À 14 mm, l'âme du foret est large : l'effort de poussée est élevé, la dérive au départ probable, et l'accrochage à la sortie d'autant plus violent.</p>
+<p><strong>Ce qu'on propose — et ce n'est pas un discours, c'est une minute de travail.</strong></p>
+<ul>
+<li>Enlever les gants, remonter et boutonner les manches.</li>
+<li>Serrer la plaque dans l'étau, et <strong>brider l'étau sur la table</strong>. Un étau posé tourne aussi.</li>
+<li>Interposer une <strong>cale martyr</strong> en bois : elle soutient la matière à la sortie et supprime l'essentiel de l'accrochage.</li>
+<li>Pointer, percer un <strong>avant-trou de Ø 4</strong>, puis le Ø 14.</li>
+<li>Régler l'étage : N = 25 000 / (π × 14) = 568 tr/min, donc l'étage à 400 — on prend l'inférieur.</li>
+</ul>
+<p><strong>Et l'argument qui porte, si la discussion s'éternise :</strong> « dix secondes » est précisément la durée de l'opération. L'accident, lui, prend deux dixièmes de seconde, et il arrive à la <em>sortie</em> du foret — c'est-à-dire pendant ces dix secondes-là, pas avant.</p>
+<p><em>Un dernier point, moins technique mais réel : dans un atelier, laisser faire une opération dangereuse revient à la valider. Si le collègue passe outre, cela se signale — ce n'est pas de la délation, c'est le fonctionnement normal d'un service de maintenance.</em></p>
+</div></details></div>
+
+</div>
+</section>
+
+<!-- ================= CH 6 ================= -->
+<section class="ch" id="c6">
+  <div class="ch-head"><div class="ch-num">06</div><div class="ch-title">
+    <span class="kicker">Un trou, un pas, et beaucoup de tarauds cassés</span><h2>Taraudage et filetages</h2></div></div>
+  <div class="ch-body">
+
+<div class="savoirs">
+  <span class="savoir n3"><b>S4.9.3</b> <i>Façonnage des pièces : taraudage</i></span>
+  <span class="savoir n3"><b>S4.9.1</b> <i>Procédés d'assemblage : éléments filetés</i></span>
+</div>
+
+<p class="lede">Le taraudage est l'opération où l'on casse le plus d'outils, et presque toujours pour la même raison : un avant-trou trop petit. Un taraud cassé dans un trou borgne transforme une réparation de dix minutes en une journée perdue, parfois en une pièce à remplacer. Tout se joue sur une soustraction.</p>
+
+<h3>6.1 — Lire un filetage ISO</h3>
+<p>Un filetage métrique se désigne par la lettre M, le diamètre nominal, et éventuellement le pas : <span class="mono">M8</span> ou <span class="mono">M8 × 1,25</span>. Quand le pas n'est pas précisé, c'est le <strong>pas gros</strong>, celui qu'on utilise par défaut.</p>
+<ul>
+<li>Le <strong>diamètre nominal D</strong> est le diamètre extérieur du filetage de la vis — pas celui du trou à percer, et c'est là que tout se joue.</li>
+<li>Le <strong>pas P</strong> est la distance entre deux filets consécutifs, donc l'avance de la vis en un tour.</li>
+</ul>
+<table>
+<thead><tr><th>Désignation</th><th>M3</th><th>M4</th><th>M5</th><th>M6</th><th>M8</th><th>M10</th><th>M12</th><th>M16</th></tr></thead>
+<tbody>
+<tr><td><strong>Pas gros P</strong></td><td>0,5</td><td>0,7</td><td>0,8</td><td>1,0</td><td>1,25</td><td>1,5</td><td>1,75</td><td>2,0</td></tr>
+<tr><td><strong>Avant-trou = D − P</strong></td><td>2,5</td><td>3,3</td><td>4,2</td><td>5,0</td><td><strong>6,75</strong></td><td>8,5</td><td>10,25</td><td>14,0</td></tr>
+<tr><td><strong>Foret courant</strong></td><td>2,5</td><td>3,3</td><td>4,2</td><td>5,0</td><td><strong>6,8</strong></td><td>8,5</td><td>10,2</td><td>14,0</td></tr>
+</tbody></table>
+<p>Le <strong>pas fin</strong> — M8 × 1 au lieu de M8 × 1,25 — sert quand on veut un réglage plus précis, une meilleure tenue au desserrage par vibration, ou quand la paroi est mince. Il se reconnaît à l'œil difficilement : on le mesure au peigne à filetage, ou en comptant les filets sur 10 mm. <span class="cle">Monter une vis à pas gros dans un taraudage à pas fin détruit les deux en un tour et demi.</span></p>
+
+<h3>6.2 — Le diamètre d'avant-trou, et la règle qui tient en trois caractères</h3>
+<p>La règle est d'une simplicité désarmante, et c'est la formule la plus rentable de tout ce dossier :</p>
+
+<div class="formule">Ø avant-trou = D − P<small>M8 pas gros : 8 − 1,25 = 6,75 mm — en pratique un foret de 6,8</small></div>
+
+<p>Pourquoi retire-t-on exactement le pas ? Parce que la hauteur théorique d'un filet ISO vaut 0,5413 × P de chaque côté, soit 1,0825 × P sur le diamètre. Percer à D − P laisse donc environ <strong>92 % de la hauteur théorique du filet</strong> — c'est-à-dire presque tout.</p>
+<p>Et c'est là qu'intervient le fait le plus utile du chapitre : <span class="cle">passer de 75 % à 100 % de filet n'apporte que quelques pour cent de résistance, mais double presque le couple de taraudage.</span> La raison est mécanique : quand un assemblage vissé cède, ce n'est presque jamais le filet du taraudage qui s'arrache — c'est la vis qui casse. Renforcer le filet au-delà du nécessaire ne sert donc à rien, alors que le couple supplémentaire, lui, casse des tarauds.</p>
+
+<figure class="anim">
+  <canvas id="a-tar" width="900" height="460" aria-label="Animation : influence du diamètre d'avant-trou sur le taux de filet, le couple de taraudage et la résistance à l'arrachement"></canvas>
+  <div class="ctrls">
+    <div class="c"><label>Filetage <span id="a-tar-m-l">M8 × 1,25</span></label><input type="range" id="a-tar-m" min="0" max="7" value="4"></div>
+    <div class="c"><label>Écart au Ø recommandé <span id="a-tar-d-l">+0,00 mm</span></label><input type="range" id="a-tar-d" min="-40" max="60" value="0"></div>
+    <div class="c"><label class="switch"><input type="checkbox" id="a-tar-lub" checked><span>Lubrification</span></label></div>
+    <div class="c readout" id="a-tar-out"></div>
+  </div>
+  <figcaption>À gauche, une coupe du taraudage : en gris la matière, en violet le filet réellement formé, et en pointillé le filet théorique complet. À droite, le taux de filet, le couple de taraudage et la résistance à l'arrachement. <b>Partez du zéro</b>, c'est le Ø recommandé D − P. <b>Descendez de deux dixièmes</b> : le filet gagne quelques pour cent, la résistance ne bouge presque pas — et le couple grimpe en flèche. <b>Descendez encore</b> : le taraud casse. <b>Remontez au contraire de trois dixièmes</b> : le couple s'effondre, et la résistance tient encore très bien. <b>Continuez</b> : à un moment le filet devient si peu profond qu'il s'arrache au serrage. <span class="cle">La zone confortable est large du côté du trop grand, et redoutablement étroite du côté du trop petit.</span> <b>Décochez la lubrification</b> : le couple augmente d'un tiers sans qu'on ait touché à la géométrie.</figcaption>
+  <div class="autableau">
+    <b class="entete">Au tableau <i>· 14 minutes · animation 1 sur 1</i></b>
+    <ol>
+      <li>Faire calculer le Ø d'avant-trou d'un M10 avant d'ouvrir l'animation. Vérifier ensuite.</li>
+      <li>Écart à <b>−0,3 mm</b>. <span class="q">« Le filet est-il meilleur ? »</span> Un peu. <span class="q">« Et le couple ? »</span> Beaucoup plus.</li>
+      <li>Écart à <b>−0,6 mm</b>. <span class="q">« Que va-t-il se passer sur la pièce ? »</span> Le taraud casse — et faire dire où : au fond du trou borgne, à l'endroit le plus inaccessible.</li>
+      <li>Écart à <b>+0,3 mm</b>. <span class="q">« A-t-on perdu de la résistance ? »</span> Presque rien. <span class="q">« Pourquoi ? »</span> Parce que c'est la vis qui casse en premier, pas le filet.</li>
+      <li>Décocher <b>lubrification</b>. Rappeler qu'un taraudage à sec dans l'acier est la deuxième cause de casse.</li>
+    </ol>
+    <div class="piege">Le piège : l'élève qui, ne trouvant pas le foret de 6,8, prend « le 6,5, c'est presque pareil ». C'est justement le sens dangereux. S'il ne reste que le 6,5 et le 7, il faut prendre le 7 : on perd un peu de filet, on ne casse pas le taraud. Faire ranger les forets de taraudage à part, avec le Ø gravé en face de chaque taraud, supprime le problème à la racine.</div>
+  </div>
+</figure>
+
+<h3>6.3 — Le jeu de tarauds, et le geste</h3>
+<p>Un taraudage à la main se fait avec trois tarauds successifs, reconnaissables aux traits gravés sur leur queue :</p>
+<table>
+<thead><tr><th>Taraud</th><th>Repère</th><th>Entrée</th><th>Rôle</th></tr></thead>
+<tbody>
+<tr><td><strong>Ébaucheur</strong></td><td>un trait</td><td>très conique, 6 à 8 filets</td><td>Amorce et guide. C'est lui qui décide si le taraudage sera droit</td></tr>
+<tr><td><strong>Intermédiaire</strong></td><td>deux traits</td><td>conique, 3 à 5 filets</td><td>Approfondit le filet</td></tr>
+<tr><td><strong>Finisseur</strong></td><td>trois traits</td><td>presque droite, 1 à 2 filets</td><td>Termine, et va au fond d'un trou borgne</td></tr>
+</tbody></table>
+<p>Le <strong>taraud machine</strong>, lui, fait tout en une passe : il est utilisé sur perceuse ou sur taraudeuse, avec une avance synchronisée. Il ne se prête pas au taraudage à la main.</p>
+<p>Le geste tient en quatre points :</p>
+<ul>
+<li><strong>Partir droit</strong>, et le vérifier à l'équerre dans deux directions après un tour et demi. Un taraudage part de travers dès le début, et rien ne le rattrape ensuite.</li>
+<li><strong>Un demi-tour en avant, un quart de tour en arrière.</strong> Le retour casse le copeau, qui sans cela s'enroule, bourre les goujures et bloque le taraud. C'est la cause n° 1 de casse après l'avant-trou trop petit.</li>
+<li><strong>Lubrifier</strong> — huile de coupe sur acier, pétrole sur aluminium, rien sur la fonte.</li>
+<li><strong>Dans un trou borgne, ressortir et vider le trou</strong> avant le taraud finisseur. Le copeau s'accumule au fond, et c'est en butant dessus qu'on casse.</li>
+</ul>
+
+<h3>6.4 — Réparer un filetage abîmé</h3>
+<p>Un filetage arraché — parce qu'on a serré trop fort, parce que la vis était trop courte, ou parce que la matière est tendre — se répare, et il vaut presque toujours mieux le réparer que de changer la pièce.</p>
+<table>
+<thead><tr><th>Solution</th><th>Principe</th><th>Quand la choisir</th></tr></thead>
+<tbody>
+<tr><td><strong>Filet rapporté</strong><br>(type Helicoil)</td><td>On perce plus gros, on taraude avec un taraud spécial, on visse un ressort de fil à section losange</td><td>La solution de référence. Le filet obtenu est <em>plus résistant</em> que l'original, surtout dans l'aluminium</td></tr>
+<tr><td><strong>Insert taraudé</strong></td><td>Une douille filetée extérieurement et intérieurement, vissée ou collée</td><td>Quand la matière est très tendre, ou pour reprendre un filetage déjà réparé</td></tr>
+<tr><td><strong>Surdimensionner</strong></td><td>On perce et on taraude au diamètre supérieur : M8 devient M10</td><td>Quand la contre-pièce peut aussi être reprise, et qu'il y a de la matière autour</td></tr>
+<tr><td><strong>Rapporter de la matière</strong></td><td>Bouchon soudé ou collé, puis reperçage et retaraudage</td><td>Dernier recours, sur pièce non critique</td></tr>
+</tbody></table>
+<p><span class="cle">Le filet rapporté n'est pas une réparation au rabais : c'est un renforcement.</span> Les constructeurs l'emploient en montage d'origine sur les carters en aluminium, précisément parce qu'un filetage taillé directement dans l'alliage léger ne tient pas les couples de serrage répétés.</p>
+
+<div class="encadre"><span class="tag">Extraire un taraud cassé</span>
+<p>C'est le scénario cauchemar, et il n'a pas de bonne solution — seulement des solutions plus ou moins coûteuses. Un taraud est en acier trempé : <strong>il ne se perce pas</strong> avec un foret ordinaire.</p>
+<ul>
+<li><strong>S'il dépasse :</strong> pince étau, ou extracteur de tarauds — un outil à doigts qui s'engagent dans les goujures. Avec de l'huile dégrippante et de la patience.</li>
+<li><strong>S'il est cassé au ras ou en dessous :</strong> l'électroérosion par enfonçage est la seule méthode fiable. Elle se sous-traite, elle coûte, mais elle ne touche pas à la pièce.</li>
+<li><strong>À défaut :</strong> percer au foret carbure ou au foret béton en surdimensionnant, accepter de détruire le filetage, et poser un filet rapporté ou un insert.</li>
+</ul>
+<p><strong>Ce qu'il ne faut pas faire :</strong> taper dessus pour « le faire tourner ». Un taraud est dur et cassant ; il se fragmente, et l'on passe d'un morceau à retirer à cinq. Ne pas chauffer non plus sur une pièce en aluminium.</p>
+<p><em>La vraie leçon est en amont : les trois causes de casse sont l'avant-trou trop petit, le copeau non brisé et le taraudage à sec. Les trois sont gratuites à éviter.</em></p></div>
+
+<div class="exo"><span class="tag">Exercice 6.1</span>
+<p>Vous devez tarauder un <strong>M10 à pas gros</strong> dans une pièce en acier. a) Quel diamètre d'avant-trou ? b) L'atelier ne dispose que de forets de 8, 8,5 et 9 mm. Lequel prenez-vous et pourquoi ? c) Si vous aviez pris le foret de 8, que se serait-il passé ?</p>
+<details><summary>Voir la réponse</summary><div class="rep">
+<p><strong>a) Ø 8,5 mm.</strong></p>
+<p>Le pas gros du M10 est de <strong>1,5 mm</strong>. La règle donne Ø = D − P = 10 − 1,5 = <strong>8,5 mm</strong>. C'est un diamètre de foret courant, ce qui n'est pas un hasard : la série des forets a été construite pour cela.</p>
+<p><strong>b) Le foret de 8,5 — il tombe exactement juste.</strong></p>
+<p>Rien à arbitrer ici. Mais la question intéressante est celle du raisonnement <em>s'il n'existait pas</em> : entre le 8 et le 9, il faudrait prendre le <strong>9</strong>.</p>
+<p>On perd alors un peu de hauteur de filet — environ 60 % au lieu de 92 % — mais on conserve l'essentiel de la résistance, puisque c'est la vis qui casse avant le filet. Avec le 8, on gagnerait quelques pour cent de résistance parfaitement inutiles et l'on doublerait presque le couple de taraudage. <span class="cle">Devant un choix, on va toujours vers le foret supérieur.</span></p>
+<p><strong>c) Avec le foret de 8, le taraud se serait très probablement cassé.</strong></p>
+<p>Le calcul le montre : l'avant-trou de 8 mm laisse une hauteur de filet de (10 − 8) / (1,0825 × 1,5) = <strong>123 %</strong> du filet théorique. C'est plus que ce qu'un filet ISO peut contenir : le taraud ne coupe plus, il <em>refoule</em> la matière.</p>
+<p>Le couple explose, et sur un M10 le levier du tourne-à-gauche donne largement de quoi rompre le taraud avant de sentir que quelque chose ne va pas. La rupture se produit typiquement à mi-profondeur, là où le couple accumulé est maximal.</p>
+<p><em>Et le pire est que ce n'est pas systématique : sur une petite profondeur, dans une matière tendre, ça peut passer. C'est exactement ce qui entretient la mauvaise habitude — jusqu'au trou borgne dans un carter qu'il faut ensuite envoyer en électroérosion.</em></p>
+</div></details></div>
+
+<div class="exo"><span class="tag">Exercice 6.2</span>
+<p>Sur un carter en aluminium, un filetage M6 est arraché : la vis tourne sans jamais se serrer. La pièce est un carter de réducteur, encore sous garantie constructeur mais indisponible avant trois semaines, et la machine est en production. Que proposez-vous, et dans quel ordre ?</p>
+<details><summary>Voir la réponse</summary><div class="rep">
+<p><strong>Un filet rapporté type Helicoil — et un appel au constructeur avant de percer.</strong></p>
+<p><strong>D'abord, l'ordre des opérations, qui compte autant que la technique.</strong></p>
+<ol>
+<li><strong>Appeler le constructeur avant de toucher à la pièce.</strong> Elle est sous garantie : une réparation non autorisée peut la faire tomber. Dans la plupart des cas, la pose d'un filet rapporté est acceptée, parfois même prescrite — mais cela se demande, et cela se trace par écrit.</li>
+<li><strong>Vérifier qu'il n'y a pas de cause en amont.</strong> Un filetage arraché dans l'aluminium vient d'un serrage excessif, d'une vis trop courte, ou de desserrages répétés dus à une vibration. Si c'est la vibration, le filet neuf s'arrachera aussi.</li>
+<li><strong>Réparer.</strong></li>
+</ol>
+<p><strong>Pourquoi le filet rapporté est la bonne solution ici.</strong></p>
+<ul>
+<li>Il <strong>rétablit un M6</strong> : la vis d'origine se remonte, et rien d'autre sur la machine ne change. C'est décisif sur une pièce sous garantie.</li>
+<li>Dans l'aluminium, le filet obtenu est <strong>plus résistant que l'original</strong>. Le ressort en acier inoxydable répartit la charge sur toute la profondeur au lieu de la concentrer sur les premiers filets, et il ne s'arrache pas comme le fait l'alliage léger. Les constructeurs le montent d'origine sur les carters les plus sollicités.</li>
+<li>La réparation se fait <strong>en place</strong>, avec un kit du commerce : foret spécifique, taraud spécifique, outil de pose, arrachage de l'ergot.</li>
+</ul>
+<p><strong>La procédure.</strong> Percer au diamètre du kit (6,3 mm pour un M6) en veillant à rester dans l'axe — un guide de perçage est vivement conseillé sur une pièce en place. Tarauder avec le taraud spécial fourni, lubrifié au pétrole. Nettoyer et souffler le trou : dans l'aluminium le copeau colle. Poser le filet rapporté avec son outil, puis casser l'ergot d'entraînement et le récupérer — <span class="cle">un ergot laissé dans un carter de réducteur finit dans l'engrènement.</span></p>
+<p><strong>Les autres solutions, et pourquoi on ne les retient pas.</strong> Surdimensionner en M8 obligerait à modifier la contre-pièce et sortirait franchement de la définition d'origine — impensable sous garantie. Un insert collé tiendrait, mais ne se démonte plus. Un bouchon soudé sur de l'aluminium coulé est une mauvaise idée : la fonderie d'aluminium se soude mal et se déforme.</p>
+<p><em>À tracer en GMAO : filetage réparé, type et référence du filet rapporté, date, accord du constructeur et nom de l'interlocuteur. Le jour où quelqu'un démontera ce carter, il doit savoir qu'il n'y a plus d'aluminium sous cette vis.</em></p>
+</div></details></div>
+
+</div>
+</section>
+
 <!-- ================= SUITE ================= -->
 <section class="ch" id="suite">
   <div class="ch-head"><div class="ch-num">…</div><div class="ch-title">
-    <span class="kicker">Rédaction en cours</span><h2>Les chapitres 4 à 13</h2></div></div>
+    <span class="kicker">Rédaction en cours</span><h2>Les chapitres 7 à 13</h2></div></div>
   <div class="ch-body">
-<p class="lede">Cette première tranche pose la décision de fabriquer, le traçage dont tout dépend, et les deux gestes de base de l'enlèvement de matière. La suite est en cours d'écriture, dans le même format et avec le même calage sur le référentiel.</p>
+<p class="lede">Les six premiers chapitres couvrent la décision de fabriquer, le traçage, et tout le travail à froid : enlever de la matière, la déformer, la percer et la tarauder. Ce qui suit est le travail à chaud et l'assemblage. La rédaction se poursuit dans le même format et avec le même calage sur le référentiel.</p>
 <ul>
-<li><strong>04 · Cisaillage et pliage</strong> — jeu de lame, bavure, effort de cisaillage (S1.4.6, niveau 3) ; fibre neutre, calcul du développé, retour élastique</li>
-<li><strong>05 · La perceuse à colonne</strong> — S4.9.3 perçage ; vitesse de coupe et fréquence de rotation N = 1000·V<sub>c</sub>/(π·D), choix et affûtage du foret, lubrification, <strong>bridage</strong></li>
-<li><strong>06 · Taraudage et filetages</strong> — S4.9.3 taraudage ; diamètre d'avant-trou, jeu de tarauds, réparation d'un filetage foiré</li>
 <li><strong>07 · Assembler sans fondre</strong> — S4.9.1 ; éléments filetés et couple de serrage, rivetage, collage structural</li>
 <li><strong>08 · Soudure à l'arc avec électrode enrobée</strong> — S4.9.1 ; rôle de l'enrobage, réglage de l'intensité, défauts de cordon, sécurité</li>
 <li><strong>09 · Le semi-automatique MAG</strong> — S4.9.1 ; tension, vitesse de fil, gaz, modes de transfert</li>
@@ -579,7 +1157,7 @@
 </section>
 
 <footer class="fin">
-  <p><strong>Refaire la pièce qui n'existe plus</strong> — dossier de fabrication et d'assemblage pour le Baccalauréat Professionnel MSPC. Chaque chapitre est calé sur le référentiel officiel du diplôme : savoir associé visé et niveau taxonomique indiqués sous le titre. <em>Dossier en cours de rédaction : 3 chapitres sur 13 sont publiés.</em></p>
+  <p><strong>Refaire la pièce qui n'existe plus</strong> — dossier de fabrication et d'assemblage pour le Baccalauréat Professionnel MSPC. Chaque chapitre est calé sur le référentiel officiel du diplôme : savoir associé visé et niveau taxonomique indiqués sous le titre. <em>Dossier en cours de rédaction : 6 chapitres sur 13 sont publiés.</em></p>
   <p>Le référentiel retenu est celui du <strong>baccalauréat professionnel Maintenance des Systèmes de Production Connectés</strong>, arrêté du 9 décembre 2020, savoir <strong>S4.9 — Procédés d'assemblage et opérations simples de fabrication mécanique</strong>. Les valeurs numériques, coefficients et ordres de grandeur cités le sont à titre pédagogique : sur une intervention réelle, la documentation constructeur, les consignes de sécurité de l'établissement et les référentiels internes de l'entreprise font toujours foi.</p>
   <p><a href="index.html">← Retour au portail Atelier MSPC</a></p>
 </footer>
@@ -1080,6 +1658,612 @@
     MSPC.mono(ctx,'contrôle : viser la lumière',px0+16,352,10,'#6f786e');
 
     out.innerHTML='jour sous la règle <b style="color:'+col+'">'+cm.toFixed(0)+' centièmes</b><br>surface '+forme.toLowerCase();
+  }, {fixed:true});
+})();
+
+/* ======================= CH 2 · lecture du pied à coulisse au 1/50 =======================
+   La ruse du vernier : 50 divisions étalées sur 49 mm. Chaque division vaut
+   0,98 mm, il lui manque donc 2/100 de mm. La division qui tombe en face d'un
+   trait de la règle donne directement le nombre de fois deux centièmes. */
+(function(){
+  "use strict";
+  var C=MSPC.ctrl('a-pac-c');
+  var V=MSPC.ctrl('a-pac-v', function(v){
+    return C.val ? '— à vous de lire —' : (v*0.02).toFixed(2).replace('.',',')+' mm';
+  }, 'a-pac-v-l');
+  var out=document.getElementById('a-pac-out');
+  if(C.el) C.el.addEventListener('change', function(){ V.el.dispatchEvent(new Event('input')); });
+  var go=document.getElementById('a-pac-go');
+  if(go) go.addEventListener('click', function(){
+    V.el.value = Math.floor(Math.random()*2750)+120;
+    V.el.dispatchEvent(new Event('input'));
+  });
+
+  MSPC.anim('a-pac', function(a){
+    var ctx=a.ctx, W=a.W, H=a.H, i;
+    var val=V.val*0.02;
+    var mm=Math.floor(val+1e-9), n=Math.round((val-mm)/0.02);
+    if(n>=50){ n=0; mm+=1; }
+    var cache=C.val;
+
+    MSPC.fond(ctx,W,H,0);
+    MSPC.mono(ctx,'PIED À COULISSE AU 1/50 — 50 DIVISIONS DU VERNIER ÉTALÉES SUR 49 MM DE LA RÈGLE',26,26,11,'#8d968b');
+
+    /* ---------- les becs et la pièce mesurée ---------- */
+    var js=8.4, jx=44, jy=46, jh=54;
+    ctx.fillStyle='#4a544c'; ctx.fillRect(jx-14,jy,14,jh);
+    ctx.fillStyle='#4a544c'; ctx.fillRect(jx+val*js,jy,14,jh);
+    ctx.fillStyle='rgba(183,154,224,.30)'; ctx.fillRect(jx,jy+8,val*js,jh-16);
+    ctx.strokeStyle='#b79ae0'; ctx.lineWidth=1.6; ctx.strokeRect(jx,jy+8,val*js,jh-16);
+    MSPC.mono(ctx,'LA PIÈCE MESURÉE',jx+val*js+26,jy+32,9.5,'#8d968b');
+
+    /* ---------- la règle ---------- */
+    var PM=15, m0=Math.max(0,mm-5), X0=40, yM=176;
+    function X(v){ return X0+(v-m0)*PM; }
+
+    ctx.fillStyle='#2b3330'; ctx.fillRect(28,132,W-56,44);
+    ctx.strokeStyle='#59645d'; ctx.lineWidth=1.4; ctx.strokeRect(28.5,132.5,W-57,44);
+
+    for(i=m0;i<=m0+58;i++){
+      var x=X(i); if(x<32||x>W-30) continue;
+      var haut = (i%10===0) ? 26 : ((i%5===0) ? 17 : 10);
+      ctx.strokeStyle = (i===mm) ? '#b79ae0' : 'rgba(230,235,228,.55)';
+      ctx.lineWidth = (i===mm) ? 2.6 : 1;
+      ctx.beginPath(); ctx.moveTo(x,yM); ctx.lineTo(x,yM-haut); ctx.stroke();
+      if(i%10===0) MSPC.mono(ctx,String(i),x,yM-30,10.5,'#cfd4ca','center');
+    }
+    MSPC.mono(ctx,'RÈGLE — MILLIMÈTRES',W-34,126,9.5,'#8d968b','right');
+
+    /* ---------- le vernier ---------- */
+    var yV=183, xv0=X(val);
+    ctx.fillStyle='#39423b'; ctx.fillRect(xv0-22,183,49*PM+44,46);
+    ctx.strokeStyle='#7f8a7e'; ctx.lineWidth=1.4; ctx.strokeRect(xv0-21.5,183.5,49*PM+43,45);
+
+    for(i=0;i<=50;i++){
+      var xd=xv0+i*0.98*PM; if(xd<32||xd>W-30) continue;
+      var al=(i===n);
+      var bas=(i%5===0)?18:11;
+      ctx.strokeStyle = al ? '#b79ae0' : 'rgba(230,235,228,.5)';
+      ctx.lineWidth = al ? 2.6 : 1;
+      ctx.beginPath(); ctx.moveTo(xd,yV); ctx.lineTo(xd,yV+bas); ctx.stroke();
+      if(i%5===0) MSPC.mono(ctx,String(i/5),xd,yV+32,10,al?'#b79ae0':'#9aa494','center');
+    }
+    MSPC.mono(ctx,'VERNIER — 0,02 MM PAR DIVISION',xv0-16,244,9.5,'#8d968b');
+
+    /* le trait vertical qui montre la coïncidence */
+    var xa=X(mm+n);
+    ctx.strokeStyle='rgba(183,154,224,.85)'; ctx.lineWidth=1.4; ctx.setLineDash([5,4]);
+    ctx.beginPath(); ctx.moveTo(xa,142); ctx.lineTo(xa,yV+26); ctx.stroke(); ctx.setLineDash([]);
+    MSPC.mono(ctx,'coïncidence',xa,110,9.5,'#b79ae0','center');
+
+    /* le zéro du vernier */
+    ctx.strokeStyle='#8fd05f'; ctx.lineWidth=2;
+    ctx.beginPath(); ctx.moveTo(xv0,yM-34); ctx.lineTo(xv0,yM); ctx.stroke();
+    MSPC.mono(ctx,'zéro du vernier',xv0,126,9.5,'#8fd05f','center');
+
+    /* ---------- la lecture ---------- */
+    var by=270;
+    ctx.fillStyle='rgba(255,255,255,.05)'; ctx.fillRect(26,by,W-52,142);
+    ctx.strokeStyle='rgba(255,255,255,.16)'; ctx.lineWidth=1; ctx.strokeRect(26.5,by+.5,W-53,142);
+
+    if(cache){
+      MSPC.titre(ctx,'À VOUS DE LIRE',48,by+52,30,'#b79ae0');
+      MSPC.mono(ctx,'1. Le dernier trait de la règle dépassé par le zéro du vernier — c’est le trait vert.',48,by+82,11.5,'#9aa494');
+      MSPC.mono(ctx,'2. La seule division du vernier qui tombe en face d’un trait de la règle.',48,by+104,11.5,'#9aa494');
+      MSPC.mono(ctx,'3. Son rang × 0,02, ajouté aux millimètres. Décochez ensuite pour vérifier.',48,by+126,11.5,'#9aa494');
+      out.innerHTML='lecture <b style="color:#b79ae0">cachée</b><br>décochez pour vérifier';
+    } else {
+      MSPC.mono(ctx,'MILLIMÈTRES ENTIERS',48,by+26,10,'#8d968b');
+      MSPC.titre(ctx,String(mm)+' mm',48,by+62,32,'#e6ebe4');
+
+      MSPC.mono(ctx,'DIVISION ALIGNÉE',250,by+26,10,'#8d968b');
+      MSPC.titre(ctx,'n° '+n,250,by+62,32,'#b79ae0');
+
+      MSPC.mono(ctx,'SA VALEUR',420,by+26,10,'#8d968b');
+      MSPC.titre(ctx,n+' × 0,02 = '+(n*0.02).toFixed(2).replace('.',','),420,by+62,28,'#b79ae0');
+
+      MSPC.mono(ctx,'LECTURE',W-260,by+26,10,'#8d968b');
+      MSPC.titre(ctx,val.toFixed(2).replace('.',',')+' mm',W-260,by+66,40,'#8fd05f');
+
+      MSPC.mono(ctx,'Contrôle : au 1/50 le nombre de centièmes est toujours PAIR — ici '
+        +(n*2<10?'0':'')+(n*2)+', pair.',48,by+104,11.5,'#8d968b');
+      MSPC.mono(ctx,'Un pied à coulisse au 1/50 ne peut afficher ni 0,01 ni 0,03 ni 0,05.',48,by+126,11.5,'#6f786e');
+      out.innerHTML='<b style="color:#8fd05f">'+val.toFixed(2).replace('.',',')+' mm</b><br>'+mm+' mm + '+n+' × 0,02';
+    }
+  }, {fixed:true});
+})();
+
+/* ======================= CH 4 · effort de cisaillage et jeu de lame ======================= */
+(function(){
+  "use strict";
+  var MAT=[{n:'aluminium recuit',t:90},{n:'acier doux S235',t:320},
+           {n:'acier mi-dur C45',t:500},{n:'inox 304',t:480}];
+  var CAPA=100000;                                   /* cisaille d'atelier : 100 kN */
+  var E=MSPC.ctrl('a-cis-e', function(v){ return (v/10).toFixed(1).replace('.',',')+' mm'; }, 'a-cis-e-l');
+  var L=MSPC.ctrl('a-cis-l', function(v){ return Math.round(v)+' mm'; }, 'a-cis-l-l');
+  var M=MSPC.ctrl('a-cis-m', function(v){ return MAT[Math.round(v)].n; }, 'a-cis-m-l');
+  var J=MSPC.ctrl('a-cis-j', function(v){ return Math.round(v)+' % de e'; }, 'a-cis-j-l');
+  var out=document.getElementById('a-cis-out');
+
+  MSPC.anim('a-cis', function(a){
+    var ctx=a.ctx, W=a.W, H=a.H;
+    var e=E.val/10, lg=L.val, mat=MAT[Math.round(M.val)], j=J.val;
+    var F=mat.t*e*lg;
+
+    MSPC.fond(ctx,W,H,0);
+    MSPC.mono(ctx,'CISAILLER, C’EST AMORCER UNE FISSURE ET LA LAISSER SE PROPAGER',26,28,11.5,'#8d968b');
+
+    /* ---------- les deux lames ---------- */
+    var bx=60, by=76, bw=380;
+    ctx.fillStyle='#4a544c';
+    ctx.beginPath(); ctx.moveTo(bx,by); ctx.lineTo(bx+200,by); ctx.lineTo(bx+200,by+40); ctx.lineTo(bx+186,by+40); ctx.closePath(); ctx.fill();
+    ctx.fillStyle='#333c37'; ctx.fillRect(bx,by+52,bw,e*9+6);
+    ctx.strokeStyle='#7f8a7e'; ctx.lineWidth=1.6; ctx.strokeRect(bx,by+52,bw,e*9+6);
+    ctx.fillStyle='#4a544c';
+    ctx.beginPath();
+    ctx.moveTo(bx+204+j*e*0.9, by+58+e*9); ctx.lineTo(bx+bw, by+58+e*9);
+    ctx.lineTo(bx+bw, by+108+e*9); ctx.lineTo(bx+204+j*e*0.9, by+108+e*9); ctx.closePath(); ctx.fill();
+    MSPC.mono(ctx,'LAME MOBILE',bx+8,by-8,9.5,'#8d968b');
+    MSPC.mono(ctx,'LAME FIXE',bx+bw-90,by+128+e*9,9.5,'#8d968b');
+    MSPC.mono(ctx,'jeu',bx+206,by+50+e*9,9.5,'#b79ae0');
+
+    /* ---------- la tranche obtenue, en coupe ---------- */
+    var tx=60, ty=236, tw=150, th=124;
+    var arr = Math.max(0.06, Math.min(0.34, 0.07+j*0.011));
+    var bri = j<3 ? 0.62 : (j<12 ? 0.32 : 0.16);
+    var mate = Math.max(0.10, 1-arr-bri);
+    var bav = j<3 ? 0.07 : (j<12 ? 0.12 : 0.32);
+
+    MSPC.mono(ctx,'LA TRANCHE, AGRANDIE',tx,ty-14,9.5,'#8d968b');
+    var yy=ty;
+    ctx.fillStyle='#5a6560'; ctx.fillRect(tx,yy,tw,th*arr); yy+=th*arr;
+    ctx.fillStyle='#cfd8d2'; ctx.fillRect(tx,yy,tw,th*bri); yy+=th*bri;
+    ctx.fillStyle='#6b736c'; ctx.fillRect(tx,yy,tw,th*mate); yy+=th*mate;
+    ctx.strokeStyle='#7f8a7e'; ctx.lineWidth=1.4; ctx.strokeRect(tx+.5,ty+.5,tw,th*(arr+bri+mate));
+    /* la bavure */
+    ctx.fillStyle='#ff6a5e';
+    ctx.beginPath(); ctx.moveTo(tx+tw,yy); ctx.lineTo(tx+tw+bav*70,yy+6); ctx.lineTo(tx+tw,yy+14); ctx.closePath(); ctx.fill();
+
+    MSPC.mono(ctx,'arrondi',tx+tw+14,ty+th*arr*0.6,10,'#9aa494');
+    MSPC.mono(ctx,'brillant — cisaillé',tx+tw+14,ty+th*arr+th*bri*0.6,10,'#e6ebe4');
+    MSPC.mono(ctx,'mat — rompu',tx+tw+14,ty+th*(arr+bri)+th*mate*0.6,10,'#9aa494');
+    MSPC.mono(ctx,'bavure',tx+tw+14,yy+12,10,'#ff6a5e');
+
+    var jv = j<3 ? 'JEU TROP FAIBLE' : (j<=12 ? 'JEU CORRECT' : 'JEU TROP GRAND');
+    var jc = j<3 ? '#ff6a5e' : (j<=12 ? '#8fd05f' : '#f0a844');
+    MSPC.titre(ctx,jv,tx,ty+th+40,20,jc);
+    MSPC.mono(ctx, j<3 ? 'Les fissures se croisent : double zone brillante, effort accru.'
+      : (j<=12 ? 'Les fissures se rejoignent : un tiers brillant, bavure faible.'
+               : 'La tôle est entraînée et pliée avant de rompre.'), tx,ty+th+60,10.5,'#9aa494');
+
+    /* ---------- le calcul ---------- */
+    var px0=W-368, pw=342;
+    ctx.fillStyle='rgba(255,255,255,.04)'; ctx.fillRect(px0,64,pw,336);
+    ctx.strokeStyle='rgba(255,255,255,.20)'; ctx.lineWidth=1.4; ctx.strokeRect(px0+.5,64.5,pw,336);
+
+    MSPC.mono(ctx,'L’EFFORT DE CISAILLAGE',px0+18,92,10,'#8d968b');
+    MSPC.titre(ctx,'F = τ × e × L',px0+18,124,24,'#e6ebe4');
+    MSPC.mono(ctx,'τ = '+mat.t+' N/mm²  ('+mat.n+')',px0+18,150,11,'#b79ae0');
+    MSPC.mono(ctx,'e × L = '+(e).toFixed(1).replace('.',',')+' × '+lg+' = '+MSPC.nb(e*lg)+' mm²',px0+18,172,11,'#9aa494');
+
+    MSPC.titre(ctx,MSPC.nb(F)+' N',px0+18,214,32,'#b79ae0');
+    MSPC.titre(ctx,(F/1000).toFixed(0)+' kN  ≈  '+(F/9810).toFixed(1).replace('.',',')+' tonnes',px0+18,246,21,'#cfd4ca');
+
+    MSPC.mono(ctx,'CAPACITÉ DE LA CISAILLE : 100 kN',px0+18,286,10,'#8d968b');
+    var r=Math.min(1.6,F/CAPA);
+    ctx.fillStyle='rgba(255,255,255,.09)'; ctx.fillRect(px0+18,296,pw-72,16);
+    ctx.fillStyle = F<=CAPA ? '#8fd05f' : '#ff6a5e';
+    ctx.fillRect(px0+18,296,Math.min(pw-72,(pw-72)*F/CAPA),16);
+    ctx.strokeStyle='#e6ebe4'; ctx.lineWidth=2;
+    ctx.beginPath(); ctx.moveTo(px0+18+(pw-72),290); ctx.lineTo(px0+18+(pw-72),318); ctx.stroke();
+
+    if(F<=CAPA){
+      MSPC.titre(ctx,'LA COUPE PASSE',px0+18,348,22,'#8fd05f');
+      MSPC.mono(ctx,'Il reste '+((1-F/CAPA)*100).toFixed(0)+' % de marge.',px0+18,370,11,'#9aa494');
+    } else {
+      MSPC.titre(ctx,'MACHINE DÉPASSÉE',px0+18,348,22,'#ff6a5e');
+      MSPC.mono(ctx,'Couper en '+Math.ceil(F/CAPA)+' passes, soit '+Math.round(lg/Math.ceil(F/CAPA))+' mm maxi.',px0+18,370,11,'#f0a844');
+    }
+
+    out.innerHTML='F = <b style="color:#b79ae0">'+(F/1000).toFixed(0)+' kN</b> · '+jv.toLowerCase()
+      +'<br>'+(F<=CAPA?'<b style="color:#8fd05f">la coupe passe</b>':'<b style="color:#ff6a5e">machine dépassée</b>');
+  }, {fixed:true});
+})();
+
+/* ======================= CH 4 · fibre neutre, développé et retour élastique ======================= */
+(function(){
+  "use strict";
+  var MAT=[{n:'aluminium recuit',s:0.020},{n:'acier doux S235',s:0.018},
+           {n:'inox 304',s:0.055},{n:'acier à ressort',s:0.150}];
+  var A=60, B=40;                                   /* cotes extérieures, en mm */
+  var E=MSPC.ctrl('a-pli-e', function(v){ return (v/10).toFixed(1).replace('.',',')+' mm'; }, 'a-pli-e-l');
+  var R=MSPC.ctrl('a-pli-r', function(v){ return (v/10).toFixed(1).replace('.',',')+' mm'; }, 'a-pli-r-l');
+  var AN=MSPC.ctrl('a-pli-a', function(v){ return Math.round(v)+'°'; }, 'a-pli-a-l');
+  var M=MSPC.ctrl('a-pli-m', function(v){ return MAT[Math.round(v)].n; }, 'a-pli-m-l');
+  var out=document.getElementById('a-pli-out');
+
+  MSPC.anim('a-pli', function(a){
+    var ctx=a.ctx, W=a.W, H=a.H;
+    var e=E.val/10, r=R.val/10, ang=AN.val, mat=MAT[Math.round(M.val)];
+    var th=ang*Math.PI/180;
+    var ratio=r/e;
+    var k = ratio<1 ? 0.33 : (ratio<3 ? 0.40 : 0.45);
+    var t=(r+e)*Math.tan(th/2);
+    var arc=th*(r+k*e);
+    var Ldev=A+B-2*t+arc;
+    var retour=ang*mat.s*(1+ratio*0.10);
+
+    MSPC.fond(ctx,W,H,0);
+    MSPC.mono(ctx,'LA FIBRE NEUTRE NE CHANGE PAS DE LONGUEUR — C’EST ELLE QU’ON DÉVELOPPE',26,28,11.5,'#8d968b');
+
+    /* ---------- la pièce pliée ----------
+       Le pli est au coin ; l'aile A arrive selon +x, l'aile B repart tournée
+       de θ vers le haut. À θ = 0 la pièce est plate, à θ = 180° elle est
+       repliée sur elle-même. */
+    var S=3.6, cx=252, cy=248;
+    ctx.strokeStyle='#b79ae0'; ctx.lineWidth=Math.max(3,e*S); ctx.lineCap='butt';
+    var ax=cx-(A-t)*S;
+    ctx.beginPath(); ctx.moveTo(ax,cy); ctx.lineTo(cx,cy); ctx.stroke();
+    var bxe=cx+Math.cos(th)*(B-t)*S, bye=cy-Math.sin(th)*(B-t)*S;
+    ctx.beginPath(); ctx.moveTo(cx,cy); ctx.lineTo(bxe,bye); ctx.stroke();
+
+    MSPC.mono(ctx,'A = 60 mm',(ax+cx)/2,cy+28,10.5,'#9aa494','center');
+    MSPC.mono(ctx,'B = 40 mm',bxe+(Math.cos(th)>=0?14:-14),bye-10,10.5,'#9aa494',Math.cos(th)>=0?'left':'right');
+    MSPC.mono(ctx,ang+'°',cx-34,cy-18,13,'#e6ebe4');
+    MSPC.mono(ctx,'LA PIÈCE VOULUE',60,96,9.5,'#8d968b');
+
+    /* ---------- la bande à découper ---------- */
+    var byy=344, bx=60, ech=4.6;
+    MSPC.mono(ctx,'LA BANDE À DÉCOUPER',bx,296,9.5,'#8d968b');
+    /* repère : la somme des cotes extérieures, toujours trop longue */
+    ctx.fillStyle='rgba(255,106,94,.18)'; ctx.fillRect(bx,byy-24,(A+B)*ech,10);
+    MSPC.mono(ctx,'A + B = 100 mm — trop long',bx+(A+B)*ech+10,byy-15,10,'#ff6a5e');
+
+    var hb=Math.max(9,e*S*1.6);
+    ctx.fillStyle='rgba(183,154,224,.22)'; ctx.fillRect(bx,byy,Ldev*ech,hb);
+    ctx.strokeStyle='#b79ae0'; ctx.lineWidth=1.8; ctx.strokeRect(bx+.5,byy+.5,Ldev*ech,hb);
+    /* la fibre neutre dans l'épaisseur */
+    ctx.strokeStyle='#8fd05f'; ctx.lineWidth=1.6; ctx.setLineDash([6,4]);
+    ctx.beginPath();
+    ctx.moveTo(bx,byy+hb*(1-k)); ctx.lineTo(bx+Ldev*ech,byy+hb*(1-k)); ctx.stroke(); ctx.setLineDash([]);
+    MSPC.mono(ctx,'fibre neutre à k·e = '+k.toFixed(2).replace('.',',')+' × e de la face intérieure',bx,byy+hb+22,10,'#8fd05f');
+    MSPC.titre(ctx,Ldev.toFixed(1).replace('.',',')+' mm',bx,byy+hb+54,26,'#b79ae0');
+
+    /* ---------- le calcul ---------- */
+    var px0=W-322, pw=296;
+    ctx.fillStyle='rgba(255,255,255,.04)'; ctx.fillRect(px0,64,pw,266);
+    ctx.strokeStyle='rgba(255,255,255,.20)'; ctx.lineWidth=1.4; ctx.strokeRect(px0+.5,64.5,pw,266);
+
+    MSPC.mono(ctx,'LE DÉVELOPPÉ',px0+18,92,10,'#8d968b');
+    MSPC.mono(ctx,'L = A + B − 2t + θ(r + k·e)',px0+18,114,12,'#e6ebe4');
+    MSPC.mono(ctx,'tangente t = (r+e)·tan(θ/2) = '+t.toFixed(2).replace('.',',')+' mm',px0+18,138,10.5,'#9aa494');
+    MSPC.mono(ctx,'arc de fibre neutre = '+arc.toFixed(2).replace('.',',')+' mm',px0+18,158,10.5,'#9aa494');
+    MSPC.titre(ctx,Ldev.toFixed(1).replace('.',',')+' mm',px0+18,196,30,'#b79ae0');
+    MSPC.mono(ctx,'soit '+(A+B-Ldev).toFixed(1).replace('.',',')+' mm de moins que A + B',px0+18,218,10.5,'#f0a844');
+
+    MSPC.mono(ctx,'RETOUR ÉLASTIQUE',px0+18,254,10,'#8d968b');
+    MSPC.titre(ctx,'+ '+retour.toFixed(1).replace('.',',')+'°',px0+18,286,24,'#f0a844');
+    MSPC.mono(ctx,'plier à '+(ang+retour).toFixed(1).replace('.',',')+'° pour obtenir '+ang+'°',px0+18,308,10.5,'#9aa494');
+
+    out.innerHTML='développé <b style="color:#b79ae0">'+Ldev.toFixed(1).replace('.',',')+' mm</b>'
+      +'<br>plier à <b>'+(ang+retour).toFixed(1).replace('.',',')+'°</b>';
+  }, {fixed:true});
+})();
+
+/* ======================= CH 5 · vitesse de coupe et étage de poulie ======================= */
+(function(){
+  "use strict";
+  var MAT=[{n:'aluminium',vc:60},{n:'laiton',vc:50},{n:'acier doux S235',vc:25},
+           {n:'fonte',vc:20,sec:true},{n:'acier mi-dur C45',vc:18},{n:'inox 304',vc:10}];
+  var VIT=[250,400,650,1000,1600,2500];
+  var D=MSPC.ctrl('a-per-d', function(v){ return Math.round(v)+' mm'; }, 'a-per-d-l');
+  var M=MSPC.ctrl('a-per-m', function(v){ return MAT[Math.round(v)].n; }, 'a-per-m-l');
+  var Nc=MSPC.ctrl('a-per-n', function(v){ return VIT[Math.round(v)]+' tr/min'; }, 'a-per-n-l');
+  var LU=MSPC.ctrl('a-per-lub');
+  var out=document.getElementById('a-per-out');
+
+  MSPC.anim('a-per', function(a){
+    var ctx=a.ctx, W=a.W, H=a.H, i;
+    var d=D.val, mat=MAT[Math.round(M.val)], et=Math.round(Nc.val), N=VIT[et], lub=LU.val;
+    var Nid=1000*mat.vc/(Math.PI*d);
+    var VcR=Math.PI*d*N/1000;
+    var ratio=N/Nid;
+    var idx=ratio*((lub||mat.sec)?1:1.35);
+
+    var verdict,couleur,copeau;
+    if(idx>1.8){ verdict='FORET BRÛLÉ'; couleur='#ff6a5e'; copeau='copeau bleu — la pointe a perdu sa trempe'; }
+    else if(idx>1.3){ verdict='TROP RAPIDE'; couleur='#f0a844'; copeau='copeau paille — usure accélérée'; }
+    else if(idx>=0.8){ verdict='CORRECT'; couleur='#8fd05f'; copeau='deux belles hélices régulières'; }
+    else if(idx>=0.45){ verdict='TROP LENT'; couleur='#f0a844'; copeau='copeau court, ça frotte plus que ça ne coupe'; }
+    else { verdict='BEAUCOUP TROP LENT'; couleur='#f0a844'; copeau='poussière — le foret s’use sans avancer'; }
+
+    MSPC.fond(ctx,W,H,0);
+    MSPC.mono(ctx,'N = 1000 × Vc / (π × D) — LA VITESSE DE COUPE APPARTIENT AU COUPLE OUTIL-MATIÈRE',26,28,11,'#8d968b');
+
+    /* ---------- les poulies étagées ---------- */
+    MSPC.mono(ctx,'POULIES ÉTAGÉES',48,62,9.5,'#8d968b');
+    var cxm=110, cxs=246, y0=86, dy=21;
+    for(i=0;i<6;i++){
+      var yy=y0+i*dy, on=(i===et);
+      var wm=12+i*6, ws=48-i*6;
+      ctx.fillStyle = on ? '#b79ae0' : '#39423b';
+      ctx.fillRect(cxm-wm,yy-8,wm*2,16);
+      ctx.fillRect(cxs-ws,yy-8,ws*2,16);
+      if(on){
+        ctx.strokeStyle='#8fd05f'; ctx.lineWidth=4;
+        ctx.beginPath(); ctx.moveTo(cxm,yy-5); ctx.lineTo(cxs,yy-5);
+        ctx.moveTo(cxm,yy+5); ctx.lineTo(cxs,yy+5); ctx.stroke();
+      }
+      MSPC.mono(ctx,VIT[i]+'',cxs+58,yy+4,10.5,on?'#e6ebe4':'#5d665e');
+    }
+    MSPC.mono(ctx,'moteur',cxm,y0+6*dy+4,9.5,'#6f786e','center');
+    MSPC.mono(ctx,'broche',cxs,y0+6*dy+4,9.5,'#6f786e','center');
+    MSPC.mono(ctx,'la courroie est sur l’étage vert',48,y0+6*dy+26,9.5,'#8fd05f');
+
+    /* ---------- le foret et le copeau ---------- */
+    var fx=400, fy=110;
+    ctx.fillStyle='#8d968b'; ctx.fillRect(fx-3,fy-46,6,30);
+    ctx.fillStyle= idx>1.8 ? '#5c7fb0' : (idx>1.3 ? '#c8a24e' : '#b0b7ae');
+    var fw=Math.max(5,d*1.5);
+    ctx.fillRect(fx-fw/2,fy-16,fw,110);
+    ctx.beginPath(); ctx.moveTo(fx-fw/2,fy+94); ctx.lineTo(fx+fw/2,fy+94); ctx.lineTo(fx,fy+94+fw*0.55); ctx.closePath(); ctx.fill();
+    ctx.strokeStyle='rgba(15,21,18,.55)'; ctx.lineWidth=1.4;
+    for(i=0;i<7;i++){
+      var yh=fy-10+i*15;
+      ctx.beginPath(); ctx.moveTo(fx-fw/2,yh); ctx.lineTo(fx+fw/2,yh+9); ctx.stroke();
+    }
+    MSPC.mono(ctx,'Ø '+d+' mm',fx,fy-56,11,'#cfd4ca','center');
+
+    ctx.fillStyle='#333c37'; ctx.fillRect(fx-110,fy+96+fw*0.55,220,44);
+    ctx.strokeStyle='#7f8a7e'; ctx.lineWidth=1.6; ctx.strokeRect(fx-110,fy+96+fw*0.55,220,44);
+    MSPC.mono(ctx,mat.n.toUpperCase(),fx,fy+160+fw*0.55,10,'#8d968b','center');
+
+    /* le copeau, dont la couleur dit tout */
+    var cc = idx>1.8 ? '#5c7fb0' : (idx>1.3 ? '#c8a24e' : (idx>=0.8 ? '#cfd8d2' : '#6b736c'));
+    ctx.strokeStyle=cc; ctx.lineWidth=2.4;
+    if(idx>=0.45){
+      for(i=0;i<2;i++){
+        var sgn=i?1:-1;
+        ctx.beginPath();
+        ctx.moveTo(fx+sgn*fw/2, fy+90);
+        ctx.bezierCurveTo(fx+sgn*(fw/2+30), fy+60, fx+sgn*(fw/2+16), fy+28, fx+sgn*(fw/2+44), fy+10);
+        ctx.stroke();
+      }
+    } else {
+      for(i=0;i<9;i++){
+        ctx.fillStyle=cc;
+        ctx.fillRect(fx-40+i*10, fy+70-((i*29)%34), 3, 3);
+      }
+    }
+
+    /* ---------- le calcul ---------- */
+    var px0=W-300, pw=274;
+    ctx.fillStyle='rgba(255,255,255,.04)'; ctx.fillRect(px0,56,pw,378);
+    ctx.strokeStyle='rgba(255,255,255,.20)'; ctx.lineWidth=1.4; ctx.strokeRect(px0+.5,56.5,pw,378);
+
+    MSPC.mono(ctx,'VITESSE DE COUPE VOULUE',px0+16,84,10,'#8d968b');
+    MSPC.titre(ctx,mat.vc+' m/min',px0+16,114,24,'#e6ebe4');
+
+    MSPC.mono(ctx,'ROTATION IDÉALE',px0+16,150,10,'#8d968b');
+    MSPC.titre(ctx,Math.round(Nid)+' tr/min',px0+16,180,26,'#b79ae0');
+    MSPC.mono(ctx,'1000 × '+mat.vc+' / (π × '+d+')',px0+16,200,10,'#6f786e');
+
+    MSPC.mono(ctx,'ÉTAGE CHOISI',px0+16,232,10,'#8d968b');
+    MSPC.titre(ctx,N+' tr/min',px0+16,262,26,couleur);
+    MSPC.mono(ctx,'soit Vc réelle = '+VcR.toFixed(1).replace('.',',')+' m/min',px0+16,282,10.5,'#9aa494');
+
+    ctx.fillStyle='rgba(255,255,255,.09)'; ctx.fillRect(px0+16,300,pw-32,14);
+    ctx.fillStyle=couleur; ctx.fillRect(px0+16,300,Math.min(pw-32,(pw-32)*idx/2.2),14);
+    ctx.strokeStyle='#8fd05f'; ctx.lineWidth=2;
+    ctx.beginPath(); ctx.moveTo(px0+16+(pw-32)/2.2,296); ctx.lineTo(px0+16+(pw-32)/2.2,318); ctx.stroke();
+    MSPC.mono(ctx,'idéal',px0+16+(pw-32)/2.2+6,294,9,'#8fd05f');
+
+    MSPC.titre(ctx,verdict,px0+16,352,22,couleur);
+    var mots=copeau.split(' '), ligne='', yy2=376;
+    mots.forEach(function(m){
+      if((ligne+m).length>34){ MSPC.mono(ctx,ligne,px0+16,yy2,10.5,'#9aa494'); ligne=m+' '; yy2+=17; }
+      else ligne+=m+' ';
+    });
+    MSPC.mono(ctx,ligne,px0+16,yy2,10.5,'#9aa494');
+    if(!lub && !mat.sec) MSPC.mono(ctx,'sans lubrification : +35 % de température',px0+16,yy2+24,10,'#f0a844');
+    if(mat.sec) MSPC.mono(ctx,'la fonte se perce à sec : son graphite lubrifie',px0+16,yy2+24,10,'#8fd05f');
+
+    out.innerHTML='idéal <b>'+Math.round(Nid)+'</b> tr/min · choisi <b>'+N+'</b>'
+      +'<br><b style="color:'+couleur+'">'+verdict+'</b>';
+  }, {fixed:true});
+})();
+
+/* ======================= CH 5 · couple d'arrachement et bridage ======================= */
+(function(){
+  "use strict";
+  var TEN=[{n:'à la main',c:12},{n:'étau simplement posé',c:45},
+           {n:'étau bridé sur la table',c:400},{n:'brides sur la pièce',c:600}];
+  var D=MSPC.ctrl('a-bri-d', function(v){ return Math.round(v)+' mm'; }, 'a-bri-d-l');
+  var E=MSPC.ctrl('a-bri-e', function(v){ return Math.round(v)+' mm'; }, 'a-bri-e-l');
+  var T=MSPC.ctrl('a-bri-t', function(v){ return TEN[Math.round(v)].n; }, 'a-bri-t-l');
+  var out=document.getElementById('a-bri-out');
+
+  MSPC.anim('a-bri', function(a){
+    var ctx=a.ctx, W=a.W, H=a.H, i;
+    var d=D.val, e=E.val, ten=TEN[Math.round(T.val)];
+    /* Le foret n'arrache pas pendant la coupe mais à la SORTIE, quand il n'a
+       plus assez de matière devant lui : d'où le facteur, maximal sur la tôle. */
+    var fact = e<=3 ? 4.0 : (e<=6 ? 2.8 : 2.2);
+    var M=0.08*d*d*fact;
+    var part=(M>ten.c);
+
+    MSPC.fond(ctx,W,H,0);
+    MSPC.mono(ctx,'LE COUPLE D’ARRACHEMENT CROÎT COMME LE CARRÉ DU DIAMÈTRE',26,28,11.5,'#8d968b');
+
+    /* ---------- la scène ---------- */
+    var cx=210, cy=190;
+    ctx.fillStyle='#39423b'; ctx.fillRect(cx-150,cy+52,300,16);
+    MSPC.mono(ctx,'TABLE DE LA PERCEUSE',cx-150,cy+86,9.5,'#8d968b');
+
+    ctx.save();
+    ctx.translate(cx,cy);
+    if(part) ctx.rotate(a.t*7);
+    ctx.fillStyle= part ? 'rgba(255,106,94,.30)' : 'rgba(183,154,224,.22)';
+    ctx.fillRect(-120,-14,240,28);
+    ctx.strokeStyle= part ? '#ff6a5e' : '#b79ae0'; ctx.lineWidth=2;
+    ctx.strokeRect(-120,-14,240,28);
+    ctx.restore();
+
+    if(part){
+      ctx.strokeStyle='rgba(255,106,94,.75)'; ctx.lineWidth=3;
+      for(i=0;i<3;i++){
+        ctx.beginPath(); ctx.arc(cx,cy,132+i*13, 0.5+i*0.4, 1.9+i*0.4); ctx.stroke();
+      }
+      MSPC.titre(ctx,'LA PIÈCE PART EN HÉLICE',cx,cy-128,23,'#ff6a5e','center');
+    }
+
+    /* le foret */
+    var fw=Math.max(5,d*1.5);
+    ctx.fillStyle='#b0b7ae'; ctx.fillRect(cx-fw/2,cy-104,fw,86);
+    ctx.beginPath(); ctx.moveTo(cx-fw/2,cy-18); ctx.lineTo(cx+fw/2,cy-18); ctx.lineTo(cx,cy-18+fw*0.55); ctx.closePath(); ctx.fill();
+    MSPC.mono(ctx,'Ø '+d+' mm',cx+fw/2+12,cy-72,10.5,'#cfd4ca');
+    MSPC.mono(ctx,'tôle de '+e+' mm',cx+134,cy+4,10.5,'#9aa494');
+
+    /* ---------- les barres ---------- */
+    var px0=W-392, pw=366, bx=px0+18, bw=pw-140;
+    ctx.fillStyle='rgba(255,255,255,.04)'; ctx.fillRect(px0,56,pw,368);
+    ctx.strokeStyle='rgba(255,255,255,.20)'; ctx.lineWidth=1.4; ctx.strokeRect(px0+.5,56.5,pw,368);
+
+    MSPC.mono(ctx,'COUPLE À LA SORTIE DU FORET',bx,84,10,'#8d968b');
+    MSPC.titre(ctx,M.toFixed(0)+' N·m',bx,120,32,'#ff6a5e');
+    MSPC.mono(ctx,'tôle de '+e+' mm → accrochage × '+fact.toFixed(1).replace('.',','),bx,142,10,'#9aa494');
+
+    var ech=Math.max(M,ten.c,60)*1.15;
+    MSPC.mono(ctx,'CE QUE CHAQUE MAINTIEN RETIENT',bx,176,10,'#8d968b');
+    TEN.forEach(function(o,i2){
+      var yy=196+i2*38, on=(o===ten);
+      ctx.fillStyle='rgba(255,255,255,.08)'; ctx.fillRect(bx,yy,bw,15);
+      ctx.fillStyle= on ? '#b79ae0' : '#4a544c';
+      ctx.fillRect(bx,yy,bw*Math.min(1,o.c/ech),15);
+      MSPC.mono(ctx,o.n,bx,yy-4,10,on?'#e6ebe4':'#6f786e');
+      MSPC.mono(ctx,o.c+' N·m',bx+bw+10,yy+12,10.5,on?'#e6ebe4':'#6f786e');
+      if(on){
+        ctx.strokeStyle='#ff6a5e'; ctx.lineWidth=2.4;
+        var xm=bx+bw*Math.min(1,M/ech);
+        ctx.beginPath(); ctx.moveTo(xm,yy-6); ctx.lineTo(xm,yy+21); ctx.stroke();
+      }
+    });
+    MSPC.mono(ctx,'le trait rouge est le couple à retenir',bx,364,9.5,'#ff6a5e');
+
+    if(part) MSPC.titre(ctx,'MAINTIEN INSUFFISANT',bx,400,22,'#ff6a5e');
+    else MSPC.titre(ctx,'MAINTIEN SUFFISANT',bx,400,22,'#8fd05f');
+
+    out.innerHTML='couple <b style="color:#ff6a5e">'+M.toFixed(0)+' N·m</b> · retenue '+ten.c+' N·m'
+      +'<br><b style="color:'+(part?'#ff6a5e':'#8fd05f')+'">'+(part?'la pièce part':'maintien suffisant')+'</b>';
+  }, {fixed:true});
+})();
+
+/* ======================= CH 6 · avant-trou, taux de filet et couple de taraudage ======================= */
+(function(){
+  "use strict";
+  var FIL=[[3,0.5],[4,0.7],[5,0.8],[6,1.0],[8,1.25],[10,1.5],[12,1.75],[16,2.0]];
+  var M=MSPC.ctrl('a-tar-m', function(v){ var f=FIL[Math.round(v)];
+    return 'M'+f[0]+' × '+f[1].toFixed(2).replace('.',',').replace(/,?0+$/,''); }, 'a-tar-m-l');
+  /* L'écart est exprimé en fraction du pas, et non en millimètres fixes :
+     ainsi la plage explorée a le même sens sur un M3 que sur un M16, puisque
+     le taux de filet ne dépend que de ce rapport. L'étiquette, elle, reste
+     en millimètres — c'est ce que lit celui qui choisit son foret. */
+  var DE=MSPC.ctrl('a-tar-d', function(v){
+    var P=FIL[Math.round(M.val)][1], mmv=v/100*P;
+    return (mmv>=0?'+':'')+mmv.toFixed(2).replace('.',',')+' mm';
+  }, 'a-tar-d-l');
+  if(M.el) M.el.addEventListener('input', function(){ DE.el.dispatchEvent(new Event('input')); });
+  var LU=MSPC.ctrl('a-tar-lub');
+  var out=document.getElementById('a-tar-out');
+
+  MSPC.anim('a-tar', function(a){
+    var ctx=a.ctx, W=a.W, H=a.H, i;
+    var f=FIL[Math.round(M.val)], Dn=f[0], P=f[1];
+    var reco=Dn-P, dtr=reco+DE.val/100*P, lub=LU.val;
+    var h=(Dn-dtr)/(1.0825*P)*100;
+    if(h<0) h=0;
+    var couple=Math.pow(h/92.4,3.5)*(lub?1:1.35);
+    var resist=Math.min(100,h*1.6);
+
+    var verdict,couleur,expl;
+    if(h>105){ verdict='LE TARAUD VA CASSER'; couleur='#ff6a5e'; expl='Le taraud ne coupe plus, il refoule la matière.'; }
+    else if(h>95){ verdict='COUPLE ÉLEVÉ'; couleur='#f0a844'; expl='Ça passe, mais la marge est mince sur un trou profond.'; }
+    else if(h>=55){ verdict='CORRECT'; couleur='#8fd05f'; expl='La vis cassera avant le filet : c’est ce qu’on veut.'; }
+    else if(h>=35){ verdict='FILET FAIBLE'; couleur='#f0a844'; expl='Utilisable en dépannage, pas sur un assemblage chargé.'; }
+    else { verdict='FILET INSUFFISANT'; couleur='#ff6a5e'; expl='Le filet s’arrachera dès le serrage.'; }
+
+    MSPC.fond(ctx,W,H,0);
+    MSPC.mono(ctx,'Ø AVANT-TROU = D − P — LA SOUSTRACTION LA PLUS RENTABLE DE L’ATELIER',26,28,11.5,'#8d968b');
+
+    /* ---------- coupe du taraudage ---------- */
+    var S=13, cx=250, cy=250, prof=150;
+    var rN=Dn/2*S, rT=dtr/2*S;
+
+    ctx.fillStyle='#333c37';
+    ctx.fillRect(cx-190,cy-prof/2,190-rN,prof);
+    ctx.fillRect(cx+rN,cy-prof/2,190-rN,prof);
+    ctx.strokeStyle='#7f8a7e'; ctx.lineWidth=1.4;
+    ctx.strokeRect(cx-190,cy-prof/2,380,prof);
+
+    /* le filet théorique complet, en pointillé */
+    ctx.strokeStyle='rgba(255,255,255,.28)'; ctx.lineWidth=1; ctx.setLineDash([4,3]);
+    ctx.beginPath();
+    ctx.moveTo(cx-rN,cy-prof/2); ctx.lineTo(cx-rN,cy+prof/2);
+    ctx.moveTo(cx+rN,cy-prof/2); ctx.lineTo(cx+rN,cy+prof/2);
+    ctx.stroke(); ctx.setLineDash([]);
+
+    /* le filet réellement formé : dents entre le trou percé et le Ø nominal */
+    var pasPx=P*S, nd=Math.floor(prof/pasPx);
+    ctx.fillStyle='#b79ae0';
+    for(i=0;i<nd;i++){
+      var yy=cy-prof/2+i*pasPx;
+      ctx.beginPath();
+      ctx.moveTo(cx-rT,yy); ctx.lineTo(cx-rN,yy+pasPx*0.5); ctx.lineTo(cx-rT,yy+pasPx); ctx.closePath(); ctx.fill();
+      ctx.beginPath();
+      ctx.moveTo(cx+rT,yy); ctx.lineTo(cx+rN,yy+pasPx*0.5); ctx.lineTo(cx+rT,yy+pasPx); ctx.closePath(); ctx.fill();
+    }
+    /* le trou percé */
+    ctx.fillStyle='#11160f'; ctx.fillRect(cx-rT,cy-prof/2,rT*2,prof);
+
+    MSPC.mono(ctx,'Ø percé '+dtr.toFixed(2).replace('.',',')+' mm',cx,cy+prof/2+26,11.5,'#e6ebe4','center');
+    MSPC.mono(ctx,'Ø nominal '+Dn+' mm (pointillé)',cx,cy+prof/2+46,10,'#8d968b','center');
+    MSPC.mono(ctx,'COUPE DU TARAUDAGE',cx-190,cy-prof/2-14,9.5,'#8d968b');
+
+    MSPC.mono(ctx,'Ø RECOMMANDÉ = D − P = '+reco.toFixed(2).replace('.',',')+' mm',cx-190,80,10.5,'#8fd05f');
+
+    /* ---------- les trois indicateurs ---------- */
+    var px0=W-372, pw=346, bx=px0+18, bw=pw-140;
+    ctx.fillStyle='rgba(255,255,255,.04)'; ctx.fillRect(px0,56,pw,372);
+    ctx.strokeStyle='rgba(255,255,255,.20)'; ctx.lineWidth=1.4; ctx.strokeRect(px0+.5,56.5,pw,372);
+
+    function barre(lbl,v,vmax,col,txt,yy){
+      MSPC.mono(ctx,lbl,bx,yy,10,'#8d968b');
+      ctx.fillStyle='rgba(255,255,255,.08)'; ctx.fillRect(bx,yy+10,bw,16);
+      ctx.fillStyle=col; ctx.fillRect(bx,yy+10,bw*Math.min(1,v/vmax),16);
+      MSPC.titre(ctx,txt,bx+bw+12,yy+25,20,col);
+    }
+    barre('TAUX DE FILET',h,130,couleur,h.toFixed(0)+' %',86);
+    /* repère du 92 % obtenu au Ø recommandé */
+    ctx.strokeStyle='#8fd05f'; ctx.lineWidth=2;
+    ctx.beginPath(); ctx.moveTo(bx+bw*92.4/130,92); ctx.lineTo(bx+bw*92.4/130,116); ctx.stroke();
+
+    barre('COUPLE DE TARAUDAGE',couple,2.6,couple>1.6?'#ff6a5e':(couple>1.15?'#f0a844':'#8fd05f'),
+          '× '+couple.toFixed(2).replace('.',','),150);
+    barre('RÉSISTANCE DE L’ASSEMBLAGE',resist,100,resist>95?'#8fd05f':(resist>70?'#f0a844':'#ff6a5e'),
+          resist.toFixed(0)+' %',214);
+    MSPC.mono(ctx,'100 % = la vis casse avant le filet',bx,268,9.5,'#6f786e');
+
+    MSPC.titre(ctx,verdict,bx,312,21,couleur);
+    var mots=expl.split(' '), ligne='', yy3=336;
+    mots.forEach(function(m){
+      if((ligne+m).length>40){ MSPC.mono(ctx,ligne,bx,yy3,10.5,'#9aa494'); ligne=m+' '; yy3+=17; }
+      else ligne+=m+' ';
+    });
+    MSPC.mono(ctx,ligne,bx,yy3,10.5,'#9aa494');
+    if(!lub) MSPC.mono(ctx,'à sec : +35 % de couple, 2ᵉ cause de casse',bx,yy3+26,10,'#f0a844');
+
+    out.innerHTML='filet <b style="color:'+couleur+'">'+h.toFixed(0)+' %</b> · couple × '+couple.toFixed(2).replace('.',',')
+      +'<br><b style="color:'+couleur+'">'+verdict+'</b>';
   }, {fixed:true});
 })();
 </script>
