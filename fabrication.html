@@ -54,9 +54,9 @@
 </header>
 
 <div class="meta-bar">
-  <div><b>6</b> chapitres sur 13 publiés</div>
-  <div><b>11</b> animations pilotables</div>
-  <div><b>17</b> exercices corrigés</div>
+  <div><b>9</b> chapitres sur 13 publiés</div>
+  <div><b>15</b> animations pilotables</div>
+  <div><b>23</b> exercices corrigés</div>
   <div>Fiches TP <b>en préparation</b></div>
   <div>Calé sur le savoir <b>S4.9</b></div>
 </div>
@@ -92,9 +92,9 @@
     <a class="borne" href="#c4"><span class="num">04</span><span class="lbl">Cisaillage et pliage</span></a>
     <a class="borne" href="#c5"><span class="num">05</span><span class="lbl">La perceuse à colonne</span></a>
     <a class="borne" href="#c6"><span class="num">06</span><span class="lbl">Taraudage et filetages</span></a>
-    <a class="borne" href="#suite"><span class="num">07</span><span class="lbl">Assembler sans fondre</span></a>
-    <a class="borne" href="#suite"><span class="num">08</span><span class="lbl">Soudure à l'électrode enrobée</span></a>
-    <a class="borne" href="#suite"><span class="num">09</span><span class="lbl">Le semi-automatique MAG</span></a>
+    <a class="borne" href="#c7"><span class="num">07</span><span class="lbl">Assembler sans fondre</span></a>
+    <a class="borne" href="#c8"><span class="num">08</span><span class="lbl">Soudure à l'électrode enrobée</span></a>
+    <a class="borne" href="#c9"><span class="num">09</span><span class="lbl">Le semi-automatique MAG</span></a>
     <a class="borne" href="#suite"><span class="num">10</span><span class="lbl">Le brasage au chalumeau</span></a>
     <a class="borne" href="#suite"><span class="num">11</span><span class="lbl">L'impression 3D</span></a>
     <a class="borne" href="#suite"><span class="num">12</span><span class="lbl">Comment la pièce a été obtenue</span></a>
@@ -1137,16 +1137,475 @@
 </div>
 </section>
 
+<!-- ================= CH 7 ================= -->
+<section class="ch" id="c7">
+  <div class="ch-head"><div class="ch-num">07</div><div class="ch-title">
+    <span class="kicker">Une vis ne serre pas, elle s'étire</span><h2>Assembler sans fondre</h2></div></div>
+  <div class="ch-body">
+
+<div class="savoirs">
+  <span class="savoir n3"><b>S4.9.1</b> <i>Procédés d'assemblage : éléments filetés, collage, rivetage, déformation</i></span>
+</div>
+
+<p class="lede">Un assemblage boulonné ne tient pas parce que la vis « appuie ». Il tient parce que la vis a été <strong>tendue comme un ressort</strong> et qu'elle serre les pièces l'une contre l'autre avec cette tension. Tant qu'on n'a pas compris cela, on serre au jugé — et l'on ne comprend ni pourquoi une vis casse au montage, ni pourquoi une autre se desserre toute seule.</p>
+
+<h3>7.1 — La précontrainte, ou la vis-ressort</h3>
+<p>Quand vous serrez une vis, elle s'allonge. De très peu — quelques centièmes de millimètre — mais elle s'allonge, exactement comme un ressort qu'on tend. Cette tension s'appelle la <strong>précontrainte</strong>, et c'est elle, et elle seule, qui fait tenir l'assemblage.</p>
+<p>Deux conséquences, qui expliquent l'essentiel de ce qui rate :</p>
+<ul>
+<li><strong>Une vis correctement serrée ne travaille presque plus.</strong> Si la précontrainte est supérieure à l'effort extérieur, la vis ne « voit » pas les variations de charge : ce sont les pièces serrées qui les encaissent. C'est pour cela qu'une vis bien serrée ne casse pas en fatigue — alors qu'une vis mollement serrée casse en quelques milliers de cycles.</li>
+<li><strong>Une vis mal serrée se desserre.</strong> Nous y venons au 7.3, mais la cause est déjà là : sans tension suffisante, rien ne s'oppose à ce que l'écrou tourne.</li>
+</ul>
+
+<h3>7.2 — Le couple de serrage, et où il part vraiment</h3>
+<p>On ne mesure pas la tension d'une vis : on mesure le <strong>couple</strong> qu'on applique, et l'on espère que la tension suit. Le lien entre les deux est une relation approchée :</p>
+
+<div class="formule">C = K × F × d<small>C couple en N·m · F précontrainte en N · d diamètre nominal en m · K coefficient global</small></div>
+
+<p>Ce coefficient K vaut environ <strong>0,20 à sec</strong>, <strong>0,15 huilé</strong> et <strong>0,12 graissé</strong>. Ce ne sont pas des détails : ils changent la tension obtenue de plus de moitié pour le même couple appliqué.</p>
+<p>Et voici le fait le plus troublant du chapitre, celui qu'il faut retenir même en oubliant tout le reste : <span class="cle">environ 90 % du couple que vous appliquez sert uniquement à vaincre des frottements.</span> La moitié part en frottement sous la tête de vis, 40 % dans les filets, et il ne reste qu'un dixième pour tendre réellement la vis. Voilà pourquoi une trace de graisse suffit à faire casser une vis serrée « au bon couple ».</p>
+
+<table>
+<thead><tr><th>Vis, classe 8.8</th><th>M6</th><th>M8</th><th>M10</th><th>M12</th><th>M14</th><th>M16</th></tr></thead>
+<tbody>
+<tr><td><strong>Couple à sec</strong></td><td>10 N·m</td><td><strong>25 N·m</strong></td><td>49 N·m</td><td>86 N·m</td><td>135 N·m</td><td>210 N·m</td></tr>
+<tr><td>Précontrainte obtenue</td><td>8,4 kN</td><td>15,2 kN</td><td>24,1 kN</td><td>35,1 kN</td><td>47,8 kN</td><td>65,3 kN</td></tr>
+</tbody></table>
+<p>Les <strong>classes</strong> se lisent sur la tête de la vis. Le premier nombre donne la résistance à la traction en centaines de mégapascals, le second le rapport entre limite élastique et résistance : une <span class="mono">8.8</span> a R<sub>m</sub> = 800 MPa et R<sub>e</sub> = 640 MPa ; une <span class="mono">10.9</span>, 1000 et 900 ; une <span class="mono">12.9</span>, 1200 et 1080. <span class="cle">Remonter une 8.8 à la place d'une 10.9 divise la précontrainte admissible par 1,4</span> — et c'est invisible une fois la vis en place.</p>
+
+<figure class="anim">
+  <canvas id="a-vis" width="900" height="470" aria-label="Animation : couple de serrage, précontrainte obtenue, répartition du couple et limite élastique de la vis"></canvas>
+  <div class="ctrls">
+    <div class="c"><label>Vis <span id="a-vis-m-l">M8</span></label><input type="range" id="a-vis-m" min="0" max="5" value="1"></div>
+    <div class="c"><label>Classe <span id="a-vis-c-l">8.8</span></label><input type="range" id="a-vis-c" min="0" max="2" value="0"></div>
+    <div class="c"><label>Couple appliqué <span id="a-vis-t-l">100 % du couple table</span></label><input type="range" id="a-vis-t" min="0" max="170" value="100"></div>
+    <div class="c"><label>État du filetage <span id="a-vis-f-l">sec</span></label><input type="range" id="a-vis-f" min="0" max="2" value="0"></div>
+    <div class="c readout" id="a-vis-out"></div>
+  </div>
+  <figcaption>À gauche, la vis et son allongement, très exagéré ; au centre, où part le couple appliqué ; à droite, la précontrainte obtenue par rapport à la limite élastique. <b>Réglage initial</b> : un M8 en 8.8 serré à sec au couple de table, on obtient 15,2 kN et l'on est à 65 % de la limite élastique — c'est exactement la cible. <b>Passez l'état du filetage sur « graissé » sans toucher au couple</b> : la vis dépasse sa limite élastique. Le couple affiché est le même, le frottement a disparu, et ce qui n'est plus perdu en frottement est passé en tension. <span class="cle">C'est l'accident classique du remontage : on graisse « pour que ça remonte mieux » et l'on plastifie la vis au couple prescrit.</span> <b>Revenez à sec et descendez le couple à 40 %</b> : l'assemblage est sous-serré, et c'est celui-là qui se desserrera et cassera en fatigue. <b>Regardez enfin le camembert du milieu</b> : quel que soit le réglage, à peine un dixième du couple sert à tendre la vis.</figcaption>
+  <div class="autableau">
+    <b class="entete">Au tableau <i>· 14 minutes · animation 1 sur 2</i></b>
+    <ol>
+      <li>Réglage initial. Faire lire la précontrainte : <span class="q">« Quinze kilonewtons, c'est combien de kilos suspendus ? »</span> Une tonne et demie, sur un M8.</li>
+      <li>Montrer le camembert. <span class="q">« Quelle part du couple sert à serrer ? »</span> Laisser deviner avant de lire : personne ne dit 10 %.</li>
+      <li>État sur <b>graissé</b>. <span class="q">« Qu'est-ce qui a changé physiquement ? »</span> Rien sur la clé — tout dans le frottement.</li>
+      <li><span class="q">« Que se passe-t-il sur une machine si on graisse les vis avant de les remonter au couple ? »</span> C'est le cœur du chapitre.</li>
+      <li>Couple à <b>40 %</b>, à sec. Faire nommer les deux risques : desserrage et rupture en fatigue.</li>
+      <li>Changer la <b>classe</b> en gardant le couple. Faire constater qu'une 8.8 montée à la place d'une 10.9 se retrouve bien plus près de sa limite.</li>
+    </ol>
+    <div class="piege">Le piège : « je serre au ressenti, j'ai l'habitude ». Les études sur le sujet sont sans appel — la dispersion au ressenti dépasse ± 40 %, même chez un professionnel expérimenté, et elle dépend de la longueur de la clé utilisée ce jour-là. La clé dynamométrique n'est pas un raffinement de laboratoire : c'est le seul moyen de savoir ce qu'on a fait.</div>
+  </div>
+</figure>
+
+<h3>7.3 — Pourquoi une vis se desserre, et comment l'en empêcher</h3>
+<p>Contrairement à l'intuition, une vis ne se desserre presque jamais à cause des vibrations <em>axiales</em>. Le mécanisme réel est le <strong>glissement transversal</strong> : si les pièces serrées bougent l'une par rapport à l'autre, ne serait-ce que de quelques microns, le frottement qui bloquait le filet disparaît un instant — et la vis tourne d'un rien. Répété des milliers de fois, l'assemblage se défait.</p>
+<p>Trois conséquences pratiques en découlent, et la première surprend toujours :</p>
+<ul>
+<li><strong>La meilleure sécurité contre le desserrage est une précontrainte élevée.</strong> Plus la vis est tendue, moins les pièces peuvent glisser. Un assemblage correctement serré n'a souvent besoin d'aucun autre freinage.</li>
+<li><strong>Une rondelle plate ne freine rien.</strong> Elle répartit la pression sous la tête et protège la surface : c'est utile, mais ce n'est pas un frein.</li>
+<li><strong>Un assemblage qui se desserre à répétition a un problème mécanique</strong>, pas un problème de freinage. Chercher le glissement — jeu, pièce déformée, appui insuffisant — avant d'ajouter du frein filet.</li>
+</ul>
+
+<table>
+<thead><tr><th>Freinage</th><th>Principe</th><th>Efficacité</th><th>Remarque</th></tr></thead>
+<tbody>
+<tr><td>Rondelle plate</td><td>Répartit la pression</td><td><strong>Nulle</strong></td><td>N'est pas un frein, malgré la croyance générale</td></tr>
+<tr><td>Rondelle éventail, Grower</td><td>Ressort et arêtes qui mordent</td><td>Faible</td><td>Marque les surfaces ; contestée en usage sévère</td></tr>
+<tr><td><strong>Écrou Nylstop</strong></td><td>Bague nylon qui freine le filet</td><td>Bonne</td><td>Démontable, mais à usage limité ; sensible à la chaleur</td></tr>
+<tr><td><strong>Frein filet</strong> (anaérobie)</td><td>Colle qui polymérise sans air</td><td><strong>Très bonne</strong></td><td>Existe en démontable et en fort ; à choisir selon le démontage prévu</td></tr>
+<tr><td>Goupille, frein plié, fil-frein</td><td>Obstacle mécanique</td><td>Totale</td><td>La seule solution vraiment sûre en aéronautique</td></tr>
+<tr><td>Rondelles à coincement</td><td>Cames qui s'opposent au dévissage</td><td>Très bonne</td><td>Toujours par paire, cames face à face</td></tr>
+</tbody></table>
+
+<figure class="anim">
+  <canvas id="a-frein" width="900" height="440" aria-label="Animation : perte de précontrainte d'un assemblage boulonné sous vibration transversale selon le mode de freinage"></canvas>
+  <div class="ctrls">
+    <div class="c"><label>Vibration transversale <span id="a-frein-v-l">55 %</span></label><input type="range" id="a-frein-v" min="0" max="100" value="55"></div>
+    <div class="c"><label>Précontrainte initiale <span id="a-frein-p-l">65 % de Re</span></label><input type="range" id="a-frein-p" min="20" max="95" value="65"></div>
+    <div class="c"><label>Freinage <span id="a-frein-t-l">aucun</span></label><input type="range" id="a-frein-t" min="0" max="4" value="0"></div>
+    <div class="c readout" id="a-frein-out"></div>
+  </div>
+  <figcaption>La courbe donne la précontrainte restante au fil des cycles de vibration. En dessous du <b>seuil rouge</b>, l'assemblage n'est plus serré : les pièces glissent librement et la vis va casser en fatigue. <b>Réglage initial, sans aucun freinage</b> : la tension s'effondre en quelques milliers de cycles. <b>Passez sur « frein filet »</b> : la courbe s'aplatit presque complètement. <b>Revenez à « aucun » et montez la précontrainte initiale à 90 %</b> : sans rien ajouter, l'assemblage tient bien plus longtemps — c'est le résultat contre-intuitif du chapitre. <span class="cle">Serrer correctement est le premier des freinages ; le frein filet ne rattrape pas un serrage insuffisant.</span> <b>Ramenez la vibration à zéro</b> : plus rien ne bouge, quel que soit le freinage. Une vis qui ne subit pas de glissement transversal ne se desserre pas.</figcaption>
+  <div class="autableau">
+    <b class="entete">Au tableau <i>· 10 minutes · animation 2 sur 2</i></b>
+    <ol>
+      <li><span class="q">« Pourquoi une vis se desserre-t-elle ? »</span> Recueillir « à cause des vibrations », puis préciser : à cause du <em>glissement transversal</em>, pas des secousses.</li>
+      <li>Sans freinage, faire lire au bout de combien de cycles le seuil est franchi.</li>
+      <li>Essayer les freinages un par un, du moins efficace au plus efficace.</li>
+      <li>Retour à <b>aucun freinage</b>, précontrainte à <b>90 %</b>. <span class="q">« Qu'est-ce qui tient le mieux : une vis freinée mal serrée, ou une vis bien serrée sans frein ? »</span></li>
+      <li><span class="q">« Sur une machine qui desserre ses vis tous les mois, que faut-il chercher en premier ? »</span> La cause du glissement, pas un tube de frein filet.</li>
+    </ol>
+    <div class="piege">Le piège : le réflexe « frein filet partout ». Sur un assemblage qui chauffe, la plupart des freins filets perdent leurs propriétés au-delà de 150 °C ; sur un assemblage qu'il faudra démonter en urgence, un frein fort impose de chauffer à 250 °C pour desserrer. Le produit se choisit — démontable, normal ou fort — et cela se note dans le dossier machine.</div>
+  </div>
+</figure>
+
+<h3>7.4 — Le rivetage</h3>
+<p>Le rivet assemble par <strong>déformation</strong> : on l'introduit dans un trou, on écrase l'extrémité, et la tête ainsi formée emprisonne les pièces. C'est un assemblage <em>définitif</em> — on ne démonte un rivet qu'en le perçant.</p>
+<ul>
+<li><strong>Le rivet plein</strong> se rive au marteau ou à la bouterolle, avec accès des deux côtés. La longueur utile dépassant vaut environ <strong>1,5 fois le diamètre</strong> : moins, la tête ne se forme pas ; plus, le rivet flambe de côté.</li>
+<li><strong>Le rivet aveugle</strong>, dit « pop », se pose d'un seul côté à la pince. Un clou intérieur est tiré, il forme la tête arrière puis casse. C'est la solution de maintenance par excellence : capots, tôles, habillages, là où l'on n'a accès qu'à une face.</li>
+</ul>
+<p>Le diamètre de perçage vaut le diamètre du rivet plus un ou deux dixièmes — un rivet aveugle de 4 se pose dans un trou de 4,1. <span class="cle">Un trou trop grand fait un assemblage mou que rien ne rattrape :</span> le rivet se dilate mais ne serre plus, et les tôles jouent.</p>
+
+<h3>7.5 — Le collage structural</h3>
+<p>Coller n'est plus une solution de dépannage : c'est un procédé d'assemblage à part entière, et le référentiel le cite explicitement. Trois familles couvrent tout ce qu'un mainteneur rencontre.</p>
+<table>
+<thead><tr><th>Famille</th><th>Durcit</th><th>Jeu admis</th><th>Emploi typique</th></tr></thead>
+<tbody>
+<tr><td><strong>Anaérobie</strong></td><td>En l'absence d'air, entre deux métaux</td><td>0,05 à 0,25 mm</td><td>Frein filet, blocage de roulement sur arbre, étanchéité de raccords</td></tr>
+<tr><td><strong>Cyanoacrylate</strong></td><td>Avec l'humidité de l'air, en secondes</td><td>&lt; 0,1 mm</td><td>Petites pièces, élastomères. Fragile aux chocs et à la chaleur</td></tr>
+<tr><td><strong>Époxy bi-composant</strong></td><td>Par réaction chimique, en heures</td><td>Jusqu'à plusieurs mm</td><td>Collage structural, comblement, réparation de carter</td></tr>
+</tbody></table>
+<p>Deux règles valent tout le reste. D'abord, <strong>la préparation de surface fait 80 % du résultat</strong> : dégraisser à l'acétone, dépolir, dégraisser à nouveau. Une colle ne tient pas sur un film d'huile invisible. Ensuite, <strong>une colle a un jeu optimal</strong> : trop serré, elle n'a pas de place et le film est discontinu ; trop lâche, l'épaisseur de colle devient le maillon faible. On ne rattrape pas un mauvais ajustement avec de la colle.</p>
+
+<div class="encadre"><span class="tag">Vissé, rivé ou collé ? La question à se poser</span>
+<p>La bonne question n'est pas « qu'est-ce qui tient le mieux » mais <strong>« faudra-t-il le démonter, et par quel côté puis-je accéder »</strong>.</p>
+<ul>
+<li><strong>Démontage prévu, accès des deux côtés</strong> → vis et écrou. C'est la solution par défaut en maintenance, et elle a un immense avantage : elle se contrôle au couple.</li>
+<li><strong>Démontage prévu, accès d'un seul côté</strong> → taraudage dans la pièce, ou insert. Voir le chapitre 6.</li>
+<li><strong>Pas de démontage, accès d'un seul côté, tôles minces</strong> → rivet aveugle.</li>
+<li><strong>Pas de démontage, grande surface, efforts répartis</strong> → collage. Il ne perce pas les tôles, donc il ne crée pas d'amorce de fissure — c'est son vrai atout, et la raison de son emploi en aéronautique.</li>
+<li><strong>Effort important et concentré</strong> → boulonnerie, toujours. Le collage n'aime pas le pelage ni le choc.</li>
+</ul></div>
+
+<div class="exo"><span class="tag">Exercice 7.1</span>
+<p>Une pompe est fixée par quatre vis M10 classe 8.8, couple prescrit 49 N·m. Lors du remontage, un technicien enduit les filets de graisse « pour faciliter le montage » et serre au couple prescrit à la clé dynamométrique. Deux vis cassent, les deux autres tiennent. Expliquez, et dites ce qu'il aurait fallu faire.</p>
+<details><summary>Voir la réponse</summary><div class="rep">
+<p><strong>La graisse a supprimé le frottement, donc le même couple a produit une tension bien plus élevée que prévu — au-delà de la limite élastique.</strong></p>
+<p><strong>Le calcul.</strong> Le couple prescrit vaut C = K × F × d avec un coefficient <strong>à sec</strong> K = 0,20 :</p>
+<p>F = C / (K × d) = 49 / (0,20 × 0,010) = <strong>24 500 N</strong>, ce qui correspond bien à environ 65 % de la limite élastique d'un M10 en 8.8. C'est la cible.</p>
+<p>Avec les filets graissés, K tombe à environ <strong>0,12</strong> :</p>
+<p>F = 49 / (0,12 × 0,010) = <strong>40 800 N</strong> — soit <strong>1,7 fois</strong> la tension prévue, très au-dessus de la limite élastique de la vis, qui vaut ici environ 37 000 N.</p>
+<p><strong>Pourquoi deux seulement ont cassé.</strong> Parce que la quantité de graisse n'était pas la même sur les quatre vis, et que la dispersion sur K est énorme. Les deux qui ont « tenu » sont probablement plastifiées elles aussi : elles se sont allongées de façon permanente, elles ont perdu leur précontrainte, et elles casseront en fatigue. <span class="cle">Les deux vis qui n'ont pas cassé sont un problème plus grave que les deux qui ont cassé, parce que personne ne les a remarquées.</span></p>
+<p><strong>Ce qu'il fallait faire.</strong></p>
+<ul>
+<li><strong>Monter les filets propres et secs</strong>, comme le suppose le couple prescrit. Un couple de serrage n'a de sens que s'il est accompagné de son état de surface.</li>
+<li>Si le constructeur prescrit un montage lubrifié, il donne <strong>un autre couple</strong> — typiquement 30 à 40 % plus faible. On applique celui-là, pas le couple à sec.</li>
+<li>Si les filets sont grippés ou rouillés au point de nécessiter un lubrifiant, c'est que <strong>la visserie est à remplacer</strong>. Une vis démontée avec difficulté ne se remonte pas.</li>
+</ul>
+<p><strong>Et maintenant :</strong> remplacer les quatre vis, pas seulement les deux cassées. Une vis de classe 8.8 ayant subi un serrage plastique est morte, même si elle a l'air intacte.</p>
+</div></details></div>
+
+<div class="exo"><span class="tag">Exercice 7.2</span>
+<p>Sur un convoyeur, quatre vis M8 fixant un support de galet se desserrent toutes les trois à quatre semaines. L'équipe les resserre à chaque fois, et a fini par ajouter des rondelles Grower — sans résultat. Que faites-vous ?</p>
+<details><summary>Voir la réponse</summary><div class="rep">
+<p><strong>On arrête de traiter le symptôme. Un assemblage qui se desserre à répétition subit un glissement transversal, et c'est la cause qu'il faut supprimer.</strong></p>
+<p><strong>Pourquoi les rondelles Grower n'ont rien changé.</strong> Elles n'ont qu'une efficacité faible, et surtout elles ne s'attaquent pas au mécanisme réel : ce n'est pas la vibration qui dévisse, c'est le <strong>glissement des pièces l'une sur l'autre</strong>. Tant que le support bouge par rapport au bâti, le frottement dans le filet s'annule périodiquement et la vis tourne.</p>
+<p><strong>Ce qu'il faut vérifier, dans cet ordre.</strong></p>
+<ol>
+<li><strong>La précontrainte.</strong> Les vis étaient-elles réellement au couple ? C'est de loin la cause la plus fréquente, et la plus facile à corriger. Un M8 en 8.8 se serre à 25 N·m, filets propres et secs, à la clé dynamométrique — pas à la clé plate.</li>
+<li><strong>L'état des portées.</strong> Une surface peinte, rouillée ou marquée par les précédents serrages « flue » sous la tête de vis : la précontrainte tombe toute seule en quelques jours, sans que rien ne se dévisse. C'est le <em>tassement</em>, et il se voit à l'empreinte laissée par les rondelles.</li>
+<li><strong>Le jeu dans les trous de passage.</strong> Des trous ovalisés ou surdimensionnés autorisent le glissement dès que la précontrainte faiblit. On les reprend, ou l'on pose des vis ajustées.</li>
+<li><strong>La cause de l'effort transversal lui-même</strong> : galet désaligné, bande mal guidée, roulement en fin de vie qui transmet des à-coups. C'est souvent là qu'est la vraie panne, et le desserrage n'en est que le symptôme visible.</li>
+</ol>
+<p><strong>Ce qu'on met en place.</strong> Vis neuves, portées reprises et propres, serrage à la clé dynamométrique, <strong>frein filet démontable</strong> en complément — et non en remplacement — du serrage correct. Puis un <strong>repère de contrôle</strong> : un trait de peinture à cheval sur la vis et la pièce, qui rend tout amorce de rotation visible en une seconde pendant la ronde.</p>
+<p><em>Ce repère est le vrai livrable de l'intervention : il transforme un défaut invisible en un contrôle d'une seconde, et il permettra de savoir si la correction a marché sans attendre la prochaine panne.</em></p>
+</div></details></div>
+
+</div>
+</section>
+
+<!-- ================= CH 8 ================= -->
+<section class="ch" id="c8">
+  <div class="ch-head"><div class="ch-num">08</div><div class="ch-title">
+    <span class="kicker">Six mille degrés au bout d'une baguette</span><h2>Soudure à l'arc avec électrode enrobée</h2></div></div>
+  <div class="ch-body">
+
+<div class="savoirs">
+  <span class="savoir n3"><b>S4.9.1</b> <i>Procédés d'assemblage : soudage</i></span>
+  <span class="savoir n3"><b>S4.2</b> <i>Respect des conditions de sécurité</i></span>
+</div>
+
+<p class="lede">Le procédé s'appelle officiellement 111, tout le monde dit « à la baguette » ou MMA. C'est le plus ancien, le plus rustique, celui qui marche dehors, sous le vent, sur de l'acier rouillé, avec un poste qu'on porte à la main. C'est aussi celui qui demande le plus de main — et dont les réglages se résument pourtant à une multiplication.</p>
+
+<h3>8.1 — Ce qui se passe dans l'arc</h3>
+<p>Entre l'électrode et la pièce, on établit un court-circuit qu'on rompt aussitôt en reculant de quelques millimètres. L'air ionisé conduit alors le courant : c'est l'<strong>arc électrique</strong>, et il monte à environ <strong>6 000 °C</strong>, bien au-delà des 1 500 °C de fusion de l'acier.</p>
+<p>Cet arc fait deux choses simultanément : il <strong>fond le métal de base</strong> — c'est la pénétration — et il <strong>fond l'électrode</strong>, dont les gouttes viennent alimenter le bain. Une soudure n'est pas un collage : c'est un bain de métal liquide commun aux deux pièces, qui se solidifie ensuite. <span class="cle">S'il n'y a pas eu fusion du métal de base, il n'y a pas eu soudure — seulement du métal d'apport posé dessus.</span> C'est le défaut appelé <em>collage</em>, et c'est le plus dangereux parce qu'il ne se voit pas.</p>
+
+<h3>8.2 — L'enrobage, qui fait tout le travail invisible</h3>
+<p>Une électrode enrobée est une âme métallique entourée d'une gaine minérale. Cette gaine n'est pas une protection de manutention : elle remplit <strong>quatre fonctions</strong> simultanées, et c'est elle qui distingue le procédé.</p>
+<ol>
+<li><strong>Elle génère un gaz protecteur</strong> en brûlant, qui chasse l'air du bain. Sans lui, l'acier liquide absorberait l'azote et l'oxygène de l'air, et le cordon serait poreux et fragile.</li>
+<li><strong>Elle forme le laitier</strong>, une croûte vitreuse qui surnage, protège le métal pendant son refroidissement et ralentit celui-ci. On le pique une fois refroidi.</li>
+<li><strong>Elle stabilise l'arc</strong> en facilitant l'ionisation.</li>
+<li><strong>Elle apporte des éléments d'alliage</strong> qui ajustent la composition du cordon.</li>
+</ol>
+
+<table>
+<thead><tr><th></th><th>Rutile</th><th>Basique</th></tr></thead>
+<tbody>
+<tr><td><strong>Facilité d'emploi</strong></td><td>Très facile, arc doux, belle apparence</td><td>Plus difficile, arc dur, cordon moins joli</td></tr>
+<tr><td><strong>Qualité mécanique</strong></td><td>Correcte</td><td><strong>Excellente</strong>, très faible teneur en hydrogène</td></tr>
+<tr><td><strong>Emploi</strong></td><td>Travaux courants, tôlerie, réparations sans exigence</td><td>Fortes épaisseurs, pièces sollicitées, aciers difficiles, basses températures</td></tr>
+<tr><td><strong>Stockage</strong></td><td>Au sec</td><td><strong>À étuver</strong> — elles absorbent l'humidité de l'air</td></tr>
+</tbody></table>
+<p>Le point du stockage n'est pas un détail d'intendance. Une électrode basique humide libère de l'<strong>hydrogène</strong> dans le bain, qui provoque des fissures différées — des fissures qui apparaissent <em>des heures</em> après la soudure, alors que tout le monde est parti. C'est pourquoi les électrodes basiques se conservent en étuve à 100-150 °C.</p>
+
+<h3>8.3 — Régler le poste : une multiplication</h3>
+<p>Le seul réglage d'un poste MMA est l'<strong>intensité</strong>. Elle se déduit du diamètre de l'électrode, lui-même choisi selon l'épaisseur à souder :</p>
+
+<div class="formule">I ≈ 40 × Ø de l'électrode<small>une électrode de 3,2 mm se règle vers 130 A · fourchette usuelle 35 à 45 × Ø</small></div>
+
+<table>
+<thead><tr><th>Épaisseur à souder</th><th>Ø électrode</th><th>Intensité</th></tr></thead>
+<tbody>
+<tr><td>1,5 à 2,5 mm</td><td>2,0 mm</td><td>50 à 80 A</td></tr>
+<tr><td>2,5 à 4 mm</td><td>2,5 mm</td><td>80 à 110 A</td></tr>
+<tr><td><strong>4 à 8 mm</strong></td><td><strong>3,2 mm</strong></td><td><strong>110 à 150 A</strong></td></tr>
+<tr><td>8 mm et plus</td><td>4,0 mm</td><td>150 à 200 A</td></tr>
+</tbody></table>
+<p>Deux autres paramètres ne sont pas sur le poste mais dans la main, et ils comptent autant :</p>
+<ul>
+<li><strong>La longueur d'arc</strong> doit rester égale au diamètre de l'électrode. Trop court, l'électrode colle ; trop long, la protection gazeuse ne couvre plus le bain et le cordon devient poreux, large et plat, avec beaucoup de projections.</li>
+<li><strong>La vitesse d'avance</strong> se règle en regardant le bain, pas l'électrode. Trop lent, le cordon est bombé et déforme la pièce ; trop rapide, il est étroit et ne pénètre pas.</li>
+</ul>
+
+<figure class="anim">
+  <canvas id="a-mma" width="900" height="480" aria-label="Animation : réglage d'un poste à souder à l'électrode enrobée, intensité, longueur d'arc et vitesse d'avance, forme du cordon et défauts"></canvas>
+  <div class="ctrls">
+    <div class="c"><label>Ø électrode <span id="a-mma-e-l">3,2 mm</span></label><input type="range" id="a-mma-e" min="0" max="3" value="2"></div>
+    <div class="c"><label>Intensité <span id="a-mma-i-l">128 A</span></label><input type="range" id="a-mma-i" min="20" max="220" value="128"></div>
+    <div class="c"><label>Longueur d'arc <span id="a-mma-l-l">3,2 mm</span></label><input type="range" id="a-mma-l" min="2" max="90" value="32"></div>
+    <div class="c"><label>Vitesse d'avance <span id="a-mma-v-l">30 cm/min</span></label><input type="range" id="a-mma-v" min="6" max="70" value="30"></div>
+    <div class="c readout" id="a-mma-out"></div>
+  </div>
+  <figcaption>En haut, l'électrode, l'arc et le bain vus de côté ; au milieu, la <b>coupe du cordon</b> avec sa pénétration dans le métal de base ; en bas, le cordon vu de dessus. À droite, le réglage conseillé et les défauts engendrés. <b>Partez du réglage juste</b> — 3,2 mm à 128 A, arc de 3,2 mm, 30 cm/min. <b>Descendez l'intensité à 70 A</b> : le cordon devient bombé et la pénétration disparaît. C'est le <b>collage</b>, le défaut invisible : le métal d'apport est posé sur la tôle sans l'avoir fondue. <b>Montez à 200 A</b> : le cordon s'étale, des caniveaux creusent ses bords et l'on risque de percer. <b>Revenez au juste et allongez l'arc à 8 mm</b> : la protection gazeuse ne couvre plus le bain, des porosités apparaissent. <b>Enfin doublez la vitesse</b> : cordon étroit, pénétration insuffisante. <span class="cle">Quatre réglages, et chacun laisse une signature différente sur le cordon.</span></figcaption>
+  <div class="autableau">
+    <b class="entete">Au tableau <i>· 18 minutes · animation 1 sur 1</i></b>
+    <ol>
+      <li>Faire calculer l'intensité avant d'ouvrir l'animation : <span class="q">« Électrode de 3,2, quelle intensité ? »</span> 40 × 3,2 = 128 A.</li>
+      <li>Réglage juste. Faire décrire le cordon : régulier, pénétration franche, pas de défaut listé.</li>
+      <li>Intensité à <b>70 A</b>. <span class="q">« Le cordon est-il laid ? »</span> Non, il est même bombé et brillant. <span class="q">« Alors où est le problème ? »</span> Faire regarder la coupe : il n'y a pas de fusion du métal de base.</li>
+      <li>Insister : <span class="cle">le collage est le seul défaut de soudage qui ne se voit pas de l'extérieur.</span> C'est pour cela qu'on contrôle les soudures importantes par ressuage ou ultrasons.</li>
+      <li>Intensité à <b>200 A</b>. Faire nommer les caniveaux et expliquer pourquoi ils sont graves : ce sont des amorces de fissure en fatigue.</li>
+      <li>Arc long. <span class="q">« D'où viennent les porosités ? »</span> Le gaz de l'enrobage ne couvre plus le bain, l'air entre.</li>
+      <li>Vitesse double. Faire comparer avec le cas « intensité faible » : les deux manquent de pénétration, pour des raisons différentes.</li>
+    </ol>
+    <div class="piege">Le piège : juger une soudure sur son apparence. Un cordon régulier et brillant fait à 70 A est un cordon sans pénétration, donc sans résistance — et il est plus <em>beau</em> qu'un cordon correct, parce qu'un vrai bain projette et laisse un dessus plus tourmenté. Faire scier et polir deux éprouvettes en atelier, une à 70 A et une à 128 A, règle la question définitivement : la coupe ne ment pas.</div>
+  </div>
+</figure>
+
+<h3>8.4 — Les défauts, et ce que chacun raconte</h3>
+<table>
+<thead><tr><th>Défaut</th><th>Aspect</th><th>Cause</th><th>Gravité</th></tr></thead>
+<tbody>
+<tr><td><strong>Collage</strong><br>manque de fusion</td><td><em>Invisible de l'extérieur</em></td><td>Intensité trop faible, vitesse trop grande, bain mal dirigé</td><td><strong>Très grave</strong> — la soudure ne tient pas</td></tr>
+<tr><td><strong>Manque de pénétration</strong></td><td>Visible en racine ou en coupe</td><td>Intensité faible, chanfrein insuffisant, écartement nul</td><td>Grave</td></tr>
+<tr><td><strong>Caniveaux</strong></td><td>Sillon creusé sur le bord du cordon</td><td>Intensité trop forte, arc trop long, mauvais angle</td><td>Grave — amorce de fissure en fatigue</td></tr>
+<tr><td><strong>Porosités</strong></td><td>Petits trous ronds dans le cordon</td><td>Arc trop long, humidité, pièce sale, peinture, rouille</td><td>Moyenne à grave selon densité</td></tr>
+<tr><td><strong>Inclusions de laitier</strong></td><td>Zones sombres piégées</td><td>Laitier mal piqué entre deux passes, cordon trop bombé</td><td>Moyenne</td></tr>
+<tr><td><strong>Fissures</strong></td><td>Ligne fine, parfois différée</td><td>Hydrogène, refroidissement trop rapide, bridage excessif</td><td><strong>Très grave</strong></td></tr>
+</tbody></table>
+
+<h3>8.5 — Préparer le joint</h3>
+<p>Au-delà de 4 mm environ, un cordon simple ne traverse pas l'épaisseur : il faut <strong>chanfreiner</strong>. Le chanfrein en V, à 60 ou 70° d'ouverture totale, laisse un <strong>talon</strong> de 1 à 2 mm et l'on ménage un <strong>écartement</strong> de l'ordre du diamètre de l'électrode. C'est cet écartement qui permet à la première passe — la <em>passe de pénétration</em> — d'atteindre l'envers.</p>
+<p>Et avant tout cela : <strong>on nettoie</strong>. Rouille, peinture, graisse, galvanisation et humidité sont toutes sources de porosités ou de fumées dangereuses. Une meuleuse avec une brosse métallique sur trois centimètres de part et d'autre du joint fait gagner plus de qualité que n'importe quel réglage.</p>
+
+<div class="encadre danger"><span class="tag">Souder n'est pas une opération ordinaire</span>
+<p><strong>Les yeux.</strong> L'arc émet un ultraviolet intense. Une exposition de quelques secondes suffit à provoquer un <em>coup d'arc</em> — une brûlure de la cornée qui ne se déclare que six à huit heures plus tard, dans la nuit, et qui est extrêmement douloureuse. Masque à teinte 10 à 13 selon l'intensité, et <strong>écran de protection pour les personnes autour</strong> : c'est très souvent le collègue qui passe qui prend le coup d'arc.</p>
+<p><strong>La peau.</strong> Le même ultraviolet brûle comme un coup de soleil violent. Manches longues, col fermé, gants de soudeur, pas de tissu synthétique qui fond sur la peau.</p>
+<p><strong>Les fumées.</strong> Elles sont classées cancérogènes depuis 2017, toutes soudures d'acier confondues. Aspiration à la source, ou à défaut ventilation et positionnement hors du panache. <span class="cle">Souder de l'acier galvanisé dégage des oxydes de zinc qui provoquent la « fièvre des fondeurs »</span> — syndrome grippal quelques heures après. On dégalvanise la zone avant de souder, et l'on aspire.</p>
+<p><strong>L'incendie.</strong> C'est le risque le plus fréquent et le plus coûteux. Les projections partent à plus de dix mètres et rebondissent. On dégage la zone, on protège ce qui ne peut pas être déplacé, on a un extincteur à portée — et l'on applique le <strong>permis de feu</strong> : autorisation écrite, consignation des risques, et <strong>surveillance de la zone pendant deux heures après la fin des travaux</strong>. La majorité des incendies déclarés après soudure démarrent bien après le départ du soudeur.</p>
+<p><strong>L'électricité.</strong> La tension à vide d'un poste atteint 50 à 90 V. Sur un sol humide ou dans un espace confiné métallique, ce n'est pas négligeable : tapis isolant, gants secs, et l'on ne coince jamais le porte-électrode sous le bras.</p></div>
+
+<div class="exo"><span class="tag">Exercice 8.1</span>
+<p>Vous devez souder deux plats d'acier de <strong>6 mm</strong> bout à bout. a) Quel diamètre d'électrode et quelle intensité ? b) Faut-il préparer le joint, et comment ? c) Le cordon obtenu est bombé, étroit, et le laitier se détache mal. Quel réglage corrigez-vous ?</p>
+<details><summary>Voir la réponse</summary><div class="rep">
+<p><strong>a) Électrode de 3,2 mm, réglée vers 128 A.</strong></p>
+<p>Le tableau donne 3,2 mm pour les épaisseurs de 4 à 8 mm. L'intensité se calcule par I ≈ 40 × Ø = 40 × 3,2 = <strong>128 A</strong>, à ajuster dans la fourchette 110-150 A selon la position et le comportement du bain.</p>
+<p><em>On pourrait souder du 6 mm avec une électrode de 2,5 en plusieurs passes, mais ce serait plus long et l'on multiplierait les risques d'inclusion de laitier entre passes.</em></p>
+<p><strong>b) Oui : chanfrein en V.</strong></p>
+<p>À 6 mm, une passe unique sur bords droits ne traverse pas l'épaisseur — on obtiendrait un manque de pénétration en racine, invisible du dessus. La préparation :</p>
+<ul>
+<li><strong>Chanfrein en V</strong>, environ 60 à 70° d'ouverture totale, soit 30 à 35° par bord, à la meuleuse.</li>
+<li><strong>Talon de 1,5 à 2 mm</strong> laissé droit en fond de chanfrein : il évite de percer à la première passe.</li>
+<li><strong>Écartement d'environ 3 mm</strong>, de l'ordre du diamètre de l'électrode, pour que la passe de pénétration atteigne l'envers.</li>
+<li><strong>Nettoyage</strong> sur 3 cm de part et d'autre : rouille, peinture, graisse.</li>
+<li><strong>Pointage</strong> aux extrémités, et prévoir le retrait : les deux plats vont se rapprocher en refroidissant.</li>
+</ul>
+<p>On soude ensuite en plusieurs passes : une passe de pénétration, puis une ou deux passes de remplissage, <strong>en piquant et brossant le laitier entre chaque</strong>.</p>
+<p><strong>c) L'intensité est trop faible. C'est le diagnostic, et les trois symptômes concordent.</strong></p>
+<ul>
+<li><strong>Cordon bombé</strong> : le métal d'apport ne s'étale pas, faute d'énergie pour rendre le bain fluide.</li>
+<li><strong>Cordon étroit</strong> : l'arc ne fond pas assez large.</li>
+<li><strong>Laitier qui se détache mal</strong> : c'est le signe le plus caractéristique. Un bain trop froid piège le laitier dans le cordon au lieu de le laisser surnager proprement.</li>
+</ul>
+<p><strong>Ce qu'il faut faire :</strong> remonter vers 140 A et refaire un cordon d'essai sur chute. Puis vérifier ce qui compte vraiment — <span class="cle">un cordon bombé à basse intensité est très probablement collé, c'est-à-dire sans aucune fusion du métal de base.</span> On scie une éprouvette d'essai en travers, on la polit et on l'attaque légèrement : la pénétration se voit immédiatement en coupe.</p>
+<p><em>Deux causes possibles se cachent parfois derrière une intensité apparemment correcte : un câble de masse mal serré ou pris sur de la peinture, et un poste dont l'affichage ment. Vérifier la masse avant d'accuser le réglage — c'est gratuit et c'est souvent ça.</em></p>
+</div></details></div>
+
+<div class="exo"><span class="tag">Exercice 8.2</span>
+<p>Un cordon présente des <strong>caniveaux</strong> nets sur ses deux bords et de nombreuses <strong>projections</strong> autour. Le soudeur affirme que l'électrode est bonne et le poste bien réglé. a) Quels réglages sont en cause ? b) Pourquoi les caniveaux sont-ils graves ? c) Que faire du cordon existant ?</p>
+<details><summary>Voir la réponse</summary><div class="rep">
+<p><strong>a) Deux réglages, et ils vont souvent ensemble : intensité trop forte et arc trop long.</strong></p>
+<p>Les caniveaux sont des sillons creusés dans le métal de base sur le bord du cordon : l'arc a fondu la tôle mais le métal d'apport n'est pas venu remplir. Les causes possibles, à passer en revue :</p>
+<ul>
+<li><strong>Intensité trop forte</strong> — la cause principale. L'arc creuse plus qu'il ne remplit.</li>
+<li><strong>Arc trop long</strong> — il s'élargit, chauffe les bords, et projette beaucoup. Les nombreuses projections signent d'ailleurs cette cause : un arc court projette peu.</li>
+<li><strong>Angle d'électrode incorrect</strong> ou balayage trop rapide sur les bords, sans marquer le temps d'arrêt qui permet au métal de remplir.</li>
+<li><strong>Vitesse d'avance trop grande</strong>, qui aggrave le phénomène.</li>
+</ul>
+<p><em>Le soudeur n'a pas forcément tort en disant que « le poste est bien réglé » : la longueur d'arc n'est pas sur le poste, elle est dans sa main. C'est le paramètre le plus souvent en cause et le seul qu'aucun affichage ne montre.</em></p>
+<p><strong>b) Parce qu'un caniveau est une amorce de fissure.</strong></p>
+<p>Un caniveau réduit l'épaisseur utile de la pièce, ce qui est déjà mauvais. Mais surtout, c'est une <strong>entaille à fond vif</strong>, exactement à l'endroit où la géométrie change et où les contraintes se concentrent. Sous chargement répété, la fissure s'amorce là, systématiquement.</p>
+<p><span class="cle">Une pièce soudée casse presque toujours au pied du cordon, pas dans le cordon.</span> Le caniveau est précisément situé au pied du cordon : il transforme un assemblage correct en pièce à durée de vie limitée. C'est pour cela que les codes de construction limitent la profondeur admissible des caniveaux à quelques dixièmes de millimètre, voire les interdisent sur les pièces en fatigue.</p>
+<p><strong>c) Il faut le reprendre — on ne le laisse pas en l'état.</strong></p>
+<ul>
+<li><strong>Meuler les caniveaux</strong> pour supprimer l'entaille, en adoucissant le raccordement avec le métal de base. Sur un défaut peu profond, cela peut suffire.</li>
+<li><strong>Si l'épaisseur utile devient insuffisante</strong>, il faut recharger : une passe supplémentaire, à intensité correcte et arc court, puis remeuler pour raccorder.</li>
+<li><strong>Refaire un essai sur chute</strong> avant de reprendre la pièce : intensité abaissée d'environ 20 A, arc raccourci à la valeur du diamètre de l'électrode. On valide sur la chute, pas sur la pièce.</li>
+<li><strong>Éliminer les projections</strong> à la brosse et au burin : elles ne sont pas qu'un défaut d'aspect, elles créent des points de corrosion et gênent tout contrôle ultérieur.</li>
+</ul>
+<p><em>Si la pièce est soumise à des efforts alternés — un bras de manutention, un support de moteur — la reprise n'est pas facultative. Et si elle relève du levage ou de la sécurité, on revient au chapitre 1 : elle ne se répare pas à l'atelier.</em></p>
+</div></details></div>
+
+</div>
+</section>
+
+<!-- ================= CH 9 ================= -->
+<section class="ch" id="c9">
+  <div class="ch-head"><div class="ch-num">09</div><div class="ch-title">
+    <span class="kicker">Trois molettes et un fil qui se déroule</span><h2>Le semi-automatique MAG</h2></div></div>
+  <div class="ch-body">
+
+<div class="savoirs">
+  <span class="savoir n3"><b>S4.9.1</b> <i>Procédés d'assemblage : soudage</i></span>
+</div>
+
+<p class="lede">Le procédé 135, dit MAG ou « semi-auto », a remplacé l'électrode enrobée partout où l'on peut travailler à l'abri du vent. Le fil se dévide tout seul, il n'y a pas de laitier à piquer, on soude en continu et le rendement est sans comparaison. En échange, il exige une bouteille de gaz, un poste plus complexe — et il ne pardonne pas le moindre courant d'air.</p>
+
+<h3>9.1 — Le principe</h3>
+<p>Un fil plein, bobiné, est dévidé en continu à travers la torche. Il est à la fois <strong>électrode</strong> et <strong>métal d'apport</strong> : l'arc s'établit entre son extrémité et la pièce, et il fond au fur et à mesure qu'il avance. Il n'y a pas d'enrobage : la protection du bain est assurée par un <strong>gaz</strong> soufflé par la buse.</p>
+<p>D'où la distinction que tout le monde mélange :</p>
+<ul>
+<li><strong>MIG</strong> (131) — <em>Metal Inert Gas</em> : le gaz est <strong>inerte</strong>, argon pur ou presque. Pour l'aluminium et l'inox.</li>
+<li><strong>MAG</strong> (135) — <em>Metal Active Gas</em> : le gaz est <strong>actif</strong>, il participe à la réaction. CO₂ pur, ou mélange argon + CO₂. C'est le procédé de l'acier, et celui qu'on trouve dans les ateliers.</li>
+</ul>
+<p>Le mélange <strong>82 % argon / 18 % CO₂</strong> est le standard : il donne un arc plus doux, moins de projections et un meilleur aspect que le CO₂ pur, lequel pénètre davantage mais projette beaucoup.</p>
+
+<h3>9.2 — Les trois réglages</h3>
+<p>Contrairement au MMA et sa molette unique, le MAG a trois réglages, et ils interagissent :</p>
+<ul>
+<li><strong>La vitesse du fil</strong> commande en réalité <strong>l'intensité</strong>. Plus le fil arrive vite, plus il faut de courant pour le fondre — le poste s'ajuste tout seul. On ne règle donc pas l'ampérage directement : on règle la vitesse du fil.</li>
+<li><strong>La tension</strong> commande la <strong>forme du cordon</strong>. Basse, l'arc est court et le cordon bombé ; haute, l'arc s'étale et le cordon devient large et plat.</li>
+<li><strong>Le débit de gaz</strong>, de l'ordre de <strong>10 à 18 L/min</strong>, protège le bain. Ni trop peu, ni trop.</li>
+</ul>
+<p>Ce dernier point mérite qu'on s'y arrête, parce qu'il est contre-intuitif : <span class="cle">un débit de gaz trop élevé protège moins bien qu'un débit correct.</span> Au-delà d'environ 20 L/min, le flux devient turbulent au lieu de rester laminaire, et cette turbulence <em>aspire</em> l'air ambiant dans le bain. On obtient exactement le défaut qu'on cherchait à éviter : des porosités.</p>
+
+<h3>9.3 — Les modes de transfert</h3>
+<p>La façon dont le métal passe du fil au bain dépend de la tension et de l'intensité. Trois régimes existent, et savoir dans lequel on travaille explique tout le comportement du poste.</p>
+<table>
+<thead><tr><th>Mode</th><th>Tension</th><th>Ce qui se passe</th><th>Emploi</th></tr></thead>
+<tbody>
+<tr><td><strong>Court-circuit</strong><br>(short-arc)</td><td>14 à 20 V</td><td>La goutte touche le bain avant de se détacher : l'arc s'éteint et se rallume 50 à 200 fois par seconde. Bruit de friture régulier</td><td><strong>Tôles minces, positions difficiles</strong>. Bain froid et peu fluide</td></tr>
+<tr><td><strong>Globulaire</strong></td><td>20 à 25 V</td><td>Grosses gouttes irrégulières qui tombent par gravité. Beaucoup de projections</td><td><strong>Zone à éviter</strong> — c'est le régime dans lequel on tombe par défaut de réglage</td></tr>
+<tr><td><strong>Pulvérisation axiale</strong><br>(spray)</td><td>&gt; 25 V, I élevée</td><td>Fines gouttelettes projetées en continu, arc silencieux et doux</td><td><strong>Fortes épaisseurs à plat</strong>. Exige un mélange riche en argon</td></tr>
+</tbody></table>
+
+<figure class="anim">
+  <canvas id="a-mag" width="900" height="480" aria-label="Animation : réglage d'un poste MAG, tension, vitesse de fil et débit de gaz, mode de transfert et forme du cordon"></canvas>
+  <div class="ctrls">
+    <div class="c"><label>Tension <span id="a-mag-t-l">20 V</span></label><input type="range" id="a-mag-t" min="12" max="34" value="20"></div>
+    <div class="c"><label>Vitesse du fil <span id="a-mag-f-l">5,0 m/min</span></label><input type="range" id="a-mag-f" min="15" max="150" value="50"></div>
+    <div class="c"><label>Débit de gaz <span id="a-mag-g-l">14 L/min</span></label><input type="range" id="a-mag-g" min="0" max="28" value="14"></div>
+    <div class="c"><label>Épaisseur à souder <span id="a-mag-e-l">4 mm</span></label><input type="range" id="a-mag-e" min="1" max="12" value="4"></div>
+    <div class="c readout" id="a-mag-out"></div>
+  </div>
+  <figcaption>À gauche, la torche, le mode de transfert des gouttes et la coupe du cordon ; à droite, l'intensité déduite de la vitesse du fil, le mode obtenu et les défauts. <b>Réglage initial</b> : 20 V et 5 m/min donnent 120 A en court-circuit — le réglage passe-partout de l'atelier. <b>Montez la tension à 23 V sans toucher au fil</b> : on tombe en régime <b>globulaire</b>, celui qu'il faut fuir, et les projections explosent. <b>Montez alors la vitesse du fil à 11 m/min</b> : l'intensité suit, on passe en <b>pulvérisation axiale</b>, l'arc redevient doux — mais essayez cela sur une tôle de 1,5 mm et vous la percez. <b>Ramenez le réglage initial et coupez le gaz à 4 L/min</b> : porosités. <b>Poussez-le maintenant à 26 L/min</b> : <span class="cle">porosités de nouveau, parce que le flux turbulent aspire l'air au lieu de le chasser.</span> C'est le réglage que personne ne soupçonne.</figcaption>
+  <div class="autableau">
+    <b class="entete">Au tableau <i>· 16 minutes · animation 1 sur 1</i></b>
+    <ol>
+      <li>Réglage initial. <span class="q">« Où règle-t-on l'ampérage sur ce poste ? »</span> Nulle part — on règle la vitesse du fil, l'intensité suit.</li>
+      <li>Faire écouter, si un poste est disponible, le bruit du court-circuit : la friture régulière est le meilleur indicateur de bon réglage.</li>
+      <li>Tension à <b>23 V</b> seule. Faire nommer le régime globulaire et constater les projections.</li>
+      <li>Monter la vitesse du fil pour rejoindre le <b>spray</b>. <span class="q">« Pourquoi ne pas souder tout le temps comme ça ? »</span> Faire régler l'épaisseur à 1,5 mm.</li>
+      <li>Gaz à <b>4 L/min</b> : porosités, tout le monde s'y attend.</li>
+      <li>Gaz à <b>26 L/min</b>. <span class="q">« Et là ? »</span> Laisser la surprise opérer avant d'expliquer la turbulence.</li>
+    </ol>
+    <div class="piege">Le piège : le réflexe « ça poreux, j'ouvre le gaz à fond ». C'est l'une des rares situations où en mettre plus aggrave le problème. Et avant d'incriminer le débit, il faut vérifier ce qui cause la majorité des porosités en atelier : une buse encrassée de projections, un tuyau percé, un courant d'air — une simple porte ouverte suffit à balayer la protection — ou une tôle peinte, grasse ou rouillée.</div>
+  </div>
+</figure>
+
+<h3>9.4 — La torche et ses pannes</h3>
+<p>Presque toutes les pannes d'un poste MAG sont dans la torche ou dans le dévidoir, et elles se ressemblent : le fil n'arrive pas correctement.</p>
+<table>
+<thead><tr><th>Symptôme</th><th>Cause la plus fréquente</th><th>Action</th></tr></thead>
+<tbody>
+<tr><td>Le fil patine, l'arc est intermittent</td><td>Galets mal serrés, mauvaise gorge, gaine encrassée</td><td>Régler la pression des galets, souffler ou changer la gaine</td></tr>
+<tr><td>Le fil colle au tube contact</td><td>Tube contact usé ou surchauffé, vitesse de fil trop faible</td><td>Changer le tube contact — c'est un consommable</td></tr>
+<tr><td>Projections dans la buse</td><td>Normal, mais s'accumule</td><td>Nettoyer régulièrement, utiliser un spray anti-adhérent</td></tr>
+<tr><td>Porosités soudaines</td><td>Bouteille vide, tuyau percé, courant d'air, buse bouchée</td><td>Vérifier le débit au débitmètre, pas au manomètre de bouteille</td></tr>
+<tr><td>Arc instable, pas de courant</td><td>Masse mal serrée ou prise sur de la peinture</td><td>Décaper le point de masse et le placer près du joint</td></tr>
+</tbody></table>
+
+<h3>9.5 — Choisir entre les procédés</h3>
+<table>
+<thead><tr><th></th><th>MMA (111)</th><th>MAG (135)</th><th>Brasage</th></tr></thead>
+<tbody>
+<tr><td><strong>Dehors, au vent</strong></td><td><strong>Oui</strong></td><td>Non — le gaz est balayé</td><td>Difficile</td></tr>
+<tr><td><strong>Tôle mince (&lt; 2 mm)</strong></td><td>Difficile</td><td><strong>Oui</strong>, en court-circuit</td><td><strong>Oui</strong></td></tr>
+<tr><td><strong>Forte épaisseur</strong></td><td>Oui, multi-passes</td><td><strong>Oui</strong>, plus rapide</td><td>Non</td></tr>
+<tr><td><strong>Acier sale ou rouillé</strong></td><td><strong>Tolérant</strong></td><td>Peu tolérant</td><td>Non</td></tr>
+<tr><td><strong>Rendement</strong></td><td>Faible — changer l'électrode, piquer le laitier</td><td><strong>Élevé</strong></td><td>Moyen</td></tr>
+<tr><td><strong>Matériaux différents</strong></td><td>Non</td><td>Non</td><td><strong>Oui</strong> — voir chapitre 10</td></tr>
+<tr><td><strong>Déformation de la pièce</strong></td><td>Forte</td><td>Moyenne</td><td><strong>Faible</strong></td></tr>
+</tbody></table>
+<p>En maintenance, la règle pratique est simple : <span class="cle">le MAG à l'atelier, l'électrode enrobée sur le terrain.</span> Un poste MAG sorti dans une allée d'usine, à côté d'une porte sectionnelle ouverte, produira des cordons poreux sans que personne ne comprenne pourquoi.</p>
+
+<div class="exo"><span class="tag">Exercice 9.1</span>
+<p>Un soudeur se plaint de porosités sur tous ses cordons depuis ce matin. Il a monté le débit de gaz de 15 à 25 L/min, ce qui n'a rien arrangé. Établissez la démarche de diagnostic.</p>
+<details><summary>Voir la réponse</summary><div class="rep">
+<p><strong>D'abord, ramener le débit à 15 L/min : à 25, il aggrave le problème au lieu de le corriger.</strong></p>
+<p>Au-delà d'environ 20 L/min, le flux de gaz cesse d'être laminaire. La turbulence créée à la sortie de la buse <strong>aspire l'air ambiant</strong> et l'entraîne dans le bain. Le soudeur a donc, en toute bonne foi, ajouté une seconde cause de porosités à la première.</p>
+<p><strong>Ensuite, la démarche — du plus probable et du moins coûteux vers le reste.</strong></p>
+<ol>
+<li><strong>Qu'est-ce qui a changé depuis hier ?</strong> C'est la première question de tout diagnostic. « Depuis ce matin » est une information capitale : une bouteille changée, une bobine neuve, une porte ouverte, un ventilateur allumé, un autre opérateur.</li>
+<li><strong>Le courant d'air.</strong> C'est la cause n° 1 en atelier et la plus bête. Une porte sectionnelle ouverte, un ventilateur d'été, une aspiration mal placée qui pompe le gaz de protection. Un simple écran suffit à trancher.</li>
+<li><strong>Le débit réel</strong>, mesuré <em>au débitmètre en sortie de torche</em>, pas au manomètre de bouteille. Le manomètre indique la pression restante dans la bouteille, pas le débit qui sort. Un tuyau percé, un raccord desserré ou une électrovanne défaillante donnent une pression normale et un débit nul.</li>
+<li><strong>La buse.</strong> Encrassée de projections, elle perturbe le flux et le rend turbulent — même effet qu'un débit trop élevé. On la nettoie, c'est gratuit.</li>
+<li><strong>L'état des tôles.</strong> Peinture, huile, rouille, humidité, condensation sur des tôles rentrées du froid. Le MAG est peu tolérant à cela, contrairement à l'électrode enrobée.</li>
+<li><strong>Le gaz lui-même.</strong> Bouteille d'argon pur montée à la place d'un mélange, ou bouteille vide dont le manomètre est resté figé.</li>
+</ol>
+<p><strong>Ce qu'il faut retenir de l'ordre.</strong> <span class="cle">On vérifie ce qui est gratuit et instantané avant ce qui est coûteux</span> — l'environnement et la propreté avant le matériel, le matériel avant le consommable. Et l'on ne change qu'une chose à la fois : le soudeur a modifié le débit sans rien vérifier d'autre, et il a maintenant deux problèmes au lieu d'un.</p>
+</div></details></div>
+
+<div class="exo"><span class="tag">Exercice 9.2</span>
+<p>Vous devez ressouder un support de capteur sur une tôle de <strong>1,5 mm</strong>, à l'extérieur d'un bâtiment, un jour de vent. Quel procédé choisissez-vous, et pourquoi ? Quels réglages si vous pouviez le faire à l'atelier ?</p>
+<details><summary>Voir la réponse</summary><div class="rep">
+<p><strong>Aucun des deux dans ces conditions : on démonte la pièce et on l'amène à l'atelier. Si c'est impossible, on abrite le poste de travail.</strong></p>
+<p><strong>Pourquoi ni l'un ni l'autre dehors.</strong></p>
+<ul>
+<li><strong>Le MAG est exclu par le vent.</strong> Le gaz de protection est balayé, et le cordon sera poreux de bout en bout. Quelques kilomètres-heure suffisent. C'est rédhibitoire, pas améliorable par le réglage.</li>
+<li><strong>Le MMA est exclu par l'épaisseur.</strong> L'électrode enrobée se moque du vent, mais même une électrode de 2,0 mm à 60 A perce une tôle de 1,5 mm. Le procédé n'est pas adapté à cette épaisseur.</li>
+</ul>
+<p><strong>Les solutions, par ordre de préférence.</strong></p>
+<ol>
+<li><strong>Démonter la tôle et souder à l'atelier</strong> au MAG. C'est presque toujours possible sur un support de capteur, et c'est la bonne réponse.</li>
+<li><strong>Abriter la zone</strong> avec des écrans pare-vent si le démontage est impossible, et souder au MAG.</li>
+<li><strong>Ne pas souder du tout</strong> : sur un support de capteur, un assemblage par <strong>rivets aveugles</strong> ou par <strong>collage structural</strong> est souvent aussi valable, plus rapide, et il ne déforme pas la tôle. Revoir le chapitre 7 — la question « faut-il vraiment souder ? » se pose avant celle du procédé.</li>
+</ol>
+<p><strong>Les réglages, à l'atelier, sur 1,5 mm.</strong></p>
+<ul>
+<li><strong>Mode court-circuit obligatoire</strong> : c'est le seul régime assez froid pour une tôle mince.</li>
+<li><strong>Tension basse</strong>, de l'ordre de <strong>16 à 18 V</strong>.</li>
+<li><strong>Vitesse de fil modérée</strong>, environ <strong>3 à 4 m/min</strong>, soit 70 à 100 A.</li>
+<li><strong>Fil de 0,8 mm</strong> plutôt que 1,0 mm.</li>
+<li><strong>Gaz à 12-14 L/min</strong>, mélange argon-CO₂.</li>
+<li><strong>Souder par points successifs</strong> plutôt qu'en cordon continu, en laissant refroidir entre chaque : c'est ce qui évite de percer et de déformer.</li>
+</ul>
+<p><em>Et le réflexe de mainteneur avant tout cela : pourquoi ce support a-t-il cassé ? Un support de capteur qui se décolle est souvent le symptôme d'une vibration ou d'un choc répété. Le ressouder à l'identique le fera casser à nouveau.</em></p>
+</div></details></div>
+
+</div>
+</section>
+
 <!-- ================= SUITE ================= -->
 <section class="ch" id="suite">
   <div class="ch-head"><div class="ch-num">…</div><div class="ch-title">
-    <span class="kicker">Rédaction en cours</span><h2>Les chapitres 7 à 13</h2></div></div>
+    <span class="kicker">Rédaction en cours</span><h2>Les chapitres 10 à 13</h2></div></div>
   <div class="ch-body">
-<p class="lede">Les six premiers chapitres couvrent la décision de fabriquer, le traçage, et tout le travail à froid : enlever de la matière, la déformer, la percer et la tarauder. Ce qui suit est le travail à chaud et l'assemblage. La rédaction se poursuit dans le même format et avec le même calage sur le référentiel.</p>
+<p class="lede">Les neuf premiers chapitres couvrent la décision de fabriquer, le traçage, tout le travail à froid — enlever de la matière, la déformer, percer, tarauder — puis l'assemblage et les deux procédés de soudage à l'arc. Restent le brasage, la fabrication additive et la lecture des procédés d'obtention. La rédaction se poursuit dans le même format et avec le même calage sur le référentiel.</p>
 <ul>
-<li><strong>07 · Assembler sans fondre</strong> — S4.9.1 ; éléments filetés et couple de serrage, rivetage, collage structural</li>
-<li><strong>08 · Soudure à l'arc avec électrode enrobée</strong> — S4.9.1 ; rôle de l'enrobage, réglage de l'intensité, défauts de cordon, sécurité</li>
-<li><strong>09 · Le semi-automatique MAG</strong> — S4.9.1 ; tension, vitesse de fil, gaz, modes de transfert</li>
 <li><strong>10 · Le brasage au chalumeau</strong> — capillarité et jeu de brasage, brasage tendre et fort, flamme et sécurité des bouteilles</li>
 <li><strong>11 · L'impression 3D</strong> — S4.9.2 fabrication additive, niveau 3 ; la Raise3D E2, matériaux, paramètres, <strong>orientation et anisotropie</strong>, chaîne numérique</li>
 <li><strong>12 · Comment la pièce a été obtenue</strong> — S4.9.2, niveau 2 ; reconnaître usinage, moulage, injection, déformation</li>
@@ -1157,7 +1616,7 @@
 </section>
 
 <footer class="fin">
-  <p><strong>Refaire la pièce qui n'existe plus</strong> — dossier de fabrication et d'assemblage pour le Baccalauréat Professionnel MSPC. Chaque chapitre est calé sur le référentiel officiel du diplôme : savoir associé visé et niveau taxonomique indiqués sous le titre. <em>Dossier en cours de rédaction : 6 chapitres sur 13 sont publiés.</em></p>
+  <p><strong>Refaire la pièce qui n'existe plus</strong> — dossier de fabrication et d'assemblage pour le Baccalauréat Professionnel MSPC. Chaque chapitre est calé sur le référentiel officiel du diplôme : savoir associé visé et niveau taxonomique indiqués sous le titre. <em>Dossier en cours de rédaction : 9 chapitres sur 13 sont publiés.</em></p>
   <p>Le référentiel retenu est celui du <strong>baccalauréat professionnel Maintenance des Systèmes de Production Connectés</strong>, arrêté du 9 décembre 2020, savoir <strong>S4.9 — Procédés d'assemblage et opérations simples de fabrication mécanique</strong>. Les valeurs numériques, coefficients et ordres de grandeur cités le sont à titre pédagogique : sur une intervention réelle, la documentation constructeur, les consignes de sécurité de l'établissement et les référentiels internes de l'entreprise font toujours foi.</p>
   <p><a href="index.html">← Retour au portail Atelier MSPC</a></p>
 </footer>
@@ -2263,6 +2722,495 @@
     if(!lub) MSPC.mono(ctx,'à sec : +35 % de couple, 2ᵉ cause de casse',bx,yy3+26,10,'#f0a844');
 
     out.innerHTML='filet <b style="color:'+couleur+'">'+h.toFixed(0)+' %</b> · couple × '+couple.toFixed(2).replace('.',',')
+      +'<br><b style="color:'+couleur+'">'+verdict+'</b>';
+  }, {fixed:true});
+})();
+
+/* ======================= CH 7 · couple, frottement et précontrainte =======================
+   Le couple de table est calé sur K = 0,20 (sec) et une précontrainte visée
+   de 65 % de la limite élastique : ce choix redonne exactement les valeurs
+   usuelles (M8 → 25 N·m, M10 → 49, M16 → 210). */
+(function(){
+  "use strict";
+  var VIS=[{n:'M6',d:6,as:20.1,p:1.0},{n:'M8',d:8,as:36.6,p:1.25},{n:'M10',d:10,as:58,p:1.5},
+           {n:'M12',d:12,as:84.3,p:1.75},{n:'M14',d:14,as:115,p:2.0},{n:'M16',d:16,as:157,p:2.0}];
+  var CL=[{n:'8.8',re:640},{n:'10.9',re:900},{n:'12.9',re:1080}];
+  var FR=[{n:'sec',k:0.20},{n:'huilé',k:0.15},{n:'graissé',k:0.12}];
+
+  function cnom(vis,cl){ return 0.20*0.65*cl.re*vis.as*vis.d/1000; }
+
+  var Mv=MSPC.ctrl('a-vis-m', function(v){ return VIS[Math.round(v)].n; }, 'a-vis-m-l');
+  var Cv=MSPC.ctrl('a-vis-c', function(v){ return CL[Math.round(v)].n; }, 'a-vis-c-l');
+  var Tv=MSPC.ctrl('a-vis-t', function(v){
+    var C=cnom(VIS[Math.round(Mv.val)],CL[Math.round(Cv.val)]);
+    return Math.round(C*v/100)+' N·m  ('+v+' %)';
+  }, 'a-vis-t-l');
+  var Fv=MSPC.ctrl('a-vis-f', function(v){ return FR[Math.round(v)].n; }, 'a-vis-f-l');
+  var out=document.getElementById('a-vis-out');
+  [Mv,Cv,Fv].forEach(function(c){
+    if(c.el) c.el.addEventListener('input', function(){ Tv.el.dispatchEvent(new Event('input')); });
+  });
+
+  MSPC.anim('a-vis', function(a){
+    var ctx=a.ctx, W=a.W, H=a.H;
+    var vis=VIS[Math.round(Mv.val)], cl=CL[Math.round(Cv.val)], fr=FR[Math.round(Fv.val)];
+    var Cn=cnom(vis,cl), Cap=Cn*Tv.val/100;
+    var F=Cap/(fr.k*vis.d/1000);
+    var Flim=cl.re*vis.as;
+    var ratio=F/Flim;
+
+    /* part du couple réellement convertie en tension : P/(2π) rapporté à K·d */
+    var utile=(vis.p/6.2832)/(fr.k*vis.d);
+    var reste=1-utile, tete=reste*0.55, filet=reste*0.45;
+
+    var verdict,couleur;
+    if(ratio>1.12){ verdict='VIS ROMPUE'; couleur='#ff6a5e'; }
+    else if(ratio>1.0){ verdict='VIS PLASTIFIÉE'; couleur='#ff6a5e'; }
+    else if(ratio>0.85){ verdict='LIMITE ÉLASTIQUE FRÔLÉE'; couleur='#f0a844'; }
+    else if(ratio>=0.45){ verdict='SERRAGE CORRECT'; couleur='#8fd05f'; }
+    else { verdict='SOUS-SERRÉ'; couleur='#f0a844'; }
+
+    MSPC.fond(ctx,W,H,0);
+    MSPC.mono(ctx,'C = K × F × d — ET PRESQUE TOUT LE COUPLE PART EN FROTTEMENT',26,28,11.5,'#8d968b');
+
+    /* ---------- la vis et son allongement ---------- */
+    var vx=120, vy=90, corps=170;
+    var allong=Math.min(26,ratio*22);
+    ctx.fillStyle='#4a544c'; ctx.fillRect(vx-46,vy+corps+allong,92,26);
+    ctx.fillStyle='#3c443e'; ctx.fillRect(vx-46,vy+corps+allong+26,92,26);
+    MSPC.mono(ctx,'pièces serrées',vx+56,vy+corps+allong+30,9.5,'#8d968b');
+
+    ctx.fillStyle= ratio>1 ? '#ff6a5e' : '#b79ae0';
+    ctx.fillRect(vx-26,vy,52,20);
+    ctx.fillRect(vx-9,vy+20,18,corps+allong);
+    ctx.fillStyle= ratio>1 ? '#ff6a5e' : '#8fd05f';
+    ctx.fillRect(vx-24,vy+corps+allong+52,48,20);
+    MSPC.mono(ctx,'écrou',vx+34,vy+corps+allong+66,9.5,'#8d968b');
+    MSPC.mono(ctx,vis.n+' '+cl.n,vx,vy-14,12,'#e6ebe4','center');
+
+    ctx.strokeStyle='#8fd05f'; ctx.lineWidth=1.4; ctx.setLineDash([4,3]);
+    ctx.beginPath(); ctx.moveTo(vx+40,vy+corps); ctx.lineTo(vx+96,vy+corps); ctx.stroke(); ctx.setLineDash([]);
+    MSPC.mono(ctx,'allongement ×200',vx+42,vy+corps-8,9,'#8fd05f');
+
+    if(ratio>1){
+      MSPC.titre(ctx,'ROMPUE',vx,vy+corps+allong+120,24,'#ff6a5e','center');
+    }
+
+    /* ---------- où part le couple ---------- */
+    var gx=280, gy=132, gw=250;
+    MSPC.mono(ctx,'OÙ PART LE COUPLE APPLIQUÉ',gx,gy-14,10,'#8d968b');
+    var parts=[{l:'frottement sous la tête',v:tete,c:'#4a544c'},
+               {l:'frottement dans le filet',v:filet,c:'#6b736c'},
+               {l:'tension réelle de la vis',v:utile,c:'#b79ae0'}];
+    var yy=gy;
+    parts.forEach(function(p){
+      ctx.fillStyle=p.c; ctx.fillRect(gx,yy,gw*p.v,26);
+      yy+=0;
+      ctx.fillStyle=p.c;
+      ctx.fillRect(gx, gy+40+parts.indexOf(p)*40, 14,14);
+      MSPC.mono(ctx,p.l,gx+22,gy+52+parts.indexOf(p)*40,10.5,'#9aa494');
+      MSPC.mono(ctx,(p.v*100).toFixed(0)+' %',gx+22,gy+68+parts.indexOf(p)*40,13,p.c==='#b79ae0'?'#b79ae0':'#cfd4ca');
+      gx+=0;
+    });
+    var xx=280;
+    parts.forEach(function(p){ ctx.fillStyle=p.c; ctx.fillRect(xx,gy,gw*p.v,26); xx+=gw*p.v; });
+    ctx.strokeStyle='rgba(255,255,255,.25)'; ctx.lineWidth=1; ctx.strokeRect(280.5,gy+.5,gw,26);
+    MSPC.mono(ctx,'un dixième environ, quel que soit le réglage',280,gy+178,10,'#f0a844');
+
+    /* ---------- le panneau ---------- */
+    var px0=W-282, pw=256;
+    ctx.fillStyle='rgba(255,255,255,.04)'; ctx.fillRect(px0,56,pw,390);
+    ctx.strokeStyle='rgba(255,255,255,.20)'; ctx.lineWidth=1.4; ctx.strokeRect(px0+.5,56.5,pw,390);
+
+    MSPC.mono(ctx,'COUPLE DE TABLE (À SEC)',px0+16,84,10,'#8d968b');
+    MSPC.titre(ctx,Math.round(Cn)+' N·m',px0+16,114,24,'#cfd4ca');
+
+    MSPC.mono(ctx,'COUPLE APPLIQUÉ',px0+16,148,10,'#8d968b');
+    MSPC.titre(ctx,Math.round(Cap)+' N·m',px0+16,178,24,'#e6ebe4');
+    MSPC.mono(ctx,'filets '+fr.n+' → K = '+fr.k.toFixed(2).replace('.',','),px0+16,198,10.5,'#b79ae0');
+
+    MSPC.mono(ctx,'PRÉCONTRAINTE OBTENUE',px0+16,232,10,'#8d968b');
+    MSPC.titre(ctx,(F/1000).toFixed(1).replace('.',',')+' kN',px0+16,264,30,couleur);
+
+    MSPC.mono(ctx,'PAR RAPPORT À LA LIMITE ÉLASTIQUE',px0+16,296,10,'#8d968b');
+    ctx.fillStyle='rgba(255,255,255,.09)'; ctx.fillRect(px0+16,306,pw-32,18);
+    ctx.fillStyle=couleur; ctx.fillRect(px0+16,306,Math.min(pw-32,(pw-32)*ratio/1.3),18);
+    ctx.strokeStyle='#ff6a5e'; ctx.lineWidth=2;
+    ctx.beginPath(); ctx.moveTo(px0+16+(pw-32)/1.3,302); ctx.lineTo(px0+16+(pw-32)/1.3,328); ctx.stroke();
+    MSPC.mono(ctx,'Re',px0+16+(pw-32)/1.3-6,300,9,'#ff6a5e','right');
+    MSPC.titre(ctx,(ratio*100).toFixed(0)+' % de Re',px0+16,352,21,couleur);
+
+    MSPC.titre(ctx,verdict,px0+16,398,20,couleur);
+    MSPC.mono(ctx, ratio>1 ? 'Le couple suppose des filets secs.'
+      : (ratio<0.45 ? 'Se desserrera, cassera en fatigue.'
+                    : 'La vis ne verra plus les variations.'),px0+16,422,10,'#9aa494');
+
+    out.innerHTML='F = <b style="color:'+couleur+'">'+(F/1000).toFixed(1).replace('.',',')+' kN</b> = '+(ratio*100).toFixed(0)+' % de Re'
+      +'<br><b style="color:'+couleur+'">'+verdict+'</b>';
+  }, {fixed:true});
+})();
+
+/* ======================= CH 7 · desserrage sous vibration transversale ======================= */
+(function(){
+  "use strict";
+  var FRN=[{n:'aucun',e:1.00},{n:'rondelle plate',e:0.95},{n:'rondelle éventail',e:0.62},
+           {n:'écrou Nylstop',e:0.30},{n:'frein filet',e:0.10}];
+  var SEUIL=25;                                  /* en % de Re : en dessous, ça glisse */
+  var V=MSPC.ctrl('a-frein-v', function(v){ return Math.round(v)+' %'; }, 'a-frein-v-l');
+  var P=MSPC.ctrl('a-frein-p', function(v){ return Math.round(v)+' % de Re'; }, 'a-frein-p-l');
+  var T=MSPC.ctrl('a-frein-t', function(v){ return FRN[Math.round(v)].n; }, 'a-frein-t-l');
+  var out=document.getElementById('a-frein-out');
+
+  MSPC.anim('a-frein', function(a){
+    var ctx=a.ctx, W=a.W, H=a.H, i;
+    var vib=V.val, F0=P.val, fr=FRN[Math.round(T.val)];
+    /* Le desserrage n'est pas dû aux secousses mais au glissement transversal :
+       plus la vis est tendue, moins les pièces peuvent glisser, d'où le cube. */
+    var k=4e-6*vib*fr.e*Math.pow(2.0-F0/100,3);
+    var NMAX=6000;
+
+    MSPC.fond(ctx,W,H,0);
+    MSPC.mono(ctx,'CE N’EST PAS LA SECOUSSE QUI DESSERRE, C’EST LE GLISSEMENT TRANSVERSAL',26,28,11.5,'#8d968b');
+
+    var box={x:70,y:70,w:W-390,h:280};
+    var ax=MSPC.axes(ctx,box,NMAX,100,'cycles de vibration','précontrainte %');
+
+    /* le seuil de desserrage */
+    ctx.strokeStyle='#ff6a5e'; ctx.lineWidth=1.6; ctx.setLineDash([6,4]);
+    ctx.beginPath(); ctx.moveTo(ax.x0,ax.Y(SEUIL)); ctx.lineTo(ax.x1,ax.Y(SEUIL)); ctx.stroke(); ctx.setLineDash([]);
+    MSPC.mono(ctx,'seuil de desserrage',ax.x0+8,ax.Y(SEUIL)-8,10,'#ff6a5e');
+    ctx.fillStyle='rgba(255,106,94,.08)';
+    ctx.fillRect(ax.x0,ax.Y(SEUIL),box.w,ax.y0-ax.Y(SEUIL));
+
+    /* la courbe de perte de précontrainte */
+    var nSeuil=-1;
+    ctx.strokeStyle='#b79ae0'; ctx.lineWidth=2.6;
+    ctx.beginPath();
+    for(i=0;i<=120;i++){
+      var n=i/120*NMAX, f=F0*Math.exp(-k*n);
+      if(nSeuil<0 && f<SEUIL) nSeuil=n;
+      if(i===0) ctx.moveTo(ax.X(n),ax.Y(f)); else ctx.lineTo(ax.X(n),ax.Y(f));
+    }
+    ctx.stroke();
+
+    if(nSeuil>0){
+      ctx.strokeStyle='#ff6a5e'; ctx.lineWidth=1.4; ctx.setLineDash([3,3]);
+      ctx.beginPath(); ctx.moveTo(ax.X(nSeuil),ax.Y(SEUIL)); ctx.lineTo(ax.X(nSeuil),ax.y0); ctx.stroke(); ctx.setLineDash([]);
+      MSPC.mono(ctx,Math.round(nSeuil)+' cycles',ax.X(nSeuil),ax.y0+18,10.5,'#ff6a5e','center');
+    }
+
+    var fFin=F0*Math.exp(-k*NMAX);
+
+    /* ---------- panneau ---------- */
+    var px0=W-296, pw=270;
+    ctx.fillStyle='rgba(255,255,255,.04)'; ctx.fillRect(px0,60,pw,340);
+    ctx.strokeStyle='rgba(255,255,255,.20)'; ctx.lineWidth=1.4; ctx.strokeRect(px0+.5,60.5,pw,340);
+
+    MSPC.mono(ctx,'FREINAGE EN PLACE',px0+16,88,10,'#8d968b');
+    MSPC.titre(ctx,fr.n,px0+16,116,22,'#b79ae0');
+
+    MSPC.mono(ctx,'APRÈS 6 000 CYCLES',px0+16,152,10,'#8d968b');
+    var col=fFin<SEUIL?'#ff6a5e':(fFin<F0*0.6?'#f0a844':'#8fd05f');
+    MSPC.titre(ctx,fFin.toFixed(0)+' % de Re',px0+16,184,26,col);
+    MSPC.mono(ctx,'au départ : '+F0+' %',px0+16,204,10.5,'#9aa494');
+
+    MSPC.mono(ctx,'SEUIL FRANCHI',px0+16,240,10,'#8d968b');
+    if(nSeuil>0){
+      MSPC.titre(ctx,'à '+Math.round(nSeuil)+' cycles',px0+16,270,22,'#ff6a5e');
+      MSPC.mono(ctx,'l’assemblage n’est plus serré',px0+16,292,10.5,'#ff6a5e');
+    } else {
+      MSPC.titre(ctx,'jamais atteint',px0+16,270,22,'#8fd05f');
+      MSPC.mono(ctx,'l’assemblage tient',px0+16,292,10.5,'#8fd05f');
+    }
+
+    if(vib<6){
+      MSPC.mono(ctx,'Sans glissement transversal,',px0+16,330,10.5,'#8fd05f');
+      MSPC.mono(ctx,'aucune vis ne se desserre.',px0+16,348,10.5,'#8fd05f');
+    } else if(fr.e>0.9 && F0>=85){
+      MSPC.mono(ctx,'Sans aucun frein, mais bien serrée :',px0+16,330,10.5,'#f0a844');
+      MSPC.mono(ctx,'le serrage est le premier freinage.',px0+16,348,10.5,'#f0a844');
+    }
+
+    out.innerHTML='reste <b style="color:'+col+'">'+fFin.toFixed(0)+' %</b> après 6 000 cycles'
+      +'<br>'+(nSeuil>0?'<b style="color:#ff6a5e">seuil à '+Math.round(nSeuil)+' cycles</b>':'<b style="color:#8fd05f">seuil jamais atteint</b>');
+  }, {fixed:true});
+})();
+
+/* ======================= CH 8 · réglage du poste à électrode enrobée ======================= */
+(function(){
+  "use strict";
+  var ELE=[2.0,2.5,3.2,4.0];
+  var E=MSPC.ctrl('a-mma-e', function(v){ return ELE[Math.round(v)].toFixed(1).replace('.',',')+' mm'; }, 'a-mma-e-l');
+  var I=MSPC.ctrl('a-mma-i', function(v){ return Math.round(v)+' A'; }, 'a-mma-i-l');
+  var L=MSPC.ctrl('a-mma-l', function(v){ return (v/10).toFixed(1).replace('.',',')+' mm'; }, 'a-mma-l-l');
+  var Vv=MSPC.ctrl('a-mma-v', function(v){ return Math.round(v)+' cm/min'; }, 'a-mma-v-l');
+  var out=document.getElementById('a-mma-out');
+
+  MSPC.anim('a-mma', function(a){
+    var ctx=a.ctx, W=a.W, H=a.H, i;
+    var dia=ELE[Math.round(E.val)], Iv=I.val, arc=L.val/10, vit=Vv.val;
+    var Iid=40*dia, vid=15+Iid*0.12;
+    var ri=Iv/Iid, ra=arc/dia, rv=vit/vid;
+
+    var larg=2.3*dia*Math.pow(ri,0.65)*(0.80+0.25*ra)/Math.pow(rv,0.35);
+    var pen =1.20*dia*Math.pow(ri,1.30)/Math.pow(rv,0.30)/(0.85+0.30*ra);
+    var haut=0.85*dia*Math.pow(ri,0.30)/Math.pow(rv,0.75);
+
+    var def=[], grave=false;
+    if(ri<0.72){ def.push('COLLAGE — pas de fusion du métal de base'); grave=true; }
+    else if(ri<0.85) def.push('manque de pénétration');
+    if(ri>1.30){ def.push('caniveaux sur les bords du cordon'); grave=true; }
+    if(ri>1.55) def.push('risque de perçage, fortes projections');
+    if(ra<0.55) def.push('électrode qui colle, arc instable');
+    if(ra>2.0) def.push('porosités — le bain n’est plus protégé');
+    if(ra>2.8) def.push('projections nombreuses');
+    if(rv>1.5) def.push('cordon étroit, pénétration insuffisante');
+    if(rv<0.60) def.push('surépaisseur, déformation de la pièce');
+
+    var verdict,couleur;
+    if(grave){ verdict='CORDON À REPRENDRE'; couleur='#ff6a5e'; }
+    else if(def.length===0){ verdict='CORDON CORRECT'; couleur='#8fd05f'; }
+    else { verdict='DÉFAUTS À CORRIGER'; couleur='#f0a844'; }
+
+    MSPC.fond(ctx,W,H,0);
+    MSPC.mono(ctx,'I ≈ 40 × Ø ÉLECTRODE — LONGUEUR D’ARC ≈ Ø ÉLECTRODE',26,26,11.5,'#8d968b');
+
+    var S=13;                                     /* unités par mm */
+    var cx=280, mx=W-330;
+
+    /* ---------- l'électrode, l'arc et le bain ---------- */
+    var ey=78;
+    ctx.save(); ctx.translate(cx,ey); ctx.rotate(-0.32);
+    ctx.fillStyle='#8d968b'; ctx.fillRect(-5,-40,10,52);
+    ctx.fillStyle='#6b5b45'; ctx.fillRect(-8,-40,3,52); ctx.fillRect(5,-40,3,52);
+    ctx.restore();
+    MSPC.mono(ctx,'électrode Ø '+dia.toFixed(1).replace('.',',')+' mm',cx+44,ey+14,10,'#9aa494');
+
+    var ay=ey+46, arcpx=Math.min(34,Math.max(4,arc*S*0.8));
+    var g=ctx.createRadialGradient(cx+16,ay+arcpx/2,2,cx+16,ay+arcpx/2,arcpx+14);
+    g.addColorStop(0,'rgba(255,255,255,.95)'); g.addColorStop(0.4,'rgba(183,154,224,.55)');
+    g.addColorStop(1,'rgba(183,154,224,0)');
+    ctx.fillStyle=g; ctx.beginPath(); ctx.arc(cx+16,ay+arcpx/2,arcpx+14,0,6.2832); ctx.fill();
+    ctx.strokeStyle= ra>2.0 ? '#f0a844' : '#b79ae0'; ctx.lineWidth=1.6;
+    ctx.beginPath(); ctx.moveTo(cx+16,ay); ctx.lineTo(cx+16,ay+arcpx); ctx.stroke();
+    MSPC.mono(ctx,'arc '+arc.toFixed(1).replace('.',',')+' mm',cx+34,ay+arcpx/2,10,ra>2.0?'#f0a844':'#b79ae0');
+
+    /* ---------- la coupe du cordon ---------- */
+    var by=250, ep=8*S/3;
+    MSPC.mono(ctx,'COUPE DU CORDON',60,by-52,9.5,'#8d968b');
+    ctx.fillStyle='#333c37'; ctx.fillRect(60,by,440,ep);
+    ctx.strokeStyle='#7f8a7e'; ctx.lineWidth=1.4; ctx.strokeRect(60,by,440,ep);
+
+    var bcx=280, wpx=larg*S/2, hpx=haut*S, ppx=Math.min(ep,pen*S);
+    /* la zone fondue sous le cordon : c'est elle qui fait la soudure */
+    ctx.fillStyle= grave&&ri<0.72 ? 'rgba(255,106,94,.25)' : 'rgba(183,154,224,.40)';
+    ctx.beginPath();
+    ctx.moveTo(bcx-wpx*0.75,by); ctx.quadraticCurveTo(bcx,by+ppx*1.5,bcx+wpx*0.75,by); ctx.closePath(); ctx.fill();
+    /* la surépaisseur du cordon */
+    ctx.fillStyle='#b79ae0';
+    ctx.beginPath();
+    ctx.moveTo(bcx-wpx,by); ctx.quadraticCurveTo(bcx,by-hpx*2.1,bcx+wpx,by); ctx.closePath(); ctx.fill();
+    /* les caniveaux */
+    if(ri>1.30){
+      ctx.fillStyle='#0d120f';
+      [-1,1].forEach(function(s){
+        ctx.beginPath();
+        ctx.moveTo(bcx+s*wpx,by); ctx.lineTo(bcx+s*(wpx+7),by); ctx.lineTo(bcx+s*wpx,by+7); ctx.closePath(); ctx.fill();
+      });
+    }
+    /* les porosités */
+    if(ra>2.0){
+      ctx.fillStyle='#0d120f';
+      for(i=0;i<5;i++){
+        ctx.beginPath();
+        ctx.arc(bcx-wpx*0.6+i*wpx*0.3, by-hpx*0.6+((i*13)%9)-4, 2.6+((i*7)%3), 0, 6.2832); ctx.fill();
+      }
+    }
+    MSPC.mono(ctx,'pénétration '+pen.toFixed(1).replace('.',',')+' mm',bcx+wpx+16,by+22,10, ri<0.85?'#ff6a5e':'#8fd05f');
+    MSPC.mono(ctx,'largeur '+larg.toFixed(1).replace('.',',')+' mm',bcx+wpx+16,by-14,10,'#9aa494');
+    if(ri<0.72) MSPC.mono(ctx,'le métal de base n’a pas fondu',60,by+ep+22,10.5,'#ff6a5e');
+
+    /* ---------- le cordon vu de dessus ---------- */
+    var ty=372;
+    MSPC.mono(ctx,'LE CORDON VU DE DESSUS',60,ty-14,9.5,'#8d968b');
+    ctx.fillStyle='#2b3330'; ctx.fillRect(60,ty,440,56);
+    ctx.fillStyle='#b79ae0'; ctx.fillRect(60,ty+28-wpx*0.5,440,wpx);
+    ctx.strokeStyle='rgba(15,21,18,.5)'; ctx.lineWidth=1.6;
+    var pasR=Math.max(6,rv*22);
+    for(i=0;i<440/pasR;i++){
+      var xr=60+i*pasR;
+      ctx.beginPath(); ctx.arc(xr,ty+28,wpx*0.55,-1.0,1.0); ctx.stroke();
+    }
+
+    /* ---------- le panneau ---------- */
+    var px0=W-300, pw=274;
+    ctx.fillStyle='rgba(255,255,255,.04)'; ctx.fillRect(px0,52,pw,404);
+    ctx.strokeStyle='rgba(255,255,255,.20)'; ctx.lineWidth=1.4; ctx.strokeRect(px0+.5,52.5,pw,404);
+
+    function ligne(lbl,val,ideal,r,yy){
+      MSPC.mono(ctx,lbl,px0+16,yy,10,'#8d968b');
+      var c = (r>0.85&&r<1.2) ? '#8fd05f' : ((r>0.7&&r<1.45)?'#f0a844':'#ff6a5e');
+      MSPC.titre(ctx,val,px0+16,yy+24,20,c);
+      MSPC.mono(ctx,'conseillé '+ideal,px0+140,yy+22,10,'#6f786e');
+    }
+    ligne('INTENSITÉ',Math.round(Iv)+' A',Math.round(Iid)+' A',ri,80);
+    ligne('LONGUEUR D’ARC',arc.toFixed(1).replace('.',',')+' mm',dia.toFixed(1).replace('.',',')+' mm',ra,140);
+    ligne('VITESSE D’AVANCE',Math.round(vit)+' cm/min',Math.round(vid)+' cm/min',rv,200);
+
+    MSPC.titre(ctx,verdict,px0+16,278,21,couleur);
+    var yy2=304;
+    if(def.length===0){
+      MSPC.mono(ctx,'Pénétration franche, pas de défaut.',px0+16,yy2,10.5,'#8fd05f');
+    } else {
+      def.slice(0,5).forEach(function(d){
+        var mots=d.split(' '), ligne2='';
+        mots.forEach(function(m){
+          if((ligne2+m).length>32){ MSPC.mono(ctx,ligne2,px0+16,yy2,10,'#f0a844'); ligne2=m+' '; yy2+=15; }
+          else ligne2+=m+' ';
+        });
+        MSPC.mono(ctx,ligne2,px0+16,yy2,10, d.indexOf('COLLAGE')>=0||d.indexOf('caniveaux')>=0?'#ff6a5e':'#f0a844');
+        yy2+=24;
+      });
+    }
+
+    out.innerHTML='I idéale <b>'+Math.round(Iid)+' A</b> · pénétration <b>'+pen.toFixed(1).replace('.',',')+' mm</b>'
+      +'<br><b style="color:'+couleur+'">'+verdict+'</b>';
+  }, {fixed:true});
+})();
+
+/* ======================= CH 9 · réglage du poste MAG ======================= */
+(function(){
+  "use strict";
+  var T=MSPC.ctrl('a-mag-t', function(v){ return Math.round(v)+' V'; }, 'a-mag-t-l');
+  var Fw=MSPC.ctrl('a-mag-f', function(v){ return (v/10).toFixed(1).replace('.',',')+' m/min'; }, 'a-mag-f-l');
+  var G=MSPC.ctrl('a-mag-g', function(v){ return Math.round(v)+' L/min'; }, 'a-mag-g-l');
+  var Ep=MSPC.ctrl('a-mag-e', function(v){ return Math.round(v)+' mm'; }, 'a-mag-e-l');
+  var out=document.getElementById('a-mag-out');
+
+  MSPC.anim('a-mag', function(a){
+    var ctx=a.ctx, W=a.W, H=a.H, i;
+    var U=T.val, vf=Fw.val/10, gaz=G.val, ep=Ep.val;
+    var Iv=24*vf;                                  /* fil de 0,8 mm */
+    var Uid=14+0.05*Iv;
+
+    var mode,modeC;
+    if(U>=25 && Iv>=180){ mode='PULVÉRISATION AXIALE'; modeC='#8fd05f'; }
+    else if(U>=21){ mode='GLOBULAIRE'; modeC='#f0a844'; }
+    else { mode='COURT-CIRCUIT'; modeC='#8fd05f'; }
+
+    var def=[], grave=false;
+    if(gaz<8){ def.push('porosités — protection gazeuse insuffisante'); grave=true; }
+    if(gaz>20){ def.push('porosités — flux turbulent qui aspire l’air'); grave=true; }
+    if(mode==='GLOBULAIRE') def.push('projections importantes, cordon irrégulier');
+    if(U<Uid-3) def.push('cordon bombé, le fil pousse la torche');
+    if(U>Uid+3) def.push('cordon plat et large, caniveaux');
+    if(Iv>45*ep){ def.push('risque de perçage sur cette épaisseur'); grave=true; }
+    if(Iv<20*ep) def.push('manque de pénétration sur cette épaisseur');
+
+    var verdict,couleur;
+    if(grave){ verdict='RÉGLAGE À REPRENDRE'; couleur='#ff6a5e'; }
+    else if(def.length===0){ verdict='RÉGLAGE CORRECT'; couleur='#8fd05f'; }
+    else { verdict='DÉFAUTS À CORRIGER'; couleur='#f0a844'; }
+
+    MSPC.fond(ctx,W,H,0);
+    MSPC.mono(ctx,'LA VITESSE DU FIL COMMANDE L’INTENSITÉ — LA TENSION COMMANDE LA FORME DU CORDON',26,26,11,'#8d968b');
+
+    /* ---------- la torche et le transfert ---------- */
+    var tx=250, ty=86;
+    ctx.save(); ctx.translate(tx,ty); ctx.rotate(-0.30);
+    ctx.fillStyle='#4a544c'; ctx.fillRect(-16,-44,32,56);
+    ctx.fillStyle='#39423b'; ctx.beginPath();
+    ctx.moveTo(-14,12); ctx.lineTo(14,12); ctx.lineTo(10,36); ctx.lineTo(-10,36); ctx.closePath(); ctx.fill();
+    ctx.restore();
+    MSPC.mono(ctx,'buse et tube contact',tx+44,ty-4,10,'#9aa494');
+
+    /* le gaz */
+    var gc = (gaz<8||gaz>20) ? '#ff6a5e' : '#8fd05f';
+    ctx.strokeStyle=gc; ctx.lineWidth=1.4;
+    for(i=0;i<5;i++){
+      var gx2=tx-46+i*24;
+      ctx.beginPath();
+      if(gaz>20){
+        ctx.moveTo(gx2,ty+42);
+        ctx.bezierCurveTo(gx2+16,ty+66,gx2-16,ty+86,gx2+10,ty+108);
+      } else {
+        ctx.moveTo(gx2,ty+42); ctx.lineTo(gx2+(i-2)*5,ty+108);
+      }
+      ctx.stroke();
+    }
+    MSPC.mono(ctx, gaz>20?'flux turbulent':(gaz<8?'protection trop faible':'flux laminaire'),tx+74,ty+80,10,gc);
+
+    /* les gouttes, selon le mode */
+    var ph=(a.t*2.2)%1;
+    ctx.fillStyle='#cfd8d2';
+    if(mode==='COURT-CIRCUIT'){
+      ctx.beginPath(); ctx.arc(tx+6,ty+60+ph*44,6,0,6.2832); ctx.fill();
+    } else if(mode==='GLOBULAIRE'){
+      ctx.beginPath(); ctx.arc(tx+6,ty+56+ph*50,11,0,6.2832); ctx.fill();
+      ctx.fillStyle='#f0a844';
+      for(i=0;i<4;i++){ ctx.beginPath(); ctx.arc(tx+30+i*17,ty+70+((i*23)%40),3,0,6.2832); ctx.fill(); }
+    } else {
+      for(i=0;i<7;i++){
+        ctx.beginPath();
+        ctx.arc(tx+6+((i*11)%9)-4, ty+52+((ph*44+i*8)%52), 2.4, 0, 6.2832); ctx.fill();
+      }
+    }
+
+    /* ---------- la coupe du cordon ---------- */
+    var by=240, epx=Math.max(14,ep*7);
+    MSPC.mono(ctx,'COUPE DU CORDON — TÔLE DE '+ep+' MM',60,by-16,9.5,'#8d968b');
+    ctx.fillStyle='#333c37'; ctx.fillRect(60,by,460,epx);
+    ctx.strokeStyle='#7f8a7e'; ctx.lineWidth=1.4; ctx.strokeRect(60,by,460,epx);
+
+    var wpx=Math.max(10,(U/Uid)*Iv*0.20);
+    var hpx=Math.max(5,26/(U/Uid)/1.4);
+    var ppx=Math.min(epx*1.4, Iv*0.085*(U/Uid));
+    ctx.fillStyle='rgba(183,154,224,.40)';
+    ctx.beginPath(); ctx.moveTo(290-wpx*0.7,by); ctx.quadraticCurveTo(290,by+ppx,290+wpx*0.7,by); ctx.closePath(); ctx.fill();
+    ctx.fillStyle='#b79ae0';
+    ctx.beginPath(); ctx.moveTo(290-wpx,by); ctx.quadraticCurveTo(290,by-hpx*2,290+wpx,by); ctx.closePath(); ctx.fill();
+    if(gaz<8||gaz>20){
+      ctx.fillStyle='#0d120f';
+      for(i=0;i<6;i++){ ctx.beginPath(); ctx.arc(290-wpx*0.7+i*wpx*0.25, by-hpx*0.5+((i*17)%8)-4, 2.8,0,6.2832); ctx.fill(); }
+    }
+    if(ppx>epx){
+      MSPC.titre(ctx,'PERCÉ',290,by+epx+30,20,'#ff6a5e','center');
+    }
+
+    /* ---------- le panneau ---------- */
+    var px0=W-306, pw=280;
+    ctx.fillStyle='rgba(255,255,255,.04)'; ctx.fillRect(px0,52,pw,404);
+    ctx.strokeStyle='rgba(255,255,255,.20)'; ctx.lineWidth=1.4; ctx.strokeRect(px0+.5,52.5,pw,404);
+
+    MSPC.mono(ctx,'INTENSITÉ DÉDUITE DU FIL',px0+16,80,10,'#8d968b');
+    MSPC.titre(ctx,Math.round(Iv)+' A',px0+16,112,28,'#e6ebe4');
+    MSPC.mono(ctx,'24 × '+vf.toFixed(1).replace('.',',')+' m/min',px0+16,132,10,'#6f786e');
+
+    MSPC.mono(ctx,'TENSION',px0+16,164,10,'#8d968b');
+    var uc=Math.abs(U-Uid)<3?'#8fd05f':'#f0a844';
+    MSPC.titre(ctx,Math.round(U)+' V',px0+16,192,24,uc);
+    MSPC.mono(ctx,'conseillée '+Math.round(Uid)+' V',px0+130,190,10,'#6f786e');
+
+    MSPC.mono(ctx,'MODE DE TRANSFERT',px0+16,226,10,'#8d968b');
+    MSPC.titre(ctx,mode,px0+16,252,mode.length>16?15:19,modeC);
+
+    MSPC.titre(ctx,verdict,px0+16,296,21,couleur);
+    var yy=322;
+    if(def.length===0){
+      MSPC.mono(ctx,'Cordon régulier, bain protégé.',px0+16,yy,10.5,'#8fd05f');
+    } else {
+      def.slice(0,5).forEach(function(d){
+        var mots=d.split(' '), lg='';
+        mots.forEach(function(m){
+          if((lg+m).length>33){ MSPC.mono(ctx,lg,px0+16,yy,10,'#f0a844'); lg=m+' '; yy+=15; }
+          else lg+=m+' ';
+        });
+        MSPC.mono(ctx,lg,px0+16,yy,10, d.indexOf('porosités')>=0||d.indexOf('perçage')>=0?'#ff6a5e':'#f0a844');
+        yy+=24;
+      });
+    }
+
+    out.innerHTML='<b>'+Math.round(Iv)+' A</b> · '+mode.toLowerCase()
       +'<br><b style="color:'+couleur+'">'+verdict+'</b>';
   }, {fixed:true});
 })();
