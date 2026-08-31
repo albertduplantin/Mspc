@@ -2680,14 +2680,15 @@
 </ul>
 
 <figure class="anim">
-  <canvas id="a-induc" width="900" height="340" aria-label="Animation : induction, aimant déplacé dans une bobine"></canvas>
+  <canvas id="a-induc" width="900" height="520" aria-label="Animation : induction dans une bobine, courant induit traversant l'électroaimant du galvanomètre, et effet Joule"></canvas>
   <div class="ctrls">
     <div class="c"><button class="btn" id="a-ind-play">Aller-retour automatique</button></div>
-    <div class="c"><label>Vitesse <span id="a-ind-v">×1</span></label><input type="range" id="a-ind-vr" min="1" max="10" value="3"></div>
+    <div class="c"><label>Vitesse <span id="a-ind-v">×3</span></label><input type="range" id="a-ind-vr" min="1" max="10" value="3"></div>
     <div class="c"><label>Spires <span id="a-ind-n">200</span></label><input type="range" id="a-ind-nr" min="20" max="600" value="200"></div>
+    <div class="c"><label class="switch"><input type="checkbox" id="a-ind-th"><span>Vue thermique amplifiée</span></label></div>
     <div class="c readout" id="a-ind-out"></div>
   </div>
-  <figcaption><b>Attrapez l'aimant à la souris ou au doigt et déplacez-le.</b> Immobilisez-le au milieu de la bobine : l'aiguille retombe à zéro alors que le champ est maximal. C'est tout le sens de la loi de Faraday.</figcaption>
+  <figcaption><b>Attrapez l'aimant à la souris ou au doigt et déplacez-le.</b> Cette figure enchaîne, sur un seul circuit, les trois phénomènes de toute l'électricité industrielle. <b>1 · L'induction</b> : le mouvement de l'aimant fait varier le flux dans la bobine et y crée une tension. Immobilisez l'aimant au milieu : l'aiguille retombe à zéro alors que le champ est maximal — c'est tout le sens de la loi de Faraday. <b>2 · L'électroaimant</b> : le galvanomètre est ouvert, et l'on voit ce qui déplace réellement l'aiguille. Le courant induit traverse le <b>cadre mobile</b>, qui devient un électroaimant ; ses pôles s'inversent avec le sens du courant, et l'aimant permanent qui l'entoure le fait tourner contre son ressort. <span class="cle">L'aiguille n'est pas poussée par le courant : elle est poussée par un champ magnétique.</span> <b>3 · L'effet Joule</b> : le même courant échauffe le fil. Cochez <b>vue thermique</b> pour le voir — l'échauffement est amplifié cent mille fois, parce qu'en réalité il se compte en millionièmes de degré. Le bandeau du bas montre où passe l'énergie : presque tout en chaleur, une miette en travail mécanique, et seulement pendant que l'aiguille bouge.</figcaption>
 </figure>
 
 <h3>11.4 — La loi de Lenz : la nature est contrariante</h3>
@@ -11312,81 +11313,277 @@ function crystal(st, opts){
   sr.addEventListener('input', upd); upd();
 })();
 
-/* ============ 6. INDUCTION (aimant déplaçable) ============ */
+/* ============ 6. INDUCTION → ÉLECTROAIMANT → EFFET JOULE ============
+   Une seule figure pour toute la chaîne de l'électricité industrielle.
+   L'aimant déplacé fait varier le flux : la bobine devient un générateur
+   (Faraday). Le courant induit parcourt UN SEUL FIL jusqu'au cadre mobile
+   du galvanomètre — ce cadre devient un ÉLECTROAIMANT, et l'aimant permanent
+   qui l'entoure le fait tourner : c'est cela, et rien d'autre, qui déplace
+   l'aiguille. Ce que le courant ne convertit pas en travail mécanique part
+   en chaleur (effet Joule) : imperceptible au doigt, mais c'est là que
+   passe presque toute l'énergie produite. */
 (function(){
   var play = el('a-ind-play'); if(!play) return;
   var auto = false, N = 200, sp = 3;
-  var pos = 0.18, vel = 0, drag = false, emf = 0, needle = 0;
+  var pos = 0.18, vel = 0, drag = false, emf = 0, needle = 0, needleV = 0;
+  var Ejoule = 0, phase = 0;
+  var RG = 48;      /* résistance du cadre mobile du galvanomètre, en ohms */
+  var CTH = 7.7;    /* capacité thermique du cuivre de la bobine, en J/K   */
+
+  function thermique(){ var c = el('a-ind-th'); return !!(c && c.checked); }
+
   var st = mk('a-induc', function(ctx, s, dt){
-    var W=s.W, H=s.H, cy=H/2-16, cxCoil=W*0.42;
-    var xmin = 40, xmax = W*0.70;
+    var W = s.W, H = s.H, i;
+    var cy = 168, cxCoil = 250, x0 = cxCoil-64, x1 = cxCoil+64, ry = 38;
+    var xmin = 40, xmax = 400;
+    var gx = 700, gy = 168;
+    var yw1 = 250, yw2 = 276;
+
+    /* ---------- position et vitesse de l'aimant ---------- */
     if(auto && !drag){ pos = 0.5 + 0.42*Math.sin(s.t*sp*0.55); }
     var x = xmin + pos*(xmax-xmin);
     if(s.px === undefined) s.px = x;
-    vel = (x - s.px)/Math.max(dt,0.001); s.px = x;
+    vel = (x - s.px)/Math.max(dt, 0.001); s.px = x;
 
-    /* bobine */
-    var turns = Math.max(6, Math.round(N/24));
-    ctx.strokeStyle="rgba(255,255,255,.14)";
-    ctx.strokeRect(cxCoil-70, cy-46, 140, 92);
-    for(var i=0;i<turns;i++){
-      var tx = cxCoil-62 + i*(124/turns);
-      ctx.strokeStyle = COL.cuivre; ctx.lineWidth = Math.max(2, 16/Math.sqrt(turns));
-      ctx.beginPath(); ctx.ellipse(tx, cy, 7, 40, 0, 0, 6.284); ctx.stroke();
-    }
-    label(ctx, cxCoil, cy-58, "BOBINE — " + N + " SPIRES", COL.vert, 11, "center");
-
-    /* flux et f.e.m. */
+    /* ---------- 1 · loi de Faraday ---------- */
     var d = (x - cxCoil)/70;
     var dPhi = -2*d*Math.exp(-d*d);
-    emf = -(N/200) * dPhi * vel * 0.06;
+    emf = -(N/200)*dPhi*(vel/600)*0.09;
+    var Rb = N*0.045, Rtot = Rb + RG;
+    var I = emf/Rtot;
+    var Pelec = Math.abs(emf*I);
 
-    /* aimant */
-    ctx.save();
+    /* ---------- 2 · l'électroaimant entraîne l'aiguille ---------- */
+    var cible = Math.max(-1, Math.min(1, I/0.0016));
+    var avant = needle;
+    needle += (cible - needle)*Math.min(1, dt*9);
+    needleV = (needle - avant)/Math.max(dt, 0.001);
+    var couple = 6e-5*Math.abs(I);
+    var Pmeca = Math.min(Pelec*0.15, couple*Math.abs(needleV)*1.15);
+
+    /* ---------- 3 · effet Joule : tout le reste ---------- */
+    var Pjoule = Math.max(0, Pelec - Pmeca);
+    Ejoule += Pjoule*dt;
+    var dT = Ejoule/CTH;
+    var chaud = thermique() ? Math.min(1, Pjoule/2.5e-5) : 0;
+    phase += I*3600*dt;
+
+    /* ---------- le circuit : un seul fil, d'un bout à l'autre ---------- */
+    function fil(pts, lw, col){
+      ctx.strokeStyle = col; ctx.lineWidth = lw; ctx.lineJoin = "round";
+      ctx.beginPath(); ctx.moveTo(pts[0][0], pts[0][1]);
+      for(var k=1;k<pts.length;k++) ctx.lineTo(pts[k][0], pts[k][1]);
+      ctx.stroke();
+    }
+    var branA = [[x0,cy],[x0,yw2],[gx+26,yw2],[gx+26,yw1+4]];
+    var branB = [[x1,cy],[x1,yw1],[gx-26,yw1],[gx-26,yw1+4]];
+    if(chaud > 0.02){
+      fil(branA, 10, "rgba(255,110,35," + (chaud*0.5).toFixed(3) + ")");
+      fil(branB, 10, "rgba(255,110,35," + (chaud*0.5).toFixed(3) + ")");
+    }
+    fil(branA, 2.6, COL.cuivre); fil(branB, 2.6, COL.cuivre);
+
+    /* les porteurs de charge : un seul et même circuit */
+    if(Math.abs(I) > 2e-5){
+      ctx.fillStyle = COL.elec;
+      for(i=0;i<9;i++){
+        var u = ((phase/60 + i/9) % 1 + 1) % 1;
+        ctx.beginPath(); ctx.arc(x1 + u*(gx-26-x1), yw1, 3, 0, 6.284); ctx.fill();
+        ctx.beginPath(); ctx.arc(gx+26 - u*(gx+26-x0), yw2, 3, 0, 6.284); ctx.fill();
+      }
+    }
+
+    /* ---------- la bobine : une hélice continue, un seul fil enroulé ----------
+       Les spires de derrière sont tracées avant l'aimant, celles de devant
+       après : l'aimant est alors visiblement A L'INTERIEUR de la bobine. */
+    var turns = Math.max(6, Math.min(22, Math.round(N/20))), steps = turns*30;
+    function helice(devant){
+      for(var j=0;j<steps;j++){
+        var t0 = j/steps*turns*6.2832, t1 = (j+1)/steps*turns*6.2832;
+        if((Math.cos((t0+t1)/2) > 0) !== devant) continue;
+        var xa = x0 + (x1-x0)*j/steps, xb = x0 + (x1-x0)*(j+1)/steps;
+        var ya = cy + ry*Math.sin(t0), yb = cy + ry*Math.sin(t1);
+        if(chaud > 0.02 && devant){
+          ctx.strokeStyle = "rgba(255,110,35," + (chaud*0.55).toFixed(3) + ")";
+          ctx.lineWidth = 9;
+          ctx.beginPath(); ctx.moveTo(xa,ya); ctx.lineTo(xb,yb); ctx.stroke();
+        }
+        ctx.strokeStyle = devant ? COL.cuivre : "rgba(118,72,34,.45)";
+        ctx.lineWidth = devant ? 2.8 : 2;
+        ctx.beginPath(); ctx.moveTo(xa,ya); ctx.lineTo(xb,yb); ctx.stroke();
+      }
+    }
+    helice(false);
+
+    /* ---------- l'aimant, glissé dans la bobine ---------- */
     ctx.fillStyle = COL.rouge; ctx.fillRect(x-34, cy-15, 34, 30);
     ctx.fillStyle = COL.bleu;  ctx.fillRect(x, cy-15, 34, 30);
-    ctx.strokeStyle="rgba(255,255,255,.35)"; ctx.strokeRect(x-34, cy-15, 68, 30);
+    ctx.strokeStyle = "rgba(255,255,255,.35)"; ctx.lineWidth = 1;
+    ctx.strokeRect(x-34, cy-15, 68, 30);
     label(ctx, x-17, cy+5, "N", "#fff", 14, "center");
     label(ctx, x+17, cy+5, "S", "#fff", 14, "center");
-    ctx.restore();
-    label(ctx, x, cy-26, drag?"↔":"GLISSEZ-MOI", "rgba(255,255,255,.55)", 10, "center");
 
-    /* galvanomètre */
-    var gx = W-108, gy = cy;
-    needle += (Math.max(-1,Math.min(1,emf)) - needle)*Math.min(1,dt*9);
-    ctx.beginPath(); ctx.arc(gx, gy, 62, Math.PI, 0); ctx.closePath();
-    ctx.fillStyle="rgba(245,246,242,.94)"; ctx.fill();
-    ctx.strokeStyle="#8d938a"; ctx.lineWidth=2; ctx.stroke();
-    for(var t2=-1;t2<=1;t2+=0.25){
-      var a2 = -Math.PI/2 + t2*1.15;
-      ctx.strokeStyle="#666"; ctx.lineWidth=1;
-      ctx.beginPath();
-      ctx.moveTo(gx+Math.sin(a2)*48, gy-Math.cos(a2)*48);
-      ctx.lineTo(gx+Math.sin(a2)*56, gy-Math.cos(a2)*56); ctx.stroke();
+    helice(true);
+    label(ctx, x, cy+ry+22, drag ? "↔" : "GLISSEZ-MOI", "rgba(255,255,255,.5)", 10, "center");
+    label(ctx, cxCoil, cy-ry-40, "1 · LE GENERATEUR", COL.vert, 10, "center");
+    label(ctx, cxCoil, cy-ry-22, "BOBINE — " + N + " SPIRES D'UN SEUL FIL", COL.vert, 11, "center");
+
+    /* ---------- le galvanomètre, ouvert ---------- */
+    var ang = needle*1.15;
+    label(ctx, gx, gy-136, "2 · LE MOTEUR DE L'AIGUILLE", COL.vert, 10, "center");
+
+    ctx.strokeStyle = "rgba(255,255,255,.20)"; ctx.lineWidth = 1.4;
+    ctx.beginPath();
+    for(i=0;i<=48;i++){
+      var ac = -1.2 + i/48*2.4;
+      var xc = gx + Math.sin(ac)*112, yc = gy - Math.cos(ac)*112;
+      if(i===0) ctx.moveTo(xc,yc); else ctx.lineTo(xc,yc);
     }
-    var na2 = -Math.PI/2 + needle*1.15;
-    ctx.strokeStyle=COL.rouge; ctx.lineWidth=3; ctx.lineCap="round";
-    ctx.beginPath(); ctx.moveTo(gx,gy); ctx.lineTo(gx+Math.sin(na2)*52, gy-Math.cos(na2)*52); ctx.stroke();
-    ctx.beginPath(); ctx.arc(gx,gy,5,0,6.284); ctx.fillStyle="#333"; ctx.fill();
-    label(ctx, gx, gy+22, "0", "#555", 11, "center");
-    label(ctx, gx-46, gy-6, "−", "#555", 14, "center");
-    label(ctx, gx+46, gy-6, "+", "#555", 14, "center");
-    label(ctx, gx, gy+42, "GALVANOMÈTRE", COL.vert, 10, "center");
+    ctx.stroke();
+    for(var g=-1;g<=1.001;g+=0.25){
+      var ag = g*1.2, gz = Math.abs(g) < 0.01;
+      ctx.strokeStyle = gz ? COL.vert : "rgba(255,255,255,.38)";
+      ctx.lineWidth = gz ? 2 : 1;
+      ctx.beginPath();
+      ctx.moveTo(gx+Math.sin(ag)*106, gy-Math.cos(ag)*106);
+      ctx.lineTo(gx+Math.sin(ag)*120, gy-Math.cos(ag)*120);
+      ctx.stroke();
+    }
+    label(ctx, gx-Math.sin(1.2)*134, gy-Math.cos(1.2)*134+4, "−", "#9aa494", 15, "center");
+    label(ctx, gx+Math.sin(1.2)*134, gy-Math.cos(1.2)*134+4, "+", "#9aa494", 15, "center");
 
-    /* fils */
-    ctx.strokeStyle="#8d8f88"; ctx.lineWidth=2;
-    ctx.beginPath(); ctx.moveTo(cxCoil+70, cy-30); ctx.lineTo(gx-62, cy-30);
-    ctx.moveTo(cxCoil+70, cy+30); ctx.lineTo(gx-62, cy+30); ctx.stroke();
+    /* l'aimant permanent : deux pièces polaires qui enserrent le cadre */
+    ctx.lineWidth = 15; ctx.lineCap = "butt";
+    ctx.strokeStyle = COL.rouge;
+    ctx.beginPath(); ctx.arc(gx, gy, 49, Math.PI-0.62, Math.PI+0.62); ctx.stroke();
+    ctx.strokeStyle = COL.bleu;
+    ctx.beginPath(); ctx.arc(gx, gy, 49, -0.62, 0.62); ctx.stroke();
+    label(ctx, gx-49, gy+5, "N", "#fff", 14, "center");
+    label(ctx, gx+49, gy+5, "S", "#fff", 14, "center");
 
-    ctx.fillStyle="rgba(0,0,0,.45)"; ctx.fillRect(0,H-42,W,42);
-    var mv = Math.abs(emf)*1000;
-    label(ctx, 14, H-16,
-      Math.abs(vel)<3 ? "AIMANT IMMOBILE  →  tension induite = 0 V   (le champ ne varie pas)"
-                      : "TENSION INDUITE ≈ " + fr(mv) + " mV   ·   sens : " + (emf>0?"positif":"négatif"),
-      Math.abs(vel)<3 ? COL.gris : COL.vert, 14);
+    /* le cadre mobile — l'électroaimant, un fil enroulé sur un cadre */
+    ctx.save(); ctx.translate(gx, gy); ctx.rotate(ang);
+    if(chaud > 0.02){
+      ctx.strokeStyle = "rgba(255,110,35," + (chaud*0.6).toFixed(3) + ")";
+      ctx.lineWidth = 13; ctx.strokeRect(-13, -30, 26, 60);
+    }
+    ctx.fillStyle = "rgba(255,255,255,.07)"; ctx.fillRect(-13, -30, 26, 60);
+    for(i=0;i<8;i++){
+      var yk = -27 + i*7.6;
+      ctx.strokeStyle = "rgba(118,72,34,.5)"; ctx.lineWidth = 1.8;   /* le retour, derrière */
+      ctx.beginPath(); ctx.moveTo(-13, yk+3.8); ctx.lineTo(13, yk); ctx.stroke();
+      ctx.strokeStyle = COL.cuivre; ctx.lineWidth = 2.6;             /* le brin de devant */
+      ctx.beginPath(); ctx.moveTo(-13, yk); ctx.lineTo(13, yk+3.8); ctx.stroke();
+    }
+    ctx.strokeStyle = "rgba(255,255,255,.28)"; ctx.lineWidth = 1.2;
+    ctx.strokeRect(-13, -30, 26, 60);
+    if(Math.abs(I) > 2e-5){
+      var pn = I >= 0 ? -1 : 1;
+      label(ctx, pn*30, -4, "N", COL.rouge, 13, "center");
+      label(ctx, -pn*30, -4, "S", COL.bleu, 13, "center");
+    }
+    ctx.restore();
+
+    /* le sens de rotation, quand le cadre est sollicité */
+    if(Math.abs(I) > 1.2e-4){
+      var sgn = I >= 0 ? 1 : -1;
+      ctx.strokeStyle = COL.jaune; ctx.lineWidth = 2;
+      ctx.beginPath();
+      ctx.arc(gx, gy, 68, -2.5 - (sgn>0?0:0.7), -2.5 + 0.7 - (sgn>0?0:0.7)); ctx.stroke();
+      var af = sgn > 0 ? -1.8 : -3.2;
+      ctx.fillStyle = COL.jaune;
+      ctx.beginPath();
+      ctx.arc(gx+Math.cos(af)*68, gy+Math.sin(af)*68, 4, 0, 6.284); ctx.fill();
+    }
+
+    /* le ressort spiral : il ramène à zéro et amène le courant au cadre */
+    ctx.strokeStyle = "rgba(200,216,200,.5)"; ctx.lineWidth = 1.2;
+    ctx.beginPath();
+    for(i=0;i<=72;i++){
+      var aq = i/72*5.6 + ang, rq = 5 + i/72*13;
+      var xq = gx + Math.cos(aq)*rq, yq = gy + Math.sin(aq)*rq;
+      if(i===0) ctx.moveTo(xq,yq); else ctx.lineTo(xq,yq);
+    }
+    ctx.stroke();
+
+    /* l'aiguille, solidaire du cadre */
+    ctx.save(); ctx.translate(gx, gy); ctx.rotate(ang);
+    ctx.strokeStyle = COL.rouge; ctx.lineWidth = 3; ctx.lineCap = "round";
+    ctx.beginPath(); ctx.moveTo(0, 12); ctx.lineTo(0, -100); ctx.stroke();
+    ctx.restore();
+    ctx.fillStyle = "#cfd6cd"; ctx.beginPath(); ctx.arc(gx, gy, 5.5, 0, 6.284); ctx.fill();
+
+    /* les renvois */
+    ctx.strokeStyle = "rgba(255,255,255,.26)"; ctx.lineWidth = 1;
+    ctx.beginPath();
+    ctx.moveTo(556, gy-54); ctx.lineTo(gx-58, gy-22);
+    ctx.moveTo(790, gy+52); ctx.lineTo(gx+20, gy+24);
+    ctx.moveTo(556, gy+44); ctx.lineTo(gx-14, gy+16);
+    ctx.stroke();
+    label(ctx, 552, gy-56, "AIMANT PERMANENT", "#9aa494", 9.5, "right");
+    label(ctx, 552, gy+46, "RESSORT DE RAPPEL", "#9aa494", 9.5, "right");
+    label(ctx, 794, gy+50, "CADRE MOBILE", COL.jaune, 9.5);
+    label(ctx, 794, gy+64, "= L'ELECTROAIMANT", COL.jaune, 9.5);
+
+    /* ---------- le bandeau d'énergie ---------- */
+    var by = 318;
+    ctx.strokeStyle = "rgba(255,255,255,.14)"; ctx.lineWidth = 1;
+    ctx.beginPath(); ctx.moveTo(20, by); ctx.lineTo(W-20, by); ctx.stroke();
+
+    var immobile = Math.abs(vel) < 3;
+    var mV = Math.abs(emf)*1000, mA = Math.abs(I)*1000, uW = Pelec*1e6;
+
+    label(ctx, 26, by+26, "1 · INDUCTION", COL.vert, 10);
+    label(ctx, 26, by+58, immobile ? "0 mV" : fr(mV,1) + " mV", immobile ? COL.gris : COL.blanc, 26);
+    label(ctx, 26, by+80, "e = −N · dΦ/dt", "#8d968b", 10);
+    label(ctx, 26, by+96, immobile ? "aimant immobile : le flux ne varie plus"
+                                   : "l'aimant bouge, donc le flux varie", "#6f776c", 10);
+
+    label(ctx, 330, by+26, "2 · ELECTROAIMANT", COL.jaune, 10);
+    label(ctx, 330, by+58, fr(mA,2) + " mA", immobile ? COL.gris : COL.blanc, 26);
+    label(ctx, 330, by+80, "I = e / (" + fr(Rb,1) + " + " + RG + " Ω)", "#8d968b", 10);
+    label(ctx, 330, by+96, "le cadre devient aimant et tourne dans le champ", "#6f776c", 10);
+
+    label(ctx, 620, by+26, "3 · EFFET JOULE", COL.rouge, 10);
+    label(ctx, 620, by+58, uW < 1 ? fr(uW*1000,0) + " nW" : fr(uW,1) + " µW",
+          immobile ? COL.gris : COL.blanc, 26);
+    label(ctx, 620, by+80, "P = R · I²   ·   cumul " + fr(Ejoule*1000,3) + " mJ", "#8d968b", 10);
+    label(ctx, 620, by+96, "le fil a chauffé de " + (dT*1e6).toFixed(1) + " millionièmes de degré",
+          "#6f776c", 10);
+
+    /* où part l'énergie électrique produite */
+    var bx = 26, bw = W-52, byy = by+130;
+    label(ctx, bx, byy-8, "OU PART L'ENERGIE ELECTRIQUE PRODUITE", "#8d968b", 10);
+    ctx.fillStyle = "rgba(255,255,255,.08)"; ctx.fillRect(bx, byy, bw, 16);
+    var fm = 0;
+    if(Pelec > 1e-9){
+      fm = Pmeca/Pelec;
+      ctx.fillStyle = COL.jaune; ctx.fillRect(bx, byy, bw*fm, 16);
+      ctx.fillStyle = COL.rouge; ctx.fillRect(bx+bw*fm, byy, bw*(1-fm), 16);
+      label(ctx, bx+bw*fm+8, byy+12, "CHALEUR — " + ((1-fm)*100).toFixed(1) + " %", "#fff", 10);
+      if(fm > 0.03) label(ctx, bx+4, byy+12, "MECANIQUE " + (fm*100).toFixed(0) + " %", "#2b2410", 10);
+    }
+    var bouge = Math.abs(needleV) > 0.08;
+    label(ctx, bx, byy+36,
+      bouge ? "L'aiguille bouge : " + (fm*100).toFixed(1) + " % du courant fait tourner le cadre, le reste chauffe le fil."
+            : "L'aiguille est au repos : plus aucun travail mécanique, tout le courant part en chaleur.",
+      bouge ? COL.jaune : "#8d968b", 10.5);
+    label(ctx, bx, byy+54,
+      "L'echauffement est imperceptible — mais c'est bien la que passe presque toute l'energie produite.",
+      "#6f776c", 10);
+
+    if(thermique()){
+      label(ctx, W-26, byy+36, "VUE THERMIQUE — echauffement amplifie × 100 000", COL.rouge, 10, "right");
+    }
+
+    var o = el('a-ind-out');
+    if(o) o.innerHTML =
+      "e = <b>" + (immobile ? "0" : fr(mV,1)) + " mV</b> · I = <b>" + fr(mA,2) + " mA</b><br>" +
+      "Joule : <b>" + (uW < 1 ? fr(uW*1000,0) + " nW" : fr(uW,1) + " µW") + "</b>" +
+      (bouge ? " · <b style='color:#ffd34d'>l'aiguille tourne</b>" : "");
   });
 
-  /* interaction pointeur */
+  /* ---------- interaction pointeur ---------- */
   var cv = el('a-induc');
   function px(ev){
     var r = cv.getBoundingClientRect();
@@ -11396,8 +11593,7 @@ function crystal(st, opts){
   function down(ev){ drag = true; auto = false; play.textContent = "Aller-retour automatique"; move(ev); }
   function move(ev){
     if(!drag) return;
-    var xmin = 40, xmax = st.W*0.70;
-    pos = Math.max(0, Math.min(1, (px(ev)-xmin)/(xmax-xmin)));
+    pos = Math.max(0, Math.min(1, (px(ev)-40)/360));
     if(ev.cancelable) ev.preventDefault();
   }
   function up(){ drag = false; }
@@ -11413,10 +11609,6 @@ function crystal(st, opts){
     sp = +sv.value; N = +sN.value;
     el('a-ind-v').textContent = "×" + sp;
     el('a-ind-n').textContent = N;
-    el('a-ind-out').innerHTML =
-      "Loi de Faraday : <b>e = −N · dΦ/dt</b><br>" +
-      "Seule la <b>variation</b> compte<br>" +
-      "Loi de Lenz : le courant induit <b>s'oppose</b> au mouvement";
   }
   sv.addEventListener('input', upd); sN.addEventListener('input', upd); upd();
 })();
