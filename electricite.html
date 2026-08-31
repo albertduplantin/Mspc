@@ -69,8 +69,8 @@
     <a class="borne" href="#c4"><span class="num">04</span><span class="lbl">Le volt : des joules par coulomb</span></a>
     <a class="borne" href="#c5"><span class="num">05</span><span class="lbl">La résistance</span></a>
     <a class="borne" href="#c6"><span class="num">06</span><span class="lbl">La loi d'Ohm : U = R × I</span></a>
-    <a class="borne" href="#c7"><span class="num">07</span><span class="lbl">L'effet Joule</span></a>
-    <a class="borne" href="#c8"><span class="num">08</span><span class="lbl">Le circuit simple et la lampe</span></a>
+    <a class="borne" href="#c7"><span class="num">07</span><span class="lbl">Le circuit simple et la lampe</span></a>
+    <a class="borne" href="#c8"><span class="num">08</span><span class="lbl">L'effet Joule</span></a>
     <a class="borne" href="#c9"><span class="num">09</span><span class="lbl">Courant = champ magnétique</span></a>
     <a class="borne" href="#c10"><span class="num">10</span><span class="lbl">L'électroaimant</span></a>
     <a class="borne" href="#c11"><span class="num">11</span><span class="lbl">L'induction</span></a>
@@ -1320,7 +1320,7 @@
 <li><strong>La nature du matériau</strong> — un cristal d'argent ou de cuivre est « propre », les électrons y circulent bien. Un cristal de nichrome (nickel-chrome) est un désordre volontaire : on l'a fabriqué exprès pour freiner.</li>
 <li><strong>La longueur</strong> — deux fois plus long, deux fois plus de chocs, deux fois plus de résistance.</li>
 <li><strong>La section</strong> — un fil deux fois plus gros offre deux fois plus de couloirs : deux fois moins de résistance. C'est pour cette raison qu'on parle de 1,5 mm², 2,5 mm², 6 mm²... et pas de la couleur de la gaine.</li>
-<li><strong>La température</strong> — dans un métal, plus c'est chaud, plus les ions vibrent, plus la résistance monte. <span class="cle">Retenez-le : ça reviendra au chapitre 8 avec la lampe et au chapitre 17 avec le bilame.</span></li>
+<li><strong>La température</strong> — dans un métal, plus c'est chaud, plus les ions vibrent, plus la résistance monte. <span class="cle">Retenez-le : ça reviendra au chapitre 7 avec la lampe et au chapitre 17 avec le bilame.</span></li>
 </ul>
 
 <h3>5.3 — Déviés par quoi, exactement ?</h3>
@@ -1599,7 +1599,7 @@
 <p>Au-delà du calcul, trois conséquences à s'approprier — ce sont elles qui servent au quotidien en atelier :</p>
 <ul>
 <li><strong>Pour un récepteur donné, la tension commande le courant.</strong> Doublez la tension, vous doublez le courant. C'est pourquoi une résistance de 24 V branchée par erreur sur 230 V voit passer près de dix fois trop de courant — et rend l'âme en quelques secondes.</li>
-<li><strong>Pour une tension donnée, c'est le récepteur qui décide du courant.</strong> Le réseau impose 230 V, point. Ce qui fixe l'intensité, c'est la résistance de ce que vous branchez. <span class="cle">Une prise ne « donne » pas 16 A : elle en autorise jusqu'à 16.</span> C'est tout le sujet du chapitre 8.</li>
+<li><strong>Pour une tension donnée, c'est le récepteur qui décide du courant.</strong> Le réseau impose 230 V, point. Ce qui fixe l'intensité, c'est la résistance de ce que vous branchez. <span class="cle">Une prise ne « donne » pas 16 A : elle en autorise jusqu'à 16.</span> C'est tout le sujet du chapitre 7.</li>
 <li><strong>Une résistance qui tend vers zéro fait exploser le courant.</strong> Si R devient minuscule, I = U/R devient énorme. C'est la définition même du court-circuit, et vous en verrez les conséquences au chapitre 16.</li>
 </ul>
 
@@ -1611,7 +1611,7 @@
 <table>
 <thead><tr><th>Composant</th><th>Comportement</th><th>Conséquence pratique</th></tr></thead>
 <tbody>
-<tr><td><strong>Lampe à incandescence</strong></td><td>Sa résistance augmente fortement en chauffant</td><td>À froid elle appelle un courant bien supérieur au nominal : c'est la pointe à l'allumage (chapitre 8)</td></tr>
+<tr><td><strong>Lampe à incandescence</strong></td><td>Sa résistance augmente fortement en chauffant</td><td>À froid elle appelle un courant bien supérieur au nominal : c'est la pointe à l'allumage (chapitre 7)</td></tr>
 <tr><td><strong>Diode, LED</strong></td><td>Bloque en dessous d'un seuil, conduit brutalement au-delà</td><td>On ne branche jamais une LED sans résistance en série</td></tr>
 <tr><td><strong>Arc électrique</strong></td><td>Sa résistance <em>diminue</em> quand le courant augmente</td><td>L'arc s'auto-entretient : d'où la chambre de coupure du disjoncteur (chapitre 17)</td></tr>
 <tr><td><strong>Moteur en rotation</strong></td><td>Produit une tension qui s'oppose à son alimentation</td><td>À l'arrêt il appelle 5 à 8 fois son courant nominal : le courant d'appel</td></tr>
@@ -1778,7 +1778,7 @@
 <p><strong>Étape 2 — la chute de tension, par la loi d'Ohm.</strong><br>Cette résistance est traversée par 16 A. La tension qu'elle consomme au passage vaut :<br>U = R × I = 0,269 × 16 = <strong>4,3 V</strong>.</p>
 <p><strong>Étape 3 — ce que reçoit réellement la machine.</strong><br>230 − 4,3 = <strong>225,7 V</strong>. La machine ne reçoit donc pas 230 V.</p>
 <p><strong>Étape 4 — est-ce acceptable ?</strong><br>On exprime la chute en pourcentage : 4,3 / 230 = 0,0187, soit <strong>1,9 %</strong>. La limite usuelle pour un circuit de force étant de 5 %, on est largement dans les clous.</p>
-<p><em>Deux remarques qui servent tous les jours. D'abord, cette chute est <strong>proportionnelle au courant</strong> : la même rallonge sur 32 A ferait chuter 8,6 V. Ensuite, cette tension perdue ne s'évapore pas — elle est dissipée en chaleur dans le câble : P = U × I = 4,3 × 16 ≈ 69 W répartis sur sa longueur. C'est exactement pour cela qu'un enrouleur non déroulé chauffe (chapitre 7).</em></p></div></details></div>
+<p><em>Deux remarques qui servent tous les jours. D'abord, cette chute est <strong>proportionnelle au courant</strong> : la même rallonge sur 32 A ferait chuter 8,6 V. Ensuite, cette tension perdue ne s'évapore pas — elle est dissipée en chaleur dans le câble : P = U × I = 4,3 × 16 ≈ 69 W répartis sur sa longueur. C'est exactement pour cela qu'un enrouleur non déroulé chauffe (chapitre 8).</em></p></div></details></div>
 
 <div class="exo"><span class="tag">Exercice 6.4</span>
 <p>Un collègue mesure à l'ohmmètre le filament d'une ampoule 230 V / 60 W éteinte : il lit 65 Ω. Il en déduit qu'elle appellera 230 / 65 ≈ 3,5 A, soit 815 W. Où est l'erreur ?</p>
@@ -1815,12 +1815,108 @@
 
 <section class="ch" id="c7">
   <div class="ch-head"><div class="ch-num">07</div><div class="ch-title">
+    <span class="kicker">Retour au concret</span><h2>Le circuit simple : c'est la lampe qui décide</h2></div></div>
+  <div class="ch-body">
+
+<p class="lede">Nous avons maintenant la loi d'Ohm. Appliquons-la à trois composants seulement : une pile, un interrupteur, une lampe. C'est là que se joue l'erreur de raisonnement la plus répandue chez les débutants.</p>
+
+<h3>7.1 — Les quatre éléments d'un circuit</h3>
+<ol>
+<li>Un <strong>générateur</strong> — il impose la tension (pile, prise, alimentation stabilisée)</li>
+<li>Un <strong>récepteur</strong> — il transforme l'énergie électrique en autre chose (lumière, chaleur, mouvement)</li>
+<li>Des <strong>conducteurs</strong> — ils relient, idéalement sans rien consommer</li>
+<li>Un <strong>organe de commande et de protection</strong> — interrupteur, disjoncteur</li>
+</ol>
+<p>Et une condition absolue : <strong>le circuit doit être fermé</strong>. Une boucle complète, sans interruption. Coupez n'importe où, tout s'arrête partout.</p>
+
+<h3>7.2 — L'erreur à corriger tout de suite</h3>
+<div class="encadre"><span class="tag">Idée fausse</span>
+<p><em>« La prise envoie 16 A dans la lampe. »</em> — <strong>Non.</strong></p>
+<p>La prise <strong>propose</strong> une tension (230 V) et <strong>autorise</strong> un courant maximal (16 A, fixé par le disjoncteur). Mais le courant qui circule réellement est déterminé par <strong>la résistance du récepteur branché</strong>.</p>
+<p>Branchez une lampe de 5 W : il passe 22 mA. Branchez un radiateur de 2 000 W : il passe 8,7 A. Même prise, même tension. <span class="cle">C'est le récepteur qui décide.</span></p></div>
+
+<div class="formule">I = U / R<small>Loi d'Ohm — la tension est imposée par la source, la résistance par le récepteur, le courant en découle</small></div>
+
+<div class="image-mentale"><span class="tag">Image mentale</span>
+<p>Un robinet ouvert à fond (la tension) au bout duquel vous branchez successivement une paille, un tuyau d'arrosage, puis une lance à incendie. La pression est la même à chaque fois. Le débit, non. <strong>C'est l'embout qui fixe le débit, pas le robinet.</strong></p></div>
+
+<figure class="anim">
+  <canvas id="a-circ" width="900" height="330" aria-label="Animation : circuit simple avec lampe, interrupteur et mesures"></canvas>
+  <div class="ctrls">
+    <div class="c"><button class="btn" id="a-circ-sw">Fermer l'interrupteur</button></div>
+    <div class="c"><label>Récepteur <span id="a-circ-rl">Lampe 60 W</span></label><input type="range" id="a-circ-rr" min="0" max="4" value="2"></div>
+    <div class="c"><label>Tension source <span id="a-circ-ul">230 V</span></label><input type="range" id="a-circ-ur" min="12" max="240" value="230"></div>
+    <div class="c readout" id="a-circ-out"></div>
+  </div>
+  <figcaption>Changez de récepteur sans toucher à la tension : le courant change tout seul. <b>L'éclat de la lampe suit la puissance, pas la tension.</b> Ouvrez l'interrupteur : le courant tombe à zéro partout instantanément, y compris dans le fil de retour.</figcaption>
+</figure>
+
+<h3>7.3 — Le cas particulier de la lampe à incandescence</h3>
+<p>Une lampe n'est pas une résistance ordinaire : <strong>sa résistance change avec sa température</strong> (chapitre 5, dernier point).</p>
+<table>
+<thead><tr><th>État</th><th class="mono">Température</th><th class="mono">Résistance</th><th class="mono">Courant sous 230 V</th></tr></thead>
+<tbody>
+<tr><td>Froide, éteinte</td><td class="mono">20 °C</td><td class="mono">≈ 60 Ω</td><td class="mono">3,8 A</td></tr>
+<tr><td>Chaude, en régime</td><td class="mono">2 500 °C</td><td class="mono">≈ 880 Ω</td><td class="mono">0,26 A</td></tr>
+</tbody></table>
+<p>À l'instant précis de l'allumage, une lampe de 60 W appelle donc <strong>15 fois son courant nominal</strong> — pendant quelques dizaines de millisecondes, le temps que le filament monte en température.</p>
+
+<div class="plaque"><span class="tag">Anecdote — pourquoi les ampoules grillent toujours à l'allumage</span>
+<p>Vous ne l'avez jamais vue griller en fonctionnement : elle claque toujours au moment où vous appuyez sur l'interrupteur. Ce n'est pas une coïncidence.</p>
+<p>La cause : ce pic de courant à froid, combiné au fait que le filament, usé, présente des zones amincies par sublimation du tungstène. Une zone plus fine = plus résistante = plus chaude = elle s'amincit encore plus vite. Le jour où le pic d'allumage passe, cette zone fond. C'est un <strong>emballement thermique</strong>, et c'est aussi la raison pour laquelle un défaut électrique s'aggrave toujours de lui-même.</p>
+<p>Conséquence directe en atelier : sur un circuit d'éclairage industriel avec 30 tubes ou projecteurs, la somme des courants d'appel peut faire déclencher un disjoncteur courbe C. On monte alors en <strong>courbe D</strong>, ou on répartit sur plusieurs départs.</p></div>
+
+<div class="plaque"><span class="tag">Anecdote — l'ampoule allumée depuis 1901</span>
+<p>Dans la caserne de pompiers n° 6 de Livermore, en Californie, brûle une ampoule à filament de carbone installée en <strong>1901</strong>. Elle est allumée en quasi-permanence depuis 124 ans. Elle a survécu à deux déménagements, et elle dispose de sa propre webcam.</p>
+<p>Son secret ? Elle n'est <strong>presque jamais éteinte</strong> (pas de pic d'allumage), elle fonctionne à puissance très réduite (4 W environ, une lueur orangée), et son filament de carbone est bien plus épais que le tungstène moderne. Elle éclaire très mal — mais elle éclaire encore.</p>
+<p>Cela dit, il faut être honnête : la mode du « cartel Phœbus », qui aurait délibérément limité les ampoules à 1 000 heures, est un fait historique documenté (1924-1939), mais la durée de vie est <strong>aussi</strong> un compromis technique réel — un filament qui dure longtemps éclaire peu et consomme mal. Les deux explications coexistent.</p></div>
+
+<div class="exo"><span class="tag">Exercice 7.1</span>
+<p>Sous 230 V, calculez le courant appelé par : une lampe LED 9 W · un sèche-cheveux 1 800 W · un moteur monophasé 750 W.</p>
+<details><summary>Voir la réponse</summary><div class="rep">
+<p><strong>Le principe.</strong> La plaque signalétique donne la puissance, le réseau impose la tension. On cherche le courant : on part de P = U × I et on isole I en divisant les deux membres par U, ce qui donne <strong>I = P / U</strong>.</p>
+<p><strong>La lampe LED de 9 W.</strong><br>I = 9 / 230 = 0,039 A = <strong>39 mA</strong></p>
+<p><strong>Le sèche-cheveux de 1 800 W.</strong><br>I = 1 800 / 230 = <strong>7,8 A</strong></p>
+<p><strong>Le moteur de 750 W.</strong><br>I = 750 / 230 = <strong>3,3 A</strong> … en théorie.</p>
+<p><strong>Pourquoi la plaque du moteur affichera plutôt 4,5 A.</strong><br>Un moteur n'est pas une simple résistance : à cause de ses bobinages, le courant et la tension ne sont pas en phase. Une partie du courant fait des allers-retours sans produire de travail. On tient compte de cela par le <em>facteur de puissance</em> cos φ, souvent voisin de 0,75 sur un petit moteur :<br>I = P / (U × cos φ) = 750 / (230 × 0,75) = <strong>4,3 A</strong></p>
+<p><em>Règle pratique : pour un appareil purement résistif — chauffage, lampe à filament, four — I = P/U est exact. Pour tout ce qui contient un bobinage — moteur, transformateur, ballast — le courant réel est toujours <strong>supérieur</strong> au calcul simple. En cas de doute, c'est la plaque qui fait foi, jamais votre division.</em></p>
+</div></details></div>
+
+<div class="exo"><span class="tag">Exercice 7.2</span>
+<p>Une lampe 12 V / 21 W de feu de stop. Quelle est sa résistance à chaud ? Que se passe-t-il si on la branche sur 24 V ?</p>
+<details><summary>Voir la réponse</summary><div class="rep">
+<p><strong>Étape 1 — le courant nominal.</strong><br>La plaque donne 21 W sous 12 V. On part de P = U × I et on isole I :<br>I = P / U = 21 / 12 = <strong>1,75 A</strong></p>
+<p><strong>Étape 2 — la résistance à chaud.</strong><br>On applique la loi d'Ohm sous la forme R = U / I :<br>R = 12 / 1,75 = <strong>6,9 Ω</strong></p>
+<p><strong>Étape 3 — ce qui se passe sous 24 V.</strong><br>Raisonnons d'abord comme si la résistance restait constante :</p>
+<ul>
+<li>Le courant doublerait : I = 24 / 6,9 = 3,5 A</li>
+<li>La puissance serait multipliée par 4 : P = 24 × 3,5 = <strong>84 W</strong> au lieu de 21 W</li>
+</ul>
+<p><strong>Étape 4 — la réalité, encore pire.</strong><br>Le filament est calculé pour atteindre 2 500 °C sous 21 W. Sommé d'en dissiper 84, il monte instantanément au-delà du point de fusion du tungstène (3 400 °C). <strong>Il fond en une fraction de seconde</strong>, avec un éclair blanc caractéristique.</p>
+<p><em>C'est très exactement ce qui arrive quand on monte du matériel 12 V sur un poids lourd en 24 V. Et notez le rapport : la tension est multipliée par 2, mais la puissance par 4 — parce que la tension agit deux fois, une fois sur elle-même et une fois via le courant qu'elle provoque.</em></p>
+</div></details></div>
+
+<div class="exo"><span class="tag">Exercice 7.3</span>
+<p>Deux lampes identiques 230 V / 60 W sont branchées en série sur 230 V. Éclairent-elles normalement ?</p>
+<details><summary>Voir la réponse</summary><div class="rep">
+<p><strong>Non. Elles rougeoient à peine.</strong></p>
+<p><strong>Étape 1 — le partage de la tension.</strong><br>En série, les deux lampes sont traversées par le <em>même</em> courant, et la tension du réseau se répartit entre elles. Comme elles sont identiques, chacune reçoit la moitié :<br>230 / 2 = <strong>115 V par lampe</strong>.</p>
+<p><strong>Étape 2 — l'effet sur la puissance, en première approche.</strong><br>Si la résistance de chaque filament restait constante (885 Ω), le courant serait divisé par deux et la puissance de chaque lampe par quatre :<br>60 / 4 = <strong>15 W</strong> au lieu de 60 W.</p>
+<p><strong>Étape 3 — la réalité est encore en dessous.</strong><br>Avec moins de puissance, le filament chauffe moins ; or un filament plus froid est <em>moins</em> résistant (chapitre 5). Sa résistance chute donc, le courant remonte un peu, mais surtout la température reste très basse. Résultat : les lampes émettent une lueur orangée, très loin de la lumière blanche normale — car le rendement lumineux s'effondre bien plus vite que la puissance.</p>
+<p><em>C'était le montage des anciennes guirlandes de Noël : vingt lampes de 12 V en série sur 230 V. D'où le défaut légendaire — <strong>une seule lampe grillée coupait le circuit et éteignait toute la guirlande</strong>, et il fallait les tester une par une. Les guirlandes modernes montent les LED en parallèle par groupes, précisément pour éviter cela.</em></p>
+</div></details></div>
+
+  </div>
+</section>
+
+<section class="ch" id="c8">
+  <div class="ch-head"><div class="ch-num">08</div><div class="ch-title">
     <span class="kicker">Quand les chocs deviennent de la chaleur</span><h2>L'effet Joule</h2></div></div>
   <div class="ch-body">
 
 <p class="lede">Au chapitre 5, les électrons se faisaient dévier par les irrégularités du réseau. Ces déviations, mises bout à bout, ne disparaissent pas dans le néant : elles deviennent de la chaleur. Parfois voulue, souvent subie, <strong>toujours présente</strong>.</p>
 
-<h3>7.1 — Le mécanisme</h3>
+<h3>8.1 — Le mécanisme</h3>
 <p>Reprenons le film au ralenti. Un électron poussé par la tension percute un ion du réseau. Il lui cède une partie de son énergie, et l'ion se met à <strong>vibrer plus fort</strong> autour de sa position. Or un réseau d'ions qui vibrent plus fort, dans notre langage de tous les jours, cela porte un nom : <strong>c'est de la chaleur</strong>. Il n'y a rien d'autre derrière le mot.</p>
 <p>Un seul choc ne réchauffe rien du tout. Mais il s'en produit des <strong>milliards de milliards par seconde</strong> dans le moindre bout de fil, et leur somme est parfaitement mesurable au thermomètre. C'est l'<strong>effet Joule</strong>.</p>
 <p><span class="cle">Chaque joule de chaleur produit ici a été prélevé sur l'énergie que le générateur avait confiée aux coulombs</span> (§ 4.4). Rien n'apparaît, rien ne disparaît : de l'énergie électrique s'est convertie en agitation thermique.</p>
@@ -2054,7 +2150,7 @@
 })();
 </script>
 
-<h3>7.2 — Ce n'est pas la chaleur produite qui brûle, c'est celle qui ne part pas</h3>
+<h3>8.2 — Ce n'est pas la chaleur produite qui brûle, c'est celle qui ne part pas</h3>
 <p>Voici ce que la formule P = R × I² ne dit pas, et qui explique la plupart des sinistres. Un conducteur ne s'échauffe pas indéfiniment : à mesure que sa température monte, il évacue de mieux en mieux vers l'air ambiant. Il finit donc par se stabiliser à la température où <strong>la chaleur évacuée égale exactement la chaleur produite</strong>.</p>
 <p>Cette température d'équilibre dépend de deux choses, et pas d'une seule :</p>
 <ul>
@@ -2069,7 +2165,7 @@
 <p>Faites-en l'essai dans l'animation : gardez 16 A sur du 2,5 mm² et basculez simplement la pose sur « enroulé sur touret ». La barre rouge ne bouge pas d'un millimètre. La bleue s'effondre. Et la température part.</p>
 <p><strong>C'est ainsi que fondent les enrouleurs de chantier sur lesquels on branche un chauffage d'appoint sans les dérouler.</strong></p></div>
 
-<h3>7.3 — L'effet Joule qu'on veut</h3>
+<h3>8.3 — L'effet Joule qu'on veut</h3>
 <ul>
 <li><strong>Chauffage et cuisson</strong> — radiateur, four, grille-pain, plaque électrique, chauffe-eau. Rendement 100 % : tout ce qui rentre sort en chaleur.</li>
 <li><strong>Le fer à souder, le décapeur thermique, le pistolet à colle</strong> — vos outils d'atelier.</li>
@@ -2079,7 +2175,7 @@
 <li><strong>La coupe au fil chaud</strong> du polystyrène, la thermosoudeuse à sachets.</li>
 </ul>
 
-<h3>7.4 — L'effet Joule qu'on subit</h3>
+<h3>8.4 — L'effet Joule qu'on subit</h3>
 <ul>
 <li><strong>Les pertes en ligne</strong> sur le réseau électrique — environ <strong>30 TWh par an en France</strong>, soit la production annuelle de trois réacteurs nucléaires, dissipée en pure chaleur dans les câbles. Chapitre 11.</li>
 <li><strong>L'échauffement des moteurs</strong> — les « pertes cuivre » dans les bobinages, qui obligent à ventiler.</li>
@@ -2096,7 +2192,7 @@
 <div class="plaque"><span class="tag">Anecdote — 95 % de chauffage, 5 % de lumière</span>
 <p>L'ampoule à incandescence était un radiateur qui, accessoirement, éclairait : sur 100 W absorbés, <strong>95 W partaient en chaleur</strong>. C'est pour ça qu'on se brûlait en la changeant, et c'est pour ça qu'elle a été retirée du marché européen entre 2009 et 2012. Une LED de même flux consomme 8 W. Le même « défaut » était pourtant un argument de vente pour le <em>Easy-Bake Oven</em>, le petit four à gâteaux pour enfants vendu aux États-Unis à partir de 1963 : il cuisait avec <strong>deux ampoules de 100 W</strong>. Il a fallu le redessiner en 2011, faute d'ampoules à incandescence disponibles.</p></div>
 
-<div class="exo"><span class="tag">Exercice 7.1</span>
+<div class="exo"><span class="tag">Exercice 8.1</span>
 <p>Un câble de résistance 0,2 Ω transporte 10 A. Quelle puissance y est dissipée ? Et si le courant monte à 20 A ?</p>
 <details><summary>Voir la réponse</summary><div class="rep">
 <p><strong>Étape 1 — la formule et pourquoi c'est celle-là.</strong><br>La puissance dissipée en chaleur dans un conducteur vaut P = R × I². Le carré vient du fait que doubler le courant, c'est à la fois deux fois plus d'électrons <em>et</em> deux fois plus d'énergie cédée par chacun.</p>
@@ -2106,7 +2202,7 @@
 <p><em>Ce que cela veut dire concrètement : 80 W dissipés dans un câble, c'est un petit radiateur d'appoint réparti sur toute sa longueur. Si ce câble est enroulé sur un touret ou passé dans un isolant, cette chaleur ne peut pas s'évacuer — et c'est ainsi que fond une gaine. Vous comprenez du même coup pourquoi un enrouleur porte deux calibres : 16 A déroulé, 8 A enroulé.</em></p>
 </div></details></div>
 
-<div class="exo"><span class="tag">Exercice 7.2</span>
+<div class="exo"><span class="tag">Exercice 8.2</span>
 <p>Une multiprise 16 A alimente : un radiateur soufflant 2 000 W, un PC 150 W et une lampe 60 W, sous 230 V. Y a-t-il un problème ?</p>
 <details><summary>Voir la réponse</summary><div class="rep">
 <p><strong>Étape 1 — additionner les puissances.</strong><br>Les trois appareils sont branchés en parallèle sur la même multiprise : leurs puissances s'ajoutent.<br>P = 2 000 + 150 + 60 = <strong>2 210 W</strong></p>
@@ -2123,7 +2219,7 @@
 <p><em>Retenez la leçon générale : <strong>respecter le calibre ne suffit pas.</strong> Le calibre suppose des contacts sains, une section correcte et une évacuation normale de la chaleur. Dès qu'une de ces trois conditions manque, le calcul devient trompeur.</em></p>
 </div></details></div>
 
-<div class="exo"><span class="tag">Exercice 7.3</span>
+<div class="exo"><span class="tag">Exercice 8.3</span>
 <p>Pourquoi les bobinages d'un moteur sont-ils en cuivre, mais les résistances de four en nichrome, alors que le nichrome est bien meilleur marché ?</p>
 <details><summary>Voir la réponse</summary><div class="rep">
 <p><strong>Parce que les deux objectifs sont exactement opposés.</strong> Ce n'est pas une question de prix, c'est une question de fonction.</p>
@@ -2131,102 +2227,6 @@
 <p><strong>Dans un four, l'effet Joule est le produit fini.</strong><br>On veut convertir l'électricité en chaleur, et le rendement est de 100 %. On cherche donc une résistance <strong>élevée</strong> : le nichrome, à environ 1 100 nΩ·m, résiste 65 fois plus que le cuivre à dimensions égales.</p>
 <p><strong>Et la raison décisive, qu'on oublie souvent :</strong> le nichrome supporte de fonctionner au rouge, vers 1 000 °C, en formant une couche d'oxyde de chrome protectrice. Le cuivre, lui, <strong>s'oxyde et casse dès 300 à 400 °C</strong> à l'air libre. Même si l'on voulait faire une résistance de four en cuivre, elle ne tiendrait pas une journée.</p>
 <p><em>Retenez la règle générale : <strong>on choisit un matériau pour la fonction qu'on lui demande, pas pour ses qualités absolues.</strong> Le « mauvais conducteur » qu'est le nichrome est le bon matériau au bon endroit.</em></p>
-</div></details></div>
-
-  </div>
-</section>
-
-<section class="ch" id="c8">
-  <div class="ch-head"><div class="ch-num">08</div><div class="ch-title">
-    <span class="kicker">Retour au concret</span><h2>Le circuit simple : c'est la lampe qui décide</h2></div></div>
-  <div class="ch-body">
-
-<p class="lede">Après le réseau national, revenons à trois composants : une pile, un interrupteur, une lampe. C'est là que se joue l'erreur de raisonnement la plus répandue chez les débutants.</p>
-
-<h3>8.1 — Les quatre éléments d'un circuit</h3>
-<ol>
-<li>Un <strong>générateur</strong> — il impose la tension (pile, prise, alimentation stabilisée)</li>
-<li>Un <strong>récepteur</strong> — il transforme l'énergie électrique en autre chose (lumière, chaleur, mouvement)</li>
-<li>Des <strong>conducteurs</strong> — ils relient, idéalement sans rien consommer</li>
-<li>Un <strong>organe de commande et de protection</strong> — interrupteur, disjoncteur</li>
-</ol>
-<p>Et une condition absolue : <strong>le circuit doit être fermé</strong>. Une boucle complète, sans interruption. Coupez n'importe où, tout s'arrête partout.</p>
-
-<h3>8.2 — L'erreur à corriger tout de suite</h3>
-<div class="encadre"><span class="tag">Idée fausse</span>
-<p><em>« La prise envoie 16 A dans la lampe. »</em> — <strong>Non.</strong></p>
-<p>La prise <strong>propose</strong> une tension (230 V) et <strong>autorise</strong> un courant maximal (16 A, fixé par le disjoncteur). Mais le courant qui circule réellement est déterminé par <strong>la résistance du récepteur branché</strong>.</p>
-<p>Branchez une lampe de 5 W : il passe 22 mA. Branchez un radiateur de 2 000 W : il passe 8,7 A. Même prise, même tension. <span class="cle">C'est le récepteur qui décide.</span></p></div>
-
-<div class="formule">I = U / R<small>Loi d'Ohm — la tension est imposée par la source, la résistance par le récepteur, le courant en découle</small></div>
-
-<div class="image-mentale"><span class="tag">Image mentale</span>
-<p>Un robinet ouvert à fond (la tension) au bout duquel vous branchez successivement une paille, un tuyau d'arrosage, puis une lance à incendie. La pression est la même à chaque fois. Le débit, non. <strong>C'est l'embout qui fixe le débit, pas le robinet.</strong></p></div>
-
-<figure class="anim">
-  <canvas id="a-circ" width="900" height="330" aria-label="Animation : circuit simple avec lampe, interrupteur et mesures"></canvas>
-  <div class="ctrls">
-    <div class="c"><button class="btn" id="a-circ-sw">Fermer l'interrupteur</button></div>
-    <div class="c"><label>Récepteur <span id="a-circ-rl">Lampe 60 W</span></label><input type="range" id="a-circ-rr" min="0" max="4" value="2"></div>
-    <div class="c"><label>Tension source <span id="a-circ-ul">230 V</span></label><input type="range" id="a-circ-ur" min="12" max="240" value="230"></div>
-    <div class="c readout" id="a-circ-out"></div>
-  </div>
-  <figcaption>Changez de récepteur sans toucher à la tension : le courant change tout seul. <b>L'éclat de la lampe suit la puissance, pas la tension.</b> Ouvrez l'interrupteur : le courant tombe à zéro partout instantanément, y compris dans le fil de retour.</figcaption>
-</figure>
-
-<h3>8.3 — Le cas particulier de la lampe à incandescence</h3>
-<p>Une lampe n'est pas une résistance ordinaire : <strong>sa résistance change avec sa température</strong> (chapitre 5, dernier point).</p>
-<table>
-<thead><tr><th>État</th><th class="mono">Température</th><th class="mono">Résistance</th><th class="mono">Courant sous 230 V</th></tr></thead>
-<tbody>
-<tr><td>Froide, éteinte</td><td class="mono">20 °C</td><td class="mono">≈ 60 Ω</td><td class="mono">3,8 A</td></tr>
-<tr><td>Chaude, en régime</td><td class="mono">2 500 °C</td><td class="mono">≈ 880 Ω</td><td class="mono">0,26 A</td></tr>
-</tbody></table>
-<p>À l'instant précis de l'allumage, une lampe de 60 W appelle donc <strong>15 fois son courant nominal</strong> — pendant quelques dizaines de millisecondes, le temps que le filament monte en température.</p>
-
-<div class="plaque"><span class="tag">Anecdote — pourquoi les ampoules grillent toujours à l'allumage</span>
-<p>Vous ne l'avez jamais vue griller en fonctionnement : elle claque toujours au moment où vous appuyez sur l'interrupteur. Ce n'est pas une coïncidence.</p>
-<p>La cause : ce pic de courant à froid, combiné au fait que le filament, usé, présente des zones amincies par sublimation du tungstène. Une zone plus fine = plus résistante = plus chaude = elle s'amincit encore plus vite. Le jour où le pic d'allumage passe, cette zone fond. C'est un <strong>emballement thermique</strong>, et c'est aussi la raison pour laquelle un défaut électrique s'aggrave toujours de lui-même.</p>
-<p>Conséquence directe en atelier : sur un circuit d'éclairage industriel avec 30 tubes ou projecteurs, la somme des courants d'appel peut faire déclencher un disjoncteur courbe C. On monte alors en <strong>courbe D</strong>, ou on répartit sur plusieurs départs.</p></div>
-
-<div class="plaque"><span class="tag">Anecdote — l'ampoule allumée depuis 1901</span>
-<p>Dans la caserne de pompiers n° 6 de Livermore, en Californie, brûle une ampoule à filament de carbone installée en <strong>1901</strong>. Elle est allumée en quasi-permanence depuis 124 ans. Elle a survécu à deux déménagements, et elle dispose de sa propre webcam.</p>
-<p>Son secret ? Elle n'est <strong>presque jamais éteinte</strong> (pas de pic d'allumage), elle fonctionne à puissance très réduite (4 W environ, une lueur orangée), et son filament de carbone est bien plus épais que le tungstène moderne. Elle éclaire très mal — mais elle éclaire encore.</p>
-<p>Cela dit, il faut être honnête : la mode du « cartel Phœbus », qui aurait délibérément limité les ampoules à 1 000 heures, est un fait historique documenté (1924-1939), mais la durée de vie est <strong>aussi</strong> un compromis technique réel — un filament qui dure longtemps éclaire peu et consomme mal. Les deux explications coexistent.</p></div>
-
-<div class="exo"><span class="tag">Exercice 8.1</span>
-<p>Sous 230 V, calculez le courant appelé par : une lampe LED 9 W · un sèche-cheveux 1 800 W · un moteur monophasé 750 W.</p>
-<details><summary>Voir la réponse</summary><div class="rep">
-<p><strong>Le principe.</strong> La plaque signalétique donne la puissance, le réseau impose la tension. On cherche le courant : on part de P = U × I et on isole I en divisant les deux membres par U, ce qui donne <strong>I = P / U</strong>.</p>
-<p><strong>La lampe LED de 9 W.</strong><br>I = 9 / 230 = 0,039 A = <strong>39 mA</strong></p>
-<p><strong>Le sèche-cheveux de 1 800 W.</strong><br>I = 1 800 / 230 = <strong>7,8 A</strong></p>
-<p><strong>Le moteur de 750 W.</strong><br>I = 750 / 230 = <strong>3,3 A</strong> … en théorie.</p>
-<p><strong>Pourquoi la plaque du moteur affichera plutôt 4,5 A.</strong><br>Un moteur n'est pas une simple résistance : à cause de ses bobinages, le courant et la tension ne sont pas en phase. Une partie du courant fait des allers-retours sans produire de travail. On tient compte de cela par le <em>facteur de puissance</em> cos φ, souvent voisin de 0,75 sur un petit moteur :<br>I = P / (U × cos φ) = 750 / (230 × 0,75) = <strong>4,3 A</strong></p>
-<p><em>Règle pratique : pour un appareil purement résistif — chauffage, lampe à filament, four — I = P/U est exact. Pour tout ce qui contient un bobinage — moteur, transformateur, ballast — le courant réel est toujours <strong>supérieur</strong> au calcul simple. En cas de doute, c'est la plaque qui fait foi, jamais votre division.</em></p>
-</div></details></div>
-
-<div class="exo"><span class="tag">Exercice 8.2</span>
-<p>Une lampe 12 V / 21 W de feu de stop. Quelle est sa résistance à chaud ? Que se passe-t-il si on la branche sur 24 V ?</p>
-<details><summary>Voir la réponse</summary><div class="rep">
-<p><strong>Étape 1 — le courant nominal.</strong><br>La plaque donne 21 W sous 12 V. On part de P = U × I et on isole I :<br>I = P / U = 21 / 12 = <strong>1,75 A</strong></p>
-<p><strong>Étape 2 — la résistance à chaud.</strong><br>On applique la loi d'Ohm sous la forme R = U / I :<br>R = 12 / 1,75 = <strong>6,9 Ω</strong></p>
-<p><strong>Étape 3 — ce qui se passe sous 24 V.</strong><br>Raisonnons d'abord comme si la résistance restait constante :</p>
-<ul>
-<li>Le courant doublerait : I = 24 / 6,9 = 3,5 A</li>
-<li>La puissance serait multipliée par 4 : P = 24 × 3,5 = <strong>84 W</strong> au lieu de 21 W</li>
-</ul>
-<p><strong>Étape 4 — la réalité, encore pire.</strong><br>Le filament est calculé pour atteindre 2 500 °C sous 21 W. Sommé d'en dissiper 84, il monte instantanément au-delà du point de fusion du tungstène (3 400 °C). <strong>Il fond en une fraction de seconde</strong>, avec un éclair blanc caractéristique.</p>
-<p><em>C'est très exactement ce qui arrive quand on monte du matériel 12 V sur un poids lourd en 24 V. Et notez le rapport : la tension est multipliée par 2, mais la puissance par 4 — parce que la tension agit deux fois, une fois sur elle-même et une fois via le courant qu'elle provoque.</em></p>
-</div></details></div>
-
-<div class="exo"><span class="tag">Exercice 8.3</span>
-<p>Deux lampes identiques 230 V / 60 W sont branchées en série sur 230 V. Éclairent-elles normalement ?</p>
-<details><summary>Voir la réponse</summary><div class="rep">
-<p><strong>Non. Elles rougeoient à peine.</strong></p>
-<p><strong>Étape 1 — le partage de la tension.</strong><br>En série, les deux lampes sont traversées par le <em>même</em> courant, et la tension du réseau se répartit entre elles. Comme elles sont identiques, chacune reçoit la moitié :<br>230 / 2 = <strong>115 V par lampe</strong>.</p>
-<p><strong>Étape 2 — l'effet sur la puissance, en première approche.</strong><br>Si la résistance de chaque filament restait constante (885 Ω), le courant serait divisé par deux et la puissance de chaque lampe par quatre :<br>60 / 4 = <strong>15 W</strong> au lieu de 60 W.</p>
-<p><strong>Étape 3 — la réalité est encore en dessous.</strong><br>Avec moins de puissance, le filament chauffe moins ; or un filament plus froid est <em>moins</em> résistant (chapitre 5). Sa résistance chute donc, le courant remonte un peu, mais surtout la température reste très basse. Résultat : les lampes émettent une lueur orangée, très loin de la lumière blanche normale — car le rendement lumineux s'effondre bien plus vite que la puissance.</p>
-<p><em>C'était le montage des anciennes guirlandes de Noël : vingt lampes de 12 V en série sur 230 V. D'où le défaut légendaire — <strong>une seule lampe grillée coupait le circuit et éteignait toute la guirlande</strong>, et il fallait les tester une par une. Les guirlandes modernes montent les LED en parallèle par groupes, précisément pour éviter cela.</em></p>
 </div></details></div>
 
   </div>
@@ -2598,7 +2598,7 @@
 <p>250 fois mieux en six ans, grâce à un isolant. C'est encore aujourd'hui le vernis d'émail de vos bobinages moteurs qui permet de mettre 800 spires là où le fil nu n'en supporterait pas deux.</p></div>
 
 <div class="plaque"><span class="tag">Anecdote — l'électroaimant le plus puissant du monde</span>
-<p>Au National High Magnetic Field Laboratory de Tallahassee, l'électroaimant résistif record produit un champ d'environ <strong>45 teslas</strong> — près d'un million de fois le champ magnétique terrestre. Il consomme <strong>30 mégawatts</strong>, soit la consommation d'une ville de 30 000 habitants, et il faut <strong>3 800 litres d'eau par minute</strong> pour évacuer l'effet Joule. Vous avez bien lu : le chapitre 7 est le principal obstacle du chapitre 10.</p>
+<p>Au National High Magnetic Field Laboratory de Tallahassee, l'électroaimant résistif record produit un champ d'environ <strong>45 teslas</strong> — près d'un million de fois le champ magnétique terrestre. Il consomme <strong>30 mégawatts</strong>, soit la consommation d'une ville de 30 000 habitants, et il faut <strong>3 800 litres d'eau par minute</strong> pour évacuer l'effet Joule. Vous avez bien lu : le chapitre 8 est le principal obstacle du chapitre 10.</p>
 <p>À l'autre bout de l'échelle : le champ produit par votre système nerveux quand vous pensez est de l'ordre du femtotesla — mille milliards de fois plus faible que ce que produit votre bobine de contacteur.</p></div>
 
 <div class="encadre"><span class="tag">Le TP à faire</span>
@@ -4042,7 +4042,7 @@
     <span class="kicker">Deux défauts, deux mécanismes</span><h2>Le disjoncteur magnéto-thermique</h2></div></div>
   <div class="ch-body">
 
-<p class="lede">Le nom dit tout : <strong>magnéto</strong> (chapitre 10, l'électroaimant) pour les court-circuits, <strong>thermique</strong> (chapitre 7, l'effet Joule) pour les surcharges. Deux capteurs, un seul mécanisme de déclenchement. Le cours entier est dans ce boîtier de 18 mm.</p>
+<p class="lede">Le nom dit tout : <strong>magnéto</strong> (chapitre 10, l'électroaimant) pour les court-circuits, <strong>thermique</strong> (chapitre 8, l'effet Joule) pour les surcharges. Deux capteurs, un seul mécanisme de déclenchement. Le cours entier est dans ce boîtier de 18 mm.</p>
 
 <h3>17.1 — Le déclencheur thermique : le bilame</h3>
 <p>Deux lames métalliques de natures différentes, soudées l'une à l'autre sur toute leur longueur. Elles n'ont pas le même <strong>coefficient de dilatation</strong>. Quand le courant les traverse, elles chauffent par effet Joule. L'une s'allonge plus que l'autre, donc l'ensemble <strong>se courbe</strong>.</p>
@@ -4139,12 +4139,12 @@
 <p>Reliez chaque élément du disjoncteur au chapitre du cours dont il est l'application.</p>
 <details><summary>Voir la réponse</summary><div class="rep">
 <ul style="margin-bottom:0">
-<li><strong>Le bilame</strong> → chapitre 7, effet Joule (P = RI²) + chapitre 5 (dilatation, agitation des ions)</li>
+<li><strong>Le bilame</strong> → chapitre 8, effet Joule (P = RI²) + chapitre 5 (dilatation, agitation des ions)</li>
 <li><strong>La bobine magnétique</strong> → chapitres 5 et 6 (le courant crée un champ, l'électroaimant attire un noyau)</li>
-<li><strong>La chambre de coupure</strong> → chapitres 8 et 13 (l'arc s'éteint au passage par zéro de l'alternatif)</li>
+<li><strong>La chambre de coupure</strong> → chapitres 7 et 13 (l'arc s'éteint au passage par zéro de l'alternatif)</li>
 <li><strong>Les contacts en argent</strong> → chapitre 5 (matériau très conducteur, peu de chocs, peu de pertes)</li>
 <li><strong>Le pouvoir de coupure</strong> → chapitre 16 (l'intensité de court-circuit disponible en ce point)</li>
-<li><strong>Le calibre</strong> → chapitre 7 (l'échauffement admissible du câble qu'il protège)</li>
+<li><strong>Le calibre</strong> → chapitre 8 (l'échauffement admissible du câble qu'il protège)</li>
 </ul>
 <p style="margin-top:10px"><em>Ce boîtier de 18 mm est le résumé de la séquence entière. C'est pour ça qu'on a commencé par les électrons.</em></p></div></details></div>
 
@@ -4292,9 +4292,9 @@
 <p>Le déclencheur le plus fréquent est banal : un outil métallique qui tombe, un tournevis non isolé qui ripe, une clé posée sur un jeu de barres. <span class="cle">C'est pour cela qu'on ne pose jamais un outil dans une armoire sous tension, et qu'on utilise de l'outillage isolé 1000 V.</span></p></div>
 
 <ul>
-<li><strong>La brûlure par contact.</strong> Le courant qui traverse échauffe les tissus par effet Joule — le chapitre 7, appliqué à de la chair. Les brûlures électriques sont profondes, suivent le trajet interne, et sont bien plus graves que ce que laissent voir les deux points d'entrée et de sortie. <strong>Toute victime d'électrisation doit être vue par un médecin, même si elle va bien.</strong></li>
+<li><strong>La brûlure par contact.</strong> Le courant qui traverse échauffe les tissus par effet Joule — le chapitre 8, appliqué à de la chair. Les brûlures électriques sont profondes, suivent le trajet interne, et sont bien plus graves que ce que laissent voir les deux points d'entrée et de sortie. <strong>Toute victime d'électrisation doit être vue par un médecin, même si elle va bien.</strong></li>
 <li><strong>La chute.</strong> Le réflexe de sursaut à 1 mA suffit à faire lâcher une échelle. C'est la cause de blessure la plus fréquente en électricité, très loin devant l'électrocution.</li>
-<li><strong>L'incendie.</strong> Un contact desserré chauffe, carbonise son support, et met le feu. C'est le chapitre 7 encore, et la raison d'être du serrage au couple des bornes.</li>
+<li><strong>L'incendie.</strong> Un contact desserré chauffe, carbonise son support, et met le feu. C'est le chapitre 8 encore, et la raison d'être du serrage au couple des bornes.</li>
 </ul>
 
 <div class="encadre"><span class="tag">Devant une victime — l'ordre compte</span>
