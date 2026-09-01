@@ -51,7 +51,7 @@
 
 <div class="meta-bar">
   <div><b>30</b> chapitres</div>
-  <div><b>56</b> animations pilotables</div>
+  <div><b>58</b> animations pilotables</div>
   <div><b>15</b> fiches TP d'atelier</div>
   <div><b>88</b> exercices corrigés</div>
   <div>Manips en <b>TBTS ≤ 24 V</b> sauf mention</div>
@@ -988,6 +988,26 @@
 </tbody></table>
 <p>Retenez surtout la ligne <strong>thermique</strong>, parce qu'elle a un statut à part. Toutes les autres formes se convertissent en chaleur sans difficulté ; l'inverse, lui, est toujours partiel et difficile. <span class="cle">La chaleur est le cimetière de l'énergie :</span> tout y va, rien n'en revient entièrement. C'est pour cela qu'aucune machine n'atteint 100 % de rendement.</p>
 
+<figure class="anim">
+  <canvas id="a-formes" width="900" height="470" aria-label="Animation : les six formes de l'énergie, chacune illustrée par une petite animation"></canvas>
+  <div class="ctrls">
+    <div class="c"><label>Détailler <span id="a-formes-s-l">chimique</span></label><input type="range" id="a-formes-s" min="0" max="5" value="0"></div>
+    <div class="c readout" id="a-formes-out"></div>
+  </div>
+  <figcaption>Les six formes tournent en même temps, chacune dans sa case. <b>Regardez-les vivre côte à côte</b> : la pile qui débite, les électrons qui dérivent, le volant qui tourne, la masse qui monte et descend, les atomes qui vibrent, la lampe qui rayonne. Ce sont six mouvements différents et une seule unité pour les mesurer tous — le joule. <b>Déplacez le curseur</b> pour en détailler une : vous obtenez sa formule et ce qu'elle représente dans votre atelier. <span class="cle">Retenez surtout les deux formules encadrées, E = ½·m·v² et E = m·g·h : ce sont les seules que ce cours vous demandera de calculer.</span> Et remarquez la case <b>thermique</b> : ses atomes s'agitent sans aller nulle part. C'est exactement pour cela que la chaleur est un point de non-retour.</figcaption>
+  <div class="autableau">
+    <b class="entete">Au tableau <i>· 12 minutes · animation 1 sur 5</i></b>
+    <ol>
+      <li>Laisser les six cases tourner en silence une minute. <span class="q">« Qu'est-ce que ces six images ont en commun ? »</span> Laisser venir : toutes contiennent de l'énergie.</li>
+      <li>Détailler <b>cinétique</b>. <span class="q">« Si je double la vitesse du convoyeur, l'énergie double-t-elle ? »</span> Le carré : elle quadruple. C'est le point le plus utile du chapitre.</li>
+      <li>Détailler <b>potentielle</b>. <span class="q">« Où retrouve-t-on ça sur une machine ? »</span> Charge levée, ressort de rappel, accumulateur hydraulique.</li>
+      <li>Détailler <b>thermique</b> et faire décrire le mouvement : désordonné, sur place. <span class="q">« Peut-on récupérer cette agitation ? »</span> Amener le point de non-retour.</li>
+      <li>Finir sur <b>lumineuse</b> : elle traverse le vide, et c'est ainsi que le Soleil nous alimente — transition vers le paragraphe 4.5.</li>
+    </ol>
+    <div class="piege">Le piège : croire que ce sont six énergies différentes. Ce sont six <em>formes</em> d'une même grandeur, et c'est précisément ce qui permet de les additionner et de les convertir. Faire dire l'unité de chacune — le joule, six fois — vaut mieux qu'un long discours.</div>
+  </div>
+</figure>
+
 <h3>4.3 — Un joule, c'est combien ?</h3>
 <p>Le joule est la même unité pour toutes ces formes — c'est là son intérêt. Il permet de comparer une batterie et une charge levée, un chauffage et un moteur. Sa valeur est facile à se représenter :</p>
 
@@ -1005,7 +1025,7 @@
   </div>
   <figcaption>L'axe est <b>logarithmique</b> : chaque graduation vaut dix fois la précédente, sans quoi rien ne tiendrait sur la même image. <b>Parcourez les situations</b> et regardez le point se déplacer. <b>Comparez la pomme soulevée et le litre d'eau porté à ébullition</b> : il y a un facteur trois cent mille entre les deux, alors que les deux gestes prennent le même temps. <span class="cle">Chauffer coûte cher en énergie ; déplacer coûte peu.</span> C'est la raison pour laquelle une plaque de cuisson consomme davantage que la perceuse de l'atelier. <b>Poussez jusqu'au TGV et à la consommation annuelle d'un foyer</b> : ces deux-là sont du même ordre, ce qui surprend toujours.</figcaption>
   <div class="autableau">
-    <b class="entete">Au tableau <i>· 10 minutes · animation 1 sur 3</i></b>
+    <b class="entete">Au tableau <i>· 10 minutes · animation 2 sur 5</i></b>
     <ol>
       <li>Faire soulever une bouteille d'eau d'un mètre. <span class="q">« Vous venez de dépenser 10 joules. »</span> Point de départ concret.</li>
       <li>Aller sur <b>1 litre d'eau porté à ébullition</b>. <span class="q">« Combien de fois plus ? »</span> Laisser chercher avant de lire : trente mille fois.</li>
@@ -1040,7 +1060,7 @@
   </div>
   <figcaption>Le flux part du réseau à gauche et ressort en levage à droite ; <b>l'épaisseur du ruban est la puissance</b>, et chaque branche qui descend est de la chaleur perdue. <b>Vérifiez d'abord la conservation</b> : additionnez les branches rouges et le ruban de sortie, vous retrouvez exactement l'entrée. Rien ne se perd, rien ne disparaît. <b>Descendez le rendement du moteur à 50 %</b> — un moteur très sous-chargé, cas courant en maintenance : la moitié de la facture part en chaleur dans les tôles et les bobinages, et le ruban utile s'effondre. <b>Remontez-le et dégradez le réducteur à 60 %</b>, ce qui arrive quand la graisse est morte : le résultat est le même vu de la facture, mais la chaleur sort ailleurs. <span class="cle">Le rendement global est le produit des deux, jamais leur moyenne.</span></figcaption>
   <div class="autableau">
-    <b class="entete">Au tableau <i>· 14 minutes · animation 2 sur 3</i></b>
+    <b class="entete">Au tableau <i>· 14 minutes · animation 3 sur 5</i></b>
     <ol>
       <li>Réglages par défaut. Faire additionner à voix haute les trois sorties et comparer à l'entrée. <span class="q">« Où est passé le reste ? »</span> Il n'y a pas de reste.</li>
       <li><span class="q">« 85 % et 92 %, ça fait quel rendement global ? »</span> Recueillir « 88,5 % » — c'est la réponse spontanée, et elle est fausse. Lire le vrai chiffre.</li>
@@ -1056,7 +1076,34 @@
 <p>Imaginez une file de personnes qui se passent des seaux d'eau pour éteindre un feu. Chacune renverse un peu d'eau en passant le seau à la suivante. Personne ne « détruit » d'eau : elle est par terre, on peut la montrer du doigt.</p>
 <p>Si dix personnes renversent chacune 10 %, il n'arrive pas 0 % au bout — mais il n'arrive pas 90 % non plus. Il arrive 0,9<sup>10</sup>, soit <strong>35 %</strong>. <span class="cle">C'est exactement ce que font les rendements en cascade, et c'est pour cela qu'on cherche toujours à raccourcir la chaîne.</span></p></div>
 
-<h3>4.5 — Le joule et le watt : la confusion à ne plus jamais faire</h3>
+<h3>4.5 — Tout vient du Soleil, et il n'en reste presque rien</h3>
+<p>Reculons d'un cran. L'électricité de l'atelier, le gazole du chariot, le sandwich du technicien : ces trois énergies ont la même origine, et c'est le <strong>rayonnement solaire</strong>. Les seules exceptions sont le nucléaire, la géothermie et les marées — tout le reste est du soleil, plus ou moins ancien et plus ou moins concentré.</p>
+<p>Entre le rayon qui frappe une feuille et la roue qui tourne, il y a une longue suite de conversions, et <strong>chacune prélève sa part</strong>. Les rendements se multiplient, comme au paragraphe précédent — sauf qu'ici la chaîne est beaucoup plus longue, et le résultat est vertigineux.</p>
+
+<figure class="anim">
+  <canvas id="a-chaine" width="900" height="470" aria-label="Animation : trois chaînes de conversion de l'énergie solaire, du pétrole au muscle, avec les pertes à chaque étage"></canvas>
+  <div class="ctrls">
+    <div class="c"><label>Chaîne <span id="a-chaine-c-l">le pétrole</span></label><input type="range" id="a-chaine-c" min="0" max="2" value="0"></div>
+    <div class="c readout" id="a-chaine-out"></div>
+  </div>
+  <figcaption>En haut, la chaîne et le rendement de chaque étage ; en bas, <b>ce qui reste du soleil de départ</b>, sur une échelle où chaque graduation vaut dix fois moins que la précédente. <b>Commencez par le pétrole</b> et suivez la marche descendante : la photosynthèse ne garde qu'un centième, la fossilisation un dix-millième de ce centième, et le moteur thermique jette les trois quarts de ce qui restait. <span class="cle">Sur un mégajoule de soleil tombé sur la forêt primitive, il reste deux dixièmes de joule pour faire avancer la voiture.</span> <b>Passez au chocolat</b> : la chaîne est plus courte, il en reste cinq cents fois plus. <b>Passez au photovoltaïque</b> : la marche descend à peine — un panneau moderne fait, en une seconde, ce que la géologie a mis des millions d'années à rater. Le pétrole n'est pas efficace : il est <em>concentré</em>, parce qu'il a accumulé des millions d'années de soleil dans un litre.</figcaption>
+  <div class="autableau">
+    <b class="entete">Au tableau <i>· 16 minutes · animation 4 sur 5</i></b>
+    <ol>
+      <li>Avant d'ouvrir : <span class="q">« D'où vient l'énergie du gazole ? »</span> Remonter la chaîne à voix haute jusqu'au Soleil, avec la classe.</li>
+      <li>Chaîne <b>pétrole</b>. Faire lire chaque rendement, puis le chiffre final. Laisser le silence.</li>
+      <li><span class="q">« Alors pourquoi utilise-t-on du pétrole, si c'est aussi mauvais ? »</span> C'est la question du chapitre. Réponse : parce que la nature a fait le stockage et la concentration gratuitement, sur des millions d'années.</li>
+      <li>Chaîne <b>chocolat</b>. <span class="q">« Combien de fois mieux ? »</span> Faire comparer les deux chiffres.</li>
+      <li>Chaîne <b>photovoltaïque</b>. <span class="q">« Qu'est-ce qui a disparu de la chaîne ? »</span> Les deux étages catastrophiques : la fossilisation et le moteur thermique.</li>
+      <li>Conclure : <span class="q">« Que gagne-t-on à supprimer un maillon ? »</span> Rappeler la chaîne de seaux du paragraphe précédent.</li>
+    </ol>
+    <div class="piege">Le piège : conclure que le photovoltaïque est « treize mille fois meilleur que le pétrole ». Le rendement ne dit rien du <em>coût de la ressource</em> : le soleil du pétrole a déjà été capté et stocké gratuitement, alors que le panneau doit capter en direct. Ce que la comparaison montre vraiment, c'est le prix des maillons intermédiaires — et le fait qu'un stock accumulé sur des millions d'années se vide, lui, en un siècle et demi.</div>
+  </div>
+</figure>
+
+<p>Une remarque qui remet les ordres de grandeur en place. Le Soleil envoie sur la Terre, <strong>en une heure</strong>, à peu près ce que l'humanité entière consomme en un an. Le problème de l'énergie n'a donc jamais été la quantité disponible : c'est la <strong>capture</strong>, la <strong>concentration</strong> et le <strong>stockage</strong>. <span class="cle">C'est très exactement ce que le pétrole apportait gratuitement, et ce qu'il faut désormais faire soi-même.</span></p>
+
+<h3>4.6 — Le joule et le watt : la confusion à ne plus jamais faire</h3>
 <p>C'est l'erreur de vocabulaire la plus répandue de tout l'électrotechnique, et elle vient d'une vraie difficulté : le langage courant utilise « puissance » et « énergie » comme des synonymes, alors que ce sont deux grandeurs différentes.</p>
 
 <div class="formule">1 watt = 1 joule par seconde<small>P = W / t · le watt est un débit, le joule est une quantité</small></div>
@@ -1083,7 +1130,7 @@
   </div>
   <figcaption>Le robinet, c'est la <b>puissance</b> : plus elle est grande, plus le jet est gros. Le réservoir, c'est l'<b>énergie</b> accumulée. <b>Réglage initial</b> : mille watts pendant une heure, c'est très exactement <b>1 kWh</b>, l'unité de votre facture — et 3,6 millions de joules. <b>Divisez la puissance par deux et doublez la durée</b> : le jet maigrit, le remplissage traîne, et pourtant le réservoir arrive au même niveau. <span class="cle">Même énergie, même prix, puissance deux fois moindre.</span> C'est tout le principe du délestage et des heures creuses. <b>Poussez la puissance à 3 000 W sur 5 minutes</b> : le jet est énorme, le réservoir presque vide — une grosse puissance très brève coûte peu.</figcaption>
   <div class="autableau">
-    <b class="entete">Au tableau <i>· 12 minutes · animation 3 sur 3</i></b>
+    <b class="entete">Au tableau <i>· 12 minutes · animation 5 sur 5</i></b>
     <ol>
       <li><span class="q">« Un radiateur de 2 000 W consomme-t-il plus qu'un de 1 000 W ? »</span> Laisser répondre « oui », puis demander : pendant combien de temps ?</li>
       <li>Réglage initial, faire lire les trois écritures de la même quantité : joules, kilojoules, kilowattheures.</li>
@@ -1101,7 +1148,7 @@
 <p>L'unité est délibérément généreuse : un vrai cheval ne tient pas ce régime longtemps. Peu importe — elle est comprise de tous, elle s'impose, et elle survit encore aujourd'hui sur les fiches techniques automobiles. <span class="cle">C'est l'ironie de l'histoire : l'homme dont le nom désigne aujourd'hui l'unité officielle de puissance a bâti son succès sur une unité qu'il avait inventée pour vendre.</span></p>
 <p>Retenez tout de même l'équivalence, elle sert encore : <strong>1 ch ≈ 736 W</strong>. Un moteur de 1,5 kW fait donc environ 2 chevaux.</p></div>
 
-<h3>4.6 — Ce que le chapitre suivant va en faire</h3>
+<h3>4.7 — Ce que le chapitre suivant va en faire</h3>
 <p>Vous avez maintenant les deux moitiés de l'électricité. Le <strong>chapitre 3</strong> vous a donné le coulomb : <em>combien</em> de charges passent. Celui-ci vous donne le joule : <em>combien d'énergie</em> est en jeu. Il ne reste qu'une question, et c'est le chapitre suivant tout entier :</p>
 <p><span class="cle">Combien de joules chaque coulomb transporte-t-il ?</span> Cette question a une réponse, elle a une unité, et cette unité s'appelle le <strong>volt</strong>.</p>
 
@@ -11699,6 +11746,273 @@ function crystal(st, opts){
   sp.addEventListener('input', upd); stt.addEventListener('input', upd);
   go.addEventListener('click', function(){ phase = 0; });
   upd();
+})();
+
+/* ============ 3d. LES SIX FORMES DE L'ÉNERGIE (chapitre 4) ============
+   Six petites animations qui tournent en meme temps : une par forme.
+   L'interet pedagogique est justement la simultaneite — six mouvements
+   tres differents, une seule unite pour les mesurer tous. */
+(function(){
+  var sr = el('a-formes-s'); if(!sr) return;
+  var FORMES = [
+    {n:"CHIMIQUE",    f:"stockée dans les liaisons", cap:"les liaisons se défont",
+     ex:"une pile, une batterie, un plein de gazole",
+     d:"C'est la forme la plus dense : un litre de gazole en contient autant qu'une batterie de plomb de 300 kg."},
+    {n:"ÉLECTRIQUE",  f:"W = U × Q", cap:"les charges dérivent",
+     ex:"tout ce qui arrive par un câble",
+     d:"Elle ne se stocke presque pas : elle se produit et se consomme au même instant."},
+    {n:"CINÉTIQUE",   f:"E = ½ · m · v²", cap:"la masse est lancée",
+     ex:"un volant d'inertie, un convoyeur lancé, un rotor",
+     d:"Le carré de la vitesse : doubler la vitesse quadruple l'énergie à dissiper au freinage."},
+    {n:"POTENTIELLE", f:"E = m · g · h", cap:"la hauteur est de l'énergie",
+     ex:"une charge levée, un ressort comprimé, un accumulateur",
+     d:"La seule qu'on récupère presque intégralement : ce qui redescend rend ce qu'on a mis à le monter."},
+    {n:"THERMIQUE",   f:"E = m · c · ΔT", cap:"ça s'agite, sans aller nulle part",
+     ex:"un moteur chaud, un frein, un câble surchargé",
+     d:"L'agitation désordonnée des atomes. Toutes les autres formes y tombent, et rien n'en ressort."},
+    {n:"LUMINEUSE",   f:"rayonnement", cap:"elle traverse le vide",
+     ex:"un éclairage, un voyant, un arc de soudage",
+     d:"Elle traverse le vide, sans support matériel. C'est ainsi que le Soleil nous alimente."}
+  ];
+  var sel = 0;
+
+  mk('a-formes', function(ctx, s, dt){
+    var W=s.W, t=s.t, i, k;
+    var tw = 273, th = 150, x0 = 22, y0 = 56, gx = 18, gy = 16;
+
+    label(ctx, 26, 30, "SIX FORMES, SIX MOUVEMENTS — ET UNE SEULE UNITÉ POUR LES MESURER", COL.vert, 11.5);
+
+    for(k=0;k<6;k++){
+      var cx = x0 + (k%3)*(tw+gx), cy = y0 + Math.floor(k/3)*(th+gy);
+      var on = (k===sel);
+      ctx.fillStyle = on ? "rgba(200,216,52,.07)" : "rgba(255,255,255,.03)";
+      ctx.fillRect(cx, cy, tw, th);
+      ctx.strokeStyle = on ? COL.vert : "rgba(255,255,255,.16)";
+      ctx.lineWidth = on ? 2 : 1;
+      ctx.strokeRect(cx+.5, cy+.5, tw, th);
+      label(ctx, cx+12, cy+20, FORMES[k].n, on ? COL.vert : "#9aa494", 11);
+
+      var mx = cx + tw/2, my = cy + 68;
+      ctx.save();
+      ctx.beginPath(); ctx.rect(cx+2, cy+28, tw-4, 80); ctx.clip();
+
+      if(k===0){                            /* CHIMIQUE : une pile qui debite */
+        ctx.fillStyle = "#4a544c"; ctx.fillRect(mx-46, my-17, 52, 34);
+        ctx.fillStyle = COL.cuivre; ctx.fillRect(mx+6, my-7, 8, 14);
+        label(ctx, mx-40, my+5, "+  −", "#e8ece6", 12);
+        for(i=0;i<5;i++){
+          var pc = ((t*0.5 + i/5) % 1);
+          ctx.fillStyle = "rgba(127,212,255," + (0.85-pc*0.5).toFixed(2) + ")";
+          ctx.beginPath(); ctx.arc(mx+16+pc*72, my, 4, 0, 6.284); ctx.fill();
+        }
+
+      } else if(k===1){                     /* ELECTRIQUE : derive des electrons */
+        ctx.strokeStyle = COL.cuivre; ctx.lineWidth = 9;
+        ctx.beginPath(); ctx.moveTo(mx-100, my); ctx.lineTo(mx+100, my); ctx.stroke();
+        for(i=0;i<9;i++){
+          var pe = ((t*0.28 + i/9) % 1);
+          ctx.fillStyle = COL.elec;
+          ctx.beginPath(); ctx.arc(mx-100+pe*200, my, 3.4, 0, 6.284); ctx.fill();
+        }
+
+      } else if(k===2){                     /* CINETIQUE : un volant qui tourne */
+        var an = t*2.2;
+        ctx.strokeStyle = "#8d968b"; ctx.lineWidth = 3;
+        ctx.beginPath(); ctx.arc(mx, my, 30, 0, 6.284); ctx.stroke();
+        ctx.strokeStyle = COL.vert; ctx.lineWidth = 2.6;
+        for(i=0;i<6;i++){
+          var a2 = an + i*1.0472;
+          ctx.beginPath(); ctx.moveTo(mx+Math.cos(a2)*7, my+Math.sin(a2)*7);
+          ctx.lineTo(mx+Math.cos(a2)*28, my+Math.sin(a2)*28); ctx.stroke();
+        }
+        ctx.fillStyle = "#4a544c"; ctx.beginPath(); ctx.arc(mx, my, 6, 0, 6.284); ctx.fill();
+
+      } else if(k===3){                     /* POTENTIELLE : une masse qui monte */
+        var u = (Math.sin(t*1.5)+1)/2;
+        var yb = my+26 - u*40;
+        ctx.strokeStyle = "#8d968b"; ctx.lineWidth = 1.6;
+        ctx.beginPath(); ctx.moveTo(mx, my-32); ctx.lineTo(mx, yb-11); ctx.stroke();
+        ctx.fillStyle = COL.vert; ctx.fillRect(mx-15, yb-11, 30, 22);
+        ctx.strokeStyle = "rgba(255,255,255,.30)"; ctx.lineWidth = 1; ctx.setLineDash([3,3]);
+        ctx.beginPath(); ctx.moveTo(mx-52, my+26); ctx.lineTo(mx+52, my+26); ctx.stroke(); ctx.setLineDash([]);
+        arrow(ctx, mx+38, my+26, mx+38, yb, "#f0a844", 1.6);
+        label(ctx, mx+44, (my+26+yb)/2, "h", "#f0a844", 11);
+
+      } else if(k===4){                     /* THERMIQUE : des atomes qui vibrent */
+        for(i=0;i<18;i++){
+          var col = i%6, row = Math.floor(i/6);
+          var bx = mx-72 + col*29, by2 = my-24 + row*22;
+          var dx = Math.sin(t*7 + i*2.3)*3.2, dy = Math.cos(t*6.3 + i*1.7)*3.2;
+          ctx.fillStyle = "#e0e6d8";
+          ctx.beginPath(); ctx.arc(bx+dx, by2+dy, 4.2, 0, 6.284); ctx.fill();
+        }
+
+      } else {                              /* LUMINEUSE : une lampe qui rayonne */
+        ctx.fillStyle = "#f0e08a";
+        ctx.beginPath(); ctx.arc(mx, my-4, 10, 0, 6.284); ctx.fill();
+        ctx.fillStyle = "#4a544c"; ctx.fillRect(mx-7, my+6, 14, 10);
+        for(i=0;i<4;i++){
+          var rr = ((t*0.55 + i/4) % 1)*28;
+          ctx.strokeStyle = "rgba(240,224,138," + (0.7*(1-rr/28)).toFixed(2) + ")";
+          ctx.lineWidth = 2;
+          ctx.beginPath(); ctx.arc(mx, my-4, 12+rr, 0, 6.284); ctx.stroke();
+        }
+      }
+      ctx.restore();
+
+      /* legende et formule, hors de la zone de dessin */
+      label(ctx, cx+12, cy+124, FORMES[k].cap, "#6f776c", 9.5);
+      label(ctx, cx+tw-12, cy+142, FORMES[k].f, on ? "#e8ece6" : "#8d968b", 11, "right");
+    }
+
+    /* le detail de la forme choisie */
+    var f = FORMES[sel], by = 386;
+    ctx.fillStyle = "rgba(255,255,255,.05)"; ctx.fillRect(26, by, W-52, 76);
+    ctx.strokeStyle = "rgba(255,255,255,.16)"; ctx.lineWidth = 1; ctx.strokeRect(26.5, by+.5, W-53, 76);
+    label(ctx, 46, by+24, f.n + "  —  " + f.f, COL.vert, 14);
+    label(ctx, 46, by+46, "dans l'atelier : " + f.ex, "#e8ece6", 10.5);
+    label(ctx, 46, by+66, f.d, "#9aa494", 10.5);
+
+    el('a-formes-out').innerHTML = "<b style='color:#c8d834'>" + f.n + "</b><br>" + f.f;
+  });
+
+  function upd(){
+    sel = +sr.value;
+    el('a-formes-s-l').textContent = FORMES[sel].n.toLowerCase();
+  }
+  sr.addEventListener('input', upd); upd();
+})();
+
+/* ============ 3e. LES CHAÎNES DE CONVERSION DEPUIS LE SOLEIL (chapitre 4) ============
+   Rendements retenus : photosynthese 1 % (cultures reelles 0,5 a 2 %),
+   fossilisation 0,01 % (il faut environ 90 t de vegetaux prehistoriques
+   pour 4 litres d'essence), moteur thermique 25 % du reservoir a la roue,
+   panneau photovoltaique 20 %, muscle 25 %. */
+(function(){
+  var sr = el('a-chaine-c'); if(!sr) return;
+  var CH = [
+    {n:"le pétrole",
+     e:[{n:"SOLEIL",           r:1,      d:"le rayonnement reçu"},
+        {n:"PHOTOSYNTHÈSE",    r:0.01,   d:"un centième est fixé"},
+        {n:"FOSSILISATION",    r:0.0001, d:"des millions d'années"},
+        {n:"EXTRACTION ET RAFFINAGE", r:0.85, d:"forage puis raffinage"},
+        {n:"MOTEUR THERMIQUE", r:0.25,   d:"les 3/4 à l'échappement"}],
+     fin:"Il faut environ 90 tonnes de végétaux préhistoriques pour faire quatre litres d'essence."},
+    {n:"le chocolat",
+     e:[{n:"SOLEIL",           r:1,     d:"le rayonnement reçu"},
+        {n:"PHOTOSYNTHÈSE",    r:0.01,  d:"un centième est fixé"},
+        {n:"FÈVE ET FABRICATION", r:0.05, d:"peu de l'arbre y arrive"},
+        {n:"DIGESTION",        r:0.9,   d:"presque tout est absorbé"},
+        {n:"MUSCLE",           r:0.25,  d:"le reste vous réchauffe"}],
+     fin:"Le muscle a le même rendement qu'un moteur thermique : environ un quart. Le reste part en chaleur, et c'est pour cela qu'on transpire à l'effort."},
+    {n:"le photovoltaïque",
+     e:[{n:"SOLEIL",           r:1,    d:"le rayonnement reçu"},
+        {n:"PANNEAU",          r:0.20, d:"un cinquième converti"},
+        {n:"ONDULEUR ET CHARGE", r:0.90, d:"conversion électronique"},
+        {n:"BATTERIE",         r:0.90, d:"charge puis décharge"},
+        {n:"MOTEUR ÉLECTRIQUE", r:0.85, d:"il rend au freinage"}],
+     fin:"Deux étages catastrophiques ont disparu de la chaîne : la fossilisation et le moteur thermique."}
+  ];
+  var ic = 0;
+
+  function pourcent(pc){
+    if(pc >= 1)     return fr(pc, pc<10?1:0) + " %";
+    if(pc >= 0.01)  return fr(pc, 3) + " %";
+    return sci(pc) + " %";
+  }
+
+  mk('a-chaine', function(ctx, s, dt){
+    var W=s.W, i;
+    var ch = CH[ic], E = ch.e;
+
+    label(ctx, 26, 30, "TOUT VIENT DU SOLEIL — ET CHAQUE ÉTAGE PRÉLÈVE SA PART", COL.vert, 11.5);
+
+    /* les cinq etages */
+    var bw = 150, bh = 74, by = 56;
+    var xs = [];
+    for(i=0;i<5;i++){ xs.push(15 + i*(bw+30) + bw/2); }
+
+    for(i=0;i<5;i++){
+      var cx = xs[i];
+      ctx.fillStyle = i===0 ? "rgba(240,224,138,.14)" : "rgba(255,255,255,.04)";
+      ctx.fillRect(cx-bw/2, by, bw, bh);
+      ctx.strokeStyle = i===0 ? "#f0e08a" : "rgba(255,255,255,.22)";
+      ctx.lineWidth = 1.4; ctx.strokeRect(cx-bw/2+.5, by+.5, bw, bh);
+
+      var mots = E[i].n.split(' '), l1 = "", l2 = "";
+      mots.forEach(function(m){ if((l1+m).length <= 15 && !l2) l1 += m+" "; else l2 += m+" "; });
+      label(ctx, cx, by + (l2 ? 28 : 34), l1.trim(), i===0?"#f0e08a":"#e8ece6", 11.5, "center");
+      if(l2) label(ctx, cx, by+44, l2.trim(), i===0?"#f0e08a":"#e8ece6", 11.5, "center");
+      label(ctx, cx, by+64, E[i].d, "#6f776c", 9, "center");
+
+      if(i>0){
+        arrow(ctx, xs[i-1]+bw/2+4, by+bh/2, cx-bw/2-4, by+bh/2, "rgba(255,255,255,.35)", 1.6);
+        label(ctx, (xs[i-1]+cx)/2, by-8, "× " + pourcent(E[i].r*100), COL.rouge, 11, "center");
+      }
+    }
+
+    /* l'echelle logarithmique de ce qui reste */
+    var yh = 194, yb2 = 366, DEC = 8;                 /* de 100 % a 10^-6 % */
+    function Y(pc){
+      var l = Math.log(Math.max(1e-6, pc))/Math.LN10;
+      return yh + (2 - l)/DEC*(yb2-yh);
+    }
+    var LBL = ["100 %","10 %","1 %","0,1 %","0,01 %","0,001 %","10⁻⁴ %","10⁻⁵ %","10⁻⁶ %"];
+    for(i=0;i<=DEC;i++){
+      var yg = yh + i/DEC*(yb2-yh);
+      ctx.strokeStyle = "rgba(255,255,255,.10)"; ctx.lineWidth = 1;
+      ctx.beginPath(); ctx.moveTo(70, yg); ctx.lineTo(W-26, yg); ctx.stroke();
+      label(ctx, 64, yg+4, LBL[i], "#6f776c", 9, "right");
+    }
+    label(ctx, W-26, yh-14, "CE QU'IL RESTE DU SOLEIL DE DÉPART", "#8d968b", 10, "right");
+
+    /* la marche descendante */
+    var cum = 100, pts = [];
+    for(i=0;i<5;i++){ cum *= E[i].r; pts.push({x:xs[i], y:Y(cum), v:cum}); }
+
+    ctx.strokeStyle = COL.vert; ctx.lineWidth = 2.6;
+    ctx.beginPath();
+    for(i=0;i<5;i++){
+      if(i===0) ctx.moveTo(pts[0].x, pts[0].y);
+      else { ctx.lineTo(pts[i].x, pts[i-1].y); ctx.lineTo(pts[i].x, pts[i].y); }
+    }
+    ctx.stroke();
+    for(i=0;i<5;i++){
+      ctx.fillStyle = COL.vert;
+      ctx.beginPath(); ctx.arc(pts[i].x, pts[i].y, 5, 0, 6.284); ctx.fill();
+      var drop = i>0 ? (pts[i].y - pts[i-1].y) : 99;
+      label(ctx, pts[i].x, drop < 26 ? pts[i].y + 20 : pts[i].y - 11,
+            pourcent(pts[i].v), "#e8ece6", 10, "center");
+    }
+
+    /* le bilan, en joules restants */
+    var reste = 1e6 * cum/100;
+    var fy = 392;
+    ctx.strokeStyle = "rgba(255,255,255,.14)"; ctx.lineWidth = 1;
+    ctx.beginPath(); ctx.moveTo(26, fy); ctx.lineTo(W-26, fy); ctx.stroke();
+    label(ctx, 26, fy+22, "SUR 1 MÉGAJOULE DE SOLEIL, IL RESTE À L'ARRIVÉE", "#8d968b", 10);
+    label(ctx, 26, fy+50,
+          reste < 1 ? fr(reste,2)+" joule" : (reste<1000 ? fr(reste,0)+" joules" : fr(reste/1000,0)+" kilojoules"),
+          COL.vert, 24);
+
+    label(ctx, 430, fy+22, "CE QU'IL FAUT EN RETENIR", "#8d968b", 10);
+    var mots2 = ch.fin.split(' '), lg = "", yy = fy+42;
+    mots2.forEach(function(m){
+      if((lg+m).length > 46){ label(ctx, 430, yy, lg, "#9aa494", 10.5); lg = m+" "; yy += 16; }
+      else lg += m+" ";
+    });
+    label(ctx, 430, yy, lg, "#9aa494", 10.5);
+
+    el('a-chaine-out').innerHTML =
+      "rendement total <b style='color:#c8d834'>" + pourcent(cum) + "</b><br>" +
+      "sur 1 MJ de soleil : " + (reste<1 ? fr(reste,2)+" J" : fr(reste,0)+" J");
+  });
+
+  function upd(){
+    ic = +sr.value;
+    el('a-chaine-c-l').textContent = CH[ic].n;
+  }
+  sr.addEventListener('input', upd); upd();
 })();
 
 /* ============ 4. ŒRSTED ============ */
