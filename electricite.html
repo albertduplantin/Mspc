@@ -994,7 +994,7 @@
     <div class="c"><label>Détailler <span id="a-formes-s-l">chimique</span></label><input type="range" id="a-formes-s" min="0" max="5" value="0"></div>
     <div class="c readout" id="a-formes-out"></div>
   </div>
-  <figcaption>Les six formes tournent en même temps, chacune dans sa case. <b>Regardez-les vivre côte à côte</b> : la pile qui débite, les électrons qui dérivent, le volant qui tourne, la masse qui monte et descend, les atomes qui vibrent, la lampe qui rayonne. Ce sont six mouvements différents et une seule unité pour les mesurer tous — le joule. <b>Déplacez le curseur</b> pour en détailler une : vous obtenez sa formule et ce qu'elle représente dans votre atelier. <span class="cle">Retenez surtout les deux formules encadrées, E = ½·m·v² et E = m·g·h : ce sont les seules que ce cours vous demandera de calculer.</span> Et remarquez la case <b>thermique</b> : ses atomes s'agitent sans aller nulle part. C'est exactement pour cela que la chaleur est un point de non-retour.</figcaption>
+  <figcaption>Les six formes tournent en même temps, chacune dans sa case. <b>Regardez-les vivre côte à côte</b> : la molécule qui se rompt en libérant sa chaleur, les électrons qui dérivent, le volant qui tourne, la masse qui monte et descend, les atomes qui vibrent, la lampe qui rayonne. Ce sont six mouvements différents et une seule unité pour les mesurer tous — le joule. <b>Déplacez le curseur</b> pour en détailler une : vous obtenez sa formule et ce qu'elle représente dans votre atelier. <span class="cle">Retenez surtout les deux formules encadrées, E = ½·m·v² et E = m·g·h : ce sont les seules que ce cours vous demandera de calculer.</span> Et remarquez la case <b>thermique</b> : ses atomes s'agitent sans aller nulle part. C'est exactement pour cela que la chaleur est un point de non-retour.</figcaption>
   <div class="autableau">
     <b class="entete">Au tableau <i>· 12 minutes · animation 1 sur 5</i></b>
     <ol>
@@ -11755,9 +11755,9 @@ function crystal(st, opts){
 (function(){
   var sr = el('a-formes-s'); if(!sr) return;
   var FORMES = [
-    {n:"CHIMIQUE",    f:"stockée dans les liaisons", cap:"les liaisons se défont",
+    {n:"CHIMIQUE",    f:"stockée dans les liaisons", cap:"la liaison cède, la chaleur sort",
      ex:"une pile, une batterie, un plein de gazole",
-     d:"C'est la forme la plus dense : un litre de gazole en contient autant qu'une batterie de plomb de 300 kg."},
+     d:"Rompre une liaison libère son énergie. C'est la forme la plus dense : un litre de gazole vaut 300 kg de batterie."},
     {n:"ÉLECTRIQUE",  f:"W = U × Q", cap:"les charges dérivent",
      ex:"tout ce qui arrive par un câble",
      d:"Elle ne se stocke presque pas : elle se produit et se consomme au même instant."},
@@ -11796,15 +11796,40 @@ function crystal(st, opts){
       ctx.save();
       ctx.beginPath(); ctx.rect(cx+2, cy+28, tw-4, 80); ctx.clip();
 
-      if(k===0){                            /* CHIMIQUE : une pile qui debite */
-        ctx.fillStyle = "#4a544c"; ctx.fillRect(mx-46, my-17, 52, 34);
-        ctx.fillStyle = COL.cuivre; ctx.fillRect(mx+6, my-7, 8, 14);
-        label(ctx, mx-40, my+5, "+  −", "#e8ece6", 12);
-        for(i=0;i<5;i++){
-          var pc = ((t*0.5 + i/5) % 1);
-          ctx.fillStyle = "rgba(127,212,255," + (0.85-pc*0.5).toFixed(2) + ")";
-          ctx.beginPath(); ctx.arc(mx+16+pc*72, my, 4, 0, 6.284); ctx.fill();
+      if(k===0){                            /* CHIMIQUE : une molecule qui se rompt
+           L'energie n'est pas dans les atomes mais dans les LIAISONS : la
+           molecule vibre, cede, et ce qui tenait les atombes ensemble part
+           en chaleur. C'est ce que fait une combustion, en tres grand. */
+        var ph = (t*0.42) % 1;
+        var casse = ph > 0.46;
+        var kf = casse ? (ph-0.46)/0.54 : 0;
+        var vib = casse ? 0 : Math.sin(t*24)*1.5;
+
+        if(casse){                          /* la chaleur liberee */
+          for(i=0;i<3;i++){
+            var rc = kf*40 + i*10;
+            if(rc < 46){
+              ctx.strokeStyle = "rgba(255,120,40," + (0.6*(1-rc/46)).toFixed(2) + ")";
+              ctx.lineWidth = 2;
+              ctx.beginPath(); ctx.arc(mx, my, rc, 0, 6.284); ctx.stroke();
+            }
+          }
         }
+
+        var dd = 23 + kf*32;
+        for(i=0;i<3;i++){
+          var aa = -1.5708 + i*2.0944;
+          var ax2 = mx + Math.cos(aa)*dd + vib, ay2 = my + Math.sin(aa)*dd;
+          if(!casse){                       /* la liaison, qui porte l'energie */
+            ctx.strokeStyle = COL.jaune; ctx.lineWidth = 3.4;
+            ctx.beginPath(); ctx.moveTo(mx+vib, my); ctx.lineTo(ax2, ay2); ctx.stroke();
+          }
+          ctx.fillStyle = "rgba(224,230,216," + (casse ? Math.max(0,1-kf).toFixed(2) : "1") + ")";
+          ctx.beginPath(); ctx.arc(ax2, ay2, 7, 0, 6.284); ctx.fill();
+        }
+        ctx.fillStyle = "#8d968b";
+        ctx.beginPath(); ctx.arc(mx+vib, my, 11, 0, 6.284); ctx.fill();
+        if(casse) label(ctx, mx+52, my-26, "chaleur", "#ff7828", 9.5);
 
       } else if(k===1){                     /* ELECTRIQUE : derive des electrons */
         ctx.strokeStyle = COL.cuivre; ctx.lineWidth = 9;
