@@ -1083,10 +1083,10 @@
 <figure class="anim">
   <canvas id="a-chaine" width="900" height="470" aria-label="Animation : trois chaînes de conversion de l'énergie solaire, du pétrole au muscle, avec les pertes à chaque étage"></canvas>
   <div class="ctrls">
-    <div class="c"><label>Chaîne <span id="a-chaine-c-l">le pétrole</span></label><input type="range" id="a-chaine-c" min="0" max="2" value="0"></div>
+    <div class="c"><label>Chaîne <span id="a-chaine-c-l">le pétrole</span></label><input type="range" id="a-chaine-c" min="0" max="3" value="0"></div>
     <div class="c readout" id="a-chaine-out"></div>
   </div>
-  <figcaption>En haut, la chaîne et le rendement de chaque étage ; en bas, <b>ce qui reste du soleil de départ</b>, sur une échelle où chaque graduation vaut dix fois moins que la précédente. <b>Commencez par le pétrole</b> et suivez la marche descendante : la photosynthèse ne garde qu'un centième, la fossilisation un dix-millième de ce centième, et le moteur thermique jette les trois quarts de ce qui restait. <span class="cle">Sur un mégajoule de soleil tombé sur la forêt primitive, il reste deux dixièmes de joule pour faire avancer la voiture.</span> <b>Passez au chocolat</b> : la chaîne est plus courte, il en reste cinq cents fois plus. <b>Passez au photovoltaïque</b> : la marche descend à peine — un panneau moderne fait, en une seconde, ce que la géologie a mis des millions d'années à rater. Le pétrole n'est pas efficace : il est <em>concentré</em>, parce qu'il a accumulé des millions d'années de soleil dans un litre.</figcaption>
+  <figcaption>En haut, la chaîne et ce que chaque étage laisse passer ; <b style="color:#e8412c">en rouge, ce qu'il perd</b>. En bas, ce qui reste du soleil de départ, sur une échelle où chaque graduation vaut dix fois moins que la précédente — les <b>paliers verts</b> sont ce qui survit, les <b style="color:#e8412c">chutes rouges</b> sont les pertes. <b>Commencez par le pétrole</b> : la photosynthèse jette 99 %, la fossilisation 99,99 % de ce qui restait, et le moteur thermique les trois quarts du reste. <span class="cle">Sur un mégajoule de soleil tombé sur la forêt primitive, il reste deux dixièmes de joule pour faire avancer la voiture.</span> <b>Passez au chocolat</b> : la chaîne est plus courte, il en reste cinq cents fois plus. <b>Passez à l'éolien</b> : l'éolienne et l'alternateur sont excellents, mais regardez la première chute — l'atmosphère ne garde que 2 % du soleil pour en faire du vent. Le vent est du soleil au second degré, et cela se paie avant même d'arriver à la machine. <b>Passez enfin au photovoltaïque</b> : les chutes rouges sont minuscules. Un panneau fait en une seconde ce que la géologie a mis des millions d'années à rater. Le pétrole n'est pas efficace : il est <em>concentré</em>, parce qu'il a accumulé des millions d'années de soleil dans un litre.</figcaption>
   <div class="autableau">
     <b class="entete">Au tableau <i>· 16 minutes · animation 4 sur 5</i></b>
     <ol>
@@ -1094,6 +1094,7 @@
       <li>Chaîne <b>pétrole</b>. Faire lire chaque rendement, puis le chiffre final. Laisser le silence.</li>
       <li><span class="q">« Alors pourquoi utilise-t-on du pétrole, si c'est aussi mauvais ? »</span> C'est la question du chapitre. Réponse : parce que la nature a fait le stockage et la concentration gratuitement, sur des millions d'années.</li>
       <li>Chaîne <b>chocolat</b>. <span class="q">« Combien de fois mieux ? »</span> Faire comparer les deux chiffres.</li>
+      <li>Chaîne <b>éolien</b>. <span class="q">« L'éolienne est-elle mauvaise ? »</span> Non — 45 % au rotor, c'est proche de la limite physique. Faire trouver le vrai coupable : la chute d'avant, l'atmosphère qui ne garde que 2 %.</li>
       <li>Chaîne <b>photovoltaïque</b>. <span class="q">« Qu'est-ce qui a disparu de la chaîne ? »</span> Les deux étages catastrophiques : la fossilisation et le moteur thermique.</li>
       <li>Conclure : <span class="q">« Que gagne-t-on à supprimer un maillon ? »</span> Rappeler la chaîne de seaux du paragraphe précédent.</li>
     </ol>
@@ -11912,7 +11913,10 @@ function crystal(st, opts){
    Rendements retenus : photosynthese 1 % (cultures reelles 0,5 a 2 %),
    fossilisation 0,01 % (il faut environ 90 t de vegetaux prehistoriques
    pour 4 litres d'essence), moteur thermique 25 % du reservoir a la roue,
-   panneau photovoltaique 20 %, muscle 25 %. */
+   muscle 25 %, panneau photovoltaique 20 %, part du rayonnement solaire
+   convertie en vent par l'atmosphere 2 %, rotor d'eolienne 45 % (la
+   limite de Betz est a 59,3 %), pertes du reseau francais 7 %.
+   Le rouge designe partout ce qui est PERDU. */
 (function(){
   var sr = el('a-chaine-c'); if(!sr) return;
   var CH = [
@@ -11920,22 +11924,30 @@ function crystal(st, opts){
      e:[{n:"SOLEIL",           r:1,      d:"le rayonnement reçu"},
         {n:"PHOTOSYNTHÈSE",    r:0.01,   d:"un centième est fixé"},
         {n:"FOSSILISATION",    r:0.0001, d:"des millions d'années"},
-        {n:"EXTRACTION ET RAFFINAGE", r:0.85, d:"forage puis raffinage"},
-        {n:"MOTEUR THERMIQUE", r:0.25,   d:"les 3/4 à l'échappement"}],
+        {n:"RAFFINAGE",        r:0.85,   d:"forage puis raffinage"},
+        {n:"MOTEUR THERMIQUE", r:0.25,   d:"3/4 à l'échappement"}],
      fin:"Il faut environ 90 tonnes de végétaux préhistoriques pour faire quatre litres d'essence."},
     {n:"le chocolat",
-     e:[{n:"SOLEIL",           r:1,     d:"le rayonnement reçu"},
-        {n:"PHOTOSYNTHÈSE",    r:0.01,  d:"un centième est fixé"},
-        {n:"FÈVE ET FABRICATION", r:0.05, d:"peu de l'arbre y arrive"},
-        {n:"DIGESTION",        r:0.9,   d:"presque tout est absorbé"},
-        {n:"MUSCLE",           r:0.25,  d:"le reste vous réchauffe"}],
-     fin:"Le muscle a le même rendement qu'un moteur thermique : environ un quart. Le reste part en chaleur, et c'est pour cela qu'on transpire à l'effort."},
+     e:[{n:"SOLEIL",        r:1,     d:"le rayonnement reçu"},
+        {n:"PHOTOSYNTHÈSE", r:0.01,  d:"un centième est fixé"},
+        {n:"FABRICATION",   r:0.05,  d:"peu de l'arbre y va"},
+        {n:"DIGESTION",     r:0.9,   d:"presque tout absorbé"},
+        {n:"MUSCLE",        r:0.25,  d:"le reste vous chauffe"}],
+     fin:"Le muscle a le même rendement qu'un moteur thermique : un quart. Le reste vous réchauffe — d'où la transpiration à l'effort."},
+    {n:"l'éolien",
+     e:[{n:"SOLEIL",      r:1,    d:"le rayonnement reçu"},
+        {n:"VENT",        r:0.02, d:"2 % de l'atmosphère"},
+        {n:"ROTOR",       r:0.45, d:"limite de Betz"},
+        {n:"ALTERNATEUR", r:0.95, d:"et le convertisseur"},
+        {n:"TRANSPORT",   r:0.93, d:"pertes sur le réseau"},
+        {n:"MOTEUR",      r:0.90, d:"et sa transmission"}],
+     fin:"Le vent est du soleil au second degré : l'atmosphère n'en garde que 2 %. L'éolienne est excellente — c'est l'étage d'avant qui coûte."},
     {n:"le photovoltaïque",
-     e:[{n:"SOLEIL",           r:1,    d:"le rayonnement reçu"},
-        {n:"PANNEAU",          r:0.20, d:"un cinquième converti"},
-        {n:"ONDULEUR ET CHARGE", r:0.90, d:"conversion électronique"},
-        {n:"BATTERIE",         r:0.90, d:"charge puis décharge"},
-        {n:"MOTEUR ÉLECTRIQUE", r:0.85, d:"il rend au freinage"}],
+     e:[{n:"SOLEIL",   r:1,    d:"le rayonnement reçu"},
+        {n:"PANNEAU",  r:0.20, d:"un cinquième converti"},
+        {n:"ONDULEUR", r:0.90, d:"l'électronique"},
+        {n:"BATTERIE", r:0.90, d:"charge puis décharge"},
+        {n:"MOTEUR",   r:0.85, d:"il rend au freinage"}],
      fin:"Deux étages catastrophiques ont disparu de la chaîne : la fossilisation et le moteur thermique."}
   ];
   var ic = 0;
@@ -11948,16 +11960,19 @@ function crystal(st, opts){
 
   mk('a-chaine', function(ctx, s, dt){
     var W=s.W, i;
-    var ch = CH[ic], E = ch.e;
+    var ch = CH[ic], E = ch.e, n = E.length;
 
-    label(ctx, 26, 30, "TOUT VIENT DU SOLEIL — ET CHAQUE ÉTAGE PRÉLÈVE SA PART", COL.vert, 11.5);
+    label(ctx, 26, 28, "TOUT VIENT DU SOLEIL — EN ROUGE, CE QUE CHAQUE ÉTAGE PERD", COL.vert, 11.5);
 
-    /* les cinq etages */
-    var bw = 150, bh = 74, by = 56;
+    /* --- les etages, dont le nombre varie selon la chaine --- */
+    var marg = 15, gap = n > 5 ? 22 : 30;
+    var bw = (W - 2*marg - (n-1)*gap)/n, bh = 72, by = 50;
+    var maxc = Math.floor((bw-16)/6.9);
+    var fd = n > 5 ? 8.5 : 9, maxd = Math.floor((bw-12)/(fd*0.62));
     var xs = [];
-    for(i=0;i<5;i++){ xs.push(15 + i*(bw+30) + bw/2); }
+    for(i=0;i<n;i++) xs.push(marg + i*(bw+gap) + bw/2);
 
-    for(i=0;i<5;i++){
+    for(i=0;i<n;i++){
       var cx = xs[i];
       ctx.fillStyle = i===0 ? "rgba(240,224,138,.14)" : "rgba(255,255,255,.04)";
       ctx.fillRect(cx-bw/2, by, bw, bh);
@@ -11965,19 +11980,34 @@ function crystal(st, opts){
       ctx.lineWidth = 1.4; ctx.strokeRect(cx-bw/2+.5, by+.5, bw, bh);
 
       var mots = E[i].n.split(' '), l1 = "", l2 = "";
-      mots.forEach(function(m){ if((l1+m).length <= 15 && !l2) l1 += m+" "; else l2 += m+" "; });
-      label(ctx, cx, by + (l2 ? 28 : 34), l1.trim(), i===0?"#f0e08a":"#e8ece6", 11.5, "center");
-      if(l2) label(ctx, cx, by+44, l2.trim(), i===0?"#f0e08a":"#e8ece6", 11.5, "center");
-      label(ctx, cx, by+64, E[i].d, "#6f776c", 9, "center");
+      mots.forEach(function(m){ if((l1+m).length <= maxc && !l2) l1 += m+" "; else l2 += m+" "; });
+      label(ctx, cx, by + (l2 ? 26 : 32), l1.trim(), i===0?"#f0e08a":"#e8ece6", 11.5, "center");
+      if(l2) label(ctx, cx, by+42, l2.trim(), i===0?"#f0e08a":"#e8ece6", 11.5, "center");
+      var dsc = E[i].d.length > maxd ? E[i].d.slice(0, maxd-1)+"…" : E[i].d;
+      label(ctx, cx, by+62, dsc, "#6f776c", fd, "center");
 
       if(i>0){
-        arrow(ctx, xs[i-1]+bw/2+4, by+bh/2, cx-bw/2-4, by+bh/2, "rgba(255,255,255,.35)", 1.6);
-        label(ctx, (xs[i-1]+cx)/2, by-8, "× " + pourcent(E[i].r*100), COL.rouge, 11, "center");
+        arrow(ctx, xs[i-1]+bw/2+3, by+bh/2, cx-bw/2-3, by+bh/2, "rgba(255,255,255,.35)", 1.6);
+        label(ctx, (xs[i-1]+cx)/2, by-8, "× " + pourcent(E[i].r*100), "#cfd6cd", 10.5, "center");
       }
     }
 
-    /* l'echelle logarithmique de ce qui reste */
-    var yh = 194, yb2 = 366, DEC = 8;                 /* de 100 % a 10^-6 % */
+    /* --- ce que chaque etage PERD, en rouge --- */
+    for(i=1;i<n;i++){
+      var xp = xs[i], perte = (1-E[i].r)*100;
+      ctx.strokeStyle = COL.rouge; ctx.lineWidth = 2;
+      ctx.beginPath(); ctx.moveTo(xp, by+bh+4); ctx.lineTo(xp, by+bh+22); ctx.stroke();
+      ctx.fillStyle = COL.rouge;
+      ctx.beginPath();
+      ctx.moveTo(xp, by+bh+30); ctx.lineTo(xp-5, by+bh+20); ctx.lineTo(xp+5, by+bh+20);
+      ctx.closePath(); ctx.fill();
+      label(ctx, xp, by+bh+46, "− " + (perte>=99.9 ? fr(perte,2) : fr(perte, perte<10?1:0)) + " %",
+            COL.rouge, n>5?9.5:10.5, "center");
+    }
+    label(ctx, 26, by+bh+46, "PERDU :", "#8d968b", 10);
+
+    /* --- l'echelle logarithmique de ce qui reste --- */
+    var yh = 202, yb2 = 356, DEC = 8;                 /* de 100 % a 10^-6 % */
     function Y(pc){
       var l = Math.log(Math.max(1e-6, pc))/Math.LN10;
       return yh + (2 - l)/DEC*(yb2-yh);
@@ -11989,20 +12019,22 @@ function crystal(st, opts){
       ctx.beginPath(); ctx.moveTo(70, yg); ctx.lineTo(W-26, yg); ctx.stroke();
       label(ctx, 64, yg+4, LBL[i], "#6f776c", 9, "right");
     }
-    label(ctx, W-26, yh-14, "CE QU'IL RESTE DU SOLEIL DE DÉPART", "#8d968b", 10, "right");
+    label(ctx, W-26, yh-12, "CE QU'IL RESTE DU SOLEIL DE DÉPART", "#8d968b", 10, "right");
 
-    /* la marche descendante */
     var cum = 100, pts = [];
-    for(i=0;i<5;i++){ cum *= E[i].r; pts.push({x:xs[i], y:Y(cum), v:cum}); }
+    for(i=0;i<n;i++){ cum *= E[i].r; pts.push({x:xs[i], y:Y(cum), v:cum}); }
 
+    /* les paliers en vert : ce qui survit d'un etage a l'autre */
     ctx.strokeStyle = COL.vert; ctx.lineWidth = 2.6;
-    ctx.beginPath();
-    for(i=0;i<5;i++){
-      if(i===0) ctx.moveTo(pts[0].x, pts[0].y);
-      else { ctx.lineTo(pts[i].x, pts[i-1].y); ctx.lineTo(pts[i].x, pts[i].y); }
+    for(i=1;i<n;i++){
+      ctx.beginPath(); ctx.moveTo(pts[i-1].x, pts[i-1].y); ctx.lineTo(pts[i].x, pts[i-1].y); ctx.stroke();
     }
-    ctx.stroke();
-    for(i=0;i<5;i++){
+    /* les chutes en rouge : c'est exactement la perte de l'etage */
+    for(i=1;i<n;i++){
+      ctx.strokeStyle = COL.rouge; ctx.lineWidth = 5;
+      ctx.beginPath(); ctx.moveTo(pts[i].x, pts[i-1].y); ctx.lineTo(pts[i].x, pts[i].y); ctx.stroke();
+    }
+    for(i=0;i<n;i++){
       ctx.fillStyle = COL.vert;
       ctx.beginPath(); ctx.arc(pts[i].x, pts[i].y, 5, 0, 6.284); ctx.fill();
       var drop = i>0 ? (pts[i].y - pts[i-1].y) : 99;
@@ -12010,15 +12042,19 @@ function crystal(st, opts){
             pourcent(pts[i].v), "#e8ece6", 10, "center");
     }
 
-    /* le bilan, en joules restants */
-    var reste = 1e6 * cum/100;
-    var fy = 392;
+    /* --- le bilan --- */
+    var reste = 1e6 * cum/100, fy = 380;
     ctx.strokeStyle = "rgba(255,255,255,.14)"; ctx.lineWidth = 1;
     ctx.beginPath(); ctx.moveTo(26, fy); ctx.lineTo(W-26, fy); ctx.stroke();
     label(ctx, 26, fy+22, "SUR 1 MÉGAJOULE DE SOLEIL, IL RESTE À L'ARRIVÉE", "#8d968b", 10);
     label(ctx, 26, fy+50,
-          reste < 1 ? fr(reste,2)+" joule" : (reste<1000 ? fr(reste,0)+" joules" : fr(reste/1000,0)+" kilojoules"),
+          reste < 1 ? fr(reste,2)+" joule" : (reste<1000 ? fr(reste,0)+" joules" : fr(reste/1000,1)+" kilojoules"),
           COL.vert, 24);
+    var fact = 100/cum, ftxt;                 /* plus parlant qu'un pourcentage a six decimales */
+    if(fact >= 1e6)       ftxt = fr(fact/1e6,1) + " millions de joules";
+    else if(fact >= 1000) ftxt = fr(fact,0) + " joules";
+    else                  ftxt = fr(fact, fact<10?1:0) + " joules";
+    label(ctx, 26, fy+72, ftxt + " de soleil pour 1 joule utile", COL.rouge, 10.5);
 
     label(ctx, 430, fy+22, "CE QU'IL FAUT EN RETENIR", "#8d968b", 10);
     var mots2 = ch.fin.split(' '), lg = "", yy = fy+42;
