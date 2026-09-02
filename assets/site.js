@@ -1,4 +1,89 @@
 /* =========================================================================
+   COMPATIBILITE ET DIAGNOSTIC
+   Ce bloc doit rester en tete du fichier : il s'execute avant toute
+   animation.
+
+   1. Trois fonctions utilisees par les figures manquent aux navigateurs
+      anterieurs a 2015 (Internet Explorer notamment). Sans elles, la
+      figure qui les appelle leve une exception et se fige.
+   2. Une exception levee pendant le dessin arretait la boucle de rendu
+      SANS RIEN DIRE : la figure restait immobile et les curseurs
+      semblaient morts. Elle est desormais affichee, sur la figure et
+      dans un bandeau, pour qu'on puisse la signaler.
+   ========================================================================= */
+(function(global){
+  "use strict";
+
+  if(!Math.hypot) Math.hypot = function(){
+    var s = 0, i;
+    for(i = 0; i < arguments.length; i++) s += arguments[i] * arguments[i];
+    return Math.sqrt(s);
+  };
+  if(!Math.log10) Math.log10 = function(x){ return Math.log(x) / Math.LN10; };
+  if(!Math.sign)  Math.sign  = function(x){ return x > 0 ? 1 : (x < 0 ? -1 : 0); };
+
+  /* ctx.ellipse n'existe pas avant Firefox 48 ni sur Internet Explorer :
+     on la reconstruit avec un arc dans un repere mis a l'echelle. */
+  var C = global.CanvasRenderingContext2D;
+  if(C && C.prototype && !C.prototype.ellipse){
+    C.prototype.ellipse = function(x, y, rx, ry, rot, a0, a1, acw){
+      if(!(rx > 0) || !(ry > 0)) return;
+      this.save();
+      this.translate(x, y);
+      this.rotate(rot || 0);
+      this.scale(rx, ry);
+      this.arc(0, 0, 1, a0, a1, acw);
+      this.restore();
+    };
+  }
+
+  /* ---------- signalement des erreurs ---------- */
+  var VUES = [], banniere = null;
+
+  function afficher(msg){
+    if(!document.body) return;
+    if(!banniere){
+      banniere = document.createElement('div');
+      banniere.id = 'mspc-erreurs';
+      banniere.setAttribute('style',
+        'position:fixed;left:0;right:0;bottom:0;z-index:9000;background:#2a1210;' +
+        'border-top:2px solid #ff6a5e;color:#e8ece6;padding:11px 46px 12px 15px;' +
+        'font:12px/1.6 "IBM Plex Mono",ui-monospace,monospace;max-height:32vh;overflow:auto');
+      var t = document.createElement('div');
+      t.setAttribute('style', 'color:#ff6a5e;margin-bottom:5px');
+      t.textContent = 'Une figure n\u2019a pas pu s\u2019afficher. Copiez ce message et signalez-le :';
+      banniere.appendChild(t);
+      var b = document.createElement('button');
+      b.type = 'button'; b.textContent = '\u00d7';
+      b.setAttribute('style', 'position:absolute;top:5px;right:12px;background:none;border:none;' +
+        'color:#ff6a5e;font-size:22px;line-height:1;cursor:pointer');
+      b.onclick = function(){ if(banniere.parentNode) banniere.parentNode.removeChild(banniere); };
+      banniere.appendChild(b);
+      document.body.appendChild(banniere);
+    }
+    var l = document.createElement('div');
+    l.textContent = msg;
+    banniere.appendChild(l);
+  }
+
+  function signaler(msg){
+    if(VUES.length > 10) return;
+    for(var i = 0; i < VUES.length; i++) if(VUES[i] === msg) return;   /* pas deux fois la meme */
+    VUES.push(msg);
+    if(global.console && console.error) console.error('[MSPC] ' + msg);
+    if(document.body) afficher(msg);
+    else if(document.addEventListener) document.addEventListener('DOMContentLoaded', function(){ afficher(msg); });
+  }
+
+  if(global.addEventListener) global.addEventListener('error', function(e){
+    if(!e || !e.message) return;                     /* on ignore les echecs de chargement */
+    signaler(e.message + '  [' + String(e.filename || '').split('/').pop() + ':' + (e.lineno || '?') + ']');
+  });
+
+  global.MSPCdiag = { signaler: signaler, erreurs: VUES };
+})(window);
+
+/* =========================================================================
    ATELIER MSPC — utilitaires communs aux pages de cours
    • MSPC.anim(id, dessin, opts)  : boucle canvas HiDPI, mise en pause
      automatique quand la figure sort de l'écran (indispensable : une page
@@ -10,6 +95,14 @@
   "use strict";
 
   var reduce = global.matchMedia && global.matchMedia('(prefers-reduced-motion:reduce)').matches;
+
+  /* Plafond de finesse du rendu, commun a toutes les figures. Sur un poste
+     sans acceleration materielle, dessiner en 2x represente quatre fois plus
+     de pixels par image : la page devient si lente qu'elle parait figee.
+     La premiere figure qui constate que la machine ne suit pas abaisse ce
+     plafond, et toutes les autres s'y conforment a l'image suivante. */
+  var DPRMAX = 2;
+  function dprVoulu(){ return Math.min(global.devicePixelRatio || 1, DPRMAX); }
 
   function anim(id, dessin, opts){
     var cv = document.getElementById(id);
@@ -29,7 +122,7 @@
                        Les coordonnées écrites dans le dessin ne bougent jamais ;
                        seule la finesse du rendu suit l'écran. */
     function resize(){
-      dpr = Math.min(global.devicePixelRatio || 1, 2);
+      dpr = dprVoulu();
       if(opts.fixed){
         W = FW; H = FH;
         cv.style.width = '100%';
@@ -52,18 +145,57 @@
       resize: resize
     };
 
+    /* Une exception dans le dessin arretait la boucle sans rien dire, et la
+       figure restait figee : les curseurs paraissaient morts alors que
+       c'est le rendu qui etait mort. On l'attrape et on l'affiche. */
+    function panne(err){
+      running = false;
+      var m = (err && err.message) ? err.message : String(err);
+      if(global.MSPCdiag) global.MSPCdiag.signaler(id + ' : ' + m);
+      try{
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+        ctx.fillStyle = '#2a1210'; ctx.fillRect(0, 0, W, H);
+        ctx.textAlign = 'left';
+        ctx.fillStyle = '#ff6a5e'; ctx.font = '13px "IBM Plex Mono",ui-monospace,monospace';
+        ctx.fillText('FIGURE INTERROMPUE \u2014 ' + id, 20, 34);
+        ctx.fillStyle = '#e8ece6'; ctx.font = '12px "IBM Plex Mono",ui-monospace,monospace';
+        ctx.fillText(m.length > 88 ? m.slice(0, 88) + '\u2026' : m, 20, 58);
+        ctx.fillStyle = '#9aa494';
+        ctx.fillText('Le reste de la page fonctionne. Signalez ce message.', 20, 84);
+      }catch(e){}
+    }
+
+    var lentes = 0, mesurees = 0;
+
     function frame(ts){
       if(!running) return;
       var dt = last ? Math.min((ts - last) / 1000, 0.05) : 0;
       last = ts; t += dt;
       api.t = t; api.dt = dt;
-      dessin(api);
+
+      /* La machine suit-elle ? Deux secondes de cadence trop basse et l'on
+         repasse tout le site en resolution simple. */
+      if(dt > 0){
+        mesurees++;
+        if(dt > 0.045) lentes++;
+        if(mesurees >= 45){
+          if(lentes > 30 && DPRMAX > 1) DPRMAX = 1;
+          mesurees = 0; lentes = 0;
+        }
+      }
+      if(dpr !== dprVoulu()) resize();
+
+      try{ dessin(api); }
+      catch(err){ panne(err); return; }
       global.requestAnimationFrame(frame);
     }
     function start(){ if(running) return; running = true; last = 0; global.requestAnimationFrame(frame); }
     function stop(){ running = false; }
 
-    global.addEventListener('resize', function(){ resize(); if(!running){ api.dt = 0; dessin(api); } });
+    global.addEventListener('resize', function(){
+      resize();
+      if(!running){ api.dt = 0; try{ dessin(api); }catch(err){ panne(err); } }
+    });
     resize();
 
     if('IntersectionObserver' in global){
@@ -76,7 +208,7 @@
       // Premier rendu différé d'une frame, pour que la figure ne soit jamais
       // vide — mais après que le code appelant a fini son initialisation.
       global.requestAnimationFrame(function(){
-        if(!running){ api.dt = 0; dessin(api); }
+        if(!running){ api.dt = 0; try{ dessin(api); }catch(err){ panne(err); } }
       });
     } else {
       start();
