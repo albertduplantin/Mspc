@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Diagnostic — Atelier MSPC</title>
+<link rel="stylesheet" href="assets/site.css">
+<style>
+/* Cette page ne charge PAS assets/site.js : elle doit mesurer ce que le
+   navigateur sait faire NATIVEMENT, avant tout correctif du site. */
+:root{--accent:#93a415; --accent-clair:#c8d834}
+.diag{max-width:900px; margin:0 auto; padding:0 20px 80px}
+.diag h1{font-size:clamp(1.6rem,4vw,2.3rem); text-transform:uppercase; margin:28px 0 6px}
+.diag h2{font-size:1.2rem; text-transform:uppercase; margin:34px 0 10px;
+  border-bottom:2px solid var(--encre); padding-bottom:5px}
+.diag p{max-width:70ch}
+#go{background:var(--encre); color:var(--accent-clair); border:none; cursor:pointer;
+  font-family:"Saira Condensed",sans-serif; font-weight:700; font-size:1.15rem;
+  text-transform:uppercase; letter-spacing:.08em; padding:15px 30px; margin:14px 0}
+#go:hover{background:var(--accent); color:#10160f}
+#go[disabled]{opacity:.5; cursor:default}
+table.res{width:100%; border-collapse:collapse; margin:12px 0; background:var(--papier)}
+table.res td{border:1px solid #c3c8bd; padding:7px 11px; font-size:.92rem; vertical-align:top}
+table.res td:first-child{width:38%; color:var(--encre-doux)}
+table.res td.v{font-family:"IBM Plex Mono",monospace; font-size:.85rem}
+.ok{color:#3d6b1f; font-weight:600}
+.ko{color:#b32017; font-weight:600}
+.moy{color:#a06a10; font-weight:600}
+#banc{border:1px solid #b0b6ab; background:#11160f; display:block; width:100%; height:150px; margin:10px 0}
+#etat{font-family:"IBM Plex Mono",monospace; font-size:.9rem; color:var(--encre-doux); min-height:1.4em}
+#rapport{width:100%; height:250px; font-family:"IBM Plex Mono",monospace; font-size:12px;
+  border:1px solid #8d938a; padding:11px; background:#fff; color:#151916}
+.verdict{border:2px solid var(--encre); background:#fff; padding:15px 19px; margin:18px 0}
+.verdict b{display:block; font-family:"Saira Condensed",sans-serif; font-size:1.25rem;
+  text-transform:uppercase; margin-bottom:6px}
+</style>
+</head>
+<body>
+
+<nav class="sitenav" aria-label="Navigation entre les cours">
+  <a class="marque" href="index.html"><span class="sig">Atelier <b>MSPC</b></span></a>
+  <div class="liens">
+    <a href="index.html">Accueil</a>
+    <a class="m-elec" href="electricite.html"><i class="pastille"></i>Électricité</a>
+  </div>
+</nav>
+
+<div class="diag">
+
+<h1>Diagnostic d'affichage</h1>
+<p class="section-intro">Cette page mesure ce que ce poste sait faire, et à quelle vitesse. Elle
+n'installe rien et ne transmet rien : tout se passe dans le navigateur. À la fin, un texte à recopier
+résume tout ce qu'il faut savoir pour corriger les animations qui ne s'affichent pas.</p>
+
+<p><strong>Mode d'emploi.</strong> Cliquez sur le bouton, attendez une dizaine de secondes sans changer
+d'onglet — <em>la mesure est faussée si la page passe en arrière-plan</em> — puis recopiez le texte du bas.</p>
+
+<button id="go" type="button">Lancer le diagnostic</button>
+<div id="etat"></div>
+
+<canvas id="banc" width="880" height="150" aria-label="Zone de mesure de la vitesse d'affichage"></canvas>
+
+<h2>Ce que sait faire ce navigateur</h2>
+<table class="res" id="tsupport"><tbody></tbody></table>
+
+<h2>Vitesse d'affichage mesurée</h2>
+<table class="res" id="tperf"><tbody></tbody></table>
+
+<div id="verdict"></div>
+
+<h2>Texte à recopier</h2>
+<p>Sélectionnez tout le cadre ci-dessous et copiez-le, puis envoyez-le-moi.</p>
+<textarea id="rapport" readonly spellcheck="false"></textarea>
+<button id="copier" type="button" style="margin-top:8px">Tout sélectionner</button>
+
+<p style="margin-top:34px"><a href="index.html">← Retour au portail Atelier MSPC</a></p>
+</div>
+
+<script>
+/* Ecrit en ES5 strict, sans fonction flechee ni let/const : cette page doit
+   pouvoir s'executer sur le navigateur qui pose probleme, y compris tres
+   ancien. Aucune dependance, aucun reseau. */
+(function(){
+  "use strict";
+
+  var L = [];                                   /* les lignes du rapport */
+  function el(id){ return document.getElementById(id); }
+  function maintenant(){
+    return (window.performance && performance.now) ? performance.now() : new Date().getTime();
+  }
+  var raf = window.requestAnimationFrame || window.webkitRequestAnimationFrame ||
+            window.mozRequestAnimationFrame ||
+            function(f){ return window.setTimeout(function(){ f(maintenant()); }, 16); };
+
+  function ligne(table, nom, valeur, classe){
+    var tr = document.createElement('tr');
+    var a = document.createElement('td'); a.appendChild(document.createTextNode(nom));
+    var b = document.createElement('td'); b.className = 'v ' + (classe || '');
+    b.appendChild(document.createTextNode(valeur));
+    tr.appendChild(a); tr.appendChild(b);
+    el(table).getElementsByTagName('tbody')[0].appendChild(tr);
+    L.push(nom + ' : ' + valeur);
+  }
+
+  /* ---------------- ce que le navigateur sait faire ---------------- */
+  function support(){
+    var cv = document.createElement('canvas');
+    var ctx = cv.getContext ? cv.getContext('2d') : null;
+
+    ligne('tsupport', 'Navigateur', navigator.userAgent);
+    ligne('tsupport', 'Fenêtre', window.innerWidth + ' × ' + window.innerHeight + ' pixels');
+    var dpr = window.devicePixelRatio || 1;
+    ligne('tsupport', 'Densité d’écran (devicePixelRatio)', String(dpr),
+          dpr > 1 ? 'moy' : 'ok');
+
+    ligne('tsupport', 'Canvas 2D', ctx ? 'oui' : 'NON', ctx ? 'ok' : 'ko');
+    ligne('tsupport', 'requestAnimationFrame',
+          window.requestAnimationFrame ? 'oui' : 'NON (remplacé par une minuterie)',
+          window.requestAnimationFrame ? 'ok' : 'ko');
+    ligne('tsupport', 'IntersectionObserver',
+          ('IntersectionObserver' in window) ? 'oui' : 'non (les figures tourneront toutes en même temps)',
+          ('IntersectionObserver' in window) ? 'ok' : 'moy');
+
+    var manquantes = [];
+    if(!Math.hypot) manquantes.push('Math.hypot');
+    if(!Math.log10) manquantes.push('Math.log10');
+    if(ctx && !ctx.ellipse) manquantes.push('ctx.ellipse');
+    if(ctx && !ctx.setLineDash) manquantes.push('ctx.setLineDash');
+    ligne('tsupport', 'Fonctions de dessin manquantes',
+          manquantes.length ? manquantes.join(', ') + '  (corrigées par le site)' : 'aucune',
+          manquantes.length ? 'moy' : 'ok');
+
+    var rm = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    ligne('tsupport', 'Animations réduites par le système', rm ? 'OUI' : 'non', rm ? 'ko' : 'ok');
+    return ctx;
+  }
+
+  /* ---------------- les trois mesures de vitesse ---------------- */
+  var cv = el('banc'), ctx = cv.getContext('2d');
+  var RES = {};
+
+  /* Une image representative d'une figure du cours : un fond, des
+     particules, des traits et du texte. */
+  function dessiner(t, n){
+    var W = cv.width / RES.dpr, H = cv.height / RES.dpr, i;
+    ctx.fillStyle = '#11160f'; ctx.fillRect(0, 0, W, H);
+    ctx.strokeStyle = 'rgba(255,255,255,.06)'; ctx.lineWidth = 1;
+    for(i = 0; i < W; i += 34){ ctx.beginPath(); ctx.moveTo(i, 0); ctx.lineTo(i, H); ctx.stroke(); }
+    for(i = 0; i < n; i++){
+      var x = (W / 2) + Math.cos(t * 0.002 + i) * (W / 2 - 20) * Math.sin(i);
+      var y = (H / 2) + Math.sin(t * 0.003 + i * 1.7) * (H / 2 - 14);
+      ctx.fillStyle = (i % 3) ? '#c8d834' : '#7fd4ff';
+      ctx.beginPath(); ctx.arc(x, y, 5, 0, 6.2832); ctx.fill();
+      ctx.strokeStyle = 'rgba(192,118,54,.55)'; ctx.lineWidth = 2;
+      ctx.beginPath(); ctx.moveTo(x, y); ctx.lineTo(W / 2, H / 2); ctx.stroke();
+    }
+    ctx.fillStyle = '#c8d834';
+    ctx.font = '13px "IBM Plex Mono",monospace';
+    ctx.fillText('MESURE EN COURS', 16, 24);
+  }
+
+  /* La vue « liquide » calcule les forces entre toutes les paires de
+     molecules : c'est le calcul le plus lourd du site. */
+  function physique(n){
+    var P = [], i, j, dx, dy, d;
+    for(i = 0; i < n; i++) P.push({ x: Math.random() * 300, y: Math.random() * 120, fx: 0, fy: 0 });
+    for(i = 0; i < n; i++){
+      for(j = i + 1; j < n; j++){
+        dx = P[j].x - P[i].x; dy = P[j].y - P[i].y;
+        d = Math.sqrt(dx * dx + dy * dy) || 1;
+        P[i].fx += dx / d; P[i].fy += dy / d;
+        P[j].fx -= dx / d; P[j].fy -= dy / d;
+      }
+    }
+    return P.length;
+  }
+
+  function mesurer(nom, dpr, particules, physiqueN, suite){
+    RES.dpr = dpr;
+    cv.width = Math.round(880 * dpr);
+    cv.height = Math.round(150 * dpr);
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    el('etat').innerHTML = nom + '…';
+
+    var images = 0, t0 = maintenant(), pire = 0, precedent = t0;
+    function boucle(){
+      var t = maintenant();
+      var dt = t - precedent; precedent = t;
+      if(images > 2 && dt > pire) pire = dt;
+      if(physiqueN) physique(physiqueN);
+      dessiner(t, particules);
+      images++;
+      if(t - t0 < 1600) raf(boucle);
+      else {
+        var fps = images / ((t - t0) / 1000);
+        suite(fps, pire);
+      }
+    }
+    raf(boucle);
+  }
+
+  function juger(fps){
+    if(fps >= 45) return ['fluide', 'ok'];
+    if(fps >= 22) return ['acceptable', 'moy'];
+    return ['TROP LENT', 'ko'];
+  }
+
+  function lancer(){
+    el('go').disabled = true;
+    ctx = cv.getContext('2d');
+    support();
+    var dprReel = window.devicePixelRatio || 1;
+
+    mesurer('Mesure 1 sur 3 — résolution simple', 1, 60, 0, function(f1, p1){
+      var j1 = juger(f1);
+      ligne('tperf', 'Résolution simple (1×), figure légère',
+            Math.round(f1) + ' images/s — ' + j1[0], j1[1]);
+
+      mesurer('Mesure 2 sur 3 — résolution de l’écran', dprReel, 60, 0, function(f2, p2){
+        var j2 = juger(f2);
+        ligne('tperf', 'Résolution de l’écran (' + dprReel + '×), figure légère',
+              Math.round(f2) + ' images/s — ' + j2[0], j2[1]);
+
+        mesurer('Mesure 3 sur 3 — figure lourde', dprReel, 60, 90, function(f3, p3){
+          var j3 = juger(f3);
+          ligne('tperf', 'Figure lourde (liquide, plasma, métal)',
+                Math.round(f3) + ' images/s — ' + j3[0], j3[1]);
+          ligne('tperf', 'Image la plus longue', Math.round(p3) + ' ms',
+                p3 > 100 ? 'ko' : (p3 > 45 ? 'moy' : 'ok'));
+          el('etat').innerHTML = 'Diagnostic terminé.';
+          conclure(f1, f2, f3);
+        });
+      });
+    });
+  }
+
+  function conclure(f1, f2, f3){
+    var titre, texte;
+    ctx.fillStyle = '#11160f';
+    ctx.fillRect(0, 0, cv.width / RES.dpr, cv.height / RES.dpr);
+    ctx.fillStyle = '#c8d834'; ctx.font = '13px "IBM Plex Mono",monospace';
+    ctx.fillText('MESURE TERMINEE', 16, 24);
+    if(f3 < 22 && f1 >= 45){
+      titre = 'Ce poste ne suit pas sur les figures lourdes';
+      texte = 'La résolution simple passe bien, mais les figures chargées s’effondrent. ' +
+              'C’est très probablement la cause des animations figées. Le site abaisse ' +
+              'désormais la résolution tout seul, mais il faudra sans doute aussi alléger ' +
+              'ces trois vues. Signalez ce rapport.';
+    } else if(f1 < 22){
+      titre = 'L’accélération matérielle semble désactivée';
+      texte = 'Même la figure la plus légère est lente, ce qui n’est pas normal. ' +
+              'Vérifiez dans le navigateur : tapez edge://gpu ou chrome://gpu dans la barre ' +
+              'd’adresse et cherchez la ligne « Canvas ». Si elle indique « Software only », ' +
+              'l’accélération est coupée. Signalez ce rapport.';
+    } else if(f2 < 30 && f1 >= 45){
+      titre = 'C’est la haute résolution qui coûte cher';
+      texte = 'La figure passe bien en résolution simple mais pas à la résolution de l’écran. ' +
+              'Le site le détecte maintenant et bascule automatiquement. Rechargez avec ' +
+              'Ctrl + Maj + R et réessayez les animations.';
+    } else {
+      titre = 'Ce poste est capable d’afficher les animations';
+      texte = 'Les vitesses mesurées sont correctes. Si une figure reste malgré tout figée, ' +
+              'c’est une erreur de programme et non un problème de machine : elle doit ' +
+              'maintenant s’afficher en rouge sur la figure. Recopiez-la avec ce rapport.';
+    }
+    var d = document.createElement('div');
+    d.className = 'verdict';
+    var b = document.createElement('b'); b.appendChild(document.createTextNode(titre));
+    var p = document.createElement('p'); p.style.margin = '0';
+    p.appendChild(document.createTextNode(texte));
+    d.appendChild(b); d.appendChild(p);
+    el('verdict').appendChild(d);
+
+    L.push('');
+    L.push('VERDICT : ' + titre);
+    el('rapport').value = '=== DIAGNOSTIC ATELIER MSPC ===\n' + L.join('\n') + '\n';
+  }
+
+  el('go').onclick = lancer;
+  el('copier').onclick = function(){
+    var t = el('rapport');
+    t.focus(); t.select();
+    try{ document.execCommand('copy'); this.innerHTML = 'Copié'; }
+    catch(e){ this.innerHTML = 'Sélectionné — faites Ctrl + C'; }
+  };
+})();
+</script>
+</body>
+</html>
