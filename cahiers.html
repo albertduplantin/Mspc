@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cahiers d'exercices imprimables — Atelier MSPC</title>
+<meta name="description" content="Cahiers d'exercices Bac Pro MSPC à imprimer : énoncés inédits et corrigé détaillé regroupé en fin de document, pour ne distribuer que les pages de questions. PDF, sans compte ni inscription.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Saira+Condensed:wght@500;600;700&family=Public+Sans:ital,wght@0,400;0,600;0,800;1,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/site.css">
+<script src="assets/site.js"></script>
+<style>
+:root{--accent:#c9484a; --accent-clair:#e88a8c}
+.hero-canvas-wrap{height:min(70vh,560px); min-height:420px}
+
+/* La fiche produit : ce qu'on achete, a quel prix, et par ou. */
+.fiche{display:grid; grid-template-columns:1.35fr 1fr; gap:0; border:2px solid var(--encre);
+  background:var(--papier); box-shadow:var(--ombre); margin:0 0 48px}
+.fiche .gauche{padding:26px 30px 28px}
+.fiche .droite{padding:26px 30px 28px; background:var(--encre); color:#dfe4de;
+  display:flex; flex-direction:column}
+.fiche h3{margin:0 0 10px; font-size:1.5rem; text-transform:uppercase}
+.fiche .droite h3{color:#fff}
+.fiche ul{margin:0; padding-left:19px}
+.fiche li{margin-bottom:7px}
+.prix{font-family:"Saira Condensed",sans-serif; font-weight:700; font-size:3.4rem; line-height:1;
+  color:var(--accent-clair); margin:2px 0 2px}
+.prix small{font-size:1rem; font-weight:500; color:#a9b0a7; display:block; letter-spacing:.04em}
+.bouton{display:inline-flex; align-items:center; justify-content:center; gap:9px; margin-top:18px;
+  background:var(--accent); color:#fff; text-decoration:none; padding:14px 22px;
+  font-family:"Saira Condensed",sans-serif; font-weight:700; font-size:1.22rem;
+  text-transform:uppercase; letter-spacing:.05em; border:2px solid var(--accent)}
+.bouton:hover{background:#e05a5c; border-color:#e05a5c}
+.fiche .droite .fin{margin-top:auto; padding-top:16px; font-size:.86rem; color:#98a097}
+@media (max-width:820px){.fiche{grid-template-columns:1fr}}
+
+/* Le sommaire des 18 exercices, en deux colonnes. */
+.liste-exos{columns:2; column-gap:34px; margin:0 0 10px; padding:0; list-style:none}
+.liste-exos li{break-inside:avoid; margin-bottom:8px; padding-left:34px; position:relative;
+  font-size:.96rem; color:var(--encre-doux)}
+.liste-exos li b{position:absolute; left:0; top:0; font-family:"IBM Plex Mono",monospace;
+  font-size:11px; color:var(--accent); letter-spacing:.06em}
+.liste-exos li.gratuit{color:var(--encre); font-weight:600}
+.liste-exos li.gratuit::after{content:"extrait offert"; font-family:"IBM Plex Mono",monospace;
+  font-size:9.5px; letter-spacing:.16em; text-transform:uppercase; color:#fff;
+  background:var(--accent); padding:1px 6px; margin-left:8px; white-space:nowrap}
+@media (max-width:700px){.liste-exos{columns:1}}
+
+.etapes{display:grid; grid-template-columns:repeat(auto-fit,minmax(210px,1fr)); gap:0;
+  border:1px solid #bcc1b7; background:#fff; margin:22px 0 10px}
+.etapes>div{padding:18px 20px 20px; border-right:1px solid #d5d9d0}
+.etapes>div:last-child{border-right:none}
+.etapes .n{font-family:"IBM Plex Mono",monospace; font-size:10.5px; letter-spacing:.2em;
+  text-transform:uppercase; color:var(--accent)}
+.etapes h4{margin:5px 0 6px; font-size:1.06rem; text-transform:uppercase}
+.etapes p{margin:0; font-size:.92rem; color:var(--encre-doux)}
+@media (max-width:700px){.etapes>div{border-right:none; border-bottom:1px solid #d5d9d0}}
+</style>
+</head>
+<body>
+
+<nav class="sitenav" aria-label="Navigation entre les cours">
+  <a class="marque" href="index.html"><span class="sig">Atelier <b>MSPC</b></span></a>
+  <div class="liens">
+    <a href="index.html">Accueil</a>
+    <a class="m-elec" href="electricite.html"><i class="pastille"></i>Électricité</a>
+    <a class="m-maint" href="maintenance-preventive.html"><i class="pastille"></i>Maintenance préventive</a>
+    <a class="m-meca" href="mecanique.html"><i class="pastille"></i>Mécanique</a>
+    <a class="m-fab" href="fabrication.html"><i class="pastille"></i>Fabrication</a>
+    <a class="m-pneu" href="pneumatique.html"><i class="pastille"></i>Pneumatique</a>
+    <a class="m-hydro" href="hydraulique.html"><i class="pastille"></i>Hydraulique</a>
+    <a class="m-cahier" href="cahiers.html" aria-current="page"><i class="pastille"></i>Cahiers PDF</a>
+  </div>
+  <a class="soutenir" href="https://ko-fi.com/topinambourrutabaga" target="_blank" rel="noopener">☕ Soutenir le site</a>
+</nav>
+
+<header class="hero">
+  <div class="hero-canvas-wrap">
+    <canvas id="himp" aria-label="Animation : impression d'un cahier d'exercices, avec ou sans les pages de corrigé"></canvas>
+    <div class="hero-ctrl">
+      <label class="switch"><input type="checkbox" id="hq" checked><span>N'imprimer que les questions</span></label>
+      <label>Effectif de la classe <span id="hnl">24 élèves</span></label>
+      <input type="range" id="hn" min="6" max="35" value="24" aria-label="Effectif de la classe">
+      <div class="verdict" id="hverdict"></div>
+    </div>
+    <div class="hero-text">
+      <span class="eyebrow">Bac Pro MSPC · Ressources imprimables</span>
+      <h1>Les questions devant,<br>le corrigé <em>derrière</em></h1>
+      <p>Un cahier d'exercices se distribue mal quand la réponse est sous la question. Ici les énoncés occupent les huit premières pages et le corrigé toutes les suivantes : vous imprimez la plage 2-8, et rien d'autre ne sort de la machine.</p>
+    </div>
+  </div>
+</header>
+
+<div class="meta-bar">
+  <div><b>18</b> exercices inédits</div>
+  <div><b>16</b> pages A4</div>
+  <div>Énoncés <b>2-8</b> · corrigé <b>9-16</b></div>
+  <div>PDF · <b>sans compte</b></div>
+  <div>Électricité, chapitres <b>1 à 3</b></div>
+</div>
+
+<div class="wrap">
+
+<p class="lede">Le cours en ligne est gratuit, et il le restera : les trente chapitres d'électricité, leurs animations et leurs quatre-vingt-huit exercices corrigés sont accessibles sans rien demander à personne. Ce que vous trouverez sur cette page est autre chose — du <span class="cle">matériel prêt à photocopier</span>, écrit pour l'heure de cours et pas pour l'écran.</p>
+
+<p>Un cahier réunit des exercices <strong>qui ne figurent pas dans le cours</strong>, mis en page pour le papier : une place pour le nom et la classe, de l'espace pour écrire sous chaque question, une durée conseillée par exercice, et un corrigé qui ne se contente pas de donner le résultat mais déroule le raisonnement, signale l'erreur classique et relie la notion au métier.</p>
+
+<p>Ce premier cahier est un essai. S'il sert, les suivants viendront chapitre après chapitre, et pour les autres matières.</p>
+
+<!-- ============ LA FICHE PRODUIT ============ -->
+<h2 id="cahier1">Cahier n° 1 — Électricité, chapitres 1 à 3</h2>
+<p class="lede">L'atome et les électrons libres · les ordres de grandeur et la vitesse de dérive · le coulomb et l'ampère.</p>
+
+<div class="fiche">
+  <div class="gauche">
+    <h3>Ce que vous téléchargez</h3>
+    <ul>
+      <li>Un <strong>PDF de 16 pages A4</strong>, prêt à imprimer, en noir sur blanc.</li>
+      <li><strong>18 exercices</strong> répartis sur les trois premiers chapitres : 6 sur l'atome, 5 sur les ordres de grandeur, 7 sur le coulomb et l'ampère.</li>
+      <li>Une <strong>page de garde</strong> avec nom, classe, date et note.</li>
+      <li>Des <strong>durées conseillées</strong> exercice par exercice — environ 2 h 20 en tout.</li>
+      <li>Un <strong>corrigé détaillé de 8 pages</strong>, regroupé à la fin : réponse, raisonnement, erreur fréquente, et le lien avec l'atelier.</li>
+      <li>Des exercices <strong>inédits</strong> : aucun n'est repris du cours en ligne, vous pouvez donc donner les deux.</li>
+    </ul>
+  </div>
+  <div class="droite">
+    <h3>Le prix</h3>
+    <div class="prix">3 €<small>paiement unique · téléchargement immédiat</small></div>
+    <p style="margin:14px 0 0; font-size:.95rem">Aucun compte à créer, aucune inscription, aucun abonnement. Vous payez, le lien de téléchargement s'affiche et part aussi par courriel.</p>
+    <a class="bouton" href="https://ko-fi.com/topinambourrutabaga/shop" target="_blank" rel="noopener">Télécharger le cahier n° 1</a>
+    <div class="fin">Paiement traité par Ko-fi (carte bancaire ou PayPal). Le fichier est un PDF ordinaire, sans verrou ni logiciel à installer.</div>
+  </div>
+</div>
+
+<!-- ============ SOMMAIRE DES EXERCICES ============ -->
+<h3>Les 18 exercices, un par un</h3>
+<p>Rien n'est caché : voici exactement ce que contient le cahier. Deux d'entre eux sont reproduits en entier plus bas, corrigé compris, pour que vous jugiez sur pièce.</p>
+
+<h4 style="margin-top:22px">Chapitre 1 — L'atome et les électrons libres</h4>
+<ul class="liste-exos">
+  <li><b>01</b>L'atome de cuivre : ses 29 protons, son électron du bord, et ce qu'il devient dans le cristal.</li>
+  <li><b>02</b>Vrai ou faux : « ce sont les protons qui se déplacent dans le fil ».</li>
+  <li><b>03</b>Dix matériaux à ranger en conducteurs, isolants et cas particuliers — dont le silicium et l'eau distillée.</li>
+  <li class="gratuit"><b>04</b>Pourquoi une gaine de câble n'est pas en verre, alors que le verre isole mieux.</li>
+  <li><b>05</b>« Une pile usée n'a plus d'électrons » : ce qui s'épuise réellement dans une pile.</li>
+  <li><b>06</b>Un moteur stocké tout l'hiver : son isolement passe de 2 MΩ à 80 kΩ. Que s'est-il passé ?</li>
+</ul>
+
+<h4 style="margin-top:22px">Chapitre 2 — Ordres de grandeur et vitesse</h4>
+<ul class="liste-exos">
+  <li><b>07</b>Combien d'électrons libres dans un mètre de câble de 2,5 mm² ?</li>
+  <li><b>08</b>Comment la vitesse de dérive change quand on modifie la section, puis le courant.</li>
+  <li class="gratuit"><b>09</b>Trente mètres de câble : le temps de trajet d'un électron contre celui de l'ordre de marche.</li>
+  <li><b>10</b>Vrai ou faux : « les électrons partis de la pile doivent arriver jusqu'à la lampe ».</li>
+  <li><b>11</b>On passe d'une rallonge de 25 m à une de 50 m : qu'est-ce qui change vraiment ?</li>
+</ul>
+
+<h4 style="margin-top:22px">Chapitre 3 — Le coulomb et l'ampère</h4>
+<ul class="liste-exos">
+  <li><b>12</b>Tableau de conversions : des milliampères aux coulombs par seconde.</li>
+  <li><b>13</b>Une bobine de contacteur collée toute l'année : combien de batteries de voiture ?</li>
+  <li><b>14</b>Soudage par points, 8 kA pendant 200 ms : la charge, et la comparaison qui surprend.</li>
+  <li><b>15</b>Le seuil de 30 mA d'un différentiel : en électrons, et surtout pourquoi si bas.</li>
+  <li><b>16</b>Un plafonnier oublié sur une batterie 70 Ah : au bout de combien de jours ?</li>
+  <li><b>17</b>Un chargeur « 5 V — 2,4 A » pendant 20 minutes : et pourquoi les volts n'entrent pas dans le calcul.</li>
+  <li><b>18</b>Synthèse des trois chapitres : un câble de 2,5 mm² sous 16 A pendant une heure.</li>
+</ul>
+
+<!-- ============ EXTRAIT ============ -->
+<h3 style="margin-top:44px">L'extrait offert</h3>
+<p>Voici deux exercices du cahier, exactement tels qu'ils y figurent, avec leur correction complète. Dans le PDF, cette correction se trouve huit pages plus loin — c'est tout l'intérêt.</p>
+
+<div class="exo"><span class="tag">Exercice 4 · durée 6 min</span>
+<p>Le verre isole mieux que le PVC. Pourtant, la gaine d'un câble souple d'atelier est en PVC et jamais en verre. Donnez <strong>trois raisons</strong> qui n'ont rien à voir avec la qualité de l'isolation.</p>
+<details><summary>Voir la réponse</summary><div class="rep">
+<p><strong>Le verre est cassant, rigide et lourd. Aucune de ces raisons ne concerne l'isolation.</strong></p>
+<p><strong>1. Il ne plie pas.</strong> Un câble d'atelier est enroulé, déroulé, plié cent fois par jour. Une gaine de verre se briserait au premier enroulement.</p>
+<p><strong>2. Il casse au choc.</strong> Une chute, un coup de chariot, et l'isolant vole en éclats — laissant le conducteur nu. Le PVC s'entaille mais ne se fragmente pas.</p>
+<p><strong>3. Il est impossible à mettre en œuvre.</strong> Le PVC s'extrude en continu autour du conducteur, à plusieurs mètres par seconde, pour un coût dérisoire. On ne sait pas faire cela avec du verre.</p>
+<p>On peut ajouter la masse, et la difficulté de raccorder : dénuder du verre n'a aucun sens.</p>
+<p><em>La leçon dépasse le câble : <strong>on ne choisit jamais un matériau sur une seule propriété</strong>. Le meilleur isolant du monde ne sert à rien s'il ne survit pas à l'usage.</em></p>
+</div></details>
+</div>
+
+<div class="exo"><span class="tag">Exercice 9 · durée 9 min</span>
+<p>Une machine est alimentée par <strong>30 mètres</strong> de câble.</p>
+<p><strong>a.</strong> Combien de temps faut-il à un électron donné pour parcourir ces 30 m, à la vitesse de dérive de 0,5 mm/s ? Exprimez le résultat en heures.<br>
+<strong>b.</strong> Combien de temps met l'ordre de mise en marche pour parcourir la même distance à 200 000 km/s ?<br>
+<strong>c.</strong> Quel est le rapport entre ces deux durées ?</p>
+<details><summary>Voir la réponse</summary><div class="rep">
+<p><strong>a. Environ 16 h 40 min. b. Environ 150 nanosecondes. c. Un rapport d'environ 400 milliards.</strong></p>
+<p><strong>a.</strong> On convertit d'abord la distance en millimètres, puisque la vitesse est en millimètres par seconde :<br>
+30 m = 30 000 mm<br>
+t = 30 000 / 0,5 = <strong>60 000 s</strong><br>
+60 000 / 3 600 = 16,7 h, soit <strong>16 h 40 min</strong>.</p>
+<p><strong>b.</strong> Pour le signal, on travaille en unités du système international :<br>
+200 000 km/s = 2 × 10<sup>8</sup> m/s<br>
+t = 30 / (2 × 10<sup>8</sup>) = 1,5 × 10<sup>−7</sup> s = <strong>150 ns</strong>.</p>
+<p><strong>c.</strong> Le rapport vaut 60 000 / (1,5 × 10<sup>−7</sup>) ≈ 4 × 10<sup>11</sup>, soit <strong>quatre cents milliards de fois</strong>.</p>
+<p><em>Ces deux nombres résument tout le chapitre. L'électron met une journée de travail à faire le trajet ; l'ordre de se mettre en marche le fait dans un temps que même un oscilloscope a du mal à mesurer. La machine démarre parce que l'ordre arrive, pas parce que les électrons arrivent.</em></p>
+</div></details>
+</div>
+
+<!-- ============ COMMENT CA MARCHE ============ -->
+<h3 style="margin-top:44px">Sans compte, sans inscription</h3>
+<p>Il n'y a rien à créer, rien à retenir, et le site ne vous demande aucune donnée : il ne sait même pas que vous êtes passé par là.</p>
+
+<div class="etapes">
+  <div><span class="n">Étape 1</span><h4>Vous cliquez</h4><p>Le bouton ouvre la boutique Ko-fi dans un nouvel onglet. Vous n'y créez pas de compte.</p></div>
+  <div><span class="n">Étape 2</span><h4>Vous payez</h4><p>Carte bancaire ou PayPal, en une fois. Ko-fi demande simplement une adresse de courriel pour vous envoyer le fichier.</p></div>
+  <div><span class="n">Étape 3</span><h4>Vous téléchargez</h4><p>Le lien apparaît aussitôt à l'écran, et part également par courriel. Le PDF est à vous, sur votre disque.</p></div>
+  <div><span class="n">Étape 4</span><h4>Vous imprimez</h4><p>Plage <strong>2-8</strong> pour les élèves, document entier pour vous. Le corrigé ne peut pas sortir par erreur.</p></div>
+</div>
+
+<div class="encadre"><span class="tag">Droit d'usage</span>
+<p style="margin-bottom:0">L'achat vous autorise à <strong>photocopier et distribuer le cahier à vos élèves</strong>, autant de fois que vous le voulez, dans votre établissement — c'est exactement l'usage prévu. Il ne vous autorise pas à le revendre, ni à le redéposer sur une plateforme de partage de documents. Si un collègue le trouve utile, envoyez-lui l'adresse de cette page plutôt que le fichier : c'est ce qui permet aux suivants d'exister.</p>
+</div>
+
+<div class="plaque"><span class="tag">Pourquoi c'est payant</span>
+<p>Le cours reste entièrement gratuit — c'est un choix, et il ne changera pas. Mais écrire dix-huit exercices inédits, les corriger en détail et les mettre en page pour le papier représente plusieurs journées de travail, et cela ne se prête pas à la lecture d'écran, donc à rien d'autre qu'à l'impression.</p>
+<p style="margin-bottom:0">Trois euros, c'est le prix d'un café. Si le cahier vous fait gagner une soirée de préparation, il est déjà largement rentabilisé — et il finance l'écriture des suivants.</p>
+</div>
+
+</div><!-- /wrap -->
+
+<footer class="fin">
+<p><strong>Cahiers d'exercices imprimables</strong> — compléments payants du cours gratuit de l'Atelier MSPC. Le premier cahier couvre les chapitres 1 à 3 d'électricité : 18 exercices inédits, 16 pages, corrigé séparé.</p>
+<p>Les exercices publiés dans le cours en ligne restent librement accessibles et le resteront. Les cahiers ne les remplacent pas : ils s'y ajoutent, pour les collègues qui préfèrent distribuer du papier.</p>
+<p style="margin-bottom:0"><em>Les valeurs numériques sont des ordres de grandeur pédagogiques. Toute intervention réelle sur installation se fait dans le respect de la NF C 18-510 et avec le titre d'habilitation correspondant.</em></p>
+</footer>
+
+<script>
+/* =========================================================================
+   HÉROS — l'imprimante qui ne sort que les pages de questions.
+   Le but de la figure est de rendre evident le decoupage du cahier :
+   une couverture, sept pages d'enonces, huit pages de corrige. On coche
+   la case et le corrige cesse d'etre imprime, pour toute la classe.
+   ========================================================================= */
+(function(){
+  var COUV = '#8d938a', QUEST = '#c8d834', CORR = '#e88a8c', MORT = '#2b332c';
+
+  /* La scene est dessinee dans un repere fixe de 880 x 176, puis posee dans
+     la bande libre au-dessus du titre : le heros porte un grand titre en bas
+     a gauche et le panneau de commandes en haut a droite, et la figure ne
+     doit empieter ni sur l'un ni sur l'autre. */
+  var SW = 880, SH = 132;
+
+  /* Le heros superpose trois calques : la figure, le panneau de commandes et
+     le titre. En grand format le panneau flotte en haut a droite ; sous 760 px
+     il repasse dans le flux et occupe toute la largeur en haut. On mesure donc
+     la bande reellement libre plutot que de la supposer. */
+  var CV = document.getElementById('himp');
+  var PAN = document.querySelector('.hero-ctrl');
+  var TXT = document.querySelector('.hero-text');
+  var bande = {y0: 14, y1: 200, pleine: false};
+  function mesure(){
+    if(!CV) return;
+    var r = CV.getBoundingClientRect();
+    var y0 = 14, y1 = r.height - 14, pleine = false;
+    if(PAN){
+      var rp = PAN.getBoundingClientRect();
+      if(rp.width > r.width * 0.8){ y0 = Math.max(y0, rp.bottom - r.top + 12); pleine = true; }
+    }
+    if(TXT) y1 = Math.min(y1, TXT.getBoundingClientRect().top - r.top - 12);
+    bande = {y0: y0, y1: Math.max(y0 + 40, y1), pleine: pleine};
+  }
+
+  function nature(p){ return p === 1 ? 'c' : (p <= 8 ? 'q' : 'r'); }
+  function couleur(p){ var n = nature(p); return n === 'c' ? COUV : (n === 'q' ? QUEST : CORR); }
+
+  var TW = 48, TG = 7, TH = 64;              // vignette : largeur, ecart, hauteur
+  function tx(p){ return (p - 1) * (TW + TG); }
+
+  var qOnly = MSPC.ctrl('hq');
+  var eff   = MSPC.ctrl('hn', function(v){ return v + ' élèves'; }, 'hnl');
+  var verdict = document.getElementById('hverdict');
+
+  var vol = [], prochaine = 1, delai = 0;    // feuilles en train de sortir
+
+  MSPC.anim('himp', function(a){
+    var ctx = a.ctx, W = a.W, H = a.H;
+    var seulesQ = qOnly.val, n = eff.val;
+
+    /* --- avancement : une page toutes les 0,38 s, les pages exclues sautees */
+    delai -= a.dt;
+    if(delai <= 0){
+      delai = 0.38;
+      var essais = 0;
+      while(essais++ < 17){
+        var pg = prochaine;
+        prochaine = prochaine >= 16 ? 1 : prochaine + 1;
+        if(!(seulesQ && nature(pg) === 'r')){ vol.push({p: pg, u: 0}); break; }
+      }
+    }
+    for(var i = vol.length - 1; i >= 0; i--){
+      vol[i].u += a.dt * 1.15;
+      if(vol[i].u > 1) vol.splice(i, 1);
+    }
+
+    MSPC.fond(ctx, W, H, 40);
+
+    /* La bande utile : environ les trois quarts gauches, en haut. */
+    var dispoW = bande.pleine ? (W - 48) : Math.max(320, W * 0.76 - 40);
+    var dispoH = bande.y1 - bande.y0;
+    var S = Math.max(0.24, Math.min(dispoW / SW, dispoH / SH));
+    ctx.save();
+    ctx.translate(24, bande.y0 + Math.max(0, (dispoH - SH * S) / 2));
+    ctx.scale(S, S);
+    ctx.translate(0, 20);
+
+    MSPC.mono(ctx, 'LE CAHIER, PAGE PAR PAGE', 0, -12, 11, '#7f8a7e');
+
+    /* --- les seize pages ------------------------------------------------- */
+    for(var p = 1; p <= 16; p++){
+      var x = tx(p), exclue = seulesQ && nature(p) === 'r';
+      ctx.fillStyle = exclue ? MORT : '#f4f6ef';
+      ctx.fillRect(x, 0, TW, TH);
+      ctx.strokeStyle = exclue ? '#3c463d' : couleur(p);
+      ctx.lineWidth = 2;
+      ctx.strokeRect(x + 1, 1, TW - 2, TH - 2);
+      ctx.fillStyle = exclue ? '#39423a' : 'rgba(20,24,15,.28)';
+      for(var l = 0; l < 5; l++)
+        ctx.fillRect(x + 8, 13 + l * 9, TW - 16 - (l === 4 ? 14 : 0), 2.6);
+      if(exclue){
+        ctx.strokeStyle = '#6b4040'; ctx.lineWidth = 2;
+        ctx.beginPath();
+        ctx.moveTo(x + 9, 11); ctx.lineTo(x + TW - 9, TH - 11);
+        ctx.moveTo(x + TW - 9, 11); ctx.lineTo(x + 9, TH - 11);
+        ctx.stroke();
+      }
+      MSPC.mono(ctx, String(p), x + TW / 2, TH + 15, 9.5,
+                exclue ? '#5c665d' : '#9aa494', 'center');
+    }
+
+    /* --- les feuilles qui se detachent ----------------------------------- */
+    for(var k = 0; k < vol.length; k++){
+      var f = vol[k], u = f.u;
+      ctx.save();
+      ctx.translate(tx(f.p) + 26 * u, 34 * u);
+      ctx.rotate(0.22 * u);
+      ctx.globalAlpha = 1 - u * u;
+      ctx.fillStyle = '#f4f6ef'; ctx.fillRect(0, 0, TW, TH);
+      ctx.strokeStyle = couleur(f.p); ctx.lineWidth = 2;
+      ctx.strokeRect(1, 1, TW - 2, TH - 2);
+      ctx.fillStyle = 'rgba(20,24,15,.28)';
+      for(var m = 0; m < 5; m++)
+        ctx.fillRect(8, 13 + m * 9, TW - 16 - (m === 4 ? 14 : 0), 2.6);
+      ctx.restore();
+    }
+    ctx.globalAlpha = 1;
+
+    /* --- accolades de legende -------------------------------------------- */
+    function legende(p1, p2, txt, col){
+      var x1 = tx(p1), x2 = tx(p2) + TW, y = TH + 24;
+      ctx.strokeStyle = col; ctx.lineWidth = 1.5;
+      ctx.beginPath();
+      ctx.moveTo(x1, y); ctx.lineTo(x1, y + 5); ctx.lineTo(x2, y + 5); ctx.lineTo(x2, y);
+      ctx.stroke();
+      MSPC.mono(ctx, txt, (x1 + x2) / 2, y + 20, 10, col, 'center');
+    }
+    legende(1, 1, 'GARDE', COUV);
+    legende(2, 8, 'LES 18 QUESTIONS', QUEST);
+    legende(9, 16, seulesQ ? 'CORRIGÉ : NON IMPRIMÉ' : 'LE CORRIGÉ', seulesQ ? '#7a4c4c' : CORR);
+
+    ctx.restore();
+
+    if(verdict){
+      var feuilles = seulesQ ? 7 : 16;
+      verdict.textContent = seulesQ
+        ? 'Plage 2-8 : ' + feuilles + ' pages × ' + n + ' élèves = ' + MSPC.nb(feuilles * n)
+          + ' feuilles. Les huit pages de corrigé sont barrées, la machine les saute — '
+          + MSPC.nb(9 * n) + ' feuilles économisées, et aucune réponse distribuée.'
+        : 'Document entier : ' + feuilles + ' pages × ' + n + ' élèves = ' + MSPC.nb(feuilles * n)
+          + ' feuilles, corrigé compris. C’est rarement ce qu’on veut : cochez la case ci-dessus.';
+    }
+  }, {fill:true, onResize: mesure});
+
+  mesure();
+  window.addEventListener('load', mesure);
+  if(document.fonts && document.fonts.ready) document.fonts.ready.then(mesure);
+})();
+</script>
+
+</body>
+</html>

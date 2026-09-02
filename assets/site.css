@@ -81,6 +81,7 @@ a{color:var(--lien)}
 .m-fab{--m-accent:#7b5ea7; --m-accent-clair:#b79ae0}
 .m-pneu{--m-accent:#1f8fb0; --m-accent-clair:#5cc4e0}
 .m-hydro{--m-accent:#b5451f; --m-accent-clair:#e07a4e}
+.m-cahier{--m-accent:#c9484a; --m-accent-clair:#e88a8c}
 
 /* ---------- HERO ---------- */
 header.hero{position:relative; margin:0; padding:0; overflow:hidden; background:#0f1512; border-bottom:6px solid var(--accent)}
