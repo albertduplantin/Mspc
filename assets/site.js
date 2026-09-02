@@ -104,6 +104,29 @@
   var DPRMAX = 2;
   function dprVoulu(){ return Math.min(global.devicePixelRatio || 1, DPRMAX); }
 
+  /* Une page de cours porte des dizaines de figures, et le halo de 120px
+     ci-dessous en fait souvent demarrer plusieurs a la fois des qu'elles
+     sont voisines a l'ecran. Sur un poste faible, calculer deux physiques
+     lourdes (particules, effets de champ) au meme moment suffit a tout
+     figer, meme en resolution reduite. On ne coupe donc jamais totalement
+     une figure proche : on ne dessine, a chaque image, que celle qui
+     occupe le plus de hauteur visible ; les autres continuent d'observer
+     sans redessiner, et reprennent des qu'elles redeviennent la plus
+     visible — la transition ne saute pas, elle se contente de sauter des
+     images tant qu'une autre figure domine l'ecran. */
+  var actifs = {};
+  function gagnant(){
+    var meilleur = null, max = -Infinity;
+    var h = global.innerHeight || (document.documentElement && document.documentElement.clientHeight) || 800;
+    for(var k in actifs){
+      if(!actifs.hasOwnProperty(k)) continue;
+      var r = actifs[k].getBoundingClientRect();
+      var recouvrement = Math.min(r.bottom, h) - Math.max(r.top, 0);
+      if(recouvrement > max){ max = recouvrement; meilleur = k; }
+    }
+    return meilleur;
+  }
+
   function anim(id, dessin, opts){
     var cv = document.getElementById(id);
     if(!cv) return null;
@@ -185,12 +208,27 @@
       }
       if(dpr !== dprVoulu()) resize();
 
+      /* Arbitrage : si une autre figure proche de l'ecran occupe davantage
+         de hauteur visible en ce moment, on saute le dessin cette image-ci
+         sans arreter la boucle — elle reprendra des que ce sera de nouveau
+         son tour. */
+      var g = gagnant();
+      if(g !== null && g !== id){
+        global.requestAnimationFrame(frame);
+        return;
+      }
+
       try{ dessin(api); }
       catch(err){ panne(err); return; }
       global.requestAnimationFrame(frame);
     }
-    function start(){ if(running) return; running = true; last = 0; global.requestAnimationFrame(frame); }
-    function stop(){ running = false; }
+    function start(){
+      if(running) return;
+      running = true; last = 0;
+      actifs[id] = cv;
+      global.requestAnimationFrame(frame);
+    }
+    function stop(){ running = false; delete actifs[id]; }
 
     global.addEventListener('resize', function(){
       resize();
