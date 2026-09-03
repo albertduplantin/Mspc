@@ -81,7 +81,7 @@ tr.fonc td:first-child{box-shadow:inset 4px 0 0 var(--accent)}
 <div class="meta-bar">
   <div><b>13</b> chapitres</div>
   <div><b>22</b> animations pilotables</div>
-  <div><b>32</b> exercices corrigés</div>
+  <div><b>33</b> exercices corrigés</div>
   <div><b>2</b> fiches TP publiées</div>
   <div>Calé sur le savoir <b>S4.9</b></div>
 </div>
@@ -2386,14 +2386,14 @@ tr.fonc td:first-child{box-shadow:inset 4px 0 0 var(--accent)}
 
 <p>Ce sont des valeurs très confortables. Un chant limé avec un peu de soin tient largement dans 0,8 mm — le chapitre 3 montre d'ailleurs qu'on fait bien mieux dès qu'on cesse de bercer la lime. Mais elles existent, elles sont opposables, et <strong>elles se contrôlent avec deux outils qui ne coûtent rien : une règle et de la lumière.</strong></p>
 
-<figure class="anim">
-  <canvas id="a-iso" width="900" height="510" aria-label="Animation : lecture du tableau ISO 2768, tolérance obtenue pour chaque cote du plan selon la classe choisie"></canvas>
+<figure class="anim" id="fig-iso">
+  <canvas id="a-iso" width="900" height="550" aria-label="Animation : lecture du tableau ISO 2768, tolérance obtenue pour chaque cote du plan selon la classe choisie"></canvas>
   <div class="ctrls">
     <div class="c"><label>Cote du plan <span id="a-iso-c-l">150,00</span></label><input type="range" id="a-iso-c" min="0" max="10" value="0"></div>
     <div class="c"><label>Classe <span id="a-iso-k-l">c &mdash; large</span></label><input type="range" id="a-iso-k" min="0" max="3" value="2"></div>
     <div class="c readout" id="a-iso-out"></div>
   </div>
-  <figcaption>En haut, la pièce, avec la cote choisie mise en évidence. En bas, <b>les quatre classes côte à côte</b>, à la même échelle très agrandie : la barre montre l'intervalle dans lequel la pièce est acceptée. <b>Balayez les cotes à classe constante</b> et regardez la barre changer de largeur par sauts — chaque saut est un changement de tranche dans le tableau. <b>Passez ensuite de f à v sur une même cote</b> : entre la classe fine et la très large, l'intervalle est multiplié par plus de dix. <b>Arrêtez-vous sur le 5,00</b> — c'est l'épaisseur, donnée par le brut : la tolérance la plus serrée de la pièce porte sur la seule cote que vous n'usinerez pas. <span class="cle">Et sur 14,77&#176;, lisez la ligne du bas : un demi-degré de tolérance vaut presque un millimètre au bout de la pente.</span></figcaption>
+  <figcaption>En haut, la pièce, avec la cote choisie mise en évidence. En bas, <b>les quatre classes côte à côte</b> : à gauche l’intervalle accepté, tracé à la même échelle très agrandie ; à droite <b>ce que cette cote coûte à fabriquer</b> dans cette classe, et le rapport au prix du plan. <b>Balayez les cotes à classe constante</b> et regardez la barre changer de largeur par sauts — chaque saut est un changement de tranche dans le tableau. <b>Passez ensuite de f à v sur une même cote</b> : l’intervalle est multiplié par plus de dix, et le prix s’effondre. <b>Arrêtez-vous sur le &#216;9,00</b> et comparez m et f : le prix est multiplié par six d’un coup, parce qu’un foret ne suffit plus et qu’il faut un alésoir. <b>Terminez par le 5,00</b>, l’épaisseur du brut : elle ne coûte rien jusqu’à m, puis cent euros — la pièce doit sortir de l’atelier. <span class="cle">Ce n’est jamais le dixième qui coûte : c’est la machine qu’il oblige à sortir.</span></figcaption>
 </figure>
 
 <div class="autableau">
@@ -2447,15 +2447,7 @@ tr.fonc td:first-child{box-shadow:inset 4px 0 0 var(--accent)}
 
 <p>Tant que la tolérance reste large, la scie suffit. En dessous, il faut limer. Plus bas, il faut limer <em>et</em> contrôler sans arrêt. Plus bas encore, la lime ne suffit plus et il faut une machine. Et tout en bas, la pièce quitte l'atelier pour aller se faire rectifier ailleurs. Entre deux marches, le prix bouge à peine ; au passage d'une marche, il double ou il décuple.</p>
 
-<figure class="anim">
-  <canvas id="a-prix" width="900" height="480" aria-label="Animation : prix de fabrication d'une cote en fonction de la tolérance demandée, par paliers de procédé"></canvas>
-  <div class="ctrls">
-    <div class="c"><label>Cote à réaliser <span id="a-prix-c-l">150,00 — longueur</span></label><input type="range" id="a-prix-c" min="0" max="3" value="0"></div>
-    <div class="c"><label>Tolérance demandée <span id="a-prix-t-l">± 1,20 mm</span></label><input type="range" id="a-prix-t" min="0" max="100" value="18"></div>
-    <div class="c readout" id="a-prix-out"></div>
-  </div>
-  <figcaption>La courbe du prix en fonction de la tolérance, de la plus large à gauche à la plus serrée à droite. Les quatre repères <b>v · c · m · f</b> marquent les tolérances qu'ISO 2768 donnerait à cette cote dans chacune de ses classes. <b>Partez du 150,00 et resserrez</b> : la courbe reste plate, puis monte par marches — chaque marche porte le nom d'un procédé. <b>Passez sur le Ø9,00</b> et arrêtez-vous entre <b>m</b> et <b>f</b> : le prix est multiplié par six d'un coup, parce qu'un foret ne suffit plus et qu'il faut un alésoir. <b>Terminez par le 5,00</b>, l'épaisseur du brut : elle ne coûte rien jusqu'à <b>m</b>, puis cent euros — la pièce doit sortir de l'atelier. <span class="cle">Ce n'est jamais le dixième qui coûte : c'est la machine qu'il oblige à sortir.</span></figcaption>
-</figure>
+<p><strong>C’est exactement ce que montre l’animation du chapitre.</strong> <a href="#fig-iso">Remontez-y</a> et regardez la colonne de droite : le prix y est calculé avec le barème ci-dessous, cote par cote et classe par classe. Vous avez d’un côté ce que la norme autorise, de l’autre ce que l’atelier facture — sur la même image.</p>
 
 <h4>La même pièce, deux cartouches</h4>
 
@@ -2690,15 +2682,18 @@ tr.fonc td:first-child{box-shadow:inset 4px 0 0 var(--accent)}
 
 <script>
 /* =========================================================================
-   a-iso — LE TABLEAU ISO 2768 APPLIQUE A LA PIECE
-   Le tableau papier est abstrait : on y lit un nombre sans voir ce qu'il
-   autorise. Ici la cote choisie est montree sur la piece, et les quatre
-   classes sont tracees cote a cote a la meme echelle tres agrandie. On voit
-   donc d'un coup d'oeil ce que change une classe, et ou sautent les
-   tranches quand on passe d'une cote a l'autre.
+   a-iso — LE TABLEAU ISO 2768 APPLIQUE A LA PIECE, ET SA FACTURE
+   Le tableau papier est abstrait deux fois : on y lit un ecart sans voir
+   ce qu'il autorise, et sans voir ce qu'il coute. Ici la cote choisie est
+   montree sur la piece, les quatre classes sont tracees cote a cote a la
+   meme echelle tres agrandie, et chacune porte le prix de la cote.
+   On voit donc d'un seul coup l'intervalle ET la facture, et surtout le
+   moment ou le prix saute : ce n'est jamais le dixieme qui coute, c'est
+   la machine qu'il oblige a sortir.
    ========================================================================= */
 (function(){
-  var VIO = '#b79ae0', VIO2 = '#7b5ea7', OR = '#f0a844', BLANC = '#e8ebe2', GRIS = '#8a9285';
+  var VIO = '#b79ae0', OR = '#f0a844', ROUGE = '#e8705e', BLANC = '#e8ece6', GRIS = '#8a9285';
+  var TAUX = 50;                       /* euros de l'heure, main-d'oeuvre + poste */
 
   /* --- les trois tableaux de la norme -------------------------------- */
   var TR_LIN = [3, 6, 30, 120, 400];
@@ -2724,19 +2719,70 @@ tr.fonc td:first-child{box-shadow:inset 4px 0 0 var(--accent)}
     return tr.length - 1;
   }
 
+  /* --- baremes d'atelier ---------------------------------------------
+     Un palier vaut a partir de la tolerance t (incluse) et jusqu'au
+     palier precedent. m = minutes d'atelier, s = forfait outil ou machine.
+     Piece unitaire, atelier de maintenance, 50 EUR de l'heure. Ce sont
+     des ordres de grandeur : ce qui compte est l'ecart entre les lignes. */
+  var B = {
+    long:  [{t:2.0,  p:'Tronçonnage seul, aucune reprise',             k:'Réglet',                   m:2,   s:0},
+            {t:0.8,  p:'Sciage puis ébavurage',                        k:'Réglet',                   m:5,   s:0},
+            {t:0.3,  p:'Limage jusqu’au trait',                        k:'Pied à coulisse au 1/50',  m:12,  s:0},
+            {t:0.1,  p:'Ajustage et contrôle répété',                  k:'Pied à coulisse au 1/100', m:25,  s:0},
+            {t:0.03, p:'Ajustage fin, reprises successives',           k:'Micromètre',               m:45,  s:0},
+            {t:0.01, p:'Fraisage en bout : bridage, réglage, machine',  k:'Comparateur sur marbre',   m:60,  s:45},
+            {t:0,    p:'Rectification, pièce stabilisée',              k:'Marbre et métrologie',     m:150, s:180}],
+    court: [{t:1.0,  p:'Sciage seul',                                  k:'Réglet',                   m:3,   s:0},
+            {t:0.5,  p:'Sciage puis limage rapide',                    k:'Réglet',                   m:6,   s:0},
+            {t:0.2,  p:'Limage jusqu’au trait',                        k:'Pied à coulisse au 1/50',  m:12,  s:0},
+            {t:0.08, p:'Ajustage et contrôle répété',                  k:'Pied à coulisse au 1/100', m:30,  s:0},
+            {t:0.02, p:'Fraisage : bridage, réglage, machine',         k:'Comparateur',              m:50,  s:45},
+            {t:0,    p:'Rectification plane',                          k:'Marbre et métrologie',     m:120, s:180}],
+    pointe:[{t:0.25, p:'Trusquin puis limage jusqu’au trait',          k:'Réglet',                   m:8,   s:0},
+            {t:0.08, p:'Limage et contrôle répété',                    k:'Pied à coulisse au 1/50',  m:20,  s:0},
+            {t:0.03, p:'Ajustage fin',                                 k:'Micromètre',               m:40,  s:0},
+            {t:0.01, p:'Fraisage : bridage, réglage',                  k:'Comparateur',              m:50,  s:45},
+            {t:0,    p:'Rectification',                                k:'Métrologie',               m:120, s:180}],
+    trace: [{t:0.4,  p:'Trusquin, un trait, pointage direct',          k:'Réglet',                   m:3,   s:0},
+            {t:0.08, p:'Trusquin vérifié, pointage en deux temps',     k:'Pied à coulisse au 1/50',  m:10,  s:0},
+            {t:0.03, p:'Traçage sur marbre, contrôle avant perçage',   k:'Pied à coulisse au 1/100', m:25,  s:0},
+            {t:0.01, p:'Perçage sur fraiseuse, mise en position',      k:'Comparateur',              m:45,  s:60},
+            {t:0,    p:'Machine à commande numérique',                 k:'Métrologie',               m:60,  s:150}],
+    trou:  [{t:0.4,  p:'Un foret Ø9 ordinaire, une passe',             k:'Pied à coulisse',          m:3,   s:0},
+            {t:0.15, p:'Avant-trou Ø4,2 puis foret Ø9 neuf, huilé',    k:'Pied à coulisse',          m:8,   s:0},
+            {t:0.05, p:'Perçage à Ø8,8 puis passage à l’alésoir Ø9',   k:'Tampon lisse',             m:18,  s:25},
+            {t:0.015,p:'Alésage machine, arrosage, contrôle systématique', k:'Micromètre d’intérieur', m:35, s:60},
+            {t:0,    p:'Alésage de précision, pièce en température',   k:'Métrologie',               m:90,  s:150}],
+    brut:  [{t:0.25, p:'Rien à faire : le fer marchand convient',      k:'Pied à coulisse',          m:1,   s:0},
+            {t:0.08, p:'Trier le brut : mesurer chaque plat',          k:'Pied à coulisse',          m:10,  s:0},
+            {t:0.03, p:'Fraisage ou rabotage des deux faces',          k:'Micromètre',               m:50,  s:60},
+            {t:0,    p:'Rectification plane des deux faces',           k:'Marbre et métrologie',     m:60,  s:200}],
+    conge: [{t:0.8,  p:'Lime ronde à main levée',                      k:'Gabarit de rayon',         m:4,   s:0},
+            {t:0.3,  p:'Lime ronde puis contrôle au gabarit',          k:'Gabarit de rayon',         m:9,   s:0},
+            {t:0,    p:'Fraise à rayon sur machine',                   k:'Projecteur de profil',     m:30,  s:55}],
+    chanf: [{t:0.3,  p:'Deux coups de lime',                           k:'À l’œil',                  m:2,   s:0},
+            {t:0.1,  p:'Lime puis contrôle',                           k:'Pied à coulisse',          m:6,   s:0},
+            {t:0,    p:'Chanfreinage à la fraise',                     k:'Projecteur de profil',     m:25,  s:55}],
+    pente: [{t:1.5,  p:'Traçage au trusquin, sciage puis limage',      k:'Réglet',                   m:10,  s:0},
+            {t:0.7,  p:'Traçage soigné, limage jusqu’au trait',        k:'Pied à coulisse au 1/50',  m:18,  s:0},
+            {t:0.25, p:'Ajustage et contrôle à la règle',              k:'Rapporteur d’atelier',     m:35,  s:0},
+            {t:0.08, p:'Fraisage incliné : montage et réglage',        k:'Rapporteur optique',       m:60,  s:60},
+            {t:0,    p:'Rectification sur montage angulaire',          k:'Métrologie',               m:120, s:180}]
+  };
+
   /* --- les onze cotes du plan ---------------------------------------- */
   var COTES = [
-    {n:'150,00', u:'mm',  v:150,    t:'lin', s:'longueur totale'},
-    {n:'40,00',  u:'mm',  v:40,     t:'lin', s:'début de la pente'},
-    {n:'35,00',  u:'mm',  v:35,     t:'lin', s:'hauteur du talon'},
-    {n:'17,50',  u:'mm',  v:17.5,   t:'lin', s:'axe du trou, depuis le bas'},
-    {n:'10,00',  u:'mm',  v:10,     t:'lin', s:'axe du trou, depuis le bout'},
-    {n:'Ø9,00',  u:'mm',  v:9,      t:'lin', s:'diamètre du trou d\'accrochage'},
-    {n:'5,00',   u:'mm',  v:5,      t:'lin', s:'épaisseur — donnée par le brut'},
-    {n:'6,00',   u:'mm',  v:6,      t:'lin', s:'hauteur de la pointe — cote déduite'},
-    {n:'R5',     u:'mm',  v:5,      t:'ray', s:'congés'},
-    {n:'1×45°',  u:'mm',  v:1,      t:'ray', s:'chanfrein — le millimètre'},
-    {n:'14,77°', u:'deg', v:113.76, t:'ang', s:'pente — côté le plus court : 113,76 mm'}
+    {n:'150,00', v:150,    t:'lin', b:'long',   s:'longueur totale'},
+    {n:'40,00',  v:40,     t:'lin', b:'court',  s:'début de la pente'},
+    {n:'35,00',  v:35,     t:'lin', b:'court',  s:'hauteur du talon'},
+    {n:'17,50',  v:17.5,   t:'lin', b:'trace',  s:'axe du trou, depuis le bas'},
+    {n:'10,00',  v:10,     t:'lin', b:'trace',  s:'axe du trou, depuis le bout'},
+    {n:'Ø9,00',  v:9,      t:'lin', b:'trou',   s:'diamètre du trou d\'accrochage'},
+    {n:'5,00',   v:5,      t:'lin', b:'brut',   s:'épaisseur — donnée par le brut'},
+    {n:'6,00',   v:6,      t:'lin', b:'pointe', s:'hauteur de la pointe — cote déduite'},
+    {n:'R5',     v:5,      t:'ray', b:'conge',  s:'congés'},
+    {n:'1×45°',  v:1,      t:'ray', b:'chanf',  s:'chanfrein — le millimètre'},
+    {n:'14,77°', v:113.76, t:'ang', b:'pente',  s:'pente — côté le plus court : 113,76 mm'}
   ];
 
   function calc(cote, cl){
@@ -2746,13 +2792,31 @@ tr.fonc td:first-child{box-shadow:inset 4px 0 0 var(--accent)}
     return {tol:V_ANG[cl][k], lb:LB_ANG[k], tab:'dimensions angulaires'};
   }
 
+  /* Un ecart angulaire ne se compare pas a un bareme en millimetres : on
+     le convertit en ce qu'il deplace au bout des 110 mm de pente. */
+  function entree(cote, tol){
+    return cote.t === 'ang' ? 110 * Math.tan(tol / 60 * Math.PI / 180) : tol;
+  }
+  function atelier(cote, tol){
+    var L = B[cote.b], e = entree(cote, tol);
+    for(var i = 0; i < L.length; i++) if(e >= L[i].t) return L[i];
+    return L[L.length - 1];
+  }
+  function prix(r){ return r.m / 60 * TAUX + r.s; }
+
   function fr(x, d){
     var s = (Math.round(x * Math.pow(10, d)) / Math.pow(10, d)).toFixed(d);
     return s.replace('.', ',');
   }
+  function eur(x){ return fr(x, 2) + ' €'; }
   function minutes(m){
     var d = Math.floor(m / 60), r = Math.round(m - d * 60);
-    return d > 0 ? (d + '°' + (r ? (r < 10 ? '0' : '') + r + '\'' : '') ) : (r + '\'');
+    return d > 0 ? (d + '°' + (r ? (r < 10 ? '0' : '') + r + '\'' : '')) : (r + '\'');
+  }
+  function duree(m){
+    if(m < 60) return m + ' min';
+    var h = Math.floor(m / 60), r = m - h * 60;
+    return h + ' h' + (r ? ' ' + (r < 10 ? '0' : '') + r : '');
   }
 
   var cc = MSPC.ctrl('a-iso-c', function(v){ return COTES[v].n; }, 'a-iso-c-l');
@@ -2763,28 +2827,29 @@ tr.fonc td:first-child{box-shadow:inset 4px 0 0 var(--accent)}
     var ctx = a.ctx, W = a.W, H = a.H;
     var cote = COTES[Math.max(0, Math.min(10, Math.round(cc.val)))];
     var cl = CLS[Math.max(0, Math.min(3, Math.round(ck.val)))];
-    var r = calc(cote, cl);
+    var r = calc(cote, cl), rat = atelier(cote, r.tol), px = prix(rat);
+    var refc = prix(atelier(cote, calc(cote, 'c').tol));
 
     MSPC.fond(ctx, W, H, 40);
 
     /* ============ 1. la piece ============ */
     var K = 3.5, X0 = 150, YB = 200;
-    function px(x){ return X0 + x * K; }
+    function px2(x){ return X0 + x * K; }
     function py(y){ return YB - y * K; }
 
     var P = [[0,0],[149,0],[150,1],[150,6],[40,35],[0,35]];
     var RC = [5, 0, 0, 5, 0, 5];
     ctx.beginPath();
-    ctx.moveTo(px(74.5), py(0));
+    ctx.moveTo(px2(74.5), py(0));
     for(var i = 1; i <= P.length; i++){
       var b = P[i % P.length], c2 = P[(i + 1) % P.length];
-      ctx.arcTo(px(b[0]), py(b[1]), px(c2[0]), py(c2[1]), RC[i % P.length] * K);
+      ctx.arcTo(px2(b[0]), py(b[1]), px2(c2[0]), py(c2[1]), RC[i % P.length] * K);
     }
     ctx.closePath();
     ctx.fillStyle = 'rgba(196,204,188,.13)'; ctx.fill();
     ctx.strokeStyle = '#aab4a2'; ctx.lineWidth = 1.6; ctx.stroke();
 
-    ctx.beginPath(); ctx.arc(px(10), py(17.5), 4.5 * K, 0, 6.2832);
+    ctx.beginPath(); ctx.arc(px2(10), py(17.5), 4.5 * K, 0, 6.2832);
     ctx.strokeStyle = '#aab4a2'; ctx.lineWidth = 1.6; ctx.stroke();
 
     MSPC.mono(ctx, 'LA PIÈCE, ET LA COTE CHOISIE', 40, 34, 11, GRIS);
@@ -2804,18 +2869,18 @@ tr.fonc td:first-child{box-shadow:inset 4px 0 0 var(--accent)}
       ctx.closePath(); ctx.fill();
     }
     function coteH(x1, x2, y, txt){
-      fleche(px((x1 + x2) / 2), py(y), px(x1), py(y));
-      fleche(px((x1 + x2) / 2), py(y), px(x2), py(y));
-      MSPC.mono(ctx, txt, px((x1 + x2) / 2), py(y) - 8, 12.5, VIO, 'center');
+      fleche(px2((x1 + x2) / 2), py(y), px2(x1), py(y));
+      fleche(px2((x1 + x2) / 2), py(y), px2(x2), py(y));
+      MSPC.mono(ctx, txt, px2((x1 + x2) / 2), py(y) - 8, 12.5, VIO, 'center');
     }
     function coteV(y1, y2, x, txt){
-      fleche(px(x), py((y1 + y2) / 2), px(x), py(y1));
-      fleche(px(x), py((y1 + y2) / 2), px(x), py(y2));
-      MSPC.mono(ctx, txt, px(x) + 8, py((y1 + y2) / 2) + 4, 12.5, VIO);
+      fleche(px2(x), py((y1 + y2) / 2), px2(x), py(y1));
+      fleche(px2(x), py((y1 + y2) / 2), px2(x), py(y2));
+      MSPC.mono(ctx, txt, px2(x) + 8, py((y1 + y2) / 2) + 4, 12.5, VIO);
     }
     function pointe(x, y, txt, dx, dy){
-      fleche(px(x) + dx, py(y) + dy, px(x), py(y));
-      MSPC.mono(ctx, txt, px(x) + dx + (dx > 0 ? 4 : -4), py(y) + dy + 4, 12.5, VIO, dx > 0 ? 'left' : 'right');
+      fleche(px2(x) + dx, py(y) + dy, px2(x), py(y));
+      MSPC.mono(ctx, txt, px2(x) + dx + (dx > 0 ? 4 : -4), py(y) + dy + 4, 12.5, VIO, dx > 0 ? 'left' : 'right');
     }
 
     var nom = cote.n;
@@ -2825,13 +2890,13 @@ tr.fonc td:first-child{box-shadow:inset 4px 0 0 var(--accent)}
     else if(nom === '17,50')  coteV(0, 17.5, 20, nom);
     else if(nom === '10,00')  coteH(0, 10, 41, nom);
     else if(nom === 'Ø9,00'){
-      ctx.beginPath(); ctx.arc(px(10), py(17.5), 4.5 * K, 0, 6.2832); ctx.lineWidth = 3; ctx.stroke();
+      ctx.beginPath(); ctx.arc(px2(10), py(17.5), 4.5 * K, 0, 6.2832); ctx.lineWidth = 3; ctx.stroke();
       pointe(13.2, 20.7, nom, 62, -46);
     }
     else if(nom === '5,00'){
       ctx.lineWidth = 3;
-      ctx.strokeRect(px(158), py(35), 5 * K, 35 * K);
-      MSPC.mono(ctx, 'vue de droite', px(160.5), py(0) + 18, 10, GRIS, 'center');
+      ctx.strokeRect(px2(158), py(35), 5 * K, 35 * K);
+      MSPC.mono(ctx, 'vue de droite', px2(160.5), py(0) + 18, 10, GRIS, 'center');
       coteH(158, 163, 38, nom);
     }
     else if(nom === '6,00')   coteV(0, 6, 155, nom);
@@ -2839,50 +2904,51 @@ tr.fonc td:first-child{box-shadow:inset 4px 0 0 var(--accent)}
       ctx.setLineDash([5, 4]); ctx.lineWidth = 2;
       var CT = [[5, 5], [5, 30], [145, 2.15]];
       for(var q = 0; q < 3; q++){
-        ctx.beginPath(); ctx.arc(px(CT[q][0]), py(CT[q][1]), 5 * K, 0, 6.2832); ctx.stroke();
+        ctx.beginPath(); ctx.arc(px2(CT[q][0]), py(CT[q][1]), 5 * K, 0, 6.2832); ctx.stroke();
       }
       ctx.setLineDash([]);
       pointe(2, 33, 'R5', -40, -34);
     }
     else if(nom === '1×45°'){
       ctx.lineWidth = 3;
-      ctx.beginPath(); ctx.moveTo(px(149), py(0)); ctx.lineTo(px(150), py(1)); ctx.stroke();
+      ctx.beginPath(); ctx.moveTo(px2(149), py(0)); ctx.lineTo(px2(150), py(1)); ctx.stroke();
       pointe(149.5, 0.5, '1×45°', 56, 18);
     }
     else {                                        /* 14,77° */
       ctx.setLineDash([5, 4]); ctx.lineWidth = 1.4;
-      ctx.beginPath(); ctx.moveTo(px(150), py(6)); ctx.lineTo(px(96), py(6)); ctx.stroke();
+      ctx.beginPath(); ctx.moveTo(px2(150), py(6)); ctx.lineTo(px2(96), py(6)); ctx.stroke();
       ctx.setLineDash([]); ctx.lineWidth = 2;
       ctx.beginPath();
-      ctx.arc(px(150), py(6), 46, Math.PI, Math.PI + 0.2578, false);
+      ctx.arc(px2(150), py(6), 46, Math.PI, Math.PI + 0.2578, false);
       ctx.stroke();
-      MSPC.mono(ctx, '14,77°', px(150) - 54, py(6) - 10, 12.5, VIO, 'right');
+      MSPC.mono(ctx, '14,77°', px2(150) - 54, py(6) - 10, 12.5, VIO, 'right');
     }
     ctx.restore();
 
-
-    /* ============ 2. les quatre classes cote a cote ============ */
+    /* ============ 2. les quatre classes, avec leur facture ============ */
     var YT = 268;
     ctx.strokeStyle = 'rgba(255,255,255,.16)'; ctx.lineWidth = 1;
     ctx.beginPath(); ctx.moveTo(40, YT - 16); ctx.lineTo(W - 40, YT - 16); ctx.stroke();
-    MSPC.mono(ctx, 'CE QUE CHAQUE CLASSE AUTORISE — TABLEAU : ' + r.tab.toUpperCase(), 40, YT - 24, 11, GRIS);
-    MSPC.mono(ctx, 'TRANCHE ' + r.lb.toUpperCase(), W - 40, YT - 24, 11, VIO, 'right');
+    MSPC.mono(ctx, 'CE QUE CHAQUE CLASSE AUTORISE, ET CE QU’ELLE COÛTE', 40, YT - 24, 11, GRIS);
+    MSPC.mono(ctx, r.tab.toUpperCase() + ' · TRANCHE ' + r.lb.toUpperCase(), W - 40, YT - 24, 11, VIO, 'right');
+    MSPC.mono(ctx, 'PRIX DE LA COTE', 812, YT + 4, 10, GRIS, 'right');
 
-    var CX = 500, LARG = 280;
+    var CX = 430, LARG = 176;
     var maxT = 0;
     for(var z = 0; z < 4; z++){ var t = calc(cote, CLS[z]).tol; if(t > maxT) maxT = t; }
 
     /* axe median : la cote nominale */
     ctx.strokeStyle = 'rgba(255,255,255,.22)'; ctx.lineWidth = 1;
     ctx.setLineDash([3, 3]);
-    ctx.beginPath(); ctx.moveTo(CX, YT + 4); ctx.lineTo(CX, YT + 172); ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(CX, YT + 12); ctx.lineTo(CX, YT + 172); ctx.stroke();
     ctx.setLineDash([]);
-    MSPC.mono(ctx, 'cote nominale', CX, YT + 186, 10, GRIS, 'center');
+    MSPC.mono(ctx, 'cote nominale', CX, YT + 188, 10, GRIS, 'center');
 
     for(var k2 = 0; k2 < 4; k2++){
-      var cl2 = CLS[k2], rr = calc(cote, cl2), y = YT + 20 + k2 * 40;
+      var cl2 = CLS[k2], rr = calc(cote, cl2), y = YT + 28 + k2 * 40;
       var actif = (cl2 === cl);
       var demi = maxT > 0 ? (rr.tol / maxT) * LARG : 0;
+      var ra = atelier(cote, rr.tol), pz = prix(ra);
 
       MSPC.mono(ctx, cl2, 44, y + 5, actif ? 17 : 14, actif ? VIO : GRIS);
       MSPC.mono(ctx, NOMC[cl2].slice(4), 62, y + 5, 11, actif ? BLANC : '#68705f');
@@ -2905,233 +2971,46 @@ tr.fonc td:first-child{box-shadow:inset 4px 0 0 var(--accent)}
         maxi = fr(14.77 + rr.tol / 60, 2) + '°';
       } else {
         txt = '±' + fr(rr.tol, 2);
-        var base = (cote.n === '1×45°') ? 1 : cote.v;
-        mini = fr(base - rr.tol, 2);
-        maxi = fr(base + rr.tol, 2);
+        mini = fr(cote.v - rr.tol, 2);
+        maxi = fr(cote.v + rr.tol, 2);
       }
       MSPC.mono(ctx, txt, CX, y + 5, actif ? 14 : 12, actif ? BLANC : '#8f9787', 'center');
       MSPC.mono(ctx, mini, CX - demi - 8, y + 5, 12, actif ? VIO : '#68705f', 'right');
       MSPC.mono(ctx, maxi, CX + demi + 8, y + 5, 12, actif ? VIO : '#68705f');
+
+      /* la facture, avec le rapport a la classe c du plan */
+      var chere = pz > refc * 1.01;
+      MSPC.mono(ctx, eur(pz), 812, y + 5, actif ? 15 : 12.5,
+                actif ? (chere ? ROUGE : OR) : (chere ? '#9c6157' : '#7e8878'), 'right');
+      if(ra.s > 0) MSPC.mono(ctx, 'machine', 822, y + 5, 9.5, chere ? '#9c6157' : '#6c7568');
+      else if(cl2 === 'c') MSPC.mono(ctx, 'le plan', 822, y + 5, 9.5, OR);
+      else if(refc > 0) MSPC.mono(ctx, '×' + fr(pz / refc, 1), 822, y + 5, 9.5, chere ? '#9c6157' : '#6c7568');
     }
 
-    /* ============ 3. la ligne du bas ============ */
+    /* ============ 3. le procede, puis la lecture ============ */
+    MSPC.mono(ctx, 'EN CLASSE ' + cl.toUpperCase() + ', IL FAUT : ', 40, H - 58, 11, GRIS);
+    MSPC.mono(ctx, rat.p + '  ·  contrôlé au ' + rat.k.toLowerCase() + '  ·  ' + duree(rat.m)
+              + (rat.s > 0 ? '  + outillage' : ''), 205, H - 58, 12, BLANC);
+
     var msg;
     if(cote.t === 'ang'){
-      msg = 'Un écart de ' + minutes(r.tol) + ' sur la pente déplace la pointe de '
-          + fr(110 * Math.tan(r.tol / 60 * Math.PI / 180), 2) + ' mm au bout des 110 mm.';
-    } else if(cote.n === '5,00'){
-      msg = 'La tolérance la plus serrée du plan porte sur la seule cote que personne n\'usine.';
-    } else if(cote.n === '6,00'){
-      msg = 'Cote déduite : 6 appartient à la tranche 3 à 6, jamais à la suivante.';
+      msg = 'Un écart de ' + minutes(r.tol) + ' déplace la pointe de '
+          + fr(110 * Math.tan(r.tol / 60 * Math.PI / 180), 2) + ' mm au bout des 110 mm — et coûte ' + eur(px) + '.';
+    } else if(cl === 'c'){
+      msg = 'C’est le prix de cette cote sur le plan tel qu’il est écrit : les trois autres classes se comparent à celui-là.';
+    } else if(px > refc * 1.01){
+      msg = 'Soit ' + fr(px / refc, 1) + ' fois le prix de la même cote en classe c, pour une pièce qui fonctionne pareil.';
+    } else if(px < refc * 0.99){
+      msg = 'Moins cher que le plan : à ce niveau, on scie et personne ne contrôle.';
     } else {
-      msg = 'Intervalle total accepté : ' + fr(2 * r.tol, 2) + ' mm, soit '
-          + fr(200 * r.tol / cote.v, 1) + ' % de la cote.';
+      msg = 'Même prix qu’en classe c : jusqu’ici, resserrer la tolérance ne coûte encore rien.';
     }
-    MSPC.mono(ctx, msg, 40, H - 16, 12, OR);
+    MSPC.mono(ctx, msg, 40, H - 24, 12, px > refc * 1.01 ? ROUGE : OR);
 
     if(out){
-      var l1 = cote.n + ' · ' + r.tab + ' · tranche ' + r.lb + ' · ';
-      if(cote.t === 'ang') out.textContent = l1 + '±' + minutes(r.tol);
-      else out.textContent = l1 + '±' + fr(r.tol, 2) + ' mm';
+      out.textContent = cote.n + ' · tranche ' + r.lb + ' · ±'
+        + (cote.t === 'ang' ? minutes(r.tol) : fr(r.tol, 2) + ' mm') + ' · ' + rat.p + ' · ' + eur(px);
     }
-  }, {fixed:true});
-})();
-</script>
-
-<script>
-/* =========================================================================
-   a-prix — CE QUE COUTE UNE TOLERANCE
-   La courbe classique cout/tolerance est presque toujours dessinee lisse.
-   Elle ne l'est pas : le prix monte par marches, et chaque marche est un
-   changement de procede. C'est ce qu'on montre ici, avec les quatre
-   tolerances qu'ISO 2768 donnerait a la cote choisie posees dessus, pour
-   qu'on voie ou tombe le plan reel.
-   ========================================================================= */
-(function(){
-  var VIO = '#b79ae0', VIO2 = '#7b5ea7', OR = '#f0a844', ROUGE = '#e8705e',
-      BLANC = '#e8ece6', GRIS = '#8a9285';
-  var TAUX = 50;                       /* euros de l'heure, main-d'oeuvre + poste */
-  var TMAX = 2.5, TMIN = 0.005;        /* bornes de l'axe des tolerances */
-
-  /* Chaque palier vaut a partir de la tolerance t (incluse) et jusqu'au
-     palier precedent. min = minutes d'atelier, sup = forfait outil/machine. */
-  var COTES = [
-    {n:'150,00 — longueur', u:'mm', iso:{v:2.5, c:1.2, m:0.5, f:0.2},
-     L:[{t:2.0,  p:'Tronçonnage seul, aucune reprise',           k:'Réglet',                  min:2,   sup:0},
-        {t:0.8,  p:'Sciage puis ébavurage',                      k:'Réglet',                  min:5,   sup:0},
-        {t:0.3,  p:'Limage jusqu’au trait',                      k:'Pied à coulisse au 1/50', min:12,  sup:0},
-        {t:0.1,  p:'Ajustage et contrôle répété',                k:'Pied à coulisse au 1/100',min:25,  sup:0},
-        {t:0.03, p:'Ajustage fin, reprises successives',         k:'Micromètre',              min:45,  sup:0},
-        {t:0.01, p:'Fraisage en bout : bridage, réglage, machine',k:'Comparateur sur marbre', min:60,  sup:45},
-        {t:0,    p:'Rectification, pièce stabilisée',            k:'Marbre et métrologie',    min:150, sup:180}]},
-
-    {n:'35,00 — hauteur', u:'mm', iso:{v:1.5, c:0.8, m:0.3, f:0.15},
-     L:[{t:1.0,  p:'Sciage seul',                                k:'Réglet',                  min:3,   sup:0},
-        {t:0.5,  p:'Sciage puis limage rapide',                  k:'Réglet',                  min:6,   sup:0},
-        {t:0.2,  p:'Limage jusqu’au trait',                      k:'Pied à coulisse au 1/50', min:12,  sup:0},
-        {t:0.08, p:'Ajustage et contrôle répété',                k:'Pied à coulisse au 1/100',min:30,  sup:0},
-        {t:0.02, p:'Fraisage : bridage, réglage, machine',       k:'Comparateur',             min:50,  sup:45},
-        {t:0,    p:'Rectification plane',                        k:'Marbre et métrologie',    min:120, sup:180}]},
-
-    {n:'Ø9,00 — le trou', u:'mm', iso:{v:1, c:0.5, m:0.2, f:0.1},
-     L:[{t:0.4,  p:'Un foret Ø9 ordinaire, une passe',           k:'Pied à coulisse',         min:3,   sup:0},
-        {t:0.15, p:'Avant-trou Ø4,2 puis foret Ø9 neuf, huilé',  k:'Pied à coulisse',         min:8,   sup:0},
-        {t:0.05, p:'Perçage à Ø8,8 puis passage à l’alésoir Ø9', k:'Tampon lisse',            min:18,  sup:25},
-        {t:0.015,p:'Alésage machine, arrosage, contrôle systématique', k:'Micromètre d’intérieur', min:35, sup:60},
-        {t:0,    p:'Alésage de précision, pièce en température', k:'Métrologie',              min:90,  sup:150}]},
-
-    {n:'5,00 — l’épaisseur', u:'mm', iso:{v:0.5, c:0.3, m:0.1, f:0.05},
-     L:[{t:0.25, p:'Rien à faire : le fer marchand convient',    k:'Pied à coulisse',         min:1,   sup:0},
-        {t:0.08, p:'Trier le brut : mesurer chaque plat',        k:'Pied à coulisse',         min:10,  sup:0},
-        {t:0.03, p:'Fraisage ou rabotage des deux faces',        k:'Micromètre',              min:50,  sup:60},
-        {t:0,    p:'Rectification plane des deux faces',         k:'Marbre et métrologie',    min:60,  sup:200}]}
-  ];
-
-  function palier(co, tol){
-    for(var i = 0; i < co.L.length; i++) if(tol >= co.L[i].t) return i;
-    return co.L.length - 1;
-  }
-  function prix(r){ return r.min / 60 * TAUX + r.sup; }
-  function eur(x){ return (Math.round(x * 100) / 100).toFixed(2).replace('.', ',') + ' €'; }
-  function mm(x){
-    var d = x >= 1 ? 2 : (x >= 0.1 ? 2 : 3);
-    return (Math.round(x * 1000) / 1000).toFixed(d).replace('.', ',');
-  }
-  function duree(m){
-    if(m < 60) return m + ' min';
-    var h = Math.floor(m / 60), r = m - h * 60;
-    return h + ' h' + (r ? ' ' + (r < 10 ? '0' : '') + r : '');
-  }
-
-  var cc = MSPC.ctrl('a-prix-c', function(v){ return COTES[Math.round(v)].n; }, 'a-prix-c-l');
-  var ct = MSPC.ctrl('a-prix-t', function(v){
-    return '± ' + mm(TMAX * Math.pow(TMIN / TMAX, v / 100)) + ' mm';
-  }, 'a-prix-t-l');
-  var out = document.getElementById('a-prix-out');
-
-  MSPC.anim('a-prix', function(a){
-    var ctx = a.ctx, W = a.W, H = a.H;
-    var co = COTES[Math.max(0, Math.min(3, Math.round(cc.val)))];
-    var tol = TMAX * Math.pow(TMIN / TMAX, Math.max(0, Math.min(100, ct.val)) / 100);
-    var ip = palier(co, tol), r = co.L[ip], px = prix(r);
-
-    MSPC.fond(ctx, W, H, 40);
-
-    /* --- le graphique ------------------------------------------------- */
-    var GX = 62, GY = 78, GW = 494, GH = 286;
-    var maxP = 0;
-    for(var i = 0; i < co.L.length; i++) maxP = Math.max(maxP, prix(co.L[i]));
-    maxP *= 1.12;
-
-    function X(t){
-      var u = (Math.log(TMAX) - Math.log(Math.max(t, TMIN))) / (Math.log(TMAX) - Math.log(TMIN));
-      return GX + u * GW;
-    }
-    function Y(p){ return GY + GH - (p / maxP) * GH; }
-
-    MSPC.mono(ctx, 'LE PRIX DE LA COTE, SELON LA TOLÉRANCE DEMANDÉE', 40, 34, 11, GRIS);
-    MSPC.mono(ctx, co.n.toUpperCase(), W - 40, 34, 11, VIO, 'right');
-
-    ctx.strokeStyle = 'rgba(255,255,255,.28)'; ctx.lineWidth = 1.3;
-    ctx.beginPath();
-    ctx.moveTo(GX, GY); ctx.lineTo(GX, GY + GH); ctx.lineTo(GX + GW, GY + GH);
-    ctx.stroke();
-    MSPC.mono(ctx, 'PRIX', GX - 4, GY - 10, 10, GRIS, 'left');
-    MSPC.mono(ctx, 'tolérance large', GX, GY + GH + 20, 10, GRIS);
-    MSPC.mono(ctx, 'tolérance serrée', GX + GW, GY + GH + 20, 10, GRIS, 'right');
-
-    /* graduations en euros */
-    for(var g = 0; g <= 4; g++){
-      var pv = maxP * g / 4, y = Y(pv);
-      ctx.strokeStyle = 'rgba(255,255,255,.07)';
-      ctx.beginPath(); ctx.moveTo(GX, y); ctx.lineTo(GX + GW, y); ctx.stroke();
-      MSPC.mono(ctx, Math.round(pv) + ' €', GX - 8, y + 4, 10, '#6c7568', 'right');
-    }
-
-    /* la marche d'escalier */
-    ctx.strokeStyle = VIO; ctx.lineWidth = 2.4;
-    ctx.beginPath();
-    var haut = TMAX, yprec = null;
-    for(i = 0; i < co.L.length; i++){
-      var bas = co.L[i].t > 0 ? co.L[i].t : TMIN;
-      var y = Y(prix(co.L[i]));
-      if(yprec === null) ctx.moveTo(X(haut), y);
-      else { ctx.lineTo(X(haut), yprec); ctx.lineTo(X(haut), y); }
-      ctx.lineTo(X(bas), y);
-      yprec = y; haut = bas;
-    }
-    ctx.stroke();
-
-    /* les quatre classes d'ISO 2768 pour cette cote */
-    var CL = ['v', 'c', 'm', 'f'];
-    for(i = 0; i < 4; i++){
-      var tc = co.iso[CL[i]], x = X(tc), pc = prix(co.L[palier(co, tc)]);
-      ctx.strokeStyle = 'rgba(255,255,255,.22)'; ctx.lineWidth = 1;
-      ctx.setLineDash([2, 3]);
-      ctx.beginPath(); ctx.moveTo(x, Y(pc)); ctx.lineTo(x, GY + GH); ctx.stroke();
-      ctx.setLineDash([]);
-      var estc = (CL[i] === 'c');
-      ctx.fillStyle = estc ? OR : '#7e8878';
-      ctx.beginPath(); ctx.arc(x, Y(pc), estc ? 4 : 3, 0, 6.2832); ctx.fill();
-      MSPC.mono(ctx, CL[i], x, GY + GH + 34, estc ? 13 : 11, estc ? OR : '#7e8878', 'center');
-      MSPC.mono(ctx, eur(pc), x, GY + GH + 47, 9.5, estc ? OR : '#69735f', 'center');
-    }
-    MSPC.mono(ctx, 'ce que donnerait chaque classe d’ISO 2768 — le plan est en c',
-              GX, GY + GH + 64, 10, GRIS);
-
-    /* le point courant */
-    var xc = X(tol), yc = Y(px);
-    ctx.strokeStyle = ROUGE; ctx.lineWidth = 1.4;
-    ctx.beginPath(); ctx.moveTo(xc, GY); ctx.lineTo(xc, GY + GH); ctx.stroke();
-    ctx.fillStyle = ROUGE;
-    ctx.beginPath(); ctx.arc(xc, yc, 6, 0, 6.2832); ctx.fill();
-
-    /* --- le panneau de droite ------------------------------------------ */
-    var PX = 596, PW = W - 40 - PX;
-    ctx.fillStyle = 'rgba(255,255,255,.05)';
-    ctx.fillRect(PX, GY - 24, PW, GH + 92);
-    ctx.strokeStyle = 'rgba(255,255,255,.14)'; ctx.lineWidth = 1;
-    ctx.strokeRect(PX + .5, GY - 23.5, PW - 1, GH + 91);
-
-    var y0 = GY - 2;
-    MSPC.mono(ctx, 'TOLÉRANCE DEMANDÉE', PX + 16, y0, 10, GRIS);
-    MSPC.titre(ctx, '± ' + mm(tol) + ' mm', PX + 16, y0 + 28, 26, ROUGE);
-
-    MSPC.mono(ctx, 'IL FAUT ALORS', PX + 16, y0 + 62, 10, GRIS);
-    var mots = r.p.split(' '), ligne = '', ly = y0 + 82;
-    for(i = 0; i < mots.length; i++){
-      var essai = ligne ? ligne + ' ' + mots[i] : mots[i];
-      ctx.font = '12.5px "IBM Plex Mono",monospace';
-      if(ctx.measureText(essai).width > PW - 32 && ligne){
-        MSPC.mono(ctx, ligne, PX + 16, ly, 12.5, BLANC); ly += 17; ligne = mots[i];
-      } else ligne = essai;
-    }
-    if(ligne) MSPC.mono(ctx, ligne, PX + 16, ly, 12.5, BLANC);
-
-    MSPC.mono(ctx, 'CONTRÔLÉ AU', PX + 16, ly + 30, 10, GRIS);
-    MSPC.mono(ctx, r.k, PX + 16, ly + 48, 12.5, VIO);
-
-    MSPC.mono(ctx, 'TEMPS D’ATELIER', PX + 16, ly + 78, 10, GRIS);
-    MSPC.mono(ctx, duree(r.min) + (r.sup ? '  + outillage' : ''), PX + 16, ly + 96, 12.5, BLANC);
-
-    ctx.fillStyle = 'rgba(255,255,255,.12)';
-    ctx.fillRect(PX + 16, ly + 112, PW - 32, 1);
-    MSPC.mono(ctx, 'PRIX DE CETTE SEULE COTE', PX + 16, ly + 134, 10, GRIS);
-    MSPC.titre(ctx, eur(px), PX + 16, ly + 168, 34, OR);
-
-    /* --- la ligne du bas ------------------------------------------------ */
-    var refc = prix(co.L[palier(co, co.iso.c)]);
-    var msg;
-    if(Math.abs(px - refc) < 0.01)
-      msg = 'Même palier que la classe c du plan : à ce niveau, resserrer ne coûte encore rien.';
-    else if(px > refc)
-      msg = 'Soit ' + (Math.round(px / refc * 10) / 10).toString().replace('.', ',')
-          + ' fois le prix de la même cote en classe c — pour une pièce qui fonctionne pareil.';
-    else
-      msg = 'Moins cher que la classe c du plan : à ce niveau, la scie suffit et personne ne contrôle.';
-    MSPC.mono(ctx, msg, 40, H - 16, 12, r.sup ? ROUGE : OR);
-
-    if(out) out.textContent = '± ' + mm(tol) + ' mm · ' + r.p + ' · ' + duree(r.min) + ' · ' + eur(px);
   }, {fixed:true});
 })();
 </script>
