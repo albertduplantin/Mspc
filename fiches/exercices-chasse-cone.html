@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Exercices supplémentaires — Décoder le plan du chasse-cône</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Saira+Condensed:wght@600;700&family=Public+Sans:ital,wght@0,400;0,600;0,800;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* =========================================================================
+   Feuille pensee pour le PAPIER. Le plan et le tableau de la norme sont
+   dans le document : l'eleve doit pouvoir travailler sans rien d'autre.
+   Les corriges sont regroupes a la fin, pour qu'on puisse n'imprimer que
+   les pages d'enonces.
+   ========================================================================= */
+@page { size: A4; margin: 16mm 15mm 17mm 15mm; }
+
+*{ box-sizing:border-box }
+body{
+  font-family:"Public Sans",-apple-system,system-ui,sans-serif;
+  font-size:10.4pt; line-height:1.48; color:#14180f; background:#fff; margin:0;
+}
+h1,h2,h3,h4{ font-family:"Saira Condensed","Public Sans",sans-serif; font-weight:700; line-height:1.08 }
+.mono{ font-family:"IBM Plex Mono",monospace }
+
+/* ---------- couverture ---------- */
+.couv{ break-after:page; page-break-after:always }
+.couv .haut{ border-bottom:5px solid #14180f; padding-bottom:7mm }
+.eyebrow{ font-family:"IBM Plex Mono",monospace; font-size:8.5pt; letter-spacing:.22em;
+  text-transform:uppercase; color:#5a4780 }
+.couv h1{ font-size:30pt; text-transform:uppercase; margin:3mm 0 2mm }
+.couv .st{ font-size:13.5pt; color:#3f4738; font-weight:400 }
+.ident{ margin-top:7mm; display:flex; gap:6mm; flex-wrap:wrap }
+.ident div{ flex:1 1 44%; border-bottom:1px solid #8d938a; padding-bottom:2mm }
+.ident span{ font-family:"IBM Plex Mono",monospace; font-size:8pt; letter-spacing:.14em;
+  text-transform:uppercase; color:#6b7264 }
+.note{ border:2px solid #14180f; padding:5mm 6mm; margin-top:7mm; background:#f6f5fa; font-size:9.6pt }
+.note b{ font-family:"Saira Condensed",sans-serif; font-size:12pt; text-transform:uppercase;
+  display:block; margin-bottom:1.5mm }
+
+/* ---------- le plan ---------- */
+.plan{ border:1px solid #8d938a; padding:4mm 3mm 2mm; margin:7mm 0 2mm; background:#fff }
+.plan svg{ display:block; width:100%; height:auto }
+.pl-c{ fill:#e9ebe2; stroke:#14180f; stroke-width:.9; stroke-linejoin:round }
+.pl-t{ fill:none; stroke:#14180f; stroke-width:.9 }
+.pl-ax{ fill:none; stroke:#5a4780; stroke-width:.35; stroke-dasharray:5 1.6 1 1.6 }
+.pl-d{ fill:none; stroke:#5a4780; stroke-width:.45 }
+.pl-x{ fill:none; stroke:#5a4780; stroke-width:.32 }
+.pl-cons{ fill:none; stroke:#8d938a; stroke-width:.3; stroke-dasharray:2.2 1.8 }
+.pl-n{ fill:#14180f; font-family:"IBM Plex Mono",monospace; font-size:4.6px }
+.pl-note{ fill:#5a4780; font-family:"Public Sans",sans-serif; font-size:4.4px }
+.pl-cadre{ fill:#3f4738; font-family:"Public Sans",sans-serif; font-size:5px; font-style:italic }
+.legende{ font-size:8.6pt; color:#5a6154; text-align:center; margin:0 }
+
+/* ---------- structure ---------- */
+h2.partie{ font-size:18pt; text-transform:uppercase; border-bottom:4px solid #14180f;
+  padding-bottom:2mm; margin:0 0 5mm }
+.exo{ break-inside:avoid; page-break-inside:avoid; margin:0 0 6mm; padding-left:12mm; position:relative }
+.exo .n{ position:absolute; left:0; top:0; width:8.5mm; height:8.5mm; background:#5a4780; color:#fff;
+  font-family:"Saira Condensed",sans-serif; font-weight:700; font-size:11.5pt;
+  display:flex; align-items:center; justify-content:center }
+.exo h3{ font-size:12.5pt; text-transform:uppercase; margin:0 0 1.5mm }
+.exo .cons{ font-size:8pt; font-family:"IBM Plex Mono",monospace; color:#6b7264;
+  text-transform:uppercase; letter-spacing:.1em; margin-bottom:1.5mm }
+.exo p{ margin:0 0 2mm }
+.rep{ border:1px dashed #a9afa2; border-radius:2px; margin-top:2mm }
+.rep.pt{ height:20mm } .rep.md{ height:30mm } .rep.gd{ height:42mm }
+
+table{ width:100%; border-collapse:collapse; margin:2mm 0 3mm; font-size:9pt }
+th,td{ border:1px solid #8d938a; padding:1.4mm 2mm; text-align:left }
+th{ background:#e9e6f0; font-family:"Saira Condensed",sans-serif; text-transform:uppercase;
+  font-size:8.6pt; letter-spacing:.03em }
+table.iso{ font-size:7.6pt }
+table.iso th,table.iso td{ padding:1mm 1.2mm; text-align:center }
+table.iso th:first-child,table.iso td:first-child{ text-align:left; white-space:nowrap }
+table.iso tr.ici td{ background:#efe9f7; font-weight:600 }
+td.mono{ font-family:"IBM Plex Mono",monospace }
+.rappel{ border-left:3px solid #5a4780; background:#f4f2f8; padding:3mm 4mm; margin:3mm 0; font-size:9.2pt }
+.rappel b{ font-family:"IBM Plex Mono",monospace; font-size:8pt; letter-spacing:.12em;
+  text-transform:uppercase; color:#5a4780; display:block; margin-bottom:1mm }
+
+/* ---------- corrige ---------- */
+.corrige{ break-before:page; page-break-before:always }
+.cor{ break-inside:avoid; page-break-inside:avoid; margin:0 0 6mm; padding-left:12mm; position:relative }
+.cor .n{ position:absolute; left:0; top:0; width:8.5mm; height:8.5mm; border:2px solid #5a4780;
+  color:#5a4780; font-family:"Saira Condensed",sans-serif; font-weight:700; font-size:11.5pt;
+  display:flex; align-items:center; justify-content:center }
+.cor p{ margin:0 0 2mm }
+.cor .rc{ font-weight:600 }
+.cor .det{ font-size:9.5pt; color:#3f4738 }
+.cor em.rem{ display:block; margin-top:2mm; font-size:9.3pt; color:#5a6154 }
+.calc{ font-family:"IBM Plex Mono",monospace; font-size:9.4pt; background:#f2f0f7;
+  border-left:3px solid #5a4780; padding:1.8mm 4mm; margin:2mm 0 }
+</style>
+</head>
+<body>
+
+<!-- ===================== COUVERTURE ===================== -->
+<section class="couv">
+  <div class="haut">
+    <div class="eyebrow">Bac Pro MSPC · Fabrication · Atelier MSPC</div>
+    <h1>Exercices supplémentaires</h1>
+    <div class="st">Décoder un plan — le chasse-cône<br>
+      <em>Quatre exercices inédits, entièrement corrigés</em></div>
+  </div>
+
+  <div class="ident">
+    <div><span>Nom et prénom</span></div>
+    <div><span>Classe</span></div>
+    <div><span>Date</span></div>
+    <div><span>Note</span></div>
+  </div>
+
+  <div class="plan">
+<svg viewBox="-18 -2 264 100" role="img" aria-label="Dessin de définition du chasse-cône : plaque de 150 par 35 par 5, trou de diamètre 9, pente à 14,77 degrés, congés rayon 5, chanfrein 1 fois 45 degrés, tolérances générales ISO 2768 cL">
+  <defs>
+    <marker id="flg" viewBox="0 0 10 8" refX="9.5" refY="4" markerWidth="5" markerHeight="4" orient="auto">
+      <path d="M10,0 L0,4 L10,8 Z" fill="#7b5ea7"/>
+    </marker>
+    <marker id="fld" viewBox="0 0 10 8" refX="0.5" refY="4" markerWidth="5" markerHeight="4" orient="auto">
+      <path d="M0,0 L10,4 L0,8 Z" fill="#7b5ea7"/>
+    </marker>
+    <marker id="flp" viewBox="0 0 10 8" refX="0.5" refY="4" markerWidth="5" markerHeight="4" orient="auto">
+      <path d="M0,0 L10,4 L0,8 Z" fill="#7b5ea7"/>
+    </marker>
+  </defs>
+
+  <!-- ===== vue de face ===== -->
+  <path class="pl-c" d="M 20.000 55.000 A 5.0 5.0 0 0 0 25.000 60.000 L 169.000 60.000 L 170.000 59.000 L 170.000 57.853 A 5.0 5.0 0 0 0 166.275 53.018 L 60.000 25.000 L 25.000 25.000 A 5.0 5.0 0 0 0 20.000 30.000 Z"/>
+  <circle class="pl-t" cx="30" cy="42.5" r="4.5"/>
+  <path class="pl-ax" d="M 22 42.5 H 38 M 30 19 V 50.5"/>
+
+  <!-- ===== vue de droite : l'épaisseur ===== -->
+  <path class="pl-c" d="M 196 25 H 201 V 59 L 200 60 H 196 Z"/>
+
+  <!-- ===== cotation ===== -->
+  <!-- 150,00 -->
+  <path class="pl-x" d="M 20 60 V 80 M 170 60 V 80"/>
+  <path class="pl-d" d="M 20 76 H 170" marker-start="url(#flg)" marker-end="url(#fld)"/>
+  <text class="pl-n" x="95" y="74.2" text-anchor="middle">150,00</text>
+  <!-- 40,00 -->
+  <path class="pl-x" d="M 20 25 V 11 M 60 25 V 11"/>
+  <path class="pl-d" d="M 20 13 H 60" marker-start="url(#flg)" marker-end="url(#fld)"/>
+  <text class="pl-n" x="40" y="11.6" text-anchor="middle">40,00</text>
+  <!-- 10,00 -->
+  <path class="pl-x" d="M 20 25 V 19.5"/>
+  <path class="pl-d" d="M 20 21.5 H 30" marker-start="url(#flg)" marker-end="url(#fld)"/>
+  <text class="pl-n" x="25" y="20.1" text-anchor="middle">10,00</text>
+  <!-- 35,00 -->
+  <path class="pl-x" d="M 20 25 H 5 M 20 60 H 5"/>
+  <path class="pl-d" d="M 8 25 V 60" marker-start="url(#flg)" marker-end="url(#fld)"/>
+  <text class="pl-n" x="6.4" y="42.5" text-anchor="middle" transform="rotate(-90 6.4 42.5)">35,00</text>
+  <!-- 17,50 -->
+  <path class="pl-x" d="M 20 42.5 H 14 M 20 60 H 14"/>
+  <path class="pl-d" d="M 16 42.5 V 60" marker-start="url(#flg)" marker-end="url(#fld)"/>
+  <text class="pl-n" x="14.4" y="51.2" text-anchor="middle" transform="rotate(-90 14.4 51.2)">17,50</text>
+  <!-- Ø9,00 -->
+  <path class="pl-d" d="M 91 6 H 68 L 33.2 39.3" marker-end="url(#flp)"/>
+  <text class="pl-n" x="69" y="4.4">&#216;9,00</text>
+  <!-- 14,77° -->
+  <path class="pl-cons" d="M 170 54 H 143"/>
+  <path class="pl-d" d="M 148 54 A 22 22 0 0 0 148.73 48.39"/>
+  <text class="pl-n" x="141" y="52.6" text-anchor="end">14,77&#176;</text>
+  <!-- 5,00 -->
+  <path class="pl-x" d="M 196 25 V 11 M 201 25 V 11"/>
+  <path class="pl-d" d="M 196 13 H 201" marker-start="url(#flg)" marker-end="url(#fld)"/>
+  <text class="pl-n" x="198.5" y="11.6" text-anchor="middle">5,00</text>
+
+  <!-- ===== notes ===== -->
+  <path class="pl-d" d="M -16 15 H 2 L 21.4 27.4" marker-end="url(#flp)"/>
+  <text class="pl-note" x="-16" y="13.4">Cong&#233;s rayon 5</text>
+  <path class="pl-d" d="M 214 72 H 186 L 169.4 59.6" marker-end="url(#flp)"/>
+  <text class="pl-note" x="186" y="70.4">Chanfrein 1&#215;45&#176;</text>
+  <text class="pl-cadre" x="95" y="92" text-anchor="middle">Tol&#233;rances g&#233;n&#233;rales ISO 2768 cL</text>
+</svg>
+  </div>
+  <p class="legende">Le dessin de définition du chasse-cône — les quatre exercices s'y rapportent tous.</p>
+
+  <div class="note">
+    <b>Comment utiliser cette fiche</b>
+    <p style="margin:0 0 2mm">Les <strong>quatre énoncés</strong> occupent les pages 1 à 4, le
+    <strong>corrigé détaillé</strong> les pages 5 à 8. Pour distribuer les questions sans les réponses,
+    imprimez <strong>les pages 1 à 4</strong> (dans la boîte d'impression, « Pages » puis
+    <span class="mono">1-4</span>).</p>
+    <p style="margin:0">Le plan ci-dessus et le tableau ISO 2768 de la page 2 suffisent à tout résoudre :
+    aucun autre document n'est nécessaire. Les exercices prolongent le chapitre « Décoder un plan » du
+    dossier fabrication et ne le répètent pas.</p>
+  </div>
+</section>
+
+<!-- ===================== ÉNONCÉS ===================== -->
+<h2 class="partie">Les questions</h2>
+
+<div class="rappel"><b>Le cartouche du plan</b>
+Tolérances générales <strong>ISO 2768&#8209;cL</strong>. La minuscule vaut pour les dimensions, la
+majuscule pour les tolérances géométriques. Les tranches se lisent « au-dessus de … jusqu'à … <em>inclus</em> ».</div>
+
+<table class="iso">
+<thead>
+<tr><th rowspan="2">Classe</th><th colspan="5">Dimensions linéaires — écarts en mm</th><th colspan="3">Rayons et chanfreins</th><th colspan="4">Dimensions angulaires <i>(côté le plus court)</i></th></tr>
+<tr><th>0,5 à 3</th><th>3 à 6</th><th>6 à 30</th><th>30 à 120</th><th>120 à 400</th><th>0,5 à 3</th><th>3 à 6</th><th>&gt; 6</th><th>&#8804; 10</th><th>10 à 50</th><th>50 à 120</th><th>120 à 400</th></tr>
+</thead>
+<tbody>
+<tr><td><strong>f</strong></td><td>±0,05</td><td>±0,05</td><td>±0,1</td><td>±0,15</td><td>±0,2</td><td>±0,2</td><td>±0,5</td><td>±1</td><td>±1&#176;</td><td>±30'</td><td>±20'</td><td>±10'</td></tr>
+<tr><td><strong>m</strong></td><td>±0,1</td><td>±0,1</td><td>±0,2</td><td>±0,3</td><td>±0,5</td><td>±0,2</td><td>±0,5</td><td>±1</td><td>±1&#176;</td><td>±30'</td><td>±20'</td><td>±10'</td></tr>
+<tr class="ici"><td><strong>c</strong></td><td>±0,2</td><td>±0,3</td><td>±0,5</td><td>±0,8</td><td>±1,2</td><td>±0,4</td><td>±1</td><td>±2</td><td>±1&#176;30'</td><td>±1&#176;</td><td>±30'</td><td>±15'</td></tr>
+<tr><td><strong>v</strong></td><td>—</td><td>±0,5</td><td>±1</td><td>±1,5</td><td>±2,5</td><td>±0,4</td><td>±1</td><td>±2</td><td>±3&#176;</td><td>±2&#176;</td><td>±1&#176;</td><td>±30'</td></tr>
+</tbody>
+</table>
+
+<table class="iso">
+<thead>
+<tr><th rowspan="2">Classe</th><th colspan="5">Rectitude et planéité — sur une longueur de</th><th colspan="3">Perpendicularité et symétrie</th><th>Battement</th></tr>
+<tr><th>&#8804; 10</th><th>10 à 30</th><th>30 à 100</th><th>100 à 300</th><th>300 à 1000</th><th>&#8804; 100</th><th>100 à 300</th><th>300 à 1000</th><th>toutes</th></tr>
+</thead>
+<tbody>
+<tr><td><strong>H</strong></td><td>0,02</td><td>0,05</td><td>0,1</td><td>0,2</td><td>0,3</td><td>0,2</td><td>0,3</td><td>0,4</td><td>0,1</td></tr>
+<tr><td><strong>K</strong></td><td>0,05</td><td>0,1</td><td>0,2</td><td>0,4</td><td>0,6</td><td>0,4</td><td>0,6</td><td>0,8</td><td>0,2</td></tr>
+<tr class="ici"><td><strong>L</strong></td><td>0,1</td><td>0,2</td><td>0,4</td><td>0,8</td><td>1,2</td><td>0,6</td><td>1</td><td>1,5</td><td>0,5</td></tr>
+</tbody>
+</table>
+
+<div class="rappel"><b>Le barème d'atelier, pour les questions de coût</b>
+Pièce unitaire, atelier de maintenance, <strong>50 € de l'heure</strong> couvrant la main-d'œuvre et
+l'occupation du poste. Une pièce complète en classe c revient à <strong>22,50 €</strong>, et la même
+en classe f à <strong>229,10 €</strong>.</div>
+
+<div class="exo"><div class="n">5</div>
+  <h3>Le procès-verbal de contrôle</h3>
+  <div class="cons">Durée : 12 min</div>
+  <p>Une pièce revient de l'atelier avec ce relevé. Le plan est en <span class="mono">ISO 2768&#8209;cL</span>.</p>
+  <table>
+    <tr><th>Ce qui a été mesuré</th><th>Valeur</th><th>Tolérance</th><th>Verdict</th></tr>
+    <tr><td>Longueur totale</td><td class="mono">150,7</td><td></td><td></td></tr>
+    <tr><td>Hauteur du talon</td><td class="mono">35,4</td><td></td><td></td></tr>
+    <tr><td>Début de la pente</td><td class="mono">40,5</td><td></td><td></td></tr>
+    <tr><td>Axe du trou depuis le bas</td><td class="mono">17,9</td><td></td><td></td></tr>
+    <tr><td>Axe du trou depuis le bout</td><td class="mono">10,3</td><td></td><td></td></tr>
+    <tr><td>Diamètre du trou</td><td class="mono">9,3</td><td></td><td></td></tr>
+    <tr><td>Épaisseur</td><td class="mono">5,1</td><td></td><td></td></tr>
+    <tr><td>Rectitude du chant de 150</td><td class="mono">0,5</td><td></td><td></td></tr>
+    <tr><td>Perpendicularité du bout gauche sur le chant du bas</td><td class="mono">0,9</td><td></td><td></td></tr>
+  </table>
+  <p><strong>a.</strong> Complétez les deux colonnes vides.<br>
+     <strong>b.</strong> La pièce est-elle acceptée ? Combien de lignes posent problème ?<br>
+     <strong>c.</strong> Avec quel instrument la dernière ligne a-t-elle été relevée ? Un pied à coulisse
+     pouvait-il la donner ?<br>
+     <strong>d.</strong> Ce défaut gêne-t-il le fonctionnement de l'outil ? Que proposez-vous ?</p>
+  <div class="rep md"></div>
+</div>
+
+<div class="exo"><div class="n">6</div>
+  <h3>Trop grand ou trop petit</h3>
+  <div class="cons">Durée : 10 min</div>
+  <p>Deux élèves apportent leur pièce. La première mesure <strong>152,0</strong> de long, la seconde
+  <strong>148,0</strong>. Tout le reste est bon sur les deux.</p>
+  <p><strong>a.</strong> Les deux sont-elles refusées ? De combien chacune sort-elle de l'intervalle ?<br>
+     <strong>b.</strong> Une seule des deux peut être rattrapée. Laquelle, et pourquoi l'autre ne le
+     peut-elle pas ?<br>
+     <strong>c.</strong> La reprise demande une dizaine de minutes à la lime. Chiffrez-la, et comparez au
+     prix d'une pièce neuve en classe c.<br>
+     <strong>d.</strong> Quelle règle de l'atelier, énoncée au chapitre, cet exercice justifie-t-il ?</p>
+  <div class="rep md"></div>
+</div>
+
+<div class="exo"><div class="n">7</div>
+  <h3>La cote en trop</h3>
+  <div class="cons">Durée : 15 min</div>
+  <p>Un bureau d'études vous envoie une nouvelle version du plan. Elle est identique, sauf sur deux points :
+  l'angle de la pente y est coté <strong>15&#176;</strong> — et non 14,77&#176; — et la hauteur de la pointe
+  y est cotée en plus, à <strong>6,00</strong>. Les cotes 150, 40 et 35 sont inchangées.</p>
+  <p><strong>a.</strong> Calculez la hauteur de pointe qu'imposent les cotes 40, 35 et l'angle de 15&#176;.
+  Est-elle compatible avec le 6,00 du plan ?<br>
+     <strong>b.</strong> Comment appelle-t-on une cote qui, comme celle-là, est déjà imposée par les autres ?<br>
+     <strong>c.</strong> Vérifiez, tolérances comprises : si vous obéissez au 6,00, respectez-vous le
+  15&#176; ? Si vous obéissez au 15&#176;, respectez-vous le 6,00 ?<br>
+     <strong>d.</strong> Laquelle des deux cotes suivez-vous en atelier, et que faites-vous ensuite ?</p>
+  <div class="rep gd"></div>
+</div>
+
+<div class="exo"><div class="n">8</div>
+  <h3>Remonter de la fonction à la classe</h3>
+  <div class="cons">Durée : 15 min · synthèse</div>
+  <p>Vous mesurez la lumière de la broche de votre perceuse : la fente fait <strong>5,6 mm</strong> de large.
+  L'atelier retient deux exigences : il faut <strong>au moins 0,2 mm de jeu</strong> pour que le coin entre
+  sans forcer, même avec une bavure, et l'épaisseur ne doit <strong>pas descendre sous 4,5 mm</strong>, faute
+  de quoi le coin plierait sous le marteau.</p>
+  <p><strong>a.</strong> Entre quelles deux valeurs l'épaisseur de la pièce doit-elle se situer ?<br>
+     <strong>b.</strong> Pour chacune des quatre classes, écrivez l'intervalle obtenu sur la cote 5,00 et
+  dites si la classe <em>garantit</em> la fonction.<br>
+     <strong>c.</strong> Quelle est la classe la plus large qui la garantisse encore ?<br>
+     <strong>d.</strong> Sachant que cette cote coûte 0,83 € en classe c, 8,33 € en classe m et 101,67 € en
+  classe f, que pensez-vous du choix du concepteur ?</p>
+  <div class="rep gd"></div>
+</div>
+
+<!-- ===================== CORRIGÉ ===================== -->
+<section class="corrige">
+<h2 class="partie">Le corrigé détaillé</h2>
+
+<div class="cor"><div class="n">5</div>
+  <p class="rc">Toutes les dimensions sont bonnes. La pièce est refusée sur une seule ligne — et c'est
+  la seule qui ne soit pas une dimension.</p>
+  <table>
+    <tr><th>Mesure</th><th>Valeur</th><th>Tolérance</th><th>Intervalle</th><th>Verdict</th></tr>
+    <tr><td>Longueur totale</td><td class="mono">150,7</td><td class="mono">±1,2</td><td class="mono">148,80 – 151,20</td><td>bon</td></tr>
+    <tr><td>Hauteur du talon</td><td class="mono">35,4</td><td class="mono">±0,8</td><td class="mono">34,20 – 35,80</td><td>bon</td></tr>
+    <tr><td>Début de la pente</td><td class="mono">40,5</td><td class="mono">±0,8</td><td class="mono">39,20 – 40,80</td><td>bon</td></tr>
+    <tr><td>Axe du trou / bas</td><td class="mono">17,9</td><td class="mono">±0,5</td><td class="mono">17,00 – 18,00</td><td>bon, de justesse</td></tr>
+    <tr><td>Axe du trou / bout</td><td class="mono">10,3</td><td class="mono">±0,5</td><td class="mono">9,50 – 10,50</td><td>bon</td></tr>
+    <tr><td>Diamètre du trou</td><td class="mono">9,3</td><td class="mono">±0,5</td><td class="mono">8,50 – 9,50</td><td>bon</td></tr>
+    <tr><td>Épaisseur</td><td class="mono">5,1</td><td class="mono">±0,3</td><td class="mono">4,70 – 5,30</td><td>bon</td></tr>
+    <tr><td>Rectitude sur 150</td><td class="mono">0,5</td><td class="mono">0,8 max</td><td class="mono">0 – 0,80</td><td>bon</td></tr>
+    <tr><td><strong>Perpendicularité sur 35</strong></td><td class="mono">0,9</td><td class="mono">0,6 max</td><td class="mono">0 – 0,60</td><td><strong>refusé</strong></td></tr>
+  </table>
+  <p class="det"><strong>a et b.</strong> Les sept dimensions passent, la rectitude passe. Seule la
+  <strong>perpendicularité</strong> sort : la classe L donne 0,6 mm pour un côté allant jusqu'à 100 mm, et
+  l'on prend ici le plus court des deux éléments — le bout de 35 mm. Mesuré à 0,9, c'est
+  <strong>0,3 mm de trop</strong>. Une seule ligne pose problème.</p>
+  <p class="det"><strong>c.</strong> Sûrement pas au pied à coulisse. Un pied à coulisse mesure des
+  distances, pas des orientations : il aurait donné 35,4 partout sans jamais voir que le bout est de
+  travers. Il faut une <strong>équerre à chapeau</strong> posée sur le chant de référence, et l'on mesure
+  le jour à la base ou au sommet — au jeu de lumière, ou avec une cale d'épaisseur. Un comparateur monté
+  sur socle donne la même chose en chiffres.</p>
+  <p class="det"><strong>d.</strong> Fonctionnellement, <strong>non, cela ne gêne rien</strong>. Le bout
+  gauche est la face qu'on frappe au marteau : 0,9 mm de faux-équerre sur 35 mm, c'est environ 1,5&#176;
+  d'inclinaison, imperceptible sous un coup de marteau. La pièce chassera les cônes exactement pareil.</p>
+  <p class="det">La bonne réponse professionnelle n'est donc ni « c'est bon » ni « à la benne ». C'est :
+  <strong>la pièce est non conforme, on le note, et on demande une dérogation</strong> — c'est-à-dire une
+  acceptation écrite malgré l'écart. Refaire une pièce pour ce défaut serait absurde ; l'accepter en
+  silence serait pris pour de la négligence le jour où l'écart comptera vraiment.</p>
+  <em class="rem">Ce que l'exercice montre : une pièce peut être <strong>bonne sur toutes ses cotes et
+  refusée quand même</strong>. Les dimensions disent des distances, jamais des formes ni des orientations.
+  C'est exactement le trou que bouchent les tolérances géométriques — et celles-là, personne ne pense à
+  les contrôler.</em>
+</div>
+
+<div class="cor"><div class="n">6</div>
+  <p class="rc">Les deux sont refusées de 0,8 mm. Seule la trop longue se rattrape : on peut toujours
+  enlever de la matière, jamais en remettre.</p>
+  <p class="det"><strong>a.</strong> La cote 150 est en tranche 120 à 400, donc ±1,2, soit un intervalle
+  de <span class="mono">148,80 à 151,20</span>.</p>
+  <div class="calc">Pièce A : 152,0 &#8722; 151,20 = <strong>0,80 mm de trop</strong><br>Pièce B : 148,80 &#8722; 148,0 = <strong>0,80 mm de moins</strong></div>
+  <p class="det">Même écart, au dixième près. Sur le papier, les deux pièces sont aussi fausses l'une que
+  l'autre.</p>
+  <p class="det"><strong>b.</strong> <strong>La pièce A se rattrape.</strong> Elle est trop longue : quelques
+  minutes de lime la ramènent dans l'intervalle, et l'élève apprend au passage à contrôler en cours de
+  route.</p>
+  <p class="det"><strong>La pièce B est perdue.</strong> Elle est trop courte, et aucune opération d'atelier
+  ne remet de l'acier là où il n'y en a plus. On peut théoriquement recharger au poste à souder puis
+  reprendre à la lime — mais sur un plat de 5 mm, cela déforme la pièce, crée une zone affectée
+  thermiquement, prend plus longtemps que de recommencer, et donne un outil qu'on ne voudrait pas frapper
+  au marteau.</p>
+  <p class="det"><strong>c.</strong> Au taux de 50 € de l'heure :</p>
+  <div class="calc">Reprise de A : 10 min &#215; 50 / 60 = <strong>8,33 €</strong><br>Pièce neuve en classe c : <strong>22,50 €</strong> + le brut</div>
+  <p class="det">La reprise coûte moins du tiers d'une pièce neuve, sans compter le temps de traçage et de
+  perçage qu'il faudrait refaire entièrement. <span style="font-weight:600">On reprend A, on recommence
+  B.</span></p>
+  <p class="det"><strong>d.</strong> Celle-ci : <strong>on scie toujours à un ou deux millimètres à
+  l'extérieur du trait</strong>, jamais dessus. Ce n'est pas de la prudence vague — c'est la conséquence
+  directe de l'asymétrie qu'on vient de voir. Une pièce trop grande est un travail en plus ; une pièce trop
+  petite est une pièce perdue. Toute la méthode d'ajustage consiste à s'approcher du trait <em>par le
+  dessus</em>, jamais par le dessous.</p>
+  <em class="rem">La même logique gouverne le perçage : on perce Ø8,8 avant d'aléser à Ø9, jamais Ø9,2 en
+  espérant que ça passe. Et le taraudage : un avant-trou trop grand ne se rattrape pas non plus.</em>
+</div>
+
+<div class="cor"><div class="n">7</div>
+  <p class="rc">Les deux cotes sont incompatibles : 15&#176; donne une pointe de 5,53 et non de 6,00. Le plan
+  est surabondant, et c'est un défaut de cotation.</p>
+  <p class="det"><strong>a.</strong> La pente descend sur 150 &#8722; 40 = 110 mm :</p>
+  <div class="calc">110 &#215; tan(15&#176;) = 110 &#215; 0,2679 = 29,47 mm<br>35,00 &#8722; 29,47 = <strong>5,53 mm</strong></div>
+  <p class="det">Le plan annonce 6,00. <strong>L'écart est de 0,47 mm</strong>, et les deux cotes ne peuvent
+  pas être vraies en même temps.</p>
+  <p class="det"><strong>b.</strong> C'est une <strong>cote surabondante</strong>. Les quatre cotes 150, 40,
+  35 et la hauteur de pointe suffisent à définir entièrement la pente : l'angle en découle. En le cotant
+  <em>en plus</em>, on ferme la chaîne de cotes — et une chaîne fermée finit toujours par se contredire,
+  parce qu'aucune fabrication ne tombe juste sur les deux valeurs à la fois.</p>
+  <p class="det"><strong>c.</strong> Vérifions, tolérances comprises.</p>
+  <p class="det"><strong>Si vous obéissez au 6,00</strong> — tranche 3 à 6, donc ±0,3, soit
+  <span class="mono">5,70 à 6,30</span> — l'angle réellement obtenu vaut arctan(29/110) = 14,77&#176;. Le
+  plan tolère l'angle à ±30' autour de 15&#176;, soit <span class="mono">14,50&#176; à 15,50&#176;</span>.
+  Or 14,77&#176; est dans cet intervalle : <strong>les deux cotes sont respectées.</strong></p>
+  <p class="det"><strong>Si vous obéissez au 15&#176;</strong>, la pointe tombe à 5,53 mm. Le plan tolère la
+  pointe entre 5,70 et 6,30 : <strong>5,53 est en dehors, la pièce est refusée.</strong></p>
+  <p class="det"><strong>d.</strong> On suit donc le <strong>6,00</strong> : c'est la seule des deux cotes
+  qui, respectée, satisfait aussi l'autre. Et c'est cohérent avec la règle du chapitre — on fabrique
+  d'après la longueur, pas d'après l'angle, parce qu'une hauteur se trace au trusquin au centième alors
+  qu'un angle se lit au degré.</p>
+  <p class="det">Ensuite, on <strong>signale le plan au bureau d'études</strong>. Ce n'est pas de la
+  délation : une chaîne fermée est une bombe à retardement. Le jour où quelqu'un d'autre lira le 15&#176;
+  d'abord, il fera une pièce refusée sans comprendre pourquoi, et personne ne saura d'où vient l'erreur.</p>
+  <em class="rem">Retenez la règle de dessin : <strong>on ne cote jamais deux fois la même chose</strong>.
+  Soit l'angle, soit la hauteur de pointe — jamais les deux. Quand une cote est utile à la lecture mais
+  déjà imposée par les autres, on l'écrit <em>entre parenthèses</em> : elle devient informative et cesse
+  d'être contractuelle.</em>
+</div>
+
+<div class="cor"><div class="n">8</div>
+  <p class="rc">L'épaisseur doit rester entre 4,50 et 5,40. La classe c est la plus large qui le
+  garantisse — c'est exactement celle du plan.</p>
+  <p class="det"><strong>a.</strong> Le maximum vient de la fente et du jeu exigé :</p>
+  <div class="calc">maxi = 5,6 &#8722; 0,2 = <strong>5,40 mm</strong><br>mini = <strong>4,50 mm</strong> (donné par l'atelier)</div>
+  <p class="det">L'épaisseur doit donc tomber dans <span class="mono">4,50 – 5,40</span>. Autour du nominal
+  de 5,00, cela autorise &#8722;0,50 en dessous et +0,40 au-dessus. <strong>L'intervalle utile n'est pas
+  symétrique</strong>, alors que les tolérances générales, elles, le sont toujours : c'est le plus petit
+  des deux côtés qui commandera.</p>
+  <p class="det"><strong>b.</strong> La cote 5,00 est en tranche 3 à 6.</p>
+  <table>
+    <tr><th>Classe</th><th>Écart</th><th>Intervalle obtenu</th><th>Garantit la fonction ?</th></tr>
+    <tr><td><strong>v</strong></td><td class="mono">±0,5</td><td class="mono">4,50 – 5,50</td><td><strong>non</strong> — 5,50 dépasse le maxi de 5,40</td></tr>
+    <tr><td><strong>c</strong></td><td class="mono">±0,3</td><td class="mono">4,70 – 5,30</td><td>oui, entièrement dedans</td></tr>
+    <tr><td><strong>m</strong></td><td class="mono">±0,1</td><td class="mono">4,90 – 5,10</td><td>oui</td></tr>
+    <tr><td><strong>f</strong></td><td class="mono">±0,05</td><td class="mono">4,95 – 5,05</td><td>oui</td></tr>
+  </table>
+  <p class="det">La classe v échoue de peu, et c'est instructif : une pièce à 5,45 serait
+  <em>réglementairement acceptée</em> et n'entrerait pas correctement dans la fente. Elle passerait sans
+  doute en forçant, jusqu'au jour où la lumière serait légèrement matée ou la pièce un peu bavurée.</p>
+  <p class="det"><strong>c.</strong> <strong>La classe c</strong> : c'est la plus large des trois qui
+  garantissent la fonction.</p>
+  <p class="det"><strong>d.</strong> Le concepteur a fait exactement le bon choix, et on peut le
+  <em>démontrer</em>. Les classes m et f garantissent la fonction elles aussi, mais elles coûtent
+  <strong>dix fois</strong> et <strong>cent vingt fois</strong> plus cher sur cette seule cote, sans rien
+  apporter : le chasse-cône n'entrera ni mieux, ni plus longtemps.</p>
+  <div class="calc">c : 0,83 €&nbsp;&nbsp;·&nbsp;&nbsp;m : 8,33 € (&#215;10)&nbsp;&nbsp;·&nbsp;&nbsp;f : 101,67 € (&#215;122)</div>
+  <p class="det">Le raisonnement complet tient en une phrase : <strong>on part de la fonction, on en déduit
+  l'intervalle nécessaire, on choisit la classe la plus large qui le contient, et on paie le moins
+  possible.</strong> C'est dans cet ordre-là que travaille un bureau d'études — jamais l'inverse.</p>
+  <em class="rem">Notez la conséquence pratique pour l'atelier : la seule chose à faire sur cette cote,
+  c'est <strong>contrôler le brut avant de commencer</strong>. Un plat livré à 5,45 est hors tolérance et
+  ne rentrera pas dans la fente — et aucune opération prévue au TP ne touche à l'épaisseur.</em>
+</div>
+
+</section>
+</body>
+</html>

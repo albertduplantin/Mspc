@@ -40,6 +40,25 @@ table.iso tr.ici td{background:#efe9f7; font-weight:600}
 table.iso tr.ici td:first-child{box-shadow:inset 4px 0 0 var(--accent)}
 tr.fonc td{background:#f3eef9}
 tr.fonc td:first-child{box-shadow:inset 4px 0 0 var(--accent)}
+
+/* Bloc de telechargement : la fiche d'exercices supplementaires en PDF. */
+.telech{display:grid; grid-template-columns:1fr auto; gap:18px 26px; align-items:center;
+  border:2px solid var(--encre); background:var(--papier); box-shadow:var(--ombre);
+  padding:20px 24px; margin:26px 0 8px}
+.telech .tag{font-family:"IBM Plex Mono",monospace; font-size:10px; letter-spacing:.22em;
+  text-transform:uppercase; color:var(--accent); display:block; margin-bottom:5px}
+.telech h4{margin:0 0 7px; font-size:1.3rem; text-transform:uppercase}
+.telech p{margin:0; font-size:.94rem; color:var(--encre-doux)}
+.telech ol{margin:8px 0 0; padding-left:19px; font-size:.93rem; color:var(--encre-doux)}
+.telech li{margin-bottom:3px}
+.telech .btn-pdf{display:inline-block; text-align:center;
+  background:var(--accent); color:#fff; text-decoration:none; padding:15px 26px;
+  font-family:"Saira Condensed",sans-serif; font-weight:700; font-size:1.18rem;
+  text-transform:uppercase; letter-spacing:.05em; border:2px solid var(--accent); white-space:nowrap}
+.telech .btn-pdf:hover{background:var(--accent-clair); border-color:var(--accent-clair); color:#1a1030}
+.telech .btn-pdf small{display:block; font-family:"IBM Plex Mono",monospace; font-size:9.5px;
+  font-weight:400; letter-spacing:.12em; margin-top:3px; opacity:.85}
+@media (max-width:700px){.telech{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
@@ -2588,6 +2607,24 @@ tr.fonc td:first-child{box-shadow:inset 4px 0 0 var(--accent)}
 <p><strong>c.</strong> <strong>Rien.</strong> Strictement rien. Le chasse-cône rectifié chasse exactement les mêmes cônes que le chasse-cône scié, ni mieux ni plus longtemps. On a payé dix fois le prix et attendu une semaine de plus pour un outil identique.</p>
 <p><em>La réponse à faire à ce collègue tient en une phrase : mettre <span class="mono">f</span> partout, ce n'est pas « bien faire », c'est refuser de choisir. Et refuser de choisir, en fabrication, se paie toujours au comptant.</em></p>
 </div></details>
+</div>
+
+<div class="telech">
+  <div>
+    <span class="tag">Fiche à imprimer</span>
+    <h4>Quatre exercices de plus</h4>
+    <p>Quatre exercices inédits sur le même plan, dans le même esprit que les quatre ci-dessus — et qui vont chercher ce qu’ils ne couvrent pas :</p>
+    <ol>
+      <li>un procès-verbal de contrôle où <strong>toutes les cotes passent</strong> et où la pièce est refusée quand même ;</li>
+      <li>deux pièces fausses du même écart, dont <strong>une seule se rattrape</strong> ;</li>
+      <li>un plan où le bureau d’études a coté <strong>une fois de trop</strong>, et les deux cotes se contredisent ;</li>
+      <li>le raisonnement inversé : partir de la fonction et <strong>démontrer</strong> que la classe c du plan est le bon choix.</li>
+    </ol>
+    <p style="margin-top:9px">Le PDF est autonome : il contient le plan et le tableau ISO 2768, donc rien d’autre n’est nécessaire pour le faire. Huit pages, corrigé détaillé <strong>regroupé à la fin</strong> — imprimez les pages 1 à 4 pour ne distribuer que les questions.</p>
+  </div>
+  <a class="btn-pdf" href="fiches/exercices-chasse-cone.pdf" download>
+    Télécharger le PDF<small>8 pages · A4 · gratuit</small>
+  </a>
 </div>
 
 <h3 id="tp-0-12">Les deux fiches de travaux pratiques</h3>
