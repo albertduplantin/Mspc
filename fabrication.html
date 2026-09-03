@@ -2433,7 +2433,85 @@ tr.fonc td:first-child{box-shadow:inset 4px 0 0 var(--accent)}
 <p>Pas pour la précision. <strong>Pour le parallélisme.</strong> Un trusquin trace une ligne à hauteur constante <em>depuis le marbre</em> : le trait est parallèle au plan de référence sur toute sa longueur, ce qu'aucun réglet tenu à la main ne garantit. Vous pouvez tracer « à peu près 6 » au réglet ; vous ne pouvez pas tracer une ligne parallèle à la base.</p>
 <p>Quant au cinquantième lui-même, il vient de <strong>Pierre Vernier</strong>, mathématicien franc-comtois qui publie le principe en 1631 : cinquante divisions du curseur couvrent exactement quarante-neuf millimètres de la règle. Chaque division du curseur est donc <strong>en retard de deux centièmes</strong> sur celle d'en face — et c'est précisément ce retard qu'on lit. L'instrument ne mesure pas les centièmes : il les compte.</p></div>
 
-<h3 id="tp-0-9">0.9 — Ce qu'on va faire, dans l'ordre</h3>
+<h3 id="tp-0-9">0.9 — Ce que coûte un dixième</h3>
+
+<p>Il reste une question que personne ne pose en classe et que tout le monde pose en entreprise : <strong>combien coûte cette tolérance ?</strong> Parce qu'une tolérance n'est pas un souhait. C'est une commande de temps, d'outillage et parfois de machine — donc une commande d'argent, signée par celui qui dessine et payée par celui qui fabrique.</p>
+
+<div class="encadre"><span class="tag">Les hypothèses du chiffrage</span>
+<p>Tous les prix qui suivent reposent sur les mêmes conventions, et elles doivent être dites : <strong>pièce unitaire</strong> (une seule, pas une série), fabriquée dans un <strong>atelier de maintenance</strong>, à un taux horaire de <strong>50 € de l'heure</strong> couvrant la main-d'œuvre et l'occupation du poste. Les opérations qui demandent une machine ou un outil spécial portent en plus un forfait.</p>
+<p style="margin-bottom:0">Ce sont des <em>ordres de grandeur</em>, pas un devis. Ce qui compte n'est pas le chiffre exact : c'est le rapport entre les colonnes.</p></div>
+
+<h4>Le prix ne monte pas doucement : il monte par marches</h4>
+
+<p>On imagine volontiers que resserrer une tolérance coûte un peu plus cher, proportionnellement. C'est faux. <span class="cle">Le coût monte par paliers, et chaque palier est un changement de procédé.</span></p>
+
+<p>Tant que la tolérance reste large, la scie suffit. En dessous, il faut limer. Plus bas, il faut limer <em>et</em> contrôler sans arrêt. Plus bas encore, la lime ne suffit plus et il faut une machine. Et tout en bas, la pièce quitte l'atelier pour aller se faire rectifier ailleurs. Entre deux marches, le prix bouge à peine ; au passage d'une marche, il double ou il décuple.</p>
+
+<figure class="anim">
+  <canvas id="a-prix" width="900" height="480" aria-label="Animation : prix de fabrication d'une cote en fonction de la tolérance demandée, par paliers de procédé"></canvas>
+  <div class="ctrls">
+    <div class="c"><label>Cote à réaliser <span id="a-prix-c-l">150,00 — longueur</span></label><input type="range" id="a-prix-c" min="0" max="3" value="0"></div>
+    <div class="c"><label>Tolérance demandée <span id="a-prix-t-l">± 1,20 mm</span></label><input type="range" id="a-prix-t" min="0" max="100" value="18"></div>
+    <div class="c readout" id="a-prix-out"></div>
+  </div>
+  <figcaption>La courbe du prix en fonction de la tolérance, de la plus large à gauche à la plus serrée à droite. Les quatre repères <b>v · c · m · f</b> marquent les tolérances qu'ISO 2768 donnerait à cette cote dans chacune de ses classes. <b>Partez du 150,00 et resserrez</b> : la courbe reste plate, puis monte par marches — chaque marche porte le nom d'un procédé. <b>Passez sur le Ø9,00</b> et arrêtez-vous entre <b>m</b> et <b>f</b> : le prix est multiplié par six d'un coup, parce qu'un foret ne suffit plus et qu'il faut un alésoir. <b>Terminez par le 5,00</b>, l'épaisseur du brut : elle ne coûte rien jusqu'à <b>m</b>, puis cent euros — la pièce doit sortir de l'atelier. <span class="cle">Ce n'est jamais le dixième qui coûte : c'est la machine qu'il oblige à sortir.</span></figcaption>
+</figure>
+
+<h4>La même pièce, deux cartouches</h4>
+
+<p>Reprenons les sept cotes dimensionnelles du plan et chiffrons-les deux fois : d'abord telles qu'elles sont, en <span class="mono">ISO 2768&#8209;c</span>, puis avec le cartouche resserré à <span class="mono">ISO 2768&#8209;f</span>. Rien d'autre ne change — ni la forme, ni la fonction, ni le matériau.</p>
+
+<div class="table-scroll">
+<table>
+<thead><tr><th rowspan="2">Cote</th><th colspan="3">Classe c — le plan tel qu'il est</th><th colspan="3">Classe f — « pour être sûr »</th></tr>
+<tr><th>Tol.</th><th>Ce qu'il faut faire</th><th>Prix</th><th>Tol.</th><th>Ce qu'il faut faire</th><th>Prix</th></tr></thead>
+<tbody>
+<tr><td class="mono"><strong>150,00</strong></td>
+  <td class="mono">±1,2</td><td>Sciage puis ébavurage</td><td class="mono">4,20 €</td>
+  <td class="mono">±0,2</td><td>Ajustage et contrôle répété</td><td class="mono">20,80 €</td></tr>
+<tr><td class="mono"><strong>40,00</strong></td>
+  <td class="mono">±0,8</td><td>Sciage puis limage rapide</td><td class="mono">5,00 €</td>
+  <td class="mono">±0,15</td><td>Ajustage et contrôle répété</td><td class="mono">25,00 €</td></tr>
+<tr><td class="mono"><strong>35,00</strong></td>
+  <td class="mono">±0,8</td><td>Sciage puis limage rapide</td><td class="mono">5,00 €</td>
+  <td class="mono">±0,15</td><td>Ajustage et contrôle répété</td><td class="mono">25,00 €</td></tr>
+<tr><td class="mono"><strong>17,50</strong></td>
+  <td class="mono">±0,5</td><td>Trusquin, rien de plus</td><td class="mono">2,50 €</td>
+  <td class="mono">±0,1</td><td>Trusquin, pointage vérifié, contrôle</td><td class="mono">8,30 €</td></tr>
+<tr><td class="mono"><strong>10,00</strong></td>
+  <td class="mono">±0,5</td><td>Trusquin, rien de plus</td><td class="mono">2,50 €</td>
+  <td class="mono">±0,1</td><td>Trusquin, pointage vérifié, contrôle</td><td class="mono">8,30 €</td></tr>
+<tr class="fonc"><td class="mono"><strong>&#216;9,00</strong></td>
+  <td class="mono">±0,5</td><td>Un foret &#216;9, une passe</td><td class="mono">2,50 €</td>
+  <td class="mono">±0,1</td><td><strong>Perçage à &#216;8,8 puis alésoir &#216;9</strong></td><td class="mono">40,00 €</td></tr>
+<tr class="fonc"><td class="mono"><strong>5,00</strong></td>
+  <td class="mono">±0,3</td><td>Rien à faire : le brut convient</td><td class="mono">0,80 €</td>
+  <td class="mono">±0,05</td><td><strong>Rectification plane des deux faces</strong></td><td class="mono">101,70 €</td></tr>
+<tr><td><strong>Total</strong></td>
+  <td colspan="2"><strong>Une demi-heure d'atelier</strong></td><td class="mono"><strong>22,50 €</strong></td>
+  <td colspan="2"><strong>Deux procédés en plus, dont un sous-traité</strong></td><td class="mono"><strong>229,10 €</strong></td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="formule">22,50 &#8594; 229,10 &nbsp;:&nbsp; <strong>&times; 10</strong><small>deux lettres changées dans le cartouche</small></div>
+
+<p>Regardez <em>où</em> passe l'argent. Ce ne sont pas les cotes qu'on lime qui font la différence : le 150, le 40 et le 35 réunis passent de 14 à 71 €, soit cinq fois plus, ce qui est déjà beaucoup mais reste du travail d'atelier. <span class="cle">Les deux postes qui explosent sont ceux qui changent de procédé</span> — le trou, qui réclame un alésoir, et l'épaisseur, qui réclame une rectifieuse que l'atelier n'a pas.</p>
+
+<p>Et le pire : <strong>ces deux cent euros n'achètent rien.</strong> Le chasse-cône rectifié chasse exactement les mêmes cônes que le chasse-cône scié. On a payé dix fois le prix pour une pièce qui fonctionne pareil.</p>
+
+<div class="image-mentale"><span class="tag">Image mentale — le coût du contrôle qu'on oublie</span>
+<p>Un dixième de tolérance en plus, ce n'est pas seulement du temps de lime. C'est aussi un <strong>instrument</strong>. La règle d'usage veut qu'on contrôle avec un appareil dix fois plus fin que la tolérance : un pied à coulisse au cinquantième suffit pour ±0,5, il faut un micromètre pour ±0,05, et un comparateur sur marbre en dessous.</p>
+<p style="margin-bottom:0">Ces instruments existent, mais ils prennent du temps à mettre en œuvre, ils s'étalonnent, et ils demandent quelqu'un qui sait s'en servir. <span class="cle">Serrer une tolérance, c'est aussi décider qui aura le droit de contrôler la pièce.</span></p></div>
+
+<div class="plaque"><span class="tag">Anecdote — la règle du bureau d'études</span>
+<p>Dans les bureaux d'études sérieux, une règle circule, jamais écrite dans une norme et pourtant plus respectée que beaucoup de normes : <span class="cle">on ne serre une tolérance que si l'on peut dire à quoi elle sert.</span> Pas « pour être sûr », pas « au cas où » : une phrase, avec un nom de fonction dedans. « Ce diamètre est serré parce qu'un roulement s'y monte. » « Cette épaisseur est serrée parce qu'elle entre dans une fente de 5,5. »</p>
+<p>Le réflexe inverse — resserrer partout par prudence — paraît responsable et coûte une fortune. Il a aussi un effet pervers : quand toutes les cotes sont serrées, l'atelier ne sait plus lesquelles comptent vraiment, et il finit par les traiter toutes de la même façon. C'est-à-dire mal.</p>
+<p style="margin-bottom:0">C'est très exactement ce que fait la ligne <span class="mono">ISO 2768&#8209;cL</span> de notre plan : elle dit à l'atelier <em>« tout le reste est libre »</em>. Sur ce dessin il n'y a aucune cote encadrée, aucune tolérance individuelle, aucun symbole de forme — donc le message est complet et sans ambiguïté : <strong>rien ici n'est critique, faites vite et bien.</strong></p></div>
+
+<p>Une nuance pour finir, parce qu'elle est importante et souvent passée sous silence. Tous ces rapports valent pour une <strong>pièce unitaire</strong>. En série, la donne change : le montage, le réglage et l'outillage se répartissent sur des milliers de pièces, et l'écart entre une tolérance large et une tolérance serrée se réduit fortement. C'est pourquoi une pièce de grande série peut être précise et bon marché, alors que la même précision sur une pièce unique de maintenance coûte un mois de salaire. <span class="cle">La précision n'est pas chère en soi : elle est chère à l'unité.</span></p>
+
+<h3 id="tp-0-10">0.10 — Ce qu'on va faire, dans l'ordre</h3>
 
 <p>Le plan décodé, la fabrication tient en une suite d'opérations dont <strong>aucune ne peut être inversée</strong>. Voici pourquoi l'ordre est celui-là :</p>
 
@@ -2450,7 +2528,7 @@ tr.fonc td:first-child{box-shadow:inset 4px 0 0 var(--accent)}
 <div class="encadre danger"><span class="tag">L'inversion qui coûte cher</span>
 <p>Percer <em>après</em> avoir scié la pente est l'erreur classique, et elle est dangereuse. La pièce n'a plus de forme régulière, elle se bride mal, et à la sortie du foret elle devient <strong>un levier de 150 mm entraîné par la broche</strong>. Voir la fiche TP&nbsp;F02 pour le détail.</p></div>
 
-<h3 id="tp-0-10">Exercices</h3>
+<h3 id="tp-0-11">Exercices</h3>
 
 <div class="exo"><span class="tag">Exercice TP.1</span>
 <p>Un camarade a fabriqué la pièce et vous demande de la contrôler. Vous mesurez : longueur <strong>151,0</strong> · hauteur du talon <strong>34,3</strong> · épaisseur <strong>5,4</strong> · trou <strong>&#216;9,2</strong> · axe du trou à <strong>10,7</strong> du bout.</p>
@@ -2500,7 +2578,27 @@ tr.fonc td:first-child{box-shadow:inset 4px 0 0 var(--accent)}
 </div></details>
 </div>
 
-<h3 id="tp-0-11">Les deux fiches de travaux pratiques</h3>
+
+<div class="exo"><span class="tag">Exercice TP.4</span>
+<p>Un collègue vous dit : « moi, dans le doute, je mets <span class="mono">f</span> partout. Comme ça c'est sûr, et ça ne coûte pas plus cher de bien faire. »</p>
+<p><strong>a.</strong> En vous appuyant sur le tableau des coûts, chiffrez ce que cette phrase coûte sur notre chasse-cône.<br>
+<strong>b.</strong> Sur les 207 € d'écart, quelle part vient des cotes qu'on lime, et quelle part vient d'autre chose ?<br>
+<strong>c.</strong> Qu'est-ce que cet argent a acheté ?</p>
+<details><summary>Voir la réponse</summary><div class="rep">
+<p><strong>a.</strong> La pièce passe de <strong>22,50 €</strong> à <strong>229,10 €</strong>, soit <span class="cle">un facteur dix</span> pour deux lettres changées dans le cartouche.</p>
+<p><strong>b.</strong> Décomposons l'écart de 206,60 € :</p>
+<ul>
+<li>Les trois cotes qu'on lime — 150, 40 et 35 — passent de 14,20 à 70,80 €, soit <strong>+56,60 €</strong>. C'est du temps d'atelier en plus : cinq fois plus long, mais c'est le même travail avec la même lime.</li>
+<li>Les deux cotes de traçage — 17,50 et 10,00 — passent de 5,00 à 16,60 €, soit <strong>+11,60 €</strong>. Négligeable.</li>
+<li>Le trou et l'épaisseur passent de 3,30 à 141,70 €, soit <strong>+138,40 €</strong>.</li>
+</ul>
+<p>Autrement dit, <strong>les deux tiers du surcoût viennent de deux cotes sur sept</strong> — et ce ne sont pas celles qu'on lime. Ce sont les deux qui <span class="cle">changent de procédé</span> : le trou réclame un alésoir que l'atelier n'a peut-être pas, l'épaisseur réclame une rectifieuse qu'il n'a certainement pas. La deuxième fait sortir la pièce de l'atelier, avec un transport, un délai et un fournisseur.</p>
+<p><strong>c.</strong> <strong>Rien.</strong> Strictement rien. Le chasse-cône rectifié chasse exactement les mêmes cônes que le chasse-cône scié, ni mieux ni plus longtemps. On a payé dix fois le prix et attendu une semaine de plus pour un outil identique.</p>
+<p><em>La réponse à faire à ce collègue tient en une phrase : mettre <span class="mono">f</span> partout, ce n'est pas « bien faire », c'est refuser de choisir. Et refuser de choisir, en fabrication, se paie toujours au comptant.</em></p>
+</div></details>
+</div>
+
+<h3 id="tp-0-12">Les deux fiches de travaux pratiques</h3>
 
 <p>Le plan donne lieu à deux séances qui se suivent. La première ne consomme pas de métal : elle se fait au crayon, sur une photocopie du plan, avec le tableau ISO 2768 à côté. La seconde est à l'atelier.</p>
 
@@ -2545,7 +2643,7 @@ tr.fonc td:first-child{box-shadow:inset 4px 0 0 var(--accent)}
 <li><strong>Brut :</strong> plat d'acier S235 de 5 &times; 40, débité à 160 mm — 10 mm de plus que la cote finale sur la longueur, et 5 mm sur la hauteur</li>
 <li><strong>Traçage :</strong> marbre, trusquin au 1/50, pointe à tracer, équerre à chapeau, réglet, bleu de traçage</li>
 <li><strong>Pointage :</strong> pointeau, marteau de 300 g, <strong>enclume ou bloc d'acier</strong> — jamais le marbre</li>
-<li><strong>Perçage :</strong> perceuse à colonne, étau de perçage <strong>bridé sur la table</strong>, foret &#216;3 pour l'avant-trou, foret &#216;9, cale martyre en bois, huile de coupe</li>
+<li><strong>Perçage :</strong> perceuse à colonne, étau de perçage <strong>bridé sur la table</strong>, foret &#216;4,2 pour l'avant-trou (c'est le foret de taraudage M5, toujours présent), foret &#216;9, cale martyre en bois, huile de coupe</li>
 <li><strong>Sciage :</strong> scie à main, lame 24 dents par pouce, étau d'établi</li>
 <li><strong>Ajustage :</strong> lime bâtarde plate <strong>avec son manche</strong>, lime demi-douce pour la finition, lime ronde ou queue-de-rat pour les congés, carde</li>
 <li><strong>Contrôle :</strong> pied à coulisse, équerre, règle d'ajusteur, rapporteur pour vérification finale seulement</li>
@@ -2557,7 +2655,7 @@ tr.fonc td:first-child{box-shadow:inset 4px 0 0 var(--accent)}
 <li><strong>Bleuir</strong> la face à tracer, laisser sécher.</li>
 <li><strong>Tracer</strong>, pièce posée sur le marbre, chant de référence en bas : trusquin à <strong>35</strong> pour le chant haut, à <strong>6</strong> pour la pointe, à <strong>17,50</strong> pour l'axe du trou. Puis à l'équerre : le bout gauche, la ligne à <strong>10</strong> et la ligne à <strong>40</strong>. Joindre enfin (40&nbsp;;&nbsp;35) et (150&nbsp;;&nbsp;6) à la règle et à la pointe. <span class="cle">L'angle n'est jamais mesuré.</span></li>
 <li><strong>Pointer</strong> le centre du trou sur une enclume : un coup léger, vérifier que la marque est bien au croisement des deux traits, corriger en inclinant le pointeau si elle est décalée, puis un coup franc.</li>
-<li><strong>Percer, la pièce encore entière.</strong> Brider l'étau de perçage sur la table, cale en bois dessous. Avant-trou &#216;3 traversant, puis &#216;9. Huiler. Ralentir nettement à la sortie du foret.</li>
+<li><strong>Percer, la pièce encore entière.</strong> Brider l'étau de perçage sur la table, cale en bois dessous. Avant-trou &#216;4,2 traversant, puis &#216;9. Huiler. Ralentir nettement à la sortie du foret.</li>
 <li><strong>Scier</strong> la pente et le bout à 1 ou 2 mm à l'extérieur du trait, pièce serrée court dans l'étau, trait de scie horizontal.</li>
 <li><strong>Limer jusqu'au trait</strong> à la lime bâtarde : la longueur, la hauteur du talon, puis la pente. Contrôler la rectitude à la règle et la perpendicularité à l'équerre au fur et à mesure — pas à la fin.</li>
 <li><strong>Finir :</strong> congés R5 à la lime ronde, chanfrein 1&#215;45&#176; sur la pointe, ébavurage de toutes les arêtes, passage à la lime demi-douce.</li>
@@ -2582,9 +2680,10 @@ tr.fonc td:first-child{box-shadow:inset 4px 0 0 var(--accent)}
 <p><strong>« Pas sur le marbre ».</strong> Le marbre de traçage est une surface de référence rectifiée à quelques micromètres. Frapper dessus au pointeau, ne serait-ce qu'une fois, y laisse un cratère — et un marbre marqué n'est plus une référence, c'est un plan de travail. On pointe sur une enclume ou sur un bloc d'acier de rebut. Dans les ateliers sérieux, le marbre est le seul outil qu'on interdit de toucher avec un marteau.</p></div>
 
 <div class="plaque"><span class="tag">Anecdote — l'âme du foret, qui n'usine rien</span>
-<p>Pourquoi un avant-trou de 3 avant le foret de 9 ? Regardez la pointe d'un foret hélicoïdal : entre les deux lèvres coupantes, il y a une petite arête transversale, <strong>l'âme</strong>, large ici d'un millimètre et demi. Cette arête ne coupe pas — sa vitesse est nulle au centre. Elle <strong>écrase</strong> le métal et le refoule sur les côtés, et c'est elle qui absorbe l'essentiel de l'effort de poussée.</p>
+<p>Pourquoi un avant-trou de 4,2 avant le foret de 9 ? Regardez la pointe d'un foret hélicoïdal : entre les deux lèvres coupantes, il y a une petite arête transversale, <strong>l'âme</strong>, large ici d'un millimètre et demi. Cette arête ne coupe pas — sa vitesse est nulle au centre. Elle <strong>écrase</strong> le métal et le refoule sur les côtés, et c'est elle qui absorbe l'essentiel de l'effort de poussée.</p>
 <p>Un avant-trou du diamètre de l'âme supprime ce travail inutile : le foret de 9 ne fait plus que couper. On perce plus vite, plus droit, avec moins d'effort et un foret qui dure.</p>
-<p>Mais il y a une limite, et elle se paie cher : <strong>un avant-trou trop gros est pire que pas d'avant-trou du tout.</strong> Si les lèvres ne mordent plus que sur une couronne étroite, le foret se visse dans la pièce comme un tire-bouchon, l'attrape et l'arrache du bridage. Règle simple : <span class="cle">l'avant-trou fait environ le sixième du diamètre final</span> — 1,5 mm d'âme sur un &#216;9, donc un &#216;3 qui laisse de la marge.</p></div>
+<p>Mais il y a une limite, et elle se paie cher : <strong>un avant-trou trop gros est pire que pas d'avant-trou du tout.</strong> Si les lèvres ne mordent plus que sur une couronne étroite, le foret se visse dans la pièce comme un tire-bouchon, l'attrape et l'arrache du bridage — surtout à la sortie. L'usage tient l'avant-trou <span class="cle">entre le tiers et la moitié du diamètre final</span>.</p>
+<p>Notre &#216;4,2 fait 47 % du &#216;9 : on est en haut de la fourchette, et c'est délibéré. &#216;4,2, c'est le <strong>foret de taraudage du M5</strong> — 5 moins le pas de 0,8, la soustraction du chapitre 6. C'est donc celui qui est toujours dans le tiroir, en plusieurs exemplaires et correctement affûté, là où le &#216;3 traîne souvent en un seul exemplaire usé. <em>Le bon avant-trou, c'est celui qui respecte la fourchette et qu'on a sous la main.</em></p></div>
 
   </div>
 </section>
@@ -2835,6 +2934,204 @@ tr.fonc td:first-child{box-shadow:inset 4px 0 0 var(--accent)}
       if(cote.t === 'ang') out.textContent = l1 + '±' + minutes(r.tol);
       else out.textContent = l1 + '±' + fr(r.tol, 2) + ' mm';
     }
+  }, {fixed:true});
+})();
+</script>
+
+<script>
+/* =========================================================================
+   a-prix — CE QUE COUTE UNE TOLERANCE
+   La courbe classique cout/tolerance est presque toujours dessinee lisse.
+   Elle ne l'est pas : le prix monte par marches, et chaque marche est un
+   changement de procede. C'est ce qu'on montre ici, avec les quatre
+   tolerances qu'ISO 2768 donnerait a la cote choisie posees dessus, pour
+   qu'on voie ou tombe le plan reel.
+   ========================================================================= */
+(function(){
+  var VIO = '#b79ae0', VIO2 = '#7b5ea7', OR = '#f0a844', ROUGE = '#e8705e',
+      BLANC = '#e8ece6', GRIS = '#8a9285';
+  var TAUX = 50;                       /* euros de l'heure, main-d'oeuvre + poste */
+  var TMAX = 2.5, TMIN = 0.005;        /* bornes de l'axe des tolerances */
+
+  /* Chaque palier vaut a partir de la tolerance t (incluse) et jusqu'au
+     palier precedent. min = minutes d'atelier, sup = forfait outil/machine. */
+  var COTES = [
+    {n:'150,00 — longueur', u:'mm', iso:{v:2.5, c:1.2, m:0.5, f:0.2},
+     L:[{t:2.0,  p:'Tronçonnage seul, aucune reprise',           k:'Réglet',                  min:2,   sup:0},
+        {t:0.8,  p:'Sciage puis ébavurage',                      k:'Réglet',                  min:5,   sup:0},
+        {t:0.3,  p:'Limage jusqu’au trait',                      k:'Pied à coulisse au 1/50', min:12,  sup:0},
+        {t:0.1,  p:'Ajustage et contrôle répété',                k:'Pied à coulisse au 1/100',min:25,  sup:0},
+        {t:0.03, p:'Ajustage fin, reprises successives',         k:'Micromètre',              min:45,  sup:0},
+        {t:0.01, p:'Fraisage en bout : bridage, réglage, machine',k:'Comparateur sur marbre', min:60,  sup:45},
+        {t:0,    p:'Rectification, pièce stabilisée',            k:'Marbre et métrologie',    min:150, sup:180}]},
+
+    {n:'35,00 — hauteur', u:'mm', iso:{v:1.5, c:0.8, m:0.3, f:0.15},
+     L:[{t:1.0,  p:'Sciage seul',                                k:'Réglet',                  min:3,   sup:0},
+        {t:0.5,  p:'Sciage puis limage rapide',                  k:'Réglet',                  min:6,   sup:0},
+        {t:0.2,  p:'Limage jusqu’au trait',                      k:'Pied à coulisse au 1/50', min:12,  sup:0},
+        {t:0.08, p:'Ajustage et contrôle répété',                k:'Pied à coulisse au 1/100',min:30,  sup:0},
+        {t:0.02, p:'Fraisage : bridage, réglage, machine',       k:'Comparateur',             min:50,  sup:45},
+        {t:0,    p:'Rectification plane',                        k:'Marbre et métrologie',    min:120, sup:180}]},
+
+    {n:'Ø9,00 — le trou', u:'mm', iso:{v:1, c:0.5, m:0.2, f:0.1},
+     L:[{t:0.4,  p:'Un foret Ø9 ordinaire, une passe',           k:'Pied à coulisse',         min:3,   sup:0},
+        {t:0.15, p:'Avant-trou Ø4,2 puis foret Ø9 neuf, huilé',  k:'Pied à coulisse',         min:8,   sup:0},
+        {t:0.05, p:'Perçage à Ø8,8 puis passage à l’alésoir Ø9', k:'Tampon lisse',            min:18,  sup:25},
+        {t:0.015,p:'Alésage machine, arrosage, contrôle systématique', k:'Micromètre d’intérieur', min:35, sup:60},
+        {t:0,    p:'Alésage de précision, pièce en température', k:'Métrologie',              min:90,  sup:150}]},
+
+    {n:'5,00 — l’épaisseur', u:'mm', iso:{v:0.5, c:0.3, m:0.1, f:0.05},
+     L:[{t:0.25, p:'Rien à faire : le fer marchand convient',    k:'Pied à coulisse',         min:1,   sup:0},
+        {t:0.08, p:'Trier le brut : mesurer chaque plat',        k:'Pied à coulisse',         min:10,  sup:0},
+        {t:0.03, p:'Fraisage ou rabotage des deux faces',        k:'Micromètre',              min:50,  sup:60},
+        {t:0,    p:'Rectification plane des deux faces',         k:'Marbre et métrologie',    min:60,  sup:200}]}
+  ];
+
+  function palier(co, tol){
+    for(var i = 0; i < co.L.length; i++) if(tol >= co.L[i].t) return i;
+    return co.L.length - 1;
+  }
+  function prix(r){ return r.min / 60 * TAUX + r.sup; }
+  function eur(x){ return (Math.round(x * 100) / 100).toFixed(2).replace('.', ',') + ' €'; }
+  function mm(x){
+    var d = x >= 1 ? 2 : (x >= 0.1 ? 2 : 3);
+    return (Math.round(x * 1000) / 1000).toFixed(d).replace('.', ',');
+  }
+  function duree(m){
+    if(m < 60) return m + ' min';
+    var h = Math.floor(m / 60), r = m - h * 60;
+    return h + ' h' + (r ? ' ' + (r < 10 ? '0' : '') + r : '');
+  }
+
+  var cc = MSPC.ctrl('a-prix-c', function(v){ return COTES[Math.round(v)].n; }, 'a-prix-c-l');
+  var ct = MSPC.ctrl('a-prix-t', function(v){
+    return '± ' + mm(TMAX * Math.pow(TMIN / TMAX, v / 100)) + ' mm';
+  }, 'a-prix-t-l');
+  var out = document.getElementById('a-prix-out');
+
+  MSPC.anim('a-prix', function(a){
+    var ctx = a.ctx, W = a.W, H = a.H;
+    var co = COTES[Math.max(0, Math.min(3, Math.round(cc.val)))];
+    var tol = TMAX * Math.pow(TMIN / TMAX, Math.max(0, Math.min(100, ct.val)) / 100);
+    var ip = palier(co, tol), r = co.L[ip], px = prix(r);
+
+    MSPC.fond(ctx, W, H, 40);
+
+    /* --- le graphique ------------------------------------------------- */
+    var GX = 62, GY = 78, GW = 494, GH = 286;
+    var maxP = 0;
+    for(var i = 0; i < co.L.length; i++) maxP = Math.max(maxP, prix(co.L[i]));
+    maxP *= 1.12;
+
+    function X(t){
+      var u = (Math.log(TMAX) - Math.log(Math.max(t, TMIN))) / (Math.log(TMAX) - Math.log(TMIN));
+      return GX + u * GW;
+    }
+    function Y(p){ return GY + GH - (p / maxP) * GH; }
+
+    MSPC.mono(ctx, 'LE PRIX DE LA COTE, SELON LA TOLÉRANCE DEMANDÉE', 40, 34, 11, GRIS);
+    MSPC.mono(ctx, co.n.toUpperCase(), W - 40, 34, 11, VIO, 'right');
+
+    ctx.strokeStyle = 'rgba(255,255,255,.28)'; ctx.lineWidth = 1.3;
+    ctx.beginPath();
+    ctx.moveTo(GX, GY); ctx.lineTo(GX, GY + GH); ctx.lineTo(GX + GW, GY + GH);
+    ctx.stroke();
+    MSPC.mono(ctx, 'PRIX', GX - 4, GY - 10, 10, GRIS, 'left');
+    MSPC.mono(ctx, 'tolérance large', GX, GY + GH + 20, 10, GRIS);
+    MSPC.mono(ctx, 'tolérance serrée', GX + GW, GY + GH + 20, 10, GRIS, 'right');
+
+    /* graduations en euros */
+    for(var g = 0; g <= 4; g++){
+      var pv = maxP * g / 4, y = Y(pv);
+      ctx.strokeStyle = 'rgba(255,255,255,.07)';
+      ctx.beginPath(); ctx.moveTo(GX, y); ctx.lineTo(GX + GW, y); ctx.stroke();
+      MSPC.mono(ctx, Math.round(pv) + ' €', GX - 8, y + 4, 10, '#6c7568', 'right');
+    }
+
+    /* la marche d'escalier */
+    ctx.strokeStyle = VIO; ctx.lineWidth = 2.4;
+    ctx.beginPath();
+    var haut = TMAX, yprec = null;
+    for(i = 0; i < co.L.length; i++){
+      var bas = co.L[i].t > 0 ? co.L[i].t : TMIN;
+      var y = Y(prix(co.L[i]));
+      if(yprec === null) ctx.moveTo(X(haut), y);
+      else { ctx.lineTo(X(haut), yprec); ctx.lineTo(X(haut), y); }
+      ctx.lineTo(X(bas), y);
+      yprec = y; haut = bas;
+    }
+    ctx.stroke();
+
+    /* les quatre classes d'ISO 2768 pour cette cote */
+    var CL = ['v', 'c', 'm', 'f'];
+    for(i = 0; i < 4; i++){
+      var tc = co.iso[CL[i]], x = X(tc), pc = prix(co.L[palier(co, tc)]);
+      ctx.strokeStyle = 'rgba(255,255,255,.22)'; ctx.lineWidth = 1;
+      ctx.setLineDash([2, 3]);
+      ctx.beginPath(); ctx.moveTo(x, Y(pc)); ctx.lineTo(x, GY + GH); ctx.stroke();
+      ctx.setLineDash([]);
+      var estc = (CL[i] === 'c');
+      ctx.fillStyle = estc ? OR : '#7e8878';
+      ctx.beginPath(); ctx.arc(x, Y(pc), estc ? 4 : 3, 0, 6.2832); ctx.fill();
+      MSPC.mono(ctx, CL[i], x, GY + GH + 34, estc ? 13 : 11, estc ? OR : '#7e8878', 'center');
+      MSPC.mono(ctx, eur(pc), x, GY + GH + 47, 9.5, estc ? OR : '#69735f', 'center');
+    }
+    MSPC.mono(ctx, 'ce que donnerait chaque classe d’ISO 2768 — le plan est en c',
+              GX, GY + GH + 64, 10, GRIS);
+
+    /* le point courant */
+    var xc = X(tol), yc = Y(px);
+    ctx.strokeStyle = ROUGE; ctx.lineWidth = 1.4;
+    ctx.beginPath(); ctx.moveTo(xc, GY); ctx.lineTo(xc, GY + GH); ctx.stroke();
+    ctx.fillStyle = ROUGE;
+    ctx.beginPath(); ctx.arc(xc, yc, 6, 0, 6.2832); ctx.fill();
+
+    /* --- le panneau de droite ------------------------------------------ */
+    var PX = 596, PW = W - 40 - PX;
+    ctx.fillStyle = 'rgba(255,255,255,.05)';
+    ctx.fillRect(PX, GY - 24, PW, GH + 92);
+    ctx.strokeStyle = 'rgba(255,255,255,.14)'; ctx.lineWidth = 1;
+    ctx.strokeRect(PX + .5, GY - 23.5, PW - 1, GH + 91);
+
+    var y0 = GY - 2;
+    MSPC.mono(ctx, 'TOLÉRANCE DEMANDÉE', PX + 16, y0, 10, GRIS);
+    MSPC.titre(ctx, '± ' + mm(tol) + ' mm', PX + 16, y0 + 28, 26, ROUGE);
+
+    MSPC.mono(ctx, 'IL FAUT ALORS', PX + 16, y0 + 62, 10, GRIS);
+    var mots = r.p.split(' '), ligne = '', ly = y0 + 82;
+    for(i = 0; i < mots.length; i++){
+      var essai = ligne ? ligne + ' ' + mots[i] : mots[i];
+      ctx.font = '12.5px "IBM Plex Mono",monospace';
+      if(ctx.measureText(essai).width > PW - 32 && ligne){
+        MSPC.mono(ctx, ligne, PX + 16, ly, 12.5, BLANC); ly += 17; ligne = mots[i];
+      } else ligne = essai;
+    }
+    if(ligne) MSPC.mono(ctx, ligne, PX + 16, ly, 12.5, BLANC);
+
+    MSPC.mono(ctx, 'CONTRÔLÉ AU', PX + 16, ly + 30, 10, GRIS);
+    MSPC.mono(ctx, r.k, PX + 16, ly + 48, 12.5, VIO);
+
+    MSPC.mono(ctx, 'TEMPS D’ATELIER', PX + 16, ly + 78, 10, GRIS);
+    MSPC.mono(ctx, duree(r.min) + (r.sup ? '  + outillage' : ''), PX + 16, ly + 96, 12.5, BLANC);
+
+    ctx.fillStyle = 'rgba(255,255,255,.12)';
+    ctx.fillRect(PX + 16, ly + 112, PW - 32, 1);
+    MSPC.mono(ctx, 'PRIX DE CETTE SEULE COTE', PX + 16, ly + 134, 10, GRIS);
+    MSPC.titre(ctx, eur(px), PX + 16, ly + 168, 34, OR);
+
+    /* --- la ligne du bas ------------------------------------------------ */
+    var refc = prix(co.L[palier(co, co.iso.c)]);
+    var msg;
+    if(Math.abs(px - refc) < 0.01)
+      msg = 'Même palier que la classe c du plan : à ce niveau, resserrer ne coûte encore rien.';
+    else if(px > refc)
+      msg = 'Soit ' + (Math.round(px / refc * 10) / 10).toString().replace('.', ',')
+          + ' fois le prix de la même cote en classe c — pour une pièce qui fonctionne pareil.';
+    else
+      msg = 'Moins cher que la classe c du plan : à ce niveau, la scie suffit et personne ne contrôle.';
+    MSPC.mono(ctx, msg, 40, H - 16, 12, r.sup ? ROUGE : OR);
+
+    if(out) out.textContent = '± ' + mm(tol) + ' mm · ' + r.p + ' · ' + duree(r.min) + ' · ' + eur(px);
   }, {fixed:true});
 })();
 </script>
