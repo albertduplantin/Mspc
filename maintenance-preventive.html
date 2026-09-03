@@ -31,6 +31,7 @@
     <a class="m-fab" href="fabrication.html"><i class="pastille"></i>Fabrication</a>
     <a class="m-pneu" href="pneumatique.html"><i class="pastille"></i>Pneumatique</a>
     <a class="m-hydro" href="hydraulique.html"><i class="pastille"></i>Hydraulique</a>
+    <a class="m-tp" href="tp.html"><i class="pastille"></i>TP d'atelier</a>
     <a class="m-cahier" href="cahiers.html"><i class="pastille"></i>Cahiers PDF</a>
   </div>
   <a class="soutenir" href="https://ko-fi.com/topinambourrutabaga" target="_blank" rel="noopener">☕ Soutenir le site</a>
@@ -2278,7 +2279,7 @@
 </div>
 
 <!-- TP1 -->
-<div class="tp"><div class="tp-head"><span class="ref">TP 01</span><h3>Ronde de surveillance : construire et éprouver une gamme</h3></div><div class="tp-body">
+<div class="tp" id="tp-maint-01"><div class="tp-head"><span class="ref">TP 01</span><h3>Ronde de surveillance : construire et éprouver une gamme</h3></div><div class="tp-body">
 <div class="tp-meta"><span>Chapitre 9</span><span>2 h</span><span class="ok">Sans énergie</span><span>Binôme</span></div>
 <h4>Objectif</h4><p>Transformer une observation intuitive en gamme de ronde exploitable, et mesurer l'écart entre deux observateurs.</p>
 <h4>Matériel</h4><ul><li>Trois machines de l'atelier en fonctionnement (perceuse à colonne, compresseur, banc de transmission…)</li><li>Thermomètre infrarouge, lampe torche, feutre indélébile, stéthoscope mécanique ou grand tournevis</li><li>Feuille de relevé vierge, chronomètre</li></ul>
@@ -2289,7 +2290,7 @@
 </div></div>
 
 <!-- TP2 -->
-<div class="tp"><div class="tp-head"><span class="ref">TP 02</span><h3>Exploiter un historique : calculer MTBF, MTTR et disponibilité</h3></div><div class="tp-body">
+<div class="tp" id="tp-maint-02"><div class="tp-head"><span class="ref">TP 02</span><h3>Exploiter un historique : calculer MTBF, MTTR et disponibilité</h3></div><div class="tp-body">
 <div class="tp-meta"><span>Chapitre 5</span><span>2 h</span><span class="ok">Salle</span><span>Individuel</span></div>
 <h4>Objectif</h4><p>Passer d'un historique brut de GMAO à des indicateurs, et en tirer une décision argumentée.</p>
 <h4>Matériel</h4><ul><li>Extrait réel ou reconstitué d'un historique de 12 mois pour 4 à 6 équipements (date, heure d'arrêt, heure de remise en service, motif, pièces)</li><li>Tableur</li></ul>
@@ -2300,7 +2301,7 @@
 </div></div>
 
 <!-- TP3 -->
-<div class="tp"><div class="tp-head"><span class="ref">TP 03</span><h3>Reconstituer une courbe en baignoire</h3></div><div class="tp-body">
+<div class="tp" id="tp-maint-03"><div class="tp-head"><span class="ref">TP 03</span><h3>Reconstituer une courbe en baignoire</h3></div><div class="tp-body">
 <div class="tp-meta"><span>Chapitre 3</span><span>1 h 30</span><span class="ok">Salle</span><span>Binôme</span></div>
 <h4>Objectif</h4><p>Construire λ(t) à partir de données de survie et identifier la zone dans laquelle se trouve un composant.</p>
 <h4>Matériel</h4><ul><li>Tableau de survie d'une population de 100 à 200 composants (lampes, courroies, capteurs, roulements) relevé par périodes</li><li>Tableur, papier millimétré</li></ul>
@@ -2311,7 +2312,7 @@
 </div></div>
 
 <!-- TP4 -->
-<div class="tp"><div class="tp-head"><span class="ref">TP 04</span><h3>Chronométrer une intervention : décomposer le MTTR</h3></div><div class="tp-body">
+<div class="tp" id="tp-maint-04"><div class="tp-head"><span class="ref">TP 04</span><h3>Chronométrer une intervention : décomposer le MTTR</h3></div><div class="tp-body">
 <div class="tp-meta"><span>Chapitre 5</span><span>2 h 30</span><span class="ok">Consignation</span><span>Groupe</span></div>
 <h4>Objectif</h4><p>Découvrir que la réparation est rarement la partie la plus longue d'une intervention, et construire un plan d'action sur le MTTR.</p>
 <h4>Matériel</h4><ul><li>Banc didactique ou machine d'atelier sur laquelle le professeur a introduit une panne (courroie rompue, capteur déréglé, fusible, flexible percé)</li><li>Chronomètre, feuille de décomposition des temps, documentation de la machine, accès au magasin</li></ul>
@@ -2322,7 +2323,7 @@
 </div></div>
 
 <!-- TP5 -->
-<div class="tp"><div class="tp-head"><span class="ref">TP 05</span><h3>Graissage d'un roulement : la bonne quantité</h3></div><div class="tp-body">
+<div class="tp" id="tp-maint-05"><div class="tp-head"><span class="ref">TP 05</span><h3>Graissage d'un roulement : la bonne quantité</h3></div><div class="tp-body">
 <div class="tp-meta"><span>Chapitre 7</span><span>2 h</span><span class="ok">Consignation puis marche</span><span>Binôme</span></div>
 <h4>Objectif</h4><p>Calculer, doser et vérifier un regraissage — et constater expérimentalement les effets du sur-graissage.</p>
 <h4>Matériel</h4><ul><li>Banc à deux paliers identiques équipés de graisseurs, entraînés par un moteur à vitesse constante</li><li>Pompe à graisse étalonnée (masse par coup vérifiée à la balance), balance de précision</li><li>Graisse NLGI 2 identifiée, thermomètre infrarouge, chronomètre, chiffons non pelucheux</li></ul>
@@ -2333,7 +2334,7 @@
 </div></div>
 
 <!-- TP6 -->
-<div class="tp"><div class="tp-head"><span class="ref">TP 06</span><h3>Serrage au couple : mesurer la précontrainte réelle</h3></div><div class="tp-body">
+<div class="tp" id="tp-maint-06"><div class="tp-head"><span class="ref">TP 06</span><h3>Serrage au couple : mesurer la précontrainte réelle</h3></div><div class="tp-body">
 <div class="tp-meta"><span>Chapitre 8</span><span>2 h</span><span class="ok">Sans énergie</span><span>Binôme</span></div>
 <h4>Objectif</h4><p>Montrer expérimentalement la dispersion du serrage au couple et l'effet du frottement.</p>
 <h4>Matériel</h4><ul><li>Maquette de serrage instrumentée : vis M10 ou M12 traversant une rondelle dynamométrique, un capteur de force ou une cellule de charge à affichage</li><li>À défaut : montage avec comparateur mesurant l'allongement de la vis, ou empilage de rondelles Belleville étalonnées</li><li>Clé dynamométrique étalonnée, clé plate ordinaire, huile, frein filet, graisse cuivre</li></ul>
@@ -2344,7 +2345,7 @@
 </div></div>
 
 <!-- TP7 -->
-<div class="tp"><div class="tp-head"><span class="ref">TP 07</span><h3>Aligner un accouplement au comparateur</h3></div><div class="tp-body">
+<div class="tp" id="tp-maint-07"><div class="tp-head"><span class="ref">TP 07</span><h3>Aligner un accouplement au comparateur</h3></div><div class="tp-body">
 <div class="tp-meta"><span>Chapitres 8 et 10</span><span>3 h</span><span class="ok">Consignation</span><span>Binôme</span></div>
 <h4>Objectif</h4><p>Maîtriser le geste d'alignement et mesurer son effet direct sur le niveau vibratoire.</p>
 <h4>Matériel</h4><ul><li>Banc moteur + pompe (ou moteur + charge) avec accouplement élastique et cales d'épaisseur calibrées</li><li>Deux comparateurs à levier sur supports magnétiques, ou système d'alignement laser si disponible</li><li>Collecteur de vibrations ou vibromètre simple, jeu de cales, règle, clé dynamométrique</li></ul>
@@ -2355,7 +2356,7 @@
 </div></div>
 
 <!-- TP8 -->
-<div class="tp"><div class="tp-head"><span class="ref">TP 08</span><h3>Balourd : détecter, quantifier, corriger</h3></div><div class="tp-body">
+<div class="tp" id="tp-maint-08"><div class="tp-head"><span class="ref">TP 08</span><h3>Balourd : détecter, quantifier, corriger</h3></div><div class="tp-body">
 <div class="tp-meta"><span>Chapitre 10</span><span>2 h 30</span><span class="ok">Protecteurs en place</span><span>Binôme</span></div>
 <h4>Objectif</h4><p>Reconnaître la signature d'un balourd et vérifier la loi qui lie l'amplitude à la vitesse de rotation.</p>
 <h4>Matériel</h4><ul><li>Banc à disque rotatif percé de trous taraudés permettant d'ajouter des masselottes, sous protecteur</li><li>Variateur de vitesse, accéléromètre et analyseur (ou application smartphone d'analyse spectrale à défaut, pour l'ordre de grandeur)</li><li>Masselottes calibrées, balance</li></ul>
@@ -2366,7 +2367,7 @@
 </div></div>
 
 <!-- TP9 -->
-<div class="tp"><div class="tp-head"><span class="ref">TP 09</span><h3>Écouter et mesurer un roulement dégradé</h3></div><div class="tp-body">
+<div class="tp" id="tp-maint-09"><div class="tp-head"><span class="ref">TP 09</span><h3>Écouter et mesurer un roulement dégradé</h3></div><div class="tp-body">
 <div class="tp-meta"><span>Chapitres 9 et 10</span><span>2 h</span><span class="ok">Protecteurs en place</span><span>Groupe</span></div>
 <h4>Objectif</h4><p>Comparer la précocité des méthodes de détection sur un même défaut : oreille, toucher, température, vitesse vibratoire, accélération.</p>
 <h4>Matériel</h4><ul><li>Collection de roulements de même référence à différents stades : neuf, légèrement marqué, écaillé, grippé (récupérés en atelier ou dégradés volontairement)</li><li>Banc permettant de les monter rapidement ; stéthoscope mécanique, thermomètre IR, vibromètre en vitesse et en accélération</li></ul>
@@ -2377,7 +2378,7 @@
 </div></div>
 
 <!-- TP10 -->
-<div class="tp"><div class="tp-head"><span class="ref">TP 10</span><h3>Thermographie : armoire, moteur et émissivité</h3></div><div class="tp-body">
+<div class="tp" id="tp-maint-10"><div class="tp-head"><span class="ref">TP 10</span><h3>Thermographie : armoire, moteur et émissivité</h3></div><div class="tp-body">
 <div class="tp-meta"><span>Chapitre 11</span><span>2 h 30</span><span class="hab">HABILITATION / DÉMO PROF</span><span>Groupe</span></div>
 <h4>Objectif</h4><p>Réaliser une inspection thermographique valable et démasquer le piège de l'émissivité.</p>
 <h4>Matériel</h4><ul><li>Caméra thermique, thermomètre IR, adhésif isolant mat noir, pastilles d'émissivité</li><li>Banc didactique de bornes chargeables (résistances) permettant de desserrer volontairement une borne — <strong>en TBTS</strong> pour la partie élève</li><li>Moteur avec ailettes obstruables, armoire de l'atelier pour la démonstration professeur</li></ul>
@@ -2388,7 +2389,7 @@
 </div></div>
 
 <!-- TP11 -->
-<div class="tp"><div class="tp-head"><span class="ref">TP 11</span><h3>Prélèvement et analyse d'huile : le test de la pastille</h3></div><div class="tp-body">
+<div class="tp" id="tp-maint-11"><div class="tp-head"><span class="ref">TP 11</span><h3>Prélèvement et analyse d'huile : le test de la pastille</h3></div><div class="tp-body">
 <div class="tp-meta"><span>Chapitre 12</span><span>2 h 30</span><span class="ok">Consignation partielle</span><span>Binôme</span></div>
 <h4>Objectif</h4><p>Réaliser un prélèvement correct, comparer visuellement des propretés et découvrir que l'huile neuve ne l'est pas.</p>
 <h4>Matériel</h4><ul><li>Kit de test par pastille (patch test) : membranes filtrantes, entonnoir de filtration, pompe à vide ou seringue, solvant de rinçage</li><li>Microscope ou loupe binoculaire, ou simple comparaison visuelle sur planche étalon</li><li>Échantillons : huile neuve prise <strong>directement au fût</strong>, huile de centrale hydraulique en service, huile de réducteur âgée, huile volontairement polluée</li><li>Flacons de prélèvement propres, gants nitrile, étiquettes</li></ul>
@@ -2399,7 +2400,7 @@
 </div></div>
 
 <!-- TP12 -->
-<div class="tp"><div class="tp-head"><span class="ref">TP 12</span><h3>Chasse aux fuites d'air comprimé et chiffrage</h3></div><div class="tp-body">
+<div class="tp" id="tp-maint-12"><div class="tp-head"><span class="ref">TP 12</span><h3>Chasse aux fuites d'air comprimé et chiffrage</h3></div><div class="tp-body">
 <div class="tp-meta"><span>Chapitres 6 et 9</span><span>3 h</span><span class="ok">Réseau en service</span><span>Groupe</span></div>
 <h4>Objectif</h4><p>Détecter des fuites, les chiffrer en euros par an, et construire un dossier de rentabilité complet.</p>
 <h4>Matériel</h4><ul><li>Détecteur de fuites à ultrasons si disponible ; à défaut : eau savonneuse, écoute directe pendant un arrêt d'atelier</li><li>Compteur horaire du compresseur, plaque signalétique (puissance absorbée), tarif de l'électricité du site</li><li>Chronomètre, étiquettes de repérage, appareil photo</li></ul>
@@ -2410,7 +2411,7 @@
 </div></div>
 
 <!-- TP13 -->
-<div class="tp"><div class="tp-head"><span class="ref">TP 13</span><h3>AMDEC d'un sous-ensemble de l'atelier</h3></div><div class="tp-body">
+<div class="tp" id="tp-maint-13"><div class="tp-head"><span class="ref">TP 13</span><h3>AMDEC d'un sous-ensemble de l'atelier</h3></div><div class="tp-body">
 <div class="tp-meta"><span>Chapitre 13</span><span>4 h</span><span class="ok">Salle + atelier</span><span>Groupe</span></div>
 <h4>Objectif</h4><p>Conduire une AMDEC machine complète et en déduire un plan de maintenance argumenté.</p>
 <h4>Matériel</h4><ul><li>Un système réel et accessible : convoyeur motorisé, poste de perçage automatisé, centrale hydraulique, compresseur</li><li>Documentation technique, schémas, historique de pannes si disponible</li><li>Grille AMDEC vierge, échelles F/G/D affichées au mur, tableur ou paperboard</li></ul>
@@ -2421,7 +2422,7 @@
 </div></div>
 
 <!-- TP14 -->
-<div class="tp"><div class="tp-head"><span class="ref">TP 14</span><h3>Rédiger une gamme préventive et la faire exécuter par un autre</h3></div><div class="tp-body">
+<div class="tp" id="tp-maint-14"><div class="tp-head"><span class="ref">TP 14</span><h3>Rédiger une gamme préventive et la faire exécuter par un autre</h3></div><div class="tp-body">
 <div class="tp-meta"><span>Chapitre 14</span><span>3 h</span><span class="ok">Consignation</span><span>Binômes croisés</span></div>
 <h4>Objectif</h4><p>Éprouver la qualité d'une gamme par le seul test qui vaille : la faire exécuter par quelqu'un d'autre.</p>
 <h4>Matériel</h4><ul><li>Deux machines différentes de l'atelier, documentation constructeur</li><li>Modèle de gamme vierge, outillage et instruments correspondants, chronomètre</li></ul>
@@ -2432,7 +2433,7 @@
 </div></div>
 
 <!-- TP15 -->
-<div class="tp"><div class="tp-head"><span class="ref">TP 15</span><h3>Chantier 5S et auto-maintenance sur un poste</h3></div><div class="tp-body">
+<div class="tp" id="tp-maint-15"><div class="tp-head"><span class="ref">TP 15</span><h3>Chantier 5S et auto-maintenance sur un poste</h3></div><div class="tp-body">
 <div class="tp-meta"><span>Chapitre 14</span><span>4 h</span><span class="ok">Atelier</span><span>Groupe complet</span></div>
 <h4>Objectif</h4><p>Conduire un chantier 5S réel et mesurer son effet sur le temps d'intervention et la détectabilité des anomalies.</p>
 <h4>Matériel</h4><ul><li>Un poste ou une zone réelle de l'atelier, dans son état habituel</li><li>Appareil photo, chronomètre, étiquettes rouges, mousse de calepinage ou panneau d'ombres, matériel de nettoyage</li></ul>

@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Les travaux pratiques d'atelier — Atelier MSPC</title>
+<meta name="description" content="Toutes les fiches de travaux pratiques du Bac Pro MSPC, classées par domaine : fabrication, électricité, mécanique, hydraulique, pneumatique, maintenance préventive. Objectif, matériel, protocole, exploitation et piège pédagogique.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Saira+Condensed:wght@500;600;700&family=Public+Sans:ital,wght@0,400;0,600;0,800;1,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/site.css">
+<script src="assets/site.js"></script>
+<style>
+:root{--accent:#5c7a4a; --accent-clair:#9dbd84}
+.hero-canvas-wrap{height:min(66vh,540px); min-height:420px}
+
+/* Un domaine : bandeau sombre, puis la grille de ses fiches. */
+.dom{margin:0 0 14px; padding:13px 18px; background:var(--encre); color:#fff;
+  display:flex; align-items:baseline; gap:16px; flex-wrap:wrap;
+  border-left:7px solid var(--m-accent,var(--accent))}
+.dom h2{margin:0; font-size:1.5rem; text-transform:uppercase; border:none; color:#fff; padding:0}
+.dom .cpt{font-family:"IBM Plex Mono",monospace; font-size:11px; letter-spacing:.15em;
+  text-transform:uppercase; color:var(--m-accent-clair,var(--accent-clair)); margin-left:auto}
+.dom p{margin:5px 0 0; flex:1 1 100%; font-size:.93rem; color:#b9c0b4}
+.dom a{color:var(--m-accent-clair,var(--accent-clair))}
+
+.tp-grille{display:grid; grid-template-columns:repeat(auto-fill,minmax(310px,1fr));
+  gap:14px; margin:0 0 40px}
+.fiche-tp{display:block; background:var(--papier); border:1px solid #bcc1b7;
+  border-left:5px solid var(--m-accent,var(--accent)); padding:12px 16px 13px;
+  text-decoration:none; color:inherit; box-shadow:var(--ombre)}
+.fiche-tp:hover{background:#fff; border-left-width:9px; padding-left:12px}
+.fiche-tp .ref{font-family:"IBM Plex Mono",monospace; font-size:10px; letter-spacing:.18em;
+  text-transform:uppercase; color:var(--m-accent,var(--accent))}
+.fiche-tp h4{margin:3px 0 8px; font-size:1.04rem; text-transform:uppercase; line-height:1.16}
+.fiche-tp .m{display:flex; flex-wrap:wrap; gap:5px}
+.fiche-tp .m span{font-family:"IBM Plex Mono",monospace; font-size:9.5px; letter-spacing:.07em;
+  text-transform:uppercase; background:#e4e7de; border:1px solid #c6cbc1; padding:1px 6px;
+  color:var(--encre-doux)}
+.fiche-tp .m span.hab{background:#fbe6e4; border-color:var(--danger); color:#8a1811}
+.fiche-tp .m span.ok{background:#e7f0d8; border-color:#93a415; color:#4a5410}
+.fiche-tp .m span.phare{background:#f7edd6; border-color:#c9791a; color:#8a5410}
+
+.vide{border:1px dashed #b0b6ab; background:#eceee6; padding:17px 20px; margin:0 0 40px;
+  color:var(--encre-doux); font-size:.95rem}
+.vide b{color:var(--encre)}
+@media (max-width:640px){.dom .cpt{margin-left:0}}
+</style>
+</head>
+<body>
+
+<nav class="sitenav" aria-label="Navigation entre les cours">
+  <a class="marque" href="index.html"><span class="sig">Atelier <b>MSPC</b></span></a>
+  <div class="liens">
+    <a href="index.html">Accueil</a>
+    <a class="m-elec" href="electricite.html"><i class="pastille"></i>Électricité</a>
+    <a class="m-maint" href="maintenance-preventive.html"><i class="pastille"></i>Maintenance préventive</a>
+    <a class="m-meca" href="mecanique.html"><i class="pastille"></i>Mécanique</a>
+    <a class="m-fab" href="fabrication.html"><i class="pastille"></i>Fabrication</a>
+    <a class="m-pneu" href="pneumatique.html"><i class="pastille"></i>Pneumatique</a>
+    <a class="m-hydro" href="hydraulique.html"><i class="pastille"></i>Hydraulique</a>
+    <a class="m-tp" href="tp.html" aria-current="page"><i class="pastille"></i>TP d'atelier</a>
+    <a class="m-cahier" href="cahiers.html"><i class="pastille"></i>Cahiers PDF</a>
+  </div>
+  <a class="soutenir" href="https://ko-fi.com/topinambourrutabaga" target="_blank" rel="noopener">☕ Soutenir le site</a>
+</nav>
+
+<header class="hero">
+  <div class="hero-canvas-wrap">
+    <canvas id="htp" aria-label="Animation : les fiches de travaux pratiques disponibles dans chacun des six domaines"></canvas>
+    <div class="hero-ctrl">
+      <label>Domaine <span id="hdl">Fabrication</span></label>
+      <input type="range" id="hd" min="0" max="5" value="0" aria-label="Domaine">
+      <label class="switch"><input type="checkbox" id="hp"><span>Masquer ce qui n'est pas écrit</span></label>
+      <div class="verdict" id="hverdict"></div>
+    </div>
+    <div class="hero-text">
+      <span class="eyebrow">Bac Pro MSPC · Travaux pratiques</span>
+      <h1>Toutes les manipulations,<br><em>rangées</em></h1>
+      <p>Chaque fiche donne l'objectif, le matériel, le protocole pas à pas, les questions d'exploitation et le piège dans lequel la classe tombe à tous les coups. Elles sont classées par domaine et pointent vers le chapitre de cours qui les prépare.</p>
+    </div>
+  </div>
+</header>
+
+<div class="meta-bar">
+  <div><b>32</b> fiches publiées</div>
+  <div><b>6</b> domaines</div>
+  <div>Objectif · matériel · protocole · <b>exploitation</b></div>
+  <div>Sécurité indiquée <b>sur chaque fiche</b></div>
+  <div>Calé sur le <b>référentiel MSPC</b></div>
+</div>
+
+<div class="wrap">
+
+<p class="lede">Un TP n'est pas une manipulation à suivre les yeux fermés. Chaque fiche part d'une question qu'on ne sait pas trancher autrement qu'en la mesurant, et se termine par une exploitation qui ramène le résultat au métier. <span class="cle">Ce qui compte n'est pas d'avoir fait la manip, c'est de pouvoir dire ce qu'elle a prouvé.</span></p>
+
+<p>Les fiches sont écrites pour l'enseignant autant que pour l'élève : durée réaliste, matériel réellement présent dans un atelier de lycée, cadre de sécurité explicite, et le piège pédagogique — celui qu'on provoque exprès parce qu'on n'apprend jamais aussi bien qu'en s'étant trompé une fois.</p>
+
+<!-- ================== FABRICATION ================== -->
+<section class="m-fab" id="d-fab">
+  <div class="dom">
+    <h2>Fabrication et assemblage</h2>
+    <span class="cpt">2 fiches sur 17</span>
+    <p>On ouvre l'année sur le décodage d'un plan et la fabrication de la pièce correspondante. Le cours complet est dans le <a href="fabrication.html">dossier fabrication</a> — treize chapitres, du traçage à l'impression 3D.</p>
+  </div>
+  <div class="tp-grille">
+    <a class="fiche-tp" href="fabrication.html#tp-fab-01">
+      <span class="ref">TP F01</span>
+      <h4>Décoder un plan et reporter les tolérances</h4>
+      <div class="m"><span>Chapitre TP 0</span><span>1 h 30</span><span class="ok">Sans machine</span><span>Individuel</span></div>
+    </a>
+    <a class="fiche-tp" href="fabrication.html#tp-fab-02">
+      <span class="ref">TP F02</span>
+      <h4>Fabriquer le chasse-cône</h4>
+      <div class="m"><span>Chapitres 2, 3, 5</span><span>4 h</span><span class="hab">Perçage · EPI</span><span>Individuel</span></div>
+    </a>
+  </div>
+</section>
+
+<!-- ================== ÉLECTRICITÉ ================== -->
+<section class="m-elec" id="d-elec">
+  <div class="dom">
+    <h2>Électricité</h2>
+    <span class="cpt">15 fiches</span>
+    <p>De la mesure de résistance à la thermographie d'armoire. Toutes les manipulations élèves se font en TBTS, sauf les trois dernières qui exigent une habilitation. Le cours est dans le <a href="electricite.html">dossier électricité</a>.</p>
+  </div>
+  <div class="tp-grille">
+    <a class="fiche-tp" href="electricite.html#tp-elec-01"><span class="ref">TP 01</span><h4>Qui conduit, qui ne conduit pas ?</h4><div class="m"><span>Chapitre 1</span><span>25 min</span><span class="ok">TBTS · 4,5 V</span><span>Binôme</span></div></a>
+    <a class="fiche-tp" href="electricite.html#tp-elec-02"><span class="ref">TP 02</span><h4>De quoi dépend la résistance d'un fil ?</h4><div class="m"><span>Chapitre 6</span><span>40 min</span><span class="ok">TBTS</span><span>Binôme</span></div></a>
+    <a class="fiche-tp" href="electricite.html#tp-elec-03"><span class="ref">TP 03</span><h4>Le cuivre chaud résiste plus</h4><div class="m"><span>Chapitre 6</span><span>30 min</span><span class="ok">TBTS</span><span>Groupe</span></div></a>
+    <a class="fiche-tp" href="electricite.html#tp-elec-04"><span class="ref">TP 04</span><h4>Effet Joule : mesurer P = RI²</h4><div class="m"><span>Chapitre 8</span><span>45 min</span><span class="ok">TBTS · 24 V</span><span>Binôme</span></div></a>
+    <a class="fiche-tp" href="electricite.html#tp-elec-05"><span class="ref">TP 05</span><h4>Refaire l'expérience d'Œrsted</h4><div class="m"><span>Chapitre 10</span><span>30 min</span><span class="ok">TBTS · 4,5 V</span><span>Binôme</span></div></a>
+    <a class="fiche-tp" href="electricite.html#tp-elec-06"><span class="ref">TP 06</span><h4>Fabriquer un électroaimant et trouver la loi N×I</h4><div class="m"><span>Chapitre 11</span><span>55 min</span><span class="ok">TBTS</span><span class="phare">★ TP phare</span></div></a>
+    <a class="fiche-tp" href="electricite.html#tp-elec-07"><span class="ref">TP 07</span><h4>Le moteur homopolaire en 60 secondes</h4><div class="m"><span>Chapitre 6</span><span>15 min</span><span class="ok">Pile AA</span><span class="phare">★ Effet waouh</span></div></a>
+    <a class="fiche-tp" href="electricite.html#tp-elec-08"><span class="ref">TP 08</span><h4>L'aimant qui tombe au ralenti</h4><div class="m"><span>Chapitre 12</span><span>25 min</span><span class="ok">Sans alimentation</span><span class="phare">★ Effet waouh</span></div></a>
+    <a class="fiche-tp" href="electricite.html#tp-elec-09"><span class="ref">TP 09</span><h4>Induction : fabriquer de la tension à la main</h4><div class="m"><span>Chapitre 12</span><span>45 min</span><span class="ok">Sans alimentation</span><span>Binôme</span></div></a>
+    <a class="fiche-tp" href="electricite.html#tp-elec-10"><span class="ref">TP 10</span><h4>Construire un alternateur et voir la sinusoïde</h4><div class="m"><span>Chapitre 13</span><span>50 min</span><span class="ok">TBTS</span><span>Groupe</span></div></a>
+    <a class="fiche-tp" href="electricite.html#tp-elec-11"><span class="ref">TP 11</span><h4>Le transformateur démontable</h4><div class="m"><span>Chapitre 15</span><span>50 min</span><span class="ok">TBTS · 24 V∼</span><span>Binôme</span></div></a>
+    <a class="fiche-tp" href="electricite.html#tp-elec-12"><span class="ref">TP 12</span><h4>Ligne de transport : pourquoi la haute tension</h4><div class="m"><span>Chapitre 16</span><span>60 min</span><span class="ok">TBTS · 24 V∼</span><span class="phare">★ TP phare</span></div></a>
+    <a class="fiche-tp" href="electricite.html#tp-elec-13"><span class="ref">TP 13</span><h4>La lampe n'est pas une résistance constante</h4><div class="m"><span>Chapitre 9</span><span>40 min</span><span class="ok">TBTS · 12 V</span><span>Binôme</span></div></a>
+    <a class="fiche-tp" href="electricite.html#tp-elec-14"><span class="ref">TP 14</span><h4>La vraie courbe de déclenchement d'un disjoncteur</h4><div class="m"><span>Chapitre 14</span><span>60 min</span><span class="hab">Habilitation BS/B1V</span><span>Groupe encadré</span></div></a>
+    <a class="fiche-tp" href="electricite.html#tp-elec-15"><span class="ref">TP 15</span><h4>Thermographie : trouver la borne desserrée</h4><div class="m"><span>Chapitres 1·4·13</span><span>45 min</span><span class="hab">Habilitation BR</span><span class="phare">★ Compétence métier</span></div></a>
+  </div>
+</section>
+
+<!-- ================== MAINTENANCE PRÉVENTIVE ================== -->
+<section class="m-maint" id="d-maint">
+  <div class="dom">
+    <h2>Maintenance préventive</h2>
+    <span class="cpt">15 fiches</span>
+    <p>Les séances les plus longues du site — de deux à quatre heures — parce qu'une ronde, un alignement ou une AMDEC ne se font pas en trente minutes. Le cours est dans le <a href="maintenance-preventive.html">dossier maintenance préventive</a>.</p>
+  </div>
+  <div class="tp-grille">
+    <a class="fiche-tp" href="maintenance-preventive.html#tp-maint-01"><span class="ref">TP 01</span><h4>Ronde de surveillance : construire et éprouver une gamme</h4><div class="m"><span>Chapitre 9</span><span>2 h</span><span class="ok">Sans énergie</span><span>Binôme</span></div></a>
+    <a class="fiche-tp" href="maintenance-preventive.html#tp-maint-02"><span class="ref">TP 02</span><h4>Exploiter un historique : MTBF, MTTR, disponibilité</h4><div class="m"><span>Chapitre 5</span><span>2 h</span><span class="ok">Salle</span><span>Individuel</span></div></a>
+    <a class="fiche-tp" href="maintenance-preventive.html#tp-maint-03"><span class="ref">TP 03</span><h4>Reconstituer une courbe en baignoire</h4><div class="m"><span>Chapitre 3</span><span>1 h 30</span><span class="ok">Salle</span><span>Binôme</span></div></a>
+    <a class="fiche-tp" href="maintenance-preventive.html#tp-maint-04"><span class="ref">TP 04</span><h4>Chronométrer une intervention : décomposer le MTTR</h4><div class="m"><span>Chapitre 5</span><span>2 h 30</span><span class="hab">Consignation</span><span>Groupe</span></div></a>
+    <a class="fiche-tp" href="maintenance-preventive.html#tp-maint-05"><span class="ref">TP 05</span><h4>Graissage d'un roulement : la bonne quantité</h4><div class="m"><span>Chapitre 7</span><span>2 h</span><span class="hab">Consignation</span><span>Binôme</span></div></a>
+    <a class="fiche-tp" href="maintenance-preventive.html#tp-maint-06"><span class="ref">TP 06</span><h4>Serrage au couple : mesurer la précontrainte réelle</h4><div class="m"><span>Chapitre 8</span><span>2 h</span><span class="ok">Sans énergie</span><span>Binôme</span></div></a>
+    <a class="fiche-tp" href="maintenance-preventive.html#tp-maint-07"><span class="ref">TP 07</span><h4>Aligner un accouplement au comparateur</h4><div class="m"><span>Chapitres 8 et 10</span><span>3 h</span><span class="hab">Consignation</span><span>Binôme</span></div></a>
+    <a class="fiche-tp" href="maintenance-preventive.html#tp-maint-08"><span class="ref">TP 08</span><h4>Balourd : détecter, quantifier, corriger</h4><div class="m"><span>Chapitre 10</span><span>2 h 30</span><span class="hab">Protecteurs</span><span>Binôme</span></div></a>
+    <a class="fiche-tp" href="maintenance-preventive.html#tp-maint-09"><span class="ref">TP 09</span><h4>Écouter et mesurer un roulement dégradé</h4><div class="m"><span>Chapitres 9 et 10</span><span>2 h</span><span class="hab">Protecteurs</span><span>Groupe</span></div></a>
+    <a class="fiche-tp" href="maintenance-preventive.html#tp-maint-10"><span class="ref">TP 10</span><h4>Thermographie : armoire, moteur et émissivité</h4><div class="m"><span>Chapitre 11</span><span>2 h 30</span><span class="hab">Habilitation · démo prof</span><span>Groupe</span></div></a>
+    <a class="fiche-tp" href="maintenance-preventive.html#tp-maint-11"><span class="ref">TP 11</span><h4>Analyse d'huile : le test de la pastille</h4><div class="m"><span>Chapitre 12</span><span>2 h 30</span><span class="hab">Consignation partielle</span><span>Binôme</span></div></a>
+    <a class="fiche-tp" href="maintenance-preventive.html#tp-maint-12"><span class="ref">TP 12</span><h4>Chasse aux fuites d'air comprimé et chiffrage</h4><div class="m"><span>Chapitres 6 et 9</span><span>3 h</span><span class="hab">Réseau en service</span><span>Groupe</span></div></a>
+    <a class="fiche-tp" href="maintenance-preventive.html#tp-maint-13"><span class="ref">TP 13</span><h4>AMDEC d'un sous-ensemble de l'atelier</h4><div class="m"><span>Chapitre 13</span><span>4 h</span><span class="ok">Salle + atelier</span><span>Groupe</span></div></a>
+    <a class="fiche-tp" href="maintenance-preventive.html#tp-maint-14"><span class="ref">TP 14</span><h4>Rédiger une gamme et la faire exécuter par un autre</h4><div class="m"><span>Chapitre 14</span><span>3 h</span><span class="hab">Consignation</span><span>Binômes croisés</span></div></a>
+    <a class="fiche-tp" href="maintenance-preventive.html#tp-maint-15"><span class="ref">TP 15</span><h4>Chantier 5S et auto-maintenance sur un poste</h4><div class="m"><span>Chapitre 14</span><span>4 h</span><span class="ok">Atelier</span><span>Groupe complet</span></div></a>
+  </div>
+</section>
+
+<!-- ================== MÉCANIQUE ================== -->
+<section class="m-meca" id="d-meca">
+  <div class="dom">
+    <h2>Mécanique</h2>
+    <span class="cpt">en préparation</span>
+    <p>Le <a href="mecanique.html">dossier mécanique</a> compte douze chapitres publiés sur dix-huit et quinze animations. Ses fiches de TP viendront quand les chapitres restants seront écrits.</p>
+  </div>
+  <div class="vide">Pas encore de fiche publiée. <b>En attendant</b>, les TP d'alignement, de serrage au couple et de balourd du dossier maintenance préventive (fiches 06, 07 et 08) couvrent l'essentiel des liaisons et de la transmission de puissance.</div>
+</section>
+
+<!-- ================== PNEUMATIQUE ================== -->
+<section class="m-pneu" id="d-pneu">
+  <div class="dom">
+    <h2>Pneumatique</h2>
+    <span class="cpt">à venir</span>
+    <p>Le dossier de cours n'est pas encore écrit.</p>
+  </div>
+  <div class="vide">Pas encore de fiche publiée. <b>En attendant</b>, la fiche 12 de maintenance préventive — chasse aux fuites d'air comprimé et chiffrage — se fait sur le réseau d'atelier et constitue une bonne entrée en matière.</div>
+</section>
+
+<!-- ================== HYDRAULIQUE ================== -->
+<section class="m-hydro" id="d-hydro">
+  <div class="dom">
+    <h2>Hydraulique</h2>
+    <span class="cpt">à venir</span>
+    <p>Le dossier de cours n'est pas encore écrit.</p>
+  </div>
+  <div class="vide">Pas encore de fiche publiée. <b>En attendant</b>, la fiche 11 de maintenance préventive — prélèvement et analyse d'huile — touche directement aux circuits hydrauliques et à leur surveillance.</div>
+</section>
+
+<div class="encadre"><span class="tag">Comment lire une fiche</span>
+<p>Toutes suivent le même plan. <strong>Objectif</strong> : ce que l'élève doit savoir faire ou avoir compris en sortant. <strong>Matériel</strong> : la liste réelle, celle qu'on prépare la veille. <strong>Protocole</strong> : les opérations numérotées, dans l'ordre. <strong>Exploitation</strong> : les questions à poser après, celles qui transforment une manipulation en connaissance. <strong>Piège pédagogique</strong> : l'erreur qu'on laisse volontairement se produire.</p>
+<p style="margin-bottom:0">L'étiquette de sécurité est en haut de chaque fiche. <span class="mono">TBTS</span> signifie que la manipulation se fait en très basse tension de sécurité et que les élèves peuvent la mener seuls ; <span class="mono">HABILITATION</span> ou <span class="mono">CONSIGNATION</span> signale une séance encadrée, avec le titre correspondant. <span class="cle">Aucune fiche ne se lance sans avoir lu cette ligne-là.</span></p>
+</div>
+
+</div><!-- /wrap -->
+
+<footer class="fin">
+<p><strong>Les travaux pratiques d'atelier</strong> — 32 fiches publiées à ce jour, réparties sur six domaines du Bac Pro MSPC. Chacune est rattachée au chapitre de cours qui la prépare et à l'animation qui l'illustre.</p>
+<p>Les fiches sont libres d'usage en classe. Elles décrivent des manipulations réalisables avec le matériel courant d'un atelier de lycée professionnel, mais restent des propositions : c'est l'enseignant qui juge de ce que son atelier, son effectif et son niveau de classe permettent.</p>
+<p style="margin-bottom:0"><em>Les valeurs numériques sont des ordres de grandeur pédagogiques. Toute intervention réelle sur installation se fait dans le respect des règles de sécurité applicables et avec l'habilitation correspondante.</em></p>
+</footer>
+
+<script>
+/* =========================================================================
+   HÉROS — l'état réel du chantier, domaine par domaine.
+   Une case pleine = une fiche ecrite, une case vide = une fiche prevue.
+   L'interet de la figure est qu'elle ne flatte pas : on voit du premier
+   coup d'oeil ou il y a de la matiere et ou il n'y a encore rien.
+   ========================================================================= */
+(function(){
+  var DOM = [
+    {n:'Fabrication',            c:'#7b5ea7', cl:'#b79ae0', ok:2,  prev:15,
+     m:'Décodage de plan et fabrication du chasse-cône : les deux premières fiches ouvrent l’année.'},
+    {n:'Électricité',            c:'#93a415', cl:'#c8d834', ok:15, prev:0,
+     m:'Le domaine le plus complet : de la mesure de résistance à la thermographie d’armoire.'},
+    {n:'Maintenance préventive', c:'#c9791a', cl:'#f0a844', ok:15, prev:0,
+     m:'Quinze séances longues — ronde, alignement, balourd, analyse d’huile, AMDEC, 5S.'},
+    {n:'Mécanique',              c:'#3f6b8a', cl:'#79a6c4', ok:0,  prev:12,
+     m:'Douze chapitres publiés sur dix-huit ; les fiches suivront les chapitres restants.'},
+    {n:'Pneumatique',            c:'#1f8fb0', cl:'#5cc4e0', ok:0,  prev:10,
+     m:'Dossier de cours pas encore écrit.'},
+    {n:'Hydraulique',            c:'#b5451f', cl:'#e07a4e', ok:0,  prev:10,
+     m:'Dossier de cours pas encore écrit.'}
+  ];
+
+  /* Scene dessinee dans un repere fixe, puis posee dans la bande libre :
+     le titre occupe le bas et le panneau de commandes le haut a droite. */
+  var SW = 820, SH = 168;
+  var CV = document.getElementById('htp');
+  var PAN = document.querySelector('.hero-ctrl');
+  var TXT = document.querySelector('.hero-text');
+  var bande = {y0:14, y1:200, pleine:false};
+  function mesure(){
+    if(!CV) return;
+    var r = CV.getBoundingClientRect();
+    var y0 = 14, y1 = r.height - 14, pleine = false;
+    if(PAN){
+      var rp = PAN.getBoundingClientRect();
+      if(rp.width > r.width * 0.8){ y0 = Math.max(y0, rp.bottom - r.top + 12); pleine = true; }
+    }
+    if(TXT) y1 = Math.min(y1, TXT.getBoundingClientRect().top - r.top - 12);
+    bande = {y0:y0, y1:Math.max(y0 + 40, y1), pleine:pleine};
+  }
+
+  var dom = MSPC.ctrl('hd', function(v){ return DOM[Math.round(v)].n; }, 'hdl');
+  var pret = MSPC.ctrl('hp');
+  var verdict = document.getElementById('hverdict');
+
+  MSPC.anim('htp', function(a){
+    var ctx = a.ctx, W = a.W, H = a.H, t = a.t;
+    var sel = Math.max(0, Math.min(5, Math.round(dom.val)));
+    var masque = pret.val;
+
+    MSPC.fond(ctx, W, H, 40);
+
+    var dispoW = bande.pleine ? (W - 48) : Math.max(320, W * 0.74 - 40);
+    var dispoH = bande.y1 - bande.y0;
+    var S = Math.max(0.24, Math.min(dispoW / SW, dispoH / SH));
+    ctx.save();
+    ctx.translate(24, bande.y0 + Math.max(0, (dispoH - SH * S) / 2));
+    ctx.scale(S, S);
+
+    MSPC.mono(ctx, 'CE QUI EST ÉCRIT, DOMAINE PAR DOMAINE', 0, 10, 11, '#7f8a7e');
+
+    var X = 230, CW = 15, CG = 4, LH = 25, Y0 = 26;
+    for(var i = 0; i < 6; i++){
+      var d = DOM[i], y = Y0 + i * LH, actif = (i === sel);
+
+      /* le nom du domaine */
+      ctx.fillStyle = actif ? d.cl : '#5f6a5e';
+      ctx.fillRect(0, y - 8, 5, 14);
+      MSPC.mono(ctx, d.n.toUpperCase(), 12, y + 4, actif ? 12 : 11, actif ? '#fff' : '#78826f');
+
+      /* les fiches : pleines si ecrites, en pointille si prevues */
+      var total = masque ? d.ok : d.ok + d.prev;
+      for(var k = 0; k < total; k++){
+        var x = X + k * (CW + CG), ecrite = k < d.ok;
+        if(ecrite){
+          ctx.fillStyle = actif ? d.cl : 'rgba(255,255,255,.26)';
+          ctx.fillRect(x, y - 8, CW, 15);
+          ctx.fillStyle = actif ? 'rgba(0,0,0,.35)' : 'rgba(0,0,0,.25)';
+          for(var l = 0; l < 3; l++) ctx.fillRect(x + 3, y - 5 + l * 4, CW - 6 - (l === 2 ? 4 : 0), 1.6);
+        } else {
+          ctx.strokeStyle = actif ? 'rgba(255,255,255,.34)' : 'rgba(255,255,255,.13)';
+          ctx.lineWidth = 1;
+          ctx.strokeRect(x + .5, y - 7.5, CW - 1, 14);
+        }
+      }
+      if(d.ok === 0 && masque)
+        MSPC.mono(ctx, 'rien encore', X, y + 4, 11, actif ? '#e0a24a' : '#5f6a5e');
+      MSPC.mono(ctx, d.ok + (d.prev ? ' / ' + (d.ok + d.prev) : ''), SW - 4, y + 4,
+                actif ? 12 : 11, actif ? d.cl : '#5f6a5e', 'right');
+    }
+
+    /* le curseur qui suit le domaine choisi */
+    var ys = Y0 + sel * LH;
+    ctx.strokeStyle = DOM[sel].cl; ctx.lineWidth = 1;
+    ctx.globalAlpha = 0.35 + 0.25 * Math.sin(t * 2.4);
+    ctx.strokeRect(-4.5, ys - 12.5, SW + 8, 25);
+    ctx.globalAlpha = 1;
+
+    ctx.restore();
+
+    if(verdict){
+      var d2 = DOM[sel];
+      verdict.textContent = d2.ok
+        ? d2.ok + (d2.prev ? ' fiche' + (d2.ok > 1 ? 's' : '') + ' sur ' + (d2.ok + d2.prev) + '. ' : ' fiches. ') + d2.m
+        : 'Aucune fiche pour l’instant. ' + d2.m;
+    }
+  }, {fill:true, onResize: mesure});
+
+  mesure();
+  window.addEventListener('load', mesure);
+  if(document.fonts && document.fonts.ready) document.fonts.ready.then(mesure);
+})();
+</script>
+
+</body>
+</html>

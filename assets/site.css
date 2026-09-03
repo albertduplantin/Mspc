@@ -81,6 +81,7 @@ a{color:var(--lien)}
 .m-fab{--m-accent:#7b5ea7; --m-accent-clair:#b79ae0}
 .m-pneu{--m-accent:#1f8fb0; --m-accent-clair:#5cc4e0}
 .m-hydro{--m-accent:#b5451f; --m-accent-clair:#e07a4e}
+.m-tp{--m-accent:#5c7a4a; --m-accent-clair:#9dbd84}
 .m-cahier{--m-accent:#c9484a; --m-accent-clair:#e88a8c}
 
 /* ---------- HERO ---------- */
@@ -99,6 +100,14 @@ header.hero{position:relative; margin:0; padding:0; overflow:hidden; background:
   text-transform:uppercase; color:var(--accent-clair); margin:0 0 4px}
 .hero-ctrl label span{color:#fff; float:right; letter-spacing:0}
 .hero-ctrl input{width:100%; margin:0 0 14px}
+/* Interrupteur dans un panneau de commandes : la pastille et son libelle
+   sur une meme ligne. Sans cela, le span herite du renvoi a droite des
+   autres etiquettes et le libelle part sous la case. */
+.switch,.hero-ctrl label.switch,.ctrls label.switch{display:flex; align-items:center;
+  gap:9px; cursor:pointer; margin:0 0 12px}
+.switch input,.hero-ctrl label.switch input,.ctrls label.switch input{width:auto; margin:0; flex:0 0 auto}
+.hero-ctrl label.switch span,.ctrls label.switch span{float:none; color:#fff; margin:0;
+  font-family:"IBM Plex Mono",monospace; font-size:10.5px; letter-spacing:.11em; text-transform:uppercase}
 .hero-ctrl .verdict{font-family:"IBM Plex Mono",monospace; font-size:11.5px; color:#9fb08c; line-height:1.45;
   border-top:1px solid rgba(255,255,255,.14); padding-top:9px; margin-top:2px}
 
