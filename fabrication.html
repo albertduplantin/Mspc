@@ -2150,7 +2150,7 @@ tr.fonc td:first-child{box-shadow:inset 4px 0 0 var(--accent)}
   <span class="savoir n2"><b>S4.1</b> <i>Documentation et suivi du matériel : lecture de plan</i></span>
 </div>
 
-<p class="lede">Une plaque d'acier de cinq millimètres, cent cinquante de long, un trou au bout et une pente. C'est le plan le plus simple qu'on puisse donner à décoder — et il contient pourtant tout : des cotes, des notes, un angle bizarre, une cote absente, et une ligne de quatre caractères dans un coin qui décide de la tolérance de <em>toutes</em> les autres. On va le lire entièrement avant de toucher au métal, parce que <span class="cle">une pièce ratée l'est presque toujours avant le premier trait de scie.</span></p>
+<p class="lede">Une plaque d'acier, un trou au bout, une pente. Le plan le plus simple qu'on puisse donner à lire — et il contient déjà tout : des cotes, des notes, une cote absente, et quatre caractères dans un coin qui décident de ce qu'on a le droit de rater. On le lit en entier avant de toucher au métal, parce que <span class="cle">une pièce ratée l'est presque toujours avant le premier trait de scie.</span></p>
 
 <h3 id="tp-0-1">0.1 — Le plan</h3>
 
@@ -2223,100 +2223,73 @@ tr.fonc td:first-child{box-shadow:inset 4px 0 0 var(--accent)}
 
 <h3 id="tp-0-2">0.2 — À quoi sert la pièce</h3>
 
-<p>Cette pièce s'appelle un <strong>chasse-cône</strong>. C'est un coin plat qu'on glisse dans la lumière de la broche d'une perceuse à colonne — la fente oblongue qui traverse la broche de part en part — et qu'on frappe d'un coup sec de marteau pour <strong>éjecter le mandrin ou le foret à cône morse</strong>. Vous l'avez déjà croisé : le chapitre 5 en parle en une ligne, à propos du cône morse qui « se monte d'un coup sec et se démonte au chasse-cône ».</p>
+<p>C'est un <strong>chasse-cône</strong>. On le glisse dans la lumière de la broche de la perceuse à colonne — la fente qui traverse la broche de part en part — et on frappe un coup sec de marteau pour <strong>éjecter le mandrin ou le foret</strong>. Le chapitre 5 en parle déjà, à propos du cône morse qui « se monte d'un coup sec et se démonte au chasse-cône ».</p>
 
-<p>Autrement dit : <span class="cle">vous allez fabriquer sur la perceuse à colonne l'outil qui sert à dépanner la perceuse à colonne.</span> C'est un bon début d'année. La pièce est utile, elle restera dans l'atelier, et le jour où un foret sera coincé dans la broche, quelqu'un ira décrocher celui que vous aurez fait.</p>
-
-<div class="plaque"><span class="tag">Anecdote — la liaison qui tient par rien</span>
-<p>Le cône morse porte le nom de <strong>Stephen A. Morse</strong>, mécanicien américain à qui l'on doit aussi le foret hélicoïdal, breveté en 1863. Sa société normalise vers la même époque une série de cônes de fixation, et cent soixante ans plus tard votre perceuse d'atelier utilise encore exactement le même profil.</p>
-<p>Sa particularité : une conicité très faible, de l'ordre de <strong>1 pour 20</strong>, soit environ 3° d'angle au sommet. En dessous d'une certaine pente, un cône engagé <strong>ne ressort plus tout seul</strong> : l'adhérence l'emporte sur la composante qui tendrait à l'expulser. On appelle cela un cône auto-serrant. Il n'y a ni vis, ni écrou, ni clavette — rien que du frottement, et ça tient plusieurs centaines de newtons-mètres.</p>
-<p>Le revers est immédiat : ce qui tient sans vis ne se démonte pas non plus sans outil. D'où le coin. <span class="cle">Le chasse-cône existe parce que le cône morse tient trop bien.</span></p></div>
+<p>Autrement dit : <span class="cle">vous allez fabriquer sur la perceuse à colonne l'outil qui sert à dépanner la perceuse à colonne.</span> Il restera à l'atelier, et le jour où un foret sera coincé, quelqu'un ira décrocher le vôtre.</p>
 
 <div class="plaque"><span class="tag">Anecdote — le trou de 9 n'est pas décoratif</span>
-<p>Regardez le plan : ce trou ne sert à rien mécaniquement. Il ne passe aucune vis, il ne guide rien. Il est là pour une seule raison — <strong>accrocher le chasse-cône à un clou à côté de la machine.</strong></p>
-<p>Un chasse-cône qui n'est pas pendu à côté de la perceuse est un chasse-cône qu'on n'a pas au moment où il faut. Et quand on ne l'a pas, il se trouve toujours quelqu'un pour enfoncer un <strong>tournevis</strong> dans la lumière et taper dessus. Le tournevis est rond, la lumière est plate : le coup mate les bords de la fente, et une lumière matée ne laisse plus jamais entrer un vrai chasse-cône. On a économisé deux minutes et abîmé la broche.</p>
-<p><span class="cle">Sur un plan, une cote qui n'a pas de fonction mécanique en a presque toujours une d'usage.</span> Cherchez-la avant de décider qu'elle est inutile.</p></div>
+<p>Ce trou ne sert à rien mécaniquement : il ne passe aucune vis, il ne guide rien. Il est là pour <strong>accrocher le chasse-cône à un clou à côté de la machine</strong>.</p>
+<p>Un chasse-cône qui n'est pas pendu près de la perceuse est un chasse-cône qu'on n'a pas quand il faut. Et là, il se trouve toujours quelqu'un pour enfoncer un <strong>tournevis</strong> dans la lumière et taper dessus. Le tournevis est rond, la fente est plate : le coup mate les bords, et une fente matée ne laisse plus jamais entrer un vrai chasse-cône. Deux minutes gagnées, une broche abîmée.</p></div>
 
-<h3 id="tp-0-3">0.3 — Lire les cotes, une par une</h3>
+<h3 id="tp-0-3">0.3 — Lire les cotes</h3>
 
-<p>Un plan se lit dans l'ordre, en se demandant chaque fois <em>de quoi part la cote</em>. Voici les huit du nôtre.</p>
+<p>Huit cotes. Pour chacune, la seule question est : <em>elle part d'où, elle va où ?</em></p>
 
 <div class="table-scroll">
 <table>
-<thead><tr><th>Cote</th><th>Ce qu'elle dit</th><th>Depuis quoi</th></tr></thead>
+<thead><tr><th>Cote</th><th>Ce qu'elle donne</th></tr></thead>
 <tbody>
-<tr><td class="mono"><strong>150,00</strong></td><td>Longueur totale de la plaque</td><td>Du bout arrondi à la pointe</td></tr>
-<tr><td class="mono"><strong>35,00</strong></td><td>Hauteur du talon, la partie qui reste à section pleine</td><td>Du chant du bas au chant du haut</td></tr>
-<tr><td class="mono"><strong>40,00</strong></td><td>Longueur droite avant que la pente ne commence</td><td>Du bout gauche</td></tr>
-<tr><td class="mono"><strong>10,00</strong></td><td>Position de l'axe du trou dans la longueur</td><td>Du bout gauche</td></tr>
-<tr><td class="mono"><strong>17,50</strong></td><td>Position de l'axe du trou dans la hauteur</td><td>Du chant du bas</td></tr>
-<tr><td class="mono"><strong>&#216;9,00</strong></td><td>Diamètre du trou d'accrochage</td><td>—</td></tr>
-<tr><td class="mono"><strong>5,00</strong></td><td>Épaisseur de la plaque</td><td>Donnée par le brut : on ne l'usine pas</td></tr>
-<tr><td class="mono"><strong>14,77&#176;</strong></td><td>Inclinaison de la pente</td><td>Par rapport au chant du bas</td></tr>
+<tr><td class="mono"><strong>150,00</strong></td><td>La longueur totale, du bout arrondi à la pointe</td></tr>
+<tr><td class="mono"><strong>35,00</strong></td><td>La hauteur du talon, la partie qui reste épaisse</td></tr>
+<tr><td class="mono"><strong>40,00</strong></td><td>Où commence la pente, mesuré depuis le bout gauche</td></tr>
+<tr><td class="mono"><strong>10,00</strong></td><td>Le trou, distance depuis le bout gauche</td></tr>
+<tr><td class="mono"><strong>17,50</strong></td><td>Le trou, hauteur depuis le chant du bas</td></tr>
+<tr><td class="mono"><strong>&#216;9,00</strong></td><td>Le diamètre du trou</td></tr>
+<tr><td class="mono"><strong>5,00</strong></td><td>L'épaisseur — elle vient du brut, on ne l'usine pas</td></tr>
+<tr><td class="mono"><strong>14,77&#176;</strong></td><td>L'inclinaison de la pente</td></tr>
 </tbody>
 </table>
 </div>
 
-<p>Deux remarques tombent tout de suite. La première : <strong>17,50 est exactement la moitié de 35,00</strong>. Le trou est donc sur l'axe de symétrie en hauteur. Le concepteur aurait pu écrire « centré » ; il a préféré donner la cote, ce qui est plus sûr — une note se discute, un nombre non.</p>
+<p><strong>17,50, c'est la moitié de 35,00 :</strong> le trou est donc pile au milieu de la hauteur. Le concepteur aurait pu écrire « centré », il a préféré donner le nombre — un nombre ne se discute pas.</p>
 
-<p>La seconde est plus embêtante : <span class="cle">il manque une cote pour pouvoir tracer.</span> Vous savez où la pente commence — à 40 du bout — mais vous ne savez pas où elle arrive. Le plan ne donne pas la hauteur de la pointe.</p>
+<div class="encadre"><span class="tag">La cote qui manque</span>
+<p>Pour tracer la pente, il vous faut deux hauteurs : celle du talon, et celle de la pointe. Le talon est coté 35. <strong>La pointe n'est pas cotée.</strong></p>
+<p>Elle se retrouve en une soustraction. Sur ses 110 mm de long, la pente descend de <strong>29 mm</strong> :</p>
+<div class="formule">35 &#8722; 29 = <strong>6 mm à la pointe</strong></div>
+<p style="margin-bottom:0">Notez ce 6 sur votre plan, <strong>entre parenthèses</strong> : c'est la façon d'écrire une cote qu'on a déduite et qui ne vient pas du bureau d'études.</p></div>
 
-<div class="encadre"><span class="tag">La cote qui n'est pas sur le plan</span>
-<p>Elle se calcule. La pente descend sur une longueur de 150 &minus; 40 = <strong>110 mm</strong>, à 14,77&#176;. La hauteur perdue vaut donc :</p>
-<div class="formule">110 &times; tan(14,77&#176;) = 110 &times; 0,2637 = <strong>29,01 mm</strong></div>
-<p>Et la hauteur de la pointe :</p>
-<div class="formule">35,00 &minus; 29,01 = <strong>5,99 mm</strong>, soit <strong>6,00 mm</strong></div>
-<p>Six millimètres tout rond. Ce n'est évidemment pas un hasard : <span class="cle">c'est le nombre que le concepteur a choisi, et l'angle est ce qui en découle.</span></p></div>
+<div class="encadre"><span class="tag">Ne tracez jamais l'angle</span>
+<p>14,77&#176;, avec deux chiffres après la virgule, sur une pièce qu'on va faire à la lime. C'est que <strong>personne n'a choisi cet angle</strong> : il sort tout seul des autres cotes, et le logiciel de dessin l'a simplement mesuré.</p>
+<p style="margin-bottom:0">Alors ne cherchez pas de rapporteur. <span class="cle">Tracez 35 au talon, 6 à la pointe, et joignez les deux traits à la règle.</span> L'angle sortira juste, sans que vous l'ayez mesuré une seule fois.</p></div>
 
-<h3 id="tp-0-4">0.4 — Pourquoi 14,77&#176; et pas 15&#176;</h3>
+<h3 id="tp-0-4">0.4 — Les quatre caractères du coin : ISO 2768</h3>
 
-<p>Un angle à deux décimales sur une pièce qu'on va faire à la lime, cela devrait vous étonner. La réponse est simple : <strong>personne n'a choisi 14,77&#176;.</strong></p>
+<p>En bas du plan : <span class="mono">Tolérances générales ISO 2768 cL</span>. Ça ne concerne aucune cote en particulier — ça les concerne <strong>toutes</strong>.</p>
 
-<p>Le concepteur a choisi quatre nombres — 150 de long, 35 de haut, la pente à partir de 40, et 6 à la pointe. L'angle est le <em>résultat</em> de ces quatre-là :</p>
+<p>Écrire 150,00 sur un plan, c'est demander cent cinquante millimètres exactement, ce qu'aucun atelier au monde ne sait faire. La vraie question n'est jamais « quelle longueur ? » mais <span class="cle">« entre quelles deux longueurs la pièce est-elle acceptée ? »</span> Ces deux valeurs, c'est la <strong>tolérance</strong>. Sans elle, une cote ne veut rien dire.</p>
 
-<div class="formule">arctan((35 &minus; 6) / 110) = arctan(29/110) = arctan(0,2636) = <strong>14,7692&#176;</strong></div>
+<p>Les mettre une par une sur le dessin le rendrait illisible ; n'en mettre nulle part, c'est le litige assuré le jour où le client refuse une pièce à 150,4. La norme tranche : <strong>une ligne dans le cartouche, et toutes les cotes reçoivent automatiquement leur intervalle</strong>, lu dans un tableau que les deux parties possèdent.</p>
 
-<p>Le logiciel de CAO a mesuré cet angle et l'a affiché avec deux décimales, comme il le fait toujours. La cote est juste, mais elle est <strong>dérivée</strong> : elle ne commande rien, elle constate.</p>
-
-<div class="encadre"><span class="tag">Conséquence pratique — ne tracez pas l'angle</span>
-<p>Vous pourriez sortir un rapporteur, chercher 14,77&#176; sur un cadran gradué au degré, et tracer une ligne. Vous liriez 15&#176; au mieux, et le trait partirait de travers.</p>
-<p>Faites le contraire. <span class="cle">Tracez les deux hauteurs au trusquin — 35 au talon, 6 à la pointe — et joignez les deux traits à la règle.</span> L'angle sortira tout seul, juste, sans que vous ayez eu à le mesurer une seule fois.</p>
-<p>C'est la règle générale : <strong>quand un plan donne un angle et les cotes qui le produisent, on fabrique d'après les cotes.</strong> Une longueur se mesure au centième avec n'importe quel instrument d'atelier ; un angle, non.</p></div>
-
-<h3 id="tp-0-5">0.5 — La ligne dans le coin : ISO 2768</h3>
-
-<p>En bas du plan, cinq mots : <span class="mono">Tolérances générales ISO 2768 cL</span>. Ils ne concernent aucune cote en particulier — ils les concernent <strong>toutes</strong>.</p>
-
-<p>Une cote seule ne veut rien dire. Écrire 150,00 sur un plan, c'est demander une longueur de cent cinquante millimètres exactement, ce qu'aucun atelier au monde ne sait faire. La question n'est jamais « quelle longueur ? » mais <span class="cle">« entre quelles deux longueurs la pièce est-elle acceptée ? »</span> Cet intervalle s'appelle la <strong>tolérance</strong>.</p>
-
-<div class="plaque"><span class="tag">Anecdote — avant la norme, le procès</span>
-<p>Il y a deux façons de traiter le problème, et les deux sont mauvaises. La première : mettre une tolérance sur chaque cote. Sur notre plan, huit cotes plus les congés et le chanfrein, cela ferait une vingtaine de nombres supplémentaires sur un dessin qui en compte huit. Le plan devient illisible, et le regard ne trouve plus les cotes qui comptent vraiment.</p>
-<p>La seconde : n'en mettre nulle part. C'est l'usage ancien, et il fonctionne très bien — jusqu'au jour où le client refuse une pièce à 150,4 et où le fabricant répond que rien sur le plan ne l'interdisait. Les deux ont raison, et cela finit devant un juge qui n'y connaît rien.</p>
-<p>La norme <strong>ISO 2768</strong> tranche : une seule ligne dans le cartouche, et <em>toute cote non tolérancée individuellement</em> reçoit automatiquement un intervalle, lu dans un tableau que les deux parties possèdent. <span class="cle">Quatre caractères remplacent vingt nombres, et il n'y a plus de litige possible.</span></p></div>
-
-<h4>Les deux lettres</h4>
-
-<p>« cL » n'est pas un mot : ce sont <strong>deux lettres indépendantes</strong>, et il faut les lire séparément.</p>
+<h4>Deux lettres, pas un mot</h4>
 
 <ul>
-<li>La minuscule — <strong>c</strong> — donne la classe pour les <strong>dimensions</strong> : les longueurs, les diamètres, les angles. Quatre classes, de la plus serrée à la plus large : <span class="mono">f</span>, <span class="mono">m</span>, <span class="mono">c</span>, <span class="mono">v</span>.</li>
-<li>La majuscule — <strong>L</strong> — donne la classe pour les <strong>tolérances géométriques</strong> : rectitude, planéité, perpendicularité, symétrie, battement. Trois classes : <span class="mono">H</span>, <span class="mono">K</span>, <span class="mono">L</span>.</li>
+<li>La minuscule <strong>c</strong> vaut pour les <strong>dimensions</strong> — longueurs, diamètres, angles. Quatre classes : <span class="mono">f</span>, <span class="mono">m</span>, <span class="mono">c</span>, <span class="mono">v</span>.</li>
+<li>La majuscule <strong>L</strong> vaut pour les <strong>formes</strong> — rectitude, planéité, perpendicularité. Trois classes : <span class="mono">H</span>, <span class="mono">K</span>, <span class="mono">L</span>.</li>
 </ul>
 
 <div class="encadre danger"><span class="tag">Le piège de la lettre c</span>
-<p>Tout le monde se trompe la première fois. Le <strong>c</strong> ne veut dire ni « courant », ni « centième », ni « classe c comme correcte ». Les quatre lettres viennent de l'anglais : <em>fine, medium, coarse, very coarse</em>. Le <strong>c</strong>, c'est <em>coarse</em> — <strong>grossier</strong>, traduit « large » dans les tableaux français.</p>
-<p>Autrement dit, <span class="cle">« cL » est la combinaison la plus permissive des deux tableaux, à une classe près.</span> Un élève qui lit « c » et comprend « précis » va perdre deux heures à limer au centième une pièce qui accepte le millimètre.</p></div>
+<p>Le <strong>c</strong> ne veut dire ni « courant », ni « centième », ni « correct ». Les lettres viennent de l'anglais : <em>fine, medium, <strong>coarse</strong>, very coarse</em>. <span class="cle">Le c, c'est « grossier » — la classe large.</span></p>
+<p style="margin-bottom:0">Un élève qui lit « c » et comprend « précis » passe deux heures à limer au centième une pièce qui accepte le millimètre.</p></div>
 
-<p>Et c'est le bon choix ici. Un chasse-cône est un coin qu'on frappe au marteau. Il doit entrer dans une fente et être assez dur : rien d'autre. Lui demander la précision d'un logement de roulement n'aurait aucun sens — et coûterait cher.</p>
+<p>Et c'est le bon choix ici : un chasse-cône est un coin qu'on frappe au marteau. Il doit entrer dans une fente et être assez dur. Rien d'autre.</p>
 
 <h4>Le tableau</h4>
-
-<p>Le voici en entier, les deux parties de la norme réunies. C'est celui que vous aurez sous les yeux pendant le TP, et c'est celui que vous devez savoir lire sans hésiter à la fin de l'année.</p>
 
 <div class="table-scroll">
 <table class="iso">
 <thead>
-<tr><th rowspan="2">Classe</th><th colspan="5">Dimensions linéaires — écarts en mm</th><th colspan="3">Rayons et chanfreins</th><th colspan="4">Dimensions angulaires<br><i>(côté le plus court)</i></th></tr>
+<tr><th rowspan="2">Classe</th><th colspan="5">Dimensions linéaires — écarts en mm</th><th colspan="3">Rayons et chanfreins</th><th colspan="4">Angles <i>(côté le plus court)</i></th></tr>
 <tr><th>0,5 à 3</th><th>3 à 6</th><th>6 à 30</th><th>30 à 120</th><th>120 à 400</th><th>0,5 à 3</th><th>3 à 6</th><th>&gt; 6</th><th>&#8804; 10</th><th>10 à 50</th><th>50 à 120</th><th>120 à 400</th></tr>
 </thead>
 <tbody>
@@ -2331,79 +2304,49 @@ tr.fonc td:first-child{box-shadow:inset 4px 0 0 var(--accent)}
 <div class="table-scroll">
 <table class="iso">
 <thead>
-<tr><th rowspan="2">Classe</th><th colspan="5">Rectitude et planéité — sur une longueur de</th><th colspan="3">Perpendicularité et symétrie</th><th>Battement</th></tr>
-<tr><th>&#8804; 10</th><th>10 à 30</th><th>30 à 100</th><th>100 à 300</th><th>300 à 1000</th><th>&#8804; 100</th><th>100 à 300</th><th>300 à 1000</th><th>toutes</th></tr>
+<tr><th rowspan="2">Classe</th><th colspan="5">Rectitude et planéité — sur une longueur de</th><th colspan="3">Perpendicularité</th></tr>
+<tr><th>&#8804; 10</th><th>10 à 30</th><th>30 à 100</th><th>100 à 300</th><th>300 à 1000</th><th>&#8804; 100</th><th>100 à 300</th><th>300 à 1000</th></tr>
 </thead>
 <tbody>
-<tr><td><strong>H</strong> <i>(fin)</i></td><td>0,02</td><td>0,05</td><td>0,1</td><td>0,2</td><td>0,3</td><td>0,2</td><td>0,3</td><td>0,4</td><td>0,1</td></tr>
-<tr><td><strong>K</strong> <i>(moyen)</i></td><td>0,05</td><td>0,1</td><td>0,2</td><td>0,4</td><td>0,6</td><td>0,4</td><td>0,6</td><td>0,8</td><td>0,2</td></tr>
-<tr class="ici"><td><strong>L</strong> <i>(large)</i></td><td>0,1</td><td>0,2</td><td>0,4</td><td>0,8</td><td>1,2</td><td>0,6</td><td>1</td><td>1,5</td><td>0,5</td></tr>
+<tr><td><strong>H</strong> <i>(fin)</i></td><td>0,02</td><td>0,05</td><td>0,1</td><td>0,2</td><td>0,3</td><td>0,2</td><td>0,3</td><td>0,4</td></tr>
+<tr><td><strong>K</strong> <i>(moyen)</i></td><td>0,05</td><td>0,1</td><td>0,2</td><td>0,4</td><td>0,6</td><td>0,4</td><td>0,6</td><td>0,8</td></tr>
+<tr class="ici"><td><strong>L</strong> <i>(large)</i></td><td>0,1</td><td>0,2</td><td>0,4</td><td>0,8</td><td>1,2</td><td>0,6</td><td>1</td><td>1,5</td></tr>
 </tbody>
 </table>
 </div>
 
-<div class="encadre"><span class="tag">Trois règles de lecture, et le piège de la borne</span>
-<p><strong>1.</strong> On choisit la colonne d'après la cote <strong>nominale</strong>, celle écrite sur le plan — jamais d'après la cote mesurée sur la pièce.</p>
-<p><strong>2.</strong> Les tranches se lisent « <em>au-dessus de</em> … <em>jusqu'à</em> … <em>inclus</em> ». Une cote de <strong>30</strong> tombe donc dans la colonne « 6 à 30 » et non dans « 30 à 120 ». La borne appartient toujours à la tranche du dessous. <span class="cle">C'est l'erreur la plus fréquente, et elle change la tolérance du simple au double.</span></p>
-<p><strong>3.</strong> Les rayons et les chanfreins ont leur propre tableau — n'allez pas chercher un R5 dans les dimensions linéaires. Et pour un chanfrein « 1&#215;45&#176; », il y a <em>deux</em> tolérances à reporter : une sur le 1 mm, une sur le 45&#176;.</p></div>
+<div class="encadre"><span class="tag">Comment on s'en sert — en trois gestes</span>
+<p><strong>1.</strong> On repère la colonne avec la cote <strong>écrite sur le plan</strong>, jamais avec la cote mesurée sur la pièce.</p>
+<p><strong>2.</strong> On lit l'écart sur la ligne <span class="mono">c</span>.</p>
+<p><strong>3.</strong> On pose deux opérations : <strong>mini = cote &#8722; écart</strong> et <strong>maxi = cote + écart</strong>.</p>
+<p style="margin-bottom:0"><span class="cle">Attention aux bornes :</span> les tranches se lisent « au-dessus de … jusqu'à … <em>inclus</em> ». Une cote de <strong>30</strong> est donc dans la colonne « 6 à 30 », pas dans « 30 à 120 ». C'est l'erreur la plus fréquente, et elle change la tolérance du simple au double.</p></div>
 
-<h3 id="tp-0-6">0.6 — Le report, cote par cote</h3>
+<h3 id="tp-0-5">0.5 — Le report, cote par cote</h3>
 
-<p>C'est le travail de la première séance : reprendre le plan au crayon de papier et écrire, à côté de chaque cote, l'intervalle dans lequel la pièce sera acceptée. Voici le résultat pour <span class="mono">ISO 2768&#8209;c</span>.</p>
+<p>C'est le travail de la première séance : reprendre le plan au crayon et écrire, sous chaque cote, entre quelles valeurs la pièce sera acceptée. Voici le résultat.</p>
 
 <div class="table-scroll">
 <table>
-<thead><tr><th>Cote</th><th>Tableau</th><th>Tranche</th><th>Écart</th><th>Mini</th><th>Maxi</th></tr></thead>
+<thead><tr><th>Cote</th><th>Tranche</th><th>Écart</th><th>Mini</th><th>Maxi</th></tr></thead>
 <tbody>
-<tr><td class="mono"><strong>150,00</strong></td><td>linéaire</td><td>120 à 400</td><td>±1,2</td><td class="mono">148,80</td><td class="mono">151,20</td></tr>
-<tr><td class="mono"><strong>40,00</strong></td><td>linéaire</td><td>30 à 120</td><td>±0,8</td><td class="mono">39,20</td><td class="mono">40,80</td></tr>
-<tr><td class="mono"><strong>35,00</strong></td><td>linéaire</td><td>30 à 120</td><td>±0,8</td><td class="mono">34,20</td><td class="mono">35,80</td></tr>
-<tr><td class="mono"><strong>17,50</strong></td><td>linéaire</td><td>6 à 30</td><td>±0,5</td><td class="mono">17,00</td><td class="mono">18,00</td></tr>
-<tr><td class="mono"><strong>10,00</strong></td><td>linéaire</td><td>6 à 30</td><td>±0,5</td><td class="mono">9,50</td><td class="mono">10,50</td></tr>
-<tr><td class="mono"><strong>&#216;9,00</strong></td><td>linéaire</td><td>6 à 30</td><td>±0,5</td><td class="mono">8,50</td><td class="mono">9,50</td></tr>
-<tr><td class="mono"><strong>5,00</strong></td><td>linéaire</td><td>3 à 6</td><td>±0,3</td><td class="mono">4,70</td><td class="mono">5,30</td></tr>
-<tr><td class="mono"><strong>R5</strong></td><td>rayons</td><td>3 à 6</td><td>±1</td><td class="mono">R4</td><td class="mono">R6</td></tr>
-<tr><td class="mono"><strong>1</strong> <i>(chanfrein)</i></td><td>chanfreins</td><td>0,5 à 3</td><td>±0,4</td><td class="mono">0,60</td><td class="mono">1,40</td></tr>
-<tr><td class="mono"><strong>45&#176;</strong> <i>(chanfrein)</i></td><td>angulaire</td><td>côté 1 mm &#8594; &#8804; 10</td><td>±1&#176;30'</td><td class="mono">43&#176;30'</td><td class="mono">46&#176;30'</td></tr>
-<tr><td class="mono"><strong>14,77&#176;</strong></td><td>angulaire</td><td>côté 113,8 mm &#8594; 50 à 120</td><td>±30'</td><td class="mono">14&#176;16'</td><td class="mono">15&#176;16'</td></tr>
+<tr><td class="mono"><strong>150,00</strong></td><td>120 à 400</td><td class="mono">±1,2</td><td class="mono">148,80</td><td class="mono">151,20</td></tr>
+<tr><td class="mono"><strong>40,00</strong></td><td>30 à 120</td><td class="mono">±0,8</td><td class="mono">39,20</td><td class="mono">40,80</td></tr>
+<tr><td class="mono"><strong>35,00</strong></td><td>30 à 120</td><td class="mono">±0,8</td><td class="mono">34,20</td><td class="mono">35,80</td></tr>
+<tr><td class="mono"><strong>17,50</strong></td><td>6 à 30</td><td class="mono">±0,5</td><td class="mono">17,00</td><td class="mono">18,00</td></tr>
+<tr><td class="mono"><strong>10,00</strong></td><td>6 à 30</td><td class="mono">±0,5</td><td class="mono">9,50</td><td class="mono">10,50</td></tr>
+<tr><td class="mono"><strong>&#216;9,00</strong></td><td>6 à 30</td><td class="mono">±0,5</td><td class="mono">8,50</td><td class="mono">9,50</td></tr>
+<tr><td class="mono"><strong>5,00</strong></td><td>3 à 6</td><td class="mono">±0,3</td><td class="mono">4,70</td><td class="mono">5,30</td></tr>
+<tr><td class="mono"><strong>R5</strong></td><td>rayons, 3 à 6</td><td class="mono">±1</td><td class="mono">R4</td><td class="mono">R6</td></tr>
+<tr><td class="mono"><strong>1</strong> <i>(chanfrein)</i></td><td>chanfreins, 0,5 à 3</td><td class="mono">±0,4</td><td class="mono">0,60</td><td class="mono">1,40</td></tr>
 </tbody>
 </table>
 </div>
 
-<p>La ligne de l'angle demande une explication. Le tableau des dimensions angulaires ne se lit pas d'après la valeur de l'angle mais d'après <strong>la longueur du plus court des deux côtés qui le forment</strong>. Ici, l'angle est pris entre le chant du bas (150 mm) et le bord incliné. Ce bord incliné mesure :</p>
-
-<div class="formule">&#8730;(110&#178; + 29&#178;) = &#8730;12 941 = <strong>113,8 mm</strong></div>
-
-<p>113,8 est plus court que 150, et il tombe dans la tranche « 50 à 120 » : la tolérance est donc de <strong>±30'</strong>, soit un demi-degré.</p>
-
-<div class="encadre"><span class="tag">Ce que vaut ce demi-degré au bout de la pièce</span>
-<p>Un demi-degré, sur le papier, c'est peu. Reporté sur les 110 mm de pente, cela donne :</p>
-<div class="formule">110 &times; tan(0,5&#176;) = 110 &times; 0,00873 = <strong>0,96 mm</strong></div>
-<p>La hauteur de la pointe peut donc légalement varier de <strong>5,0 à 7,0 mm</strong> rien qu'à cause de la tolérance d'angle — et davantage encore si l'on cumule avec la tolérance du 35,00. <span class="cle">Sur cette pièce, l'angle n'est pas une contrainte : c'est la conséquence tolérée d'autre chose.</span> Raison de plus pour tracer les hauteurs et non l'angle.</p></div>
-
-<h3 id="tp-0-7">0.7 — Les tolérances qu'on oublie toujours : la forme</h3>
-
-<p>Le tableau <span class="mono">L</span> ne parle pas de longueurs mais de <strong>formes</strong>, et c'est un tout autre sujet. Une pièce peut être bonne sur toutes ses cotes et refusée quand même.</p>
+<p><strong>Et l'angle ?</strong> Le tableau des angles ne se lit pas sur la valeur de l'angle, mais sur la longueur du côté le plus court. Ici c'est le bord incliné, qui mesure <strong>113,8 mm</strong> : tranche 50 à 120, donc <span class="mono">±30'</span>, un demi-degré. Retenez surtout ceci : <span class="cle">personne ne mesurera jamais cet angle sur votre pièce.</span></p>
 
 <div class="image-mentale"><span class="tag">Image mentale — le parallélogramme</span>
-<p>Imaginez que votre chasse-cône soit légèrement « penché » : le bout gauche n'est pas d'équerre, la pièce forme un parallélogramme très aplati. Mesurez la hauteur au pied à coulisse à cinq endroits : vous trouvez 35,0 partout. La cote 35,00 &plusmn; 0,8 est <strong>parfaitement respectée</strong>.</p>
-<p>Et pourtant la pièce est fausse : posée sur le marbre, elle ne tient pas droite, et le trou de 9 n'est plus à 10 du bout mesuré perpendiculairement. <span class="cle">Une cote dit une distance ; elle ne dit rien de l'orientation ni de la rectitude.</span> C'est exactement le trou que bouchent les tolérances géométriques.</p></div>
-
-<p>Trois d'entre elles s'appliquent directement à ce que vous allez faire à la lime :</p>
-
-<div class="table-scroll">
-<table>
-<thead><tr><th>Sur quoi</th><th>Quelle tolérance</th><th>Longueur concernée</th><th>Classe L</th><th>Comment on contrôle</th></tr></thead>
-<tbody>
-<tr><td>Le chant du bas, sur 150</td><td><strong>Rectitude</strong></td><td>100 à 300</td><td class="mono">0,8 mm</td><td>Règle d'ajusteur posée dessus, contre la lumière</td></tr>
-<tr><td>Le chant du haut, sur 40</td><td><strong>Rectitude</strong></td><td>30 à 100</td><td class="mono">0,4 mm</td><td>Idem, règle plus courte</td></tr>
-<tr><td>Le bout gauche par rapport au chant du bas</td><td><strong>Perpendicularité</strong></td><td>&#8804; 100 <i>(le côté le plus court, 35)</i></td><td class="mono">0,6 mm</td><td>Équerre à chapeau, contre la lumière</td></tr>
-<tr><td>Une face de 150 &times; 35</td><td><strong>Planéité</strong></td><td>100 à 300</td><td class="mono">0,8 mm</td><td>Règle en croix sur la face</td></tr>
-</tbody>
-</table>
-</div>
-
-<p>Ce sont des valeurs très confortables. Un chant limé avec un peu de soin tient largement dans 0,8 mm — le chapitre 3 montre d'ailleurs qu'on fait bien mieux dès qu'on cesse de bercer la lime. Mais elles existent, elles sont opposables, et <strong>elles se contrôlent avec deux outils qui ne coûtent rien : une règle et de la lumière.</strong></p>
+<p>Imaginez votre chasse-cône légèrement penché : le bout gauche n'est pas d'équerre, la pièce forme un parallélogramme aplati. Mesurez la hauteur au pied à coulisse à cinq endroits : 35,0 partout. La cote est <strong>parfaitement respectée</strong>.</p>
+<p style="margin-bottom:0">Et pourtant la pièce est fausse : posée sur le marbre, elle ne tient pas droite. <span class="cle">Une cote dit une distance, jamais une forme.</span> C'est ce trou que bouche la lettre <span class="mono">L</span> — et sur cette pièce, elle autorise 0,8 mm de rectitude sur le grand chant et 0,6 mm de faux-équerre sur le bout. On les contrôle avec une règle, une équerre, et de la lumière derrière.</p></div>
 
 <figure class="anim" id="fig-iso">
   <canvas id="a-iso" width="900" height="550" aria-label="Animation : lecture du tableau ISO 2768, tolérance obtenue pour chaque cote du plan selon la classe choisie"></canvas>
@@ -2415,197 +2358,146 @@ tr.fonc td:first-child{box-shadow:inset 4px 0 0 var(--accent)}
   <figcaption>En haut, la pièce, avec la cote choisie mise en évidence. En bas, <b>les quatre classes côte à côte</b> : à gauche l’intervalle accepté, tracé à la même échelle très agrandie ; à droite <b>ce que cette cote coûte à fabriquer</b> dans cette classe, et le rapport au prix du plan. <b>Balayez les cotes à classe constante</b> et regardez la barre changer de largeur par sauts — chaque saut est un changement de tranche dans le tableau. <b>Passez ensuite de f à v sur une même cote</b> : l’intervalle est multiplié par plus de dix, et le prix s’effondre. <b>Arrêtez-vous sur le &#216;9,00</b> et comparez m et f : le prix est multiplié par six d’un coup, parce qu’un foret ne suffit plus et qu’il faut un alésoir. <b>Terminez par le 5,00</b>, l’épaisseur du brut : elle ne coûte rien jusqu’à m, puis cent euros — la pièce doit sortir de l’atelier. <span class="cle">Ce n’est jamais le dixième qui coûte : c’est la machine qu’il oblige à sortir.</span></figcaption>
 </figure>
 
-<div class="autableau">
-  <b class="entete">Au tableau <i>&middot; 12 minutes &middot; animation 1 sur 1</i></b>
-  <ol>
-    <li>Réglage initial, cote <b>150,00</b> en classe <b>c</b>. <span class="q">« La pièce fait 151. Elle est bonne ou mauvaise ? »</span> Faire lire la barre plutôt que deviner.</li>
-    <li>Sans rien changer d'autre, passer en classe <b>f</b>. <span class="q">« Et maintenant ? »</span> Même pièce, même plan, verdict inversé. Faire dire que la tolérance n'est pas une propriété de la pièce mais une décision du concepteur.</li>
-    <li>Retour en <b>c</b>, aller sur <b>17,50</b> puis <b>35,00</b>. <span class="q">« Pourquoi la barre grandit-elle d'un coup ? »</span> Attendre « on a changé de colonne » — c'est tout le mécanisme du tableau.</li>
-    <li>Aller sur <b>5,00</b>. <span class="q">« Quelle est la cote la plus serrée du plan ? »</span> Puis : <span class="q">« Qui l'usine ? »</span> Personne. Elle vient du fer marchand.</li>
-    <li>Terminer sur <b>14,77&#176;</b> et la ligne du bas. <span class="q">« Un demi-degré, c'est beaucoup ou pas ? »</span> 0,96 mm au bout : ça dépend toujours de la longueur du bras de levier.</li>
-  </ol>
-  <div class="piege">Piège classique à provoquer : demander la tranche de la cote <b>30</b> (inventée pour l'occasion). La moitié de la classe répondra « 30 à 120 ». La borne appartient à la tranche du dessous.</div>
-</div>
+<h3 id="tp-0-6">0.6 — Deux cotes sur huit comptent vraiment</h3>
 
-<h3 id="tp-0-8">0.8 — Quelles cotes comptent vraiment</h3>
+<p>Toutes les cotes n'ont pas le même poids. Deux seulement décident si l'outil marche :</p>
 
-<p>Toutes les cotes d'un plan n'ont pas le même poids. Certaines conditionnent le fonctionnement, les autres tiennent la forme. Savoir les distinguer, c'est savoir où mettre son temps.</p>
+<ul>
+<li><strong>L'épaisseur de 5</strong> : c'est elle qui doit entrer dans la fente de la broche. Trop épaisse, le coin n'entre pas du tout.</li>
+<li><strong>Les 6 de la pointe</strong> : elle doit s'engager sous le tenon. Trop haute, le coin bute avant d'avoir poussé.</li>
+</ul>
+
+<p>Tout le reste — la longueur, la hauteur du talon, le diamètre du trou, l'angle — peut se tromper de un ou deux millimètres sans que personne ne s'en aperçoive jamais. <span class="cle">Les deux cotes qui comptent sont les deux plus petites, celles qu'on regarde en dernier.</span> C'est presque toujours ainsi.</p>
+
+<h3 id="tp-0-7">0.7 — Ce que coûte la précision</h3>
+
+<p>Une tolérance n'est pas un souhait : c'est une commande de temps et de machine, donc d'argent. Voici la même pièce chiffrée deux fois — d'abord telle qu'elle est, en classe <span class="mono">c</span>, puis avec le cartouche resserré en classe <span class="mono">f</span>. Rien d'autre ne change.</p>
 
 <div class="table-scroll">
 <table>
-<thead><tr><th>Cote</th><th>Rôle</th><th>Si elle est fausse</th></tr></thead>
+<thead><tr><th>Cote</th><th>En classe c</th><th>Prix</th><th>En classe f</th><th>Prix</th></tr></thead>
 <tbody>
-<tr class="fonc"><td class="mono"><strong>5,00</strong></td><td><strong>Fonctionnelle.</strong> C'est l'épaisseur qui doit entrer dans la lumière de la broche</td><td>Trop épais, le coin n'entre pas du tout</td></tr>
-<tr class="fonc"><td class="mono"><strong>6,00</strong> <i>(pointe)</i></td><td><strong>Fonctionnelle.</strong> La pointe doit s'engager dans la fente et passer sous le tenon</td><td>Trop haute, le coin bute avant d'avoir poussé</td></tr>
-<tr><td class="mono"><strong>35,00</strong></td><td>De forme. Donne du corps là où l'on frappe</td><td>Rien, tant qu'on peut taper dessus</td></tr>
-<tr><td class="mono"><strong>150,00</strong></td><td>De forme. Assez long pour tenir la main hors de la trajectoire</td><td>Rien à 2 mm près</td></tr>
-<tr><td class="mono"><strong>&#216;9,00</strong></td><td>D'usage. Le clou d'accrochage</td><td>Rien, tant qu'un clou passe</td></tr>
-<tr><td class="mono"><strong>14,77&#176;</strong></td><td>Dérivée. Conséquence des quatre autres</td><td>Rien, dans l'intervalle du tableau</td></tr>
+<tr><td class="mono"><strong>150,00</strong></td><td>Scier, ébavurer</td><td class="mono">4,20 €</td><td>Ajuster et contrôler</td><td class="mono">20,80 €</td></tr>
+<tr><td class="mono"><strong>40,00</strong></td><td>Limer vite</td><td class="mono">5,00 €</td><td>Ajuster et contrôler</td><td class="mono">25,00 €</td></tr>
+<tr><td class="mono"><strong>35,00</strong></td><td>Limer vite</td><td class="mono">5,00 €</td><td>Ajuster et contrôler</td><td class="mono">25,00 €</td></tr>
+<tr><td class="mono"><strong>17,50</strong></td><td>Trusquin</td><td class="mono">2,50 €</td><td>Trusquin et contrôle</td><td class="mono">8,30 €</td></tr>
+<tr><td class="mono"><strong>10,00</strong></td><td>Trusquin</td><td class="mono">2,50 €</td><td>Trusquin et contrôle</td><td class="mono">8,30 €</td></tr>
+<tr class="fonc"><td class="mono"><strong>&#216;9,00</strong></td><td>Un foret</td><td class="mono">2,50 €</td><td><strong>Il faut un alésoir</strong></td><td class="mono">40,00 €</td></tr>
+<tr class="fonc"><td class="mono"><strong>5,00</strong></td><td>Rien à faire</td><td class="mono">0,80 €</td><td><strong>Il faut rectifier</strong></td><td class="mono">101,70 €</td></tr>
+<tr><td><strong>Total</strong></td><td><strong>Une demi-heure</strong></td><td class="mono"><strong>22,50 €</strong></td><td><strong>Deux machines en plus</strong></td><td class="mono"><strong>229,10 €</strong></td></tr>
 </tbody>
 </table>
 </div>
 
-<p><span class="cle">Deux cotes fonctionnelles sur huit</span> — et ce sont les deux plus petites, celles qu'on regarde en dernier. C'est presque toujours ainsi. La longueur totale saute aux yeux et ne sert à rien ; l'épaisseur, qu'on ne pense même pas à mesurer, décide si l'outil marche.</p>
+<div class="formule">22,50 &#8594; 229,10 &nbsp;:&nbsp; <strong>dix fois plus cher</strong><small>pour deux lettres changées dans le coin du plan</small></div>
 
-<div class="plaque"><span class="tag">Anecdote — le trusquin, et ce qu'il garantit vraiment</span>
-<p>Le trusquin que vous allez utiliser se lit au <strong>cinquantième de millimètre</strong>, soit 0,02 mm. Face à une tolérance de &plusmn;0,8, c'est quarante fois plus fin que nécessaire. Alors pourquoi s'en servir ?</p>
-<p>Pas pour la précision. <strong>Pour le parallélisme.</strong> Un trusquin trace une ligne à hauteur constante <em>depuis le marbre</em> : le trait est parallèle au plan de référence sur toute sa longueur, ce qu'aucun réglet tenu à la main ne garantit. Vous pouvez tracer « à peu près 6 » au réglet ; vous ne pouvez pas tracer une ligne parallèle à la base.</p>
-<p>Quant au cinquantième lui-même, il vient de <strong>Pierre Vernier</strong>, mathématicien franc-comtois qui publie le principe en 1631 : cinquante divisions du curseur couvrent exactement quarante-neuf millimètres de la règle. Chaque division du curseur est donc <strong>en retard de deux centièmes</strong> sur celle d'en face — et c'est précisément ce retard qu'on lit. L'instrument ne mesure pas les centièmes : il les compte.</p></div>
+<p>Regardez <em>où</em> part l'argent. Les cotes qu'on lime coûtent cinq fois plus — c'est beaucoup, mais c'est encore du travail d'atelier. <span class="cle">Les deux qui explosent sont celles qui changent d'outil</span> : le trou réclame un alésoir, l'épaisseur réclame une rectifieuse que l'atelier n'a pas. La pièce doit sortir de l'atelier.</p>
 
-<h3 id="tp-0-9">0.9 — Ce que coûte un dixième</h3>
+<p>Et le pire : <strong>ces deux cents euros n'achètent rien.</strong> Le chasse-cône rectifié chasse exactement les mêmes cônes que le chasse-cône scié. D'où la règle des bureaux d'études : <span class="cle">on ne serre une tolérance que si l'on peut dire à quoi elle sert.</span> Pas « pour être sûr » — une phrase, avec une fonction dedans.</p>
 
-<p>Il reste une question que personne ne pose en classe et que tout le monde pose en entreprise : <strong>combien coûte cette tolérance ?</strong> Parce qu'une tolérance n'est pas un souhait. C'est une commande de temps, d'outillage et parfois de machine — donc une commande d'argent, signée par celui qui dessine et payée par celui qui fabrique.</p>
+<h3 id="tp-0-8">0.8 — L'ordre des opérations</h3>
 
-<div class="encadre"><span class="tag">Les hypothèses du chiffrage</span>
-<p>Tous les prix qui suivent reposent sur les mêmes conventions, et elles doivent être dites : <strong>pièce unitaire</strong> (une seule, pas une série), fabriquée dans un <strong>atelier de maintenance</strong>, à un taux horaire de <strong>50 € de l'heure</strong> couvrant la main-d'œuvre et l'occupation du poste. Les opérations qui demandent une machine ou un outil spécial portent en plus un forfait.</p>
-<p style="margin-bottom:0">Ce sont des <em>ordres de grandeur</em>, pas un devis. Ce qui compte n'est pas le chiffre exact : c'est le rapport entre les colonnes.</p></div>
-
-<h4>Le prix ne monte pas doucement : il monte par marches</h4>
-
-<p>On imagine volontiers que resserrer une tolérance coûte un peu plus cher, proportionnellement. C'est faux. <span class="cle">Le coût monte par paliers, et chaque palier est un changement de procédé.</span></p>
-
-<p>Tant que la tolérance reste large, la scie suffit. En dessous, il faut limer. Plus bas, il faut limer <em>et</em> contrôler sans arrêt. Plus bas encore, la lime ne suffit plus et il faut une machine. Et tout en bas, la pièce quitte l'atelier pour aller se faire rectifier ailleurs. Entre deux marches, le prix bouge à peine ; au passage d'une marche, il double ou il décuple.</p>
-
-<p><strong>C’est exactement ce que montre l’animation du chapitre.</strong> <a href="#fig-iso">Remontez-y</a> et regardez la colonne de droite : le prix y est calculé avec le barème ci-dessous, cote par cote et classe par classe. Vous avez d’un côté ce que la norme autorise, de l’autre ce que l’atelier facture — sur la même image.</p>
-
-<h4>La même pièce, deux cartouches</h4>
-
-<p>Reprenons les sept cotes dimensionnelles du plan et chiffrons-les deux fois : d'abord telles qu'elles sont, en <span class="mono">ISO 2768&#8209;c</span>, puis avec le cartouche resserré à <span class="mono">ISO 2768&#8209;f</span>. Rien d'autre ne change — ni la forme, ni la fonction, ni le matériau.</p>
-
-<div class="table-scroll">
-<table>
-<thead><tr><th rowspan="2">Cote</th><th colspan="3">Classe c — le plan tel qu'il est</th><th colspan="3">Classe f — « pour être sûr »</th></tr>
-<tr><th>Tol.</th><th>Ce qu'il faut faire</th><th>Prix</th><th>Tol.</th><th>Ce qu'il faut faire</th><th>Prix</th></tr></thead>
-<tbody>
-<tr><td class="mono"><strong>150,00</strong></td>
-  <td class="mono">±1,2</td><td>Sciage puis ébavurage</td><td class="mono">4,20 €</td>
-  <td class="mono">±0,2</td><td>Ajustage et contrôle répété</td><td class="mono">20,80 €</td></tr>
-<tr><td class="mono"><strong>40,00</strong></td>
-  <td class="mono">±0,8</td><td>Sciage puis limage rapide</td><td class="mono">5,00 €</td>
-  <td class="mono">±0,15</td><td>Ajustage et contrôle répété</td><td class="mono">25,00 €</td></tr>
-<tr><td class="mono"><strong>35,00</strong></td>
-  <td class="mono">±0,8</td><td>Sciage puis limage rapide</td><td class="mono">5,00 €</td>
-  <td class="mono">±0,15</td><td>Ajustage et contrôle répété</td><td class="mono">25,00 €</td></tr>
-<tr><td class="mono"><strong>17,50</strong></td>
-  <td class="mono">±0,5</td><td>Trusquin, rien de plus</td><td class="mono">2,50 €</td>
-  <td class="mono">±0,1</td><td>Trusquin, pointage vérifié, contrôle</td><td class="mono">8,30 €</td></tr>
-<tr><td class="mono"><strong>10,00</strong></td>
-  <td class="mono">±0,5</td><td>Trusquin, rien de plus</td><td class="mono">2,50 €</td>
-  <td class="mono">±0,1</td><td>Trusquin, pointage vérifié, contrôle</td><td class="mono">8,30 €</td></tr>
-<tr class="fonc"><td class="mono"><strong>&#216;9,00</strong></td>
-  <td class="mono">±0,5</td><td>Un foret &#216;9, une passe</td><td class="mono">2,50 €</td>
-  <td class="mono">±0,1</td><td><strong>Perçage à &#216;8,8 puis alésoir &#216;9</strong></td><td class="mono">40,00 €</td></tr>
-<tr class="fonc"><td class="mono"><strong>5,00</strong></td>
-  <td class="mono">±0,3</td><td>Rien à faire : le brut convient</td><td class="mono">0,80 €</td>
-  <td class="mono">±0,05</td><td><strong>Rectification plane des deux faces</strong></td><td class="mono">101,70 €</td></tr>
-<tr><td><strong>Total</strong></td>
-  <td colspan="2"><strong>Une demi-heure d'atelier</strong></td><td class="mono"><strong>22,50 €</strong></td>
-  <td colspan="2"><strong>Deux procédés en plus, dont un sous-traité</strong></td><td class="mono"><strong>229,10 €</strong></td></tr>
-</tbody>
-</table>
-</div>
-
-<div class="formule">22,50 &#8594; 229,10 &nbsp;:&nbsp; <strong>&times; 10</strong><small>deux lettres changées dans le cartouche</small></div>
-
-<p>Regardez <em>où</em> passe l'argent. Ce ne sont pas les cotes qu'on lime qui font la différence : le 150, le 40 et le 35 réunis passent de 14 à 71 €, soit cinq fois plus, ce qui est déjà beaucoup mais reste du travail d'atelier. <span class="cle">Les deux postes qui explosent sont ceux qui changent de procédé</span> — le trou, qui réclame un alésoir, et l'épaisseur, qui réclame une rectifieuse que l'atelier n'a pas.</p>
-
-<p>Et le pire : <strong>ces deux cent euros n'achètent rien.</strong> Le chasse-cône rectifié chasse exactement les mêmes cônes que le chasse-cône scié. On a payé dix fois le prix pour une pièce qui fonctionne pareil.</p>
-
-<div class="image-mentale"><span class="tag">Image mentale — le coût du contrôle qu'on oublie</span>
-<p>Un dixième de tolérance en plus, ce n'est pas seulement du temps de lime. C'est aussi un <strong>instrument</strong>. La règle d'usage veut qu'on contrôle avec un appareil dix fois plus fin que la tolérance : un pied à coulisse au cinquantième suffit pour ±0,5, il faut un micromètre pour ±0,05, et un comparateur sur marbre en dessous.</p>
-<p style="margin-bottom:0">Ces instruments existent, mais ils prennent du temps à mettre en œuvre, ils s'étalonnent, et ils demandent quelqu'un qui sait s'en servir. <span class="cle">Serrer une tolérance, c'est aussi décider qui aura le droit de contrôler la pièce.</span></p></div>
-
-<div class="plaque"><span class="tag">Anecdote — la règle du bureau d'études</span>
-<p>Dans les bureaux d'études sérieux, une règle circule, jamais écrite dans une norme et pourtant plus respectée que beaucoup de normes : <span class="cle">on ne serre une tolérance que si l'on peut dire à quoi elle sert.</span> Pas « pour être sûr », pas « au cas où » : une phrase, avec un nom de fonction dedans. « Ce diamètre est serré parce qu'un roulement s'y monte. » « Cette épaisseur est serrée parce qu'elle entre dans une fente de 5,5. »</p>
-<p>Le réflexe inverse — resserrer partout par prudence — paraît responsable et coûte une fortune. Il a aussi un effet pervers : quand toutes les cotes sont serrées, l'atelier ne sait plus lesquelles comptent vraiment, et il finit par les traiter toutes de la même façon. C'est-à-dire mal.</p>
-<p style="margin-bottom:0">C'est très exactement ce que fait la ligne <span class="mono">ISO 2768&#8209;cL</span> de notre plan : elle dit à l'atelier <em>« tout le reste est libre »</em>. Sur ce dessin il n'y a aucune cote encadrée, aucune tolérance individuelle, aucun symbole de forme — donc le message est complet et sans ambiguïté : <strong>rien ici n'est critique, faites vite et bien.</strong></p></div>
-
-<p>Une nuance pour finir, parce qu'elle est importante et souvent passée sous silence. Tous ces rapports valent pour une <strong>pièce unitaire</strong>. En série, la donne change : le montage, le réglage et l'outillage se répartissent sur des milliers de pièces, et l'écart entre une tolérance large et une tolérance serrée se réduit fortement. C'est pourquoi une pièce de grande série peut être précise et bon marché, alors que la même précision sur une pièce unique de maintenance coûte un mois de salaire. <span class="cle">La précision n'est pas chère en soi : elle est chère à l'unité.</span></p>
-
-<h3 id="tp-0-10">0.10 — Ce qu'on va faire, dans l'ordre</h3>
-
-<p>Le plan décodé, la fabrication tient en une suite d'opérations dont <strong>aucune ne peut être inversée</strong>. Voici pourquoi l'ordre est celui-là :</p>
+<p>Aucune de ces étapes ne peut être inversée :</p>
 
 <ol>
-<li><strong>Dresser une face de référence et un chant de référence.</strong> Tout le reste part de là. Un traçage fait depuis un chant tordu est faux dès le premier trait.</li>
-<li><strong>Tracer.</strong> Trusquin pour les hauteurs (35 et 6), équerre pour le bout, pointe à tracer et règle pour joindre la pente.</li>
+<li><strong>Dresser</strong> une face et un chant de référence. Tout le traçage part de là.</li>
+<li><strong>Tracer</strong> : trusquin pour les hauteurs (35 et 6), équerre pour le bout, règle pour joindre la pente.</li>
 <li><strong>Pointer</strong> le centre du trou, au croisement exact des deux traits.</li>
-<li><strong>Percer</strong> — avant-trou puis &#216;9. <span class="cle">Toujours avant de scier.</span> Une plaque entière se bride facilement dans l'étau de perçage ; un coin de plaque déjà découpé, beaucoup moins.</li>
-<li><strong>Scier</strong> à 1 ou 2 mm à l'extérieur du trait. Jamais sur le trait : la scie ne finit pas, elle dégrossit.</li>
-<li><strong>Limer</strong> jusqu'au trait, contrôler, finir les congés et le chanfrein.</li>
+<li><strong>Percer</strong> — avant-trou puis &#216;9. <span class="cle">Toujours avant de scier</span> : une plaque entière se bride facilement, un morceau découpé beaucoup moins.</li>
+<li><strong>Scier</strong> à 1 ou 2 mm <em>à l'extérieur</em> du trait. Jamais dessus : la scie dégrossit, elle ne finit pas.</li>
+<li><strong>Limer</strong> jusqu'au trait, contrôler, faire les congés et le chanfrein.</li>
 <li><strong>Contrôler</strong> et ébavurer.</li>
 </ol>
 
 <div class="encadre danger"><span class="tag">L'inversion qui coûte cher</span>
-<p>Percer <em>après</em> avoir scié la pente est l'erreur classique, et elle est dangereuse. La pièce n'a plus de forme régulière, elle se bride mal, et à la sortie du foret elle devient <strong>un levier de 150 mm entraîné par la broche</strong>. Voir la fiche TP&nbsp;F02 pour le détail.</p></div>
+<p style="margin-bottom:0">Percer <em>après</em> avoir scié la pente est l'erreur classique, et elle est dangereuse : la pièce n'a plus de forme régulière, elle se bride mal, et à la sortie du foret elle devient un levier de 150 mm entraîné par la broche. Voir la fiche TP&nbsp;F02.</p></div>
 
-<h3 id="tp-0-11">Exercices</h3>
+<h3 id="tp-0-9">Exercices</h3>
 
 <div class="exo"><span class="tag">Exercice TP.1</span>
-<p>Un camarade a fabriqué la pièce et vous demande de la contrôler. Vous mesurez : longueur <strong>151,0</strong> · hauteur du talon <strong>34,3</strong> · épaisseur <strong>5,4</strong> · trou <strong>&#216;9,2</strong> · axe du trou à <strong>10,7</strong> du bout.</p>
-<p>La pièce est-elle acceptée ? Justifiez cote par cote, et dites laquelle pose un vrai problème de fonctionnement.</p>
+<p>Pour chacune de ces trois cotes du plan, utilisez le tableau ISO 2768 en classe <span class="mono">c</span> et complétez.</p>
+<div class="table-scroll">
+<table>
+<thead><tr><th>Cote</th><th>Tranche</th><th>Écart</th><th>Mini</th><th>Maxi</th></tr></thead>
+<tbody>
+<tr><td class="mono"><strong>35,00</strong></td><td></td><td></td><td></td><td></td></tr>
+<tr><td class="mono"><strong>&#216;9,00</strong></td><td></td><td></td><td></td><td></td></tr>
+<tr><td class="mono"><strong>5,00</strong></td><td></td><td></td><td></td><td></td></tr>
+</tbody>
+</table>
+</div>
 <details><summary>Voir la réponse</summary><div class="rep">
-<p><strong>La pièce est refusée, sur une seule cote — mais c'est la pire.</strong></p>
-<ul>
-<li><strong>151,0</strong> → tranche 120 à 400, ±1,2 → accepté entre 148,8 et 151,2. <strong>Bon.</strong></li>
-<li><strong>34,3</strong> → tranche 30 à 120, ±0,8 → accepté entre 34,2 et 35,8. <strong>Bon</strong>, de justesse : il reste un dixième.</li>
-<li><strong>&#216;9,2</strong> → tranche 6 à 30, ±0,5 → accepté entre 8,5 et 9,5. <strong>Bon.</strong></li>
-<li><strong>10,7</strong> → tranche 6 à 30, ±0,5 → accepté entre 9,5 et 10,5. <strong>Hors tolérance de 0,2 mm.</strong></li>
-<li><strong>5,4</strong> → tranche 3 à 6, ±0,3 → accepté entre 4,7 et 5,3. <strong>Hors tolérance de 0,1 mm.</strong></li>
-</ul>
-<p><strong>Deux cotes sortent, et elles ne se valent pas du tout.</strong></p>
-<p>Le 10,7 est un défaut de traçage sans aucune conséquence : le trou sert à pendre l'outil à un clou. La pièce fonctionnerait parfaitement. On la refuse formellement, on la garde en pratique.</p>
-<p>Le 5,4 est autre chose. C'est <span class="cle">la seule cote vraiment fonctionnelle de la pièce</span> : quatre dixièmes de trop, et le coin risque de ne plus entrer dans la lumière de la broche. L'outil est bon à jeter — et le plus troublant, c'est que l'élève n'y est pour rien : cette cote vient du brut. <em>La leçon : on contrôle l'épaisseur du fer marchand</em> avant<em> de commencer, pas après.</em></p>
+<div class="table-scroll">
+<table>
+<thead><tr><th>Cote</th><th>Tranche</th><th>Écart</th><th>Mini</th><th>Maxi</th></tr></thead>
+<tbody>
+<tr><td class="mono"><strong>35,00</strong></td><td>30 à 120</td><td class="mono">±0,8</td><td class="mono">34,20</td><td class="mono">35,80</td></tr>
+<tr><td class="mono"><strong>&#216;9,00</strong></td><td>6 à 30</td><td class="mono">±0,5</td><td class="mono">8,50</td><td class="mono">9,50</td></tr>
+<tr><td class="mono"><strong>5,00</strong></td><td>3 à 6</td><td class="mono">±0,3</td><td class="mono">4,70</td><td class="mono">5,30</td></tr>
+</tbody>
+</table>
+</div>
+<p><strong>35</strong> est plus grand que 30, donc dans la colonne « 30 à 120 ». Écart ±0,8. Mini : 35 &#8722; 0,8 = 34,20. Maxi : 35 + 0,8 = 35,80.</p>
+<p><strong>9</strong> est plus grand que 6, donc « 6 à 30 ». Écart ±0,5 → de 8,50 à 9,50.</p>
+<p><strong>5</strong> est entre 3 et 6, donc « 3 à 6 ». Écart ±0,3 → de 4,70 à 5,30.</p>
+<p><em>Le piège : le 5 tombe dans la colonne la plus serrée du tableau. La cote la plus petite de la pièce est celle qui a le moins de marge.</em></p>
 </div></details>
 </div>
 
 <div class="exo"><span class="tag">Exercice TP.2</span>
-<p>Le bureau d'études change une seule chose au cartouche : <span class="mono">ISO 2768&#8209;fH</span> à la place de <span class="mono">cL</span>.</p>
-<p><strong>a.</strong> Que devient la tolérance sur le 150,00 ? Sur le 5,00 ?<br>
-<strong>b.</strong> Que devient la rectitude du chant de 150 ?<br>
-<strong>c.</strong> Cette pièce est-elle encore réalisable à la lime ? Qu'est-ce que ce simple changement de deux lettres implique pour l'atelier ?</p>
+<p>Une pièce revient de l'atelier. Voici ce qu'on a mesuré. Pour chaque ligne, dites si c'est <strong>bon</strong> ou <strong>pas bon</strong>.</p>
+<div class="table-scroll">
+<table>
+<thead><tr><th>Cote</th><th>Accepté entre</th><th>Mesuré</th><th>Bon / pas bon</th></tr></thead>
+<tbody>
+<tr><td class="mono">150,00</td><td class="mono">148,80 et 151,20</td><td class="mono">151,50</td><td></td></tr>
+<tr><td class="mono">35,00</td><td class="mono">34,20 et 35,80</td><td class="mono">35,50</td><td></td></tr>
+<tr><td class="mono">&#216;9,00</td><td class="mono">8,50 et 9,50</td><td class="mono">9,20</td><td></td></tr>
+<tr><td class="mono">5,00</td><td class="mono">4,70 et 5,30</td><td class="mono">5,60</td><td></td></tr>
+</tbody>
+</table>
+</div>
+<p><strong>a.</strong> Combien de lignes sont mauvaises ?<br>
+<strong>b.</strong> Une seule des deux empêche vraiment le chasse-cône de fonctionner. Laquelle, et pourquoi ?</p>
 <details><summary>Voir la réponse</summary><div class="rep">
-<p><strong>a.</strong> Le 150,00 passe de ±1,2 à <strong>±0,2</strong> — six fois plus serré, un intervalle de 4 dixièmes au lieu de 2,4 mm. Le 5,00 passe de ±0,3 à <strong>±0,05</strong>, soit un intervalle d'un dixième au total.</p>
-<p><strong>b.</strong> La rectitude sur 100 à 300 passe de 0,8 mm à <strong>0,2 mm</strong>.</p>
-<p><strong>c.</strong> <strong>Non, plus à la lime, et surtout plus avec ce brut.</strong> Deux choses ont changé de nature :</p>
+<p><strong>Deux lignes sont mauvaises : la longueur et l'épaisseur.</strong></p>
 <ul>
-<li>Le 150 &plusmn;0,2 reste faisable par un bon ajusteur, mais il demande un contrôle permanent et beaucoup de temps.</li>
-<li>Le 5 &plusmn;0,05 est <strong>impossible</strong> à obtenir sur du fer marchand : une tôle laminée de 5 mm est livrée avec plusieurs dixièmes de dispersion. Il faudrait la <em>rectifier</em>, c'est-à-dire une machine, un autre atelier et un autre budget.</li>
+<li><span class="mono">150,00</span> → mesuré <strong>151,50</strong>, le maxi est 151,20. <strong>Pas bon</strong>, de 0,3 mm.</li>
+<li><span class="mono">35,00</span> → 35,50 est bien entre 34,20 et 35,80. <strong>Bon.</strong></li>
+<li><span class="mono">&#216;9,00</span> → 9,20 est bien entre 8,50 et 9,50. <strong>Bon.</strong></li>
+<li><span class="mono">5,00</span> → mesuré <strong>5,60</strong>, le maxi est 5,30. <strong>Pas bon</strong>, de 0,3 mm.</li>
 </ul>
-<p><span class="cle">Deux lettres changées dans un coin du plan, et la pièce quitte l'atelier de maintenance pour l'atelier d'usinage.</span> C'est exactement pour cela qu'un mainteneur doit savoir lire ce cartouche : il ne le remplit pas, mais c'est lui qui découvre, la pièce dans les mains, que ce qu'on lui demande n'est pas faisable là où il est.</p>
+<p><strong>b. C'est l'épaisseur.</strong> Les deux défauts font exactement le même écart — trois dixièmes — mais ils n'ont rien à voir.</p>
+<p>Une pièce trop longue de 3 dixièmes, personne ne le verra jamais : elle chassera les cônes exactement pareil. On la refuse sur le papier, on la garde en pratique.</p>
+<p>Une pièce trop épaisse de 3 dixièmes, <span class="cle">elle n'entre pas dans la fente de la broche.</span> L'outil ne sert à rien. Et le plus embêtant : cette cote-là vient du brut, l'élève n'y est pour rien. <em>D'où la première opération du TP : mesurer l'épaisseur du plat avant de commencer.</em></p>
 </div></details>
 </div>
 
 <div class="exo"><span class="tag">Exercice TP.3</span>
-<p>On veut simplifier le plan : au lieu de coter l'angle à 14,77&#176;, on décide d'écrire directement la hauteur de la pointe, <strong>6,00</strong>, et de supprimer la cote d'angle.</p>
-<p><strong>a.</strong> Quelle tolérance ISO 2768&#8209;c s'applique alors à cette cote de 6,00 ?<br>
-<strong>b.</strong> Comparez l'intervalle obtenu sur la pointe avec celui que donnait la tolérance d'angle (calculé plus haut : ±0,96 mm).<br>
-<strong>c.</strong> Laquelle des deux façons de coter est la plus favorable au fabricant ? Laquelle est la plus honnête ?</p>
+<p>Deux élèves apportent leur pièce. La longueur est acceptée entre <strong>148,80 et 151,20</strong>.</p>
+<ul><li>Pièce A : elle mesure <strong>152,0</strong>.</li><li>Pièce B : elle mesure <strong>148,0</strong>.</li></ul>
+<p><strong>a.</strong> Les deux sont-elles refusées ?<br>
+<strong>b.</strong> Une seule peut être rattrapée à la lime. Laquelle ? Pourquoi pas l'autre ?<br>
+<strong>c.</strong> Quelle règle du chapitre cela justifie-t-il ?</p>
 <details><summary>Voir la réponse</summary><div class="rep">
-<p><strong>a.</strong> C'est exactement le piège de la borne. La tranche se lit « au-dessus de 3 jusqu'à 6 <em>inclus</em> » : <span class="cle">6,00 appartient donc à la tranche 3 à 6, et non à la suivante.</span> La tolérance est <strong>±0,3</strong>, soit un intervalle de <strong>5,70 à 6,30</strong>. Celui qui glisse d'une colonne trouve ±0,5 et s'accorde deux dixièmes qu'il n'a pas.</p>
-<p><strong>b.</strong> Par l'angle, la pointe pouvait varier de <strong>±0,96 mm</strong> (5,0 à 7,0). Par la cote directe, elle ne peut plus varier que de <strong>±0,3 mm</strong>. <span class="cle">La cotation directe est trois fois plus serrée</span> — pour une pièce qui n'a pas changé d'un millimètre.</p>
-<p><strong>c.</strong> La cotation par l'angle est plus <em>favorable</em> au fabricant : elle laisse trois fois plus de jeu sur la cote qui compte. Mais la cotation directe est plus <em>honnête</em> : elle dit ce qui est vraiment attendu, au lieu de laisser la tolérance de la pointe se déduire d'une tolérance d'angle que personne ne mesurera jamais.</p>
-<p>C'est un vrai débat de bureau d'études, et il n'a pas de bonne réponse universelle. Retenez seulement ceci : <strong>coter un angle, c'est toujours tolérancer indirectement une longueur</strong> — et il faut avoir fait le calcul avant de signer le plan.</p>
+<p><strong>a. Oui, les deux.</strong> A dépasse le maxi (152,0 &gt; 151,20), B est sous le mini (148,0 &lt; 148,80).</p>
+<p><strong>b. On rattrape A.</strong> Elle est trop longue : quelques minutes de lime la ramènent dans l'intervalle.</p>
+<p><strong>B est perdue.</strong> Elle est trop courte, et <span class="cle">aucun outil d'atelier ne remet de l'acier là où il n'y en a plus.</span> On peut théoriquement recharger au poste à souder, mais sur un plat de 5 mm cela déforme la pièce et prend plus longtemps que d'en refaire une.</p>
+<p><strong>c.</strong> Celle-ci : <strong>on scie toujours à un ou deux millimètres à l'extérieur du trait.</strong> Ce n'est pas de la prudence vague — c'est parce que trop grand se rattrape et trop petit ne se rattrape pas. Toute la méthode d'ajustage consiste à s'approcher du trait <em>par le dessus</em>.</p>
 </div></details>
 </div>
 
-
 <div class="exo"><span class="tag">Exercice TP.4</span>
-<p>Un collègue vous dit : « moi, dans le doute, je mets <span class="mono">f</span> partout. Comme ça c'est sûr, et ça ne coûte pas plus cher de bien faire. »</p>
-<p><strong>a.</strong> En vous appuyant sur le tableau des coûts, chiffrez ce que cette phrase coûte sur notre chasse-cône.<br>
-<strong>b.</strong> Sur les 207 € d'écart, quelle part vient des cotes qu'on lime, et quelle part vient d'autre chose ?<br>
-<strong>c.</strong> Qu'est-ce que cet argent a acheté ?</p>
+<p>Reprenez le tableau des prix du 0.7.</p>
+<p><strong>a.</strong> Quelle cote coûte le plus cher en classe f ? Combien ?<br>
+<strong>b.</strong> Combien coûte-t-elle en classe c ?<br>
+<strong>c.</strong> Est-ce que la pièce chère fonctionne mieux ?</p>
 <details><summary>Voir la réponse</summary><div class="rep">
-<p><strong>a.</strong> La pièce passe de <strong>22,50 €</strong> à <strong>229,10 €</strong>, soit <span class="cle">un facteur dix</span> pour deux lettres changées dans le cartouche.</p>
-<p><strong>b.</strong> Décomposons l'écart de 206,60 € :</p>
-<ul>
-<li>Les trois cotes qu'on lime — 150, 40 et 35 — passent de 14,20 à 70,80 €, soit <strong>+56,60 €</strong>. C'est du temps d'atelier en plus : cinq fois plus long, mais c'est le même travail avec la même lime.</li>
-<li>Les deux cotes de traçage — 17,50 et 10,00 — passent de 5,00 à 16,60 €, soit <strong>+11,60 €</strong>. Négligeable.</li>
-<li>Le trou et l'épaisseur passent de 3,30 à 141,70 €, soit <strong>+138,40 €</strong>.</li>
-</ul>
-<p>Autrement dit, <strong>les deux tiers du surcoût viennent de deux cotes sur sept</strong> — et ce ne sont pas celles qu'on lime. Ce sont les deux qui <span class="cle">changent de procédé</span> : le trou réclame un alésoir que l'atelier n'a peut-être pas, l'épaisseur réclame une rectifieuse qu'il n'a certainement pas. La deuxième fait sortir la pièce de l'atelier, avec un transport, un délai et un fournisseur.</p>
-<p><strong>c.</strong> <strong>Rien.</strong> Strictement rien. Le chasse-cône rectifié chasse exactement les mêmes cônes que le chasse-cône scié, ni mieux ni plus longtemps. On a payé dix fois le prix et attendu une semaine de plus pour un outil identique.</p>
-<p><em>La réponse à faire à ce collègue tient en une phrase : mettre <span class="mono">f</span> partout, ce n'est pas « bien faire », c'est refuser de choisir. Et refuser de choisir, en fabrication, se paie toujours au comptant.</em></p>
+<p><strong>a.</strong> L'épaisseur de 5 mm : <strong>101,70 €</strong>. C'est presque la moitié du prix total de la pièce.</p>
+<p><strong>b.</strong> <strong>0,80 €</strong> — c'est-à-dire à peu près rien.</p>
+<p><strong>c. Non. Pas du tout.</strong> Le chasse-cône rectifié chasse exactement les mêmes cônes, ni mieux, ni plus longtemps.</p>
+<p>Et remarquez ce qui s'est passé : en classe c, cette cote ne coûte rien parce qu'<strong>on n'y touche pas</strong> — le plat d'acier arrive déjà à la bonne épaisseur. En classe f, il faut une rectifieuse que le lycée n'a pas : la pièce part chez un sous-traitant, avec un transport et une semaine d'attente.</p>
+<p><em><span class="cle">Ce n'est jamais le dixième qui coûte : c'est la machine qu'il oblige à sortir.</span></em></p>
 </div></details>
 </div>
 
@@ -2620,99 +2512,87 @@ tr.fonc td:first-child{box-shadow:inset 4px 0 0 var(--accent)}
       <li>un plan où le bureau d’études a coté <strong>une fois de trop</strong>, et les deux cotes se contredisent ;</li>
       <li>le raisonnement inversé : partir de la fonction et <strong>démontrer</strong> que la classe c du plan est le bon choix.</li>
     </ol>
-    <p style="margin-top:9px">Le PDF est autonome : il contient le plan et le tableau ISO 2768, donc rien d’autre n’est nécessaire pour le faire. Huit pages, corrigé détaillé <strong>regroupé à la fin</strong> — imprimez les pages 1 à 4 pour ne distribuer que les questions.</p>
+    <p style="margin-top:9px">Le PDF est autonome : il contient le plan et le tableau ISO 2768, donc rien d’autre n’est nécessaire pour le faire. Six pages, corrigé <strong>regroupé à la fin</strong> — imprimez les pages 1 à 4 pour ne distribuer que les questions.</p>
   </div>
   <a class="btn-pdf" href="fiches/exercices-chasse-cone.pdf" download>
-    Télécharger le PDF<small>8 pages · A4 · gratuit</small>
+    Télécharger le PDF<small>6 pages · A4 · gratuit</small>
   </a>
 </div>
 
-<h3 id="tp-0-12">Les deux fiches de travaux pratiques</h3>
+<h3 id="tp-0-10">Les deux fiches de travaux pratiques</h3>
 
-<p>Le plan donne lieu à deux séances qui se suivent. La première ne consomme pas de métal : elle se fait au crayon, sur une photocopie du plan, avec le tableau ISO 2768 à côté. La seconde est à l'atelier.</p>
+<p>Le plan donne lieu à deux séances. La première ne consomme pas de métal : crayon, photocopie du plan, tableau ISO 2768. La seconde est à l'atelier.</p>
 
 <div class="tp" id="tp-fab-01"><div class="tp-head"><span class="ref">TP F01</span><h3>Décoder un plan et reporter les tolérances</h3></div><div class="tp-body">
 <div class="tp-meta"><span>Chapitre TP 0</span><span>1 h 30</span><span class="ok">Sans machine</span><span>Individuel</span></div>
-<h4>Objectif</h4><p>Lire entièrement un dessin de définition, retrouver une cote absente, et écrire à côté de chaque cote l'intervalle d'acceptation tiré du tableau ISO 2768. À la fin, l'élève sait dire de n'importe quelle pièce si elle est bonne ou mauvaise, sans demander à personne.</p>
+<h4>Objectif</h4><p>Lire un dessin de définition en entier et écrire, sous chaque cote, entre quelles valeurs la pièce est acceptée. À la fin, l'élève sait dire d'une pièce si elle est bonne ou mauvaise, sans demander à personne.</p>
 <h4>Matériel</h4>
 <ul>
-<li>Une photocopie A4 du plan du chasse-cône, <strong>par élève</strong> — prévoir large, elle se rature</li>
-<li>Un crayon de papier HB et une gomme. <span class="cle">Pas de stylo :</span> le report se corrige, et une tolérance fausse écrite à l'encre sera recopiée par le voisin</li>
-<li>Le tableau ISO 2768 (les deux parties) imprimé ou projeté</li>
-<li>Une calculatrice avec les fonctions trigonométriques</li>
-<li>Une vraie pièce de référence si l'atelier en possède une, et un chasse-cône du commerce pour comparer</li>
+<li>Une photocopie A4 du plan, <strong>par élève</strong> — prévoir large, elle se rature</li>
+<li>Un crayon de papier et une gomme. <span class="cle">Pas de stylo :</span> une tolérance fausse écrite à l'encre sera recopiée par le voisin</li>
+<li>Le tableau ISO 2768 imprimé ou projeté</li>
+<li>Un chasse-cône du commerce et un mandrin à cône morse, à faire circuler</li>
 </ul>
 <h4>Protocole</h4>
 <ol>
-<li><strong>Inventaire.</strong> Entourer au crayon toutes les cotes du plan et les compter. Entourer d'une autre couleur les trois notes. Vérifier qu'on trouve bien huit cotes et trois notes.</li>
-<li><strong>Fonction.</strong> Écrire en une phrase, en haut du plan, à quoi sert la pièce. Faire circuler un chasse-cône du commerce et un mandrin à cône morse pour que la fonction soit vue et pas seulement dite.</li>
-<li><strong>La cote manquante.</strong> Chercher ce qui empêche de tracer la pente. Calculer la hauteur de la pointe : 35 &minus; 110&nbsp;&times;&nbsp;tan(14,77&#176;). L'écrire sur le plan <strong>entre parenthèses</strong> — c'est la convention pour une cote déduite, non contractuelle.</li>
-<li><strong>Le cartouche.</strong> Décomposer « cL » en deux lettres, dire ce que chacune gouverne, et surtout ce que veut dire le c. Faire formuler à voix haute : « c comme <em>coarse</em>, c'est la classe large ».</li>
-<li><strong>Le report.</strong> Pour chaque cote : identifier le bon tableau (linéaire / rayons-chanfreins / angulaire), la tranche, l'écart, puis écrire au crayon <strong>sous la cote</strong> le mini et le maxi. Onze reports en tout, chanfrein compris — il en compte deux à lui seul.</li>
-<li><strong>L'angle.</strong> Calculer la longueur du bord incliné pour choisir la tranche angulaire, puis convertir le demi-degré en millimètres au bout de la pente.</li>
-<li><strong>La forme.</strong> Sur une seconde photocopie, repérer d'une flèche les surfaces concernées par la rectitude, la perpendicularité et la planéité, et écrire la valeur de la classe L en face de chacune.</li>
-<li><strong>Le tri.</strong> Cocher d'une étoile les cotes <em>fonctionnelles</em> — celles dont dépend le fonctionnement de l'outil. Défendre son choix devant le groupe.</li>
+<li><strong>Inventaire.</strong> Entourer toutes les cotes du plan et les compter. On doit en trouver huit, plus trois notes.</li>
+<li><strong>Fonction.</strong> Écrire en une phrase, en haut du plan, à quoi sert la pièce — après avoir eu le vrai chasse-cône en main.</li>
+<li><strong>La cote qui manque.</strong> Chercher ce qui empêche de tracer la pente, puis faire la soustraction : 35 &#8722; 29 = 6. L'écrire <strong>entre parenthèses</strong> sur le plan.</li>
+<li><strong>Le cartouche.</strong> Séparer les deux lettres de « cL » et dire ce que chacune gouverne. Faire prononcer à voix haute : « c comme <em>coarse</em>, c'est la classe large ».</li>
+<li><strong>Le report.</strong> Pour chaque cote : trouver la colonne, lire l'écart, poser les deux opérations, écrire le mini et le maxi <strong>sous la cote</strong>.</li>
+<li><strong>Le tri.</strong> Marquer d'une étoile les deux cotes dont dépend vraiment le fonctionnement de l'outil, et défendre son choix devant le groupe.</li>
 </ol>
 <h4>Exploitation</h4>
 <ul>
-<li>Combien de nombres a-t-il fallu écrire pour tolérancer entièrement ce plan ? Combien la norme en a-t-elle économisé sur le dessin ?</li>
-<li>Quelle est la cote la plus serrée du plan ? Qui la fabrique ? <em>(Personne : c'est l'épaisseur du brut.)</em></li>
-<li>Deux élèves ont-ils trouvé des tranches différentes pour la même cote ? Sur laquelle ? <em>(La borne 6 du &#216;9, ou le 30 s'il apparaît, sont les points de désaccord attendus.)</em></li>
-<li>Si la pièce doit être refaite dans un atelier qui n'a qu'une scie et des limes, quelle classe le bureau d'études <em>doit-il</em> écrire ?</li>
+<li>Quelle est la cote qui a le moins de marge ? Qui la fabrique ? <em>(Personne : c'est l'épaisseur du brut.)</em></li>
+<li>Deux élèves ont-ils trouvé des colonnes différentes pour la même cote ? Sur laquelle ?</li>
+<li>Combien de nombres a-t-il fallu écrire pour tolérancer tout le plan ? Combien la norme en a-t-elle économisé sur le dessin ?</li>
 </ul>
-<h4>Piège pédagogique</h4><p>Distribuer volontairement le tableau <strong>sans</strong> surligner la ligne c. Beaucoup d'élèves liront la ligne f, la première du tableau, sans se demander laquelle les concerne. Laisser faire, puis faire comparer deux copies : les intervalles diffèrent d'un facteur six. C'est le meilleur moment pour expliquer que le cartouche n'est pas de la décoration.</p>
-<h4>Prolongement</h4><p>Refaire le report en supposant <span class="mono">ISO 2768&#8209;mK</span>, la classe la plus courante en construction mécanique, et comparer les deux colonnes. C'est l'exercice TP.2 ci-dessus, en version longue.</p>
+<h4>Piège pédagogique</h4><p>Distribuer le tableau <strong>sans</strong> surligner la ligne c. Beaucoup liront la ligne f, la première du tableau, sans se demander laquelle les concerne. Laisser faire, puis comparer deux copies : les intervalles diffèrent d'un facteur six. C'est le meilleur moment pour expliquer que le cartouche n'est pas de la décoration.</p>
 </div></div>
 
 <div class="tp" id="tp-fab-02"><div class="tp-head"><span class="ref">TP F02</span><h3>Fabriquer le chasse-cône</h3></div><div class="tp-body">
 <div class="tp-meta"><span>Chapitres 2, 3, 5</span><span>4 h &middot; deux séances</span><span class="hab">Perçage &middot; EPI obligatoires</span><span>Individuel</span></div>
-<h4>Objectif</h4><p>Réaliser entièrement la pièce du plan, du brut au contrôle final, en respectant l'ordre des opérations et les tolérances relevées au TP F01. Chaque élève repart avec son chasse-cône ; les meilleurs restent à l'atelier, pendus à côté des perceuses.</p>
+<h4>Objectif</h4><p>Réaliser la pièce du plan, du brut au contrôle final, en respectant l'ordre des opérations et les tolérances relevées au TP F01. Chaque élève repart avec son chasse-cône ; les meilleurs restent pendus à côté des perceuses.</p>
 <h4>Matériel</h4>
 <ul>
-<li><strong>Brut :</strong> plat d'acier S235 de 5 &times; 40, débité à 160 mm — 10 mm de plus que la cote finale sur la longueur, et 5 mm sur la hauteur</li>
+<li><strong>Brut :</strong> plat d'acier S235 de 5 &times; 40, débité à 160 mm</li>
 <li><strong>Traçage :</strong> marbre, trusquin au 1/50, pointe à tracer, équerre à chapeau, réglet, bleu de traçage</li>
 <li><strong>Pointage :</strong> pointeau, marteau de 300 g, <strong>enclume ou bloc d'acier</strong> — jamais le marbre</li>
-<li><strong>Perçage :</strong> perceuse à colonne, étau de perçage <strong>bridé sur la table</strong>, foret &#216;4,2 pour l'avant-trou (c'est le foret de taraudage M5, toujours présent), foret &#216;9, cale martyre en bois, huile de coupe</li>
+<li><strong>Perçage :</strong> perceuse à colonne, étau de perçage <strong>bridé sur la table</strong>, foret &#216;4,2, foret &#216;9, cale en bois, huile de coupe</li>
 <li><strong>Sciage :</strong> scie à main, lame 24 dents par pouce, étau d'établi</li>
-<li><strong>Ajustage :</strong> lime bâtarde plate <strong>avec son manche</strong>, lime demi-douce pour la finition, lime ronde ou queue-de-rat pour les congés, carde</li>
-<li><strong>Contrôle :</strong> pied à coulisse, équerre, règle d'ajusteur, rapporteur pour vérification finale seulement</li>
+<li><strong>Ajustage :</strong> lime bâtarde plate <strong>avec son manche</strong>, lime demi-douce, lime ronde, carde</li>
+<li><strong>Contrôle :</strong> pied à coulisse, équerre, règle d'ajusteur</li>
 </ul>
 <h4>Protocole</h4>
 <ol>
-<li><strong>Contrôler le brut avant tout.</strong> Mesurer l'épaisseur au pied à coulisse en quatre points. Si elle sort de 4,70&nbsp;&ndash;&nbsp;5,30, changer de plat : la pièce serait refusée avant d'avoir commencé.</li>
-<li><strong>Dresser les références.</strong> Une face plane, puis un chant d'équerre avec elle : ce sont les origines de tout le traçage. Contrôler à la règle et à l'équerre contre la lumière.</li>
-<li><strong>Bleuir</strong> la face à tracer, laisser sécher.</li>
-<li><strong>Tracer</strong>, pièce posée sur le marbre, chant de référence en bas : trusquin à <strong>35</strong> pour le chant haut, à <strong>6</strong> pour la pointe, à <strong>17,50</strong> pour l'axe du trou. Puis à l'équerre : le bout gauche, la ligne à <strong>10</strong> et la ligne à <strong>40</strong>. Joindre enfin (40&nbsp;;&nbsp;35) et (150&nbsp;;&nbsp;6) à la règle et à la pointe. <span class="cle">L'angle n'est jamais mesuré.</span></li>
-<li><strong>Pointer</strong> le centre du trou sur une enclume : un coup léger, vérifier que la marque est bien au croisement des deux traits, corriger en inclinant le pointeau si elle est décalée, puis un coup franc.</li>
-<li><strong>Percer, la pièce encore entière.</strong> Brider l'étau de perçage sur la table, cale en bois dessous. Avant-trou &#216;4,2 traversant, puis &#216;9. Huiler. Ralentir nettement à la sortie du foret.</li>
-<li><strong>Scier</strong> la pente et le bout à 1 ou 2 mm à l'extérieur du trait, pièce serrée court dans l'étau, trait de scie horizontal.</li>
-<li><strong>Limer jusqu'au trait</strong> à la lime bâtarde : la longueur, la hauteur du talon, puis la pente. Contrôler la rectitude à la règle et la perpendicularité à l'équerre au fur et à mesure — pas à la fin.</li>
-<li><strong>Finir :</strong> congés R5 à la lime ronde, chanfrein 1&#215;45&#176; sur la pointe, ébavurage de toutes les arêtes, passage à la lime demi-douce.</li>
-<li><strong>Contrôler</strong> les onze valeurs relevées au TP F01 et remplir la fiche. Terminer par l'essai réel : le chasse-cône doit entrer dans la lumière de la broche de la perceuse et en chasser le mandrin.</li>
+<li><strong>Contrôler le brut avant tout.</strong> Mesurer l'épaisseur en quatre points. Si elle sort de 4,70&nbsp;&ndash;&nbsp;5,30, changer de plat : la pièce serait refusée avant d'avoir commencé.</li>
+<li><strong>Dresser les références :</strong> une face plane, puis un chant d'équerre avec elle. Contrôler à la règle et à l'équerre contre la lumière.</li>
+<li><strong>Bleuir</strong> la face à tracer.</li>
+<li><strong>Tracer</strong> sur le marbre, chant de référence en bas : trusquin à <strong>35</strong>, à <strong>6</strong>, à <strong>17,50</strong>. Puis à l'équerre : le bout, la ligne à 10 et celle à 40. Joindre enfin la pente à la règle. <span class="cle">L'angle n'est jamais mesuré.</span></li>
+<li><strong>Pointer</strong> sur une enclume : un coup léger, vérifier que la marque est au croisement des traits, corriger en inclinant le pointeau, puis un coup franc.</li>
+<li><strong>Percer, la pièce encore entière.</strong> Étau bridé, cale en bois dessous. Avant-trou &#216;4,2 traversant, puis &#216;9. Huiler. Ralentir nettement à la sortie du foret.</li>
+<li><strong>Scier</strong> la pente et le bout à 1 ou 2 mm à l'extérieur du trait.</li>
+<li><strong>Limer jusqu'au trait</strong> à la bâtarde, en contrôlant au fur et à mesure — pas à la fin. Puis congés R5 à la lime ronde, chanfrein 1&#215;45&#176; sur la pointe, ébavurage.</li>
+<li><strong>Contrôler</strong> toutes les cotes relevées au TP F01, puis faire l'essai réel : le chasse-cône doit entrer dans la lumière de la broche et en chasser le mandrin.</li>
 </ol>
 <h4>Exploitation</h4>
 <ul>
-<li>Relever l'angle obtenu au rapporteur et le comparer à 14,77&#176;. Est-il dans l'intervalle ±30' ? <em>La question n'est pas d'y arriver, mais de constater qu'on y arrive sans l'avoir visé.</em></li>
-<li>Quelle opération a pris le plus de temps ? Laquelle a été refaite ?</li>
-<li>Comparer les pièces de deux élèves : la dispersion est-elle plus grande sur le 150 ou sur le 6 de la pointe ? Pourquoi ?</li>
 <li>Combien de pièces de la classe passent l'essai réel dans la broche ? Sur celles qui échouent, quelle cote est en cause ?</li>
+<li>Quelle opération a pris le plus de temps ? Laquelle a été refaite ?</li>
+<li>Comparer deux pièces : l'écart est-il plus grand sur le 150 ou sur le 6 de la pointe ? Pourquoi ?</li>
 </ul>
 <h4>Sécurité — la pièce qui devient un moulinet</h4>
-<p>C'est le vrai danger de la séance, et il vaut d'être montré avant d'être expliqué. Une plaque de 150 mm tenue à la main sur la table de la perceuse, au moment où le foret perce de part en part, se met à tourner avec lui : elle devient <strong>une lame de 150 mm entraînée à plusieurs centaines de tours par minute</strong>. Elle casse les poignets et ouvre les mains.</p>
-<p><span class="cle">La pièce est bridée, toujours, sans exception, même pour un trou de 3.</span> Et l'on ralentit à la sortie du foret : c'est là que les lèvres accrochent la dernière pellicule de métal et que tout part d'un coup.</p>
-<h4>Piège pédagogique</h4><p>Ne pas annoncer l'ordre des opérations. Laisser deux ou trois élèves scier avant de percer, puis leur demander de brider ce qu'il leur reste. Ils comprendront en trente secondes, définitivement, pourquoi on perce d'abord — et personne ne l'apprend aussi bien dans un cours.</p>
+<p>C'est le vrai danger de la séance. Une plaque de 150 mm tenue à la main sur la table de la perceuse, au moment où le foret perce de part en part, se met à tourner avec lui : elle devient <strong>une lame de 150 mm entraînée à plusieurs centaines de tours par minute</strong>. Elle casse les poignets et ouvre les mains.</p>
+<p><span class="cle">La pièce est bridée, toujours, même pour un trou de 4.</span> Et l'on ralentit à la sortie du foret : c'est là que ça part d'un coup.</p>
+<h4>Trois consignes d'atelier qui sauvent du matériel</h4>
+<ul>
+<li><strong>Jamais de lime sans manche.</strong> La soie, cette pointe carrée à l'arrière, traverse la paume quand la lime accroche et que la main glisse. Un manche coûte deux euros.</li>
+<li><strong>Jamais de marteau sur le marbre.</strong> C'est une surface de référence rectifiée à quelques micromètres : un seul coup de pointeau y laisse un cratère, et un marbre marqué n'est plus une référence.</li>
+<li><strong>Le &#216;4,2 n'est pas un hasard.</strong> C'est le foret de taraudage du M5 — donc celui qui est toujours dans le tiroir et bien affûté. Un avant-trou se prend entre le tiers et la moitié du diamètre final ; plus gros, le foret se visse dans la pièce et l'arrache du bridage.</li>
+</ul>
+<h4>Piège pédagogique</h4><p>Ne pas annoncer l'ordre des opérations. Laisser deux ou trois élèves scier avant de percer, puis leur demander de brider ce qu'il leur reste. Ils comprendront en trente secondes, définitivement, pourquoi on perce d'abord.</p>
 </div></div>
-
-<div class="plaque"><span class="tag">Anecdote — trois mots d'atelier qui sauvent du matériel</span>
-<p><strong>« Bâtarde ».</strong> Le nom des limes vient d'un classement en quatre tailles : grosse, bâtarde, demi-douce, douce. La bâtarde n'est ni l'une ni l'autre — c'est littéralement le sens du mot, celle qui n'appartient à aucune des deux familles voisines. C'est aussi la seule qui enlève vite <em>et</em> laisse un état correct : c'est pour cela qu'elle est la lime par défaut de l'ajusteur.</p>
-<p><strong>« Sans manche ».</strong> Une lime se vend nue. La soie, cette pointe carrée à l'arrière, est dure et effilée : quand la lime accroche et que la main glisse en avant, elle traverse la paume. Un manche coûte deux euros. <span class="cle">Une lime sans manche ne se prête pas, ne s'emprunte pas, et ne sort pas du tiroir.</span></p>
-<p><strong>« Pas sur le marbre ».</strong> Le marbre de traçage est une surface de référence rectifiée à quelques micromètres. Frapper dessus au pointeau, ne serait-ce qu'une fois, y laisse un cratère — et un marbre marqué n'est plus une référence, c'est un plan de travail. On pointe sur une enclume ou sur un bloc d'acier de rebut. Dans les ateliers sérieux, le marbre est le seul outil qu'on interdit de toucher avec un marteau.</p></div>
-
-<div class="plaque"><span class="tag">Anecdote — l'âme du foret, qui n'usine rien</span>
-<p>Pourquoi un avant-trou de 4,2 avant le foret de 9 ? Regardez la pointe d'un foret hélicoïdal : entre les deux lèvres coupantes, il y a une petite arête transversale, <strong>l'âme</strong>, large ici d'un millimètre et demi. Cette arête ne coupe pas — sa vitesse est nulle au centre. Elle <strong>écrase</strong> le métal et le refoule sur les côtés, et c'est elle qui absorbe l'essentiel de l'effort de poussée.</p>
-<p>Un avant-trou du diamètre de l'âme supprime ce travail inutile : le foret de 9 ne fait plus que couper. On perce plus vite, plus droit, avec moins d'effort et un foret qui dure.</p>
-<p>Mais il y a une limite, et elle se paie cher : <strong>un avant-trou trop gros est pire que pas d'avant-trou du tout.</strong> Si les lèvres ne mordent plus que sur une couronne étroite, le foret se visse dans la pièce comme un tire-bouchon, l'attrape et l'arrache du bridage — surtout à la sortie. L'usage tient l'avant-trou <span class="cle">entre le tiers et la moitié du diamètre final</span>.</p>
-<p>Notre &#216;4,2 fait 47 % du &#216;9 : on est en haut de la fourchette, et c'est délibéré. &#216;4,2, c'est le <strong>foret de taraudage du M5</strong> — 5 moins le pas de 0,8, la soustraction du chapitre 6. C'est donc celui qui est toujours dans le tiroir, en plusieurs exemplaires et correctement affûté, là où le &#216;3 traîne souvent en un seul exemplaire usé. <em>Le bon avant-trou, c'est celui qui respecte la fourchette et qu'on a sous la main.</em></p></div>
 
   </div>
 </section>
